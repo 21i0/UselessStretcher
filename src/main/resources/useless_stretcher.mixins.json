@@ -11,6 +11,7 @@
     "RecoverableItemStackHandlerMixin",
     "ItemStackHandlerMixin",
     "BeefTimeAccelerationMixin",
+    "BeefToolVariantsMixin",
     "ConfigManagerMixin",
     "PassiveCraftingHatchBlockEntityMixin",
     "PassiveCraftingHatchMenuMixin",
