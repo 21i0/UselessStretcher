@@ -30,6 +30,9 @@ import java.util.UUID;
  * accumulates {@code speed} work and executes at most {@value #MAX_EXECUTIONS_PER_TICK}
  * ticks, so a very high multiplier never stalls the server — the backlog drains over time.
  *
+ * <p>The retained-virtual-tick + per-tick budget idea is a simplified version of JDT Extras'
+ * {@code TimeAccelerationWorkQueue} / {@code ExtendedTimeAccelerationManager} (MIT).
+ *
  * <p>Block targets that expose FE storage sleep automatically when their energy level stays
  * unchanged for {@value #IDLE_THRESHOLD_TICKS} ticks (i.e. the machine is not working), and
  * wake up again as soon as the energy level moves. AE2 targets sleep through their own grid

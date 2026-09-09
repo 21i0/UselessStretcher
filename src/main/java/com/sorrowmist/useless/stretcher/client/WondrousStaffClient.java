@@ -19,15 +19,18 @@ import net.neoforged.neoforge.client.event.InputEvent;
 /**
  * Client-side controls for the wondrous staff:
  * <ul>
- *   <li>Shift + mouse wheel cycles the multiplier gear (off / x2 / x4 / x16 / x256 / x1024).</li>
+ *   <li>Shift + mouse wheel cycles the multiplier gear (off / x2 / x4 / x16 / x32 / x64 / x128
+ *       / x256 / x512 / x1024).</li>
  *   <li>The dedicated mode key (unbound by default, bind in controls) toggles normal ↔ permanent.</li>
  * </ul>
  * Shift is only used together with the wheel and with right-click, never captured on its own.
+ *
+ * <p>Gear presets are modeled after JDT Extras' {@code TimeMultitoolSpeedMode} (MIT).
  */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)
 public final class WondrousStaffClient {
-    /** Preset multiplier gears. 0 = off. */
-    private static final int[] GEARS = {0, 2, 4, 16, 256, 1024};
+    /** Preset multiplier gears. 0 = off. See {@code TimeMultitoolSpeedMode} (JDTE, MIT). */
+    private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
 
     private WondrousStaffClient() {
     }
