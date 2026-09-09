@@ -1,0 +1,39 @@
+package com.sorrowmist.useless.stretcher.init;
+
+import com.sorrowmist.useless.stretcher.UselessStretcherMod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+/**
+ * Registers a small creative tab so the handheld stretcher and the dimension teleport blocks are
+ * visible and searchable in JEI. The omniversal myriad block is deliberately left out: it is a
+ * wildcard mold, and exposing it to JEI would double the alloy-furnace recipe pages. It remains
+ * obtainable through its crafting recipe.
+ */
+public final class ModCreativeTabs {
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TAB =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, UselessStretcherMod.MODID);
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_TAB.register(
+            "main",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModItems.USELESS_STRETCHER.get()))
+                    .title(Component.translatable("itemGroup.useless_stretcher"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ModItems.USELESS_STRETCHER.get());
+                        output.accept(ModItems.WONDROUS_STAFF.get());
+                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.QUAD_CHUNK_DIMENSION_BLOCK_ITEM.get());
+                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.NINE_CHUNK_DIMENSION_BLOCK_ITEM.get());
+                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.QUAD_CHUNK_ODD_DIMENSION_BLOCK_ITEM.get());
+                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.NINE_CHUNK_ODD_DIMENSION_BLOCK_ITEM.get());
+                    })
+                    .build()
+    );
+
+    private ModCreativeTabs() {
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "useless_mod:advanced_alloy_furnace_block" },
+    { "item": "ae2:blank_pattern" }
+  ],
+  "result": {
+    "id": "useless_stretcher:omniversal_myriad",
+    "count": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "com.sorrowmist.useless.stretcher.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AdapterUtilsMoldMixin",
+    "AdapterUtilsItemRepresentativeMixin",
+    "MoldHubMultiMoldMixin",
+    "MoldMatcherPreparedMoldsMixin",
+    "RecoverableItemStackHandlerMixin",
+    "ItemStackHandlerMixin",
+    "BeefTimeAccelerationMixin",
+    "ConfigManagerMixin",
+    "PassiveCraftingHatchBlockEntityMixin",
+    "PassiveCraftingHatchMenuMixin",
+    "PassiveCraftingStatusPacketMixin",
+    "PagedRecoverableMenuMixin",
+    "PagedRecoverableMenuPageViewMixin",
+    "OreGeneratorMenuMixin",
+    "SagMillingRecipeAdapterMixin",
+    "UselessDimensionConfigManagerMixin",
+    "UselessDimensionsMixin"
+  ],
+  "client": [
+    "PagedRecoverableScreenMixin",
+    "PatternAssemblyScreenMixin",
+    "PassiveCraftingHatchScreenMixin",
+    "OreGeneratorScreenMixin"
+  ],
+  "server": []
+}

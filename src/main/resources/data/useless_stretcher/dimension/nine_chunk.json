@@ -1,0 +1,10 @@
+{
+  "type": "useless_stretcher:nine_chunk",
+  "generator": {
+    "type": "useless_stretcher:nine_chunk_gen",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "useless_mod:useless_biome"
+    }
+  }
+}

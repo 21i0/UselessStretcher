@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:dragon_head" },
+    { "item": "minecraft:water_bucket" }
+  ],
+  "result": {
+    "id": "minecraft:dragon_breath",
+    "count": 3
+  }
+}

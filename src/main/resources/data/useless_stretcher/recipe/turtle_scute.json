@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:green_dye" }
+  },
+  "result": {
+    "id": "minecraft:turtle_scute",
+    "count": 1
+  }
+}

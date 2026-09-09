@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "useless_stretcher:useless_stretcher" },
+    { "tag": "c:tools/tools" }
+  ],
+  "result": {
+    "id": "useless_stretcher:wondrous_staff",
+    "count": 1
+  }
+}

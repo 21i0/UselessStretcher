@@ -1,0 +1,21 @@
+# Gradle / NeoForge
+.gradle/
+build/
+out/
+run/
+runs/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
