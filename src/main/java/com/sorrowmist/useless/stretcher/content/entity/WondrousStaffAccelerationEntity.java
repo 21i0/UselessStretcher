@@ -1,10 +1,7 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
-import appeng.api.networking.IGridNode;
-import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -18,9 +15,6 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.UUID;
 
@@ -33,10 +27,9 @@ import java.util.UUID;
  * <p>The retained-virtual-tick + per-tick budget idea is a simplified version of JDT Extras'
  * {@code TimeAccelerationWorkQueue} / {@code ExtendedTimeAccelerationManager} (MIT).
  *
- * <p>Block targets that expose FE storage sleep automatically when their energy level stays
- * unchanged for {@value #IDLE_THRESHOLD_TICKS} ticks (i.e. the machine is not working), and
- * wake up again as soon as the energy level moves. AE2 targets sleep through their own grid
- * node activity flag.
+ * <p>There is deliberately no "idle machine" detection: energy-based heuristics proved
+ * unreliable (machines whose buffer stays constant were wrongly put to sleep), so the target
+ * is always accelerated for the full duration.
  */
 public class WondrousStaffAccelerationEntity extends Entity {
     /** Negative remaining time means the acceleration never expires. */
@@ -44,7 +37,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
     public static final int MAX_MULTIPLIER = 1024;
     public static final int MAX_EXECUTIONS_PER_TICK = 256;
     private static final long MAX_PENDING_TICKS = 8192L;
-    private static final int IDLE_THRESHOLD_TICKS = 40;
 
     public static final int MODE_BLOCK = 0;
     public static final int MODE_ENTITY = 1;
@@ -60,8 +52,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private BlockPos targetPos;
     private UUID targetUuid;
     private long pendingTicks;
-    private long lastEnergy = -1L;
-    private int idleTicks;
 
     public WondrousStaffAccelerationEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -128,13 +118,11 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 discard();
                 return;
             }
-            if (isTargetActive(level, this.targetPos)) {
-                pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
-                int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
-                pendingTicks -= executed;
-                if (executed > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
-                }
+            pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
+            int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+            pendingTicks -= executed;
+            if (executed > 0) {
+                WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
             }
         }
 
@@ -165,49 +153,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
         } else {
             discard();
         }
-    }
-
-    /**
-     * True while the target is actually working. FE-backed machines are considered active
-     * whenever their stored energy changes in either direction — consuming (working machines)
-     * or generating (power generators) — and sleep only while the level stays constant.
-     */
-    private boolean isTargetActive(ServerLevel level, BlockPos pos) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof IInWorldGridNodeHost host) {
-            return hasActiveAeNode(host);
-        }
-        if (blockEntity == null) {
-            return true; // random-tick blocks (crops etc.) are treated as always active
-        }
-        IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, pos, null);
-        if (energy == null) {
-            return true; // no energy information, keep the previous always-on behavior
-        }
-        // Creative / infinite-energy machines never change their energy level, so the
-        // "energy changed = working" signal below would incorrectly put them to sleep.
-        if (energy.getMaxEnergyStored() >= 2_000_000_000) {
-            return true;
-        }
-        int current = energy.getEnergyStored();
-        if (lastEnergy < 0L || current != lastEnergy) {
-            lastEnergy = current;
-            idleTicks = 0;
-            return true;
-        }
-        lastEnergy = current;
-        idleTicks++;
-        return idleTicks <= IDLE_THRESHOLD_TICKS;
-    }
-
-    private static boolean hasActiveAeNode(IInWorldGridNodeHost host) {
-        for (Direction direction : Direction.values()) {
-            IGridNode node = host.getGridNode(direction);
-            if (node != null && node.getGrid() != null && node.isActive()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public BlockPos getTargetPos() {

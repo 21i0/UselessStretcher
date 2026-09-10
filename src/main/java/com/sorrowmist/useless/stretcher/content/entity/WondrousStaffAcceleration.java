@@ -196,12 +196,8 @@ public final class WondrousStaffAcceleration {
     /** Ticks a block or AE node {@code speed} extra times. */
     public static void tickTarget(ServerLevel level, BlockPos pos, int speed) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof IInWorldGridNodeHost host) {
-            tickAeNode(host, speed);
-            return;
-        }
-
         BlockState state = level.getBlockState(pos);
+
         if (blockEntity == null) {
             if (!state.isRandomlyTicking()) return;
             RandomSource random = level.getRandom();
@@ -213,6 +209,14 @@ public final class WondrousStaffAcceleration {
             return;
         }
 
+        // 1. AE2 machines that expose an IGridTickable run on their own AE grid tick.
+        if (blockEntity instanceof IInWorldGridNodeHost host && tickAeNode(host, speed)) {
+            return;
+        }
+
+        // 2. Everything else uses its normal block-entity ticker. This fallback matters for
+        //    AE machines (e.g. AE2 Crystal Science) that are grid node hosts but do NOT
+        //    implement IGridTickable — they would otherwise never be accelerated.
         @SuppressWarnings("rawtypes")
         BlockEntityTicker ticker = state.getTicker(level, blockEntity.getType());
         if (ticker == null) return;
@@ -222,7 +226,8 @@ public final class WondrousStaffAcceleration {
         }
     }
 
-    private static void tickAeNode(IInWorldGridNodeHost host, int speed) {
+    /** @return true when an active {@link IGridTickable} was found and ticked. */
+    private static boolean tickAeNode(IInWorldGridNodeHost host, int speed) {
         for (Direction direction : Direction.values()) {
             IGridNode node = host.getGridNode(direction);
             if (node == null || node.getGrid() == null || !node.isActive()) continue;
@@ -236,8 +241,9 @@ public final class WondrousStaffAcceleration {
                     break;
                 }
             }
-            return;
+            return true;
         }
+        return false;
     }
 
     /** Mirrors Useless Mod's own time-acceleration sound, pitched by the multiplier gear. */
