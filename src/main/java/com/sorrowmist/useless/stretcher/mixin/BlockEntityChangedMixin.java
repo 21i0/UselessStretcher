@@ -19,7 +19,10 @@ public abstract class BlockEntityChangedMixin implements ChangedTickAccessor {
     @Unique
     private long uselessStretcher$lastChangedTick = -1L;
 
-    @Inject(method = "setChanged", at = @At("HEAD"))
+    // NOTE: the descriptor is mandatory here. BlockEntity also declares a *static*
+    // setChanged(Level, BlockPos, BlockState); a bare "setChanged" would match both and Mixin
+    // rejects a non-static callback targeting a static method, crashing at startup.
+    @Inject(method = "setChanged()V", at = @At("HEAD"))
     private void uselessStretcher$recordChanged(CallbackInfo ci) {
         BlockEntity self = (BlockEntity) (Object) this;
         if (self.getLevel() != null && !self.getLevel().isClientSide) {
