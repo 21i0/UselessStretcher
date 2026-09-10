@@ -23,7 +23,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 import java.util.List;
 
 /**
- * 急急国王之杖：继承造化垂青之杖的全部功能，并额外支持 AE 刻加速（shift+右键 AE 机器）、
+ * 荒辰移晷之杖：继承造化垂青之杖的全部功能，并额外支持 AE 刻加速（shift+右键 AE 机器）、
  * 时间/实体加速等扩展。AE 机器走自己的 AE 刻，因此这里不走普通方块 ticker，而是直接驱动
  * AE 节点的 {@code IGridTickable}。
  */

@@ -35,9 +35,13 @@ import java.util.UUID;
  * <p>The retained-virtual-tick + per-tick budget idea is a simplified version of JDT Extras'
  * {@code TimeAccelerationWorkQueue} / {@code ExtendedTimeAccelerationManager} (MIT).
  *
- * <p>Idle machines may sleep to save performance, but only once the machine has proven it can
- * be observed working (see {@link #isWorking}). A machine that never emits any signal is never
- * slept, so a creative / infinite-energy machine can never be put to sleep by mistake.
+ * <p>An idle machine is throttled instead of being put to sleep: after {@value #IDLE_WINDOW_TICKS}
+ * ticks without any activity signal the per-tick budget drops from {@value #MAX_EXECUTIONS_PER_TICK}
+ * to {@value #IDLE_EXECUTIONS_PER_TICK}. Throttling removes ~98% of the idle cost while guaranteeing
+ * the target is never stopped outright — a wrongly throttled machine only runs slower for a moment,
+ * and any activity signal restores full speed on the very next tick. Only a machine that has already
+ * proven it can be observed working (see {@link #isWorking}) is ever throttled, so a machine whose
+ * activity we cannot observe is never slowed down.
  */
 public class WondrousStaffAccelerationEntity extends Entity {
     /** Negative remaining time means the acceleration never expires. */
@@ -45,8 +49,10 @@ public class WondrousStaffAccelerationEntity extends Entity {
     public static final int MAX_MULTIPLIER = 1024;
     public static final int MAX_EXECUTIONS_PER_TICK = 256;
     private static final long MAX_PENDING_TICKS = 8192L;
-    /** How long a machine may show no activity signal before it is allowed to sleep. */
+    /** How long a machine may show no activity signal before it is throttled. */
     private static final int IDLE_WINDOW_TICKS = 100;
+    /** Extra ticks per game tick while throttled. Never 0: the target must keep progressing. */
+    private static final int IDLE_EXECUTIONS_PER_TICK = 4;
     /** A {@code setChanged()} call within this many ticks counts as "working". */
     private static final int CHANGED_WINDOW_TICKS = 60;
 
@@ -136,8 +142,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 return;
             }
 
-            // Idle sleep: only ever skip work for a machine that has already proven we can
-            // observe it working, so waking up is guaranteed to be detected.
+            // Idle throttle: only ever slow down a machine that has already proven we can observe
+            // it working, so a machine we cannot observe is never throttled by mistake.
             boolean working = isWorking(level, this.targetPos);
             if (working) {
                 observedWorking = true;
@@ -145,9 +151,13 @@ public class WondrousStaffAccelerationEntity extends Entity {
             } else {
                 idleTicks++;
             }
-            boolean asleep = StretcherConfig.idleSleep() && observedWorking
+            boolean throttled = StretcherConfig.idleThrottle() && observedWorking
                     && idleTicks > IDLE_WINDOW_TICKS;
-            if (!asleep) {
+            if (throttled) {
+                // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
+                pendingTicks = 0L;
+                WondrousStaffAcceleration.tickTarget(level, this.targetPos, IDLE_EXECUTIONS_PER_TICK);
+            } else {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
                 int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
                 pendingTicks -= executed;

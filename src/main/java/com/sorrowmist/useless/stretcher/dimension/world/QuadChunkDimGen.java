@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.world.dimension.DimensionGenerationConfig;
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.resources.ResourceLocation;
@@ -102,14 +103,38 @@ public class QuadChunkDimGen extends ChunkGenerator {
 
     /** Applies this addon's own dimension-floor blacklist/whitelist, falling back to defaults. */
     private DimensionGenerationConfig filterAllowed(DimensionGenerationConfig configuration) {
-        return new DimensionGenerationConfig(
+        return rebuild(
                 allowed(configuration.borderBlockId(), DimensionGenerationConfig.DEFAULT_BORDER_BLOCK),
                 allowed(configuration.fillBlockId(), DimensionGenerationConfig.DEFAULT_FILL_BLOCK),
                 allowed(configuration.centerBlockId(), DimensionGenerationConfig.DEFAULT_CENTER_BLOCK),
-                configuration.platformLayers(),
-                configuration.platformStartY(),
-                configuration.generateBedrock(),
-                configuration.bedrockAtBottom());
+                configuration);
+    }
+
+    /**
+     * 用本模组过滤后的三个方块 ID 重建前置的配置 record。
+     *
+     * <p>无用之物 2.3.6 给这个 record 新增了第 9 个分量 {@code features}（边界/道路/中心标记等
+     * 表面特征配置）。旧的 7 参构造器仍然保留，但它会把 {@code features} 重置为默认值——直接用它
+     * 会把玩家在维度 GUI 里配好的道路、边界、中心标记全部悄悄清掉。所以这里优先用反射拿到
+     * 带 {@code features} 的构造器并原样带过去；在更旧的无用之物上（没有 {@code features()}）
+     * 自动退回 7 参构造器。
+     */
+    private static DimensionGenerationConfig rebuild(ResourceLocation border, ResourceLocation fill,
+                                                     ResourceLocation center,
+                                                     DimensionGenerationConfig source) {
+        try {
+            Object features = DimensionGenerationConfig.class.getMethod("features").invoke(source);
+            Constructor<DimensionGenerationConfig> constructor = DimensionGenerationConfig.class.getConstructor(
+                    ResourceLocation.class, ResourceLocation.class, ResourceLocation.class,
+                    int.class, int.class, boolean.class, boolean.class, features.getClass());
+            return constructor.newInstance(border, fill, center,
+                    source.platformLayers(), source.platformStartY(),
+                    source.generateBedrock(), source.bedrockAtBottom(), features);
+        } catch (ReflectiveOperationException | RuntimeException ignored) {
+            return new DimensionGenerationConfig(border, fill, center,
+                    source.platformLayers(), source.platformStartY(),
+                    source.generateBedrock(), source.bedrockAtBottom());
+        }
     }
 
     private static ResourceLocation allowed(ResourceLocation id, ResourceLocation fallback) {

@@ -17,18 +17,22 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue HIGHLIGHT_SEE_THROUGH;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_FLOOR_BLACKLIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_FLOOR_WHITELIST;
-    public static final ModConfigSpec.BooleanValue IDLE_SLEEP;
+    public static final ModConfigSpec.BooleanValue IDLE_THROTTLE;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     static {
         BUILDER.push("acceleration");
-        IDLE_SLEEP = BUILDER
-                .comment("加速时是否对空闲机器自动休眠以省性能。",
-                        "true（默认）：机器一段时间没有活动迹象（setChanged / 方块状态 / 能量均无变化）就休眠；",
-                        "              一旦重新工作会立刻满速恢复。只有能可靠检测到活动的机器才会被休眠。",
-                        "false：目标始终满速加速，不做任何休眠判断。")
-                .define("idle_sleep", true);
+        IDLE_THROTTLE = BUILDER
+                .comment("加速时是否对空闲机器自动降频以省性能（推荐开启）。",
+                        "加速是「每游戏刻把目标 tick 重复跑 256 次」，所以哪怕目标空闲、单次 tick 很便宜，",
+                        "256 倍放大后也可能很可观；遇到空闲 tick 偏重的机器（扫背包/查配方）会直接拖垮 TPS。",
+                        "true（默认）：机器连续 100 刻没有任何活动迹象（setChanged / 方块状态 / 能量 / AE 节点）",
+                        "              就把每刻次数降到 4 次；任一活动迹象出现立刻恢复满速。",
+                        "              注意是降频不是休眠，机器永远不会被停掉，最坏也只是短暂变慢。",
+                        "              只有曾经被确认为「能被检测到活动」的机器才会降频，检测不到活动的机器永不休眠。",
+                        "false：目标始终满速加速，不做任何降频判断。")
+                .define("idle_throttle", true);
         BUILDER.pop();
 
         BUILDER.push("recipe_compat");
@@ -73,8 +77,8 @@ public final class StretcherConfig {
         return HIGHLIGHT_SEE_THROUGH.get();
     }
 
-    public static boolean idleSleep() {
-        return IDLE_SLEEP.get();
+    public static boolean idleThrottle() {
+        return IDLE_THROTTLE.get();
     }
 
     /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */
