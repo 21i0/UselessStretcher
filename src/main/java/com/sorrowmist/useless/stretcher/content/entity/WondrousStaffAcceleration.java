@@ -12,14 +12,18 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -30,9 +34,16 @@ import java.util.List;
  * Server-side tick driver for the wondrous staff. Blocks tick through their normal block-entity
  * ticker; AE2 machines are ticked through their own {@link IGridTickable} grid service, which is
  * what makes AE machines "run on their own AE tick".
+ *
+ * <p>Lightning rods are special-cased: vanilla redirects natural thunderstorm lightning to a rod
+ * through a rare random roll, so the staff simply rolls that chance faster.
  */
 public final class WondrousStaffAcceleration {
     public static final int DEFAULT_DURATION_TICKS = 600;
+    /** Vanilla-ish natural lightning rarity; divided by the gear multiplier for the rod. */
+    private static final int LIGHTNING_ROD_BASE_CHANCE = 20000;
+    /** Never strike faster than once per this many game ticks. */
+    private static final int LIGHTNING_ROD_MIN_CHANCE = 10;
     /** The multiplier gear a freshly crafted staff starts with (x2). */
     public static final int DEFAULT_GEAR = 2;
     private static final int RANDOM_TICK_CHANCE = 1365;
@@ -185,18 +196,25 @@ public final class WondrousStaffAcceleration {
      * dirt or stone return false.
      */
     public static boolean isValidTarget(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.getBlock() instanceof LightningRodBlock) return true;
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity != null) {
             if (blockEntity instanceof IInWorldGridNodeHost) return true;
-            return level.getBlockState(pos).getTicker(level, blockEntity.getType()) != null;
+            return state.getTicker(level, blockEntity.getType()) != null;
         }
-        return level.getBlockState(pos).isRandomlyTicking();
+        return state.isRandomlyTicking();
     }
 
     /** Ticks a block or AE node {@code speed} extra times. */
     public static void tickTarget(ServerLevel level, BlockPos pos, int speed) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         BlockState state = level.getBlockState(pos);
+
+        if (state.getBlock() instanceof LightningRodBlock) {
+            tickLightningRod(level, pos, speed);
+            return;
+        }
 
         if (blockEntity == null) {
             if (!state.isRandomlyTicking()) return;
@@ -224,6 +242,26 @@ public final class WondrousStaffAcceleration {
             //noinspection unchecked
             ticker.tick(level, pos, state, blockEntity);
         }
+    }
+
+    /**
+     * Accelerates a lightning rod's natural thunderstorm lightning: while it is thundering and
+     * the rod sits on the world surface (the same condition vanilla uses for its electric spark
+     * particles), roll the lightning chance {@code speed} times faster and strike the rod with a
+     * real {@link LightningBolt}.
+     */
+    private static void tickLightningRod(ServerLevel level, BlockPos pos, int speed) {
+        if (!level.isThundering() || !level.canSeeSky(pos)) return;
+        if (pos.getY() != level.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ()) - 1) {
+            return;
+        }
+        int chance = Math.max(LIGHTNING_ROD_MIN_CHANCE, LIGHTNING_ROD_BASE_CHANCE / Math.max(1, speed));
+        if (level.getRandom().nextInt(chance) != 0) return;
+
+        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
+        if (bolt == null) return;
+        bolt.moveTo(Vec3.atBottomCenterOf(pos.above()));
+        level.addFreshEntity(bolt);
     }
 
     /** @return true when an active {@link IGridTickable} was found and ticked. */
