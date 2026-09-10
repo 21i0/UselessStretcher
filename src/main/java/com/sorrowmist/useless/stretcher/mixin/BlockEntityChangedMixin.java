@@ -1,5 +1,6 @@
 package com.sorrowmist.useless.stretcher.mixin;
 
+import com.sorrowmist.useless.stretcher.content.entity.ChangedTickAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
