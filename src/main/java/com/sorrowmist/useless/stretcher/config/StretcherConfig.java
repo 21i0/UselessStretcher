@@ -17,10 +17,20 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue HIGHLIGHT_SEE_THROUGH;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_FLOOR_BLACKLIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_FLOOR_WHITELIST;
+    public static final ModConfigSpec.BooleanValue IDLE_SLEEP;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     static {
+        BUILDER.push("acceleration");
+        IDLE_SLEEP = BUILDER
+                .comment("加速时是否对空闲机器自动休眠以省性能。",
+                        "true（默认）：机器一段时间没有活动迹象（setChanged / 方块状态 / 能量均无变化）就休眠；",
+                        "              一旦重新工作会立刻满速恢复。只有能可靠检测到活动的机器才会被休眠。",
+                        "false：目标始终满速加速，不做任何休眠判断。")
+                .define("idle_sleep", true);
+        BUILDER.pop();
+
         BUILDER.push("recipe_compat");
         HIDE_ENDERIO_GRINDING_BALLS = BUILDER
                 .comment("隐藏 Ender IO 半自磨机（SAG Mill）的磨珠配方变体。",
@@ -61,6 +71,10 @@ public final class StretcherConfig {
 
     public static boolean highlightSeeThrough() {
         return HIGHLIGHT_SEE_THROUGH.get();
+    }
+
+    public static boolean idleSleep() {
+        return IDLE_SLEEP.get();
     }
 
     /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */

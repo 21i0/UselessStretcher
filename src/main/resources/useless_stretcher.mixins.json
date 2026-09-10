@@ -12,6 +12,7 @@
     "ItemStackHandlerMixin",
     "BeefTimeAccelerationMixin",
     "BeefToolVariantsMixin",
+    "BlockEntityChangedMixin",
     "ConfigManagerMixin",
     "PassiveCraftingHatchBlockEntityMixin",
     "PassiveCraftingHatchMenuMixin",
