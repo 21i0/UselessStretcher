@@ -2,17 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "A": {
-      "tag": "minecraft:planks"
-    },
-    "B": {
-      "item": "minecraft:dirt"
-    }
+    "A": { "tag": "minecraft:planks" },
+    "B": { "item": "minecraft:dirt" }
   },
   "pattern": [
-    "AAA",
-    "ABA",
-    "AAA"
+    "BBB",
+    "BAB",
+    "BBB"
   ],
   "result": {
     "count": 1,
