@@ -206,26 +206,6 @@ public final class WondrousStaffAcceleration {
         return state.isRandomlyTicking();
     }
 
-    /**
-     * 取消挂在 {@code pos} 上的加速（如果有）。用于"手杖总开关已经关掉、但存档里还留着
-     * 一个（通常是永久）加速"的情况——否则玩家再也没有办法把它关掉。
-     *
-     * <p>返回 true 表示确实找到了加速并已移除；客户端只做存在性判断（返回是否有），
-     * 真正的移除在服务端发生。
-     */
-    public static boolean cancelEffectAt(Level level, BlockPos pos) {
-        BlockPos target = pos.immutable();
-        List<WondrousStaffAccelerationEntity> existing = level.getEntitiesOfClass(
-                WondrousStaffAccelerationEntity.class,
-                new AABB(target),
-                entity -> entity.getTargetPos().equals(target));
-        if (existing.isEmpty()) return false;
-        if (level instanceof ServerLevel) {
-            existing.forEach(WondrousStaffAccelerationEntity::discard);
-        }
-        return true;
-    }
-
     /** Ticks a block or AE node {@code speed} extra times. */
     public static void tickTarget(ServerLevel level, BlockPos pos, int speed) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
