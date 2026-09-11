@@ -30,8 +30,6 @@ public final class WondrousStaffRightClickHandler {
         ItemStack stack = event.getItemStack();
         if (stack.getItem() != ModItems.WONDROUS_STAFF.get()) return;
         if (!player.isShiftKeyDown()) return;
-        // 总开关（G 轮盘里的「时间加速」）关掉时，加速功能的一切都不参与——
-        // 既不新建、也不取消已有加速，更不抢别人的 Shift+右键。
         if (!WondrousStaffAcceleration.isEnabled(stack)) return;
 
         UseOnContext ctx = new UseOnContext(event.getLevel(), player, event.getHand(), stack, event.getHitVec());
