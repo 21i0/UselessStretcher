@@ -10,9 +10,20 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * Registers a small creative tab so the handheld stretcher and the dimension teleport blocks are
- * visible and searchable in JEI. The omniversal myriad block is deliberately left out: it is a
- * wildcard mold, and exposing it to JEI would double the alloy-furnace recipe pages. It remains
- * obtainable through its crafting recipe.
+ * visible and searchable in JEI. The omniversal myriad block is deliberately left out: it is the
+ * addon's wildcard mold, meant to be obtained through its crafting recipe rather than spawned.
+ *
+ * <p>It is <b>not</b> left out because of JEI recipe duplication (an earlier comment here claimed
+ * that — it was wrong). Verified against Useless Mod 2.3.6:
+ * <ul>
+ *   <li>{@code JEIPlugin.registerRecipeCatalysts} hard-codes the alloy-furnace catalysts to
+ *       {@code advanced_alloy_furnace_block} and {@code multiblock_alloy_furnace_core} only, so a
+ *       block of ours can never become a recipe catalyst (we ship no JEI plugin at all).</li>
+ *   <li>Recipe pages come from {@code AlloyFurnaceRecipeCatalog} and are de-duplicated by
+ *       {@code Entry#identity()}, so extra items cannot multiply them.</li>
+ *   <li>Being in {@code useless_mod:molds} only makes it appear as a mold catalyst <i>slot inside</i>
+ *       existing recipe pages, not as an extra page.</li>
+ * </ul>
  */
 public final class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TAB =
