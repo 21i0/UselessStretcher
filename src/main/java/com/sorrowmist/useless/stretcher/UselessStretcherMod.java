@@ -6,6 +6,7 @@ import com.sorrowmist.useless.stretcher.init.ModBlockEntities;
 import com.sorrowmist.useless.stretcher.init.ModBlocks;
 import com.sorrowmist.useless.stretcher.init.ModCreativeTabs;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
+import com.sorrowmist.useless.stretcher.init.ModItemDefaults;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.ModMenuTypes;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
@@ -30,6 +31,7 @@ public final class UselessStretcherMod {
         StretcherComponents.init(modBus);
         DimensionCompat.init(modBus);
         modBus.addListener(Network::register);
+        modBus.addListener(ModItemDefaults::modifyDefaultComponents);
         container.registerConfig(ModConfig.Type.COMMON, StretcherConfig.COMMON_SPEC);
     }
 }
