@@ -30,7 +30,16 @@ public final class WondrousStaffRightClickHandler {
         ItemStack stack = event.getItemStack();
         if (stack.getItem() != ModItems.WONDROUS_STAFF.get()) return;
         if (!player.isShiftKeyDown()) return;
-        if (!WondrousStaffAcceleration.isEnabled(stack)) return;
+
+        if (!WondrousStaffAcceleration.isEnabled(stack)) {
+            // 总开关关着：正常情况本模组完全不参与这次右键（不去抢别人的 Shift+右键）。
+            // 但如果这个位置本来就挂着一个加速（典型是开了永久加速之后又关掉总开关），
+            // 仍然允许把它取消掉——否则那个加速会永远卡在存档里关不掉。
+            if (!WondrousStaffAcceleration.cancelEffectAt(event.getLevel(), event.getPos())) return;
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            return;
+        }
 
         UseOnContext ctx = new UseOnContext(event.getLevel(), player, event.getHand(), stack, event.getHitVec());
         WondrousStaffAcceleration.tryUse(ctx);

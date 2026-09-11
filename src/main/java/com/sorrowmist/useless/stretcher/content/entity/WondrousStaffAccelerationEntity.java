@@ -1,11 +1,7 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
-import appeng.api.networking.IGridNode;
-import appeng.api.networking.IInWorldGridNodeHost;
-import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -19,10 +15,6 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.UUID;
 
@@ -35,13 +27,9 @@ import java.util.UUID;
  * <p>The retained-virtual-tick + per-tick budget idea is a simplified version of JDT Extras'
  * {@code TimeAccelerationWorkQueue} / {@code ExtendedTimeAccelerationManager} (MIT).
  *
- * <p>An idle machine is throttled instead of being put to sleep: after {@value #IDLE_WINDOW_TICKS}
- * ticks without any activity signal the per-tick budget drops from {@value #MAX_EXECUTIONS_PER_TICK}
- * to {@value #IDLE_EXECUTIONS_PER_TICK}. Throttling removes ~98% of the idle cost while guaranteeing
- * the target is never stopped outright — a wrongly throttled machine only runs slower for a moment,
- * and any activity signal restores full speed on the very next tick. Only a machine that has already
- * proven it can be observed working (see {@link #isWorking}) is ever throttled, so a machine whose
- * activity we cannot observe is never slowed down.
+ * <p>The target is accelerated at full speed for as long as the effect lives. There is
+ * deliberately no idle detection / sleeping / throttling: any such heuristic risks silently
+ * slowing down a machine that is actually working, which players read as "acceleration broke".
  */
 public class WondrousStaffAccelerationEntity extends Entity {
     /** Negative remaining time means the acceleration never expires. */
@@ -49,12 +37,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
     public static final int MAX_MULTIPLIER = 1024;
     public static final int MAX_EXECUTIONS_PER_TICK = 256;
     private static final long MAX_PENDING_TICKS = 8192L;
-    /** How long a machine may show no activity signal before it is throttled. */
-    private static final int IDLE_WINDOW_TICKS = 100;
-    /** Extra ticks per game tick while throttled. Never 0: the target must keep progressing. */
-    private static final int IDLE_EXECUTIONS_PER_TICK = 4;
-    /** A {@code setChanged()} call within this many ticks counts as "working". */
-    private static final int CHANGED_WINDOW_TICKS = 60;
 
     public static final int MODE_BLOCK = 0;
     public static final int MODE_ENTITY = 1;
@@ -70,11 +52,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private BlockPos targetPos;
     private UUID targetUuid;
     private long pendingTicks;
-    private long lastEnergy = -1L;
-    private BlockState lastState;
-    private int idleTicks;
-    /** Set once the target has ever emitted an activity signal we can rely on for waking up. */
-    private boolean observedWorking;
 
     public WondrousStaffAccelerationEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -142,28 +119,12 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 return;
             }
 
-            // Idle throttle: only ever slow down a machine that has already proven we can observe
-            // it working, so a machine we cannot observe is never throttled by mistake.
-            boolean working = isWorking(level, this.targetPos);
-            if (working) {
-                observedWorking = true;
-                idleTicks = 0;
-            } else {
-                idleTicks++;
-            }
-            boolean throttled = StretcherConfig.idleThrottle() && observedWorking
-                    && idleTicks > IDLE_WINDOW_TICKS;
-            if (throttled) {
-                // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
-                pendingTicks = 0L;
-                WondrousStaffAcceleration.tickTarget(level, this.targetPos, IDLE_EXECUTIONS_PER_TICK);
-            } else {
-                pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
-                int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
-                pendingTicks -= executed;
-                if (executed > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
-                }
+            // Always run the target at full speed: no idle detection, no sleeping, no throttling.
+            pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
+            int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+            pendingTicks -= executed;
+            if (executed > 0) {
+                WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
             }
         }
 
@@ -194,59 +155,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
         } else {
             discard();
         }
-    }
-
-    /**
-     * Cheap activity check; any signal counts as "working":
-     * <ol>
-     *   <li>the block entity called {@code setChanged()} recently — this works even for
-     *       creative / infinite-energy machines whose FE buffer never moves,</li>
-     *   <li>the block state changed,</li>
-     *   <li>stored FE changed in either direction (consuming or generating),</li>
-     *   <li>an AE grid node of the machine is active.</li>
-     * </ol>
-     */
-    private boolean isWorking(ServerLevel level, BlockPos pos) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null) return true;
-
-        long now = level.getGameTime();
-        if (blockEntity instanceof ChangedTickAccessor accessor) {
-            long lastChanged = accessor.uselessStretcher$getLastChangedTick();
-            if (lastChanged >= 0L && now - lastChanged <= CHANGED_WINDOW_TICKS) {
-                return true;
-            }
-        }
-
-        BlockState state = level.getBlockState(pos);
-        if (!state.equals(lastState)) {
-            lastState = state;
-            return true;
-        }
-
-        if (blockEntity instanceof IInWorldGridNodeHost host && hasActiveAeNode(host)) {
-            return true;
-        }
-
-        IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, pos, null);
-        if (energy != null) {
-            int current = energy.getEnergyStored();
-            if (lastEnergy < 0L || current != lastEnergy) {
-                lastEnergy = current;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasActiveAeNode(IInWorldGridNodeHost host) {
-        for (Direction direction : Direction.values()) {
-            IGridNode node = host.getGridNode(direction);
-            if (node != null && node.getGrid() != null && node.isActive()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public BlockPos getTargetPos() {
