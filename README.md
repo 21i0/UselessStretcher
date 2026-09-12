@@ -51,8 +51,8 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 - **Shift + 左键**：催熟幼年动物 / 缩短成年动物繁殖冷却
 - **Shift + 滚轮**：切换倍率 关 / x2 / x4 / x16 / x32 / x64 / x128 / x256 / x512 / x1024
 - **G 轮盘**：加速总开关（关掉后手杖完全不参与加速）
-- **独立按键**：普通模式（30 秒）/ 永久模式，默认未绑定
-- 拿起手杖可看到正在被加速的机器高亮框（普通=蓝色，永久=彩虹）
+- **独立按键**：循环切换普通模式（30 秒、不降频）/ 永久模式（动态降频）/ 永久模式（无休眠降频），默认未绑定
+- 拿起手杖可看到正在被加速的机器高亮框（满速工作时流光溢彩，动态降频时固定金色）
 
 ### 其它
 - 内置 8 个工作台配方（龙息、鞘翅、海龟鳞片、附魔金苹果、凋零玫瑰、潜行壳等）
@@ -65,7 +65,7 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 
 ```toml
 [acceleration]
-    idle_throttle = true      # 空闲机器自动降频省性能（有活动立刻回满速）
+    idle_throttle = true      # 空闲机器自动降频省性能（有活动立刻回满速）；永久（无休眠降频）模式会忽略此项
 
 [recipe_compat]
     hide_enderio_grinding_balls = true   # 屏蔽 EIO 半自磨机磨珠的重复配方

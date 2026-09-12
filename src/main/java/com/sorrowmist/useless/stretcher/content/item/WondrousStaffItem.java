@@ -66,6 +66,8 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_speed")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_mode")
+                .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
     }
 

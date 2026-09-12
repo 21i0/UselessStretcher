@@ -28,12 +28,14 @@ import java.util.List;
 /**
  * While the wondrous staff is held (and its time-acceleration switch is on): outlines the
  * animal under the crosshair and every accelerated machine. Machine outlines are a single
- * thick box: blue for normal acceleration, and a cycling rainbow for permanent acceleration.
+ * thick box: a flowing rainbow while the target is running at full speed, and gold while
+ * the target is in dynamic idle throttling.
  */
 @EventBusSubscriber(value = Dist.CLIENT)
 public final class WondrousStaffHighlight {
     private static final float EDGE_THICKNESS = 0.035F;
-    private static final int RAINBOW_PERIOD_TICKS = 40;
+    private static final int RAINBOW_PERIOD_TICKS = 72;
+    private static final int RAINBOW_TICK_SPEED = 2;
 
     private WondrousStaffHighlight() {
     }
@@ -45,9 +47,8 @@ public final class WondrousStaffHighlight {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         if (player == null || minecraft.level == null) return;
-        ItemStack held = player.getMainHandItem();
-        if (!(held.getItem() instanceof WondrousStaffItem)) return;
-        if (!WondrousStaffAcceleration.isEnabled(held)) return;
+        ItemStack held = findHeldStaff(player);
+        if (held.isEmpty()) return;
 
         boolean seeThrough = StretcherConfig.highlightSeeThrough();
         Camera camera = event.getCamera();
@@ -61,31 +62,41 @@ public final class WondrousStaffHighlight {
                     0.0F, 1.0F, 0.4F, 0.9F, seeThrough);
         }
 
-        long gameTime = minecraft.level.getGameTime();
         List<WondrousStaffAccelerationEntity> machines = minecraft.level.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class,
                 new AABB(player.blockPosition()).inflate(64.0D),
                 entity -> entity.getMode() == WondrousStaffAccelerationEntity.MODE_BLOCK);
         for (WondrousStaffAccelerationEntity machine : machines) {
-            float r, g, b;
-            if (machine.isPermanent()) {
-                float hue = (gameTime % RAINBOW_PERIOD_TICKS) / (float) RAINBOW_PERIOD_TICKS;
-                int rgb = Mth.hsvToRgb(hue, 1.0F, 1.0F);
-                r = ((rgb >> 16) & 0xFF) / 255.0F;
-                g = ((rgb >> 8) & 0xFF) / 255.0F;
-                b = (rgb & 0xFF) / 255.0F;
-            } else {
-                r = 0.2F;
-                g = 0.8F;
-                b = 1.0F;
-            }
-            drawThickBox(poseStack, quads, new AABB(machine.getTargetPos()), camPos,
-                    r, g, b, 0.9F, seeThrough);
+            drawFlowingBox(poseStack, quads, new AABB(machine.getTargetPos()), camPos,
+                    minecraft.level.getGameTime(), machine.isIdleThrottled(), 0.9F, seeThrough);
         }
+    }
+
+    /** Returns an enabled staff from either hand, preferring the main hand when both contain one. */
+    private static ItemStack findHeldStaff(Player player) {
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.getItem() instanceof WondrousStaffItem
+                && WondrousStaffAcceleration.isEnabled(mainHand)) return mainHand;
+
+        ItemStack offHand = player.getOffhandItem();
+        return offHand.getItem() instanceof WondrousStaffItem
+                && WondrousStaffAcceleration.isEnabled(offHand) ? offHand : ItemStack.EMPTY;
     }
 
     private static void drawThickBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
                                      float r, float g, float b, float a, boolean seeThrough) {
+        drawBox(poseStack, quads, box, camPos, r, g, b, a, seeThrough, false, 0L, false);
+    }
+
+    private static void drawFlowingBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
+                                       long gameTime, boolean throttled, float alpha, boolean seeThrough) {
+        drawBox(poseStack, quads, box, camPos, 0.0F, 0.0F, 0.0F, alpha, seeThrough,
+                true, gameTime, throttled);
+    }
+
+    private static void drawBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
+                                float solidR, float solidG, float solidB, float alpha, boolean seeThrough,
+                                boolean flowing, long gameTime, boolean throttled) {
         Vec3[] corners = new Vec3[]{
                 new Vec3(box.minX, box.minY, box.minZ),
                 new Vec3(box.maxX, box.minY, box.minZ),
@@ -107,7 +118,8 @@ public final class WondrousStaffHighlight {
         if (seeThrough) RenderSystem.disableDepthTest();
         Matrix4f pose = poseStack.last().pose();
 
-        for (int[] edge : edges) {
+        for (int edgeIndex = 0; edgeIndex < edges.length; edgeIndex++) {
+            int[] edge = edges[edgeIndex];
             Vec3 from = corners[edge[0]];
             Vec3 to = corners[edge[1]];
             Vec3 dir = to.subtract(from);
@@ -126,7 +138,27 @@ public final class WondrousStaffHighlight {
             }
             side = side.normalize().scale(EDGE_THICKNESS * 0.5D);
 
-            addQuad(quads, pose, from.add(side), from.subtract(side), to.subtract(side), to.add(side), r, g, b, a);
+            float r = solidR;
+            float g = solidG;
+            float b = solidB;
+            if (flowing) {
+                if (throttled) {
+                    // Gold is deliberately static: it is an immediate visual indication that
+                    // the server has entered its reduced idle-tick path.
+                    r = 1.0F;
+                    g = 0.65F;
+                    b = 0.05F;
+                } else {
+                    long phase = Math.floorMod(gameTime * RAINBOW_TICK_SPEED
+                            + edgeIndex * (long) (RAINBOW_PERIOD_TICKS / edges.length),
+                            (long) RAINBOW_PERIOD_TICKS);
+                    int rgb = Mth.hsvToRgb(phase / (float) RAINBOW_PERIOD_TICKS, 0.9F, 1.0F);
+                    r = ((rgb >> 16) & 0xFF) / 255.0F;
+                    g = ((rgb >> 8) & 0xFF) / 255.0F;
+                    b = (rgb & 0xFF) / 255.0F;
+                }
+            }
+            addQuad(quads, pose, from.add(side), from.subtract(side), to.subtract(side), to.add(side), r, g, b, alpha);
         }
 
         if (seeThrough) RenderSystem.enableDepthTest();

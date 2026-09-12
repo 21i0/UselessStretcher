@@ -41,7 +41,8 @@ import java.util.UUID;
  * the target is never stopped outright — a wrongly throttled machine only runs slower for a moment,
  * and any activity signal restores full speed on the very next tick. Only a machine that has already
  * proven it can be observed working (see {@link #isWorking}) is ever throttled, so a machine whose
- * activity we cannot observe is never slowed down.
+ * activity we cannot observe is never slowed down. The staff's third mode can explicitly disable
+ * this throttle for machines whose activity signals are unreliable.
  */
 public class WondrousStaffAccelerationEntity extends Entity {
     /** Negative remaining time means the acceleration never expires. */
@@ -66,6 +67,11 @@ public class WondrousStaffAccelerationEntity extends Entity {
             SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> MODE =
             SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> IDLE_THROTTLE_DISABLED =
+            SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
+    /** True while this block target is currently running at the reduced idle rate. */
+    private static final EntityDataAccessor<Boolean> IDLE_THROTTLED =
+            SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
 
     private BlockPos targetPos;
     private UUID targetUuid;
@@ -128,11 +134,13 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
         int speed = Math.max(1, getSpeed());
         if (isTimeMode()) {
+            setIdleThrottled(false);
             // Sun/moon acceleration is blacklisted from permanent mode: convert any legacy
             // permanent time entity back to the normal 30s duration so it can expire.
             if (isPermanent()) setRemainingTime(WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
             level.setDayTime(level.getDayTime() + speed);
         } else if (isEntityMode()) {
+            setIdleThrottled(false);
             advanceEntity(level);
         } else {
             // If the target block was broken (or changed to a static block), remove the
@@ -152,7 +160,9 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 idleTicks++;
             }
             boolean throttled = StretcherConfig.idleThrottle() && observedWorking
+                    && !isIdleThrottleDisabled()
                     && idleTicks > IDLE_WINDOW_TICKS;
+            setIdleThrottled(throttled);
             if (throttled) {
                 // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
                 pendingTicks = 0L;
@@ -269,6 +279,23 @@ public class WondrousStaffAccelerationEntity extends Entity {
         this.entityData.set(MODE, mode);
     }
 
+    public boolean isIdleThrottleDisabled() {
+        return this.entityData.get(IDLE_THROTTLE_DISABLED);
+    }
+
+    public void setIdleThrottleDisabled(boolean disabled) {
+        this.entityData.set(IDLE_THROTTLE_DISABLED, disabled);
+    }
+
+    /** True when the target is currently being ticked at the reduced idle rate. */
+    public boolean isIdleThrottled() {
+        return this.entityData.get(IDLE_THROTTLED);
+    }
+
+    private void setIdleThrottled(boolean throttled) {
+        this.entityData.set(IDLE_THROTTLED, throttled);
+    }
+
     public boolean isTimeMode() {
         return getMode() == MODE_TIME;
     }
@@ -306,6 +333,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
         builder.define(SPEED, 2);
         builder.define(REMAINING_TIME, WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
         builder.define(MODE, MODE_BLOCK);
+        builder.define(IDLE_THROTTLE_DISABLED, false);
+        builder.define(IDLE_THROTTLED, false);
     }
 
     @Override
@@ -315,6 +344,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
         setMode(tag.getInt("mode"));
         setSpeed(tag.getInt("speed"));
         setRemainingTime(tag.getInt("remainingTime"));
+        setIdleThrottleDisabled(tag.getBoolean("idleThrottleDisabled"));
+        setIdleThrottled(tag.getBoolean("idleThrottled"));
     }
 
     @Override
@@ -324,6 +355,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
         tag.putInt("mode", getMode());
         tag.putInt("speed", getSpeed());
         tag.putInt("remainingTime", getRemainingTime());
+        tag.putBoolean("idleThrottleDisabled", isIdleThrottleDisabled());
+        tag.putBoolean("idleThrottled", isIdleThrottled());
     }
 
     @Override

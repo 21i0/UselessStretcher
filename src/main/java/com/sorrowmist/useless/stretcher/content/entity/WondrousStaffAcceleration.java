@@ -39,6 +39,11 @@ import java.util.List;
  * through a rare random roll, so the staff simply rolls that chance faster.
  */
 public final class WondrousStaffAcceleration {
+    public static final int STAFF_MODE_NORMAL = 0;
+    public static final int STAFF_MODE_PERMANENT = 1;
+    public static final int STAFF_MODE_PERMANENT_NO_THROTTLE = 2;
+    public static final int STAFF_MODE_COUNT = 3;
+
     public static final int DEFAULT_DURATION_TICKS = 600;
     /** Vanilla-ish natural lightning rarity; divided by the gear multiplier for the rod. */
     private static final int LIGHTNING_ROD_BASE_CHANCE = 20000;
@@ -66,7 +71,9 @@ public final class WondrousStaffAcceleration {
 
         BlockPos pos = ctx.getClickedPos().immutable();
         int speed = getSpeed(ctx.getItemInHand());
-        boolean permanent = isPermanent(ctx.getItemInHand());
+        int staffMode = getMode(ctx.getItemInHand());
+        boolean permanent = isPermanentMode(staffMode);
+        boolean noIdleThrottle = skipsIdleThrottle(staffMode);
         List<WondrousStaffAccelerationEntity> existing = serverLevel.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class,
                 new AABB(pos),
@@ -80,9 +87,11 @@ public final class WondrousStaffAcceleration {
             WondrousStaffAccelerationEntity created =
                     new WondrousStaffAccelerationEntity(serverLevel, pos, speed);
             if (permanent) created.setPermanent();
+            created.setIdleThrottleDisabled(noIdleThrottle);
             serverLevel.addFreshEntity(created);
         } else {
             effect.setSpeed(speed);
+            effect.setIdleThrottleDisabled(noIdleThrottle);
             if (permanent) effect.setPermanent();
             else effect.setRemainingTime(DEFAULT_DURATION_TICKS);
         }
@@ -100,7 +109,9 @@ public final class WondrousStaffAcceleration {
 
         AABB area = target.getBoundingBox().inflate(4.0D);
         int speed = getSpeed(player.getMainHandItem());
-        boolean permanent = isPermanent(player.getMainHandItem());
+        int staffMode = getMode(player.getMainHandItem());
+        boolean permanent = isPermanentMode(staffMode);
+        boolean noIdleThrottle = skipsIdleThrottle(staffMode);
         List<WondrousStaffAccelerationEntity> existing = serverLevel.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class,
                 area,
@@ -114,9 +125,11 @@ public final class WondrousStaffAcceleration {
             WondrousStaffAccelerationEntity created =
                     new WondrousStaffAccelerationEntity(serverLevel, target, speed);
             if (permanent) created.setPermanent();
+            created.setIdleThrottleDisabled(noIdleThrottle);
             serverLevel.addFreshEntity(created);
         } else {
             effect.setSpeed(speed);
+            effect.setIdleThrottleDisabled(noIdleThrottle);
             if (permanent) effect.setPermanent();
             else effect.setRemainingTime(DEFAULT_DURATION_TICKS);
         }
@@ -158,8 +171,44 @@ public final class WondrousStaffAcceleration {
         return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
     }
 
+    /**
+     * Reads the new three-state mode, falling back to the old boolean component for existing
+     * stacks made before the mode key was added.
+     */
+    public static int getMode(ItemStack stack) {
+        Integer mode = stack.get(StretcherComponents.WONDROUS_STAFF_MODE.get());
+        if (mode != null) return normalizeMode(mode);
+        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false)
+                ? STAFF_MODE_PERMANENT : STAFF_MODE_NORMAL;
+    }
+
+    /** Writes both the new mode and the legacy boolean so old stacks remain interoperable. */
+    public static void setMode(ItemStack stack, int mode) {
+        int normalized = normalizeMode(mode);
+        stack.set(StretcherComponents.WONDROUS_STAFF_MODE.get(), normalized);
+        stack.set(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), isPermanentMode(normalized));
+    }
+
     public static boolean isPermanent(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false);
+        return isPermanentMode(getMode(stack));
+    }
+
+    public static boolean skipsIdleThrottle(ItemStack stack) {
+        return skipsIdleThrottle(getMode(stack));
+    }
+
+    public static boolean isPermanentMode(int mode) {
+        return normalizeMode(mode) != STAFF_MODE_NORMAL;
+    }
+
+    public static boolean skipsIdleThrottle(int mode) {
+        // Normal mode is intentionally also full-speed: its 30-second lifetime already limits
+        // the total cost. Only the explicitly named permanent mode uses dynamic idle throttling.
+        return normalizeMode(mode) != STAFF_MODE_PERMANENT;
+    }
+
+    private static int normalizeMode(int mode) {
+        return mode >= STAFF_MODE_NORMAL && mode < STAFF_MODE_COUNT ? mode : STAFF_MODE_NORMAL;
     }
 
     /**

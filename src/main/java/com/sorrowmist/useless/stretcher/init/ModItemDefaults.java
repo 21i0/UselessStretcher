@@ -26,6 +26,9 @@ public final class ModItemDefaults {
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
         event.modify(ModItems.WONDROUS_STAFF.get(), builder ->
-                builder.set(UComponents.BeefInvulnerabilityEnabledComponent.get(), true));
+                builder.set(UComponents.BeefInvulnerabilityEnabledComponent.get(), true)
+                        // New stacks start in normal mode; getMode() still reads the legacy
+                        // permanent component for stacks created before this three-state mode.
+                        .set(StretcherComponents.WONDROUS_STAFF_MODE.get(), 0));
     }
 }

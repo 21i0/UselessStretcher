@@ -80,14 +80,14 @@ public final class Network {
         }
     }
 
-    public record WondrousStaffSpeedPayload(int speed, boolean permanent) implements CustomPacketPayload {
+    public record WondrousStaffSpeedPayload(int speed, int mode) implements CustomPacketPayload {
         public static final Type<WondrousStaffSpeedPayload> TYPE =
                 new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_speed"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffSpeedPayload> STREAM_CODEC =
                 StreamCodec.composite(
                         ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::speed,
-                        ByteBufCodecs.BOOL, WondrousStaffSpeedPayload::permanent,
+                        ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::mode,
                         WondrousStaffSpeedPayload::new);
 
         @Override
@@ -114,11 +114,11 @@ public final class Network {
         ItemStack held = player.getMainHandItem();
         if (held.getItem() != com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get()) return;
         held.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_SPEED.get(), payload.speed());
-        held.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), payload.permanent());
+        com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.setMode(held, payload.mode());
     }
 
-    public static void sendWondrousStaffSpeed(int speed, boolean permanent) {
-        PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(speed, permanent));
+    public static void sendWondrousStaffSpeed(int speed, int mode) {
+        PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(speed, mode));
     }
 
     private static void handleAction(MyriadActionPayload payload, net.neoforged.neoforge.network.handling.IPayloadContext context) {

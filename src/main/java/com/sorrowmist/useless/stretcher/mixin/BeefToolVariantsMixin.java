@@ -39,6 +39,7 @@ public abstract class BeefToolVariantsMixin {
 
     private static boolean isWondrousStaffSource(ItemStack source) {
         return source.getItem() instanceof WondrousStaffItem
-                || source.has(StretcherComponents.WONDROUS_STAFF_SPEED.get());
+                || source.has(StretcherComponents.WONDROUS_STAFF_SPEED.get())
+                || source.has(StretcherComponents.WONDROUS_STAFF_MODE.get());
     }
 }

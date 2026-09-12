@@ -29,6 +29,15 @@ public final class StretcherComponents {
                     .persistent(Codec.BOOL)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
 
+    /**
+     * Staff acceleration mode: 0 = normal, 1 = permanent, 2 = permanent without idle throttling.
+     * The separate legacy boolean above is retained so pre-mode stacks can still be read.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WONDROUS_STAFF_MODE =
+            register("wondrous_staff_mode", builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
+
     private StretcherComponents() {
     }
 

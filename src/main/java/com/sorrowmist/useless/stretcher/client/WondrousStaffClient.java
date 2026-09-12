@@ -21,7 +21,8 @@ import net.neoforged.neoforge.client.event.InputEvent;
  * <ul>
  *   <li>Shift + mouse wheel cycles the multiplier gear (off / x2 / x4 / x16 / x32 / x64 / x128
  *       / x256 / x512 / x1024).</li>
- *   <li>The dedicated mode key (unbound by default, bind in controls) toggles normal ↔ permanent.</li>
+ *   <li>The dedicated mode key (unbound by default, bind in controls) cycles normal → permanent
+ *       → permanent without idle throttling.</li>
  * </ul>
  * Shift is only used together with the wheel and with right-click, never captured on its own.
  *
@@ -49,7 +50,7 @@ public final class WondrousStaffClient {
 
         int speed = cycleGear(WondrousStaffAcceleration.getSpeed(held), up);
         held.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
-        Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.isPermanent(held));
+        Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held));
         showGearStatus(speed);
         event.setCanceled(true);
     }
@@ -64,10 +65,11 @@ public final class WondrousStaffClient {
         ItemStack held = player.getMainHandItem();
         if (held.getItem() != ModItems.WONDROUS_STAFF.get()) return;
 
-        boolean permanent = !WondrousStaffAcceleration.isPermanent(held);
-        held.set(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), permanent);
-        Network.sendWondrousStaffSpeed(WondrousStaffAcceleration.getSpeed(held), permanent);
-        showModeStatus(permanent);
+        int mode = (WondrousStaffAcceleration.getMode(held) + 1)
+                % WondrousStaffAcceleration.STAFF_MODE_COUNT;
+        WondrousStaffAcceleration.setMode(held, mode);
+        Network.sendWondrousStaffSpeed(WondrousStaffAcceleration.getSpeed(held), mode);
+        showModeStatus(mode);
     }
 
     private static int cycleGear(int current, boolean up) {
@@ -92,10 +94,18 @@ public final class WondrousStaffClient {
         mc.gui.setOverlayMessage(text, false);
     }
 
-    private static void showModeStatus(boolean permanent) {
-        Component text = permanent
-                ? Component.literal("\u6A21\u5F0F\uFF1A\u6C38\u4E45").withStyle(ChatFormatting.GOLD)
-                : Component.literal("\u6A21\u5F0F\uFF1A\u666E\u901A").withStyle(ChatFormatting.AQUA);
+    private static void showModeStatus(int mode) {
+        Component text;
+        if (mode == WondrousStaffAcceleration.STAFF_MODE_PERMANENT_NO_THROTTLE) {
+            text = Component.translatable("gui.useless_stretcher.mode_permanent_no_throttle")
+                    .withStyle(ChatFormatting.LIGHT_PURPLE);
+        } else if (mode == WondrousStaffAcceleration.STAFF_MODE_PERMANENT) {
+            text = Component.translatable("gui.useless_stretcher.mode_permanent")
+                    .withStyle(ChatFormatting.GOLD);
+        } else {
+            text = Component.translatable("gui.useless_stretcher.mode_normal")
+                    .withStyle(ChatFormatting.AQUA);
+        }
         Minecraft.getInstance().gui.setOverlayMessage(text, false);
     }
 }
