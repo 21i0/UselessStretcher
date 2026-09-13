@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8.5",
   "package": "com.sorrowmist.useless.stretcher.mixin",
+  "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AdapterUtilsMoldMixin",

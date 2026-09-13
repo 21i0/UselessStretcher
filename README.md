@@ -5,11 +5,11 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 《无用之物 / Useless Mod》的附属模组：把模具变成万能通配、把样板投送变成远程，
-样板与被动仓扩到 **4096 槽**，新增 **四联 / 九联区块维度**方块，
+样板与被动仓在旧版前置上扩到 **4096 槽**（无用之物 2.3.7+ 使用上游原生实现），新增 **四联 / 九联区块维度**方块，
 以及一根能加速机器、AE、动物、昼夜与引雷的 **荒辰移晷之杖**。
 
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
-**4096** pattern slots, four chunk-dimension blocks, and a time-acceleration staff.
+**4096** pattern slots with legacy compatibility (native in Useless Mod 2.3.7+), four chunk-dimension blocks, and a time-acceleration staff.
 
 ---
 
@@ -37,8 +37,9 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 开启模具和获取样板分别支持按锚点 Shift 区间选择；重复样板自动去重；
 标签材料优先选用 AE 里已有或可合成的。
 
-### 4096 槽扩容 + 分页界面
-样板总成与被动合成仓扩到 4096 格，分页每页 90 格（10×9）。
+### 4096 槽兼容 + 分页界面
+旧版无用之物由本模组将样板总成与被动合成仓扩到 4096 格，分页每页 90 格（10×9）；
+无用之物 2.3.7 及更新版本已原生提供容量，本模组自动跳过旧版扩容 Mixin。
 老存档里的 540 槽数据会**原地升级**，方块不需要重新放置。
 样板总成被挖掉时，完整库存保存在服务端，掉落物仅携带 UUID 引用；
 旧版物品会自动迁移，避免大容量样板 NBT 超过原版实体同步包上限。
