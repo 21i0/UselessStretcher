@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,8 +22,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
  * <ul>
  *   <li>Shift + mouse wheel cycles the multiplier gear (off / x2 / x4 / x16 / x32 / x64 / x128
  *       / x256 / x512 / x1024).</li>
- *   <li>The dedicated mode key (unbound by default, bind in controls) cycles normal → permanent
- *       → permanent without idle throttling.</li>
+ *   <li>The dedicated key (unbound by default) opens a button-based speed and duration menu.</li>
  * </ul>
  * Shift is only used together with the wheel and with right-click, never captured on its own.
  *
@@ -41,8 +41,9 @@ public final class WondrousStaffClient {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || !player.isShiftKeyDown()) return;
-        ItemStack held = player.getMainHandItem();
-        if (held.getItem() != ModItems.WONDROUS_STAFF.get()) return;
+        InteractionHand hand = findStaffHand(player);
+        if (hand == null) return;
+        ItemStack held = player.getItemInHand(hand);
 
         double delta = event.getScrollDeltaY();
         if (delta == 0) return;
@@ -50,7 +51,8 @@ public final class WondrousStaffClient {
 
         int speed = cycleGear(WondrousStaffAcceleration.getSpeed(held), up);
         held.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
-        Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held));
+        Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held),
+                WondrousStaffAcceleration.isEnabled(held), hand);
         showGearStatus(speed);
         event.setCanceled(true);
     }
@@ -62,14 +64,8 @@ public final class WondrousStaffClient {
         if (player == null || mc.screen != null) return;
         if (!StretcherKeyBindings.WONDROUS_STAFF_MODE.consumeClick()) return;
 
-        ItemStack held = player.getMainHandItem();
-        if (held.getItem() != ModItems.WONDROUS_STAFF.get()) return;
-
-        int mode = (WondrousStaffAcceleration.getMode(held) + 1)
-                % WondrousStaffAcceleration.STAFF_MODE_COUNT;
-        WondrousStaffAcceleration.setMode(held, mode);
-        Network.sendWondrousStaffSpeed(WondrousStaffAcceleration.getSpeed(held), mode);
-        showModeStatus(mode);
+        InteractionHand hand = findStaffHand(player);
+        if (hand != null) mc.setScreen(new WondrousStaffConfigScreen(hand));
     }
 
     private static int cycleGear(int current, boolean up) {
@@ -94,18 +90,9 @@ public final class WondrousStaffClient {
         mc.gui.setOverlayMessage(text, false);
     }
 
-    private static void showModeStatus(int mode) {
-        Component text;
-        if (mode == WondrousStaffAcceleration.STAFF_MODE_PERMANENT_NO_THROTTLE) {
-            text = Component.translatable("gui.useless_stretcher.mode_permanent_no_throttle")
-                    .withStyle(ChatFormatting.LIGHT_PURPLE);
-        } else if (mode == WondrousStaffAcceleration.STAFF_MODE_PERMANENT) {
-            text = Component.translatable("gui.useless_stretcher.mode_permanent")
-                    .withStyle(ChatFormatting.GOLD);
-        } else {
-            text = Component.translatable("gui.useless_stretcher.mode_normal")
-                    .withStyle(ChatFormatting.AQUA);
-        }
-        Minecraft.getInstance().gui.setOverlayMessage(text, false);
+    private static InteractionHand findStaffHand(Player player) {
+        if (player.getMainHandItem().is(ModItems.WONDROUS_STAFF.get())) return InteractionHand.MAIN_HAND;
+        if (player.getOffhandItem().is(ModItems.WONDROUS_STAFF.get())) return InteractionHand.OFF_HAND;
+        return null;
     }
 }

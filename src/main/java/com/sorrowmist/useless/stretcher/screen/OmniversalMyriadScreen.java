@@ -1,5 +1,7 @@
 package com.sorrowmist.useless.stretcher.screen;
 
+import appeng.client.gui.widgets.AE2Button;
+import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.mold.MoldCatalog;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.network.Network;
@@ -22,17 +24,18 @@ import java.util.Set;
 
 public final class OmniversalMyriadScreen extends AbstractContainerScreen<OmniversalMyriadMenu> {
     private static final int ROW_HEIGHT = 18;
-    private static final int LIST_TOP = 32;
-    private static final int LIST_BOTTOM = 208;
+    private static final int LIST_TOP = 50;
+    private static final int LIST_BOTTOM = 226;
 
     private final BlockPos pos;
     private Map<String, List<MoldCatalog.MoldEntry>> catalog = Map.of();
-    private List<MoldCatalog.MoldEntry> flatMolds = List.of();
     private final Set<ResourceLocation> enabled = new LinkedHashSet<>();
     private final Set<ResourceLocation> patternMolds = new LinkedHashSet<>();
     private final Set<String> expandedMods = new LinkedHashSet<>();
     private ResourceLocation lastToggled;
     private ResourceLocation lastPatternToggled;
+    private boolean lastToggleOn;
+    private boolean lastPatternToggleOn;
     private int patternsCount;
     private boolean aeBound;
     private int scroll;
@@ -41,8 +44,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     public OmniversalMyriadScreen(OmniversalMyriadMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.pos = menu.getPos();
-        this.imageWidth = 256;
-        this.imageHeight = 224;
+        this.imageWidth = 300;
+        this.imageHeight = 250;
     }
 
     public boolean matches(BlockPos target) {
@@ -68,14 +71,19 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     protected void init() {
         super.init();
         this.catalog = MoldCatalog.getAllMolds(Minecraft.getInstance().level);
-        List<MoldCatalog.MoldEntry> flat = new ArrayList<>();
-        for (List<MoldCatalog.MoldEntry> list : catalog.values()) flat.addAll(list);
-        this.flatMolds = List.copyOf(flat);
 
-        this.search = new EditBox(this.font, leftPos + 8, topPos + 8, 158, 16, Component.empty());
+        this.search = new EditBox(this.font, leftPos + 8, topPos + 25, 192, 18, Component.empty());
         this.search.setMaxLength(64);
         this.search.setHint(Component.translatable("gui.useless_stretcher.search_hint"));
+        this.search.setTextColor(StretcherScreenStyle.TEXT_COLOR);
+        this.search.setTextColorUneditable(StretcherScreenStyle.MUTED_TEXT_COLOR);
         addRenderableWidget(search);
+        addRenderableWidget(new AE2Button(leftPos + 206, topPos + 25, 86, 18,
+                Component.translatable("gui.useless_stretcher.clear"), ignored -> {
+                    patternMolds.clear();
+                    lastPatternToggled = null;
+                    Network.clearPatterns(pos);
+                }));
         Network.requestState(pos);
     }
 
@@ -91,61 +99,76 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        graphics.fill(leftPos, topPos, leftPos + imageWidth, topPos + imageHeight, 0xC0101010);
-        graphics.fill(leftPos + 7, topPos + 7, leftPos + imageWidth - 7, topPos + imageHeight - 7, 0xFF15151F);
-
-        // Clear-all button.
-        int clearX = leftPos + 174;
-        int clearY = topPos + 8;
-        boolean hoverClear = mouseX >= clearX && mouseX <= clearX + 74 && mouseY >= clearY && mouseY <= clearY + 16;
-        graphics.fill(clearX, clearY, clearX + 74, clearY + 16, hoverClear ? 0xFF8B3A3A : 0xFF4A2020);
-        graphics.drawString(this.font, Component.translatable("gui.useless_stretcher.clear"),
-                clearX + 12, clearY + 4, 0xFFFFFF, false);
+        StretcherScreenStyle.drawPanel(graphics, leftPos, topPos, imageWidth, imageHeight);
+        graphics.drawString(this.font, title, leftPos + 8, topPos + 8,
+                StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, leftPos + 7, topPos + LIST_TOP - 1,
+                leftPos + imageWidth - 7, topPos + LIST_BOTTOM + 1);
 
         graphics.drawString(this.font,
                 Component.translatable("gui.useless_stretcher.patterns", patternsCount),
-                leftPos + 8, topPos + LIST_BOTTOM + 2, 0x888888, false);
+                leftPos + 8, topPos + LIST_BOTTOM + 7, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         graphics.drawString(this.font,
                 Component.translatable(aeBound ? "gui.useless_stretcher.ae_bound" : "gui.useless_stretcher.ae_unbound"),
-                leftPos + 140, topPos + LIST_BOTTOM + 2, aeBound ? 0x55FF55 : 0x888888, false);
+                leftPos + 174, topPos + LIST_BOTTOM + 7,
+                aeBound ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR, false);
 
         List<Row> rows = visibleRows();
         int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (LIST_BOTTOM - LIST_TOP));
         if (scroll > maxScroll) scroll = maxScroll;
 
-        int index = 0;
-        for (Row row : rows) {
-            int y = topPos + LIST_TOP + index * ROW_HEIGHT - scroll;
-            if (y + ROW_HEIGHT < topPos + LIST_TOP || y > topPos + LIST_BOTTOM) {
+        graphics.enableScissor(leftPos + 8, topPos + LIST_TOP, leftPos + imageWidth - 8, topPos + LIST_BOTTOM);
+        try {
+            int index = 0;
+            for (Row row : rows) {
+                int y = topPos + LIST_TOP + index * ROW_HEIGHT - scroll;
+                if (y + ROW_HEIGHT < topPos + LIST_TOP || y > topPos + LIST_BOTTOM) {
+                    index++;
+                    continue;
+                }
+                if (row instanceof HeaderRow header) {
+                    renderHeader(graphics, header, y, mouseX, mouseY);
+                } else if (row instanceof MoldRow mold) {
+                    renderMold(graphics, mold, y, mouseX, mouseY);
+                }
                 index++;
-                continue;
             }
-            if (row instanceof HeaderRow header) {
-                renderHeader(graphics, header, y, mouseX, mouseY);
-            } else if (row instanceof MoldRow mold) {
-                renderMold(graphics, mold, y, mouseX, mouseY);
-            }
-            index++;
+        } finally {
+            graphics.disableScissor();
+        }
+
+        if (maxScroll > 0) {
+            int trackX = leftPos + imageWidth - 11;
+            int trackHeight = LIST_BOTTOM - LIST_TOP - 4;
+            int thumbHeight = Math.max(18, trackHeight * (LIST_BOTTOM - LIST_TOP)
+                    / Math.max(LIST_BOTTOM - LIST_TOP, rows.size() * ROW_HEIGHT));
+            int thumbY = topPos + LIST_TOP + 2 + (trackHeight - thumbHeight) * scroll / maxScroll;
+            graphics.fill(trackX, topPos + LIST_TOP + 2, trackX + 2, topPos + LIST_BOTTOM - 2,
+                    StretcherScreenStyle.SLOT_SHADOW_COLOR);
+            graphics.fill(trackX, thumbY, trackX + 2, thumbY + thumbHeight,
+                    StretcherScreenStyle.ACTIVE_COLOR);
         }
     }
 
     private void renderHeader(GuiGraphics graphics, HeaderRow header, int y, int mouseX, int mouseY) {
         boolean expanded = expandedMods.contains(header.sourceId());
-        int color = 0xE0E0E0;
-        graphics.fill(leftPos + 8, y, leftPos + 248, y + ROW_HEIGHT - 1, 0xFF303048);
-        graphics.drawString(this.font, (expanded ? "▼ " : "▶ ") + header.sourceId(),
-                leftPos + 12, y + 5, color, false);
+        int rowLeft = leftPos + 9;
+        int rowRight = leftPos + imageWidth - 12;
+        boolean hovered = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_HEIGHT;
+        graphics.fill(rowLeft, y, rowRight, y + ROW_HEIGHT - 1,
+                hovered ? StretcherScreenStyle.HIGHLIGHT_COLOR : StretcherScreenStyle.SLOT_COLOR);
+        int checkX = rowRight - 62;
+        String headerName = this.font.plainSubstrByWidth(
+                (expanded ? "- " : "+ ") + header.sourceId(), checkX - rowLeft - 8);
+        graphics.drawString(this.font, headerName,
+                rowLeft + 4, y + 5, StretcherScreenStyle.TEXT_COLOR, false);
+        drawCheckbox(graphics, checkX, y + 3, allEnabled(header.entries()));
 
-        String label = allEnabled(header.entries()) ? "☑" : "☐";
-        graphics.drawString(this.font, label, leftPos + 200, y + 5, 0x55FF55, false);
-
-        int px = leftPos + 216;
+        int px = rowRight - 44;
         int py = y + 2;
         boolean allFetched = allPatternsFetched(header.entries());
-        boolean hoverPat = mouseX >= px && mouseX <= px + 30 && mouseY >= py && mouseY <= py + 14;
-        graphics.fill(px, py, px + 30, py + 14, allFetched ? 0xFF7A5A10 : (hoverPat ? 0xFF2A4A6A : 0xFF1F3240));
-        graphics.drawString(this.font, allFetched ? "样✓" : "样", px + 4, py + 3,
-                allFetched ? 0xFFFFD75E : 0x66B2FF, false);
+        boolean hoverPat = mouseX >= px && mouseX <= px + 40 && mouseY >= py && mouseY <= py + 14;
+        drawPatternButton(graphics, px, py, 40, allFetched, hoverPat);
     }
 
     private void renderMold(GuiGraphics graphics, MoldRow mold, int y, int mouseX, int mouseY) {
@@ -153,20 +176,40 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         boolean fetched = patternMolds.contains(mold.entry().id());
         String query = search == null ? "" : search.getValue().trim();
         boolean highlighted = !query.isEmpty() && matches(mold.entry(), query);
-        if (highlighted) {
-            graphics.fill(leftPos + 8, y, leftPos + 248, y + ROW_HEIGHT - 1, 0xFF6A5A10);
-        } else {
-            graphics.fill(leftPos + 8, y, leftPos + 248, y + ROW_HEIGHT - 1, 0x28FFFFFF);
-        }
-        graphics.drawString(this.font, (on ? "☑ " : "☐ ") + mold.entry().displayName(),
-                leftPos + 20, y + 5, highlighted ? 0xFFFFD75E : (on ? 0xFFFFFF : 0xA0A0A0), false);
+        int rowLeft = leftPos + 9;
+        int rowRight = leftPos + imageWidth - 12;
+        boolean hovered = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_HEIGHT;
+        int background = highlighted ? 0xFFFFE3A0
+                : hovered ? StretcherScreenStyle.HIGHLIGHT_COLOR : StretcherScreenStyle.PANEL_COLOR;
+        graphics.fill(rowLeft, y, rowRight, y + ROW_HEIGHT - 1, background);
+        drawCheckbox(graphics, rowLeft + 11, y + 3, on);
+        String name = this.font.plainSubstrByWidth(mold.entry().displayName(), rowRight - rowLeft - 76);
+        graphics.drawString(this.font, name, rowLeft + 27, y + 5,
+                on ? StretcherScreenStyle.TEXT_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR, false);
 
-        int px = leftPos + 210;
+        int px = rowRight - 44;
         int py = y + 2;
-        boolean hoverPat = mouseX >= px && mouseX <= px + 36 && mouseY >= py && mouseY <= py + 14;
-        graphics.fill(px, py, px + 36, py + 14, fetched ? 0xFF7A5A10 : (hoverPat ? 0xFF2A4A6A : 0xFF1F3240));
-        graphics.drawString(this.font, fetched ? "样✓" : "样", px + 5, py + 3,
-                fetched ? 0xFFFFD75E : 0x66B2FF, false);
+        boolean hoverPat = mouseX >= px && mouseX <= px + 40 && mouseY >= py && mouseY <= py + 14;
+        drawPatternButton(graphics, px, py, 40, fetched, hoverPat);
+    }
+
+    private void drawCheckbox(GuiGraphics graphics, int x, int y, boolean checked) {
+        graphics.fill(x, y, x + 11, y + 11, StretcherScreenStyle.SLOT_SHADOW_COLOR);
+        graphics.fill(x + 1, y + 1, x + 10, y + 10,
+                checked ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.HIGHLIGHT_COLOR);
+        if (checked) graphics.drawString(font, "x", x + 3, y + 2, 0xFFFFFFFF, false);
+    }
+
+    private void drawPatternButton(GuiGraphics graphics, int x, int y, int width,
+                                   boolean fetched, boolean hovered) {
+        graphics.fill(x, y, x + width, y + 14, StretcherScreenStyle.SLOT_SHADOW_COLOR);
+        int color = fetched ? StretcherScreenStyle.WARNING_COLOR
+                : hovered ? StretcherScreenStyle.ACTIVE_COLOR : StretcherScreenStyle.SUBTLE_TEXT_COLOR;
+        graphics.fill(x + 1, y + 1, x + width - 1, y + 13, color);
+        Component label = Component.translatable(fetched
+                ? "gui.useless_stretcher.pattern_remove_short"
+                : "gui.useless_stretcher.pattern_get_short");
+        graphics.drawCenteredString(font, label, x + width / 2, y + 3, 0xFFFFFFFF);
     }
 
     private boolean allEnabled(List<MoldCatalog.MoldEntry> entries) {
@@ -217,19 +260,12 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0) {
-            int clearX = leftPos + 174;
-            int clearY = topPos + 8;
-            if (mouseX >= clearX && mouseX <= clearX + 74 && mouseY >= clearY && mouseY <= clearY + 16) {
-                patternMolds.clear();
-                Network.clearPatterns(pos);
-                return true;
-            }
-
             List<Row> rows = visibleRows();
             int index = 0;
             for (Row row : rows) {
                 int y = topPos + LIST_TOP + index * ROW_HEIGHT - scroll;
-                if (mouseX >= leftPos + 8 && mouseX <= leftPos + 248
+                if (mouseY >= topPos + LIST_TOP && mouseY < topPos + LIST_BOTTOM
+                        && mouseX >= leftPos + 9 && mouseX <= leftPos + imageWidth - 12
                         && mouseY >= y && mouseY < y + ROW_HEIGHT) {
                     handleClick(row, mouseX, mouseY);
                     return true;
@@ -242,10 +278,11 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     private void handleClick(Row row, double mouseX, double mouseY) {
         if (row instanceof HeaderRow header) {
-            boolean hitPattern = mouseX >= leftPos + 216;
-            boolean hitToggle = mouseX >= leftPos + 196 && !hitPattern;
+            int rowRight = leftPos + imageWidth - 12;
+            boolean hitPattern = mouseX >= rowRight - 44;
+            boolean hitToggle = mouseX >= rowRight - 66 && !hitPattern;
             if (hitPattern) {
-                toggleModPatterns(header);
+                setModPatterns(header);
             } else if (hitToggle) {
                 boolean all = allEnabled(header.entries());
                 for (MoldCatalog.MoldEntry entry : header.entries()) {
@@ -257,13 +294,20 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 if (!expandedMods.remove(header.sourceId())) expandedMods.add(header.sourceId());
             }
         } else if (row instanceof MoldRow mold) {
-            boolean hitPattern = mouseX >= leftPos + 210;
+            int rowRight = leftPos + imageWidth - 12;
+            boolean hitPattern = mouseX >= rowRight - 44;
             if (hitPattern) {
+                ResourceLocation id = mold.entry().id();
+                boolean ctrl = Screen.hasControlDown();
                 if (Screen.hasShiftDown() && lastPatternToggled != null) {
-                    togglePatternRange(lastPatternToggled, mold.entry().id());
+                    setPatternRange(lastPatternToggled, id, lastPatternToggleOn);
                 } else {
-                    Network.togglePatterns(pos, mold.entry().id().toString());
-                    lastPatternToggled = mold.entry().id();
+                    boolean fetch = !patternMolds.contains(id);
+                    setPatternSelection(List.of(id), fetch);
+                    if (!ctrl) {
+                        lastPatternToggled = id;
+                        lastPatternToggleOn = fetch;
+                    }
                 }
                 return;
             }
@@ -273,29 +317,21 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
             boolean turnOn = !enabled.contains(mold.entry().id());
 
             if (shift && lastToggled != null) {
-                toggleRange(lastToggled, mold.entry().id(), turnOn);
+                setEnabledRange(lastToggled, mold.entry().id(), lastToggleOn);
             } else {
                 if (turnOn) enabled.add(mold.entry().id());
                 else enabled.remove(mold.entry().id());
-                if (!ctrl) lastToggled = mold.entry().id();
+                if (!ctrl) {
+                    lastToggled = mold.entry().id();
+                    lastToggleOn = turnOn;
+                }
             }
             pushEnabled();
         }
     }
 
-    private void toggleRange(ResourceLocation anchor, ResourceLocation target, boolean turnOn) {
-        int a = -1;
-        int b = -1;
-        for (int i = 0; i < flatMolds.size(); i++) {
-            ResourceLocation id = flatMolds.get(i).id();
-            if (id.equals(anchor)) a = i;
-            if (id.equals(target)) b = i;
-        }
-        if (a < 0 || b < 0) return;
-        int lo = Math.min(a, b);
-        int hi = Math.max(a, b);
-        for (int i = lo; i <= hi; i++) {
-            ResourceLocation id = flatMolds.get(i).id();
+    private void setEnabledRange(ResourceLocation anchor, ResourceLocation target, boolean turnOn) {
+        for (ResourceLocation id : rangeIds(anchor, target)) {
             if (turnOn) enabled.add(id);
             else enabled.remove(id);
         }
@@ -306,28 +342,41 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         Network.setEnabled(pos, ids);
     }
 
-    private void toggleModPatterns(HeaderRow header) {
-        List<String> ids = header.entries().stream().map(e -> e.id().toString()).toList();
+    private void setModPatterns(HeaderRow header) {
+        List<ResourceLocation> ids = header.entries().stream().map(MoldCatalog.MoldEntry::id).toList();
         if (ids.isEmpty()) return;
-        Network.toggleModPatterns(pos, ids);
+        boolean fetch = !allPatternsFetched(header.entries());
+        setPatternSelection(ids, fetch);
     }
 
-    private void togglePatternRange(ResourceLocation anchor, ResourceLocation target) {
+    private void setPatternRange(ResourceLocation anchor, ResourceLocation target, boolean fetch) {
+        setPatternSelection(rangeIds(anchor, target), fetch);
+    }
+
+    private List<ResourceLocation> rangeIds(ResourceLocation anchor, ResourceLocation target) {
+        List<ResourceLocation> visibleMolds = visibleRows().stream()
+                .filter(MoldRow.class::isInstance)
+                .map(MoldRow.class::cast)
+                .map(row -> row.entry().id())
+                .toList();
         int a = -1;
         int b = -1;
-        for (int i = 0; i < flatMolds.size(); i++) {
-            ResourceLocation id = flatMolds.get(i).id();
+        for (int i = 0; i < visibleMolds.size(); i++) {
+            ResourceLocation id = visibleMolds.get(i);
             if (id.equals(anchor)) a = i;
             if (id.equals(target)) b = i;
         }
-        if (a < 0 || b < 0) return;
+        if (a < 0 || b < 0) return List.of();
         int lo = Math.min(a, b);
         int hi = Math.max(a, b);
-        List<String> ids = new ArrayList<>();
-        for (int i = lo; i <= hi; i++) {
-            ids.add(flatMolds.get(i).id().toString());
-        }
-        if (!ids.isEmpty()) Network.toggleModPatterns(pos, ids);
+        return List.copyOf(visibleMolds.subList(lo, hi + 1));
+    }
+
+    private void setPatternSelection(List<ResourceLocation> ids, boolean fetch) {
+        if (ids.isEmpty()) return;
+        if (fetch) patternMolds.addAll(ids);
+        else patternMolds.removeAll(ids);
+        Network.setPatterns(pos, ids.stream().map(ResourceLocation::toString).toList(), fetch);
     }
 
     @Override

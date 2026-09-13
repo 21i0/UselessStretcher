@@ -8,7 +8,7 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 public final class StretcherKeyBindings {
     public static final String CATEGORY = "key.categories.useless_stretcher";
 
-    /** Cycles normal, permanent, and permanent-without-idle-throttle acceleration modes. */
+    /** Opens the staff acceleration configuration screen. */
     public static final KeyMapping WONDROUS_STAFF_MODE = new KeyMapping(
             "key.useless_stretcher.wondrous_staff_mode",
             KeyConflictContext.IN_GAME,

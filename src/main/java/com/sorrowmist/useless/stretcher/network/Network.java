@@ -10,6 +10,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -28,6 +29,8 @@ public final class Network {
     public static final int ACTION_TOGGLE_PATTERNS = 2;
     public static final int ACTION_CLEAR_PATTERNS = 3;
     public static final int ACTION_TOGGLE_MOD_PATTERNS = 4;
+    public static final int ACTION_FETCH_PATTERNS = 5;
+    public static final int ACTION_REMOVE_PATTERNS = 6;
 
     public record MyriadStatePayload(BlockPos pos, List<String> enabledMolds, List<String> patternMolds,
                                      int patternCount, boolean aeBound) implements CustomPacketPayload {
@@ -80,7 +83,8 @@ public final class Network {
         }
     }
 
-    public record WondrousStaffSpeedPayload(int speed, int mode) implements CustomPacketPayload {
+    public record WondrousStaffSpeedPayload(int speed, int mode, boolean accelerationEnabled, boolean offhand)
+            implements CustomPacketPayload {
         public static final Type<WondrousStaffSpeedPayload> TYPE =
                 new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_speed"));
 
@@ -88,6 +92,8 @@ public final class Network {
                 StreamCodec.composite(
                         ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::speed,
                         ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::mode,
+                        ByteBufCodecs.BOOL, WondrousStaffSpeedPayload::accelerationEnabled,
+                        ByteBufCodecs.BOOL, WondrousStaffSpeedPayload::offhand,
                         WondrousStaffSpeedPayload::new);
 
         @Override
@@ -111,14 +117,27 @@ public final class Network {
     private static void handleWondrousStaffSpeed(WondrousStaffSpeedPayload payload,
                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        ItemStack held = player.getMainHandItem();
+        InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack held = player.getItemInHand(hand);
         if (held.getItem() != com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get()) return;
-        held.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_SPEED.get(), payload.speed());
-        com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.setMode(held, payload.mode());
+        int speed = switch (payload.speed()) {
+            case 0, 2, 4, 16, 32, 64, 128, 256, 512, 1024 -> payload.speed();
+            default -> com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.DEFAULT_GEAR;
+        };
+        int mode = payload.mode() >= 0
+                && payload.mode() < com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.STAFF_MODE_COUNT
+                ? payload.mode()
+                : com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.STAFF_MODE_NORMAL;
+        held.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.setMode(held, mode);
+        held.set(com.sorrowmist.useless.core.component.UComponents.BeefTimeAccelerationEnabledComponent.get(),
+                payload.accelerationEnabled());
     }
 
-    public static void sendWondrousStaffSpeed(int speed, int mode) {
-        PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(speed, mode));
+    public static void sendWondrousStaffSpeed(int speed, int mode, boolean accelerationEnabled,
+                                              InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(
+                speed, mode, accelerationEnabled, hand == InteractionHand.OFF_HAND));
     }
 
     private static void handleAction(MyriadActionPayload payload, net.neoforged.neoforge.network.handling.IPayloadContext context) {
@@ -160,6 +179,18 @@ public final class Network {
                             }
                         }
                     }
+                    case ACTION_FETCH_PATTERNS, ACTION_REMOVE_PATTERNS -> {
+                        List<ResourceLocation> ids = payload.enabledMolds().stream()
+                                .map(ResourceLocation::tryParse)
+                                .filter(java.util.Objects::nonNull)
+                                .toList();
+                        boolean fetch = payload.action() == ACTION_FETCH_PATTERNS;
+                        for (ResourceLocation id : ids) {
+                            be.setMoldPatterns(id, fetch
+                                    ? PatternFetcher.fetchForMold(player.level(), payload.pos(), be.getAeNodePos(), id.toString())
+                                    : List.of());
+                        }
+                    }
                     case ACTION_REQUEST_STATE -> {
                         // fall through to reply below
                     }
@@ -191,6 +222,11 @@ public final class Network {
 
     public static void toggleModPatterns(BlockPos pos, List<String> moldIds) {
         PacketDistributor.sendToServer(new MyriadActionPayload(pos, ACTION_TOGGLE_MOD_PATTERNS, "", moldIds));
+    }
+
+    public static void setPatterns(BlockPos pos, List<String> moldIds, boolean fetch) {
+        PacketDistributor.sendToServer(new MyriadActionPayload(pos,
+                fetch ? ACTION_FETCH_PATTERNS : ACTION_REMOVE_PATTERNS, "", moldIds));
     }
 
     public static void clearPatterns(BlockPos pos) {

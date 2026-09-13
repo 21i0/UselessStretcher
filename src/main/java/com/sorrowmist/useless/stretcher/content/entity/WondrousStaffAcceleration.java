@@ -100,16 +100,16 @@ public final class WondrousStaffAcceleration {
     }
 
     /** Accelerates a living entity (baby growth or adult breeding cooldown). Never targets players. */
-    public static InteractionResult tryUseEntity(Player player, LivingEntity target) {
+    public static InteractionResult tryUseEntity(Player player, LivingEntity target, ItemStack staff) {
         if (target instanceof Player) return InteractionResult.PASS;
-        if (!isEnabled(player.getMainHandItem())) return InteractionResult.PASS;
+        if (!isEnabled(staff)) return InteractionResult.PASS;
         Level level = target.level();
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
 
         AABB area = target.getBoundingBox().inflate(4.0D);
-        int speed = getSpeed(player.getMainHandItem());
-        int staffMode = getMode(player.getMainHandItem());
+        int speed = getSpeed(staff);
+        int staffMode = getMode(staff);
         boolean permanent = isPermanentMode(staffMode);
         boolean noIdleThrottle = skipsIdleThrottle(staffMode);
         List<WondrousStaffAccelerationEntity> existing = serverLevel.getEntitiesOfClass(
@@ -138,13 +138,13 @@ public final class WondrousStaffAcceleration {
     }
 
     /** Accelerates world time (the day/night cycle) while the player looks at the sky. */
-    public static InteractionResult tryUseTime(Player player) {
+    public static InteractionResult tryUseTime(Player player, ItemStack staff) {
         Level level = player.level();
-        if (!isEnabled(player.getMainHandItem())) return InteractionResult.PASS;
+        if (!isEnabled(staff)) return InteractionResult.PASS;
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
 
-        int speed = getSpeed(player.getMainHandItem());
+        int speed = getSpeed(staff);
         List<WondrousStaffAccelerationEntity> existing = serverLevel.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class,
                 player.getBoundingBox().inflate(24.0D),

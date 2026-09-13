@@ -98,7 +98,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
                                                   InteractionHand hand) {
         if (player.isShiftKeyDown() && !(entity instanceof Player)
                 && entity instanceof AgeableMob) {
-            InteractionResult result = WondrousStaffAcceleration.tryUseEntity(player, entity);
+            InteractionResult result = WondrousStaffAcceleration.tryUseEntity(player, entity, stack);
             if (result != InteractionResult.PASS) return result;
         }
         return super.interactLivingEntity(stack, player, entity, hand);
@@ -107,7 +107,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (player.isShiftKeyDown() && WondrousStaffAcceleration.isLookingAtCelestial(level, player)) {
-            InteractionResult result = WondrousStaffAcceleration.tryUseTime(player);
+            InteractionResult result = WondrousStaffAcceleration.tryUseTime(player, player.getItemInHand(hand));
             if (result != InteractionResult.PASS) {
                 return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
             }

@@ -38,6 +38,12 @@ public final class StretcherComponents {
                     .persistent(Codec.INT)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
 
+    /** Small server-store reference replacing the pattern assembly's potentially multi-megabyte item data. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> PATTERN_ASSEMBLY_REF =
+            register("pattern_assembly_ref", builder -> builder
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
     private StretcherComponents() {
     }
 

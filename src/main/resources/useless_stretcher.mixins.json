@@ -17,6 +17,8 @@
     "PassiveCraftingHatchBlockEntityMixin",
     "PassiveCraftingHatchMenuMixin",
     "PassiveCraftingStatusPacketMixin",
+    "MePatternAssemblyBlockMixin",
+    "MePatternAssemblyBlockEntityMixin",
     "PagedRecoverableMenuMixin",
     "PagedRecoverableMenuPageViewMixin",
     "OreGeneratorMenuMixin",
