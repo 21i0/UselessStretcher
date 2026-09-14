@@ -4,9 +4,10 @@ license="MIT"
 
 [[mods]]
 modId="useless_stretcher"
-version="1.21.1-1.3.3"
+version="1.21.1-1.3.4"
 displayName="Useless Stretcher"
 description="Omniversal Alloy Furnace addon: the Omniversal Myriad Block carries every mold, and the Useless Stretcher delivers patterns remotely."
+credits="Art by 虾比"
 authors="2i学习"
 
 [[dependencies.useless_stretcher]]

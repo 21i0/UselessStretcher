@@ -1,6 +1,14 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "useless_mod:item/endless_beaf_item"
-  }
+    "layer0": "useless_stretcher:item/endless_beaf_time_item"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "useless_stretcher:item/wondrous_staff_silk_touch"
+    }
+  ]
 }
