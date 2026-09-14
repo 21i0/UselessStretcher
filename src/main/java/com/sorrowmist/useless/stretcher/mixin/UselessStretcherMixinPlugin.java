@@ -1,6 +1,8 @@
 package com.sorrowmist.useless.stretcher.mixin;
 
-import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 /** Selects the legacy capacity patches only for Useless Mod versions before 2.3.7. */
 public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
+    private static final Logger LOGGER = LogManager.getLogger("UselessStretcher/MixinPlugin");
     private static final Set<String> LEGACY_4096_MIXINS = Set.of(
             "ConfigManagerMixin", "RecoverableItemStackHandlerMixin", "ItemStackHandlerMixin",
             "PassiveCraftingHatchBlockEntityMixin", "PassiveCraftingHatchMenuMixin",
@@ -22,7 +25,11 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        if (native4096 == null) native4096 = detectNative4096Support();
+        if (native4096 == null) {
+            native4096 = detectNative4096Support();
+            LOGGER.info("Useless Mod native 4096 support detected: {}; legacy capacity/UI mixins enabled: {}",
+                    native4096, !native4096);
+        }
     }
 
     @Override
@@ -34,10 +41,13 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
 
     private static boolean detectNative4096Support() {
         try {
-            String version = ModList.get().getModContainerById("useless_mod")
-                    .map(container -> container.getModInfo().getVersion().toString()).orElse("");
+            String version = FMLLoader.getLoadingModList().getMods().stream()
+                    .filter(mod -> mod.getModId().equals("useless_mod"))
+                    .map(mod -> mod.getVersion().toString())
+                    .findFirst()
+                    .orElse("");
             return compareVersion(extractModVersion(version), List.of(2, 3, 7)) >= 0;
-        } catch (RuntimeException ignored) {
+        } catch (RuntimeException | LinkageError ignored) {
             return false;
         }
     }
