@@ -1,6 +1,8 @@
 package com.sorrowmist.useless.stretcher.client;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
+import com.sorrowmist.useless.stretcher.client.render.StaffLeafRewardRenderer;
+import com.sorrowmist.useless.stretcher.client.render.TimeFlowRenderer;
 import com.sorrowmist.useless.stretcher.client.render.WondrousStaffAccelerationRenderer;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModMenuTypes;
@@ -26,6 +28,8 @@ public final class ClientSetup {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.WONDROUS_STAFF_ACCELERATION.get(),
                 WondrousStaffAccelerationRenderer::new);
+        event.registerEntityRenderer(ModEntities.STAFF_LEAF_REWARD.get(), StaffLeafRewardRenderer::new);
+        event.registerEntityRenderer(ModEntities.TIME_FLOW.get(), TimeFlowRenderer::new);
     }
 
     @SubscribeEvent

@@ -20,7 +20,7 @@ import java.util.List;
 public final class WondrousStaffConfigScreen extends Screen {
     private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
     private static final int PANEL_WIDTH = 260;
-    private static final int PANEL_HEIGHT = 171;
+    private static final int PANEL_HEIGHT = 193;
 
     private final InteractionHand hand;
     private final List<ChoiceButton> speedButtons = new ArrayList<>();
@@ -82,6 +82,15 @@ public final class WondrousStaffConfigScreen extends Screen {
                     Component.translatable(modeKeys[mode]), ignored -> selectMode(value)));
             modeButtons.add(new ChoiceButton(mode, button));
         }
+        int footerWidth = (cardWidth - 3) / 2;
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft, panelTop + 169, footerWidth, 17,
+                Component.translatable("gui.useless_stretcher.range.open"),
+                ignored -> minecraft.setScreen(new RangeAccelerationConfigScreen(this, hand))));
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft + footerWidth + 3, panelTop + 169, cardWidth - footerWidth - 3, 17,
+                Component.translatable("gui.useless_stretcher.range.history"),
+                ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
         updateSelection();
     }
 

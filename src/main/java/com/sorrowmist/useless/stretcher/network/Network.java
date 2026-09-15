@@ -83,6 +83,18 @@ public final class Network {
         }
     }
 
+    public record StaffTutorialPayload() implements CustomPacketPayload {
+        public static final Type<StaffTutorialPayload> TYPE =
+                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_tutorial"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StaffTutorialPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> { }, buf -> new StaffTutorialPayload());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record WondrousStaffSpeedPayload(int speed, int mode, boolean accelerationEnabled, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffSpeedPayload> TYPE =
@@ -102,6 +114,24 @@ public final class Network {
         }
     }
 
+    /** Dimension-wide visual clock used only for client cloud movement. */
+    public record TimeAccelerationStatePayload(String dimension, int speed) implements CustomPacketPayload {
+        public static final Type<TimeAccelerationStatePayload> TYPE =
+                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                        "time_acceleration_state"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, TimeAccelerationStatePayload> STREAM_CODEC =
+                StreamCodec.composite(
+                        ByteBufCodecs.STRING_UTF8, TimeAccelerationStatePayload::dimension,
+                        ByteBufCodecs.VAR_INT, TimeAccelerationStatePayload::speed,
+                        TimeAccelerationStatePayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(UselessStretcherMod.MODID);
 
@@ -110,8 +140,13 @@ public final class Network {
                 (payload, context) -> ClientStateReceiver.accept(payload));
         registrar.playToClient(FullSlotsPayload.TYPE, FullSlotsPayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.handleFullSlots(payload));
+        registrar.playToClient(StaffTutorialPayload.TYPE, StaffTutorialPayload.STREAM_CODEC,
+                (payload, context) -> ClientStateReceiver.handleStaffTutorial());
+        registrar.playToClient(TimeAccelerationStatePayload.TYPE, TimeAccelerationStatePayload.STREAM_CODEC,
+                (payload, context) -> ClientStateReceiver.handleTimeAcceleration(payload));
         registrar.playToServer(WondrousStaffSpeedPayload.TYPE, WondrousStaffSpeedPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSpeed(payload, context)));
+        RangeNetwork.register(registrar);
     }
 
     private static void handleWondrousStaffSpeed(WondrousStaffSpeedPayload payload,
@@ -138,6 +173,15 @@ public final class Network {
                                               InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(
                 speed, mode, accelerationEnabled, hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendStaffTutorial(ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, new StaffTutorialPayload());
+    }
+
+    public static void sendTimeAccelerationState(net.minecraft.server.level.ServerLevel level, int speed) {
+        PacketDistributor.sendToPlayersInDimension(level, new TimeAccelerationStatePayload(
+                level.dimension().location().toString(), Math.max(0, speed)));
     }
 
     private static void handleAction(MyriadActionPayload payload, net.neoforged.neoforge.network.handling.IPayloadContext context) {

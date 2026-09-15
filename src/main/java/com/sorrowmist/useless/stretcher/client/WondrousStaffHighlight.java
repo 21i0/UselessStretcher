@@ -58,7 +58,7 @@ public final class WondrousStaffHighlight {
 
         if (minecraft.hitResult instanceof EntityHitResult hit
                 && hit.getEntity() instanceof AgeableMob ageable) {
-            drawThickBox(poseStack, quads, ageable.getBoundingBox().inflate(0.05D), camPos,
+            drawSolidOutline(poseStack, quads, ageable.getBoundingBox().inflate(0.05D), camPos,
                     0.0F, 1.0F, 0.4F, 0.9F, seeThrough);
         }
 
@@ -67,7 +67,7 @@ public final class WondrousStaffHighlight {
                 new AABB(player.blockPosition()).inflate(64.0D),
                 entity -> entity.getMode() == WondrousStaffAccelerationEntity.MODE_BLOCK);
         for (WondrousStaffAccelerationEntity machine : machines) {
-            drawFlowingBox(poseStack, quads, new AABB(machine.getTargetPos()), camPos,
+            drawFlowingOutline(poseStack, quads, new AABB(machine.getTargetPos()), camPos,
                     minecraft.level.getGameTime(), machine.isIdleThrottled(), 0.9F, seeThrough);
         }
     }
@@ -83,20 +83,33 @@ public final class WondrousStaffHighlight {
                 && WondrousStaffAcceleration.isEnabled(offHand) ? offHand : ItemStack.EMPTY;
     }
 
-    private static void drawThickBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
-                                     float r, float g, float b, float a, boolean seeThrough) {
-        drawBox(poseStack, quads, box, camPos, r, g, b, a, seeThrough, false, 0L, false);
+    static void drawSolidOutline(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
+                                 float r, float g, float b, float a, boolean seeThrough) {
+        drawBox(poseStack, quads, box, camPos, r, g, b, a, seeThrough, false, 0L, false, -1);
     }
 
-    private static void drawFlowingBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
-                                       long gameTime, boolean throttled, float alpha, boolean seeThrough) {
+    static void drawFlowingOutline(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
+                                   long gameTime, boolean throttled, float alpha, boolean seeThrough) {
+        drawFlowingOutline(poseStack, quads, box, camPos, gameTime, throttled, alpha, seeThrough, -1);
+    }
+
+    /**
+     * Draws the animated outline with an optional RGB tint. A tint is used only for transient
+     * placement gestures (Ctrl+right-click): the rainbow remains visible while the red/green
+     * bias tells the player whether the current list is a blacklist or whitelist.
+     *
+     * @param tintRgb {@code -1} for the normal palette, otherwise a packed {@code 0xRRGGBB}
+     */
+    static void drawFlowingOutline(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
+                                   long gameTime, boolean throttled, float alpha, boolean seeThrough,
+                                   int tintRgb) {
         drawBox(poseStack, quads, box, camPos, 0.0F, 0.0F, 0.0F, alpha, seeThrough,
-                true, gameTime, throttled);
+                true, gameTime, throttled, tintRgb);
     }
 
     private static void drawBox(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,
                                 float solidR, float solidG, float solidB, float alpha, boolean seeThrough,
-                                boolean flowing, long gameTime, boolean throttled) {
+                                boolean flowing, long gameTime, boolean throttled, int tintRgb) {
         Vec3[] corners = new Vec3[]{
                 new Vec3(box.minX, box.minY, box.minZ),
                 new Vec3(box.maxX, box.minY, box.minZ),
@@ -156,6 +169,15 @@ public final class WondrousStaffHighlight {
                     r = ((rgb >> 16) & 0xFF) / 255.0F;
                     g = ((rgb >> 8) & 0xFF) / 255.0F;
                     b = (rgb & 0xFF) / 255.0F;
+                    if (tintRgb >= 0) {
+                        float tintR = ((tintRgb >> 16) & 0xFF) / 255.0F;
+                        float tintG = ((tintRgb >> 8) & 0xFF) / 255.0F;
+                        float tintB = (tintRgb & 0xFF) / 255.0F;
+                        // Keep enough of the rainbow for motion while making the mode legible.
+                        r = Mth.lerp(0.68F, r, tintR);
+                        g = Mth.lerp(0.68F, g, tintG);
+                        b = Mth.lerp(0.68F, b, tintB);
+                    }
                 }
             }
             addQuad(quads, pose, from.add(side), from.subtract(side), to.subtract(side), to.add(side), r, g, b, alpha);

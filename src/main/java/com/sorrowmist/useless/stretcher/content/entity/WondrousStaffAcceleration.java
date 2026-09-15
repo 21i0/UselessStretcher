@@ -3,10 +3,14 @@ package com.sorrowmist.useless.stretcher.content.entity;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IInWorldGridNodeHost;
 import appeng.api.networking.ticking.IGridTickable;
+import appeng.me.service.TickManagerService;
 import com.sorrowmist.useless.core.component.UComponents;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
+import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,19 +18,23 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
 
 import java.util.List;
 
@@ -52,6 +60,8 @@ public final class WondrousStaffAcceleration {
     /** The multiplier gear a freshly crafted staff starts with (x2). */
     public static final int DEFAULT_GEAR = 2;
     private static final int RANDOM_TICK_CHANCE = 1365;
+    /** Vanilla's private ServerLevel.THUNDER_DELAY provider. */
+    private static final IntProvider THUNDER_DELAY = UniformInt.of(12000, 180000);
 
     private WondrousStaffAcceleration() {
     }
@@ -99,9 +109,10 @@ public final class WondrousStaffAcceleration {
         return InteractionResult.sidedSuccess(false);
     }
 
-    /** Accelerates a living entity (baby growth or adult breeding cooldown). Never targets players. */
-    public static InteractionResult tryUseEntity(Player player, LivingEntity target, ItemStack staff) {
-        if (target instanceof Player) return InteractionResult.PASS;
+    /** Accelerates an entity. Never targets players or an acceleration marker itself. */
+    public static InteractionResult tryUseEntity(Player player, Entity target, ItemStack staff) {
+        if (target == null || target instanceof Player || target instanceof WondrousStaffAccelerationEntity
+                || target.isRemoved()) return InteractionResult.PASS;
         if (!isEnabled(staff)) return InteractionResult.PASS;
         Level level = target.level();
         if (level.isClientSide) return InteractionResult.SUCCESS;
@@ -126,10 +137,12 @@ public final class WondrousStaffAcceleration {
                     new WondrousStaffAccelerationEntity(serverLevel, target, speed);
             if (permanent) created.setPermanent();
             created.setIdleThrottleDisabled(noIdleThrottle);
+            created.setEntityAiDisabled(StretcherConfig.entityDisableAi());
             serverLevel.addFreshEntity(created);
         } else {
             effect.setSpeed(speed);
             effect.setIdleThrottleDisabled(noIdleThrottle);
+            effect.setEntityAiDisabled(StretcherConfig.entityDisableAi());
             if (permanent) effect.setPermanent();
             else effect.setRemainingTime(DEFAULT_DURATION_TICKS);
         }
@@ -137,7 +150,7 @@ public final class WondrousStaffAcceleration {
         return InteractionResult.sidedSuccess(false);
     }
 
-    /** Accelerates world time (the day/night cycle) while the player looks at the sky. */
+    /** Accelerates the dimension's day/night and weather cycles while looking at the sky. */
     public static InteractionResult tryUseTime(Player player, ItemStack staff) {
         Level level = player.level();
         if (!isEnabled(staff)) return InteractionResult.PASS;
@@ -145,13 +158,18 @@ public final class WondrousStaffAcceleration {
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
 
         int speed = getSpeed(staff);
-        List<WondrousStaffAccelerationEntity> existing = serverLevel.getEntitiesOfClass(
-                WondrousStaffAccelerationEntity.class,
-                player.getBoundingBox().inflate(24.0D),
-                WondrousStaffAccelerationEntity::isTimeMode);
-        WondrousStaffAccelerationEntity effect = existing.stream().findFirst().orElse(null);
+        // Daytime and weather are dimension-wide, so distant players must update one shared effect
+        // instead of accidentally stacking several global clocks.
+        WondrousStaffAccelerationEntity effect = null;
+        for (Entity entity : serverLevel.getAllEntities()) {
+            if (entity instanceof WondrousStaffAccelerationEntity candidate && candidate.isTimeMode()) {
+                effect = candidate;
+                break;
+            }
+        }
         if (speed <= 0) {
             if (effect != null) effect.discard();
+            else Network.sendTimeAccelerationState(serverLevel, 0);
             return InteractionResult.sidedSuccess(false);
         }
         if (effect == null) {
@@ -160,9 +178,12 @@ public final class WondrousStaffAcceleration {
             // Sun/moon acceleration is blacklisted from permanent mode: always 30s.
             serverLevel.addFreshEntity(created);
         } else {
+            effect.setTargetPos(player.blockPosition());
+            effect.setPos(player.position());
             effect.setSpeed(speed);
             effect.setRemainingTime(DEFAULT_DURATION_TICKS);
         }
+        Network.sendTimeAccelerationState(serverLevel, speed);
         playUseSound(serverLevel, player.blockPosition(), speed);
         return InteractionResult.sidedSuccess(false);
     }
@@ -255,6 +276,85 @@ public final class WondrousStaffAcceleration {
         return state.isRandomlyTicking();
     }
 
+    /**
+     * Advances only vanilla's weather state machine. This deliberately does not touch game time,
+     * scheduled ticks, chunks, block entities or entities. Replaying the small state machine keeps
+     * clear/rain/thunder durations and transitions identical to vanilla while coalescing all
+     * client updates into at most one final packet of each kind per real server tick.
+     */
+    public static void tickWeather(ServerLevel level, int extraTicks) {
+        int steps = Math.max(0, Math.min(WondrousStaffAccelerationEntity.MAX_MULTIPLIER, extraTicks));
+        if (steps == 0 || !level.dimensionType().hasSkyLight()) return;
+        if (!(level.getLevelData() instanceof ServerLevelData data)) return;
+
+        boolean wasVisiblyRaining = level.isRaining();
+        float oldRainLevel = level.rainLevel;
+        float oldThunderLevel = level.thunderLevel;
+        boolean weatherCycle = level.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE);
+
+        int clearTime = data.getClearWeatherTime();
+        int thunderTime = data.getThunderTime();
+        int rainTime = data.getRainTime();
+        boolean thundering = data.isThundering();
+        boolean raining = data.isRaining();
+
+        for (int tick = 0; tick < steps; tick++) {
+            if (weatherCycle) {
+                if (clearTime > 0) {
+                    clearTime--;
+                    thunderTime = thundering ? 0 : 1;
+                    rainTime = raining ? 0 : 1;
+                    thundering = false;
+                    raining = false;
+                } else {
+                    if (thunderTime > 0) {
+                        if (--thunderTime == 0) thundering = !thundering;
+                    } else {
+                        thunderTime = (thundering ? ServerLevel.THUNDER_DURATION : THUNDER_DELAY)
+                                .sample(level.random);
+                    }
+
+                    if (rainTime > 0) {
+                        if (--rainTime == 0) raining = !raining;
+                    } else {
+                        rainTime = (raining ? ServerLevel.RAIN_DURATION : ServerLevel.RAIN_DELAY)
+                                .sample(level.random);
+                    }
+                }
+            }
+
+            level.oThunderLevel = level.thunderLevel;
+            level.thunderLevel = Math.clamp(level.thunderLevel + (thundering ? 0.01F : -0.01F), 0.0F, 1.0F);
+            level.oRainLevel = level.rainLevel;
+            level.rainLevel = Math.clamp(level.rainLevel + (raining ? 0.01F : -0.01F), 0.0F, 1.0F);
+        }
+
+        data.setClearWeatherTime(clearTime);
+        data.setThunderTime(thunderTime);
+        data.setRainTime(rainTime);
+        data.setThundering(thundering);
+        data.setRaining(raining);
+
+        boolean visiblyRaining = level.isRaining();
+        if (wasVisiblyRaining != visiblyRaining) {
+            ClientboundGameEventPacket.Type type = visiblyRaining
+                    ? ClientboundGameEventPacket.START_RAINING
+                    : ClientboundGameEventPacket.STOP_RAINING;
+            level.getServer().getPlayerList().broadcastAll(new ClientboundGameEventPacket(type, 0.0F),
+                    level.dimension());
+        }
+        if (oldRainLevel != level.rainLevel || wasVisiblyRaining != visiblyRaining) {
+            level.getServer().getPlayerList().broadcastAll(
+                    new ClientboundGameEventPacket(ClientboundGameEventPacket.RAIN_LEVEL_CHANGE, level.rainLevel),
+                    level.dimension());
+        }
+        if (oldThunderLevel != level.thunderLevel || wasVisiblyRaining != visiblyRaining) {
+            level.getServer().getPlayerList().broadcastAll(
+                    new ClientboundGameEventPacket(ClientboundGameEventPacket.THUNDER_LEVEL_CHANGE, level.thunderLevel),
+                    level.dimension());
+        }
+    }
+
     /** Ticks a block or AE node {@code speed} extra times. */
     public static void tickTarget(ServerLevel level, BlockPos pos, int speed) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -329,6 +429,27 @@ public final class WondrousStaffAcceleration {
                 }
             }
             return true;
+        }
+        return false;
+    }
+
+    /** True when an AE device currently requests ticks instead of reporting itself asleep. */
+    public static boolean isAeDeviceWorking(IInWorldGridNodeHost host) {
+        for (Direction direction : Direction.values()) {
+            IGridNode node = host.getGridNode(direction);
+            if (node == null || node.getGrid() == null || !node.isActive()) continue;
+            IGridTickable tickable = node.getService(IGridTickable.class);
+            if (tickable == null) continue;
+            try {
+                if (node.getGrid().getTickManager() instanceof TickManagerService manager) {
+                    if (!manager.getStatus(node).sleeping()) return true;
+                    continue;
+                }
+                if (!tickable.getTickingRequest(node).isSleeping()) return true;
+            } catch (RuntimeException ignored) {
+                // If a device cannot expose its state safely, keep it at full speed.
+                return true;
+            }
         }
         return false;
     }

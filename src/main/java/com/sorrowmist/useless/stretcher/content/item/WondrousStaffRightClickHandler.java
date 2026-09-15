@@ -2,9 +2,11 @@ package com.sorrowmist.useless.stretcher.content.item;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.neoforged.bus.api.EventPriority;
@@ -29,12 +31,58 @@ public final class WondrousStaffRightClickHandler {
         Player player = event.getEntity();
         ItemStack stack = event.getItemStack();
         if (stack.getItem() != ModItems.WONDROUS_STAFF.get()) return;
+        if (RangeAccelerationSettings.filterMarkingMode(stack)) {
+            // The client sends a dedicated filter packet. The logical server must suppress any
+            // vanilla block use that still arrives while marking is active.
+            if (!event.getLevel().isClientSide) {
+                event.setCanceled(true);
+                event.setCancellationResult(InteractionResult.SUCCESS);
+            }
+            return;
+        }
         if (!player.isShiftKeyDown()) return;
         if (!WondrousStaffAcceleration.isEnabled(stack)) return;
+        if (RangeAccelerationSettings.placementMode(stack)) {
+            // The client sends a dedicated placement packet. The server side of this event only
+            // suppresses the machine's normal use and tool actions.
+            if (!event.getLevel().isClientSide) {
+                event.setCanceled(true);
+                event.setCancellationResult(InteractionResult.SUCCESS);
+            }
+            return;
+        }
 
         UseOnContext ctx = new UseOnContext(event.getLevel(), player, event.getHand(), stack, event.getHitVec());
         WondrousStaffAcceleration.tryUse(ctx);
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        InteractionResult result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        if (result != InteractionResult.PASS) {
+            event.setCanceled(true);
+            event.setCancellationResult(result);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onRightClickEntitySpecific(PlayerInteractEvent.EntityInteractSpecific event) {
+        InteractionResult result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        if (result != InteractionResult.PASS) {
+            event.setCanceled(true);
+            event.setCancellationResult(result);
+        }
+    }
+
+    private static InteractionResult tryEntityInteraction(Player player, ItemStack stack, Entity target) {
+        if (stack.getItem() == ModItems.WONDROUS_STAFF.get()
+                && RangeAccelerationSettings.filterMarkingMode(stack)) {
+            return InteractionResult.SUCCESS;
+        }
+        if (!player.isShiftKeyDown() || stack.getItem() != ModItems.WONDROUS_STAFF.get()
+                || !WondrousStaffAcceleration.isEnabled(stack)) return InteractionResult.PASS;
+        return WondrousStaffAcceleration.tryUseEntity(player, target, stack);
     }
 }

@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
+import org.lwjgl.glfw.GLFW;
 
 /** Client key bindings added by Useless Stretcher. */
 public final class StretcherKeyBindings {
@@ -13,7 +14,7 @@ public final class StretcherKeyBindings {
             "key.useless_stretcher.wondrous_staff_mode",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
-            InputConstants.UNKNOWN.getValue(),
+            GLFW.GLFW_KEY_X,
             CATEGORY);
 
     private StretcherKeyBindings() {

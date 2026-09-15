@@ -3,6 +3,8 @@ package com.sorrowmist.useless.stretcher.client;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -12,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -59,6 +62,40 @@ public final class WondrousStaffHud {
         Font font = mc.font;
 
         renderTimeBar(g, mc, player, font, w, h);
+        renderFilterMarkingStatus(g, player, font, w, h);
+    }
+
+    private static void renderFilterMarkingStatus(GuiGraphics graphics, Player player,
+                                                   Font font, int width, int height) {
+        ItemStack staff = filterMarkingStaff(player);
+        if (staff.isEmpty()) return;
+        boolean sleepList = RangeAccelerationSettings.markSleepList(staff);
+        boolean whitelist = sleepList
+                ? RangeAccelerationSettings.sleepWhitelistMode(staff)
+                : RangeAccelerationSettings.whitelistMode(staff);
+        Component listType = Component.translatable(listNameKey(sleepList, whitelist));
+        Component status = Component.translatable("gui.useless_stretcher.range.marking_status", listType);
+        int color = whitelist ? 0x62E795 : 0xF06A7A;
+        // Keep this persistent mode indicator clear of vanilla's action-bar message line.
+        graphics.drawCenteredString(font, status, width / 2, Math.max(8, height - 92), color);
+    }
+
+    private static String listNameKey(boolean sleepList, boolean whitelist) {
+        if (sleepList) return whitelist
+                ? "gui.useless_stretcher.range.sleep_whitelist"
+                : "gui.useless_stretcher.range.sleep_blacklist";
+        return whitelist
+                ? "gui.useless_stretcher.range.acceleration_whitelist"
+                : "gui.useless_stretcher.range.acceleration_blacklist";
+    }
+
+    private static ItemStack filterMarkingStaff(Player player) {
+        ItemStack main = player.getMainHandItem();
+        if (main.is(ModItems.WONDROUS_STAFF.get())
+                && RangeAccelerationSettings.filterMarkingMode(main)) return main;
+        ItemStack off = player.getOffhandItem();
+        return off.is(ModItems.WONDROUS_STAFF.get())
+                && RangeAccelerationSettings.filterMarkingMode(off) ? off : ItemStack.EMPTY;
     }
 
     // ---------------------------------------------------------------------

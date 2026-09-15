@@ -1,11 +1,10 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
-import appeng.api.networking.IGridNode;
 import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
+import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -15,9 +14,10 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +30,7 @@ import java.util.UUID;
  * Invisible marker entity that drives extra ticks on a block / AE node / living entity /
  * world time every game tick. Retained virtual ticks act as a large cache: each game tick
  * accumulates {@code speed} work and executes at most {@value #MAX_EXECUTIONS_PER_TICK}
- * ticks, so a very high multiplier never stalls the server — the backlog drains over time.
+ * ticks, so retained work can drain over time without losing requested acceleration.
  *
  * <p>The retained-virtual-tick + per-tick budget idea is a simplified version of JDT Extras'
  * {@code TimeAccelerationWorkQueue} / {@code ExtendedTimeAccelerationManager} (MIT).
@@ -38,7 +38,7 @@ import java.util.UUID;
  * <p>An idle machine is throttled instead of being put to sleep: after {@value #IDLE_WINDOW_TICKS}
  * ticks without any activity signal the per-tick budget drops from {@value #MAX_EXECUTIONS_PER_TICK}
  * to {@value #IDLE_EXECUTIONS_PER_TICK}. Throttling removes ~98% of the idle cost while guaranteeing
- * the target is never stopped outright — a wrongly throttled machine only runs slower for a moment,
+ * the target is never stopped outright; a wrongly throttled machine only runs slower for a moment,
  * and any activity signal restores full speed on the very next tick. Only a machine that has already
  * proven it can be observed working (see {@link #isWorking}) is ever throttled, so a machine whose
  * activity we cannot observe is never slowed down. The staff's third mode can explicitly disable
@@ -48,7 +48,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
     /** Negative remaining time means the acceleration never expires. */
     public static final int PERMANENT = -1;
     public static final int MAX_MULTIPLIER = 1024;
-    public static final int MAX_EXECUTIONS_PER_TICK = 256;
+    public static final int MAX_EXECUTIONS_PER_TICK = MAX_MULTIPLIER;
     private static final long MAX_PENDING_TICKS = 8192L;
     /** How long a machine may show no activity signal before it is throttled. */
     private static final int IDLE_WINDOW_TICKS = 100;
@@ -72,6 +72,12 @@ public class WondrousStaffAccelerationEntity extends Entity {
     /** True while this block target is currently running at the reduced idle rate. */
     private static final EntityDataAccessor<Boolean> IDLE_THROTTLED =
             SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
+    /** Whether entity mode should suppress Mob AI while this marker is active. */
+    private static final EntityDataAccessor<Boolean> ENTITY_AI_DISABLED =
+            SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
+    /** Current target height, used to keep the world-space entity progress bar above its head. */
+    private static final EntityDataAccessor<Float> TARGET_HEIGHT =
+            SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.FLOAT);
 
     private BlockPos targetPos;
     private UUID targetUuid;
@@ -81,6 +87,9 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private int idleTicks;
     /** Set once the target has ever emitted an activity signal we can rely on for waking up. */
     private boolean observedWorking;
+    /** Original Mob AI state, captured before entity acceleration changes it. */
+    private boolean originalNoAi;
+    private boolean aiStateCaptured;
 
     public WondrousStaffAccelerationEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -112,6 +121,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
         this.targetUuid = target.getUUID();
         this.targetPos = target.blockPosition();
         this.setPos(target.position());
+        this.setTargetHeight(target.getBbHeight());
         this.setMode(MODE_ENTITY);
         this.setSpeed(speed);
         this.setRemainingTime(WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
@@ -130,6 +140,19 @@ public class WondrousStaffAccelerationEntity extends Entity {
             this.discard();
             return;
         }
+        // Entity targets can move. Keep both the marker and the persisted lookup position in sync
+        // before checking the chunk, otherwise a moving target would stop being accelerated after
+        // leaving its first block.
+        if (isEntityMode()) {
+            Entity target = findEntity(level);
+            if (target == null || target.isRemoved() || target instanceof Player) {
+                discard();
+                return;
+            }
+            this.targetPos = target.blockPosition();
+            this.setPos(target.position());
+            this.setTargetHeight(target.getBbHeight());
+        }
         if (!level.isLoaded(this.targetPos)) return;
 
         int speed = Math.max(1, getSpeed());
@@ -138,7 +161,13 @@ public class WondrousStaffAccelerationEntity extends Entity {
             // Sun/moon acceleration is blacklisted from permanent mode: convert any legacy
             // permanent time entity back to the normal 30s duration so it can expire.
             if (isPermanent()) setRemainingTime(WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
-            level.setDayTime(level.getDayTime() + speed);
+            if (level.getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DAYLIGHT)) {
+                level.setDayTime(level.getDayTime() + speed);
+            }
+            WondrousStaffAcceleration.tickWeather(level, speed);
+            if (this.tickCount % 10 == 1) {
+                Network.sendTimeAccelerationState(level, speed);
+            }
         } else if (isEntityMode()) {
             setIdleThrottled(false);
             advanceEntity(level);
@@ -183,33 +212,68 @@ public class WondrousStaffAccelerationEntity extends Entity {
     }
 
     private void advanceEntity(ServerLevel level) {
-        if (targetUuid == null) {
+        Entity target = findEntity(level);
+        if (target == null || target.isRemoved() || target instanceof Player) {
             discard();
             return;
         }
-        if (level.getEntity(targetUuid) instanceof AgeableMob ageable) {
-            int age = ageable.getAge();
-            int speed = getSpeed();
-            if (age < 0) {
-                // Baby: advance the negative age toward 0 to grow it up.
-                ageable.setAge(Math.min(0, age + speed));
-                if (ageable.getAge() >= 0) discard();
-            } else if (age > 0) {
-                // Adult: advance the breeding cooldown back down to 0.
-                ageable.setAge(Math.max(0, age - speed));
-                if (ageable.getAge() <= 0) discard();
-            } else {
-                discard();
-            }
-        } else {
-            discard();
+
+        this.targetPos = target.blockPosition();
+        this.setPos(target.position());
+        updateEntityAi(target);
+
+        // Run the target's complete tick instead of only changing an AgeableMob's age. This
+        // accelerates movement, item/projectile lifetime, status effects, cooldowns and modded
+        // entity logic alike. Retaining excess virtual ticks keeps x1024 from doing all work in
+        // one server tick while preserving it for later frames.
+        pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + (long) Math.max(1, getSpeed()));
+        int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+        pendingTicks -= executed;
+        for (int i = 0; i < executed && !target.isRemoved(); i++) {
+            target.tick();
         }
+        setTargetHeight(target.getBbHeight());
+        if (target.isRemoved()) discard();
+    }
+
+    private Entity findEntity(ServerLevel level) {
+        return targetUuid == null ? null : level.getEntity(targetUuid);
+    }
+
+    private void updateEntityAi(Entity target) {
+        if (!(target instanceof Mob mob)) return;
+        if (!isEntityAiDisabled()) {
+            restoreEntityAi(mob);
+            return;
+        }
+        if (!aiStateCaptured) {
+            originalNoAi = mob.isNoAi();
+            aiStateCaptured = true;
+        }
+        mob.setNoAi(true);
+    }
+
+    private void restoreEntityAi(Mob mob) {
+        if (!aiStateCaptured) return;
+        mob.setNoAi(originalNoAi);
+        aiStateCaptured = false;
+    }
+
+    private void restoreEntityAi() {
+        if (!aiStateCaptured || targetUuid == null || !(this.level() instanceof ServerLevel level)) return;
+        for (ServerLevel candidate : level.getServer().getAllLevels()) {
+            if (candidate.getEntity(targetUuid) instanceof Mob mob) {
+                mob.setNoAi(originalNoAi);
+                break;
+            }
+        }
+        aiStateCaptured = false;
     }
 
     /**
      * Cheap activity check; any signal counts as "working":
      * <ol>
-     *   <li>the block entity called {@code setChanged()} recently — this works even for
+     *   <li>the block entity called {@code setChanged()} recently; this works even for
      *       creative / infinite-energy machines whose FE buffer never moves,</li>
      *   <li>the block state changed,</li>
      *   <li>stored FE changed in either direction (consuming or generating),</li>
@@ -234,7 +298,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
             return true;
         }
 
-        if (blockEntity instanceof IInWorldGridNodeHost host && hasActiveAeNode(host)) {
+        if (blockEntity instanceof IInWorldGridNodeHost host
+                && WondrousStaffAcceleration.isAeDeviceWorking(host)) {
             return true;
         }
 
@@ -243,16 +308,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
             int current = energy.getEnergyStored();
             if (lastEnergy < 0L || current != lastEnergy) {
                 lastEnergy = current;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasActiveAeNode(IInWorldGridNodeHost host) {
-        for (Direction direction : Direction.values()) {
-            IGridNode node = host.getGridNode(direction);
-            if (node != null && node.getGrid() != null && node.isActive()) {
                 return true;
             }
         }
@@ -287,6 +342,18 @@ public class WondrousStaffAccelerationEntity extends Entity {
         this.entityData.set(IDLE_THROTTLE_DISABLED, disabled);
     }
 
+    public boolean isEntityAiDisabled() {
+        return this.entityData.get(ENTITY_AI_DISABLED);
+    }
+
+    public void setEntityAiDisabled(boolean disabled) {
+        this.entityData.set(ENTITY_AI_DISABLED, disabled);
+        if (!disabled && this.level() instanceof ServerLevel level && targetUuid != null
+                && level.getEntity(targetUuid) instanceof Mob mob) {
+            restoreEntityAi(mob);
+        }
+    }
+
     /** True when the target is currently being ticked at the reduced idle rate. */
     public boolean isIdleThrottled() {
         return this.entityData.get(IDLE_THROTTLED);
@@ -302,6 +369,25 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     public boolean isEntityMode() {
         return getMode() == MODE_ENTITY;
+    }
+
+    public float getTargetHeight() {
+        return this.entityData.get(TARGET_HEIGHT);
+    }
+
+    private void setTargetHeight(float height) {
+        this.entityData.set(TARGET_HEIGHT, Math.max(0.1F, Math.min(16.0F, height)));
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        // Chunk-unload removal is temporary and this marker is saved with the target; retain both
+        // states so the field can resume after reload. Every terminal removal restores the target.
+        if (reason != RemovalReason.UNLOADED_TO_CHUNK) restoreEntityAi();
+        if (isTimeMode() && this.level() instanceof ServerLevel level) {
+            Network.sendTimeAccelerationState(level, 0);
+        }
+        super.remove(reason);
     }
 
     public int getSpeed() {
@@ -335,6 +421,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
         builder.define(MODE, MODE_BLOCK);
         builder.define(IDLE_THROTTLE_DISABLED, false);
         builder.define(IDLE_THROTTLED, false);
+        builder.define(ENTITY_AI_DISABLED, false);
+        builder.define(TARGET_HEIGHT, 1.0F);
     }
 
     @Override
@@ -346,6 +434,10 @@ public class WondrousStaffAccelerationEntity extends Entity {
         setRemainingTime(tag.getInt("remainingTime"));
         setIdleThrottleDisabled(tag.getBoolean("idleThrottleDisabled"));
         setIdleThrottled(tag.getBoolean("idleThrottled"));
+        setEntityAiDisabled(tag.getBoolean("entityAiDisabled"));
+        if (tag.contains("targetHeight")) setTargetHeight(tag.getFloat("targetHeight"));
+        originalNoAi = tag.getBoolean("originalNoAi");
+        aiStateCaptured = tag.getBoolean("aiStateCaptured");
     }
 
     @Override
@@ -357,6 +449,10 @@ public class WondrousStaffAccelerationEntity extends Entity {
         tag.putInt("remainingTime", getRemainingTime());
         tag.putBoolean("idleThrottleDisabled", isIdleThrottleDisabled());
         tag.putBoolean("idleThrottled", isIdleThrottled());
+        tag.putBoolean("entityAiDisabled", isEntityAiDisabled());
+        tag.putFloat("targetHeight", getTargetHeight());
+        tag.putBoolean("originalNoAi", originalNoAi);
+        tag.putBoolean("aiStateCaptured", aiStateCaptured);
     }
 
     @Override

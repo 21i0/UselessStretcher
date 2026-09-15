@@ -3,14 +3,16 @@ package com.sorrowmist.useless.stretcher.content.item;
 import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.content.items.EndlessBeafItem;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -33,6 +35,17 @@ public class WondrousStaffItem extends EndlessBeafItem {
         super(ToolTypeMode.NONE_MODE, true);
     }
 
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean selected) {
+        super.inventoryTick(stack, level, entity, slotId, selected);
+        if (!(entity instanceof ServerPlayer player)
+                || (!selected && player.getOffhandItem() != stack)
+                || !StaffTutorialData.get(player.getServer()).markShown(player.getUUID())) {
+            return;
+        }
+        com.sorrowmist.useless.stretcher.network.Network.sendStaffTutorial(player);
+    }
+
     /** Override the inherited name so it never displays as the 造化垂青之杖. */
     @Override
     @OnlyIn(Dist.CLIENT)
@@ -46,6 +59,9 @@ public class WondrousStaffItem extends EndlessBeafItem {
      */
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility ability) {
+        if (RangeAccelerationSettings.filterMarkingMode(stack)) {
+            return false;
+        }
         if (WondrousStaffAcceleration.isEnabled(stack) && ability.name().startsWith("wrench_")) {
             return false;
         }
@@ -68,13 +84,17 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_mode")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_range")
+                .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
     }
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
+        if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
         if (player != null && player.isShiftKeyDown() && WondrousStaffAcceleration.isEnabled(stack)) {
+            if (RangeAccelerationSettings.placementMode(stack)) return InteractionResult.FAIL;
             // Acceleration mode ON: disable every other right-click (wrench/tool/block menu)
             // so Shift+right-click can only accelerate, exactly like the base staff.
             WondrousStaffAcceleration.tryUse(ctx);
@@ -85,8 +105,10 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
+        if (RangeAccelerationSettings.filterMarkingMode(ctx.getItemInHand())) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
         if (player != null && player.isShiftKeyDown() && WondrousStaffAcceleration.isEnabled(ctx.getItemInHand())) {
+            if (RangeAccelerationSettings.placementMode(ctx.getItemInHand())) return InteractionResult.FAIL;
             WondrousStaffAcceleration.tryUse(ctx);
             return InteractionResult.FAIL;
         }
@@ -96,8 +118,9 @@ public class WondrousStaffItem extends EndlessBeafItem {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity,
                                                   InteractionHand hand) {
+        if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
         if (player.isShiftKeyDown() && !(entity instanceof Player)
-                && entity instanceof AgeableMob) {
+                && !entity.isRemoved()) {
             InteractionResult result = WondrousStaffAcceleration.tryUseEntity(player, entity, stack);
             if (result != InteractionResult.PASS) return result;
         }
@@ -106,6 +129,9 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (RangeAccelerationSettings.filterMarkingMode(player.getItemInHand(hand))) {
+            return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+        }
         if (player.isShiftKeyDown() && WondrousStaffAcceleration.isLookingAtCelestial(level, player)) {
             InteractionResult result = WondrousStaffAcceleration.tryUseTime(player, player.getItemInHand(hand));
             if (result != InteractionResult.PASS) {

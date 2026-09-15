@@ -11,6 +11,7 @@
     "MoldMatcherPreparedMoldsMixin",
     "RecoverableItemStackHandlerMixin",
     "ItemStackHandlerMixin",
+    "ChunkDimensionDaylightMixin",
     "BeefTimeAccelerationMixin",
     "BeefToolVariantsMixin",
     "BlockEntityChangedMixin",
@@ -28,6 +29,7 @@
     "UselessDimensionsMixin"
   ],
   "client": [
+    "LevelRendererCloudMixin",
     "PagedRecoverableScreenMixin",
     "PatternAssemblyScreenMixin",
     "PassiveCraftingHatchScreenMixin",

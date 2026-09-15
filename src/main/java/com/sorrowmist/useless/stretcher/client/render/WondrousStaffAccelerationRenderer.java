@@ -30,6 +30,8 @@ public class WondrousStaffAccelerationRenderer
     private static final float BAR_WIDTH = 36.0F;
     private static final float BAR_HEIGHT = 3.0F;
     private static final float BAR_Y = 11.0F;
+    private static final float ENTITY_TEXT_SCALE = 0.018F;
+    private static final double BLOCK_FACE_OFFSET = 0.516D;
 
     private final Font font;
 
@@ -42,6 +44,10 @@ public class WondrousStaffAccelerationRenderer
     @Override
     public void render(WondrousStaffAccelerationEntity entity, float yaw, float partialTick,
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        if (entity.isEntityMode()) {
+            renderEntityProgress(entity, poseStack, buffer, packedLight);
+            return;
+        }
         if (entity.level().getBlockState(entity.getTargetPos()).isAir()) return;
 
         boolean permanent = entity.isPermanent();
@@ -66,6 +72,30 @@ public class WondrousStaffAccelerationRenderer
             drawProgressBar(poseStack, buffer, fraction, fillR, fillG, fillB);
             poseStack.popPose();
         }
+    }
+
+    private void renderEntityProgress(WondrousStaffAccelerationEntity entity, PoseStack poseStack,
+                                      MultiBufferSource buffer, int packedLight) {
+        boolean permanent = entity.isPermanent();
+        String text = permanent
+                ? String.format(Locale.ROOT, "x%d \u221E", entity.getSpeed())
+                : String.format(Locale.ROOT, "x%d", entity.getSpeed());
+        float fraction = permanent
+                ? 1.0F
+                : Mth.clamp(entity.getRemainingTime()
+                        / (float) WondrousStaffAcceleration.DEFAULT_DURATION_TICKS, 0.0F, 1.0F);
+
+        poseStack.pushPose();
+        poseStack.translate(0.0D, entity.getTargetHeight() + 0.28D, 0.0D);
+        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
+        poseStack.scale(ENTITY_TEXT_SCALE, -ENTITY_TEXT_SCALE, ENTITY_TEXT_SCALE);
+        this.font.drawInBatch(text, -this.font.width(text) / 2.0F, 0.0F, 0xFFFFFF, false,
+                poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, packedLight);
+        drawProgressBar(poseStack, buffer, fraction,
+                permanent ? 1.0F : 0.25F,
+                permanent ? 0.7F : 0.8F,
+                permanent ? 0.1F : 1.0F);
+        poseStack.popPose();
     }
 
     private static void drawProgressBar(PoseStack poseStack, MultiBufferSource buffer,
@@ -97,24 +127,24 @@ public class WondrousStaffAccelerationRenderer
     private static void moveToFace(PoseStack poseStack, Direction face) {
         switch (face) {
             case UP -> {
-                poseStack.translate(0.0D, 0.506D, 0.0D);
+                poseStack.translate(0.0D, BLOCK_FACE_OFFSET, 0.0D);
                 poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
             }
             case DOWN -> {
-                poseStack.translate(0.0D, -0.506D, 0.0D);
+                poseStack.translate(0.0D, -BLOCK_FACE_OFFSET, 0.0D);
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
             }
             case NORTH -> {
-                poseStack.translate(0.0D, 0.0D, -0.506D);
+                poseStack.translate(0.0D, 0.0D, -BLOCK_FACE_OFFSET);
                 poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
             }
-            case SOUTH -> poseStack.translate(0.0D, 0.0D, 0.506D);
+            case SOUTH -> poseStack.translate(0.0D, 0.0D, BLOCK_FACE_OFFSET);
             case WEST -> {
-                poseStack.translate(-0.506D, 0.0D, 0.0D);
+                poseStack.translate(-BLOCK_FACE_OFFSET, 0.0D, 0.0D);
                 poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
             }
             case EAST -> {
-                poseStack.translate(0.506D, 0.0D, 0.0D);
+                poseStack.translate(BLOCK_FACE_OFFSET, 0.0D, 0.0D);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
             }
         }

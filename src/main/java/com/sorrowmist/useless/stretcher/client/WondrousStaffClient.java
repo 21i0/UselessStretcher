@@ -22,7 +22,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
  * <ul>
  *   <li>Shift + mouse wheel cycles the multiplier gear (off / x2 / x4 / x16 / x32 / x64 / x128
  *       / x256 / x512 / x1024).</li>
- *   <li>The dedicated key (unbound by default) opens a button-based speed and duration menu.</li>
+ *   <li>The X key opens a button-based speed and duration menu.</li>
  * </ul>
  * Shift is only used together with the wheel and with right-click, never captured on its own.
  *
