@@ -28,6 +28,12 @@ public final class TimeFlowEntity extends Entity {
             SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SIZE_Z =
             SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> OFFSET_X =
+            SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> OFFSET_Y =
+            SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> OFFSET_Z =
+            SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> ENABLED =
             SynchedEntityData.defineId(TimeFlowEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IDLE_THROTTLED =
@@ -77,6 +83,9 @@ public final class TimeFlowEntity extends Entity {
         entityData.set(SIZE_X, field.sizeX());
         entityData.set(SIZE_Y, field.sizeY());
         entityData.set(SIZE_Z, field.sizeZ());
+        entityData.set(OFFSET_X, field.offsetX());
+        entityData.set(OFFSET_Y, field.offsetY());
+        entityData.set(OFFSET_Z, field.offsetZ());
         entityData.set(ENABLED, field.enabled());
         entityData.set(IDLE_THROTTLED, field.idleThrottled());
         entityData.set(CREATED_AT, field.createdAt());
@@ -88,8 +97,8 @@ public final class TimeFlowEntity extends Entity {
                 field.accelerationMarks().stream().mapToLong(Long::longValue).toArray());
         state.putLongArray("sleep_marks", field.sleepMarks().stream().mapToLong(Long::longValue).toArray());
         entityData.set(LIST_STATE, state);
-        setPos(field.center().getX() + 0.5D, field.center().getY() + 0.08D,
-                field.center().getZ() + 0.5D);
+        var center = field.effectiveCenter();
+        setPos(center.getX() + 0.5D, center.getY() + 0.08D, center.getZ() + 0.5D);
     }
 
     public boolean isEnabled() {
@@ -107,6 +116,9 @@ public final class TimeFlowEntity extends Entity {
     public int getSizeX() { return entityData.get(SIZE_X); }
     public int getSizeY() { return entityData.get(SIZE_Y); }
     public int getSizeZ() { return entityData.get(SIZE_Z); }
+    public int getOffsetX() { return entityData.get(OFFSET_X); }
+    public int getOffsetY() { return entityData.get(OFFSET_Y); }
+    public int getOffsetZ() { return entityData.get(OFFSET_Z); }
 
     public UUID getOwner() {
         refreshListCache();
@@ -170,6 +182,9 @@ public final class TimeFlowEntity extends Entity {
         builder.define(SIZE_X, 3);
         builder.define(SIZE_Y, 3);
         builder.define(SIZE_Z, 3);
+        builder.define(OFFSET_X, 0);
+        builder.define(OFFSET_Y, 0);
+        builder.define(OFFSET_Z, 0);
         builder.define(ENABLED, true);
         builder.define(IDLE_THROTTLED, false);
         builder.define(CREATED_AT, 0L);
@@ -181,6 +196,9 @@ public final class TimeFlowEntity extends Entity {
         entityData.set(SIZE_X, RangeAccelerationSavedData.clampSize(tag.getInt("size_x")));
         entityData.set(SIZE_Y, RangeAccelerationSavedData.clampSize(tag.getInt("size_y")));
         entityData.set(SIZE_Z, RangeAccelerationSavedData.clampSize(tag.getInt("size_z")));
+        entityData.set(OFFSET_X, RangeAccelerationSavedData.clampOffset(tag.getInt("offset_x")));
+        entityData.set(OFFSET_Y, RangeAccelerationSavedData.clampOffset(tag.getInt("offset_y")));
+        entityData.set(OFFSET_Z, RangeAccelerationSavedData.clampOffset(tag.getInt("offset_z")));
         entityData.set(ENABLED, !tag.contains("enabled") || tag.getBoolean("enabled"));
         entityData.set(IDLE_THROTTLED, tag.getBoolean("idle_throttled"));
         entityData.set(CREATED_AT, tag.getLong("created_at"));
@@ -192,6 +210,9 @@ public final class TimeFlowEntity extends Entity {
         tag.putInt("size_x", getSizeX());
         tag.putInt("size_y", getSizeY());
         tag.putInt("size_z", getSizeZ());
+        tag.putInt("offset_x", getOffsetX());
+        tag.putInt("offset_y", getOffsetY());
+        tag.putInt("offset_z", getOffsetZ());
         tag.putBoolean("enabled", isEnabled());
         tag.putBoolean("idle_throttled", isIdleThrottled());
         tag.putLong("created_at", getCreatedAt());

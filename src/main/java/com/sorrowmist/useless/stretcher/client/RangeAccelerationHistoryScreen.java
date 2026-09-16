@@ -46,14 +46,19 @@ public final class RangeAccelerationHistoryScreen extends Screen {
         for (int index = start; index < end; index++) {
             RangeAccelerationSavedData.Summary field = fields.get(index);
             int row = index - start;
+            int actionsLeft = panelLeft + panelWidth - 142;
+            addRenderableWidget(new SelectableAE2Button(
+                    actionsLeft, panelTop + 31 + row * 27,
+                    37, 18, Component.translatable("gui.useless_stretcher.range.edit"), ignored ->
+                    minecraft.setScreen(new RangeAccelerationHistoryEditScreen(this, field))));
             SelectableAE2Button toggle = addRenderableWidget(new SelectableAE2Button(
-                    panelLeft + panelWidth - 104, panelTop + 31 + row * 27,
-                    40, 18, enabledMessage(field.enabled()), ignored ->
+                    actionsLeft + 40, panelTop + 31 + row * 27,
+                    37, 18, enabledMessage(field.enabled()), ignored ->
                     RangeNetwork.setHistoryEnabled(field.id(), !field.enabled())));
             toggle.setSelected(field.enabled());
             addRenderableWidget(new SelectableAE2Button(
-                    panelLeft + panelWidth - 61, panelTop + 31 + row * 27,
-                    53, 18, Component.translatable("gui.useless_stretcher.range.reclaim"), ignored ->
+                    actionsLeft + 80, panelTop + 31 + row * 27,
+                    54, 18, Component.translatable("gui.useless_stretcher.range.reclaim"), ignored ->
                     confirmReclaim(field)));
         }
 
@@ -111,13 +116,15 @@ public final class RangeAccelerationHistoryScreen extends Screen {
             int y = panelTop + 27 + (index - start) * 27;
             StretcherScreenStyle.drawInset(graphics, panelLeft + 8, y,
                     panelLeft + panelWidth - 8, y + 24);
-            String location = field.dimension() + "  " + field.center().getX() + ", "
-                    + field.center().getY() + ", " + field.center().getZ();
+            var center = field.center().offset(field.offsetX(), field.offsetY(), field.offsetZ());
+            String location = field.dimension() + "  " + center.getX() + ", "
+                    + center.getY() + ", " + center.getZ();
             String details = TIME_FORMAT.format(Instant.ofEpochMilli(field.createdAt()))
-                    + "  x" + field.speed() + "  " + field.sizeX() + "x" + field.sizeY() + "x" + field.sizeZ();
-            graphics.drawString(font, font.plainSubstrByWidth(location, panelWidth - 122),
+                    + "  x" + field.speed() + "  " + field.sizeX() + "x" + field.sizeY() + "x" + field.sizeZ()
+                    + "  偏" + field.offsetX() + "," + field.offsetY() + "," + field.offsetZ();
+            graphics.drawString(font, font.plainSubstrByWidth(location, panelWidth - 158),
                     panelLeft + 12, y + 3, StretcherScreenStyle.TEXT_COLOR, false);
-            graphics.drawString(font, font.plainSubstrByWidth(details, panelWidth - 122), panelLeft + 12, y + 13,
+            graphics.drawString(font, font.plainSubstrByWidth(details, panelWidth - 158), panelLeft + 12, y + 13,
                     StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         }
         int pages = Math.max(1, (fields.size() + ROWS_PER_PAGE - 1) / ROWS_PER_PAGE);

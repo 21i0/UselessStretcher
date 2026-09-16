@@ -36,6 +36,7 @@ public final class RangeNetwork {
     public record SettingsPayload(boolean offhand, boolean placementMode, boolean filterMarkingMode,
                                   boolean markSleepList,
                                   int sizeX, int sizeY, int sizeZ,
+                                  int offsetX, int offsetY, int offsetZ,
                                   boolean accelerationWhitelistMode,
                                   boolean sleepWhitelistMode) implements CustomPacketPayload {
         public static final Type<SettingsPayload> TYPE = RangeNetwork.type("range_settings");
@@ -48,10 +49,14 @@ public final class RangeNetwork {
                     buf.writeVarInt(value.sizeX);
                     buf.writeVarInt(value.sizeY);
                     buf.writeVarInt(value.sizeZ);
+                    buf.writeVarInt(value.offsetX);
+                    buf.writeVarInt(value.offsetY);
+                    buf.writeVarInt(value.offsetZ);
                     buf.writeBoolean(value.accelerationWhitelistMode);
                     buf.writeBoolean(value.sleepWhitelistMode);
                 },
                 buf -> new SettingsPayload(buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(),
+                        buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                         buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                         buf.readBoolean(), buf.readBoolean()));
 
@@ -115,6 +120,28 @@ public final class RangeNetwork {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
+    public record HistoryEditPayload(UUID id, int speed, int sizeX, int sizeY, int sizeZ,
+                                     int offsetX, int offsetY, int offsetZ) implements CustomPacketPayload {
+        public static final Type<HistoryEditPayload> TYPE = RangeNetwork.type("range_history_edit");
+        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryEditPayload> STREAM_CODEC =
+                StreamCodec.of(
+                        (buf, value) -> {
+                            buf.writeUUID(value.id);
+                            buf.writeVarInt(value.speed);
+                            buf.writeVarInt(value.sizeX);
+                            buf.writeVarInt(value.sizeY);
+                            buf.writeVarInt(value.sizeZ);
+                            buf.writeVarInt(value.offsetX);
+                            buf.writeVarInt(value.offsetY);
+                            buf.writeVarInt(value.offsetZ);
+                        },
+                        buf -> new HistoryEditPayload(buf.readUUID(),
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
+
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     public record HistoryStatePayload(List<RangeAccelerationSavedData.Summary> fields)
             implements CustomPacketPayload {
         public static final Type<HistoryStatePayload> TYPE = RangeNetwork.type("range_history_state");
@@ -132,6 +159,9 @@ public final class RangeNetwork {
                         buf.writeVarInt(field.sizeX());
                         buf.writeVarInt(field.sizeY());
                         buf.writeVarInt(field.sizeZ());
+                        buf.writeVarInt(field.offsetX());
+                        buf.writeVarInt(field.offsetY());
+                        buf.writeVarInt(field.offsetZ());
                     }
                 },
                 buf -> {
@@ -142,6 +172,7 @@ public final class RangeNetwork {
                         fields.add(new RangeAccelerationSavedData.Summary(
                                 buf.readUUID(), ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(),
                                 buf.readLong(), buf.readBoolean(), buf.readVarInt(),
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
                     }
                     return new HistoryStatePayload(fields);
@@ -167,6 +198,8 @@ public final class RangeNetwork {
                 (payload, context) -> context.enqueueWork(() -> handleHistoryToggle(payload, context)));
         registrar.playToServer(HistoryReclaimPayload.TYPE, HistoryReclaimPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleHistoryReclaim(payload, context)));
+        registrar.playToServer(HistoryEditPayload.TYPE, HistoryEditPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleHistoryEdit(payload, context)));
         registrar.playToClient(HistoryStatePayload.TYPE, HistoryStatePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleRangeHistory(payload)));
     }
@@ -174,11 +207,23 @@ public final class RangeNetwork {
     public static void sendSettings(InteractionHand hand, boolean placementMode, boolean filterMarkingMode,
                                     boolean markSleepList,
                                     int sizeX, int sizeY, int sizeZ,
+                                    int offsetX, int offsetY, int offsetZ,
                                     boolean accelerationWhitelistMode,
                                     boolean sleepWhitelistMode) {
         PacketDistributor.sendToServer(new SettingsPayload(hand == InteractionHand.OFF_HAND,
                 placementMode, filterMarkingMode, markSleepList, sizeX, sizeY, sizeZ,
+                offsetX, offsetY, offsetZ,
                 accelerationWhitelistMode, sleepWhitelistMode));
+    }
+
+    public static void sendSettings(InteractionHand hand, boolean placementMode, boolean filterMarkingMode,
+                                    boolean markSleepList,
+                                    int sizeX, int sizeY, int sizeZ,
+                                    boolean accelerationWhitelistMode,
+                                    boolean sleepWhitelistMode) {
+        sendSettings(hand, placementMode, filterMarkingMode, markSleepList,
+                sizeX, sizeY, sizeZ, 0, 0, 0,
+                accelerationWhitelistMode, sleepWhitelistMode);
     }
 
     public static void place(InteractionHand hand, BlockPos clickedPos, Direction face) {
@@ -202,6 +247,12 @@ public final class RangeNetwork {
         PacketDistributor.sendToServer(new HistoryReclaimPayload(id));
     }
 
+    public static void editHistory(UUID id, int speed, int sizeX, int sizeY, int sizeZ,
+                                   int offsetX, int offsetY, int offsetZ) {
+        PacketDistributor.sendToServer(new HistoryEditPayload(id, speed, sizeX, sizeY, sizeZ,
+                offsetX, offsetY, offsetZ));
+    }
+
     public static BlockPos placementCenter(net.minecraft.world.level.Level level,
                                            BlockPos clickedPos, Direction face) {
         // A valid acceleration target is the intended anchor even when it has no block entity
@@ -218,6 +269,7 @@ public final class RangeNetwork {
         RangeAccelerationSettings.set(staff, payload.placementMode, payload.filterMarkingMode,
                 payload.markSleepList,
                 payload.sizeX, payload.sizeY, payload.sizeZ,
+                payload.offsetX, payload.offsetY, payload.offsetZ,
                 payload.accelerationWhitelistMode, payload.sleepWhitelistMode);
         player.getInventory().setChanged();
         player.containerMenu.broadcastChanges();
@@ -272,6 +324,11 @@ public final class RangeNetwork {
                         ? "msg.useless_stretcher.range_updated"
                         : "msg.useless_stretcher.range_placed",
                 center.getX(), center.getY(), center.getZ()), true);
+        // A successful placement consumes the preview mode so the next right-click cannot
+        // accidentally place/update another field before the player re-enables it.
+        staff.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
+        player.getInventory().setChanged();
+        player.containerMenu.broadcastChanges();
     }
 
     private static void handleFilterToggle(FilterTogglePayload payload, IPayloadContext context) {
@@ -327,6 +384,15 @@ public final class RangeNetwork {
             player.displayClientMessage(Component.translatable("msg.useless_stretcher.range_reclaimed",
                     reclaimed.center().getX(), reclaimed.center().getY(), reclaimed.center().getZ()), true);
         }
+        sendHistory(player);
+    }
+
+    private static void handleHistoryEdit(HistoryEditPayload payload, IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
+        data.editGeometry(player.getServer(), player.getUUID(), payload.id(),
+                payload.speed(), payload.sizeX(), payload.sizeY(), payload.sizeZ(),
+                payload.offsetX(), payload.offsetY(), payload.offsetZ());
         sendHistory(player);
     }
 

@@ -24,8 +24,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
@@ -48,10 +51,13 @@ public final class RangeAccelerationPreview {
     }
 
     /** Hide the vanilla one-block outline while one of the staff's world interaction modes is active. */
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public static void onHighlight(RenderHighlightEvent.Block event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player != null && !interactionModeStaff(minecraft.player).isEmpty()) {
+        Player player = minecraft.player;
+        if (player == null || minecraft.level == null) return;
+
+        if (!interactionModeStaff(player).isEmpty()) {
             event.setCanceled(true);
         }
     }
@@ -82,6 +88,7 @@ public final class RangeAccelerationPreview {
             renderPlacementPreview(minecraft, event.getPoseStack(), staff, outlines,
                     cameraPos, gameTime, seeThrough);
         }
+
         if (RangeAccelerationSettings.filterMarkingMode(staff)) {
             renderMarkingOverlays(minecraft, event.getPoseStack(), player, staff, fields,
                     outlines, buffers, cameraPos, gameTime, seeThrough);
@@ -103,19 +110,36 @@ public final class RangeAccelerationPreview {
         }
     }
 
-    /** Always renders while placement mode is active, even if another mod suppresses block highlights. */
+    /** Renders independently from block-highlight events so entity markers and canceled highlights still work. */
     private static void renderPlacementPreview(Minecraft minecraft, PoseStack poseStack, ItemStack staff,
                                                VertexConsumer outlines, Vec3 cameraPos,
                                                long gameTime, boolean seeThrough) {
-        if (!(minecraft.hitResult instanceof BlockHitResult hit)) return;
-        BlockPos center = RangeNetwork.placementCenter(
-                minecraft.level, hit.getBlockPos(), hit.getDirection());
+        HitResult target = minecraft.hitResult;
+        BlockPos anchor;
+        if (target instanceof BlockHitResult hit && hit.getType() == HitResult.Type.BLOCK) {
+            anchor = RangeNetwork.placementCenter(
+                    minecraft.level, hit.getBlockPos(), hit.getDirection());
+        } else if (target instanceof EntityHitResult hit && hit.getEntity() instanceof TimeFlowEntity marker) {
+            anchor = marker.blockPosition();
+        } else {
+            return;
+        }
+
+        BlockPos center = anchor.offset(
+                RangeAccelerationSettings.offsetX(staff),
+                RangeAccelerationSettings.offsetY(staff),
+                RangeAccelerationSettings.offsetZ(staff));
         AABB bounds = RangeAccelerationSavedData.bounds(center,
                 RangeAccelerationSettings.sizeX(staff),
                 RangeAccelerationSettings.sizeY(staff),
                 RangeAccelerationSettings.sizeZ(staff)).inflate(0.008D);
+        // The large box previews acceleration coverage; the brighter single cube is the
+        // actual Time Flow landing cell and remains distinct even for a 1x1x1 range.
         WondrousStaffHighlight.drawFlowingOutline(poseStack, outlines, bounds, cameraPos,
-                gameTime, false, 0.96F, seeThrough, 0x66C8FF);
+                gameTime, false, 0.68F, seeThrough, 0x58E68A);
+        WondrousStaffHighlight.drawSolidOutline(poseStack, outlines,
+                new AABB(center).inflate(0.026D), cameraPos,
+                0.18F, 1.0F, 0.38F, 1.0F, seeThrough);
     }
 
     private static void renderMarkingOverlays(Minecraft minecraft, PoseStack poseStack, Player player,

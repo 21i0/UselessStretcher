@@ -4,6 +4,7 @@ import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.content.items.EndlessBeafItem;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.client.StretcherKeyBindings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -82,7 +83,8 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_speed")
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_mode")
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_mode",
+                        StretcherKeyBindings.WONDROUS_STAFF_MODE.getTranslatedKeyMessage())
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_range")
                 .withStyle(ChatFormatting.GRAY));

@@ -41,6 +41,8 @@ import java.util.UUID;
 public final class RangeAccelerationSavedData extends net.minecraft.world.level.saveddata.SavedData {
     public static final int MIN_SIZE = 1;
     public static final int MAX_SIZE = 15;
+    public static final int MIN_OFFSET = -15;
+    public static final int MAX_OFFSET = 15;
     public static final int MAX_FILTERS = 128;
     public static final int MAX_MARKED_POSITIONS = MAX_SIZE * MAX_SIZE * MAX_SIZE;
     public static final int MAX_ACTIVE_FIELDS_PER_OWNER = 64;
@@ -124,6 +126,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 RangeAccelerationSettings.sizeX(staff),
                 RangeAccelerationSettings.sizeY(staff),
                 RangeAccelerationSettings.sizeZ(staff),
+                RangeAccelerationSettings.offsetX(staff),
+                RangeAccelerationSettings.offsetY(staff),
+                RangeAccelerationSettings.offsetZ(staff),
                 RangeAccelerationSettings.whitelistMode(staff),
                 RangeAccelerationSettings.sleepWhitelistMode(staff),
                 List.of(), List.of(), List.of(), true);
@@ -250,6 +255,23 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         return true;
     }
 
+    /** Updates an owned range's speed and geometry; its UUID, anchor and filter marks stay intact. */
+    public Summary editGeometry(MinecraftServer server, UUID owner, UUID id,
+                                int speed, int sizeX, int sizeY, int sizeZ,
+                                int offsetX, int offsetY, int offsetZ) {
+        Field field = fields.get(id);
+        if (field == null || !field.owner.equals(owner)) return null;
+        field.editGeometry(speed, sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ);
+        runtime.remove(id);
+        setDirty();
+
+        ServerLevel level = server.getLevel(field.dimensionKey());
+        if (level != null && level.getEntity(id) instanceof TimeFlowEntity marker) {
+            marker.sync(field);
+        }
+        return field.summary();
+    }
+
     public void tick(MinecraftServer server) {
         if (fields.isEmpty()) return;
         List<Field> snapshot = List.copyOf(fields.values());
@@ -258,7 +280,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         for (int offset = 0; offset < snapshot.size(); offset++) {
             Field field = snapshot.get((start + offset) % snapshot.size());
             ServerLevel level = server.getLevel(field.dimensionKey());
-            if (level == null || !level.isLoaded(field.center)) continue;
+            if (level == null || !level.isLoaded(field.effectiveCenter())) continue;
             ensureMarker(level, field);
             if (!field.enabled) continue;
             tickField(level, field, budget);
@@ -342,9 +364,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
     private static List<BlockPos> scanTargets(ServerLevel level, Field field) {
         List<BlockPos> targets = new ArrayList<>();
-        int startX = field.center.getX() - (field.sizeX - 1) / 2;
-        int startY = field.center.getY() - (field.sizeY - 1) / 2;
-        int startZ = field.center.getZ() - (field.sizeZ - 1) / 2;
+        BlockPos rangeCenter = field.effectiveCenter();
+        int startX = rangeCenter.getX() - (field.sizeX - 1) / 2;
+        int startY = rangeCenter.getY() - (field.sizeY - 1) / 2;
+        int startZ = rangeCenter.getZ() - (field.sizeZ - 1) / 2;
         for (int x = 0; x < field.sizeX; x++) {
             for (int y = 0; y < field.sizeY; y++) {
                 for (int z = 0; z < field.sizeZ; z++) {
@@ -371,6 +394,14 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         return Math.max(MIN_SIZE, Math.min(MAX_SIZE, value));
     }
 
+    public static int clampSpeed(int value) {
+        return Math.max(1, Math.min(WondrousStaffAccelerationEntity.MAX_MULTIPLIER, value));
+    }
+
+    public static int clampOffset(int value) {
+        return Math.max(MIN_OFFSET, Math.min(MAX_OFFSET, value));
+    }
+
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
@@ -390,7 +421,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     }
 
     public record Summary(UUID id, ResourceLocation dimension, BlockPos center, long createdAt,
-                          boolean enabled, int speed, int sizeX, int sizeY, int sizeZ) {
+                          boolean enabled, int speed, int sizeX, int sizeY, int sizeZ,
+                          int offsetX, int offsetY, int offsetZ) {
     }
 
     public enum PlacementStatus {
@@ -424,6 +456,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         private int sizeX;
         private int sizeY;
         private int sizeZ;
+        private int offsetX;
+        private int offsetY;
+        private int offsetZ;
         private boolean accelerationWhitelistMode;
         private boolean sleepWhitelistMode;
         private final Set<Long> accelerationMarks;
@@ -437,6 +472,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
         private Field(UUID id, UUID owner, ResourceLocation dimension, BlockPos center,
                       long createdAt, boolean enabled, int speed, int sizeX, int sizeY, int sizeZ,
+                      int offsetX, int offsetY, int offsetZ,
                       boolean accelerationWhitelistMode, boolean sleepWhitelistMode,
                       Iterable<Long> accelerationMarks, Iterable<Long> sleepMarks,
                       Iterable<ResourceLocation> legacyFilters, boolean positionalLists) {
@@ -446,10 +482,13 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             this.center = center;
             this.createdAt = createdAt;
             this.enabled = enabled;
-            this.speed = Math.max(1, Math.min(1024, speed));
+            this.speed = clampSpeed(speed);
             this.sizeX = clampSize(sizeX);
             this.sizeY = clampSize(sizeY);
             this.sizeZ = clampSize(sizeZ);
+            this.offsetX = clampOffset(offsetX);
+            this.offsetY = clampOffset(offsetY);
+            this.offsetZ = clampOffset(offsetZ);
             this.accelerationWhitelistMode = accelerationWhitelistMode;
             this.sleepWhitelistMode = sleepWhitelistMode;
             this.accelerationMarks = validatedMarks(accelerationMarks);
@@ -470,6 +509,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             sizeX = RangeAccelerationSettings.sizeX(staff);
             sizeY = RangeAccelerationSettings.sizeY(staff);
             sizeZ = RangeAccelerationSettings.sizeZ(staff);
+            offsetX = RangeAccelerationSettings.offsetX(staff);
+            offsetY = RangeAccelerationSettings.offsetY(staff);
+            offsetZ = RangeAccelerationSettings.offsetZ(staff);
             accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
             sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
             trimMarksToBounds();
@@ -487,6 +529,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         public int sizeX() { return sizeX; }
         public int sizeY() { return sizeY; }
         public int sizeZ() { return sizeZ; }
+        public int offsetX() { return offsetX; }
+        public int offsetY() { return offsetY; }
+        public int offsetZ() { return offsetZ; }
+        public BlockPos effectiveCenter() { return center.offset(offsetX, offsetY, offsetZ); }
         public boolean accelerationWhitelistMode() { return accelerationWhitelistMode; }
         public boolean sleepWhitelistMode() { return sleepWhitelistMode; }
         public Set<Long> accelerationMarks() { return Set.copyOf(accelerationMarks); }
@@ -494,6 +540,20 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         public int accelerationMarkCount() { return accelerationMarks.size(); }
         public int sleepMarkCount() { return sleepMarks.size(); }
         public boolean idleThrottled() { return idleThrottled; }
+
+        private void editGeometry(int speed, int sizeX, int sizeY, int sizeZ,
+                                  int offsetX, int offsetY, int offsetZ) {
+            this.speed = clampSpeed(speed);
+            this.sizeX = clampSize(sizeX);
+            this.sizeY = clampSize(sizeY);
+            this.sizeZ = clampSize(sizeZ);
+            this.offsetX = clampOffset(offsetX);
+            this.offsetY = clampOffset(offsetY);
+            this.offsetZ = clampOffset(offsetZ);
+            trimMarksToBounds();
+            idleThrottled = false;
+            revision++;
+        }
 
         private ResourceKey<Level> dimensionKey() {
             return ResourceKey.create(Registries.DIMENSION, dimension);
@@ -516,7 +576,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         }
 
         private boolean contains(BlockPos pos) {
-            return bounds(center, sizeX, sizeY, sizeZ).contains(Vec3.atCenterOf(pos));
+            return bounds(effectiveCenter(), sizeX, sizeY, sizeZ).contains(Vec3.atCenterOf(pos));
         }
 
         private void setWhitelistMode(boolean sleepList, boolean whitelistMode) {
@@ -527,9 +587,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         private List<BlockPos> sameTypeTargets(ServerLevel level, BlockPos target) {
             net.minecraft.world.level.block.Block targetBlock = level.getBlockState(target).getBlock();
             List<BlockPos> matches = new ArrayList<>();
-            int startX = center.getX() - (sizeX - 1) / 2;
-            int startY = center.getY() - (sizeY - 1) / 2;
-            int startZ = center.getZ() - (sizeZ - 1) / 2;
+            BlockPos rangeCenter = effectiveCenter();
+            int startX = rangeCenter.getX() - (sizeX - 1) / 2;
+            int startY = rangeCenter.getY() - (sizeY - 1) / 2;
+            int startZ = rangeCenter.getZ() - (sizeZ - 1) / 2;
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {
                     for (int z = 0; z < sizeZ; z++) {
@@ -547,9 +608,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         /** Converts old type-wide filters to the concrete target positions inside this field. */
         private boolean migrateLegacyFilters(ServerLevel level) {
             if (positionalLists) return false;
-            int startX = center.getX() - (sizeX - 1) / 2;
-            int startY = center.getY() - (sizeY - 1) / 2;
-            int startZ = center.getZ() - (sizeZ - 1) / 2;
+            BlockPos rangeCenter = effectiveCenter();
+            int startX = rangeCenter.getX() - (sizeX - 1) / 2;
+            int startY = rangeCenter.getY() - (sizeY - 1) / 2;
+            int startZ = rangeCenter.getZ() - (sizeZ - 1) / 2;
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {
                     for (int z = 0; z < sizeZ; z++) {
@@ -584,7 +646,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         }
 
         private Summary summary() {
-            return new Summary(id, dimension, center, createdAt, enabled, speed, sizeX, sizeY, sizeZ);
+            return new Summary(id, dimension, center, createdAt, enabled, speed, sizeX, sizeY, sizeZ,
+                    offsetX, offsetY, offsetZ);
         }
 
         private CompoundTag save() {
@@ -599,6 +662,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             tag.putInt("size_x", sizeX);
             tag.putInt("size_y", sizeY);
             tag.putInt("size_z", sizeZ);
+            tag.putInt("offset_x", offsetX);
+            tag.putInt("offset_y", offsetY);
+            tag.putInt("offset_z", offsetZ);
             tag.putBoolean("acceleration_whitelist", accelerationWhitelistMode);
             tag.putBoolean("sleep_whitelist", sleepWhitelistMode);
             tag.putBoolean("positional_lists", positionalLists);
@@ -635,6 +701,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                     BlockPos.of(tag.getLong("center")), tag.getLong("created_at"),
                     !tag.contains("enabled") || tag.getBoolean("enabled"), tag.getInt("speed"),
                     tag.getInt("size_x"), tag.getInt("size_y"), tag.getInt("size_z"),
+                    tag.getInt("offset_x"), tag.getInt("offset_y"), tag.getInt("offset_z"),
                     accelerationWhitelist, sleepWhitelist, accelerationMarks, sleepMarks,
                     filters, positionalLists);
         }

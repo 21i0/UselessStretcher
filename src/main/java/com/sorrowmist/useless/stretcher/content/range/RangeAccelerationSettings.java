@@ -41,6 +41,21 @@ public final class RangeAccelerationSettings {
                 staff.getOrDefault(StretcherComponents.RANGE_SIZE_Z.get(), DEFAULT_SIZE));
     }
 
+    public static int offsetX(ItemStack staff) {
+        return RangeAccelerationSavedData.clampOffset(
+                staff.getOrDefault(StretcherComponents.RANGE_OFFSET_X.get(), 0));
+    }
+
+    public static int offsetY(ItemStack staff) {
+        return RangeAccelerationSavedData.clampOffset(
+                staff.getOrDefault(StretcherComponents.RANGE_OFFSET_Y.get(), 0));
+    }
+
+    public static int offsetZ(ItemStack staff) {
+        return RangeAccelerationSavedData.clampOffset(
+                staff.getOrDefault(StretcherComponents.RANGE_OFFSET_Z.get(), 0));
+    }
+
     public static boolean idleThrottleDisabled(ItemStack staff) {
         return staff.getOrDefault(StretcherComponents.RANGE_IDLE_THROTTLE_DISABLED.get(), false);
     }
@@ -91,6 +106,7 @@ public final class RangeAccelerationSettings {
     public static void set(ItemStack staff, boolean placementMode, boolean filterMarkingMode,
                            boolean markSleepList,
                            int sizeX, int sizeY, int sizeZ,
+                           int offsetX, int offsetY, int offsetZ,
                            boolean accelerationWhitelistMode, boolean sleepWhitelistMode) {
         // These are both exclusive interaction modes. Marking wins if malformed data enables both.
         if (filterMarkingMode) placementMode = false;
@@ -100,7 +116,20 @@ public final class RangeAccelerationSettings {
         staff.set(StretcherComponents.RANGE_SIZE_X.get(), RangeAccelerationSavedData.clampSize(sizeX));
         staff.set(StretcherComponents.RANGE_SIZE_Y.get(), RangeAccelerationSavedData.clampSize(sizeY));
         staff.set(StretcherComponents.RANGE_SIZE_Z.get(), RangeAccelerationSavedData.clampSize(sizeZ));
+        staff.set(StretcherComponents.RANGE_OFFSET_X.get(), RangeAccelerationSavedData.clampOffset(offsetX));
+        staff.set(StretcherComponents.RANGE_OFFSET_Y.get(), RangeAccelerationSavedData.clampOffset(offsetY));
+        staff.set(StretcherComponents.RANGE_OFFSET_Z.get(), RangeAccelerationSavedData.clampOffset(offsetZ));
         staff.set(StretcherComponents.RANGE_IDLE_THROTTLE_DISABLED.get(), sleepWhitelistMode);
         staff.set(StretcherComponents.RANGE_WHITELIST_MODE.get(), accelerationWhitelistMode);
+    }
+
+    /** Compatibility overload for callers that do not expose offsets. */
+    public static void set(ItemStack staff, boolean placementMode, boolean filterMarkingMode,
+                           boolean markSleepList,
+                           int sizeX, int sizeY, int sizeZ,
+                           boolean accelerationWhitelistMode, boolean sleepWhitelistMode) {
+        set(staff, placementMode, filterMarkingMode, markSleepList,
+                sizeX, sizeY, sizeZ, 0, 0, 0,
+                accelerationWhitelistMode, sleepWhitelistMode);
     }
 }

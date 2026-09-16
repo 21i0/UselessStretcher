@@ -4,6 +4,7 @@ import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.network.RangeNetwork;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 /** Button-based range setup using the same visual language as the upstream G screen. */
 public final class RangeAccelerationConfigScreen extends Screen {
     private static final int PANEL_WIDTH = 276;
-    private static final int PANEL_HEIGHT = 180;
+    private static final int PANEL_HEIGHT = 174;
 
     private final Screen parent;
     private final InteractionHand hand;
@@ -28,6 +29,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
     private int sizeX;
     private int sizeY;
     private int sizeZ;
+    private int offsetX;
+    private int offsetY;
+    private int offsetZ;
     private boolean accelerationWhitelistMode;
     private boolean sleepWhitelistMode;
     private int accelerationMarkCount;
@@ -36,6 +40,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
     private SelectableAE2Button accelerationListButton;
     private SelectableAE2Button sleepListButton;
     private SelectableAE2Button markingButton;
+    private SelectableAE2Button offsetXButton;
+    private SelectableAE2Button offsetYButton;
+    private SelectableAE2Button offsetZButton;
 
     public RangeAccelerationConfigScreen(Screen parent, InteractionHand hand) {
         super(Component.translatable("gui.useless_stretcher.range.title"));
@@ -56,6 +63,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
         sizeX = RangeAccelerationSettings.sizeX(staff);
         sizeY = RangeAccelerationSettings.sizeY(staff);
         sizeZ = RangeAccelerationSettings.sizeZ(staff);
+        offsetX = RangeAccelerationSettings.offsetX(staff);
+        offsetY = RangeAccelerationSettings.offsetY(staff);
+        offsetZ = RangeAccelerationSettings.offsetZ(staff);
         accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
         sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
         accelerationMarkCount = RangeAccelerationSettings.accelerationMarkCount(staff);
@@ -78,44 +88,60 @@ public final class RangeAccelerationConfigScreen extends Screen {
 
         int cardLeft = panelLeft + 7;
         int cardWidth = panelWidth - 14;
-        addAxisSlider(cardLeft + 5, panelTop + 48, 'X', sizeX);
-        addAxisSlider(cardLeft + 5, panelTop + 69, 'Y', sizeY);
-        addAxisSlider(cardLeft + 5, panelTop + 90, 'Z', sizeZ);
+        addAxisSlider(cardLeft + 5, panelTop + 46, 'X', sizeX, offsetX);
+        addAxisSlider(cardLeft + 5, panelTop + 65, 'Y', sizeY, offsetY);
+        addAxisSlider(cardLeft + 5, panelTop + 84, 'Z', sizeZ, offsetZ);
 
         int half = (cardWidth - 13) / 2;
         accelerationListButton = addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 5, panelTop + 121, half, 18,
+                cardLeft + 5, panelTop + 112, half, 18,
                 accelerationListMessage(), ignored -> {
                     if (markSleepList) markSleepList = false;
                     else accelerationWhitelistMode = !accelerationWhitelistMode;
                     apply();
                 }));
         sleepListButton = addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 8 + half, panelTop + 121, cardWidth - 13 - half, 18,
+                cardLeft + 8 + half, panelTop + 112, cardWidth - 13 - half, 18,
                 sleepListMessage(), ignored -> {
                     if (!markSleepList) markSleepList = true;
                     else sleepWhitelistMode = !sleepWhitelistMode;
                     apply();
                 }));
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 5, panelTop + 153, (cardWidth - 13) / 2, 18,
+                cardLeft + 5, panelTop + 143, (cardWidth - 13) / 2, 18,
                 Component.translatable("gui.useless_stretcher.range.history"),
                 ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 8 + (cardWidth - 13) / 2, panelTop + 153,
+                cardLeft + 8 + (cardWidth - 13) / 2, panelTop + 143,
                 cardWidth - 13 - (cardWidth - 13) / 2, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
         updateButtons();
     }
 
-    private void addAxisSlider(int left, int y, char axis, int initialValue) {
+    private void addAxisSlider(int left, int y, char axis, int initialValue, int initialOffset) {
         AE2RangeSlider slider = addRenderableWidget(new AE2RangeSlider(
-                left + 21, y, 208, 18, String.valueOf(axis),
+                left + 21, y, 135, 18, String.valueOf(axis),
                 1, 15, initialValue, value -> setAxis(axis, value)));
         addRenderableWidget(new SelectableAE2Button(left, y, 18, 18,
                 Component.literal("-"), ignored -> slider.step(-1)));
-        addRenderableWidget(new SelectableAE2Button(left + 232, y, 18, 18,
+        addRenderableWidget(new SelectableAE2Button(left + 158, y, 18, 18,
                 Component.literal("+"), ignored -> slider.step(1)));
+
+        SelectableAE2Button decrement = new SelectableAE2Button(left + 178, y, 18, 18,
+                Component.literal("-"), ignored -> stepOffset(axis, -1));
+        SelectableAE2Button value = new SelectableAE2Button(left + 198, y, 34, 18,
+                offsetMessage(initialOffset), ignored -> { });
+        value.active = false;
+        SelectableAE2Button increment = new SelectableAE2Button(left + 234, y, 18, 18,
+                Component.literal("+"), ignored -> stepOffset(axis, 1));
+        addRenderableWidget(decrement);
+        addRenderableWidget(value);
+        addRenderableWidget(increment);
+        switch (axis) {
+            case 'X' -> offsetXButton = value;
+            case 'Y' -> offsetYButton = value;
+            default -> offsetZButton = value;
+        }
     }
 
     private void setAxis(char axis, int value) {
@@ -127,13 +153,24 @@ public final class RangeAccelerationConfigScreen extends Screen {
         apply();
     }
 
+    private void stepOffset(char axis, int delta) {
+        switch (axis) {
+            case 'X' -> offsetX = RangeAccelerationSavedData.clampOffset(offsetX + delta);
+            case 'Y' -> offsetY = RangeAccelerationSavedData.clampOffset(offsetY + delta);
+            default -> offsetZ = RangeAccelerationSavedData.clampOffset(offsetZ + delta);
+        }
+        apply();
+    }
+
     private void apply() {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         RangeAccelerationSettings.set(staff, placementMode, filterMarkingMode, markSleepList,
-                sizeX, sizeY, sizeZ, accelerationWhitelistMode, sleepWhitelistMode);
+                sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ,
+                accelerationWhitelistMode, sleepWhitelistMode);
         RangeNetwork.sendSettings(hand, placementMode, filterMarkingMode, markSleepList,
-                sizeX, sizeY, sizeZ, accelerationWhitelistMode, sleepWhitelistMode);
+                sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ,
+                accelerationWhitelistMode, sleepWhitelistMode);
         updateButtons();
     }
 
@@ -154,6 +191,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
             markingButton.setSelected(filterMarkingMode);
             markingButton.setMessage(markingMessage());
         }
+        if (offsetXButton != null) offsetXButton.setMessage(offsetMessage(offsetX));
+        if (offsetYButton != null) offsetYButton.setMessage(offsetMessage(offsetY));
+        if (offsetZButton != null) offsetZButton.setMessage(offsetMessage(offsetZ));
     }
 
     @Override
@@ -175,9 +215,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
         int panelWidth = Math.min(PANEL_WIDTH, width - 12);
         StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, PANEL_HEIGHT);
         StretcherScreenStyle.drawInset(graphics, panelLeft + 7, panelTop + 24,
-                panelLeft + panelWidth - 7, panelTop + 112);
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 7, panelTop + 116,
-                panelLeft + panelWidth - 7, panelTop + 145);
+                panelLeft + panelWidth - 7, panelTop + 108);
+        StretcherScreenStyle.drawInset(graphics, panelLeft + 7, panelTop + 109,
+                panelLeft + panelWidth - 7, panelTop + 138);
         graphics.drawString(font, title, panelLeft + 8, panelTop + 9,
                 StretcherScreenStyle.TEXT_COLOR, false);
         graphics.drawString(font,
@@ -232,5 +272,9 @@ public final class RangeAccelerationConfigScreen extends Screen {
                 Component.translatable(filterMarkingMode
                         ? "gui.useless_stretcher.staff_config.on"
                         : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private static Component offsetMessage(int value) {
+        return Component.translatable("gui.useless_stretcher.range.offset_short", value);
     }
 }

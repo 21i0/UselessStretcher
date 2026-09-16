@@ -72,6 +72,14 @@ public final class StretcherComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_SIZE_Z =
             integerComponent("range_size_z");
 
+    /** Signed offset of the range center from the placement anchor, bounded to +/-15. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_X =
+            integerComponent("range_offset_x");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_Y =
+            integerComponent("range_offset_y");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_Z =
+            integerComponent("range_offset_z");
+
     /** Legacy-compatible storage: true now means the sleep list is a whitelist. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_IDLE_THROTTLE_DISABLED =
             register("range_idle_throttle_disabled", builder -> builder
