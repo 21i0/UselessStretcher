@@ -80,8 +80,10 @@ public final class RangeAccelerationPreview {
         boolean seeThrough = StretcherConfig.highlightSeeThrough();
         long gameTime = minecraft.level.getGameTime();
 
-        renderPlacedRangeBounds(event.getPoseStack(), fields, outlines, cameraPos,
-                gameTime, seeThrough);
+        if (!WondrousStaffHighlight.findHeldStaff(player).isEmpty()) {
+            renderPlacedRangeBounds(event.getPoseStack(), fields, outlines, cameraPos,
+                    gameTime, seeThrough);
+        }
 
         if (RangeAccelerationSettings.placementMode(staff)
                 && WondrousStaffAcceleration.isEnabled(staff)) {

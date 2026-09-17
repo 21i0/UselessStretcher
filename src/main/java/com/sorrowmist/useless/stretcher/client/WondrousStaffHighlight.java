@@ -73,7 +73,7 @@ public final class WondrousStaffHighlight {
     }
 
     /** Returns an enabled staff from either hand, preferring the main hand when both contain one. */
-    private static ItemStack findHeldStaff(Player player) {
+    static ItemStack findHeldStaff(Player player) {
         ItemStack mainHand = player.getMainHandItem();
         if (mainHand.getItem() instanceof WondrousStaffItem
                 && WondrousStaffAcceleration.isEnabled(mainHand)) return mainHand;
