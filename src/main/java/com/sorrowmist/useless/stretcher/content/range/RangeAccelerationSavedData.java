@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.content.range;
 
 import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
 import com.sorrowmist.useless.stretcher.content.entity.ChangedTickAccessor;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
@@ -49,14 +50,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     public static final int MAX_HISTORY_PER_OWNER = 512;
     private static final String FILE_ID = "useless_stretcher_range_acceleration";
     private static final int MAX_EXECUTIONS_PER_TARGET = WondrousStaffAccelerationEntity.MAX_MULTIPLIER;
-    /**
-     * A malformed or simply over-ambitious setup must not turn one server tick into an
-     * unbounded amount of block-entity work. The budget is shared by all loaded fields and is
-     * deliberately high enough for ordinary x1024 use; excess work remains in each target's
-     * pending counter and is serviced on later ticks.
-     */
-    private static final int MAX_EXECUTIONS_PER_SERVER_TICK = 1_000_000;
-    private static final long MAX_PENDING_TICKS = 8192L;
+    private static final long MAX_PENDING_TICKS = 1_000_000L;
     private static final long PLACEMENT_COOLDOWN_TICKS = 5L;
     private static final int IDLE_WINDOW_TICKS = 100;
     private static final int IDLE_EXECUTIONS_PER_TICK = 4;
@@ -276,14 +270,13 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         if (fields.isEmpty()) return;
         List<Field> snapshot = List.copyOf(fields.values());
         int start = Math.floorMod(executionCursor++, snapshot.size());
-        ExecutionBudget budget = new ExecutionBudget(MAX_EXECUTIONS_PER_SERVER_TICK);
         for (int offset = 0; offset < snapshot.size(); offset++) {
             Field field = snapshot.get((start + offset) % snapshot.size());
             ServerLevel level = server.getLevel(field.dimensionKey());
             if (level == null || !level.isLoaded(field.effectiveCenter())) continue;
             ensureMarker(level, field);
             if (!field.enabled) continue;
-            tickField(level, field, budget);
+            tickField(level, field);
         }
     }
 
@@ -294,7 +287,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         level.addFreshEntity(marker);
     }
 
-    private void tickField(ServerLevel level, Field field, ExecutionBudget budget) {
+    private void tickField(ServerLevel level, Field field) {
         if (field.migrateLegacyFilters(level)) setDirty();
         FieldRuntime state = runtime.computeIfAbsent(field.id, ignored -> new FieldRuntime());
         long now = level.getGameTime();
@@ -324,7 +317,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             if (throttled) {
                 anyTargetThrottled = true;
                 work.pendingTicks = 0L;
-                int executions = budget.take(IDLE_EXECUTIONS_PER_TICK);
+                int executions = AccelerationExecutionBudget.take(
+                        level.getServer(), work, IDLE_EXECUTIONS_PER_TICK);
                 if (executions > 0) {
                     WondrousStaffAcceleration.tickTarget(level, target, executions);
                     nextTarget = (targetIndex + 1) % targetCount;
@@ -334,7 +328,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
             work.pendingTicks = Math.min(MAX_PENDING_TICKS, work.pendingTicks + field.speed);
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
-            int executions = budget.take(requested);
+            int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
             work.pendingTicks -= executions;
             if (executions > 0) {
                 WondrousStaffAcceleration.tickTarget(level, target, executions);
@@ -345,21 +339,6 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         // The marker exposes a range-level status. If even one target is reduced, gold is used so
         // the player is never told the whole field is running at full speed while part of it sleeps.
         field.idleThrottled = anyTargetThrottled;
-    }
-
-    /** Mutable per-tick work allowance shared by every enabled field. */
-    private static final class ExecutionBudget {
-        private int remaining;
-
-        private ExecutionBudget(int amount) {
-            remaining = Math.max(0, amount);
-        }
-
-        private int take(int requested) {
-            int granted = Math.min(Math.max(0, requested), remaining);
-            remaining -= granted;
-            return granted;
-        }
     }
 
     private static List<BlockPos> scanTargets(ServerLevel level, Field field) {

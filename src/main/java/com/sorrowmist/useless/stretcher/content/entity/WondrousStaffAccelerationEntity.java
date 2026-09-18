@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.content.entity;
 
 import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
@@ -49,7 +50,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
     public static final int PERMANENT = -1;
     public static final int MAX_MULTIPLIER = 1024;
     public static final int MAX_EXECUTIONS_PER_TICK = MAX_MULTIPLIER;
-    private static final long MAX_PENDING_TICKS = 8192L;
+    private static final long MAX_PENDING_TICKS = 1_000_000L;
     /** How long a machine may show no activity signal before it is throttled. */
     private static final int IDLE_WINDOW_TICKS = 100;
     /** Extra ticks per game tick while throttled. Never 0: the target must keep progressing. */
@@ -195,10 +196,15 @@ public class WondrousStaffAccelerationEntity extends Entity {
             if (throttled) {
                 // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
                 pendingTicks = 0L;
-                WondrousStaffAcceleration.tickTarget(level, this.targetPos, IDLE_EXECUTIONS_PER_TICK);
+                int executed = AccelerationExecutionBudget.take(
+                        level.getServer(), this, IDLE_EXECUTIONS_PER_TICK);
+                if (executed > 0) {
+                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                }
             } else {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
-                int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+                int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+                int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
                 pendingTicks -= executed;
                 if (executed > 0) {
                     WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
@@ -227,7 +233,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
         // entity logic alike. Retaining excess virtual ticks keeps x1024 from doing all work in
         // one server tick while preserving it for later frames.
         pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + (long) Math.max(1, getSpeed()));
-        int executed = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+        int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+        int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
         pendingTicks -= executed;
         for (int i = 0; i < executed && !target.isRemoved(); i++) {
             target.tick();

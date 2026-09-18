@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-本模组（Useless Stretcher）引用了以下第三方项目的设计思路（非代码拷贝），在此声明来源与许可。
+本模组（Useless Stretcher）引用了以下第三方项目的设计思路，并对少量调度实现作了适配改写，在此声明来源与许可。
 
 ## JDT Extras (JDTE)
 
@@ -9,9 +9,40 @@
 - 引用内容：
   - 手杖倍率档位设计（`TimeMultitoolSpeedMode` 的 1 / 2 / 4 / 16 / 256 / 1024 档位概念）。
   - “retained virtual ticks + 每 tick 执行预算 + pending 上限”的优化思路（`TimeAccelerationWorkQueue` / `ExtendedTimeAccelerationManager`）。
+  - AE2 多端点按节点身份去重、直接调用 `IGridTickable`、收到 `TickRateModulation.SLEEP` 后停止本轮空转的调度思路（`ExtendedTimeAcceleratorAE2Integration`）。
 - 相关代码位置：
   - `src/main/java/com/sorrowmist/useless/stretcher/client/WondrousStaffClient.java`
+  - `src/main/java/com/sorrowmist/useless/stretcher/content/acceleration/AccelerationExecutionBudget.java`
+  - `src/main/java/com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAcceleration.java`
   - `src/main/java/com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAccelerationEntity.java`
+
+说明：本模组的 MSPT 采样与自适应预算为自行实现；JDTE 0.6.0-pre6 使用固定全局预算，未实现按 TPS/MSPT 自动调频。`jdte_matrix` 也未修改 AE2 TickManager 或移除其 tick 上限。
+
+### JDTE MIT License
+
+```text
+MIT License
+
+Copyright (c) 2026 JDTE contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ## 其它
 

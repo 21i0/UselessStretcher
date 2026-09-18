@@ -1,8 +1,10 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
+import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IInWorldGridNodeHost;
 import appeng.api.networking.ticking.IGridTickable;
+import appeng.api.networking.ticking.TickRateModulation;
 import appeng.me.service.TickManagerService;
 import com.sorrowmist.useless.core.component.UComponents;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
@@ -14,7 +16,6 @@ import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -36,7 +37,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Server-side tick driver for the wondrous staff. Blocks tick through their normal block-entity
@@ -59,7 +65,6 @@ public final class WondrousStaffAcceleration {
     private static final int LIGHTNING_ROD_MIN_CHANCE = 10;
     /** The multiplier gear a freshly crafted staff starts with (x2). */
     public static final int DEFAULT_GEAR = 2;
-    private static final int RANDOM_TICK_CHANCE = 1365;
     /** Vanilla's private ServerLevel.THUNDER_DELAY provider. */
     private static final IntProvider THUNDER_DELAY = UniformInt.of(12000, 180000);
 
@@ -367,17 +372,17 @@ public final class WondrousStaffAcceleration {
 
         if (blockEntity == null) {
             if (!state.isRandomlyTicking()) return;
-            RandomSource random = level.getRandom();
             for (int i = 0; i < speed; i++) {
-                if (random.nextInt(RANDOM_TICK_CHANCE) == 0) {
-                    state.randomTick(level, pos, random);
-                }
+                // One requested virtual tick means one randomTick invocation, matching JDTE's
+                // Ultimate Time Wand. Applying vanilla's section-level 1/1365 selection chance a
+                // second time made crops/saplings roughly 1365 times slower than JDTE at x1024.
+                state.randomTick(level, pos, level.getRandom());
             }
             return;
         }
 
-        // 1. AE2 machines that expose an IGridTickable run on their own AE grid tick.
-        if (blockEntity instanceof IInWorldGridNodeHost host && tickAeNode(host, speed)) {
+        // 1. AE2 machines that expose IGridTickable endpoints run on their own AE grid ticks.
+        if (tickAeNodes(level, pos, speed)) {
             return;
         }
 
@@ -413,24 +418,50 @@ public final class WondrousStaffAcceleration {
         level.addFreshEntity(bolt);
     }
 
-    /** @return true when an active {@link IGridTickable} was found and ticked. */
-    private static boolean tickAeNode(IInWorldGridNodeHost host, int speed) {
+    /**
+     * Ticks every distinct active AE endpoint exposed by this block. A multipart host may return
+     * the same node from several faces, so identity de-duplication is required. An endpoint that
+     * reports {@link TickRateModulation#SLEEP} is removed immediately instead of receiving up to
+     * another 1023 empty calls during the same real server tick.
+     *
+     * @return true when at least one active {@link IGridTickable} endpoint was found
+     */
+    private static boolean tickAeNodes(ServerLevel level, BlockPos pos, int speed) {
+        IInWorldGridNodeHost host = GridHelper.getNodeHost(level, pos);
+        if (host == null) return false;
+
+        Set<IGridNode> seen = Collections.newSetFromMap(new IdentityHashMap<>());
+        List<AeEndpoint> active = new ArrayList<>();
         for (Direction direction : Direction.values()) {
             IGridNode node = host.getGridNode(direction);
-            if (node == null || node.getGrid() == null || !node.isActive()) continue;
+            if (node == null || !seen.add(node) || node.getGrid() == null || !node.isActive()) continue;
             IGridTickable tickable = node.getService(IGridTickable.class);
-            if (tickable == null) continue;
-            for (int i = 0; i < speed; i++) {
+            if (tickable != null) active.add(new AeEndpoint(node, tickable));
+        }
+        if (active.isEmpty()) return false;
+
+        for (int i = 0; i < speed && !active.isEmpty(); i++) {
+            Iterator<AeEndpoint> iterator = active.iterator();
+            while (iterator.hasNext()) {
+                AeEndpoint endpoint = iterator.next();
+                if (endpoint.node.getGrid() == null || !endpoint.node.isActive()) {
+                    iterator.remove();
+                    continue;
+                }
                 try {
-                    tickable.tickingRequest(node, 1);
+                    TickRateModulation modulation = endpoint.tickable.tickingRequest(endpoint.node, 1);
+                    if (modulation == TickRateModulation.SLEEP) iterator.remove();
                 } catch (RuntimeException ignored) {
                     // A device may reject an out-of-band tick (e.g. while not loaded/active).
-                    break;
+                    // Remove only that endpoint; other faces/nodes can continue normally.
+                    iterator.remove();
                 }
             }
-            return true;
         }
-        return false;
+        return true;
+    }
+
+    private record AeEndpoint(IGridNode node, IGridTickable tickable) {
     }
 
     /** True when an AE device currently requests ticks instead of reporting itself asleep. */
