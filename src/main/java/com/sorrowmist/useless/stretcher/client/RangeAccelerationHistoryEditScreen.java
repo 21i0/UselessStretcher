@@ -68,12 +68,8 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
         addSlider(sliderLeft, panelTop + 168, sliderWidth, 'Y', true, offsetY);
         addSlider(sliderLeft, panelTop + 188, sliderWidth, 'Z', true, offsetZ);
 
-        int half = (panelWidth - 27) / 2;
         addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 9, panelTop + 215, half, 18,
-                Component.translatable("gui.useless_stretcher.range.save"), ignored -> saveAndClose()));
-        addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 12 + half, panelTop + 215, panelWidth - 21 - half, 18,
+                panelLeft + 9, panelTop + 215, panelWidth - 18, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
     }
 
@@ -87,8 +83,10 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
             index = i;
         }
         index = Math.max(0, Math.min(SPEED_PRESETS.length - 1, index + delta));
+        if (speed == SPEED_PRESETS[index]) return;
         speed = SPEED_PRESETS[index];
         if (speedButton != null) speedButton.setMessage(speedMessage());
+        persist();
     }
 
     private void addSlider(int left, int y, int width, char axis, boolean offset, int initialValue) {
@@ -117,11 +115,11 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
                 default -> sizeZ = value;
             }
         }
+        persist();
     }
 
-    private void saveAndClose() {
+    private void persist() {
         RangeNetwork.editHistory(field.id(), speed, sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ);
-        onClose();
     }
 
     @Override
@@ -158,6 +156,8 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
     @Override
     public void onClose() {
         minecraft.setScreen(parent);
+        // Edit replies received while this screen is open do not update the history screen.
+        RangeNetwork.requestHistory();
     }
 
     @Override

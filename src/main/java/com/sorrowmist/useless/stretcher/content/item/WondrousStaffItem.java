@@ -41,7 +41,8 @@ public class WondrousStaffItem extends EndlessBeafItem {
         super.inventoryTick(stack, level, entity, slotId, selected);
         if (!(entity instanceof ServerPlayer player)
                 || (!selected && player.getOffhandItem() != stack)
-                || !StaffTutorialData.get(player.getServer()).markShown(player.getUUID())) {
+                || !StaffTutorialData.get(player.getServer()).markHintShown(player.getUUID(),
+                StaffTutorialData.HINT_FIRST_HELD)) {
             return;
         }
         com.sorrowmist.useless.stretcher.network.Network.sendStaffTutorial(player);

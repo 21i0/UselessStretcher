@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.network;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import com.sorrowmist.useless.stretcher.content.mold.PatternFetcher;
+import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -95,6 +96,19 @@ public final class Network {
         }
     }
 
+    /** Sent once when the player opens the X staff configuration screen. */
+    public record StaffTutorialOpenedPayload() implements CustomPacketPayload {
+        public static final Type<StaffTutorialOpenedPayload> TYPE =
+                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_tutorial_opened"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StaffTutorialOpenedPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> { }, buf -> new StaffTutorialOpenedPayload());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record WondrousStaffSpeedPayload(int speed, int mode, boolean accelerationEnabled, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffSpeedPayload> TYPE =
@@ -142,6 +156,12 @@ public final class Network {
                 (payload, context) -> ClientStateReceiver.handleFullSlots(payload));
         registrar.playToClient(StaffTutorialPayload.TYPE, StaffTutorialPayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.handleStaffTutorial());
+        registrar.playToServer(StaffTutorialOpenedPayload.TYPE, StaffTutorialOpenedPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) {
+                        StaffTutorialData.get(player.getServer()).markUiOpened(player.getUUID());
+                    }
+                }));
         registrar.playToClient(TimeAccelerationStatePayload.TYPE, TimeAccelerationStatePayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.handleTimeAcceleration(payload));
         registrar.playToServer(WondrousStaffSpeedPayload.TYPE, WondrousStaffSpeedPayload.STREAM_CODEC,
@@ -167,6 +187,10 @@ public final class Network {
         com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.setMode(held, mode);
         held.set(com.sorrowmist.useless.core.component.UComponents.BeefTimeAccelerationEnabledComponent.get(),
                 payload.accelerationEnabled());
+        if (StaffTutorialData.get(player.getServer()).markHintShown(player.getUUID(),
+                StaffTutorialData.HINT_GEAR_CHANGE)) {
+            sendStaffTutorial(player);
+        }
     }
 
     public static void sendWondrousStaffSpeed(int speed, int mode, boolean accelerationEnabled,
@@ -177,6 +201,10 @@ public final class Network {
 
     public static void sendStaffTutorial(ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, new StaffTutorialPayload());
+    }
+
+    public static void sendStaffTutorialOpened() {
+        PacketDistributor.sendToServer(new StaffTutorialOpenedPayload());
     }
 
     public static void sendTimeAccelerationState(net.minecraft.server.level.ServerLevel level, int speed) {

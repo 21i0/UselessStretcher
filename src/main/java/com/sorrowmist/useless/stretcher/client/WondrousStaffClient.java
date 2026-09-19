@@ -65,7 +65,10 @@ public final class WondrousStaffClient {
         if (!StretcherKeyBindings.WONDROUS_STAFF_MODE.consumeClick()) return;
 
         InteractionHand hand = findStaffHand(player);
-        if (hand != null) mc.setScreen(new WondrousStaffConfigScreen(hand));
+        if (hand != null) {
+            Network.sendStaffTutorialOpened();
+            mc.setScreen(new WondrousStaffConfigScreen(hand));
+        }
     }
 
     private static int cycleGear(int current, boolean up) {

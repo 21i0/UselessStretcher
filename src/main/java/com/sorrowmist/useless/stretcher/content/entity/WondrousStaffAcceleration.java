@@ -8,6 +8,7 @@ import appeng.api.networking.ticking.TickRateModulation;
 import appeng.me.service.TickManagerService;
 import com.sorrowmist.useless.core.component.UComponents;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
@@ -67,6 +68,7 @@ public final class WondrousStaffAcceleration {
     public static final int DEFAULT_GEAR = 2;
     /** Vanilla's private ServerLevel.THUNDER_DELAY provider. */
     private static final IntProvider THUNDER_DELAY = UniformInt.of(12000, 180000);
+    private static final Direction[] DIRECTIONS = Direction.values();
 
     private WondrousStaffAcceleration() {
     }
@@ -83,6 +85,7 @@ public final class WondrousStaffAcceleration {
         if (!isEnabled(ctx.getItemInHand())) return InteractionResult.PASS;
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
+        sendAccelerationTutorial(player);
 
         BlockPos pos = ctx.getClickedPos().immutable();
         int speed = getSpeed(ctx.getItemInHand());
@@ -122,6 +125,7 @@ public final class WondrousStaffAcceleration {
         Level level = target.level();
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
+        sendAccelerationTutorial(player);
 
         AABB area = target.getBoundingBox().inflate(4.0D);
         int speed = getSpeed(staff);
@@ -161,6 +165,7 @@ public final class WondrousStaffAcceleration {
         if (!isEnabled(staff)) return InteractionResult.PASS;
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
+        sendAccelerationTutorial(player);
 
         int speed = getSpeed(staff);
         // Daytime and weather are dimension-wide, so distant players must update one shared effect
@@ -424,7 +429,7 @@ public final class WondrousStaffAcceleration {
      * reports {@link TickRateModulation#SLEEP} is removed immediately instead of receiving up to
      * another 1023 empty calls during the same real server tick.
      *
-     * @return true when at least one active {@link IGridTickable} endpoint was found
+     * @return true when at least one {@link IGridTickable} endpoint was found
      */
     private static boolean tickAeNodes(ServerLevel level, BlockPos pos, int speed) {
         IInWorldGridNodeHost host = GridHelper.getNodeHost(level, pos);
@@ -432,9 +437,12 @@ public final class WondrousStaffAcceleration {
 
         Set<IGridNode> seen = Collections.newSetFromMap(new IdentityHashMap<>());
         List<AeEndpoint> active = new ArrayList<>();
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DIRECTIONS) {
             IGridNode node = host.getGridNode(direction);
-            if (node == null || !seen.add(node) || node.getGrid() == null || !node.isActive()) continue;
+            // A number of AE-compatible machines run entirely on FE until they are connected
+            // to an AE network. Their node has no grid in that state, but the public AE2
+            // IGridTickable service is still the machine's real tick entrypoint.
+            if (node == null || !seen.add(node)) continue;
             IGridTickable tickable = node.getService(IGridTickable.class);
             if (tickable != null) active.add(new AeEndpoint(node, tickable));
         }
@@ -444,10 +452,6 @@ public final class WondrousStaffAcceleration {
             Iterator<AeEndpoint> iterator = active.iterator();
             while (iterator.hasNext()) {
                 AeEndpoint endpoint = iterator.next();
-                if (endpoint.node.getGrid() == null || !endpoint.node.isActive()) {
-                    iterator.remove();
-                    continue;
-                }
                 try {
                     TickRateModulation modulation = endpoint.tickable.tickingRequest(endpoint.node, 1);
                     if (modulation == TickRateModulation.SLEEP) iterator.remove();
@@ -466,7 +470,7 @@ public final class WondrousStaffAcceleration {
 
     /** True when an AE device currently requests ticks instead of reporting itself asleep. */
     public static boolean isAeDeviceWorking(IInWorldGridNodeHost host) {
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DIRECTIONS) {
             IGridNode node = host.getGridNode(direction);
             if (node == null || node.getGrid() == null || !node.isActive()) continue;
             IGridTickable tickable = node.getService(IGridTickable.class);
@@ -492,5 +496,13 @@ public final class WondrousStaffAcceleration {
         float pitch = (float) Math.pow(2.0D, (levelIndex - 5) / 12.0D);
         level.playSound(null, pos, SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(),
                 SoundSource.PLAYERS, 1.0F, pitch);
+    }
+
+    private static void sendAccelerationTutorial(Player player) {
+        if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer
+                && StaffTutorialData.get(serverPlayer.getServer()).markHintShown(serverPlayer.getUUID(),
+                StaffTutorialData.HINT_ACCELERATION)) {
+            Network.sendStaffTutorial(serverPlayer);
+        }
     }
 }
