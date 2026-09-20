@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,13 @@ import java.util.Set;
  */
 @Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds")
 public abstract class MoldMatcherPreparedMoldsMixin {
+
+    /** PreparedMolds is reused by the upstream hub; retain the expensive ingredient checks. */
+    @org.spongepowered.asm.mixin.Unique
+    private final Map<Ingredient, List<ResourceLocation>> uselessStretcher$myriadMatchCache = new HashMap<>();
+
+    @org.spongepowered.asm.mixin.Unique
+    private Set<ResourceLocation> uselessStretcher$cachedMyriadMolds = Set.of();
 
     @Shadow
     @Final
@@ -59,17 +67,16 @@ public abstract class MoldMatcherPreparedMoldsMixin {
             }
         }
         if (!hasMyriad) return; // let the original matcher run
+        if (!myriadMolds.equals(uselessStretcher$cachedMyriadMolds)) {
+            uselessStretcher$myriadMatchCache.clear();
+            uselessStretcher$cachedMyriadMolds = Set.copyOf(myriadMolds);
+        }
 
         List<Ingredient> normalNeeded = new ArrayList<>();
         for (Ingredient requirement : normalized) {
-            boolean covered = false;
-            for (ResourceLocation id : myriadMolds) {
-                if (MoldMatch.matches(requirement, id)) {
-                    covered = true;
-                    break;
-                }
+            if (uselessStretcher$matchingMyriad(requirement, myriadMolds).isEmpty()) {
+                normalNeeded.add(requirement);
             }
-            if (!covered) normalNeeded.add(requirement);
         }
 
         if (normalNeeded.isEmpty()) {
@@ -83,8 +90,19 @@ public abstract class MoldMatcherPreparedMoldsMixin {
 
         int[] requirementForSlot = new int[normalSlots.size()];
         Arrays.fill(requirementForSlot, -1);
+        Map<Ingredient, List<Integer>> matchingSlots = new HashMap<>();
+        for (Ingredient requirement : normalNeeded) {
+            matchingSlots.computeIfAbsent(requirement, ignored -> {
+                List<Integer> slots = new ArrayList<>();
+                for (int slot = 0; slot < normalSlots.size(); slot++) {
+                    if (AdapterUtils.matchesMold(requirement, normalSlots.get(slot))) slots.add(slot);
+                }
+                return slots;
+            });
+        }
         for (int requirement = 0; requirement < normalNeeded.size(); requirement++) {
-            if (!augment(normalNeeded, normalSlots, requirement, requirementForSlot, new boolean[normalSlots.size()])) {
+            if (!augment(normalNeeded, matchingSlots, requirement, requirementForSlot,
+                    new boolean[normalSlots.size()])) {
                 cir.setReturnValue(false);
                 return;
             }
@@ -92,14 +110,25 @@ public abstract class MoldMatcherPreparedMoldsMixin {
         cir.setReturnValue(true);
     }
 
-    private static boolean augment(List<Ingredient> requirements, List<ItemStack> slots,
+    @org.spongepowered.asm.mixin.Unique
+    private List<ResourceLocation> uselessStretcher$matchingMyriad(
+            Ingredient requirement, Set<ResourceLocation> myriadMolds) {
+        return uselessStretcher$myriadMatchCache.computeIfAbsent(requirement, ignored -> {
+            List<ResourceLocation> matches = new ArrayList<>();
+            for (ResourceLocation id : myriadMolds) {
+                if (MoldMatch.matches(requirement, id)) matches.add(id);
+            }
+            return List.copyOf(matches);
+        });
+    }
+
+    private static boolean augment(List<Ingredient> requirements, Map<Ingredient, List<Integer>> matchingSlots,
                                    int requirement, int[] requirementForSlot, boolean[] visited) {
-        Ingredient needed = requirements.get(requirement);
-        for (int slot = 0; slot < slots.size(); slot++) {
-            if (visited[slot] || !AdapterUtils.matchesMold(needed, slots.get(slot))) continue;
+        for (int slot : matchingSlots.getOrDefault(requirements.get(requirement), List.of())) {
+            if (visited[slot]) continue;
             visited[slot] = true;
             int previous = requirementForSlot[slot];
-            if (previous < 0 || augment(requirements, slots, previous, requirementForSlot, visited)) {
+            if (previous < 0 || augment(requirements, matchingSlots, previous, requirementForSlot, visited)) {
                 requirementForSlot[slot] = requirement;
                 return true;
             }

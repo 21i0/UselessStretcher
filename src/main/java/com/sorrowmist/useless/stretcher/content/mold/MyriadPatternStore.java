@@ -22,6 +22,7 @@ import java.util.UUID;
  */
 public final class MyriadPatternStore extends SavedData {
     private static final String NAME = "useless_stretcher_patterns";
+    private static final int MAX_PATTERNS = PatternFetcher.MAX_PATTERNS;
 
     private final Map<UUID, Map<ResourceLocation, List<ItemStack>>> entries = new HashMap<>();
 
@@ -39,16 +40,7 @@ public final class MyriadPatternStore extends SavedData {
     }
 
     public void put(UUID id, Map<ResourceLocation, List<ItemStack>> groups) {
-        Map<ResourceLocation, List<ItemStack>> copy = new LinkedHashMap<>();
-        if (groups != null) {
-            for (Map.Entry<ResourceLocation, List<ItemStack>> entry : groups.entrySet()) {
-                List<ItemStack> stacks = new ArrayList<>();
-                for (ItemStack stack : entry.getValue()) {
-                    if (stack != null && !stack.isEmpty()) stacks.add(stack.copy());
-                }
-                if (!stacks.isEmpty()) copy.put(entry.getKey(), stacks);
-            }
-        }
+        Map<ResourceLocation, List<ItemStack>> copy = copyGroups(groups, MAX_PATTERNS);
         if (copy.isEmpty()) entries.remove(id);
         else entries.put(id, copy);
         setDirty();
@@ -67,6 +59,7 @@ public final class MyriadPatternStore extends SavedData {
             List<ItemStack> copies = new ArrayList<>();
             for (ItemStack stack : patterns) {
                 if (stack != null && !stack.isEmpty()) copies.add(stack.copy());
+                if (copies.size() >= MAX_PATTERNS) break;
             }
             if (copies.isEmpty()) groups.remove(mold);
             else groups.put(mold, copies);
@@ -91,9 +84,39 @@ public final class MyriadPatternStore extends SavedData {
                     }
                 }
                 if (!duplicate) result.add(stack.copy());
+                if (result.size() >= MAX_PATTERNS) return result;
             }
         }
         return result;
+    }
+
+    private static Map<ResourceLocation, List<ItemStack>> copyGroups(
+            Map<ResourceLocation, List<ItemStack>> groups, int limit) {
+        Map<ResourceLocation, List<ItemStack>> copy = new LinkedHashMap<>();
+        if (groups == null || limit <= 0) return copy;
+        List<ItemStack> unique = new ArrayList<>();
+        for (Map.Entry<ResourceLocation, List<ItemStack>> entry : groups.entrySet()) {
+            if (entry.getKey() == null || entry.getValue() == null) continue;
+            List<ItemStack> stacks = new ArrayList<>();
+            for (ItemStack stack : entry.getValue()) {
+                if (stack == null || stack.isEmpty()) continue;
+                boolean duplicate = false;
+                for (ItemStack existing : unique) {
+                    if (ItemStack.isSameItemSameComponents(existing, stack)) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (duplicate) continue;
+                ItemStack stored = stack.copy();
+                stacks.add(stored);
+                unique.add(stored);
+                if (unique.size() >= limit) break;
+            }
+            if (!stacks.isEmpty()) copy.put(entry.getKey(), stacks);
+            if (unique.size() >= limit) break;
+        }
+        return copy;
     }
 
     @Override
@@ -148,7 +171,7 @@ public final class MyriadPatternStore extends SavedData {
                 }
                 if (!patterns.isEmpty()) groups.put(mold, patterns);
             }
-            if (!groups.isEmpty()) store.entries.put(id, groups);
+            if (!groups.isEmpty()) store.entries.put(id, copyGroups(groups, MAX_PATTERNS));
         }
         return store;
     }

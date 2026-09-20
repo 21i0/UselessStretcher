@@ -19,6 +19,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public final class Network {
@@ -246,10 +247,9 @@ public final class Network {
                         for (ResourceLocation id : ids) {
                             if (all) {
                                 be.setMoldPatterns(id, List.of());
-                            } else {
-                                be.setMoldPatterns(id, PatternFetcher.fetchForMold(player.level(), payload.pos(), be.getAeNodePos(), id.toString()));
                             }
                         }
+                        if (!all) fetchAndStore(player, payload.pos(), be, ids);
                     }
                     case ACTION_FETCH_PATTERNS, ACTION_REMOVE_PATTERNS -> {
                         List<ResourceLocation> ids = payload.enabledMolds().stream()
@@ -257,11 +257,8 @@ public final class Network {
                                 .filter(java.util.Objects::nonNull)
                                 .toList();
                         boolean fetch = payload.action() == ACTION_FETCH_PATTERNS;
-                        for (ResourceLocation id : ids) {
-                            be.setMoldPatterns(id, fetch
-                                    ? PatternFetcher.fetchForMold(player.level(), payload.pos(), be.getAeNodePos(), id.toString())
-                                    : List.of());
-                        }
+                        if (fetch) fetchAndStore(player, payload.pos(), be, ids);
+                        else for (ResourceLocation id : ids) be.setMoldPatterns(id, List.of());
                     }
                     case ACTION_REQUEST_STATE -> {
                         // fall through to reply below
@@ -270,6 +267,17 @@ public final class Network {
                 replyState(player, be);
             }
         });
+    }
+
+    /** Fetches a bulk selection in one catalog/context pass and lets the store enforce its cap. */
+    private static void fetchAndStore(ServerPlayer player, BlockPos pos,
+                                      OmniversalMyriadBlockEntity be, List<ResourceLocation> ids) {
+        List<String> requested = ids.stream().map(ResourceLocation::toString).toList();
+        Map<ResourceLocation, List<ItemStack>> fetched = PatternFetcher.fetchForMolds(
+                player.level(), pos, be.getAeNodePos(), requested, PatternFetcher.MAX_PATTERNS);
+        for (ResourceLocation id : ids) {
+            be.setMoldPatterns(id, fetched.getOrDefault(id, List.of()));
+        }
     }
 
     private static void replyState(ServerPlayer player, OmniversalMyriadBlockEntity be) {
