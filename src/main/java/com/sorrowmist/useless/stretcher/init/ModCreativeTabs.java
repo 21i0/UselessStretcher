@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * Registers a small creative tab so the handheld stretcher and the dimension teleport blocks are
+ * Registers a small creative tab so the handheld stretcher and the staff are
  * visible and searchable in JEI. The omniversal myriad block is deliberately left out: it is the
  * addon's wildcard mold, meant to be obtained through its crafting recipe rather than spawned.
  *
@@ -37,10 +37,6 @@ public final class ModCreativeTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.USELESS_STRETCHER.get());
                         output.accept(ModItems.WONDROUS_STAFF.get());
-                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.QUAD_CHUNK_DIMENSION_BLOCK_ITEM.get());
-                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.NINE_CHUNK_DIMENSION_BLOCK_ITEM.get());
-                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.QUAD_CHUNK_ODD_DIMENSION_BLOCK_ITEM.get());
-                        output.accept(com.sorrowmist.useless.stretcher.dimension.init.ModItems.NINE_CHUNK_ODD_DIMENSION_BLOCK_ITEM.get());
                     })
                     .build()
     );

@@ -3,6 +3,10 @@ package com.sorrowmist.useless.stretcher.content.blockentity;
 import com.sorrowmist.useless.stretcher.content.ae.AeBindingStore;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
+import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldStore;
+import com.sorrowmist.useless.stretcher.content.mold.PatternFetcher;
+import com.sorrowmist.useless.stretcher.event.MyriadWorkQueue;
+import appeng.api.stacks.AEItemKey;
 import com.sorrowmist.useless.stretcher.init.ModBlockEntities;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import net.minecraft.core.BlockPos;
@@ -35,14 +39,27 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     private static final String TAG_AE_REF = "AeRef";
 
     private final Set<ResourceLocation> enabledMolds = new LinkedHashSet<>();
+    private UUID moldRef;
+    private boolean resolveMolds;
     private UUID patternRef;
     private UUID aeRef;
+    private PatternFetcher fetch;
+    private final Set<ResourceLocation> pendingFetch = new LinkedHashSet<>();
+    private String fetchResult = "";
+    private int selectionVersion;
+
+    public int selectionVersion() { return selectionVersion; }
 
     public OmniversalMyriadBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.OMNIVERSAL_MYRIAD.get(), pos, state);
     }
 
     public Set<ResourceLocation> getEnabledMolds() {
+        if (resolveMolds && level instanceof ServerLevel serverLevel) {
+            enabledMolds.clear();
+            enabledMolds.addAll(MyriadMoldStore.get(serverLevel.getServer()).resolve(moldRef));
+            resolveMolds = false;
+        }
         return enabledMolds;
     }
 
@@ -68,7 +85,7 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
 
     public Set<ResourceLocation> getPatternMolds() {
         MyriadPatternStore store = store();
-        return store == null ? Set.of() : store.get(patternRef).keySet();
+        return store == null ? Set.of() : store.molds(patternRef);
     }
 
     public List<ItemStack> getPatterns() {
@@ -77,20 +94,92 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     }
 
     public void setEnabledMolds(Collection<ResourceLocation> molds) {
+        moldRef = null;
+        resolveMolds = false;
         enabledMolds.clear();
         if (molds != null) enabledMolds.addAll(molds);
+        if (level instanceof ServerLevel serverLevel) {
+            moldRef = MyriadMoldStore.get(serverLevel.getServer()).snapshot(enabledMolds);
+        }
+        selectionVersion++;
         setChanged();
     }
 
-    public void setMoldPatterns(ResourceLocation moldId, Collection<ItemStack> patterns) {
+    public int getPatternCount() {
+        MyriadPatternStore store = store();
+        return store == null ? 0 : store.count(patternRef);
+    }
+
+    public void replacePatternKeys(ResourceLocation moldId, Set<AEItemKey> patterns) {
         MyriadPatternStore store = store();
         if (store == null) return;
         if (patternRef == null) patternRef = UUID.randomUUID();
-        store.setMold(patternRef, moldId, patterns == null ? List.of() : List.copyOf(patterns));
+        store.replace(patternRef, moldId, patterns);
         setChanged();
     }
 
+    public void requestPatterns(Collection<ResourceLocation> ids) {
+        selectionVersion++;
+        fetchResult = "";
+        for (ResourceLocation id : ids) {
+            if (id != null && (fetch == null || !fetch.contains(id))) pendingFetch.add(id);
+        }
+        if (!pendingFetch.isEmpty() || fetch != null) MyriadWorkQueue.enqueue(this);
+    }
+
+    public void removePatterns(Collection<ResourceLocation> ids) {
+        selectionVersion++;
+        for (ResourceLocation id : ids) {
+            pendingFetch.remove(id);
+            if (fetch != null) fetch.cancel(id);
+            replacePatternKeys(id, Set.of());
+        }
+    }
+
+    public Set<ResourceLocation> getRequestedPatternMolds() {
+        Set<ResourceLocation> ids = new LinkedHashSet<>(getPatternMolds());
+        ids.addAll(pendingFetch);
+        if (fetch != null) ids.addAll(fetch.molds());
+        return ids;
+    }
+
+    public String getFetchProgress() {
+        if (fetch != null) return fetch.progress();
+        return pendingFetch.isEmpty() ? fetchResult : "0";
+    }
+
+    public void cancelFetch() {
+        selectionVersion++;
+        fetch = null;
+        pendingFetch.clear();
+    }
+
+    public void setFetchFailed() { fetchResult = "failed"; }
+
+    public boolean stepFetch() {
+        if (!(level instanceof ServerLevel serverLevel)) return true;
+        if (fetch == null && !pendingFetch.isEmpty()) {
+            fetch = new PatternFetcher(pendingFetch);
+            pendingFetch.clear();
+        }
+        if (fetch == null) return true;
+        if (fetch.step(serverLevel, this)) {
+            selectionVersion++;
+            if (fetch.failures() > 0) fetchResult = "partial";
+            fetch = null;
+        }
+        return fetch == null && pendingFetch.isEmpty();
+    }
+
+    @Override
+    public void setRemoved() {
+        cancelFetch();
+        super.setRemoved();
+    }
+
     public void clearPatterns() {
+        cancelFetch();
+        fetchResult = "";
         MyriadPatternStore store = store();
         if (store != null) store.clear(patternRef);
         setChanged();
@@ -101,26 +190,49 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     }
 
     public void saveToItem(ItemStack stack, HolderLookup.Provider registries) {
-        MyriadMoldData.writeEnabledMolds(stack, enabledMolds);
+        if (level instanceof ServerLevel serverLevel) {
+            MyriadMoldData.writeEnabledMolds(stack, getEnabledMolds(), serverLevel);
+            moldRef = MyriadMoldData.readMoldRef(stack);
+        }
         MyriadMoldData.writePatternRef(stack, patternRef);
         MyriadMoldData.writeAeRef(stack, aeRef);
     }
 
     public void loadFromItem(ItemStack stack, HolderLookup.Provider registries) {
+        if (level instanceof ServerLevel serverLevel) MyriadMoldData.externalize(serverLevel, stack);
         enabledMolds.clear();
         enabledMolds.addAll(MyriadMoldData.readEnabledMolds(stack));
+        moldRef = MyriadMoldData.readMoldRef(stack);
+        resolveMolds = false;
         patternRef = MyriadMoldData.readPatternRef(stack);
         aeRef = MyriadMoldData.readAeRef(stack);
         setChanged();
     }
 
     @Override
+    public void onLoad() {
+        super.onLoad();
+        // Publish legacy selections before the server's SavedData/chunk save phases can diverge.
+        if (moldRef == null && !enabledMolds.isEmpty() && level instanceof ServerLevel serverLevel) {
+            moldRef = MyriadMoldStore.get(serverLevel.getServer()).snapshot(enabledMolds);
+            setChanged();
+        }
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
 
-        ListTag enabled = new ListTag();
-        for (ResourceLocation id : enabledMolds) enabled.add(StringTag.valueOf(id.toString()));
-        tag.put(TAG_ENABLED, enabled);
+        if (moldRef == null && level instanceof ServerLevel serverLevel) {
+            moldRef = MyriadMoldStore.get(serverLevel.getServer()).snapshot(getEnabledMolds());
+        }
+        if (moldRef != null) {
+            tag.putUUID("MoldRef", moldRef);
+        } else if (!(level instanceof ServerLevel)) {
+            ListTag enabled = new ListTag();
+            for (ResourceLocation id : enabledMolds) enabled.add(StringTag.valueOf(id.toString()));
+            tag.put(TAG_ENABLED, enabled);
+        }
 
         if (patternRef != null) tag.putString(TAG_PATTERN_REF, patternRef.toString());
         if (aeRef != null) tag.putString(TAG_AE_REF, aeRef.toString());
@@ -130,6 +242,8 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         enabledMolds.clear();
+        moldRef = tag.hasUUID("MoldRef") ? tag.getUUID("MoldRef") : null;
+        resolveMolds = moldRef != null;
         patternRef = null;
         aeRef = null;
 

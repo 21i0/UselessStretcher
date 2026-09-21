@@ -1,37 +1,56 @@
 package com.sorrowmist.useless.stretcher.content.mold;
 
-import com.sorrowmist.useless.content.recipe.AdapterUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-/**
- * Mold matching that understands data-component ingredients. Productive Bees encodes each bee in
- * a spawn egg's data component, so a bare {@code new ItemStack(item)} can never match its
- * {@code ComponentIngredient}. When plain matching fails, fall back to the ingredient's own
- * representative stack (which keeps the component) and compare item ids.
- */
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+/** Mold identity must never consult the AE input-material preference or recurse into our mixin. */
 public final class MoldMatch {
-    private MoldMatch() {
+    private MoldMatch() { }
+
+    public static Set<ResourceLocation> matchingIds(Ingredient required, Set<ResourceLocation> selected) {
+        if (required == null || selected.isEmpty() || required.isEmpty()) return Set.of();
+        Set<ResourceLocation> matches = new LinkedHashSet<>();
+        ItemStack[] displayed;
+        try {
+            displayed = required.getItems();
+        } catch (RuntimeException ignored) {
+            displayed = new ItemStack[0];
+        }
+        if (!required.isCustom()) {
+            for (ItemStack stack : displayed) {
+                if (stack == null || stack.isEmpty()) continue;
+                ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                if (selected.contains(id)) matches.add(id);
+            }
+            return matches;
+        }
+        // Preserve the existing component-sensitive representative fallback (e.g. bee eggs).
+        for (ItemStack stack : displayed) {
+            if (stack == null || stack.isEmpty()) continue;
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (selected.contains(id)) matches.add(id);
+            break;
+        }
+        // Non-enumerable custom predicates still get their full test, once per cached ingredient.
+        for (ResourceLocation id : selected) {
+            if (matches.contains(id) || !BuiltInRegistries.ITEM.containsKey(id)) continue;
+            Item item = BuiltInRegistries.ITEM.get(id);
+            try {
+                if (required.test(new ItemStack(item))) matches.add(id);
+            } catch (RuntimeException ignored) {
+                // Some third-party predicates reject unrelated stack types.
+            }
+        }
+        return matches;
     }
 
-    public static boolean matches(Ingredient required, ResourceLocation moldId) {
-        if (required == null || required.isEmpty() || moldId == null) return false;
-
-        Item item = BuiltInRegistries.ITEM.get(moldId);
-        if (item != null && AdapterUtils.matchesMold(required, new ItemStack(item))) {
-            return true;
-        }
-
-        ItemStack representative;
-        try {
-            representative = AdapterUtils.itemRepresentative(required);
-        } catch (RuntimeException ignored) {
-            return false;
-        }
-        return representative != null && !representative.isEmpty()
-                && moldId.equals(BuiltInRegistries.ITEM.getKey(representative.getItem()));
+    public static boolean matches(Ingredient required, ResourceLocation id) {
+        return id != null && !matchingIds(required, Set.of(id)).isEmpty();
     }
 }

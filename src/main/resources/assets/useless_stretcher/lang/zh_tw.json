@@ -1,4 +1,10 @@
 {
+  "gui.useless_stretcher.catalog_loading": "正在整理模具：%s",
+  "gui.useless_stretcher.fetch_progress": "正在取得樣板：%s",
+  "gui.useless_stretcher.fetch_index": "正在建立機器索引：%s",
+  "gui.useless_stretcher.fetch_select": "正在定位所選機器配方",
+  "gui.useless_stretcher.fetch_failed": "取得中斷，請重試（詳情見日誌）",
+  "gui.useless_stretcher.fetch_partial": "部分模具取得失敗，已保留原樣板",
   "itemGroup.useless_stretcher": "萬象擔架",
   "block.useless_stretcher.omniversal_myriad": "萬象萬物之塊",
   "item.useless_stretcher.useless_stretcher": "萬象擔架",

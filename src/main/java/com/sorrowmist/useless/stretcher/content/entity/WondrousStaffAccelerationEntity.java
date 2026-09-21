@@ -205,9 +205,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
                 int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
                 int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
-                pendingTicks -= executed;
                 if (executed > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
                 }
             }
         }
@@ -235,9 +234,15 @@ public class WondrousStaffAccelerationEntity extends Entity {
         pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + (long) Math.max(1, getSpeed()));
         int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
         int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
-        pendingTicks -= executed;
-        for (int i = 0; i < executed && !target.isRemoved(); i++) {
-            target.tick();
+        long started = System.nanoTime();
+        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
+        try {
+            for (int i = 0; i < executed && !target.isRemoved() && System.nanoTime() < deadline; i++) {
+                target.tick();
+                pendingTicks--;
+            }
+        } finally {
+            AccelerationExecutionBudget.recordWork(level.getServer(), started);
         }
         setTargetHeight(target.getBbHeight());
         if (target.isRemoved()) discard();
@@ -388,6 +393,11 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     @Override
     public void remove(RemovalReason reason) {
+        pendingTicks = 0L;
+        lastState = null;
+        lastEnergy = -1L;
+        idleTicks = 0;
+        observedWorking = false;
         // Chunk-unload removal is temporary and this marker is saved with the target; retain both
         // states so the field can resume after reload. Every terminal removal restores the target.
         if (reason != RemovalReason.UNLOADED_TO_CHUNK) restoreEntityAi();

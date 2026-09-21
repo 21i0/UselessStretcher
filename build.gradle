@@ -71,6 +71,19 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+// Opt-in integration checks run in an isolated world and are excluded from release jars.
+if (providers.gradleProperty('regressionTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/regression/java'
+    neoForge.runs {
+        regression {
+            server()
+            gameDirectory = file('build/regression-server')
+            programArguments.add '--nogui'
+            systemProperty 'useless_stretcher.regression', 'true'
+        }
+    }
+}
+
 dependencies {
     // Compile against the locally built Useless Mod and AE2. Both are resolved
     // at runtime by the host pack, so they stay compileOnly here.

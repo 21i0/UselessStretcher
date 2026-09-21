@@ -11,7 +11,7 @@ import com.sorrowmist.useless.stretcher.dimension.world.QuadChunkOddDimensions;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 
-/** Registers the merged dimension-teleporter content under the stretcher mod's namespace. */
+/** Legacy save compatibility only. New multi-platform worlds use Useless Mod's dimension settings. */
 public final class DimensionCompat {
     public static final String MODID = UselessStretcherMod.MODID;
 
@@ -19,6 +19,7 @@ public final class DimensionCompat {
     }
 
     public static void init(IEventBus modEventBus) {
+        // Keep old IDs, generators and portals so existing builds remain reachable.
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModPOIs.POI_TYPES.register(modEventBus);

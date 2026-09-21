@@ -47,6 +47,7 @@ public final class TimeFlowEntity extends Entity {
     private UUID cachedOwner;
     private Set<Long> cachedAccelerationMarks = Set.of();
     private Set<Long> cachedSleepMarks = Set.of();
+    private int syncedRevision = Integer.MIN_VALUE;
 
     public TimeFlowEntity(EntityType<? extends TimeFlowEntity> type, Level level) {
         super(type, level);
@@ -80,6 +81,9 @@ public final class TimeFlowEntity extends Entity {
     }
 
     public void sync(RangeAccelerationSavedData.Field field) {
+        entityData.set(IDLE_THROTTLED, field.idleThrottled());
+        if (syncedRevision == field.revision()) return;
+        syncedRevision = field.revision();
         entityData.set(SIZE_X, field.sizeX());
         entityData.set(SIZE_Y, field.sizeY());
         entityData.set(SIZE_Z, field.sizeZ());
@@ -87,7 +91,6 @@ public final class TimeFlowEntity extends Entity {
         entityData.set(OFFSET_Y, field.offsetY());
         entityData.set(OFFSET_Z, field.offsetZ());
         entityData.set(ENABLED, field.enabled());
-        entityData.set(IDLE_THROTTLED, field.idleThrottled());
         entityData.set(CREATED_AT, field.createdAt());
         CompoundTag state = new CompoundTag();
         state.putUUID("owner", field.owner());
@@ -145,8 +148,8 @@ public final class TimeFlowEntity extends Entity {
 
     private void refreshListCache() {
         CompoundTag current = entityData.get(LIST_STATE);
-        if (cachedListState != null && cachedListState.equals(current)) return;
-        cachedListState = current.copy();
+        if (cachedListState == current) return;
+        cachedListState = current;
         cachedOwner = current.hasUUID("owner") ? current.getUUID("owner") : null;
         cachedAccelerationMarks = immutableLongSet(current.getLongArray("acceleration_marks"));
         cachedSleepMarks = immutableLongSet(current.getLongArray("sleep_marks"));

@@ -2,8 +2,6 @@ package com.sorrowmist.useless.stretcher.content.block;
 
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +15,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import java.util.List;
 
 public final class OmniversalMyriadBlock extends Block implements EntityBlock {
     public OmniversalMyriadBlock(Properties properties) {
@@ -64,23 +65,11 @@ public final class OmniversalMyriadBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide && !player.isCreative()) {
-            if (level.getBlockEntity(pos) instanceof OmniversalMyriadBlockEntity myriad) {
-                ItemStack drop = new ItemStack(this);
-                myriad.saveToItem(drop, level.registryAccess());
-                Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop);
-            }
+    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        ItemStack drop = new ItemStack(this);
+        if (builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof OmniversalMyriadBlockEntity block) {
+            block.saveToItem(drop, builder.getLevel().registryAccess());
         }
-        return super.playerWillDestroy(level, pos, state, player);
-    }
-
-    @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state,
-                              BlockEntity blockEntity, ItemStack tool) {
-        // The NBT-carrying drop is already spawned in playerWillDestroy; skip the default
-        // dropResources so we don't drop a second, empty copy.
-        player.awardStat(Stats.BLOCK_MINED.get(this));
-        player.causeFoodExhaustion(0.005F);
+        return List.of(drop);
     }
 }

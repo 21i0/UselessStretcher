@@ -273,9 +273,15 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         for (int offset = 0; offset < snapshot.size(); offset++) {
             Field field = snapshot.get((start + offset) % snapshot.size());
             ServerLevel level = server.getLevel(field.dimensionKey());
-            if (level == null || !level.isLoaded(field.effectiveCenter())) continue;
+            if (level == null || !level.hasChunkAt(field.effectiveCenter())) {
+                runtime.remove(field.id);
+                continue;
+            }
             ensureMarker(level, field);
-            if (!field.enabled) continue;
+            if (!field.enabled) {
+                runtime.remove(field.id);
+                continue;
+            }
             tickField(level, field);
         }
     }
@@ -307,9 +313,15 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         for (int offset = 0; offset < targetCount; offset++) {
             int targetIndex = (targetStart + offset) % targetCount;
             BlockPos target = state.targets.get(targetIndex);
-            if (!level.isLoaded(target)) continue;
+            if (!level.hasChunkAt(target)) {
+                state.targetWork.remove(target.asLong());
+                continue;
+            }
             BlockState targetState = level.getBlockState(target);
-            if (!field.matches(target, targetState) || !WondrousStaffAcceleration.isValidTarget(level, target)) continue;
+            if (!field.matches(target, targetState) || !WondrousStaffAcceleration.isValidTarget(level, target)) {
+                state.targetWork.remove(target.asLong());
+                continue;
+            }
 
             TargetWork work = state.targetWork.computeIfAbsent(target.asLong(), ignored -> new TargetWork());
             boolean throttled = field.allowsSleep(target) && StretcherConfig.idleThrottle()
@@ -329,9 +341,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             work.pendingTicks = Math.min(MAX_PENDING_TICKS, work.pendingTicks + field.speed);
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
             int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
-            work.pendingTicks -= executions;
             if (executions > 0) {
-                WondrousStaffAcceleration.tickTarget(level, target, executions);
+                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions);
                 nextTarget = (targetIndex + 1) % targetCount;
             }
         }
@@ -519,6 +530,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         public int accelerationMarkCount() { return accelerationMarks.size(); }
         public int sleepMarkCount() { return sleepMarks.size(); }
         public boolean idleThrottled() { return idleThrottled; }
+        public int revision() { return revision; }
 
         private void editGeometry(int speed, int sizeX, int sizeY, int sizeZ,
                                   int offsetX, int offsetY, int offsetZ) {

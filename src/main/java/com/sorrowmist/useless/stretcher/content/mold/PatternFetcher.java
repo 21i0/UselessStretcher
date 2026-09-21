@@ -1,94 +1,101 @@
 package com.sorrowmist.useless.stretcher.content.mold;
 
+import appeng.api.stacks.AEItemKey;
+import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.content.machines.advanced_alloy_furnace.ae.OmniversalPatternEncoding;
-import com.sorrowmist.useless.content.recipe.AdvancedAlloyFurnaceRecipe;
-import com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog;
 import com.sorrowmist.useless.stretcher.content.ae.AeMaterialContext;
-import net.minecraft.core.BlockPos;
+import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-/** Builds the full set of omniversal patterns that a given mold can drive. */
+/** Resumable main-thread job that only encodes recipes returned by the shared mold index. */
 public final class PatternFetcher {
-    /** Hard safety cap for one omniversal block, including all mold groups. */
-    public static final int MAX_PATTERNS = 4096;
+    private final Map<ResourceLocation, Set<AEItemKey>> groups = new LinkedHashMap<>();
+    private final Set<ResourceLocation> failedMolds = new LinkedHashSet<>();
+    private MoldRecipeIndex index;
+    private MoldRecipeIndex.Query query;
+    private AeMaterialContext materials;
+    private boolean materialsReady;
+    private int failures;
+    private Iterator<ResourceLocation> committing;
 
-    private PatternFetcher() {
+    public PatternFetcher(Collection<ResourceLocation> requested) {
+        for (ResourceLocation id : requested) groups.put(id, new LinkedHashSet<>());
     }
 
-    /** Fetches patterns while preferring AE-available materials. */
-    public static List<ItemStack> fetchForMold(Level level, BlockPos pos, BlockPos aeNodePos, String moldId) {
-        if (level == null || moldId == null || moldId.isBlank()) return List.of();
-        return fetchForMolds(level, pos, aeNodePos, List.of(moldId), MAX_PATTERNS)
-                .getOrDefault(ResourceLocation.tryParse(moldId), List.of());
+    public boolean contains(ResourceLocation id) { return groups.containsKey(id); }
+    public Set<ResourceLocation> molds() { return Set.copyOf(groups.keySet()); }
+    public int failures() { return failures; }
+
+    public void cancel(ResourceLocation id) {
+        groups.remove(id);
+        if (query != null) query.cancel(id);
+        committing = null;
     }
 
-    /**
-     * Fetches several mold groups using one recipe catalog pass and one AE material snapshot.
-     * The limit is global, so a bulk request can never encode more than the store can hold.
-     */
-    public static Map<ResourceLocation, List<ItemStack>> fetchForMolds(
-            Level level, BlockPos pos, BlockPos aeNodePos, Collection<String> moldIds, int limit) {
-        if (level == null || moldIds == null || moldIds.isEmpty() || limit <= 0) return Map.of();
+    public String progress() {
+        if (index == null) return "0";
+        if (!index.ready()) return "index:" + index.progress();
+        if (query == null || !query.prepared()) return "select";
+        return query.consumedReferences() + "/" + query.totalReferences();
+    }
 
-        LinkedHashMap<ResourceLocation, List<ItemStack>> result = new LinkedHashMap<>();
-        List<ResourceLocation> requested = new ArrayList<>();
-        for (String moldId : moldIds) {
-            ResourceLocation id = ResourceLocation.tryParse(moldId);
-            if (id != null && !requested.contains(id)) requested.add(id);
+    /** Performs one unit. The queue checks its global wall-clock budget between units. */
+    public boolean step(ServerLevel level, OmniversalMyriadBlockEntity block) {
+        if (groups.isEmpty()) return true;
+        if (index == null) index = MoldRecipeIndex.get(level);
+        if (index != MoldRecipeIndex.get(level)) {
+            throw new IllegalStateException("Recipes reloaded during pattern fetch; retry the selection");
         }
-        if (requested.isEmpty()) return Map.of();
+        index.checkHealthy();
+        if (!index.ready()) { index.advance(); return false; }
+        if (query == null) query = index.query(groups.keySet());
+        if (!query.prepared()) { query.prepareStep(); return false; }
+        if (query.hasNext() && !materialsReady) {
+            materials = AeMaterialContext.fromBoundNode(level, block.getAeNodePos());
+            if (materials == null) materials = AeMaterialContext.fromNearbyGrid(level, block.getBlockPos(), 8);
+            materialsReady = true;
+            return false;
+        }
+        if (!query.hasNext()) {
+            if (committing == null) committing = List.copyOf(groups.keySet()).iterator();
+            if (!committing.hasNext()) return true;
+            ResourceLocation id = committing.next();
+            // A broken recipe must not erase an existing, usable group during a refresh.
+            if (!failedMolds.contains(id)) block.replacePatternKeys(id, groups.get(id));
+            return !committing.hasNext();
+        }
 
-        AeMaterialContext context = AeMaterialContext.fromBoundNode(level, aeNodePos);
-        if (context == null) {
-            context = AeMaterialContext.fromNearbyGrid(level, pos, 8);
-        }
-        AeMaterialContext.push(context);
+        var match = query.next();
+        var entry = match.entry();
+        var recipe = entry.recipe();
+        Set<ResourceLocation> matched = match.molds();
+        matched.retainAll(groups.keySet());
+        if (matched.isEmpty()) return false;
+
+        AeMaterialContext.push(materials);
         try {
-            List<AlloyFurnaceRecipeCatalog.Entry> catalog = AlloyFurnaceRecipeCatalog.entries(level);
-            int remaining = Math.min(MAX_PATTERNS, limit);
-            for (ResourceLocation id : requested) {
-                if (remaining <= 0) break;
-                List<ItemStack> fetched = fetch(catalog, level, id, remaining);
-                result.put(id, fetched);
-                remaining -= fetched.size();
-            }
-            return result;
+            ItemStack processing = OmniversalPatternEncoding.createProcessingPattern(recipe);
+            if (processing.isEmpty()) return false;
+            ItemStack pattern = OmniversalPatternEncoding.encode(processing, entry, level);
+            AEItemKey key = AEItemKey.of(pattern);
+            if (key != null) for (ResourceLocation id : matched) groups.get(id).add(key);
+        } catch (RuntimeException exception) {
+            failures++;
+            failedMolds.addAll(matched);
+            if (failures <= 5) LogUtils.getLogger().warn("Cannot encode myriad recipe {}", recipe.id(), exception);
         } finally {
             AeMaterialContext.pop();
         }
-    }
-
-    private static List<ItemStack> fetch(List<AlloyFurnaceRecipeCatalog.Entry> catalog,
-                                         Level level, ResourceLocation id, int limit) {
-        List<ItemStack> result = new ArrayList<>();
-        for (AlloyFurnaceRecipeCatalog.Entry entry : catalog) {
-            if (result.size() >= limit) break;
-            AdvancedAlloyFurnaceRecipe recipe = entry.recipe();
-            if (recipe == null) continue;
-
-            boolean matches = false;
-            for (Ingredient required : recipe.molds()) {
-                if (required != null && !required.isEmpty() && MoldMatch.matches(required, id)) {
-                    matches = true;
-                    break;
-                }
-            }
-            if (!matches) continue;
-
-            ItemStack processing = OmniversalPatternEncoding.createProcessingPattern(recipe);
-            if (processing.isEmpty()) continue;
-            ItemStack omniversal = OmniversalPatternEncoding.encode(processing, entry, level);
-            if (!omniversal.isEmpty()) result.add(omniversal);
-        }
-        return result;
+        return false;
     }
 }

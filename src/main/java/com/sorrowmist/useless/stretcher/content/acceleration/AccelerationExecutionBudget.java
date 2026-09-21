@@ -10,8 +10,8 @@ import java.util.WeakHashMap;
  * Server-wide allowance for expensive virtual ticks produced by every staff accelerator.
  *
  * <p>At a healthy MSPT the allowance matches the range accelerator's previous one-million tick
- * ceiling, so ordinary setups retain their existing throughput. When the server is already late,
- * the allowance is reduced in steps and unspent work remains in each target's pending counter.
+ * ceiling. A cooperative elapsed-time guard also limits expensive callbacks; when either budget
+ * is exhausted, unspent work remains in each target's bounded pending counter.
  * This protects the next real server tick without changing the selected multiplier or any saved
  * staff/range state.
  */
@@ -22,6 +22,7 @@ public final class AccelerationExecutionBudget {
     private static final int OVERLOADED_BUDGET = 16_384;
     private static final int EMERGENCY_BUDGET = 4_096;
     private static final long NANOS_PER_MILLISECOND = 1_000_000L;
+    private static final long MAX_WORK_NANOS = 5_000_000L;
 
     /** Weak server keys avoid retaining an integrated server after returning to the title screen. */
     private static final Map<MinecraftServer, ServerState> STATES = new WeakHashMap<>();
@@ -40,13 +41,24 @@ public final class AccelerationExecutionBudget {
         STATES.remove(server);
     }
 
+    /** A count budget alone cannot protect against an expensive modded tick. */
+    public static long deadline(MinecraftServer server) {
+        ServerState state = STATES.get(server);
+        if (state == null) return System.nanoTime() + MAX_WORK_NANOS;
+        return System.nanoTime() + Math.max(0L, Math.min(state.sliceNanos, MAX_WORK_NANOS - state.workNanos));
+    }
+
+    public static void recordWork(MinecraftServer server, long started) {
+        ServerState state = STATES.get(server);
+        if (state != null) state.workNanos += Math.max(0L, System.nanoTime() - started);
+    }
+
     /**
      * Claims up to {@code requested} virtual ticks for one stable runtime target key.
      * During degraded operation the previous tick's active-target count supplies a fair per-target
-     * slice. A single x1024 target therefore keeps its complete 1024 virtual ticks even at the
-     * emergency 4096 global budget; only enough simultaneous targets to exceed the server-wide
-     * allowance are shared down. This matches JDTE's observable single-target throughput while
-     * preventing the first machine in tick order from consuming the complete allowance.
+     * slice. The count allowance can grant a single x1024 target all 1024 ticks even at the
+     * emergency 4096 budget. Actual execution also obeys the elapsed-time deadline, so expensive
+     * targets yield without claiming that their configured multiplier is guaranteed throughput.
      */
     public static int take(MinecraftServer server, Object targetKey, int requested) {
         if (requested <= 0 || targetKey == null) return 0;
@@ -95,11 +107,15 @@ public final class AccelerationExecutionBudget {
         private int tick = Integer.MIN_VALUE;
         private int remaining;
         private int perTargetLimit = Integer.MAX_VALUE;
+        private long workNanos;
+        private long sliceNanos = MAX_WORK_NANOS;
         private final Map<Object, Integer> activeTargets = new IdentityHashMap<>();
 
         private void begin(int serverTick, int budget) {
             int previousTargetCount = Math.max(1, activeTargets.size());
             activeTargets.clear();
+            workNanos = 0L;
+            sliceNanos = Math.max(1L, MAX_WORK_NANOS / previousTargetCount);
             tick = serverTick;
             remaining = Math.max(0, budget);
             if (budget >= HEALTHY_BUDGET) {
@@ -116,6 +132,7 @@ public final class AccelerationExecutionBudget {
                     ? Integer.MAX_VALUE
                     : Math.max(0, perTargetLimit - alreadyGranted);
             int granted = Math.min(Math.max(0, requested), Math.min(remaining, targetRemaining));
+            if (workNanos >= MAX_WORK_NANOS) granted = 0;
             activeTargets.put(targetKey, alreadyGranted + granted);
             remaining -= granted;
             return granted;

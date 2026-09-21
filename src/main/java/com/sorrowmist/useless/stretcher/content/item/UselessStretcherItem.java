@@ -25,6 +25,9 @@ import appeng.api.networking.IInWorldGridNodeHost;
 
 import java.util.List;
 import java.util.UUID;
+import appeng.api.stacks.AEItemKey;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public final class UselessStretcherItem extends Item {
     public UselessStretcherItem(Properties properties) {
@@ -58,7 +61,7 @@ public final class UselessStretcherItem extends Item {
                     MyriadMoldData.writePatternRef(stretcher, ref);
                     UUID aeRef = MyriadMoldData.readAeRef(stretcher);
                     if (aeRef != null) myriad.setAeRef(aeRef);
-                    int count = ref == null ? 0 : myriad.getPatterns().size();
+                    int count = ref == null ? 0 : myriad.getPatternCount();
                     player.displayClientMessage(
                             Component.translatable("msg.useless_stretcher.bound", count), true);
                 }
@@ -85,7 +88,7 @@ public final class UselessStretcherItem extends Item {
         if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
             MyriadPatternStore store = MyriadPatternStore.get(serverLevel);
             UUID ref = MyriadMoldData.readPatternRef(stretcher);
-            List<ItemStack> patterns = ref == null ? List.of() : store.flatten(ref);
+            Collection<AEItemKey> patterns = ref == null ? List.of() : store.keys(ref);
             if (patterns.isEmpty()) {
                 player.displayClientMessage(Component.translatable("msg.useless_stretcher.no_patterns"), true);
                 return InteractionResult.SUCCESS;
@@ -111,13 +114,22 @@ public final class UselessStretcherItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    private static int deliverToHandler(RecoverableItemStackHandler handler, List<ItemStack> patterns) {
+    private static int deliverToHandler(RecoverableItemStackHandler handler, Collection<AEItemKey> patterns) {
         int activeSlots = handler.getActiveSlots();
         int inserted = 0;
-        for (ItemStack pattern : patterns) {
-            for (int slot = 0; slot < activeSlots; slot++) {
-                if (handler.getStackInSlot(slot).isEmpty() && handler.isItemValid(slot, pattern)) {
-                    handler.setStackInSlot(slot, pattern.copy());
+        var emptySlots = new LinkedList<Integer>();
+        for (int slot = 0; slot < activeSlots; slot++) {
+            if (handler.getStackInSlot(slot).isEmpty()) emptySlots.add(slot);
+        }
+        for (AEItemKey key : patterns) {
+            if (emptySlots.isEmpty()) break;
+            ItemStack pattern = key.toStack(1);
+            var slots = emptySlots.iterator();
+            while (slots.hasNext()) {
+                int slot = slots.next();
+                if (handler.isItemValid(slot, pattern)) {
+                    handler.setStackInSlot(slot, pattern);
+                    slots.remove();
                     inserted++;
                     break;
                 }
@@ -126,12 +138,21 @@ public final class UselessStretcherItem extends Item {
         return inserted;
     }
 
-    private static int deliverToInventory(InternalInventory inventory, List<ItemStack> patterns) {
+    private static int deliverToInventory(InternalInventory inventory, Collection<AEItemKey> patterns) {
         int inserted = 0;
-        for (ItemStack pattern : patterns) {
-            for (int slot = 0; slot < inventory.size(); slot++) {
-                if (inventory.getStackInSlot(slot).isEmpty() && inventory.isItemValid(slot, pattern)) {
-                    inventory.setItemDirect(slot, pattern.copy());
+        var emptySlots = new LinkedList<Integer>();
+        for (int slot = 0; slot < inventory.size(); slot++) {
+            if (inventory.getStackInSlot(slot).isEmpty()) emptySlots.add(slot);
+        }
+        for (AEItemKey key : patterns) {
+            if (emptySlots.isEmpty()) break;
+            ItemStack pattern = key.toStack(1);
+            var slots = emptySlots.iterator();
+            while (slots.hasNext()) {
+                int slot = slots.next();
+                if (inventory.isItemValid(slot, pattern)) {
+                    inventory.setItemDirect(slot, pattern);
+                    slots.remove();
                     inserted++;
                     break;
                 }

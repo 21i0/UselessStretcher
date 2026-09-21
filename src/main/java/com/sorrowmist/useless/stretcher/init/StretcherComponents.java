@@ -113,6 +113,14 @@ public final class StretcherComponents {
                     .persistent(Codec.STRING)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> MYRIAD_MOLD_REF =
+            register("myriad_mold_ref", builder -> builder
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MYRIAD_MOLD_COUNT =
+            integerComponent("myriad_mold_count");
+
     private StretcherComponents() {
     }
 

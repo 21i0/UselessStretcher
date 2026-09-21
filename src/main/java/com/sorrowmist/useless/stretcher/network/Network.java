@@ -2,7 +2,7 @@ package com.sorrowmist.useless.stretcher.network;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
-import com.sorrowmist.useless.stretcher.content.mold.PatternFetcher;
+import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -35,17 +35,25 @@ public final class Network {
     public static final int ACTION_REMOVE_PATTERNS = 6;
 
     public record MyriadStatePayload(BlockPos pos, List<String> enabledMolds, List<String> patternMolds,
-                                     int patternCount, boolean aeBound) implements CustomPacketPayload {
+                                     int patternCount, boolean aeBound, String progress,
+                                     int part, int parts) implements CustomPacketPayload {
         public static final Type<MyriadStatePayload> TYPE =
                 new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_state"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, MyriadStatePayload> STREAM_CODEC = StreamCodec.composite(
-                BlockPos.STREAM_CODEC, MyriadStatePayload::pos,
-                ByteBufCodecs.collection(ArrayList::new, ByteBufCodecs.STRING_UTF8), MyriadStatePayload::enabledMolds,
-                ByteBufCodecs.collection(ArrayList::new, ByteBufCodecs.STRING_UTF8), MyriadStatePayload::patternMolds,
-                ByteBufCodecs.VAR_INT, MyriadStatePayload::patternCount,
-                ByteBufCodecs.BOOL, MyriadStatePayload::aeBound,
-                MyriadStatePayload::new);
+        public static final StreamCodec<RegistryFriendlyByteBuf, MyriadStatePayload> STREAM_CODEC = StreamCodec.of(
+                (buffer, value) -> {
+                    buffer.writeBlockPos(value.pos());
+                    buffer.writeCollection(value.enabledMolds(), (buf, id) -> buf.writeUtf(id));
+                    buffer.writeCollection(value.patternMolds(), (buf, id) -> buf.writeUtf(id));
+                    buffer.writeVarInt(value.patternCount());
+                    buffer.writeBoolean(value.aeBound());
+                    buffer.writeUtf(value.progress());
+                    buffer.writeVarInt(value.part());
+                    buffer.writeVarInt(value.parts());
+                }, buffer -> new MyriadStatePayload(buffer.readBlockPos(),
+                        buffer.readList(buf -> buf.readUtf()), buffer.readList(buf -> buf.readUtf()),
+                        buffer.readVarInt(), buffer.readBoolean(), buffer.readUtf(),
+                        buffer.readVarInt(), buffer.readVarInt()));
 
         @Override
         public Type<? extends CustomPacketPayload> type() {
@@ -148,7 +156,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar(UselessStretcherMod.MODID);
+        PayloadRegistrar registrar = event.registrar("2");
 
         registrar.playToServer(MyriadActionPayload.TYPE, MyriadActionPayload.STREAM_CODEC, Network::handleAction);
         registrar.playToClient(MyriadStatePayload.TYPE, MyriadStatePayload.STREAM_CODEC,
@@ -216,23 +224,24 @@ public final class Network {
     private static void handleAction(MyriadActionPayload payload, net.neoforged.neoforge.network.handling.IPayloadContext context) {
         context.enqueueWork(() -> {
             ServerPlayer player = (ServerPlayer) context.player();
+            if (!(player.containerMenu instanceof OmniversalMyriadMenu menu)
+                    || !menu.getPos().equals(payload.pos())
+                    || player.distanceToSqr(payload.pos().getCenter()) > 64.0
+                    || !player.level().hasChunkAt(payload.pos())) return;
             if (player.level().getBlockEntity(payload.pos()) instanceof OmniversalMyriadBlockEntity be) {
                 switch (payload.action()) {
                     case ACTION_SET_ENABLED -> {
-                        List<ResourceLocation> enabled = payload.enabledMolds().stream()
-                                .map(ResourceLocation::tryParse)
-                                .filter(java.util.Objects::nonNull)
-                                .toList();
+                        Set<ResourceLocation> enabled = menu.receiveSelection(payload.moldId(), payload.enabledMolds());
+                        if (enabled == null) return;
                         be.setEnabledMolds(enabled);
                     }
                     case ACTION_TOGGLE_PATTERNS -> {
                         ResourceLocation moldId = ResourceLocation.tryParse(payload.moldId());
                         if (moldId != null) {
-                            if (be.getPatternMolds().contains(moldId)) {
-                                be.setMoldPatterns(moldId, List.of());
+                            if (be.getRequestedPatternMolds().contains(moldId)) {
+                                be.removePatterns(List.of(moldId));
                             } else {
-                                List<ItemStack> fetched = PatternFetcher.fetchForMold(player.level(), payload.pos(), be.getAeNodePos(), moldId.toString());
-                                be.setMoldPatterns(moldId, fetched);
+                                be.requestPatterns(List.of(moldId));
                             }
                         }
                     }
@@ -242,23 +251,18 @@ public final class Network {
                                 .map(ResourceLocation::tryParse)
                                 .filter(java.util.Objects::nonNull)
                                 .toList();
-                        Set<ResourceLocation> current = be.getPatternMolds();
+                        Set<ResourceLocation> current = be.getRequestedPatternMolds();
                         boolean all = !ids.isEmpty() && ids.stream().allMatch(current::contains);
-                        for (ResourceLocation id : ids) {
-                            if (all) {
-                                be.setMoldPatterns(id, List.of());
-                            }
-                        }
-                        if (!all) fetchAndStore(player, payload.pos(), be, ids);
+                        if (all) be.removePatterns(ids);
+                        else be.requestPatterns(ids);
                     }
                     case ACTION_FETCH_PATTERNS, ACTION_REMOVE_PATTERNS -> {
-                        List<ResourceLocation> ids = payload.enabledMolds().stream()
-                                .map(ResourceLocation::tryParse)
-                                .filter(java.util.Objects::nonNull)
-                                .toList();
+                        Set<ResourceLocation> ids = menu.receiveSelection(
+                                payload.action(), payload.moldId(), payload.enabledMolds());
+                        if (ids == null) return;
                         boolean fetch = payload.action() == ACTION_FETCH_PATTERNS;
-                        if (fetch) fetchAndStore(player, payload.pos(), be, ids);
-                        else for (ResourceLocation id : ids) be.setMoldPatterns(id, List.of());
+                        if (fetch) be.requestPatterns(ids);
+                        else be.removePatterns(ids);
                     }
                     case ACTION_REQUEST_STATE -> {
                         // fall through to reply below
@@ -269,23 +273,31 @@ public final class Network {
         });
     }
 
-    /** Fetches a bulk selection in one catalog/context pass and lets the store enforce its cap. */
-    private static void fetchAndStore(ServerPlayer player, BlockPos pos,
-                                      OmniversalMyriadBlockEntity be, List<ResourceLocation> ids) {
-        List<String> requested = ids.stream().map(ResourceLocation::toString).toList();
-        Map<ResourceLocation, List<ItemStack>> fetched = PatternFetcher.fetchForMolds(
-                player.level(), pos, be.getAeNodePos(), requested, PatternFetcher.MAX_PATTERNS);
-        for (ResourceLocation id : ids) {
-            be.setMoldPatterns(id, fetched.getOrDefault(id, List.of()));
+    public static void replyToViewers(OmniversalMyriadBlockEntity be) {
+        if (!(be.getLevel() instanceof net.minecraft.server.level.ServerLevel level)) return;
+        for (ServerPlayer player : level.players()) {
+            if (player.containerMenu instanceof OmniversalMyriadMenu menu
+                    && menu.getPos().equals(be.getBlockPos())) replyState(player, be);
         }
     }
 
     private static void replyState(ServerPlayer player, OmniversalMyriadBlockEntity be) {
-        List<String> enabled = be.getEnabledMolds().stream().map(ResourceLocation::toString).toList();
-        List<String> patternMolds = be.getPatternMolds().stream().map(ResourceLocation::toString).toList();
-        int patternCount = be.getPatterns().size();
-        PacketDistributor.sendToPlayer(player,
-                new MyriadStatePayload(be.getBlockPos(), enabled, patternMolds, patternCount, be.getAeRef() != null));
+        if (player.containerMenu instanceof OmniversalMyriadMenu menu
+                && !menu.needsSelections(be.selectionVersion())) {
+            PacketDistributor.sendToPlayer(player, new MyriadStatePayload(be.getBlockPos(), List.of(), List.of(),
+                    be.getPatternCount(), be.getAeRef() != null, be.getFetchProgress(), -1, 0));
+            return;
+        }
+        var enabled = MyriadSelectionBatches.split(be.getEnabledMolds().stream().map(ResourceLocation::toString).toList());
+        var patternMolds = MyriadSelectionBatches.split(be.getRequestedPatternMolds().stream().map(ResourceLocation::toString).toList());
+        int patternCount = be.getPatternCount();
+        int parts = Math.max(enabled.size(), patternMolds.size());
+        for (int part = 0; part < parts; part++) {
+            PacketDistributor.sendToPlayer(player,
+                    new MyriadStatePayload(be.getBlockPos(), part < enabled.size() ? enabled.get(part) : List.of(),
+                            part < patternMolds.size() ? patternMolds.get(part) : List.of(), patternCount,
+                            be.getAeRef() != null, be.getFetchProgress(), part, parts));
+        }
     }
 
     public static void requestState(BlockPos pos) {
@@ -293,7 +305,12 @@ public final class Network {
     }
 
     public static void setEnabled(BlockPos pos, List<String> enabled) {
-        PacketDistributor.sendToServer(new MyriadActionPayload(pos, ACTION_SET_ENABLED, "", enabled));
+        var batches = MyriadSelectionBatches.split(enabled);
+        for (int part = 0; part < batches.size(); part++) {
+            String phase = batches.size() == 1 ? "single" : part == 0 ? "begin"
+                    : part == batches.size() - 1 ? "end" : "append";
+            PacketDistributor.sendToServer(new MyriadActionPayload(pos, ACTION_SET_ENABLED, phase, batches.get(part)));
+        }
     }
 
     public static void togglePatterns(BlockPos pos, String moldId) {
@@ -305,8 +322,13 @@ public final class Network {
     }
 
     public static void setPatterns(BlockPos pos, List<String> moldIds, boolean fetch) {
-        PacketDistributor.sendToServer(new MyriadActionPayload(pos,
-                fetch ? ACTION_FETCH_PATTERNS : ACTION_REMOVE_PATTERNS, "", moldIds));
+        var batches = MyriadSelectionBatches.split(moldIds);
+        for (int part = 0; part < batches.size(); part++) {
+            String phase = batches.size() == 1 ? "single" : part == 0 ? "begin"
+                    : part == batches.size() - 1 ? "end" : "append";
+            PacketDistributor.sendToServer(new MyriadActionPayload(pos,
+                    fetch ? ACTION_FETCH_PATTERNS : ACTION_REMOVE_PATTERNS, phase, batches.get(part)));
+        }
     }
 
     public static void clearPatterns(BlockPos pos) {

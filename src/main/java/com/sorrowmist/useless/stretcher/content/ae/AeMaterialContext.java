@@ -23,6 +23,9 @@ public final class AeMaterialContext {
 
     private final KeyCounter available;
     private final ICraftingService crafting;
+    private final java.util.Map<Ingredient, ItemStack> preferred = new java.util.HashMap<>();
+    private final java.util.Map<ItemStack, AEItemKey> keys = new java.util.IdentityHashMap<>();
+    private static final Direction[] DIRECTIONS = Direction.values();
 
     private AeMaterialContext(KeyCounter available, ICraftingService crafting) {
         this.available = available;
@@ -42,7 +45,7 @@ public final class AeMaterialContext {
         if (level == null || nodePos == null || !level.isLoaded(nodePos)) return null;
         BlockEntity blockEntity = level.getBlockEntity(nodePos);
         if (!(blockEntity instanceof IInWorldGridNodeHost host)) return null;
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DIRECTIONS) {
             IGridNode node = host.getGridNode(direction);
             if (node != null && node.getGrid() != null) {
                 IGrid grid = node.getGrid();
@@ -67,27 +70,35 @@ public final class AeMaterialContext {
 
     public ItemStack pickPreferred(Ingredient ingredient, ItemStack fallback) {
         if (ingredient == null) return fallback;
+        ItemStack cached = preferred.get(ingredient);
+        if (cached != null) return cached.isEmpty() ? fallback : cached.copyWithCount(1);
+        ItemStack selected = findPreferred(ingredient);
+        preferred.put(ingredient, selected);
+        return selected.isEmpty() ? fallback : selected.copyWithCount(1);
+    }
+
+    private ItemStack findPreferred(Ingredient ingredient) {
 
         ItemStack[] items;
         try {
             items = ingredient.getItems();
         } catch (RuntimeException exception) {
-            return fallback;
+            return ItemStack.EMPTY;
         }
 
         // Prefer a member already present in the network.
         for (ItemStack stack : items) {
             if (stack == null || stack.isEmpty()) continue;
-            AEItemKey key = AEItemKey.of(stack);
-            if (key != null && available.get(key) > 0) return stack.copyWithCount(1);
+            AEItemKey key = keys.computeIfAbsent(stack, AEItemKey::of);
+            if (key != null && available.get(key) > 0) return stack;
         }
         // Then a member the network can craft.
         for (ItemStack stack : items) {
             if (stack == null || stack.isEmpty()) continue;
-            AEItemKey key = AEItemKey.of(stack);
-            if (key != null && crafting.isCraftable(key)) return stack.copyWithCount(1);
+            AEItemKey key = keys.computeIfAbsent(stack, AEItemKey::of);
+            if (key != null && crafting.isCraftable(key)) return stack;
         }
-        return fallback;
+        return ItemStack.EMPTY;
     }
 
     private static IGrid findGrid(Level level, BlockPos center, int radius) {
@@ -99,7 +110,7 @@ public final class AeMaterialContext {
                     if (!level.isLoaded(cursor)) continue;
                     BlockEntity blockEntity = level.getBlockEntity(cursor);
                     if (!(blockEntity instanceof IInWorldGridNodeHost host)) continue;
-                    for (Direction direction : Direction.values()) {
+                    for (Direction direction : DIRECTIONS) {
                         IGridNode node = host.getGridNode(direction);
                         if (node != null && node.getGrid() != null) return node.getGrid();
                     }

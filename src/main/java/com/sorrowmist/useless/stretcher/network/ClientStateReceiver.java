@@ -15,7 +15,8 @@ public final class ClientStateReceiver {
     public static void accept(Network.MyriadStatePayload payload) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof OmniversalMyriadScreen screen && screen.matches(payload.pos())) {
-            screen.onState(payload.enabledMolds(), payload.patternMolds(), payload.patternCount(), payload.aeBound());
+            screen.onState(payload.enabledMolds(), payload.patternMolds(), payload.patternCount(), payload.aeBound(),
+                    payload.progress(), payload.part(), payload.parts());
         }
     }
 

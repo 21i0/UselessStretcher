@@ -40,40 +40,69 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private boolean aeBound;
     private int scroll;
     private EditBox search;
+    private MoldCatalog.Builder catalogBuilder;
+    private List<Row> rowCache;
+    private String fetchProgress = "";
+    private final List<String> receivedEnabled = new ArrayList<>();
+    private final List<String> receivedPatterns = new ArrayList<>();
+    private int expectedPart;
 
     public OmniversalMyriadScreen(OmniversalMyriadMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.pos = menu.getPos();
         this.imageWidth = 300;
-        this.imageHeight = 250;
+        this.imageHeight = 264;
     }
 
     public boolean matches(BlockPos target) {
         return pos.equals(target);
     }
 
-    public void onState(List<String> enabledMolds, List<String> patternMolds, int patternCount, boolean aeBound) {
+    public void onState(List<String> enabledMolds, List<String> patternMolds, int patternCount, boolean aeBound,
+                        String progress, int part, int parts) {
+        if (part == -1 && parts == 0) {
+            patternsCount = patternCount;
+            this.aeBound = aeBound;
+            fetchProgress = progress;
+            return;
+        }
+        if (part == 0) {
+            receivedEnabled.clear();
+            receivedPatterns.clear();
+            expectedPart = 0;
+        }
+        if (part != expectedPart || parts <= 0 || part >= parts) return;
+        expectedPart++;
+        receivedEnabled.addAll(enabledMolds);
+        receivedPatterns.addAll(patternMolds);
+        if (part + 1 < parts) return;
         enabled.clear();
-        for (String id : enabledMolds) {
+        for (String id : receivedEnabled) {
             ResourceLocation parsed = ResourceLocation.tryParse(id);
             if (parsed != null) enabled.add(parsed);
         }
         this.patternMolds.clear();
-        for (String id : patternMolds) {
+        for (String id : receivedPatterns) {
             ResourceLocation parsed = ResourceLocation.tryParse(id);
             if (parsed != null) this.patternMolds.add(parsed);
         }
         patternsCount = patternCount;
         this.aeBound = aeBound;
+        this.fetchProgress = progress;
+        receivedEnabled.clear();
+        receivedPatterns.clear();
     }
 
     @Override
     protected void init() {
         super.init();
-        this.catalog = MoldCatalog.getAllMolds(Minecraft.getInstance().level);
+        this.catalogBuilder = MoldCatalog.start(Minecraft.getInstance().level);
+        this.catalog = catalogBuilder.result();
+        this.rowCache = null;
 
         this.search = new EditBox(this.font, leftPos + 8, topPos + 25, 192, 18, Component.empty());
         this.search.setMaxLength(64);
+        this.search.setResponder(value -> { rowCache = null; scroll = 0; });
         this.search.setHint(Component.translatable("gui.useless_stretcher.search_hint"));
         this.search.setTextColor(StretcherScreenStyle.TEXT_COLOR);
         this.search.setTextColorUneditable(StretcherScreenStyle.MUTED_TEXT_COLOR);
@@ -85,6 +114,15 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                     Network.clearPatterns(pos);
                 }));
         Network.requestState(pos);
+    }
+
+    @Override
+    protected void containerTick() {
+        super.containerTick();
+        if (catalogBuilder != null && !catalogBuilder.done() && catalogBuilder.advance()) {
+            catalog = catalogBuilder.result();
+            rowCache = null;
+        }
     }
 
     @Override
@@ -112,6 +150,22 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 Component.translatable(aeBound ? "gui.useless_stretcher.ae_bound" : "gui.useless_stretcher.ae_unbound"),
                 leftPos + 174, topPos + LIST_BOTTOM + 7,
                 aeBound ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR, false);
+
+        if (catalogBuilder != null && !catalogBuilder.done()) {
+            graphics.drawString(font, Component.translatable("gui.useless_stretcher.catalog_loading",
+                    catalogBuilder.progress()), leftPos + 12, topPos + LIST_TOP + 8,
+                    StretcherScreenStyle.TEXT_COLOR, false);
+        }
+        if (!fetchProgress.isEmpty()) {
+            String key = "failed".equals(fetchProgress) ? "gui.useless_stretcher.fetch_failed"
+                    : "partial".equals(fetchProgress) ? "gui.useless_stretcher.fetch_partial"
+                    : fetchProgress.startsWith("index:") ? "gui.useless_stretcher.fetch_index"
+                    : "select".equals(fetchProgress) ? "gui.useless_stretcher.fetch_select"
+                    : "gui.useless_stretcher.fetch_progress";
+            String value = fetchProgress.startsWith("index:") ? fetchProgress.substring(6) : fetchProgress;
+            graphics.drawString(font, Component.translatable(key, value), leftPos + 8,
+                    topPos + LIST_BOTTOM + 21, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+        }
 
         List<Row> rows = visibleRows();
         int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (LIST_BOTTOM - LIST_TOP));
@@ -228,6 +282,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     }
 
     private List<Row> visibleRows() {
+        if (rowCache != null) return rowCache;
         String query = search == null ? "" : search.getValue().trim();
         boolean searching = !query.isEmpty();
         List<Row> rows = new ArrayList<>();
@@ -243,7 +298,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 for (MoldCatalog.MoldEntry mold : filtered) rows.add(new MoldRow(mold));
             }
         }
-        return rows;
+        rowCache = List.copyOf(rows);
+        return rowCache;
     }
 
     private static boolean matches(MoldCatalog.MoldEntry mold, String query) {
@@ -292,6 +348,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 pushEnabled();
             } else {
                 if (!expandedMods.remove(header.sourceId())) expandedMods.add(header.sourceId());
+                rowCache = null;
             }
         } else if (row instanceof MoldRow mold) {
             int rowRight = leftPos + imageWidth - 12;

@@ -44,6 +44,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+## BeyondDimensions
+
+- 仓库：https://github.com/Frostbite-time/BeyondDimensions
+- 许可：MIT License，Copyright (c) 2025 Frostbite-time。
+- 参考范围：阅读 `ItemStackKey` / `UnifiedStorage` 的物品与组件键索引设计，用于分析大量物品逐项比较的成本。
+- 本项目未逐字复制其实现；样板及挖掘掉落索引使用已有 AE2 `AEItemKey`，模具归属引用计数和 palette 存储自行实现。
+- 不包含或要求安装 BeyondDimensions 运行依赖。
+
 ## 其它
 
 - 太阳/月亮方向公式来自原版 Minecraft（`LevelRenderer` 天空渲染）。

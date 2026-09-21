@@ -1,5 +1,6 @@
 package com.sorrowmist.useless.stretcher.content.mold;
 
+import appeng.api.stacks.AEItemKey;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -10,136 +11,105 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
-/**
- * External, server-side storage for fetched omniversal patterns. Items and blocks only carry a
- * small {@link UUID} reference, so inventories never serialize hundreds of encoded patterns.
- */
+/** World-owned pattern libraries. Items keep their existing UUID, never the library contents. */
 public final class MyriadPatternStore extends SavedData {
     private static final String NAME = "useless_stretcher_patterns";
-    private static final int MAX_PATTERNS = PatternFetcher.MAX_PATTERNS;
-
-    private final Map<UUID, Map<ResourceLocation, List<ItemStack>>> entries = new HashMap<>();
+    private final Map<UUID, Library> entries = new HashMap<>();
 
     public static MyriadPatternStore get(ServerLevel level) {
         return level.getDataStorage().computeIfAbsent(
                 new SavedData.Factory<>(MyriadPatternStore::new, MyriadPatternStore::load), NAME);
     }
 
-    public Map<ResourceLocation, List<ItemStack>> get(UUID id) {
-        return id == null ? Map.of() : entries.getOrDefault(id, Map.of());
+    public Set<ResourceLocation> molds(UUID id) {
+        Library library = entries.get(id);
+        return library == null ? Set.of() : Collections.unmodifiableSet(library.groups.keySet());
     }
 
-    public Map<ResourceLocation, List<ItemStack>> getOrCreate(UUID id) {
-        return entries.computeIfAbsent(id, k -> new LinkedHashMap<>());
+    public int count(UUID id) {
+        Library library = entries.get(id);
+        return library == null ? 0 : library.references.size();
     }
 
-    public void put(UUID id, Map<ResourceLocation, List<ItemStack>> groups) {
-        Map<ResourceLocation, List<ItemStack>> copy = copyGroups(groups, MAX_PATTERNS);
-        if (copy.isEmpty()) entries.remove(id);
-        else entries.put(id, copy);
-        setDirty();
-    }
-
-    public void remove(UUID id) {
-        if (id != null && entries.remove(id) != null) setDirty();
-    }
-
-    public void setMold(UUID id, ResourceLocation mold, List<ItemStack> patterns) {
-        if (id == null || mold == null) return;
-        Map<ResourceLocation, List<ItemStack>> groups = new LinkedHashMap<>(getOrCreate(id));
-        if (patterns == null || patterns.isEmpty()) {
-            groups.remove(mold);
-        } else {
-            List<ItemStack> copies = new ArrayList<>();
-            for (ItemStack stack : patterns) {
-                if (stack != null && !stack.isEmpty()) copies.add(stack.copy());
-                if (copies.size() >= MAX_PATTERNS) break;
-            }
-            if (copies.isEmpty()) groups.remove(mold);
-            else groups.put(mold, copies);
-        }
-        put(id, groups);
-    }
-
-    public void clear(UUID id) {
-        if (id != null) put(id, Map.of());
+    /** Read-only immutable keys; materialize stacks only for slots that can receive them. */
+    public Collection<AEItemKey> keys(UUID id) {
+        Library library = entries.get(id);
+        return library == null ? List.of() : Collections.unmodifiableSet(library.references.keySet());
     }
 
     public List<ItemStack> flatten(UUID id) {
-        List<ItemStack> result = new ArrayList<>();
-        for (List<ItemStack> group : get(id).values()) {
-            for (ItemStack stack : group) {
-                if (stack == null || stack.isEmpty()) continue;
-                boolean duplicate = false;
-                for (ItemStack existing : result) {
-                    if (ItemStack.isSameItemSameComponents(existing, stack)) {
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate) result.add(stack.copy());
-                if (result.size() >= MAX_PATTERNS) return result;
-            }
-        }
-        return result;
+        return keys(id).stream().map(key -> key.toStack(1)).toList();
     }
 
-    private static Map<ResourceLocation, List<ItemStack>> copyGroups(
-            Map<ResourceLocation, List<ItemStack>> groups, int limit) {
-        Map<ResourceLocation, List<ItemStack>> copy = new LinkedHashMap<>();
-        if (groups == null || limit <= 0) return copy;
-        List<ItemStack> unique = new ArrayList<>();
-        for (Map.Entry<ResourceLocation, List<ItemStack>> entry : groups.entrySet()) {
-            if (entry.getKey() == null || entry.getValue() == null) continue;
-            List<ItemStack> stacks = new ArrayList<>();
-            for (ItemStack stack : entry.getValue()) {
-                if (stack == null || stack.isEmpty()) continue;
-                boolean duplicate = false;
-                for (ItemStack existing : unique) {
-                    if (ItemStack.isSameItemSameComponents(existing, stack)) {
-                        duplicate = true;
-                        break;
-                    }
+    public void replace(UUID id, ResourceLocation mold, Set<AEItemKey> patterns) {
+        if (id == null || mold == null) return;
+        Library library = entries.computeIfAbsent(id, ignored -> new Library());
+        library.replace(mold, patterns);
+        if (library.groups.isEmpty()) entries.remove(id);
+        setDirty();
+    }
+
+    public void clear(UUID id) {
+        if (id != null && entries.remove(id) != null) setDirty();
+    }
+
+    /** Hash equality includes every component. A hash collision never merges distinct patterns. */
+    public static final class Library {
+        private final Map<ResourceLocation, Set<AEItemKey>> groups = new LinkedHashMap<>();
+        private final Map<AEItemKey, Integer> references = new LinkedHashMap<>();
+
+        public void replace(ResourceLocation mold, Set<AEItemKey> patterns) {
+            Set<AEItemKey> replacement = new LinkedHashSet<>(patterns);
+            Set<AEItemKey> old = groups.remove(mold);
+            if (old != null) {
+                for (AEItemKey key : old) {
+                    references.computeIfPresent(key, (ignored, count) -> count == 1 ? null : count - 1);
                 }
-                if (duplicate) continue;
-                ItemStack stored = stack.copy();
-                stacks.add(stored);
-                unique.add(stored);
-                if (unique.size() >= limit) break;
             }
-            if (!stacks.isEmpty()) copy.put(entry.getKey(), stacks);
-            if (unique.size() >= limit) break;
+            if (!replacement.isEmpty()) {
+                groups.put(mold, replacement);
+                for (AEItemKey key : replacement) references.merge(key, 1, Integer::sum);
+            }
         }
-        return copy;
+
+        public int size() { return references.size(); }
     }
 
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
-        for (Map.Entry<UUID, Map<ResourceLocation, List<ItemStack>>> entry : entries.entrySet()) {
+        for (var entry : entries.entrySet()) {
             CompoundTag entryTag = new CompoundTag();
             entryTag.putString("id", entry.getKey().toString());
-
+            // One stack per distinct pattern; mold groups store compact palette indices.
+            Map<AEItemKey, Integer> indices = new HashMap<>();
+            ListTag palette = new ListTag();
+            for (AEItemKey key : entry.getValue().references.keySet()) {
+                indices.put(key, palette.size());
+                palette.add(key.toStack(1).saveOptional(registries));
+            }
+            entryTag.put("palette", palette);
             ListTag groups = new ListTag();
-            for (Map.Entry<ResourceLocation, List<ItemStack>> group : entry.getValue().entrySet()) {
+            for (var group : entry.getValue().groups.entrySet()) {
                 CompoundTag groupTag = new CompoundTag();
                 groupTag.putString("mold", group.getKey().toString());
-                ListTag stacks = new ListTag();
-                for (ItemStack stack : group.getValue()) {
-                    if (stack != null && !stack.isEmpty()) stacks.add(stack.saveOptional(registries));
-                }
-                groupTag.put("patterns", stacks);
+                groupTag.putIntArray("indices", group.getValue().stream().mapToInt(indices::get).toArray());
                 groups.add(groupTag);
             }
             entryTag.put("groups", groups);
             list.add(entryTag);
         }
+        tag.putInt("format", 2);
         tag.put("entries", list);
         return tag;
     }
@@ -155,23 +125,37 @@ public final class MyriadPatternStore extends SavedData {
             } catch (IllegalArgumentException ignored) {
                 continue;
             }
-
-            Map<ResourceLocation, List<ItemStack>> groups = new LinkedHashMap<>();
-            ListTag groupList = entryTag.getList("groups", Tag.TAG_COMPOUND);
-            for (int j = 0; j < groupList.size(); j++) {
-                CompoundTag groupTag = groupList.getCompound(j);
-                ResourceLocation mold = ResourceLocation.tryParse(groupTag.getString("mold"));
-                if (mold == null) continue;
-
-                ListTag stacks = groupTag.getList("patterns", Tag.TAG_COMPOUND);
-                List<ItemStack> patterns = new ArrayList<>();
-                for (int k = 0; k < stacks.size(); k++) {
-                    ItemStack stack = ItemStack.parse(registries, stacks.getCompound(k)).orElse(ItemStack.EMPTY);
-                    if (!stack.isEmpty()) patterns.add(stack);
-                }
-                if (!patterns.isEmpty()) groups.put(mold, patterns);
+            List<AEItemKey> palette = new ArrayList<>();
+            ListTag paletteTags = entryTag.getList("palette", Tag.TAG_COMPOUND);
+            for (int j = 0; j < paletteTags.size(); j++) {
+                palette.add(AEItemKey.of(ItemStack.parse(registries, paletteTags.getCompound(j))
+                        .orElse(ItemStack.EMPTY)));
             }
-            if (!groups.isEmpty()) store.entries.put(id, copyGroups(groups, MAX_PATTERNS));
+            Library library = new Library();
+            ListTag groups = entryTag.getList("groups", Tag.TAG_COMPOUND);
+            for (int j = 0; j < groups.size(); j++) {
+                CompoundTag group = groups.getCompound(j);
+                ResourceLocation mold = ResourceLocation.tryParse(group.getString("mold"));
+                if (mold == null) continue;
+                Set<AEItemKey> patterns = new LinkedHashSet<>();
+                if (group.contains("indices", Tag.TAG_INT_ARRAY)) {
+                    for (int index : group.getIntArray("indices")) {
+                        if (index >= 0 && index < palette.size() && palette.get(index) != null) {
+                            patterns.add(palette.get(index));
+                        }
+                    }
+                } else {
+                    // Pre-palette saves retain their UUID and all groups, without truncation.
+                    ListTag stacks = group.getList("patterns", Tag.TAG_COMPOUND);
+                    for (int k = 0; k < stacks.size(); k++) {
+                        AEItemKey key = AEItemKey.of(ItemStack.parse(registries, stacks.getCompound(k))
+                                .orElse(ItemStack.EMPTY));
+                        if (key != null) patterns.add(key);
+                    }
+                }
+                library.replace(mold, patterns);
+            }
+            if (library.size() > 0) store.entries.put(id, library);
         }
         return store;
     }

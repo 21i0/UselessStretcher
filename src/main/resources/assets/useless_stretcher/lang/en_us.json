@@ -1,4 +1,10 @@
 {
+  "gui.useless_stretcher.catalog_loading": "Indexing molds: %s",
+  "gui.useless_stretcher.fetch_progress": "Fetching patterns: %s",
+  "gui.useless_stretcher.fetch_index": "Building machine index: %s",
+  "gui.useless_stretcher.fetch_select": "Locating selected machine recipes",
+  "gui.useless_stretcher.fetch_failed": "Fetch interrupted; retry (see log)",
+  "gui.useless_stretcher.fetch_partial": "Some molds failed; old patterns kept",
   "itemGroup.useless_stretcher": "Useless Stretcher",
   "block.useless_stretcher.omniversal_myriad": "Omniversal Myriad Block",
   "item.useless_stretcher.useless_stretcher": "Useless Stretcher",

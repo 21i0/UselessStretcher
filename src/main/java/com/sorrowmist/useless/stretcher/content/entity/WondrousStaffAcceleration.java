@@ -366,41 +366,57 @@ public final class WondrousStaffAcceleration {
     }
 
     /** Ticks a block or AE node {@code speed} extra times. */
-    public static void tickTarget(ServerLevel level, BlockPos pos, int speed) {
+    public static int tickTarget(ServerLevel level, BlockPos pos, int speed) {
+        long started = System.nanoTime();
+        long deadline = com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.deadline(level.getServer());
+        try {
+            return tickTargetWithinBudget(level, pos, speed, deadline);
+        } finally {
+            com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.recordWork(level.getServer(), started);
+        }
+    }
+
+    private static int tickTargetWithinBudget(ServerLevel level, BlockPos pos, int speed, long deadline) {
+        if (System.nanoTime() >= deadline) return 0;
         BlockEntity blockEntity = level.getBlockEntity(pos);
         BlockState state = level.getBlockState(pos);
 
         if (state.getBlock() instanceof LightningRodBlock) {
             tickLightningRod(level, pos, speed);
-            return;
+            return speed;
         }
 
         if (blockEntity == null) {
-            if (!state.isRandomlyTicking()) return;
-            for (int i = 0; i < speed; i++) {
+            if (!state.isRandomlyTicking()) return speed;
+            int executed = 0;
+            for (; executed < speed && System.nanoTime() < deadline; executed++) {
                 // One requested virtual tick means one randomTick invocation, matching JDTE's
                 // Ultimate Time Wand. Applying vanilla's section-level 1/1365 selection chance a
                 // second time made crops/saplings roughly 1365 times slower than JDTE at x1024.
-                state.randomTick(level, pos, level.getRandom());
+                BlockState current = level.getBlockState(pos);
+                if (!current.isRandomlyTicking()) return speed;
+                current.randomTick(level, pos, level.getRandom());
             }
-            return;
+            return executed;
         }
 
         // 1. AE2 machines that expose IGridTickable endpoints run on their own AE grid ticks.
-        if (tickAeNodes(level, pos, speed)) {
-            return;
-        }
+        int aeExecuted = tickAeNodes(level, pos, speed, deadline);
+        if (aeExecuted >= 0) return aeExecuted;
 
         // 2. Everything else uses its normal block-entity ticker. This fallback matters for
         //    AE machines (e.g. AE2 Crystal Science) that are grid node hosts but do NOT
         //    implement IGridTickable — they would otherwise never be accelerated.
         @SuppressWarnings("rawtypes")
         BlockEntityTicker ticker = state.getTicker(level, blockEntity.getType());
-        if (ticker == null) return;
-        for (int i = 0; i < speed; i++) {
+        if (ticker == null) return speed;
+        int executed = 0;
+        for (; executed < speed && System.nanoTime() < deadline; executed++) {
+            if (blockEntity.isRemoved() || level.getBlockState(pos) != state) return executed;
             //noinspection unchecked
             ticker.tick(level, pos, state, blockEntity);
         }
+        return executed;
     }
 
     /**
@@ -429,11 +445,11 @@ public final class WondrousStaffAcceleration {
      * reports {@link TickRateModulation#SLEEP} is removed immediately instead of receiving up to
      * another 1023 empty calls during the same real server tick.
      *
-     * @return true when at least one {@link IGridTickable} endpoint was found
+     * @return consumed virtual ticks, or -1 when no {@link IGridTickable} endpoint was found
      */
-    private static boolean tickAeNodes(ServerLevel level, BlockPos pos, int speed) {
+    private static int tickAeNodes(ServerLevel level, BlockPos pos, int speed, long deadline) {
         IInWorldGridNodeHost host = GridHelper.getNodeHost(level, pos);
-        if (host == null) return false;
+        if (host == null) return -1;
 
         Set<IGridNode> seen = Collections.newSetFromMap(new IdentityHashMap<>());
         List<AeEndpoint> active = new ArrayList<>();
@@ -446,9 +462,10 @@ public final class WondrousStaffAcceleration {
             IGridTickable tickable = node.getService(IGridTickable.class);
             if (tickable != null) active.add(new AeEndpoint(node, tickable));
         }
-        if (active.isEmpty()) return false;
+        if (active.isEmpty()) return -1;
 
-        for (int i = 0; i < speed && !active.isEmpty(); i++) {
+        int executed = 0;
+        for (; executed < speed && !active.isEmpty() && System.nanoTime() < deadline; executed++) {
             Iterator<AeEndpoint> iterator = active.iterator();
             while (iterator.hasNext()) {
                 AeEndpoint endpoint = iterator.next();
@@ -462,7 +479,7 @@ public final class WondrousStaffAcceleration {
                 }
             }
         }
-        return true;
+        return active.isEmpty() ? speed : executed;
     }
 
     private record AeEndpoint(IGridNode node, IGridTickable tickable) {
