@@ -84,8 +84,27 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
     }
 }
 
+// Optional visual guide check in its own client directory; never part of release jars.
+if (providers.gradleProperty('guideTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/guideTest/java'
+    neoForge.runs {
+        guidePreview {
+            client()
+            gameDirectory = file('build/guide-client')
+            programArguments.addAll '--width', '1280', '--height', '800'
+            systemProperty 'useless_stretcher.guide_test', 'true'
+        }
+    }
+    dependencies {
+        compileOnly('org.appliedenergistics:guideme:21.1.17') { transitive = false }
+    }
+}
+
 dependencies {
     // Compile against the locally built Useless Mod and AE2. Both are resolved
     // at runtime by the host pack, so they stay compileOnly here.
-    compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'])
+    // Compile against the latest upstream tool-switch API; keep the legacy jar on disk
+    // for older pack references without allowing Gradle to select its older classpath.
+    compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'],
+            excludes: ['useless_mod-1.21.1-2.3.6.1.jar'])
 }

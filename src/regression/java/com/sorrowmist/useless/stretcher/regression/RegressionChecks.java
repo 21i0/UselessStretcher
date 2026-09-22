@@ -7,6 +7,7 @@ import com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog;
 import com.sorrowmist.useless.content.recipe.MoldMatcher;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.item.StaffMiningContext;
+import com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
 import com.sorrowmist.useless.stretcher.content.mold.MoldMatch;
@@ -19,6 +20,7 @@ import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldStore;
 import com.sorrowmist.useless.stretcher.content.mold.MoldRecipeIndex;
 import com.sorrowmist.useless.stretcher.event.MyriadWorkQueue;
 import com.sorrowmist.useless.content.recipe.AdvancedAlloyFurnaceRecipe;
+import com.sorrowmist.useless.core.component.UComponents;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
@@ -34,13 +36,16 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import io.netty.buffer.Unpooled;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
@@ -78,9 +83,11 @@ public final class RegressionChecks {
             molds(level);
             drops();
             acceleration(level);
+            toolCompatibility();
             largeMoldDrop(level);
             indexedRecipes(level);
             legacyDimensions(level);
+            guideRecipeRemoved(level);
             BlockPos pos = new BlockPos(0, 100, 0);
             level.setBlockAndUpdate(pos, ModBlocks.OMNIVERSAL_MYRIAD.get().defaultBlockState());
             queued = (OmniversalMyriadBlockEntity) level.getBlockEntity(pos);
@@ -406,6 +413,48 @@ public final class RegressionChecks {
             check(level.getServer().getLevel(dimension) != null, "legacy dimension remains loaded and reachable");
         }
         LogUtils.getLogger().info("REGRESSION dimensions: four legacy IDs/worlds retained, recipes/creative entries removed");
+    }
+
+    private static void guideRecipeRemoved(ServerLevel level) {
+        var id = ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "guide");
+        check(level.getRecipeManager().byKey(id).isEmpty(), "standalone guide recipe is removed");
+        LogUtils.getLogger().info("REGRESSION guide: standalone guide recipe absent; pages are merged into AE2 guide");
+    }
+
+    private static void toolCompatibility() {
+        ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        check(staff.getItem() instanceof WondrousStaffItem, "staff keeps its item identity");
+        check(staff.getItem().canPerformAction(staff, ItemAbilities.SHEARS_DIG),
+                "shears capability enabled by default");
+        check(staff.getItem().canPerformAction(staff, ItemAbilities.FIRESTARTER_LIGHT),
+                "flint capability enabled by default");
+        staff.set(UComponents.BeefShearsComponent.get(), false);
+        staff.set(UComponents.BeefFlintAndSteelComponent.get(), false);
+        check(!staff.getItem().canPerformAction(staff, ItemAbilities.SHEARS_DIG),
+                "shears capability follows its G-menu switch");
+        check(!staff.getItem().canPerformAction(staff, ItemAbilities.FIRESTARTER_LIGHT),
+                "flint capability follows its G-menu switch");
+        var wrenchTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
+                ResourceLocation.parse("c:tools/wrench"));
+        var wrenchesTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
+                ResourceLocation.parse("c:wrenches"));
+        var mekanismConfiguratorTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
+                ResourceLocation.parse("mekanism:configurators"));
+        staff.set(UComponents.WrenchTagEnabledComponent.get(), false);
+        check(!staff.is(wrenchTag), "disabled wrench tag is not advertised");
+        check(!staff.is(wrenchesTag), "disabled aggregate wrench tag is not advertised");
+        check(!staff.is(mekanismConfiguratorTag), "disabled Mekanism configurator tag is not advertised");
+        for (String abilityName : List.of("wrench_dismantle", "wrench_rotate", "wrench_empty", "wrench_configure",
+                "wrench_configure_chemicals", "wrench_configure_energy", "wrench_configure_fluids",
+                "wrench_configure_heat", "wrench_configure_items")) {
+            check(!staff.getItem().canPerformAction(staff, net.neoforged.neoforge.common.ItemAbility.get(abilityName)),
+                    "disabled wrench ability is blocked: " + abilityName);
+        }
+        staff.set(UComponents.WrenchTagEnabledComponent.get(), true);
+        check(staff.is(wrenchTag), "enabled wrench tag is advertised");
+        check(staff.is(wrenchesTag), "enabled aggregate wrench tag is advertised");
+        check(staff.is(mekanismConfiguratorTag), "enabled Mekanism configurator tag is advertised");
+        LogUtils.getLogger().info("REGRESSION tools: wrench, shears and flint switches synchronized");
     }
 
     private static Object readField(Object object, String name) {

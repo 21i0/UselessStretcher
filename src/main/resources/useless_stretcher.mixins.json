@@ -18,6 +18,7 @@
     "ChunkDimensionDaylightMixin",
     "BeefTimeAccelerationMixin",
     "BeefToolVariantsMixin",
+    "ItemStackToolTagsMixin",
     "BlockEntityChangedMixin",
     "ConfigManagerMixin",
     "PassiveCraftingHatchBlockEntityMixin",

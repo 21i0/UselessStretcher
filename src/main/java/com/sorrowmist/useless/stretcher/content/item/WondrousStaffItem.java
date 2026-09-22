@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.content.item;
 
 import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.content.items.EndlessBeafItem;
+import com.sorrowmist.useless.content.items.BeefToolVariants;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.client.StretcherKeyBindings;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 import java.util.List;
 
@@ -55,19 +57,60 @@ public class WondrousStaffItem extends EndlessBeafItem {
         return Component.translatable("item.useless_stretcher.wondrous_staff");
     }
 
-    /**
-     * While time acceleration is enabled, the staff is never a wrench (or any other tool):
-     * acceleration takes priority over dismantling / rotating machines.
-     */
+    /** Exposes the upstream tool and shears abilities while acceleration interactions stay explicit. */
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility ability) {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) {
             return false;
         }
-        if (WondrousStaffAcceleration.isEnabled(stack) && ability.name().startsWith("wrench_")) {
+        // Keep the same mining/tool abilities as the upstream staff.  The acceleration
+        // interaction is intercepted by onItemUseFirst/useOn, so exposing these abilities
+        // is safe and lets Apotheosis and the newer tool-mode UI classify the staff correctly.
+        if (ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(ability)
+                || ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability)
+                || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(ability)
+                || ItemAbilities.DEFAULT_HOE_ACTIONS.contains(ability)
+                || ItemAbilities.DEFAULT_BRUSH_ACTIONS.contains(ability)
+                || (ItemAbilities.DEFAULT_SHEARS_ACTIONS.contains(ability)
+                        && staffShearsEnabled(stack))
+                || (ItemAbilities.DEFAULT_FLINT_ACTIONS.contains(ability)
+                        && staffFlintAndSteelEnabled(stack))
+                || (ability == ItemAbilities.FIRESTARTER_LIGHT
+                        && staffFlintAndSteelEnabled(stack))
+                || ability == ItemAbilities.SWORD_SWEEP) {
+            return true;
+        }
+        if (ability == ItemAbilities.SWORD_DIG) {
+            return false;
+        }
+        // The upstream base item exposes mode-specific abilities. Keep the staff in NONE_MODE,
+        // but never leak wrench abilities when the G-menu wrench tag is disabled.
+        if (isWrenchAbility(ability) && !BeefToolVariants.isWrenchTagEnabled(stack)) {
             return false;
         }
         return super.canPerformAction(stack, ability);
+    }
+
+    private static boolean isWrenchAbility(ItemAbility ability) {
+        String name = ability.name();
+        return name.startsWith("wrench_") || name.equals("wrench");
+    }
+
+    /** The extra switches only exist in newer Useless Mod builds; old builds keep legacy defaults. */
+    private static boolean staffShearsEnabled(ItemStack stack) {
+        try {
+            return EndlessBeafItem.isShearsEnabled(stack);
+        } catch (NoSuchMethodError ignored) {
+            return true;
+        }
+    }
+
+    private static boolean staffFlintAndSteelEnabled(ItemStack stack) {
+        try {
+            return EndlessBeafItem.isFlintAndSteelEnabled(stack);
+        } catch (NoSuchMethodError ignored) {
+            return true;
+        }
     }
 
     @Override

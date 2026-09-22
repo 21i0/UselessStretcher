@@ -22,6 +22,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BeefToolVariantsMixin {
 
     @Inject(
+            method = "isBaseVariant(Lnet/minecraft/world/item/ItemStack;)Z",
+            at = @At("HEAD"), cancellable = true)
+    private static void uselessStretcher$staffIsBaseVariant(ItemStack source,
+                                                             CallbackInfoReturnable<Boolean> cir) {
+        if (isWondrousStaffSource(source)) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(
+            method = "withWrenchTag(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/item/ItemStack;",
+            at = @At("HEAD"), cancellable = true)
+    private static void uselessStretcher$keepStaffWrenchTag(ItemStack source, boolean enabled,
+                                                             CallbackInfoReturnable<ItemStack> cir) {
+        if (!isWondrousStaffSource(source)) return;
+
+        ItemStack result = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        result.applyComponents(source.getComponents());
+        result.set(UComponents.WrenchTagEnabledComponent.get(), enabled);
+        result.set(UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
+        cir.setReturnValue(result);
+    }
+
+    @Inject(
             method = "createForToolMode(Lnet/minecraft/world/item/ItemStack;Lcom/sorrowmist/useless/api/enums/tool/ToolTypeMode;)Lnet/minecraft/world/item/ItemStack;",
             at = @At("HEAD"),
             cancellable = true)
