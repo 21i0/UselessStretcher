@@ -37,7 +37,7 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 
 ## 主要内容 / Features
 
-### 游戏内指南（1.4.2 测试版）
+### 游戏内指南（1.4.2）
 安装 GuideME 21.1.17 或更新版后，打开 AE2 原有指南，在左侧导航进入“万象担架附属”。
 也可在背包中悬停万物之块、担架或手杖，按 GuideME 阅读键直接跳转到对应页面。
 不再额外注册第二本指南书，也没有书加紫色染料配方。
