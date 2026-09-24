@@ -148,8 +148,6 @@ public final class AccelerationExecutionBudget {
         private int permanentRemaining;
         private boolean ordinaryPresent;
         private boolean permanentPresent;
-        private int tickAllowance;
-        private int registeredTargets;
         private long workNanos;
         private long sliceNanos = MAX_WORK_NANOS;
         private final Map<Object, Long> targetWorkNanos = new IdentityHashMap<>();
@@ -165,24 +163,25 @@ public final class AccelerationExecutionBudget {
             sliceNanos = Math.max(1L, MAX_WORK_NANOS / previousTargetCount);
             tick = serverTick;
             remaining = Math.max(0, budget);
-            tickAllowance = Math.max(1, budget / Math.max(1, previousTargetCount));
-            ordinaryRemaining = tickAllowance;
-            permanentRemaining = tickAllowance;
+            // Keep the count allowance independent from registration order. The previous
+            // implementation repeatedly divided this value as targets registered during the
+            // tick, which could reduce a normal x1024 target to one virtual tick or zero useful
+            // work when a range accelerator visited many machines.
+            ordinaryRemaining = budget;
+            permanentRemaining = budget;
             ordinaryPresent = false;
             permanentPresent = false;
-            registeredTargets = 0;
             if (budget >= HEALTHY_BUDGET) {
-                perTargetLimit = Math.max(64, (budget + previousTargetCount - 1) / previousTargetCount);
+                perTargetLimit = Math.max(64, budget);
                 return;
             }
-            perTargetLimit = Math.max(1,
-                    (budget + previousTargetCount - 1) / previousTargetCount);
+            perTargetLimit = Math.max(1, budget);
         }
 
         private int take(Object targetKey, int requested) {
             Boolean ordinary = priority.get(targetKey);
             int alreadyGranted = activeTargets.getOrDefault(targetKey, 0);
-            int targetRemaining = Math.max(0, Math.min(perTargetLimit, tickAllowance) - alreadyGranted);
+            int targetRemaining = Math.max(0, perTargetLimit - alreadyGranted);
             int modeRemaining = Boolean.TRUE.equals(ordinary) ? ordinaryRemaining
                     : Boolean.FALSE.equals(ordinary) ? permanentRemaining : remaining;
             int granted = Math.min(Math.max(0, requested), Math.min(remaining,
@@ -200,14 +199,11 @@ public final class AccelerationExecutionBudget {
             if (previous != null && previous == ordinary) return;
             ordinaryPresent |= ordinary;
             permanentPresent |= !ordinary;
-            registeredTargets++;
-            if (registeredTargets > 1) {
-                tickAllowance = Math.max(1, remaining / registeredTargets);
-                ordinaryRemaining = Math.min(ordinaryRemaining, tickAllowance);
-                permanentRemaining = Math.min(permanentRemaining, tickAllowance);
-            }
-            if (!permanentPresent) ordinaryRemaining = tickAllowance;
-            if (!ordinaryPresent) permanentRemaining = tickAllowance;
+            // Ordinary work remains the preferred class. Permanent work shares the remaining
+            // server allowance only after ordinary work has claimed its requested batch; neither
+            // class is reduced merely because another target registered later in the tick.
+            if (!permanentPresent) ordinaryRemaining = remaining;
+            if (!ordinaryPresent) permanentRemaining = remaining;
         }
     }
 }
