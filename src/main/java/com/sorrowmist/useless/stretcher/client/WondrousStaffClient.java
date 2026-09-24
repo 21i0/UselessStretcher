@@ -54,6 +54,8 @@ public final class WondrousStaffClient {
         Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held),
                 WondrousStaffAcceleration.isEnabled(held), hand);
         showGearStatus(speed);
+        // This event would otherwise continue into vanilla inventory scrolling.
+        event.setCanceled(true);
     }
 
     @SubscribeEvent
@@ -75,6 +77,10 @@ public final class WondrousStaffClient {
         Minecraft mc = Minecraft.getInstance();
         if (event.getAction() != org.lwjgl.glfw.GLFW.GLFW_PRESS || mc.screen != null) return;
         if (event.getKey() != org.lwjgl.glfw.GLFW.GLFW_KEY_X) return;
+        // The raw X fallback is only a conflict-priority path for the default X binding.
+        // Once the player rebinds the action, X must be left to its new owner.
+        if (StretcherKeyBindings.WONDROUS_STAFF_MODE.getKey().getValue()
+                != org.lwjgl.glfw.GLFW.GLFW_KEY_X) return;
         Player player = mc.player;
         InteractionHand hand = player == null ? null : findStaffHand(player);
         if (hand == null) return;

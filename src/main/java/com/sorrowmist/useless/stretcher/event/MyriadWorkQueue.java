@@ -53,6 +53,9 @@ public final class MyriadWorkQueue {
             }
             return;
         }
+        // The latest base mod builds its shared recipe directory asynchronously. Wait for the
+        // published snapshot instead of synchronously rebuilding it on the server tick thread.
+        if (!index.catalogReady()) return;
         if (!jobs && (index.ready() || index.failed())) return;
         long slice = currentSlice(event.getServer());
         long deadline = started + slice;

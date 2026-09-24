@@ -19,6 +19,7 @@
     "ItemStackHandlerMixin",
     "ChunkDimensionDaylightMixin",
     "BeefTimeAccelerationMixin",
+    "UselessModLightningRodMixin",
     "BeefToolVariantsMixin",
     "ItemStackToolTagsMixin",
     "BlockEntityChangedMixin",

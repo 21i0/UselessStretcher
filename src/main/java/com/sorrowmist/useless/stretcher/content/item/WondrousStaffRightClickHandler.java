@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.LightningRodBlock;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -41,7 +42,12 @@ public final class WondrousStaffRightClickHandler {
             }
             return;
         }
-        if (!player.isShiftKeyDown()) return;
+        boolean lightningRod = event.getLevel().getBlockState(event.getPos()).getBlock() instanceof LightningRodBlock;
+        // Range placement keeps its Shift gesture and must not turn a normal right-click into an
+        // acceleration action.  Outside placement mode, an enabled staff owns rod clicks even
+        // without Shift so the upstream staff cannot run its lightning-collector action first.
+        if (RangeAccelerationSettings.placementMode(stack) && !player.isShiftKeyDown()) return;
+        if (!player.isShiftKeyDown() && !lightningRod) return;
         if (!WondrousStaffAcceleration.isEnabled(stack)) return;
         if (RangeAccelerationSettings.placementMode(stack)) {
             // The client sends a dedicated placement packet. The server side of this event only

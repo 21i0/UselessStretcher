@@ -140,7 +140,7 @@ public final class Network {
     }
 
     /** Staff-only feature toggles edited by the X screen. */
-    public record WondrousStaffFeaturesPayload(boolean autoSmelt, boolean summonEnabled,
+    public record WondrousStaffFeaturesPayload(boolean summonEnabled,
                                                 boolean lootRefresh, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffFeaturesPayload> TYPE =
@@ -148,7 +148,6 @@ public final class Network {
                         "wondrous_staff_features"));
         public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffFeaturesPayload> STREAM_CODEC =
                 StreamCodec.composite(
-                        ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::autoSmelt,
                         ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::summonEnabled,
                         ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::lootRefresh,
                         ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::offhand,
@@ -207,7 +206,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("3");
+        PayloadRegistrar registrar = event.registrar("4");
 
         registrar.playToServer(MyriadActionPayload.TYPE, MyriadActionPayload.STREAM_CODEC, Network::handleAction);
         registrar.playToClient(MyriadStatePayload.TYPE, MyriadStatePayload.STREAM_CODEC,
@@ -269,7 +268,6 @@ public final class Network {
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
-        held.set(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), payload.autoSmelt());
         held.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), payload.summonEnabled());
         held.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(),
                 payload.lootRefresh()
@@ -285,11 +283,10 @@ public final class Network {
         WondrousStaffSummoning.summon(player, held, payload.entityIds());
     }
 
-    public static void sendWondrousStaffFeatures(boolean autoSmelt, boolean summonEnabled,
-                                                 boolean lootRefresh,
+    public static void sendWondrousStaffFeatures(boolean summonEnabled, boolean lootRefresh,
                                                  InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffFeaturesPayload(
-                autoSmelt, summonEnabled, lootRefresh, hand == InteractionHand.OFF_HAND));
+                summonEnabled, lootRefresh, hand == InteractionHand.OFF_HAND));
     }
 
     public static void sendWondrousStaffSummon(List<String> entityIds, InteractionHand hand) {

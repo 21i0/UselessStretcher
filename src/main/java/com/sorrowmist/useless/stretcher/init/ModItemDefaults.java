@@ -30,7 +30,6 @@ public final class ModItemDefaults {
                         // New stacks start in normal mode; getMode() still reads the legacy
                         // permanent component for stacks created before this three-state mode.
                         .set(StretcherComponents.WONDROUS_STAFF_MODE.get(), 0)
-                        .set(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), false)
                         .set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false)
                         .set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false));
     }

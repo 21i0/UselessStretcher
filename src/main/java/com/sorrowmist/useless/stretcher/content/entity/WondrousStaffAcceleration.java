@@ -30,7 +30,6 @@ import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
@@ -60,10 +59,8 @@ public final class WondrousStaffAcceleration {
     public static final int STAFF_MODE_COUNT = 3;
 
     public static final int DEFAULT_DURATION_TICKS = 600;
-    /** Vanilla-ish natural lightning rarity; divided by the gear multiplier for the rod. */
-    private static final int LIGHTNING_ROD_BASE_CHANCE = 20000;
-    /** Never strike faster than once per this many game ticks. */
-    private static final int LIGHTNING_ROD_MIN_CHANCE = 10;
+    /** Bound the number of command-style bolts spawned by one accelerated rod per real tick. */
+    private static final int LIGHTNING_ROD_MAX_BOLTS_PER_TICK = 16;
     /** The multiplier gear a freshly crafted staff starts with (x2). */
     public static final int DEFAULT_GEAR = 2;
     /** Vanilla's private ServerLevel.THUNDER_DELAY provider. */
@@ -81,7 +78,13 @@ public final class WondrousStaffAcceleration {
     public static InteractionResult tryUse(UseOnContext ctx) {
         Level level = ctx.getLevel();
         Player player = ctx.getPlayer();
-        if (player == null || !player.isShiftKeyDown()) return InteractionResult.PASS;
+        // Lightning rods are the one block interaction that intentionally works without Shift:
+        // the upstream staff uses an ordinary right-click to summon a bolt there.  Once this
+        // staff's acceleration toggle is enabled, the rod must enter our acceleration path first
+        // so the upstream lightning interaction cannot steal the click.  All other block targets
+        // retain the explicit Shift gesture used by the staff UI.
+        boolean lightningRod = level.getBlockState(ctx.getClickedPos()).getBlock() instanceof LightningRodBlock;
+        if (player == null || (!player.isShiftKeyDown() && !lightningRod)) return InteractionResult.PASS;
         if (!isEnabled(ctx.getItemInHand())) return InteractionResult.PASS;
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
@@ -200,10 +203,6 @@ public final class WondrousStaffAcceleration {
 
     public static int getSpeed(ItemStack stack) {
         return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
-    }
-
-    public static boolean isAutoSmeltEnabled(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), false);
     }
 
     public static boolean isSummonEnabled(ItemStack stack) {
@@ -432,23 +431,21 @@ public final class WondrousStaffAcceleration {
     }
 
     /**
-     * Accelerates a lightning rod's natural thunderstorm lightning: while it is thundering and
-     * the rod sits on the world surface (the same condition vanilla uses for its electric spark
-     * particles), roll the lightning chance {@code speed} times faster and strike the rod with a
-     * real {@link LightningBolt}.
+     * Accelerates a lightning rod with command-style lightning. This intentionally does not use
+     * the vanilla weather scheduler: rods work in clear weather and underground, just like
+     * {@code /summon lightning_bolt}. A cap keeps x1024 from creating an unbounded entity burst.
      */
     private static void tickLightningRod(ServerLevel level, BlockPos pos, int speed) {
-        if (!level.isThundering() || !level.canSeeSky(pos)) return;
-        if (pos.getY() != level.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ()) - 1) {
-            return;
+        int bolts = Math.min(Math.max(0, speed), LIGHTNING_ROD_MAX_BOLTS_PER_TICK);
+        for (int i = 0; i < bolts; i++) {
+            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
+            if (bolt == null) continue;
+            // A summoned bolt is a normal, damaging lightning entity; visualOnly=false is
+            // explicit so this remains distinct from cosmetic lightning effects.
+            bolt.setVisualOnly(false);
+            bolt.moveTo(Vec3.atBottomCenterOf(pos.above()));
+            level.addFreshEntity(bolt);
         }
-        int chance = Math.max(LIGHTNING_ROD_MIN_CHANCE, LIGHTNING_ROD_BASE_CHANCE / Math.max(1, speed));
-        if (level.getRandom().nextInt(chance) != 0) return;
-
-        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
-        if (bolt == null) return;
-        bolt.moveTo(Vec3.atBottomCenterOf(pos.above()));
-        level.addFreshEntity(bolt);
     }
 
     /**

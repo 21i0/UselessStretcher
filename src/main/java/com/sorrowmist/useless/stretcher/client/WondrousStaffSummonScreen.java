@@ -207,7 +207,7 @@ public final class WondrousStaffSummonScreen extends Screen {
         enabledButton.setMessage(enabledMessage());
         summonActionButton.active = StretcherConfig.enableStaffSummon();
         summonActionButton.setMessage(summonActionMessage());
-        Network.sendWondrousStaffFeatures(WondrousStaffAcceleration.isAutoSmeltEnabled(staff), enabled,
+        Network.sendWondrousStaffFeatures(enabled,
                 WondrousStaffAcceleration.isLootRefreshEnabled(staff), hand);
     }
 
@@ -219,7 +219,7 @@ public final class WondrousStaffSummonScreen extends Screen {
             staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), true);
             enabledButton.setSelected(true);
             enabledButton.setMessage(enabledMessage());
-            Network.sendWondrousStaffFeatures(WondrousStaffAcceleration.isAutoSmeltEnabled(staff), true,
+            Network.sendWondrousStaffFeatures(true,
                     WondrousStaffAcceleration.isLootRefreshEnabled(staff), hand);
         }
         Network.sendWondrousStaffSummon(selected.stream().map(ResourceLocation::toString).toList(), hand);

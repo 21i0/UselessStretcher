@@ -36,6 +36,7 @@ import com.sorrowmist.useless.stretcher.init.ModBlocks;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.utils.mining.MiningUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -43,6 +44,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Item;
@@ -61,10 +64,14 @@ import net.minecraft.world.entity.vehicle.MinecartChest;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -92,6 +99,7 @@ public final class RegressionChecks {
             molds(level);
             drops();
             acceleration(level);
+            lightningRodInteraction(level);
             toolCompatibility();
             lootRefresh(level);
             largeMoldDrop(level);
@@ -399,6 +407,45 @@ public final class RegressionChecks {
                 "right-click reclaimer path removes another player's range without block interaction");
         AccelerationExecutionBudget.removeServer(server);
         LogUtils.getLogger().info("REGRESSION acceleration: budget, revisions, pause, reclaim and unload passed");
+    }
+
+    /** Exercises the real mod-event ordering that previously let the upstream one-shot win. */
+    private static void lightningRodInteraction(ServerLevel level) {
+        var player = FakePlayerFactory.get(level,
+                new GameProfile(UUID.randomUUID(), "LightningRodRegression"));
+        ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
+        player.setItemInHand(InteractionHand.MAIN_HAND, staff);
+
+        BlockPos rodPos = new BlockPos(8, 200 + level.getRandom().nextInt(40), 8);
+        level.setBlockAndUpdate(rodPos, Blocks.LIGHTNING_ROD.defaultBlockState());
+        AABB area = new AABB(rodPos).inflate(4.0D);
+        BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(rodPos), Direction.UP, rodPos, false);
+
+        int lightningBefore = level.getEntitiesOfClass(LightningBolt.class, area).size();
+        var enabledClick = new PlayerInteractEvent.RightClickBlock(
+                player, InteractionHand.MAIN_HAND, rodPos, hit);
+        NeoForge.EVENT_BUS.post(enabledClick);
+        int lightningAfter = level.getEntitiesOfClass(LightningBolt.class, area).size();
+        List<WondrousStaffAccelerationEntity> effects = level.getEntitiesOfClass(
+                WondrousStaffAccelerationEntity.class, new AABB(rodPos),
+                entity -> rodPos.equals(entity.getTargetPos()));
+        check(enabledClick.isCanceled(), "enabled rod click is consumed by wondrous acceleration");
+        check(lightningAfter == lightningBefore,
+                "upstream one-shot lightning is suppressed while acceleration is enabled");
+        check(effects.size() == 1, "enabled rod click creates one wondrous acceleration marker");
+
+        effects.forEach(WondrousStaffAccelerationEntity::discard);
+        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
+        var disabledClick = new PlayerInteractEvent.RightClickBlock(
+                player, InteractionHand.MAIN_HAND, rodPos, hit);
+        NeoForge.EVENT_BUS.post(disabledClick);
+        check(level.getEntitiesOfClass(LightningBolt.class, area).size() == lightningBefore + 1,
+                "disabled rod click preserves the upstream one-shot lightning feature");
+
+        level.getEntitiesOfClass(LightningBolt.class, area).forEach(LightningBolt::discard);
+        level.removeBlock(rodPos, false);
+        LogUtils.getLogger().info("REGRESSION lightning rod: upstream one-shot intercepted only while enabled");
     }
 
     private static void indexedRecipes(ServerLevel level) {

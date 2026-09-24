@@ -28,26 +28,45 @@ public final class MoldCatalog {
 
     public static Builder start(Level level) {
         if (level == null) return new Builder(List.of());
-        var recipes = AlloyFurnaceRecipeCatalog.entries(level);
+        RecipeCatalogAccess.Snapshot snapshot = RecipeCatalogAccess.read(level);
+        if (!snapshot.ready()) RecipeCatalogAccess.prewarmAsync(level);
+        var recipes = snapshot.entries();
         Builder cached = CACHE.get(level.getRecipeManager());
-        if (cached == null || cached.recipes != recipes) {
-            cached = new Builder(recipes);
+        if (cached == null || cached.recipes != recipes
+                || (snapshot.ready() && !cached.catalogReady)) {
+            cached = new Builder(level, recipes, snapshot.ready());
             CACHE.put(level.getRecipeManager(), cached);
         }
         return cached;
     }
 
     public static final class Builder {
-        private final List<AlloyFurnaceRecipeCatalog.Entry> recipes;
+        private final Level level;
+        private List<AlloyFurnaceRecipeCatalog.Entry> recipes;
+        private boolean catalogReady;
         private final Map<String, LinkedHashMap<ResourceLocation, MoldEntry>> byMod = new TreeMap<>();
         private final Map<String, Set<Ingredient>> inspected = new HashMap<>();
         private Map<String, List<MoldEntry>> result;
         private int cursor;
 
-        private Builder(List<AlloyFurnaceRecipeCatalog.Entry> recipes) { this.recipes = recipes; }
+        private Builder(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
+            this(null, recipes, true);
+        }
+
+        private Builder(Level level, List<AlloyFurnaceRecipeCatalog.Entry> recipes, boolean catalogReady) {
+            this.level = level;
+            this.recipes = recipes;
+            this.catalogReady = catalogReady;
+        }
 
         public boolean advance() {
             if (result != null) return true;
+            if (!catalogReady && level != null) {
+                RecipeCatalogAccess.Snapshot snapshot = RecipeCatalogAccess.read(level);
+                if (!snapshot.ready()) return false;
+                recipes = snapshot.entries();
+                catalogReady = true;
+            }
             long deadline = System.nanoTime() + 1_000_000L;
             int steps = 0;
             while (cursor < recipes.size() && steps++ < 512) {

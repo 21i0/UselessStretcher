@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LightningRodBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -135,8 +136,6 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_summon")
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_smelt")
-                .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_loot_refresh")
                 .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
@@ -146,6 +145,9 @@ public class WondrousStaffItem extends EndlessBeafItem {
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
+        if (isEnabledLightningRodTarget(stack, ctx)) {
+            return WondrousStaffAcceleration.tryUse(ctx);
+        }
         if (player != null && player.isShiftKeyDown()
                 && StretcherConfig.enableStaffLootRefresh()
                 && WondrousStaffAcceleration.isLootRefreshEnabled(stack)) {
@@ -166,6 +168,9 @@ public class WondrousStaffItem extends EndlessBeafItem {
     public InteractionResult useOn(UseOnContext ctx) {
         if (RangeAccelerationSettings.filterMarkingMode(ctx.getItemInHand())) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
+        if (isEnabledLightningRodTarget(ctx.getItemInHand(), ctx)) {
+            return WondrousStaffAcceleration.tryUse(ctx);
+        }
         if (player != null && player.isShiftKeyDown()
                 && StretcherConfig.enableStaffLootRefresh()
                 && WondrousStaffAcceleration.isLootRefreshEnabled(ctx.getItemInHand())) {
@@ -178,6 +183,17 @@ public class WondrousStaffItem extends EndlessBeafItem {
             return InteractionResult.FAIL;
         }
         return super.useOn(ctx);
+    }
+
+    /**
+     * The upstream item handles lightning rods before its normal acceleration hook.  Keep a
+     * direct item-level guard as a fallback for interaction paths that do not dispatch the
+     * NeoForge block event (and for servers with a different event-handler ordering).
+     */
+    private static boolean isEnabledLightningRodTarget(ItemStack stack, UseOnContext ctx) {
+        return WondrousStaffAcceleration.isEnabled(stack)
+                && !RangeAccelerationSettings.placementMode(stack)
+                && ctx.getLevel().getBlockState(ctx.getClickedPos()).getBlock() instanceof LightningRodBlock;
     }
 
     @Override

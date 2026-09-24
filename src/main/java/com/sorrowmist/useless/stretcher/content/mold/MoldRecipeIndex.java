@@ -25,6 +25,7 @@ import java.util.WeakHashMap;
 public final class MoldRecipeIndex {
     private static final Map<MinecraftServer, MoldRecipeIndex> SERVERS = new WeakHashMap<>();
     private final List<AlloyFurnaceRecipeCatalog.Entry> recipes;
+    private final boolean catalogReady;
     private final Map<Ingredient, List<Posting>> ingredients = new HashMap<>();
     private final Map<ResourceLocation, Posting> byMold = new HashMap<>();
     private final List<Posting> custom = new ArrayList<>();
@@ -32,15 +33,25 @@ public final class MoldRecipeIndex {
     private int built;
     private RuntimeException failure;
 
-    public MoldRecipeIndex(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
+    public MoldRecipeIndex(List<AlloyFurnaceRecipeCatalog.Entry> recipes, boolean catalogReady) {
         this.recipes = recipes;
+        this.catalogReady = catalogReady;
+    }
+
+    /** Fixture and API compatibility constructor for an already materialized catalog. */
+    public MoldRecipeIndex(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
+        this(recipes, true);
     }
 
     public static MoldRecipeIndex get(ServerLevel level) {
-        var snapshot = AlloyFurnaceRecipeCatalog.entries(level);
+        RecipeCatalogAccess.Snapshot catalog = RecipeCatalogAccess.read(level);
+        if (!catalog.ready()) RecipeCatalogAccess.prewarmAsync(level);
+        var snapshot = catalog.entries();
         var index = SERVERS.get(level.getServer());
-        if (index == null || !index.isFor(snapshot)) {
-            index = new MoldRecipeIndex(snapshot);
+        if (index == null
+                || (!catalog.ready() && index.catalogReady())
+                || (catalog.ready() && !index.isFor(snapshot))) {
+            index = new MoldRecipeIndex(snapshot, catalog.ready());
             SERVERS.put(level.getServer(), index);
         }
         return index;
@@ -49,7 +60,8 @@ public final class MoldRecipeIndex {
     /** Release only on server shutdown; recipe reload replaces the old snapshot in get(). */
     public static void removeServer(MinecraftServer server) { SERVERS.remove(server); }
     public boolean isFor(List<AlloyFurnaceRecipeCatalog.Entry> snapshot) { return recipes == snapshot; }
-    public boolean ready() { return built >= recipes.size(); }
+    public boolean catalogReady() { return catalogReady; }
+    public boolean ready() { return catalogReady && built >= recipes.size(); }
     public boolean failed() { return failure != null; }
     public void checkHealthy() {
         if (failure != null) throw new IllegalStateException("Cannot build mold recipe index", failure);
@@ -58,6 +70,7 @@ public final class MoldRecipeIndex {
 
     /** One recipe per unit; each distinct ingredient is expanded just once for this snapshot. */
     public void advance() {
+        if (!catalogReady) return;
         checkHealthy();
         try { advanceRecipe(); }
         catch (RuntimeException exception) { failure = exception; throw exception; }
