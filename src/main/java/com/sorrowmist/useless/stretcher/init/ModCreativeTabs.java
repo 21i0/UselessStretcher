@@ -9,8 +9,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * Registers a small creative tab so the handheld stretcher and the staff are
- * visible and searchable in JEI, including the omniversal myriad block. The block is safe to show
+ * Registers a small creative tab so the handheld tools are visible and searchable in JEI,
+ * including the omniversal myriad block and the non-craftable range reclaimer. The block is safe to show
  * as an item: its wildcard mold entry is de-duplicated by the shared recipe catalog and does not
  * multiply alloy-furnace recipe pages.
  *
@@ -38,6 +38,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.USELESS_STRETCHER.get());
                         output.accept(ModItems.WONDROUS_STAFF.get());
                         output.accept(ModItems.OMNIVERSAL_MYRIAD.get());
+                        output.accept(ModItems.RANGE_RECLAIMER.get());
                     })
                     .build()
     );

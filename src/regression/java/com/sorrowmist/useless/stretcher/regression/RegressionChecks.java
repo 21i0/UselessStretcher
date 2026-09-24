@@ -423,6 +423,11 @@ public final class RegressionChecks {
         var tab = com.sorrowmist.useless.stretcher.init.ModCreativeTabs.MAIN.get();
         tab.buildContents(new net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters(
                 level.enabledFeatures(), true, level.registryAccess()));
+        check(tab.getDisplayItems().stream().anyMatch(stack -> stack.is(ModItems.RANGE_RECLAIMER.get())),
+                "range reclaimer is visible to creative tabs and recipe viewers");
+        check(level.getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(
+                        UselessStretcherMod.MODID, "range_reclaimer")).isEmpty(),
+                "range reclaimer remains non-craftable");
         var hidden = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
                 ResourceLocation.parse("c:hidden_from_recipe_viewers"));
         for (String name : List.of("quad_chunk", "nine_chunk", "quad_chunk_odd", "nine_chunk_odd")) {

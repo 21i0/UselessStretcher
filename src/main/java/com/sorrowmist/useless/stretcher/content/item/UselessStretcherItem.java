@@ -10,6 +10,7 @@ import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +18,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -32,6 +34,24 @@ import java.util.LinkedList;
 public final class UselessStretcherItem extends Item {
     public UselessStretcherItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip,
+                                TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.flavor")
+                .withStyle(ChatFormatting.GOLD));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_ae")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_myriad")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_send")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_copy")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_full")
+                .withStyle(ChatFormatting.GRAY));
+        super.appendHoverText(stack, context, tooltip, flag);
     }
 
     @Override
