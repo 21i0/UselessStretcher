@@ -13,6 +13,8 @@
     "MyriadContainerMigrationMixin",
     "StaffMiningDispatcherMixin",
     "StaffMiningDropsMixin",
+    "RandomizableContainerLootMemoryMixin",
+    "MinecartContainerLootMemoryMixin",
     "RecoverableItemStackHandlerMixin",
     "ItemStackHandlerMixin",
     "ChunkDimensionDaylightMixin",

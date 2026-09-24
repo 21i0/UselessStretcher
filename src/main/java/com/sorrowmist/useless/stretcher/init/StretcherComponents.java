@@ -41,6 +41,24 @@ public final class StretcherComponents {
                     .persistent(Codec.INT)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
 
+    /** Enables direct smelting of smeltable drops produced while mining with the staff. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_AUTO_SMELT =
+            register("wondrous_staff_auto_smelt", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Enables the staff's summon catalog and summon action. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_SUMMON_ENABLED =
+            register("wondrous_staff_summon_enabled", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Enables Shift+right-click refresh for loot-table containers and container minecarts. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_LOOT_REFRESH =
+            register("wondrous_staff_loot_refresh", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
     /** Whether Shift+right-click places an independent range instead of accelerating one target. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_PLACEMENT_MODE =
             register("range_placement_mode", builder -> builder

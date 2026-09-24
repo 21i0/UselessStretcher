@@ -9,6 +9,8 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.item.StaffMiningContext;
 import com.sorrowmist.useless.stretcher.content.item.RangeReclaimerItem;
 import com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem;
+import com.sorrowmist.useless.stretcher.content.item.WondrousStaffLootRefresh;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
 import com.sorrowmist.useless.stretcher.content.mold.MoldMatch;
@@ -55,6 +57,9 @@ import io.netty.buffer.Unpooled;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.MinecartChest;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -88,6 +93,7 @@ public final class RegressionChecks {
             drops();
             acceleration(level);
             toolCompatibility();
+            lootRefresh(level);
             largeMoldDrop(level);
             indexedRecipes(level);
             legacyDimensions(level);
@@ -237,6 +243,32 @@ public final class RegressionChecks {
             }
         });
         check(!StaffMiningContext.active(), "mining context released");
+    }
+
+    private static void lootRefresh(ServerLevel level) {
+        check(!StretcherConfig.enableStaffLootRefresh(), "loot refresh global config defaults off");
+        var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "loot-refresh-test"));
+
+        BlockPos barrelPos = new BlockPos(4, 100, 0);
+        level.setBlockAndUpdate(barrelPos, Blocks.BARREL.defaultBlockState());
+        var barrel = (RandomizableContainerBlockEntity) level.getBlockEntity(barrelPos);
+        check(barrel != null, "loot refresh barrel exists");
+        barrel.setLootTable(BuiltInLootTables.SIMPLE_DUNGEON);
+        barrel.setLootTable(null);
+        check(WondrousStaffLootRefresh.tryRefreshBlock(player, barrelPos) != InteractionResult.PASS,
+                "opened vanilla loot block is handled");
+        check(!barrel.isEmpty(), "opened vanilla loot block regenerates contents");
+
+        MinecartChest minecart = new MinecartChest(level, 4.5D, 100.0D, 2.5D);
+        level.addFreshEntity(minecart);
+        minecart.setLootTable(BuiltInLootTables.SIMPLE_DUNGEON, 1L);
+        minecart.setLootTable(null);
+        check(WondrousStaffLootRefresh.tryRefreshEntity(player, minecart) != InteractionResult.PASS,
+                "opened loot minecart is handled");
+        check(!minecart.isEmpty(), "opened loot minecart regenerates contents");
+        minecart.discard();
+        level.removeBlock(barrelPos, false);
+        LogUtils.getLogger().info("REGRESSION loot refresh: opened block and minecart regenerated from remembered tables");
     }
 
     @SuppressWarnings("unchecked")

@@ -21,6 +21,8 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue ENTITY_DISABLE_AI;
     public static final ModConfigSpec.BooleanValue ENABLE_STAFF_LEAF_DROP;
     public static final ModConfigSpec.DoubleValue STAFF_LEAF_DROP_PROBABILITY;
+    public static final ModConfigSpec.BooleanValue ENABLE_STAFF_SUMMON;
+    public static final ModConfigSpec.BooleanValue ENABLE_STAFF_LOOT_REFRESH;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -43,6 +45,35 @@ public final class StretcherConfig {
                         "加速效果结束或目标消失时会恢复目标原本的 AI 状态。")
                 .translation("useless_stretcher.configuration.acceleration.entity_disable_ai")
                 .define("entity_disable_ai", true);
+        BUILDER.pop();
+
+        // Keep all staff-specific categories adjacent in the generated config UI while retaining
+        // their established paths so existing server settings continue to load unchanged.
+        BUILDER.translation("useless_stretcher.configuration.summoning").push("summoning");
+        ENABLE_STAFF_SUMMON = BUILDER
+                .comment("是否允许手杖召唤目录和召唤功能。默认关闭。",
+                        "关闭后，手杖 UI 中的召唤功能不会执行，已保存的手杖开关不会被删除。")
+                .translation("useless_stretcher.configuration.summoning.enable")
+                .define("enable", false);
+        BUILDER.pop();
+
+        BUILDER.translation("useless_stretcher.configuration.loot_refresh").push("loot_refresh");
+        ENABLE_STAFF_LOOT_REFRESH = BUILDER
+                .comment("是否允许手杖刷新战利品箱、其它原版战利品容器、容器矿车和 Lootr 容器。默认关闭。",
+                        "关闭后，手杖 UI 中仍会显示该功能，但无法开启或执行刷新。")
+                .translation("useless_stretcher.configuration.loot_refresh.enable")
+                .define("enable", false);
+        BUILDER.pop();
+
+        BUILDER.translation("useless_stretcher.configuration.staff_leaf_drop").push("staff_leaf_drop");
+        ENABLE_STAFF_LEAF_DROP = BUILDER
+                .comment("是否启用破坏树叶时极低概率掉落荒辰移晷之杖彩蛋。")
+                .translation("useless_stretcher.configuration.staff_leaf_drop.enable")
+                .define("enable", true);
+        STAFF_LEAF_DROP_PROBABILITY = BUILDER
+                .comment("破坏树叶掉落荒辰移晷之杖的概率，0.00001为十万分之一。")
+                .translation("useless_stretcher.configuration.staff_leaf_drop.probability")
+                .defineInRange("probability", 0.00001D, 0.0D, 1.0D);
         BUILDER.pop();
 
         BUILDER.translation("useless_stretcher.configuration.recipe_compat").push("recipe_compat");
@@ -77,17 +108,6 @@ public final class StretcherConfig {
                 .defineList("whitelist", ArrayList::new, o -> o instanceof String);
         BUILDER.pop();
 
-        BUILDER.translation("useless_stretcher.configuration.staff_leaf_drop").push("staff_leaf_drop");
-        ENABLE_STAFF_LEAF_DROP = BUILDER
-                .comment("是否启用破坏树叶时极低概率掉落荒辰移晷之杖彩蛋。")
-                .translation("useless_stretcher.configuration.staff_leaf_drop.enable")
-                .define("enable", true);
-        STAFF_LEAF_DROP_PROBABILITY = BUILDER
-                .comment("破坏树叶掉落荒辰移晷之杖的概率，0.00001为十万分之一。")
-                .translation("useless_stretcher.configuration.staff_leaf_drop.probability")
-                .defineInRange("probability", 0.00001D, 0.0D, 1.0D);
-        BUILDER.pop();
-
         COMMON_SPEC = BUILDER.build();
     }
 
@@ -116,6 +136,14 @@ public final class StretcherConfig {
 
     public static double staffLeafDropProbability() {
         return STAFF_LEAF_DROP_PROBABILITY.get();
+    }
+
+    public static boolean enableStaffSummon() {
+        return ENABLE_STAFF_SUMMON.get();
+    }
+
+    public static boolean enableStaffLootRefresh() {
+        return ENABLE_STAFF_LOOT_REFRESH.get();
     }
 
     /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */

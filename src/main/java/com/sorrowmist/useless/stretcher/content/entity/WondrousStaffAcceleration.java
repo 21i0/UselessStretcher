@@ -202,6 +202,18 @@ public final class WondrousStaffAcceleration {
         return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
     }
 
+    public static boolean isAutoSmeltEnabled(ItemStack stack) {
+        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), false);
+    }
+
+    public static boolean isSummonEnabled(ItemStack stack) {
+        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
+    }
+
+    public static boolean isLootRefreshEnabled(ItemStack stack) {
+        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
+    }
+
     /**
      * Reads the new three-state mode, falling back to the old boolean component for existing
      * stacks made before the mode key was added.

@@ -4,10 +4,12 @@ import com.sorrowmist.useless.core.component.UComponents;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -20,17 +22,26 @@ import java.util.List;
 public final class WondrousStaffConfigScreen extends Screen {
     private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
     private static final int PANEL_WIDTH = 260;
-    private static final int PANEL_HEIGHT = 193;
+    private static final int PANEL_COLLAPSED_HEIGHT = 278;
+    private static final int PANEL_EXPANDED_HEIGHT = 313;
 
     private final InteractionHand hand;
     private final List<ChoiceButton> speedButtons = new ArrayList<>();
     private final List<ChoiceButton> modeButtons = new ArrayList<>();
     private SelectableAE2Button accelerationButton;
+    private SelectableAE2Button autoSmeltButton;
+    private SelectableAE2Button lootRefreshButton;
+    private SelectableAE2Button summonOpenButton;
+    private PlainTextButton extrasFoldText;
     private int panelLeft;
     private int panelTop;
     private int selectedSpeed;
     private int selectedMode;
     private boolean accelerationEnabled;
+    private boolean autoSmeltEnabled;
+    private boolean summonEnabled;
+    private boolean lootRefreshEnabled;
+    private boolean extrasCollapsed = true;
 
     public WondrousStaffConfigScreen(InteractionHand hand) {
         super(Component.translatable("gui.useless_stretcher.staff_config.title"));
@@ -41,12 +52,15 @@ public final class WondrousStaffConfigScreen extends Screen {
     protected void init() {
         super.init();
         panelLeft = (width - Math.min(PANEL_WIDTH, width - 12)) / 2;
-        panelTop = Math.max(6, (height - PANEL_HEIGHT) / 2);
+        panelTop = Math.max(6, (height - panelHeight()) / 2);
         int panelWidth = Math.min(PANEL_WIDTH, width - 12);
         ItemStack staff = currentStaff();
         selectedSpeed = WondrousStaffAcceleration.getSpeed(staff);
         selectedMode = WondrousStaffAcceleration.getMode(staff);
         accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
+        autoSmeltEnabled = WondrousStaffAcceleration.isAutoSmeltEnabled(staff);
+        summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+        lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
 
         speedButtons.clear();
         modeButtons.clear();
@@ -82,15 +96,40 @@ public final class WondrousStaffConfigScreen extends Screen {
                     Component.translatable(modeKeys[mode]), ignored -> selectMode(value)));
             modeButtons.add(new ChoiceButton(mode, button));
         }
+        autoSmeltButton = addRenderableWidget(new SelectableAE2Button(
+                cardLeft + 5, panelTop + 188, cardWidth - 10, 17,
+                autoSmeltMessage(), ignored -> toggleAutoSmelt()));
+        Component foldText = Component.translatable(extrasCollapsed
+                ? "gui.useless_stretcher.staff_summon.expand"
+                : "gui.useless_stretcher.staff_summon.collapse");
+        int foldWidth = font.width(foldText);
+        extrasFoldText = addRenderableWidget(new PlainTextButton(
+                cardLeft + (cardWidth - foldWidth) / 2, panelTop + 211, foldWidth, 10,
+                foldText, ignored -> toggleExtrasFold(), font));
+        if (!extrasCollapsed) {
+            lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5, panelTop + 226, cardWidth - 10, 17,
+                    lootRefreshMessage(), ignored -> toggleLootRefresh()));
+            summonOpenButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5, panelTop + 246, cardWidth - 10, 17,
+                    summonOpenMessage(),
+                    ignored -> minecraft.setScreen(new WondrousStaffSummonScreen(this, hand))));
+        } else {
+            lootRefreshButton = null;
+            summonOpenButton = null;
+        }
+
         int footerWidth = (cardWidth - 3) / 2;
+        int footerY = panelTop + (extrasCollapsed ? 251 : 286);
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft, panelTop + 169, footerWidth, 17,
+                cardLeft, footerY, footerWidth, 17,
                 Component.translatable("gui.useless_stretcher.range.open"),
                 ignored -> minecraft.setScreen(new RangeAccelerationConfigScreen(this, hand))));
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft + footerWidth + 3, panelTop + 169, cardWidth - footerWidth - 3, 17,
+                cardLeft + footerWidth + 3, footerY, cardWidth - footerWidth - 3, 17,
                 Component.translatable("gui.useless_stretcher.range.history"),
                 ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
+        autoSmeltButton.setSelected(autoSmeltEnabled);
         updateSelection();
     }
 
@@ -98,7 +137,7 @@ public final class WondrousStaffConfigScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0x33000000);
         int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, PANEL_HEIGHT);
+        StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, panelHeight());
         graphics.drawString(font, title, panelLeft + 8, panelTop + 8,
                 StretcherScreenStyle.TEXT_COLOR, false);
 
@@ -110,6 +149,10 @@ public final class WondrousStaffConfigScreen extends Screen {
         StretcherScreenStyle.drawInset(graphics, cardLeft, panelTop + 84, cardRight, panelTop + 163);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.duration"),
                 cardLeft + 5, panelTop + 89, StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, cardLeft, panelTop + 167, cardRight,
+                panelTop + (extrasCollapsed ? 244 : 279));
+        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.features"),
+                cardLeft + 5, panelTop + 172, StretcherScreenStyle.TEXT_COLOR, false);
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
@@ -142,6 +185,31 @@ public final class WondrousStaffConfigScreen extends Screen {
         sendSelection();
     }
 
+    private void toggleAutoSmelt() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        autoSmeltEnabled = !autoSmeltEnabled;
+        // The summon screen can enable this component while it is open. Read
+        // it back before sending the combined feature payload so returning to
+        // this parent screen cannot overwrite that choice with stale state.
+        summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+        lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+        staff.set(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), autoSmeltEnabled);
+        Network.sendWondrousStaffFeatures(autoSmeltEnabled, summonEnabled, lootRefreshEnabled, hand);
+        updateSelection();
+    }
+
+    private void toggleLootRefresh() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !StretcherConfig.enableStaffLootRefresh()) return;
+        autoSmeltEnabled = WondrousStaffAcceleration.isAutoSmeltEnabled(staff);
+        summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+        lootRefreshEnabled = !WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+        staff.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), lootRefreshEnabled);
+        Network.sendWondrousStaffFeatures(autoSmeltEnabled, summonEnabled, lootRefreshEnabled, hand);
+        updateSelection();
+    }
+
     private void sendSelection() {
         updateSelection();
         Network.sendWondrousStaffSpeed(selectedSpeed, selectedMode, accelerationEnabled, hand);
@@ -154,6 +222,26 @@ public final class WondrousStaffConfigScreen extends Screen {
             accelerationButton.setSelected(accelerationEnabled);
             accelerationButton.setMessage(accelerationMessage());
         }
+        if (autoSmeltButton != null) {
+            autoSmeltButton.setSelected(autoSmeltEnabled);
+            autoSmeltButton.setMessage(autoSmeltMessage());
+        }
+        if (lootRefreshButton != null) {
+            boolean configEnabled = StretcherConfig.enableStaffLootRefresh();
+            lootRefreshButton.active = configEnabled;
+            lootRefreshButton.setSelected(configEnabled && lootRefreshEnabled);
+            lootRefreshButton.setMessage(configEnabled
+                    ? lootRefreshMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_config.loot_refresh_disabled"));
+        }
+        if (summonOpenButton != null) {
+            boolean configEnabled = StretcherConfig.enableStaffSummon();
+            summonOpenButton.visible = true;
+            summonOpenButton.active = configEnabled;
+            summonOpenButton.setMessage(configEnabled
+                    ? summonOpenMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_summon.disabled"));
+        }
     }
 
     private Component accelerationMessage() {
@@ -161,6 +249,31 @@ public final class WondrousStaffConfigScreen extends Screen {
                 Component.translatable(accelerationEnabled
                         ? "gui.useless_stretcher.staff_config.on"
                         : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component autoSmeltMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.auto_smelt",
+                Component.translatable(autoSmeltEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component summonOpenMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_summon.open");
+    }
+
+    private Component lootRefreshMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.loot_refresh",
+                Component.translatable(lootRefreshEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private void toggleExtrasFold() {
+        extrasCollapsed = !extrasCollapsed;
+        rebuildWidgets();
+    }
+
+    private int panelHeight() {
+        return extrasCollapsed ? PANEL_COLLAPSED_HEIGHT : PANEL_EXPANDED_HEIGHT;
     }
 
     private ItemStack currentStaff() {

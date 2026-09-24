@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -259,6 +260,11 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     private void updateEntityAi(Entity target) {
         if (!(target instanceof Mob mob)) return;
+        // Ender Dragon hitboxes are maintained by its phase/part tick. Forcing
+        // Mob#setNoAi(true) stops that lifecycle, leaving the dragon unable to
+        // process damage and death. Keep its vanilla phase ticking; all other
+        // mobs still use the staff's no-AI behavior.
+        if (mob instanceof EnderDragon) return;
         if (!isEntityAiDisabled()) {
             restoreEntityAi(mob);
             return;

@@ -5,6 +5,7 @@ import com.sorrowmist.useless.content.items.EndlessBeafItem;
 import com.sorrowmist.useless.content.items.BeefToolVariants;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.client.StretcherKeyBindings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -132,6 +133,12 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_range")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_summon")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_smelt")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_loot_refresh")
+                .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
     }
 
@@ -139,6 +146,12 @@ public class WondrousStaffItem extends EndlessBeafItem {
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
+        if (player != null && player.isShiftKeyDown()
+                && StretcherConfig.enableStaffLootRefresh()
+                && WondrousStaffAcceleration.isLootRefreshEnabled(stack)) {
+            InteractionResult refresh = WondrousStaffLootRefresh.tryRefreshBlock(player, ctx.getClickedPos());
+            if (refresh != InteractionResult.PASS) return refresh;
+        }
         if (player != null && player.isShiftKeyDown() && WondrousStaffAcceleration.isEnabled(stack)) {
             if (RangeAccelerationSettings.placementMode(stack)) return InteractionResult.FAIL;
             // Acceleration mode ON: disable every other right-click (wrench/tool/block menu)
@@ -153,6 +166,12 @@ public class WondrousStaffItem extends EndlessBeafItem {
     public InteractionResult useOn(UseOnContext ctx) {
         if (RangeAccelerationSettings.filterMarkingMode(ctx.getItemInHand())) return InteractionResult.FAIL;
         Player player = ctx.getPlayer();
+        if (player != null && player.isShiftKeyDown()
+                && StretcherConfig.enableStaffLootRefresh()
+                && WondrousStaffAcceleration.isLootRefreshEnabled(ctx.getItemInHand())) {
+            InteractionResult refresh = WondrousStaffLootRefresh.tryRefreshBlock(player, ctx.getClickedPos());
+            if (refresh != InteractionResult.PASS) return refresh;
+        }
         if (player != null && player.isShiftKeyDown() && WondrousStaffAcceleration.isEnabled(ctx.getItemInHand())) {
             if (RangeAccelerationSettings.placementMode(ctx.getItemInHand())) return InteractionResult.FAIL;
             WondrousStaffAcceleration.tryUse(ctx);

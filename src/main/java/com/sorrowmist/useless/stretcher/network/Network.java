@@ -4,6 +4,8 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
+import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
+import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -137,6 +139,55 @@ public final class Network {
         }
     }
 
+    /** Staff-only feature toggles edited by the X screen. */
+    public record WondrousStaffFeaturesPayload(boolean autoSmelt, boolean summonEnabled,
+                                                boolean lootRefresh, boolean offhand)
+            implements CustomPacketPayload {
+        public static final Type<WondrousStaffFeaturesPayload> TYPE =
+                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                        "wondrous_staff_features"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffFeaturesPayload> STREAM_CODEC =
+                StreamCodec.composite(
+                        ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::autoSmelt,
+                        ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::summonEnabled,
+                        ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::lootRefresh,
+                        ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::offhand,
+                        WondrousStaffFeaturesPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Selected entity registry IDs to summon. The server applies the hard count limit. */
+    public record WondrousStaffSummonPayload(List<String> entityIds, boolean offhand)
+            implements CustomPacketPayload {
+        public static final Type<WondrousStaffSummonPayload> TYPE =
+                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                        "wondrous_staff_summon"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffSummonPayload> STREAM_CODEC =
+                StreamCodec.of((buffer, value) -> {
+                    int size = Math.min(value.entityIds().size(), WondrousStaffSummoning.MAX_SELECTION);
+                    buffer.writeVarInt(size);
+                    for (int i = 0; i < size; i++) buffer.writeUtf(value.entityIds().get(i), 256);
+                    buffer.writeBoolean(value.offhand());
+                }, buffer -> {
+                    int size = buffer.readVarInt();
+                    if (size < 0 || size > WondrousStaffSummoning.MAX_SELECTION) {
+                        throw new IllegalArgumentException("Invalid summon selection size: " + size);
+                    }
+                    List<String> ids = new ArrayList<>(size);
+                    for (int i = 0; i < size; i++) ids.add(buffer.readUtf(256));
+                    return new WondrousStaffSummonPayload(ids, buffer.readBoolean());
+                });
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     /** Dimension-wide visual clock used only for client cloud movement. */
     public record TimeAccelerationStatePayload(String dimension, int speed) implements CustomPacketPayload {
         public static final Type<TimeAccelerationStatePayload> TYPE =
@@ -156,7 +207,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("2");
+        PayloadRegistrar registrar = event.registrar("3");
 
         registrar.playToServer(MyriadActionPayload.TYPE, MyriadActionPayload.STREAM_CODEC, Network::handleAction);
         registrar.playToClient(MyriadStatePayload.TYPE, MyriadStatePayload.STREAM_CODEC,
@@ -175,6 +226,10 @@ public final class Network {
                 (payload, context) -> ClientStateReceiver.handleTimeAcceleration(payload));
         registrar.playToServer(WondrousStaffSpeedPayload.TYPE, WondrousStaffSpeedPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSpeed(payload, context)));
+        registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
+        registrar.playToServer(WondrousStaffSummonPayload.TYPE, WondrousStaffSummonPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSummon(payload, context)));
         RangeNetwork.register(registrar);
     }
 
@@ -206,6 +261,40 @@ public final class Network {
                                               InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(
                 speed, mode, accelerationEnabled, hand == InteractionHand.OFF_HAND));
+    }
+
+    private static void handleWondrousStaffFeatures(WondrousStaffFeaturesPayload payload,
+                                                    net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack held = player.getItemInHand(hand);
+        if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+        held.set(StretcherComponents.WONDROUS_STAFF_AUTO_SMELT.get(), payload.autoSmelt());
+        held.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), payload.summonEnabled());
+        held.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(),
+                payload.lootRefresh()
+                        && com.sorrowmist.useless.stretcher.config.StretcherConfig.enableStaffLootRefresh());
+    }
+
+    private static void handleWondrousStaffSummon(WondrousStaffSummonPayload payload,
+                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack held = player.getItemInHand(hand);
+        if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+        WondrousStaffSummoning.summon(player, held, payload.entityIds());
+    }
+
+    public static void sendWondrousStaffFeatures(boolean autoSmelt, boolean summonEnabled,
+                                                 boolean lootRefresh,
+                                                 InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffFeaturesPayload(
+                autoSmelt, summonEnabled, lootRefresh, hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendWondrousStaffSummon(List<String> entityIds, InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffSummonPayload(
+                List.copyOf(entityIds), hand == InteractionHand.OFF_HAND));
     }
 
     public static void sendStaffTutorial(ServerPlayer player) {
