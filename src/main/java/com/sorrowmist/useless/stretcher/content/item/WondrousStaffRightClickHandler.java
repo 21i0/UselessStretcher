@@ -28,7 +28,7 @@ public final class WondrousStaffRightClickHandler {
     private WondrousStaffRightClickHandler() {
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
         ItemStack stack = event.getItemStack();
@@ -65,7 +65,7 @@ public final class WondrousStaffRightClickHandler {
         event.setCancellationResult(InteractionResult.SUCCESS);
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
         InteractionResult result = tryRangeReclaim(event.getEntity(), event.getItemStack(), event.getTarget());
         if (result == InteractionResult.PASS) {
@@ -77,7 +77,7 @@ public final class WondrousStaffRightClickHandler {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public static void onRightClickEntitySpecific(PlayerInteractEvent.EntityInteractSpecific event) {
         InteractionResult result = tryRangeReclaim(event.getEntity(), event.getItemStack(), event.getTarget());
         if (result == InteractionResult.PASS) {

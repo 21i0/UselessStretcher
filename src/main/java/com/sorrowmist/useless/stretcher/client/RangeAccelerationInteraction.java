@@ -20,7 +20,7 @@ public final class RangeAccelerationInteraction {
     private RangeAccelerationInteraction() {
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if (!event.getLevel().isClientSide()) return;
 

@@ -425,12 +425,19 @@ public final class RegressionChecks {
         int lightningBefore = level.getEntitiesOfClass(LightningBolt.class, area).size();
         var enabledClick = new PlayerInteractEvent.RightClickBlock(
                 player, InteractionHand.MAIN_HAND, rodPos, hit);
+        // Large packs often cancel block interaction before the staff listener runs (for
+        // example through right-click rule engines). The staff's enabled interaction must still
+        // own its target at HIGHEST priority instead of silently doing nothing.
+        enabledClick.setCanceled(true);
+        enabledClick.setCancellationResult(InteractionResult.FAIL);
         NeoForge.EVENT_BUS.post(enabledClick);
         int lightningAfter = level.getEntitiesOfClass(LightningBolt.class, area).size();
         List<WondrousStaffAccelerationEntity> effects = level.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class, new AABB(rodPos),
                 entity -> rodPos.equals(entity.getTargetPos()));
         check(enabledClick.isCanceled(), "enabled rod click is consumed by wondrous acceleration");
+        check(enabledClick.getCancellationResult() == InteractionResult.SUCCESS,
+                "enabled rod click overrides an earlier canceled interaction");
         check(lightningAfter == lightningBefore,
                 "upstream one-shot lightning is suppressed while acceleration is enabled");
         check(effects.size() == 1, "enabled rod click creates one wondrous acceleration marker");
