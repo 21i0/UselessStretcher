@@ -23,9 +23,6 @@ public final class AccelerationExecutionBudget {
     private static final int EMERGENCY_BUDGET = 4_096;
     private static final long NANOS_PER_MILLISECOND = 1_000_000L;
     private static final long MAX_WORK_NANOS = 5_000_000L;
-    private static final long MAX_TARGET_WORK_NANOS = 500_000L;
-    private static final int MAX_TARGET_BATCH = 4;
-    private static final int MAX_TARGETS_PER_TICK = 128;
 
     /** Weak server keys avoid retaining an integrated server after returning to the title screen. */
     private static final Map<MinecraftServer, ServerState> STATES = new WeakHashMap<>();
@@ -51,43 +48,9 @@ public final class AccelerationExecutionBudget {
         return System.nanoTime() + Math.max(0L, Math.min(state.sliceNanos, MAX_WORK_NANOS - state.workNanos));
     }
 
-    /** Per-target deadline; a slow callback yields this target without ending server-wide work. */
-    public static long targetDeadline(MinecraftServer server, Object targetKey) {
-        ServerState state = STATES.get(server);
-        if (state == null) return System.nanoTime() + MAX_TARGET_WORK_NANOS;
-        long used = state.targetWorkNanos.getOrDefault(targetKey, 0L);
-        return System.nanoTime() + Math.max(0L, Math.min(MAX_TARGET_WORK_NANOS - used,
-                MAX_WORK_NANOS - state.workNanos));
-    }
-
-    /** Small batches keep a single machine from occupying a long uninterrupted main-thread slice. */
-    public static int batchSize(int requested) {
-        return Math.min(Math.max(0, requested), MAX_TARGET_BATCH);
-    }
-
-    /** Bounds per-field work on a tick while a rotating cursor eventually visits every target. */
-    public static int targetVisitLimit() {
-        return MAX_TARGETS_PER_TICK;
-    }
-
-    /** Ordinary, expiring acceleration gets first claim; permanent targets use leftover budget. */
-    public static void prioritize(MinecraftServer server, Object targetKey, boolean ordinary) {
-        ServerState state = STATES.get(server);
-        if (state != null && targetKey != null) state.prioritize(targetKey, ordinary);
-    }
-
     public static void recordWork(MinecraftServer server, long started) {
         ServerState state = STATES.get(server);
         if (state != null) state.workNanos += Math.max(0L, System.nanoTime() - started);
-    }
-
-    public static void recordTargetWork(MinecraftServer server, Object targetKey, long started) {
-        ServerState state = STATES.get(server);
-        if (state != null && targetKey != null) {
-            long elapsed = Math.max(0L, System.nanoTime() - started);
-            state.workNanos += elapsed;
-            state.targetWorkNanos.merge(targetKey, elapsed, Long::sum);
-        }
     }
 
     /**
@@ -143,67 +106,36 @@ public final class AccelerationExecutionBudget {
     private static final class ServerState {
         private int tick = Integer.MIN_VALUE;
         private int remaining;
-        private int perTargetLimit = HEALTHY_BUDGET;
-        private int ordinaryRemaining;
-        private int permanentRemaining;
-        private boolean ordinaryPresent;
-        private boolean permanentPresent;
+        private int perTargetLimit = Integer.MAX_VALUE;
         private long workNanos;
         private long sliceNanos = MAX_WORK_NANOS;
-        private final Map<Object, Long> targetWorkNanos = new IdentityHashMap<>();
-        private final Map<Object, Boolean> priority = new IdentityHashMap<>();
         private final Map<Object, Integer> activeTargets = new IdentityHashMap<>();
 
         private void begin(int serverTick, int budget) {
             int previousTargetCount = Math.max(1, activeTargets.size());
             activeTargets.clear();
-            targetWorkNanos.clear();
-            priority.clear();
             workNanos = 0L;
             sliceNanos = Math.max(1L, MAX_WORK_NANOS / previousTargetCount);
             tick = serverTick;
             remaining = Math.max(0, budget);
-            // Keep the count allowance independent from registration order. The previous
-            // implementation repeatedly divided this value as targets registered during the
-            // tick, which could reduce a normal x1024 target to one virtual tick or zero useful
-            // work when a range accelerator visited many machines.
-            ordinaryRemaining = budget;
-            permanentRemaining = budget;
-            ordinaryPresent = false;
-            permanentPresent = false;
             if (budget >= HEALTHY_BUDGET) {
-                perTargetLimit = Math.max(64, budget);
+                perTargetLimit = Integer.MAX_VALUE;
                 return;
             }
-            perTargetLimit = Math.max(1, budget);
+            perTargetLimit = Math.max(1,
+                    (budget + previousTargetCount - 1) / previousTargetCount);
         }
 
         private int take(Object targetKey, int requested) {
-            Boolean ordinary = priority.get(targetKey);
             int alreadyGranted = activeTargets.getOrDefault(targetKey, 0);
-            int targetRemaining = Math.max(0, perTargetLimit - alreadyGranted);
-            int modeRemaining = Boolean.TRUE.equals(ordinary) ? ordinaryRemaining
-                    : Boolean.FALSE.equals(ordinary) ? permanentRemaining : remaining;
-            int granted = Math.min(Math.max(0, requested), Math.min(remaining,
-                    Math.min(targetRemaining, modeRemaining)));
+            int targetRemaining = perTargetLimit == Integer.MAX_VALUE
+                    ? Integer.MAX_VALUE
+                    : Math.max(0, perTargetLimit - alreadyGranted);
+            int granted = Math.min(Math.max(0, requested), Math.min(remaining, targetRemaining));
             if (workNanos >= MAX_WORK_NANOS) granted = 0;
             activeTargets.put(targetKey, alreadyGranted + granted);
             remaining -= granted;
-            if (Boolean.TRUE.equals(ordinary)) ordinaryRemaining -= granted;
-            else if (Boolean.FALSE.equals(ordinary)) permanentRemaining -= granted;
             return granted;
-        }
-
-        private void prioritize(Object targetKey, boolean ordinary) {
-            Boolean previous = priority.put(targetKey, ordinary);
-            if (previous != null && previous == ordinary) return;
-            ordinaryPresent |= ordinary;
-            permanentPresent |= !ordinary;
-            // Ordinary work remains the preferred class. Permanent work shares the remaining
-            // server allowance only after ordinary work has claimed its requested batch; neither
-            // class is reduced merely because another target registered later in the tick.
-            if (!permanentPresent) ordinaryRemaining = remaining;
-            if (!ordinaryPresent) permanentRemaining = remaining;
         }
     }
 }

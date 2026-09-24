@@ -301,7 +301,6 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     }
 
     private void tickField(ServerLevel level, Field field) {
-        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
         if (field.migrateLegacyFilters(level)) setDirty();
         FieldRuntime state = runtime.computeIfAbsent(field.id, ignored -> new FieldRuntime());
         long now = level.getGameTime();
@@ -318,10 +317,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         int targetCount = state.targets.size();
         int targetStart = targetCount == 0 ? 0 : Math.floorMod(state.targetCursor, targetCount);
         int nextTarget = targetStart;
-        int visitLimit = Math.min(targetCount, AccelerationExecutionBudget.targetVisitLimit());
-        int visited = 0;
-        for (int offset = 0; offset < visitLimit && System.nanoTime() < deadline; offset++) {
-            visited++;
+        for (int offset = 0; offset < targetCount; offset++) {
             int targetIndex = (targetStart + offset) % targetCount;
             BlockPos target = state.targets.get(targetIndex);
             if (!level.hasChunkAt(target)) {
@@ -335,7 +331,6 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             }
 
             TargetWork work = state.targetWork.computeIfAbsent(target.asLong(), ignored -> new TargetWork());
-            AccelerationExecutionBudget.prioritize(level.getServer(), work, false);
             boolean throttled = field.allowsSleep(target) && StretcherConfig.idleThrottle()
                     && work.shouldThrottle(level, target, targetState);
             if (throttled) {
@@ -344,8 +339,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 int executions = AccelerationExecutionBudget.take(
                         level.getServer(), work, IDLE_EXECUTIONS_PER_TICK);
                 if (executions > 0) {
-                    int actual = WondrousStaffAcceleration.tickTarget(level, target, executions, work, deadline);
-                    work.pendingTicks = Math.max(0L, work.pendingTicks - actual);
+                    WondrousStaffAcceleration.tickTarget(level, target, executions);
                     nextTarget = (targetIndex + 1) % targetCount;
                 }
                 continue;
@@ -355,11 +349,11 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
             int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
             if (executions > 0) {
-                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions, work, deadline);
+                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions);
                 nextTarget = (targetIndex + 1) % targetCount;
             }
         }
-        state.targetCursor = targetCount == 0 ? 0 : (targetStart + Math.max(1, visited)) % targetCount;
+        state.targetCursor = nextTarget;
         // The marker exposes a range-level status. If even one target is reduced, gold is used so
         // the player is never told the whole field is running at full speed while part of it sleeps.
         field.idleThrottled = anyTargetThrottled;

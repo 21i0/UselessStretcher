@@ -198,22 +198,20 @@ public class WondrousStaffAccelerationEntity extends Entity {
                     && !isIdleThrottleDisabled()
                     && idleTicks > IDLE_WINDOW_TICKS;
             setIdleThrottled(throttled);
-            AccelerationExecutionBudget.prioritize(level.getServer(), this, !isPermanent());
             if (throttled) {
                 // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
                 pendingTicks = 0L;
                 int executed = AccelerationExecutionBudget.take(
                         level.getServer(), this, IDLE_EXECUTIONS_PER_TICK);
                 if (executed > 0) {
-                    int actual = WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
-                    pendingTicks = Math.max(0L, pendingTicks - actual);
+                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
                 }
             } else {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
                 int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
                 int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
                 if (executed > 0) {
-                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
+                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
                 }
             }
         }
@@ -240,19 +238,16 @@ public class WondrousStaffAccelerationEntity extends Entity {
         // one server tick while preserving it for later frames.
         pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + (long) Math.max(1, getSpeed()));
         int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
-        AccelerationExecutionBudget.prioritize(level.getServer(), this, !isPermanent());
         int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
         long started = System.nanoTime();
-        long deadline = Math.min(AccelerationExecutionBudget.deadline(level.getServer()),
-                AccelerationExecutionBudget.targetDeadline(level.getServer(), this));
+        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
         try {
-            for (int i = 0; i < AccelerationExecutionBudget.batchSize(executed)
-                    && !target.isRemoved() && System.nanoTime() < deadline; i++) {
+            for (int i = 0; i < executed && !target.isRemoved() && System.nanoTime() < deadline; i++) {
                 target.tick();
                 pendingTicks--;
             }
         } finally {
-            AccelerationExecutionBudget.recordTargetWork(level.getServer(), this, started);
+            AccelerationExecutionBudget.recordWork(level.getServer(), started);
         }
         setTargetHeight(target.getBbHeight());
         if (target.isRemoved()) discard();

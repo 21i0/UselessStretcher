@@ -15,6 +15,7 @@ import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBloc
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
 import com.sorrowmist.useless.stretcher.content.mold.PatternFetcher;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldStore;
 import com.sorrowmist.useless.stretcher.content.mold.MoldRecipeIndex;
@@ -45,6 +46,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import io.netty.buffer.Unpooled;
@@ -260,24 +262,12 @@ public final class RegressionChecks {
         AccelerationExecutionBudget.beginTick(server);
         Object slow = new Object();
         Object fast = new Object();
-        AccelerationExecutionBudget.prioritize(server, slow, false);
-        AccelerationExecutionBudget.prioritize(server, fast, false);
-        check(AccelerationExecutionBudget.batchSize(1024) == 4,
-                "target execution is limited to small batches");
         check(AccelerationExecutionBudget.take(server, slow, 1024) > 0,
                 "first target receives work allowance");
         check(AccelerationExecutionBudget.take(server, fast, 1024) > 0,
                 "one target cannot consume all count allowance before another");
-        Object ordinary = new Object();
-        Object permanent = new Object();
-        AccelerationExecutionBudget.prioritize(server, ordinary, true);
-        AccelerationExecutionBudget.prioritize(server, permanent, false);
-        int ordinaryGrant = AccelerationExecutionBudget.take(server, ordinary, 1024);
-        int permanentGrant = AccelerationExecutionBudget.take(server, permanent, 1024);
-        check(ordinaryGrant > 0 && ordinaryGrant >= permanentGrant,
-                "ordinary mode gets first priority while permanent mode keeps a bounded share");
         AccelerationExecutionBudget.recordWork(server, System.nanoTime() - 10_000_000L);
-        check(AccelerationExecutionBudget.take(server, ordinary, 1024) == 0,
+        check(AccelerationExecutionBudget.take(server, new Object(), 1024) == 0,
                 "elapsed budget prevents further grants");
         check(WondrousStaffAcceleration.tickTarget(level, BlockPos.ZERO, 1024) == 0,
                 "elapsed budget prevents block callbacks");
@@ -286,13 +276,33 @@ public final class RegressionChecks {
         check(AccelerationExecutionBudget.take(server, new Object(), 1024) == 1024,
                 "server budget cleanup allows a fresh tick");
 
+        ItemEntity acceleratedItem = new ItemEntity(level, 4.5D, 101.0D, 4.5D,
+                new ItemStack(Items.CLOCK));
+        check(level.addFreshEntity(acceleratedItem), "entity acceleration target is added");
+        check(level.getEntity(acceleratedItem.getUUID()) == acceleratedItem,
+                "entity acceleration target is immediately addressable");
+        // Exclude one-time class loading from the execution-budget assertion.
+        acceleratedItem.tick();
+        AccelerationExecutionBudget.beginTick(server);
+        WondrousStaffAccelerationEntity accelerator =
+                new WondrousStaffAccelerationEntity(level, acceleratedItem, 16);
+        int targetAge = acceleratedItem.getAge();
+        accelerator.tick();
+        int acceleratedTicks = acceleratedItem.getAge() - targetAge;
+        check(acceleratedTicks == 16,
+                "configured acceleration executes the full available batch: actual=" + acceleratedTicks);
+        accelerator.discard();
+        acceleratedItem.discard();
+
         UUID owner = UUID.randomUUID();
         UUID id = UUID.randomUUID();
         UUID unloadedId = UUID.randomUUID();
         BlockPos center = new BlockPos(4, 100, 4);
         BlockPos unloaded = new BlockPos(10_000_000, 100, 10_000_000);
         check(!level.hasChunkAt(unloaded), "test location is not loaded");
-        level.setBlockAndUpdate(center, Blocks.FURNACE.defaultBlockState());
+        level.setBlockAndUpdate(center, Blocks.HOPPER.defaultBlockState());
+        HopperBlockEntity hopper = (HopperBlockEntity) level.getBlockEntity(center);
+        hopper.setCooldown(100);
         CompoundTag root = new CompoundTag();
         ListTag fields = new ListTag();
         fields.add(rangeTag(owner, id, center));
@@ -305,6 +315,8 @@ public final class RegressionChecks {
         var runtime = (Map<UUID, Object>) field(RangeAccelerationSavedData.class, "runtime").get(ranges);
         runtime.put(unloadedId, new Object());
         ranges.tick(server);
+        check(field(HopperBlockEntity.class, "cooldownTime").getInt(hopper) == 99,
+                "range acceleration executes the target block ticker");
         check(runtime.containsKey(id) && !runtime.containsKey(unloadedId),
                 "loaded field owns runtime; unloaded field releases runtime");
         var marker = (TimeFlowEntity) level.getEntity(id);
