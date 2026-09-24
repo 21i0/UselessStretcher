@@ -258,10 +258,26 @@ public final class RegressionChecks {
     private static void acceleration(ServerLevel level) throws Exception {
         var server = level.getServer();
         AccelerationExecutionBudget.beginTick(server);
-        check(AccelerationExecutionBudget.take(server, new Object(), 1024) == 1024,
-                "single x1024 target not count-clamped");
+        Object slow = new Object();
+        Object fast = new Object();
+        AccelerationExecutionBudget.prioritize(server, slow, false);
+        AccelerationExecutionBudget.prioritize(server, fast, false);
+        check(AccelerationExecutionBudget.batchSize(1024) == 4,
+                "target execution is limited to small batches");
+        check(AccelerationExecutionBudget.take(server, slow, 1024) > 0,
+                "first target receives work allowance");
+        check(AccelerationExecutionBudget.take(server, fast, 1024) > 0,
+                "one target cannot consume all count allowance before another");
+        Object ordinary = new Object();
+        Object permanent = new Object();
+        AccelerationExecutionBudget.prioritize(server, ordinary, true);
+        AccelerationExecutionBudget.prioritize(server, permanent, false);
+        int ordinaryGrant = AccelerationExecutionBudget.take(server, ordinary, 1024);
+        int permanentGrant = AccelerationExecutionBudget.take(server, permanent, 1024);
+        check(ordinaryGrant > 0 && ordinaryGrant >= permanentGrant,
+                "ordinary mode gets first priority while permanent mode keeps a bounded share");
         AccelerationExecutionBudget.recordWork(server, System.nanoTime() - 10_000_000L);
-        check(AccelerationExecutionBudget.take(server, new Object(), 1024) == 0,
+        check(AccelerationExecutionBudget.take(server, ordinary, 1024) == 0,
                 "elapsed budget prevents further grants");
         check(WondrousStaffAcceleration.tickTarget(level, BlockPos.ZERO, 1024) == 0,
                 "elapsed budget prevents block callbacks");

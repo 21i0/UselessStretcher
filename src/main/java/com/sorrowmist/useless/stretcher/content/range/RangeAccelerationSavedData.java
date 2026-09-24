@@ -52,9 +52,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     private static final int MAX_EXECUTIONS_PER_TARGET = WondrousStaffAccelerationEntity.MAX_MULTIPLIER;
     private static final long MAX_PENDING_TICKS = 1_000_000L;
     private static final long PLACEMENT_COOLDOWN_TICKS = 5L;
-    private static final int IDLE_WINDOW_TICKS = 100;
+    private static final int IDLE_WINDOW_TICKS = 200;
     private static final int IDLE_EXECUTIONS_PER_TICK = 4;
-    private static final int CHANGED_WINDOW_TICKS = 60;
+    private static final int CHANGED_WINDOW_TICKS = 120;
     private static final int TARGET_RESCAN_TICKS = 20;
 
     private final Map<UUID, Field> fields = new LinkedHashMap<>();
@@ -169,6 +169,13 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             marker.discard();
         }
         return summary;
+    }
+
+    /** Removes a field by id without requiring ownership; the caller must enforce operator access. */
+    public Summary reclaimByOperator(MinecraftServer server, UUID id) {
+        Field field = fields.get(id);
+        if (field == null) return null;
+        return reclaim(server, field.owner, id);
     }
 
     public Field getField(UUID id) {
@@ -294,6 +301,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     }
 
     private void tickField(ServerLevel level, Field field) {
+        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
         if (field.migrateLegacyFilters(level)) setDirty();
         FieldRuntime state = runtime.computeIfAbsent(field.id, ignored -> new FieldRuntime());
         long now = level.getGameTime();
@@ -310,7 +318,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         int targetCount = state.targets.size();
         int targetStart = targetCount == 0 ? 0 : Math.floorMod(state.targetCursor, targetCount);
         int nextTarget = targetStart;
-        for (int offset = 0; offset < targetCount; offset++) {
+        int visitLimit = Math.min(targetCount, AccelerationExecutionBudget.targetVisitLimit());
+        int visited = 0;
+        for (int offset = 0; offset < visitLimit && System.nanoTime() < deadline; offset++) {
+            visited++;
             int targetIndex = (targetStart + offset) % targetCount;
             BlockPos target = state.targets.get(targetIndex);
             if (!level.hasChunkAt(target)) {
@@ -324,6 +335,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             }
 
             TargetWork work = state.targetWork.computeIfAbsent(target.asLong(), ignored -> new TargetWork());
+            AccelerationExecutionBudget.prioritize(level.getServer(), work, false);
             boolean throttled = field.allowsSleep(target) && StretcherConfig.idleThrottle()
                     && work.shouldThrottle(level, target, targetState);
             if (throttled) {
@@ -332,7 +344,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 int executions = AccelerationExecutionBudget.take(
                         level.getServer(), work, IDLE_EXECUTIONS_PER_TICK);
                 if (executions > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, target, executions);
+                    int actual = WondrousStaffAcceleration.tickTarget(level, target, executions, work, deadline);
+                    work.pendingTicks = Math.max(0L, work.pendingTicks - actual);
                     nextTarget = (targetIndex + 1) % targetCount;
                 }
                 continue;
@@ -342,11 +355,11 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
             int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
             if (executions > 0) {
-                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions);
+                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions, work, deadline);
                 nextTarget = (targetIndex + 1) % targetCount;
             }
         }
-        state.targetCursor = nextTarget;
+        state.targetCursor = targetCount == 0 ? 0 : (targetStart + Math.max(1, visited)) % targetCount;
         // The marker exposes a range-level status. If even one target is reduced, gold is used so
         // the player is never told the whole field is running at full speed while part of it sleeps.
         field.idleThrottled = anyTargetThrottled;
@@ -710,6 +723,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     private static final class TargetWork {
         private long pendingTicks;
         private long lastEnergy = Long.MIN_VALUE;
+        private int lastItems;
+        private int lastFluids;
+        private int capabilitySampleTicks;
         private BlockState lastState;
         private int idleTicks;
         private boolean observedWorking;
@@ -744,6 +760,36 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 if (lastEnergy == Long.MIN_VALUE || stored != lastEnergy) {
                     lastEnergy = stored;
                     return true;
+                }
+            }
+            if (++capabilitySampleTicks >= 5) {
+                capabilitySampleTicks = 0;
+                var items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
+                if (items != null) {
+                    int fingerprint = items.getSlots();
+                    for (int slot = 0; slot < items.getSlots(); slot++) {
+                        ItemStack stack = items.getStackInSlot(slot);
+                        fingerprint = 31 * fingerprint + ItemStack.hashItemAndComponents(stack);
+                        fingerprint = 31 * fingerprint + stack.getCount();
+                    }
+                    if (fingerprint != lastItems) {
+                        lastItems = fingerprint;
+                        return true;
+                    }
+                }
+                var fluids = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
+                if (fluids != null) {
+                    int fingerprint = fluids.getTanks();
+                    for (int tank = 0; tank < fluids.getTanks(); tank++) {
+                        var stack = fluids.getFluidInTank(tank);
+                        fingerprint = 31 * fingerprint + stack.getFluid().hashCode();
+                        fingerprint = 31 * fingerprint + stack.getAmount();
+                        fingerprint = 31 * fingerprint + stack.getComponentsPatch().hashCode();
+                    }
+                    if (fingerprint != lastFluids) {
+                        lastFluids = fingerprint;
+                        return true;
+                    }
                 }
             }
             return false;

@@ -54,7 +54,6 @@ public final class WondrousStaffClient {
         Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held),
                 WondrousStaffAcceleration.isEnabled(held), hand);
         showGearStatus(speed);
-        event.setCanceled(true);
     }
 
     @SubscribeEvent
@@ -69,6 +68,19 @@ public final class WondrousStaffClient {
             Network.sendStaffTutorialOpened();
             mc.setScreen(new WondrousStaffConfigScreen(hand));
         }
+    }
+
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.HIGHEST)
+    public static void onKeyInput(InputEvent.Key event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (event.getAction() != org.lwjgl.glfw.GLFW.GLFW_PRESS || mc.screen != null) return;
+        if (event.getKey() != org.lwjgl.glfw.GLFW.GLFW_KEY_X) return;
+        Player player = mc.player;
+        InteractionHand hand = player == null ? null : findStaffHand(player);
+        if (hand == null) return;
+        StretcherKeyBindings.WONDROUS_STAFF_MODE.consumeClick();
+        Network.sendStaffTutorialOpened();
+        mc.setScreen(new WondrousStaffConfigScreen(hand));
     }
 
     private static int cycleGear(int current, boolean up) {

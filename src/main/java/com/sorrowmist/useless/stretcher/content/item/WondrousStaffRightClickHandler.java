@@ -3,6 +3,8 @@ package com.sorrowmist.useless.stretcher.content.item;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -60,7 +62,10 @@ public final class WondrousStaffRightClickHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-        InteractionResult result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        InteractionResult result = tryRangeReclaim(event.getEntity(), event.getItemStack(), event.getTarget());
+        if (result == InteractionResult.PASS) {
+            result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        }
         if (result != InteractionResult.PASS) {
             event.setCanceled(true);
             event.setCancellationResult(result);
@@ -69,11 +74,37 @@ public final class WondrousStaffRightClickHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onRightClickEntitySpecific(PlayerInteractEvent.EntityInteractSpecific event) {
-        InteractionResult result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        InteractionResult result = tryRangeReclaim(event.getEntity(), event.getItemStack(), event.getTarget());
+        if (result == InteractionResult.PASS) {
+            result = tryEntityInteraction(event.getEntity(), event.getItemStack(), event.getTarget());
+        }
         if (result != InteractionResult.PASS) {
             event.setCanceled(true);
             event.setCancellationResult(result);
         }
+    }
+
+    private static InteractionResult tryRangeReclaim(Player player, ItemStack stack, Entity target) {
+        if (stack.getItem() != ModItems.RANGE_RECLAIMER.get() || !(target instanceof TimeFlowEntity marker)) {
+            return InteractionResult.PASS;
+        }
+        if (!(player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)) {
+            return InteractionResult.SUCCESS;
+        }
+        RangeAccelerationSavedData.Summary reclaimed = RangeAccelerationSavedData
+                .get(serverPlayer.getServer()).reclaimByOperator(serverPlayer.getServer(), marker.getUUID());
+        if (reclaimed == null) {
+            serverPlayer.displayClientMessage(
+                    net.minecraft.network.chat.Component.translatable("msg.useless_stretcher.range_reclaimer.missing"),
+                    true);
+        } else {
+            serverPlayer.displayClientMessage(
+                    net.minecraft.network.chat.Component.translatable(
+                            "msg.useless_stretcher.range_reclaimer.reclaimed",
+                            reclaimed.center().getX(), reclaimed.center().getY(), reclaimed.center().getZ()),
+                    true);
+        }
+        return InteractionResult.SUCCESS;
     }
 
     private static InteractionResult tryEntityInteraction(Player player, ItemStack stack, Entity target) {

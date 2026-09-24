@@ -376,6 +376,38 @@ public final class WondrousStaffAcceleration {
         }
     }
 
+    /** Executes one small batch, checking the global and per-target slice between machine ticks. */
+    public static int tickTarget(ServerLevel level, BlockPos pos, int speed, Object targetKey) {
+        long started = System.nanoTime();
+        long deadline = Math.min(
+                com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.deadline(level.getServer()),
+                com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.targetDeadline(level.getServer(), targetKey));
+        int batch = com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.batchSize(speed);
+        try {
+            if (System.nanoTime() >= deadline) return 0;
+            return tickTargetWithinBudget(level, pos, batch, deadline);
+        } finally {
+            com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.recordTargetWork(
+                    level.getServer(), targetKey, started);
+        }
+    }
+
+    /** Small-budget entry point used by time-sliced range targets. */
+    public static int tickTarget(ServerLevel level, BlockPos pos, int speed, Object targetKey, long deadline) {
+        long started = System.nanoTime();
+        long targetDeadline = Math.min(deadline,
+                com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.targetDeadline(
+                        level.getServer(), targetKey));
+        int batch = com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.batchSize(speed);
+        try {
+            if (System.nanoTime() >= targetDeadline) return 0;
+            return tickTargetWithinBudget(level, pos, batch, targetDeadline);
+        } finally {
+            com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget.recordTargetWork(
+                    level.getServer(), targetKey, started);
+        }
+    }
+
     private static int tickTargetWithinBudget(ServerLevel level, BlockPos pos, int speed, long deadline) {
         if (System.nanoTime() >= deadline) return 0;
         BlockEntity blockEntity = level.getBlockEntity(pos);

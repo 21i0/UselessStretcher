@@ -24,6 +24,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.UUID;
 
@@ -52,11 +54,11 @@ public class WondrousStaffAccelerationEntity extends Entity {
     public static final int MAX_EXECUTIONS_PER_TICK = MAX_MULTIPLIER;
     private static final long MAX_PENDING_TICKS = 1_000_000L;
     /** How long a machine may show no activity signal before it is throttled. */
-    private static final int IDLE_WINDOW_TICKS = 100;
+    private static final int IDLE_WINDOW_TICKS = 200;
     /** Extra ticks per game tick while throttled. Never 0: the target must keep progressing. */
     private static final int IDLE_EXECUTIONS_PER_TICK = 4;
     /** A {@code setChanged()} call within this many ticks counts as "working". */
-    private static final int CHANGED_WINDOW_TICKS = 60;
+    private static final int CHANGED_WINDOW_TICKS = 120;
 
     public static final int MODE_BLOCK = 0;
     public static final int MODE_ENTITY = 1;
@@ -84,6 +86,9 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private UUID targetUuid;
     private long pendingTicks;
     private long lastEnergy = -1L;
+    private int lastItemFingerprint;
+    private int lastFluidFingerprint;
+    private int capabilitySampleTicks;
     private BlockState lastState;
     private int idleTicks;
     /** Set once the target has ever emitted an activity signal we can rely on for waking up. */
@@ -193,20 +198,22 @@ public class WondrousStaffAccelerationEntity extends Entity {
                     && !isIdleThrottleDisabled()
                     && idleTicks > IDLE_WINDOW_TICKS;
             setIdleThrottled(throttled);
+            AccelerationExecutionBudget.prioritize(level.getServer(), this, !isPermanent());
             if (throttled) {
                 // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
                 pendingTicks = 0L;
                 int executed = AccelerationExecutionBudget.take(
                         level.getServer(), this, IDLE_EXECUTIONS_PER_TICK);
                 if (executed > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                    int actual = WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
+                    pendingTicks = Math.max(0L, pendingTicks - actual);
                 }
             } else {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
                 int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
                 int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
                 if (executed > 0) {
-                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
                 }
             }
         }
@@ -233,16 +240,19 @@ public class WondrousStaffAccelerationEntity extends Entity {
         // one server tick while preserving it for later frames.
         pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + (long) Math.max(1, getSpeed()));
         int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
+        AccelerationExecutionBudget.prioritize(level.getServer(), this, !isPermanent());
         int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
         long started = System.nanoTime();
-        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
+        long deadline = Math.min(AccelerationExecutionBudget.deadline(level.getServer()),
+                AccelerationExecutionBudget.targetDeadline(level.getServer(), this));
         try {
-            for (int i = 0; i < executed && !target.isRemoved() && System.nanoTime() < deadline; i++) {
+            for (int i = 0; i < AccelerationExecutionBudget.batchSize(executed)
+                    && !target.isRemoved() && System.nanoTime() < deadline; i++) {
                 target.tick();
                 pendingTicks--;
             }
         } finally {
-            AccelerationExecutionBudget.recordWork(level.getServer(), started);
+            AccelerationExecutionBudget.recordTargetWork(level.getServer(), this, started);
         }
         setTargetHeight(target.getBbHeight());
         if (target.isRemoved()) discard();
@@ -323,7 +333,47 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 return true;
             }
         }
+        if (++capabilitySampleTicks >= 5) {
+            capabilitySampleTicks = 0;
+            IItemHandler items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
+            if (items != null) {
+                int fingerprint = itemFingerprint(items);
+                if (fingerprint != lastItemFingerprint) {
+                    lastItemFingerprint = fingerprint;
+                    return true;
+                }
+            }
+            IFluidHandler fluids = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
+            if (fluids != null) {
+                int fingerprint = fluidFingerprint(fluids);
+                if (fingerprint != lastFluidFingerprint) {
+                    lastFluidFingerprint = fingerprint;
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+
+    private static int itemFingerprint(IItemHandler handler) {
+        int hash = handler.getSlots();
+        for (int slot = 0; slot < handler.getSlots(); slot++) {
+            net.minecraft.world.item.ItemStack stack = handler.getStackInSlot(slot);
+            hash = 31 * hash + net.minecraft.world.item.ItemStack.hashItemAndComponents(stack);
+            hash = 31 * hash + stack.getCount();
+        }
+        return hash;
+    }
+
+    private static int fluidFingerprint(IFluidHandler handler) {
+        int hash = handler.getTanks();
+        for (int tank = 0; tank < handler.getTanks(); tank++) {
+            var fluid = handler.getFluidInTank(tank);
+            hash = 31 * hash + fluid.getFluid().hashCode();
+            hash = 31 * hash + fluid.getAmount();
+            hash = 31 * hash + fluid.getComponentsPatch().hashCode();
+        }
+        return hash;
     }
 
     public BlockPos getTargetPos() {

@@ -2,7 +2,6 @@ package com.sorrowmist.useless.stretcher.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import org.lwjgl.glfw.GLFW;
 
 /** Client key bindings added by Useless Stretcher. */
@@ -12,10 +11,10 @@ public final class StretcherKeyBindings {
     /** Opens the staff acceleration configuration screen. */
     public static final KeyMapping WONDROUS_STAFF_MODE = new KeyMapping(
             "key.useless_stretcher.wondrous_staff_mode",
-            KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_X,
             CATEGORY);
+
 
     private StretcherKeyBindings() {
     }
