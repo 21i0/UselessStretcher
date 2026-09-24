@@ -3,7 +3,6 @@ package com.sorrowmist.useless.stretcher.content.item;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
-import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.world.InteractionResult;
@@ -85,26 +84,9 @@ public final class WondrousStaffRightClickHandler {
     }
 
     private static InteractionResult tryRangeReclaim(Player player, ItemStack stack, Entity target) {
-        if (stack.getItem() != ModItems.RANGE_RECLAIMER.get() || !(target instanceof TimeFlowEntity marker)) {
-            return InteractionResult.PASS;
-        }
-        if (!(player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)) {
-            return InteractionResult.SUCCESS;
-        }
-        RangeAccelerationSavedData.Summary reclaimed = RangeAccelerationSavedData
-                .get(serverPlayer.getServer()).reclaimByOperator(serverPlayer.getServer(), marker.getUUID());
-        if (reclaimed == null) {
-            serverPlayer.displayClientMessage(
-                    net.minecraft.network.chat.Component.translatable("msg.useless_stretcher.range_reclaimer.missing"),
-                    true);
-        } else {
-            serverPlayer.displayClientMessage(
-                    net.minecraft.network.chat.Component.translatable(
-                            "msg.useless_stretcher.range_reclaimer.reclaimed",
-                            reclaimed.center().getX(), reclaimed.center().getY(), reclaimed.center().getZ()),
-                    true);
-        }
-        return InteractionResult.SUCCESS;
+        return target instanceof TimeFlowEntity marker
+                ? RangeReclaimerItem.tryReclaim(player, stack, marker)
+                : InteractionResult.PASS;
     }
 
     private static InteractionResult tryEntityInteraction(Player player, ItemStack stack, Entity target) {

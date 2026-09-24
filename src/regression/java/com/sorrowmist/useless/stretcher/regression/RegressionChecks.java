@@ -7,6 +7,7 @@ import com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog;
 import com.sorrowmist.useless.content.recipe.MoldMatcher;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.item.StaffMiningContext;
+import com.sorrowmist.useless.stretcher.content.item.RangeReclaimerItem;
 import com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
@@ -39,6 +40,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Item;
@@ -321,6 +323,8 @@ public final class RegressionChecks {
                 "loaded field owns runtime; unloaded field releases runtime");
         var marker = (TimeFlowEntity) level.getEntity(id);
         check(marker != null, "range creates time-flow marker");
+        check(marker.isPickable() && !marker.isAttackable(),
+                "time-flow marker can be right-clicked without becoming attackable");
         var unchanged = marker.getAccelerationMarks();
         marker.sync(ranges.getField(id));
         check(marker.getAccelerationMarks() == unchanged, "unchanged marker reuses list cache");
@@ -341,6 +345,26 @@ public final class RegressionChecks {
         check(!level.hasChunkAt(unloaded), "range cleanup never force-loads remote chunks");
         ranges.remove(unloadedId);
         level.removeBlock(center, false);
+
+        var rangeOwner = FakePlayerFactory.get(level,
+                new GameProfile(UUID.randomUUID(), "RangeOwnerRegression"));
+        var operator = FakePlayerFactory.get(level,
+                new GameProfile(UUID.randomUUID(), "RangeReclaimerRegression"));
+        var liveRanges = RangeAccelerationSavedData.get(server);
+        BlockPos reclaimCenter = new BlockPos(4, 200 + level.getRandom().nextInt(40), 4);
+        var placed = liveRanges.place(level, rangeOwner, reclaimCenter,
+                new ItemStack(ModItems.WONDROUS_STAFF.get()));
+        check(placed.status() == RangeAccelerationSavedData.PlacementStatus.CREATED,
+                "reclaimer test range is created");
+        liveRanges.tick(server);
+        var reclaimMarker = (TimeFlowEntity) level.getEntity(placed.id());
+        check(reclaimMarker != null && reclaimMarker.isPickable(),
+                "reclaimer target is ray-pickable");
+        check(RangeReclaimerItem.tryReclaim(operator,
+                        new ItemStack(ModItems.RANGE_RECLAIMER.get()), reclaimMarker)
+                        == InteractionResult.SUCCESS
+                        && liveRanges.getField(placed.id()) == null && reclaimMarker.isRemoved(),
+                "right-click reclaimer path removes another player's range without block interaction");
         AccelerationExecutionBudget.removeServer(server);
         LogUtils.getLogger().info("REGRESSION acceleration: budget, revisions, pause, reclaim and unload passed");
     }
