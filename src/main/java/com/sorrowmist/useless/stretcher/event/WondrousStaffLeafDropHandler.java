@@ -5,6 +5,10 @@ import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.entity.StaffLeafRewardEntity;
 import com.sorrowmist.useless.stretcher.content.leaf.StaffLeafDropData;
 import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.init.StretcherComponents;
+import com.sorrowmist.useless.api.enums.tool.EnchantMode;
+import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
+import com.sorrowmist.useless.core.component.UComponents;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -13,6 +17,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.CustomModelData;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -133,7 +141,7 @@ public final class WondrousStaffLeafDropHandler {
     }
 
     private static boolean tryDeliver(ServerPlayer player) {
-        ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        ItemStack staff = createLeafStaff(player);
         if (player.getInventory().getSlotWithRemainingSpace(staff) < 0
                 && player.getInventory().getFreeSlot() < 0) {
             return false;
@@ -146,6 +154,32 @@ public final class WondrousStaffLeafDropHandler {
         }
         return false;
     }
+
+    /** Builds the same fully initialized precise-mode tool as a newly obtained base staff. */
+    private static ItemStack createLeafStaff(ServerPlayer player) {
+        ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        staff.set(UComponents.EnchantModeComponent.get(), EnchantMode.SILK_TOUCH);
+        staff.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(1));
+        var registry = player.level().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
+        var silk = registry.getHolderOrThrow(Enchantments.SILK_TOUCH);
+        var fortune = registry.getHolderOrThrow(Enchantments.FORTUNE);
+        EnchantmentHelper.updateEnchantments(staff, enchantments -> {
+            enchantments.set(silk, 1);
+            enchantments.set(fortune, 0);
+        });
+        staff.set(UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
+        staff.set(UComponents.BeefCaptureEnabledComponent.get(), false);
+        staff.set(UComponents.BeefInvulnerabilityEnabledComponent.get(), true);
+        staff.remove(UComponents.EnhancedChainMiningComponent.get());
+        staff.remove(UComponents.ForceMiningComponent.get());
+        staff.remove(UComponents.ForceKillEnabledComponent.get());
+        staff.set(StretcherComponents.WONDROUS_STAFF_MODE.get(), 0);
+        staff.set(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false);
+        staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
+        staff.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
+        return staff;
+    }
+
 
     private static void ensureRewardEntity(MinecraftServer server, ServerPlayer player) {
         UUID owner = player.getUUID();

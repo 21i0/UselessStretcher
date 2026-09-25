@@ -125,7 +125,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 RangeAccelerationSettings.offsetZ(staff),
                 RangeAccelerationSettings.whitelistMode(staff),
                 RangeAccelerationSettings.sleepWhitelistMode(staff),
-                List.of(), List.of(), List.of(), true);
+                List.of(), List.of(), List.of(), true, "");
         fields.put(id, field);
         pruneHistory(owner.getUUID());
         setDirty();
@@ -271,6 +271,16 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             marker.sync(field);
         }
         return field.summary();
+    }
+
+    public boolean rename(MinecraftServer server, UUID owner, UUID id, String name) {
+        Field field = fields.get(id);
+        if (field == null || !field.owner.equals(owner)) return false;
+        field.rename(name);
+        setDirty();
+        ServerLevel level = server.getLevel(field.dimensionKey());
+        if (level != null && level.getEntity(id) instanceof TimeFlowEntity marker) marker.sync(field);
+        return true;
     }
 
     public void tick(MinecraftServer server) {
@@ -419,7 +429,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
     public record Summary(UUID id, ResourceLocation dimension, BlockPos center, long createdAt,
                           boolean enabled, int speed, int sizeX, int sizeY, int sizeZ,
-                          int offsetX, int offsetY, int offsetZ) {
+                          int offsetX, int offsetY, int offsetZ, String name) {
     }
 
     public enum PlacementStatus {
@@ -448,6 +458,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         private final ResourceLocation dimension;
         private final BlockPos center;
         private long createdAt;
+        private String name;
         private boolean enabled;
         private int speed;
         private int sizeX;
@@ -472,12 +483,13 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                       int offsetX, int offsetY, int offsetZ,
                       boolean accelerationWhitelistMode, boolean sleepWhitelistMode,
                       Iterable<Long> accelerationMarks, Iterable<Long> sleepMarks,
-                      Iterable<ResourceLocation> legacyFilters, boolean positionalLists) {
+                      Iterable<ResourceLocation> legacyFilters, boolean positionalLists, String name) {
             this.id = id;
             this.owner = owner;
             this.dimension = dimension;
             this.center = center;
             this.createdAt = createdAt;
+            this.name = normalizeName(name);
             this.enabled = enabled;
             this.speed = clampSpeed(speed);
             this.sizeX = clampSize(sizeX);
@@ -521,6 +533,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         public ResourceLocation dimension() { return dimension; }
         public BlockPos center() { return center; }
         public long createdAt() { return createdAt; }
+        public String name() { return name; }
         public boolean enabled() { return enabled; }
         public int speed() { return speed; }
         public int sizeX() { return sizeX; }
@@ -551,6 +564,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             trimMarksToBounds();
             idleThrottled = false;
             revision++;
+        }
+
+        private void rename(String value) {
+            name = normalizeName(value);
         }
 
         private ResourceKey<Level> dimensionKey() {
@@ -645,7 +662,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
         private Summary summary() {
             return new Summary(id, dimension, center, createdAt, enabled, speed, sizeX, sizeY, sizeZ,
-                    offsetX, offsetY, offsetZ);
+                    offsetX, offsetY, offsetZ, name);
         }
 
         private CompoundTag save() {
@@ -655,6 +672,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             tag.putString("dimension", dimension.toString());
             tag.putLong("center", center.asLong());
             tag.putLong("created_at", createdAt);
+            if (!name.isEmpty()) tag.putString("name", name);
             tag.putBoolean("enabled", enabled);
             tag.putInt("speed", speed);
             tag.putInt("size_x", sizeX);
@@ -701,7 +719,13 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                     tag.getInt("size_x"), tag.getInt("size_y"), tag.getInt("size_z"),
                     tag.getInt("offset_x"), tag.getInt("offset_y"), tag.getInt("offset_z"),
                     accelerationWhitelist, sleepWhitelist, accelerationMarks, sleepMarks,
-                    filters, positionalLists);
+                    filters, positionalLists, tag.contains("name") ? tag.getString("name") : "");
+        }
+
+        private static String normalizeName(String value) {
+            if (value == null) return "";
+            String normalized = value.trim();
+            return normalized.length() > 48 ? normalized.substring(0, 48) : normalized;
         }
     }
 

@@ -142,6 +142,15 @@ public final class RangeNetwork {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
+    public record HistoryRenamePayload(UUID id, String name) implements CustomPacketPayload {
+        public static final Type<HistoryRenamePayload> TYPE = RangeNetwork.type("range_history_rename");
+        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryRenamePayload> STREAM_CODEC = StreamCodec.of(
+                (buf, value) -> { buf.writeUUID(value.id); buf.writeUtf(value.name, 48); },
+                buf -> new HistoryRenamePayload(buf.readUUID(), buf.readUtf(48)));
+
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     public record HistoryStatePayload(List<RangeAccelerationSavedData.Summary> fields)
             implements CustomPacketPayload {
         public static final Type<HistoryStatePayload> TYPE = RangeNetwork.type("range_history_state");
@@ -162,6 +171,7 @@ public final class RangeNetwork {
                         buf.writeVarInt(field.offsetX());
                         buf.writeVarInt(field.offsetY());
                         buf.writeVarInt(field.offsetZ());
+                        buf.writeUtf(field.name(), 48);
                     }
                 },
                 buf -> {
@@ -173,7 +183,7 @@ public final class RangeNetwork {
                                 buf.readUUID(), ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(),
                                 buf.readLong(), buf.readBoolean(), buf.readVarInt(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
-                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readUtf(48)));
                     }
                     return new HistoryStatePayload(fields);
                 });
@@ -200,6 +210,8 @@ public final class RangeNetwork {
                 (payload, context) -> context.enqueueWork(() -> handleHistoryReclaim(payload, context)));
         registrar.playToServer(HistoryEditPayload.TYPE, HistoryEditPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleHistoryEdit(payload, context)));
+        registrar.playToServer(HistoryRenamePayload.TYPE, HistoryRenamePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleHistoryRename(payload, context)));
         registrar.playToClient(HistoryStatePayload.TYPE, HistoryStatePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleRangeHistory(payload)));
     }
@@ -251,6 +263,10 @@ public final class RangeNetwork {
                                    int offsetX, int offsetY, int offsetZ) {
         PacketDistributor.sendToServer(new HistoryEditPayload(id, speed, sizeX, sizeY, sizeZ,
                 offsetX, offsetY, offsetZ));
+    }
+
+    public static void renameHistory(UUID id, String name) {
+        PacketDistributor.sendToServer(new HistoryRenamePayload(id, name == null ? "" : name));
     }
 
     public static BlockPos placementCenter(net.minecraft.world.level.Level level,
@@ -393,6 +409,13 @@ public final class RangeNetwork {
         data.editGeometry(player.getServer(), player.getUUID(), payload.id(),
                 payload.speed(), payload.sizeX(), payload.sizeY(), payload.sizeZ(),
                 payload.offsetX(), payload.offsetY(), payload.offsetZ());
+        sendHistory(player);
+    }
+
+    private static void handleHistoryRename(HistoryRenamePayload payload, IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
+        data.rename(player.getServer(), player.getUUID(), payload.id(), payload.name());
         sendHistory(player);
     }
 

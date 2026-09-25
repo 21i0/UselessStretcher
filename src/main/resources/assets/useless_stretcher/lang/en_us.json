@@ -85,6 +85,8 @@
   "gui.useless_stretcher.range.reclaim": "Reclaim",
   "gui.useless_stretcher.range.reclaim_title": "Reclaim Time Flow?",
   "gui.useless_stretcher.range.reclaim_message": "The range and history at %s, %s, %s will be permanently removed.",
+  "gui.useless_stretcher.range.rename_hint": "Double-click to rename, then click the black box to type",
+  "gui.useless_stretcher.range.rename_title": "Rename range",
   "gui.useless_stretcher.back": "Back",
   "tooltip.useless_stretcher.wondrous_staff.flavor": "Grow the little animals up fast — this is very important",
   "tooltip.useless_stretcher.wondrous_staff.hint_ae": "Shift + right-click AE/machine: accelerate",

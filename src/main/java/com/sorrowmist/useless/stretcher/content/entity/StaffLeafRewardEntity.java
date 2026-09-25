@@ -2,12 +2,18 @@ package com.sorrowmist.useless.stretcher.content.entity;
 
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.init.StretcherComponents;
+import com.sorrowmist.useless.api.enums.tool.EnchantMode;
+import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
+import com.sorrowmist.useless.core.component.UComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,6 +23,7 @@ import java.util.UUID;
 public final class StaffLeafRewardEntity extends Entity {
     private UUID ownerId;
     private final ItemStack displayStack = new ItemStack(ModItems.WONDROUS_STAFF.get());
+
 
     public StaffLeafRewardEntity(EntityType<? extends StaffLeafRewardEntity> type, Level level) {
         super(type, level);

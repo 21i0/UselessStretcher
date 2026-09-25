@@ -7,6 +7,7 @@ import com.sorrowmist.useless.stretcher.network.RangeNetwork;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
@@ -29,6 +30,10 @@ public final class RangeAccelerationHistoryScreen extends Screen {
     private int panelLeft;
     private int panelTop;
     private boolean requested;
+    private EditBox renameBox;
+    private int renameIndex = -1;
+    private long lastNameClick;
+    private int lastNameIndex = -1;
 
     public RangeAccelerationHistoryScreen(Screen parent) {
         super(Component.translatable("gui.useless_stretcher.range.history_title"));
@@ -119,6 +124,7 @@ public final class RangeAccelerationHistoryScreen extends Screen {
             var center = field.center().offset(field.offsetX(), field.offsetY(), field.offsetZ());
             String location = field.dimension() + "  " + center.getX() + ", "
                     + center.getY() + ", " + center.getZ();
+            if (!field.name().isBlank()) location = field.name() + "  ·  " + location;
             String details = TIME_FORMAT.format(Instant.ofEpochMilli(field.createdAt()))
                     + "  x" + field.speed() + "  " + field.sizeX() + "x" + field.sizeY() + "x" + field.sizeZ()
                     + "  偏" + field.offsetX() + "," + field.offsetY() + "," + field.offsetZ();
@@ -131,6 +137,11 @@ public final class RangeAccelerationHistoryScreen extends Screen {
         graphics.drawString(font, (page + 1) + "/" + pages,
                 panelLeft + 87, panelTop + 204, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         super.render(graphics, mouseX, mouseY, partialTick);
+        if (renameIndex < 0) {
+            int hovered = nameRowAt(mouseX, mouseY);
+            if (hovered >= 0) graphics.renderTooltip(font,
+                    Component.translatable("gui.useless_stretcher.range.rename_hint"), mouseX, mouseY);
+        }
     }
 
     @Override
@@ -145,6 +156,67 @@ public final class RangeAccelerationHistoryScreen extends Screen {
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (renameIndex >= 0) return super.mouseClicked(mouseX, mouseY, button);
+        int index = nameRowAt(mouseX, mouseY);
+        if (button == 0 && index >= 0) {
+            long now = System.currentTimeMillis();
+            if (index == lastNameIndex && now - lastNameClick <= 350) {
+                beginRename(index);
+                lastNameIndex = -1;
+                return true;
+            }
+            lastNameIndex = index;
+            lastNameClick = now;
+            return true;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    private int nameRowAt(double mouseX, double mouseY) {
+        int start = page * ROWS_PER_PAGE;
+        int row = (int) ((mouseY - (panelTop + 27)) / 27);
+        int index = start + row;
+        if (mouseX < panelLeft + 8 || mouseX > panelLeft + Math.min(PANEL_WIDTH, width - 12) - 148
+                || row < 0 || row >= ROWS_PER_PAGE || index >= fields.size()) return -1;
+        return index;
+    }
+
+    private void beginRename(int index) {
+        renameIndex = index;
+        RangeAccelerationSavedData.Summary field = fields.get(index);
+        renameBox = new EditBox(font, panelLeft + 12, panelTop + 27 + (index - page * ROWS_PER_PAGE) * 27,
+                Math.min(PANEL_WIDTH, width - 12) - 166, 18,
+                Component.translatable("gui.useless_stretcher.range.rename_title"));
+        renameBox.setMaxLength(48);
+        renameBox.setValue(field.name());
+        renameBox.setResponder(value -> { });
+        renameBox.setCanLoseFocus(false);
+        addRenderableWidget(renameBox);
+        renameBox.setFocused(true);
+        renameBox.setEditable(true);
+    }
+
+    private void finishRename(boolean save) {
+        if (renameBox == null) return;
+        if (save && renameIndex >= 0 && renameIndex < fields.size()) {
+            RangeNetwork.renameHistory(fields.get(renameIndex).id(), renameBox.getValue());
+        }
+        removeWidget(renameBox);
+        renameBox = null;
+        renameIndex = -1;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (renameIndex >= 0) {
+            if (keyCode == 257 || keyCode == 335) { finishRename(true); return true; }
+            if (keyCode == 256) { finishRename(false); return true; }
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     private static Component enabledMessage(boolean enabled) {
