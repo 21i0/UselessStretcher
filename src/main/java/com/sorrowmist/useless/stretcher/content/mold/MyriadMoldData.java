@@ -78,6 +78,14 @@ public final class MyriadMoldData {
         return true;
     }
 
+    /** Cheap component-only check used by the global container migration guard. */
+    public static boolean isLegacyInline(ItemStack stack) {
+        if (!stack.is(ModItems.OMNIVERSAL_MYRIAD.get())) return false;
+        CustomData custom = stack.get(DataComponents.CUSTOM_DATA);
+        return custom != null && !custom.isEmpty() && custom.contains(KEY_ENABLED)
+                && readMoldRef(stack) == null;
+    }
+
     public static boolean hasEnabledMolds(ItemStack stack) {
         if (readMoldRef(stack) != null && EffectiveSide.get().isClient()) {
             return stack.getOrDefault(StretcherComponents.MYRIAD_MOLD_COUNT.get(), 0) > 0;

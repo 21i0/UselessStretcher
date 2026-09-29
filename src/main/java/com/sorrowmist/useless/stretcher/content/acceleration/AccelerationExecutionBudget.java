@@ -22,7 +22,10 @@ public final class AccelerationExecutionBudget {
     private static final int OVERLOADED_BUDGET = 16_384;
     private static final int EMERGENCY_BUDGET = 4_096;
     private static final long NANOS_PER_MILLISECOND = 1_000_000L;
-    private static final long MAX_WORK_NANOS = 5_000_000L;
+    /** Shared cap leaves room for several normal targets in one real server tick. */
+    private static final long MAX_WORK_NANOS = 20_000_000L;
+    /** A single target may not monopolize the shared allowance, even if its ticker is expensive. */
+    private static final long MAX_TARGET_WORK_NANOS = 8_000_000L;
 
     /** Weak server keys avoid retaining an integrated server after returning to the title screen. */
     private static final Map<MinecraftServer, ServerState> STATES = new WeakHashMap<>();
@@ -43,14 +46,35 @@ public final class AccelerationExecutionBudget {
 
     /** A count budget alone cannot protect against an expensive modded tick. */
     public static long deadline(MinecraftServer server) {
+        return deadline(server, null);
+    }
+
+    /** Returns a shared deadline further capped by the target's own wall-clock slice. */
+    public static long deadline(MinecraftServer server, Object targetKey) {
         ServerState state = STATES.get(server);
-        if (state == null) return System.nanoTime() + MAX_WORK_NANOS;
-        return System.nanoTime() + Math.max(0L, Math.min(state.sliceNanos, MAX_WORK_NANOS - state.workNanos));
+        if (state == null) return System.nanoTime() + MAX_TARGET_WORK_NANOS;
+        long globalRemaining = Math.max(0L, MAX_WORK_NANOS - state.workNanos);
+        long targetRemaining = targetKey == null
+                ? MAX_TARGET_WORK_NANOS
+                : Math.max(0L, MAX_TARGET_WORK_NANOS - state.targetWorkNanos.getOrDefault(targetKey, 0L));
+        return System.nanoTime() + Math.max(0L, Math.min(state.sliceNanos,
+                Math.min(globalRemaining, targetRemaining)));
     }
 
     public static void recordWork(MinecraftServer server, long started) {
         ServerState state = STATES.get(server);
         if (state != null) state.workNanos += Math.max(0L, System.nanoTime() - started);
+    }
+
+    public static void recordWork(MinecraftServer server, Object targetKey, long started) {
+        long elapsed = Math.max(0L, System.nanoTime() - started);
+        ServerState state = STATES.get(server);
+        if (state != null) {
+            state.workNanos += elapsed;
+            if (targetKey != null) {
+                state.targetWorkNanos.merge(targetKey, elapsed, Long::sum);
+            }
+        }
     }
 
     /**
@@ -110,11 +134,13 @@ public final class AccelerationExecutionBudget {
         private long workNanos;
         private long sliceNanos = MAX_WORK_NANOS;
         private final Map<Object, Integer> activeTargets = new IdentityHashMap<>();
+        private final Map<Object, Long> targetWorkNanos = new IdentityHashMap<>();
 
         private void begin(int serverTick, int budget) {
             int previousTargetCount = Math.max(1, activeTargets.size());
             activeTargets.clear();
             workNanos = 0L;
+            targetWorkNanos.clear();
             sliceNanos = Math.max(1L, MAX_WORK_NANOS / previousTargetCount);
             tick = serverTick;
             remaining = Math.max(0, budget);

@@ -5,6 +5,8 @@ import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBloc
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
+import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -13,6 +15,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -23,8 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 public final class Network {
+    private static final int MAX_RECLAIM_ENTRIES = 512;
     private Network() {
     }
 
@@ -187,6 +194,64 @@ public final class Network {
         }
     }
 
+    public record WondrousStaffRecallPayload(boolean offhand) implements CustomPacketPayload {
+        public static final Type<WondrousStaffRecallPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_recall"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffRecallPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> buf.writeBoolean(value.offhand()),
+                        buf -> new WondrousStaffRecallPayload(buf.readBoolean()));
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** One range or machine marker shown by the operator reclaimer. */
+    public record ReclaimerEntry(boolean range, UUID id, UUID owner, String ownerName,
+                                 ResourceLocation dimension, BlockPos pos, String label)
+            implements CustomPacketPayload {
+        public static final Type<ReclaimerEntry> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_entry"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerEntry> STREAM_CODEC = StreamCodec.of(
+                (buf, value) -> {
+                    buf.writeBoolean(value.range()); buf.writeUUID(value.id()); buf.writeUUID(value.owner());
+                    buf.writeUtf(value.ownerName(), 64); ResourceLocation.STREAM_CODEC.encode(buf, value.dimension());
+                    buf.writeBlockPos(value.pos()); buf.writeUtf(value.label(), 128);
+                }, buf -> new ReclaimerEntry(buf.readBoolean(), buf.readUUID(), buf.readUUID(), buf.readUtf(64),
+                        ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(), buf.readUtf(128)));
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record ReclaimerStatePayload(List<ReclaimerEntry> entries) implements CustomPacketPayload {
+        public static final Type<ReclaimerStatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_state"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerStatePayload> STREAM_CODEC = StreamCodec.of(
+                (buf, value) -> {
+                    int count = Math.min(MAX_RECLAIM_ENTRIES, value.entries().size()); buf.writeVarInt(count);
+                    for (int i = 0; i < count; i++) ReclaimerEntry.STREAM_CODEC.encode(buf, value.entries().get(i));
+                }, buf -> {
+                    int count = Math.min(MAX_RECLAIM_ENTRIES, Math.max(0, buf.readVarInt()));
+                    List<ReclaimerEntry> entries = new ArrayList<>(count);
+                    for (int i = 0; i < count; i++) entries.add(ReclaimerEntry.STREAM_CODEC.decode(buf));
+                    return new ReclaimerStatePayload(entries);
+                });
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record ReclaimerRequestPayload() implements CustomPacketPayload {
+        public static final Type<ReclaimerRequestPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_request"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerRequestPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> {}, buf -> new ReclaimerRequestPayload());
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record ReclaimerActionPayload(boolean range, UUID id) implements CustomPacketPayload {
+        public static final Type<ReclaimerActionPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_action"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerActionPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> { buf.writeBoolean(value.range()); buf.writeUUID(value.id()); },
+                        buf -> new ReclaimerActionPayload(buf.readBoolean(), buf.readUUID()));
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     /** Dimension-wide visual clock used only for client cloud movement. */
     public record TimeAccelerationStatePayload(String dimension, int speed) implements CustomPacketPayload {
         public static final Type<TimeAccelerationStatePayload> TYPE =
@@ -229,6 +294,14 @@ public final class Network {
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
         registrar.playToServer(WondrousStaffSummonPayload.TYPE, WondrousStaffSummonPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSummon(payload, context)));
+        registrar.playToServer(WondrousStaffRecallPayload.TYPE, WondrousStaffRecallPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleWondrousStaffRecall(payload, context)));
+        registrar.playToServer(ReclaimerRequestPayload.TYPE, ReclaimerRequestPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> sendReclaimerState((ServerPlayer) context.player())));
+        registrar.playToServer(ReclaimerActionPayload.TYPE, ReclaimerActionPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleReclaimerAction(payload, context)));
+        registrar.playToClient(ReclaimerStatePayload.TYPE, ReclaimerStatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleReclaimer(payload)));
         RangeNetwork.register(registrar);
     }
 
@@ -283,6 +356,68 @@ public final class Network {
         WondrousStaffSummoning.summon(player, held, payload.entityIds());
     }
 
+    private static void handleWondrousStaffRecall(WondrousStaffRecallPayload payload,
+                                                   net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+        WondrousStaffSummoning.recall(player, held);
+    }
+
+    private static void sendReclaimerState(ServerPlayer player) {
+        if (player == null || (!player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
+                && !player.getOffhandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get()))) return;
+        List<ReclaimerEntry> result = new ArrayList<>();
+        RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
+        for (RangeAccelerationSavedData.Field field : data.operatorFields()) {
+            if (result.size() >= MAX_RECLAIM_ENTRIES) break;
+            result.add(new ReclaimerEntry(true, field.id(), field.owner(), ownerName(player, field.owner()),
+                    field.dimension(), field.center(), "时间流逝 " + field.speed() + "x"));
+        }
+        for (ServerLevel level : player.getServer().getAllLevels()) {
+            for (Entity entity : level.getAllEntities()) {
+                if (!(entity instanceof WondrousStaffAccelerationEntity marker)
+                        || marker.isEntityMode() || marker.isTimeMode() || marker.getOwnerUuid() == null) continue;
+                if (result.size() >= MAX_RECLAIM_ENTRIES) break;
+                BlockPos pos = marker.getTargetPos();
+                String label = level.getBlockState(pos).getBlock().getName().getString();
+                result.add(new ReclaimerEntry(false, marker.getUUID(), marker.getOwnerUuid(),
+                        ownerName(player, marker.getOwnerUuid()), level.dimension().location(), pos, label));
+            }
+        }
+        PacketDistributor.sendToPlayer(player, new ReclaimerStatePayload(result));
+    }
+
+    private static String ownerName(ServerPlayer viewer, UUID owner) {
+        ServerPlayer online = viewer.getServer().getPlayerList().getPlayer(owner);
+        return online != null ? online.getGameProfile().getName() : owner.toString();
+    }
+
+    private static void handleReclaimerAction(ReclaimerActionPayload payload,
+                                               net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        ItemStack tool = player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
+                ? player.getMainHandItem() : player.getOffhandItem();
+        if (!tool.is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())) return;
+        boolean removed = false;
+        if (payload.range()) {
+            removed = RangeAccelerationSavedData.get(player.getServer())
+                    .reclaimByOperator(player.getServer(), payload.id()) != null;
+        } else {
+            for (ServerLevel level : player.getServer().getAllLevels()) {
+                Entity entity = level.getEntity(payload.id());
+                if (entity instanceof WondrousStaffAccelerationEntity marker) {
+                    marker.discard();
+                    removed = true;
+                    break;
+                }
+            }
+        }
+        player.displayClientMessage(Component.translatable(removed
+                ? "msg.useless_stretcher.reclaimer.removed"
+                : "msg.useless_stretcher.reclaimer.missing"), true);
+        sendReclaimerState(player);
+    }
+
     public static void sendWondrousStaffFeatures(boolean summonEnabled, boolean lootRefresh,
                                                  InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffFeaturesPayload(
@@ -292,6 +427,18 @@ public final class Network {
     public static void sendWondrousStaffSummon(List<String> entityIds, InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffSummonPayload(
                 List.copyOf(entityIds), hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void recallWondrousStaff(InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffRecallPayload(hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void requestReclaimer() {
+        PacketDistributor.sendToServer(new ReclaimerRequestPayload());
+    }
+
+    public static void reclaimTarget(boolean range, UUID id) {
+        PacketDistributor.sendToServer(new ReclaimerActionPayload(range, id));
     }
 
     public static void sendStaffTutorial(ServerPlayer player) {

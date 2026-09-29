@@ -25,6 +25,20 @@ public abstract class MyriadContainerMigrationMixin {
         var server = ServerLifecycleHooks.getCurrentServer();
         if (server == null || !EffectiveSide.get().isServer()) return;
         var level = server.overworld();
+        // This hook runs for every open menu, including AE terminals that call
+        // broadcastChanges every tick. Skip the slot scan unless this menu actually contains
+        // one of our legacy inline Myriad stacks. New external-reference stacks never need
+        // migration and therefore cost zero here.
+        boolean candidate = false;
+        for (Slot slot : slots) {
+            ItemStack stack = slot.getItem();
+            if (MyriadMoldData.isLegacyInline(stack)) {
+                candidate = true;
+                break;
+            }
+        }
+        if (!candidate && MyriadMoldData.isLegacyInline(getCarried())) candidate = true;
+        if (!candidate) return;
         for (Slot slot : slots) {
             if (MyriadMoldData.externalize(level, slot.getItem())) slot.setChanged();
         }

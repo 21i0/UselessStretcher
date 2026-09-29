@@ -85,6 +85,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     private BlockPos targetPos;
     private UUID targetUuid;
+    /** Player who created this marker; used by the operator reclaimer. */
+    private UUID ownerUuid;
     private long pendingTicks;
     private long lastEnergy = -1L;
     private int lastItemFingerprint;
@@ -195,7 +197,13 @@ public class WondrousStaffAccelerationEntity extends Entity {
             } else {
                 idleTicks++;
             }
-            boolean throttled = StretcherConfig.idleThrottle() && observedWorking
+            // Lightning rods are deliberately driven by command-style lightning rather than
+            // vanilla's weather scheduler. They do not mutate a block entity, energy buffer, or
+            // inventory, so the generic activity probe can never observe them as "working".
+            // Never let dynamic idle throttling silently reduce a rod to the fallback rate.
+            boolean throttled = !(level.getBlockState(this.targetPos).getBlock()
+                    instanceof net.minecraft.world.level.block.LightningRodBlock)
+                    && StretcherConfig.idleThrottle() && observedWorking
                     && !isIdleThrottleDisabled()
                     && idleTicks > IDLE_WINDOW_TICKS;
             setIdleThrottled(throttled);
@@ -205,14 +213,14 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 int executed = AccelerationExecutionBudget.take(
                         level.getServer(), this, IDLE_EXECUTIONS_PER_TICK);
                 if (executed > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                    WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
                 }
             } else {
                 pendingTicks = Math.min(MAX_PENDING_TICKS, pendingTicks + speed);
                 int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
                 int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
                 if (executed > 0) {
-                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed);
+                    pendingTicks -= WondrousStaffAcceleration.tickTarget(level, this.targetPos, executed, this);
                 }
             }
         }
@@ -241,14 +249,14 @@ public class WondrousStaffAccelerationEntity extends Entity {
         int requested = (int) Math.min(pendingTicks, MAX_EXECUTIONS_PER_TICK);
         int executed = AccelerationExecutionBudget.take(level.getServer(), this, requested);
         long started = System.nanoTime();
-        long deadline = AccelerationExecutionBudget.deadline(level.getServer());
+        long deadline = AccelerationExecutionBudget.deadline(level.getServer(), this);
         try {
             for (int i = 0; i < executed && !target.isRemoved() && System.nanoTime() < deadline; i++) {
                 target.tick();
                 pendingTicks--;
             }
         } finally {
-            AccelerationExecutionBudget.recordWork(level.getServer(), started);
+            AccelerationExecutionBudget.recordWork(level.getServer(), this, started);
         }
         setTargetHeight(target.getBbHeight());
         if (target.isRemoved()) discard();
@@ -389,6 +397,14 @@ public class WondrousStaffAccelerationEntity extends Entity {
         return this.targetUuid;
     }
 
+    public UUID getOwnerUuid() {
+        return ownerUuid;
+    }
+
+    public void setOwnerUuid(UUID ownerUuid) {
+        this.ownerUuid = ownerUuid;
+    }
+
     public int getMode() {
         return this.entityData.get(MODE);
     }
@@ -497,6 +513,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
     protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.contains("targetPos")) this.targetPos = BlockPos.of(tag.getLong("targetPos"));
         if (tag.hasUUID("targetUuid")) this.targetUuid = tag.getUUID("targetUuid");
+        if (tag.hasUUID("ownerUuid")) this.ownerUuid = tag.getUUID("ownerUuid");
         setMode(tag.getInt("mode"));
         setSpeed(tag.getInt("speed"));
         setRemainingTime(tag.getInt("remainingTime"));
@@ -512,6 +529,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
     protected void addAdditionalSaveData(CompoundTag tag) {
         if (this.targetPos != null) tag.putLong("targetPos", this.targetPos.asLong());
         if (this.targetUuid != null) tag.putUUID("targetUuid", this.targetUuid);
+        if (this.ownerUuid != null) tag.putUUID("ownerUuid", this.ownerUuid);
         tag.putInt("mode", getMode());
         tag.putInt("speed", getSpeed());
         tag.putInt("remainingTime", getRemainingTime());

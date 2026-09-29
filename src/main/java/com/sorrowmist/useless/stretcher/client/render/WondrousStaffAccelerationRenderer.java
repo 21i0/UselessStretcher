@@ -106,22 +106,25 @@ public class WondrousStaffAccelerationRenderer
         float y1 = BAR_Y + BAR_HEIGHT;
 
         VertexConsumer vc = buffer.getBuffer(RenderType.debugQuads());
-        addQuad(vc, poseStack, x0, y0, x1, y1, 0.15F, 0.15F, 0.15F, 0.85F);
+        addQuad(vc, poseStack, x0, y0, x1, y1, 0.0F, 0.15F, 0.15F, 0.15F, 0.85F);
 
         float fillX = x0 + BAR_WIDTH * fraction;
         if (fillX > x0) {
-            addQuad(vc, poseStack, x0, y0, fillX, y1, r, g, b, 0.9F);
+            // Keep the fill fractionally closer to the camera than the gray track. Both quads
+            // otherwise share one plane and flicker due to depth-buffer Z-fighting.
+            addQuad(vc, poseStack, x0, y0, fillX, y1, -0.01F, r, g, b, 0.9F);
         }
     }
 
     private static void addQuad(VertexConsumer vc, PoseStack poseStack,
                                 float x0, float y0, float x1, float y1,
+                                float z,
                                 float r, float g, float b, float a) {
         Matrix4f pose = poseStack.last().pose();
-        vc.addVertex(pose, x0, y0, 0.0F).setColor(r, g, b, a);
-        vc.addVertex(pose, x1, y0, 0.0F).setColor(r, g, b, a);
-        vc.addVertex(pose, x1, y1, 0.0F).setColor(r, g, b, a);
-        vc.addVertex(pose, x0, y1, 0.0F).setColor(r, g, b, a);
+        vc.addVertex(pose, x0, y0, z).setColor(r, g, b, a);
+        vc.addVertex(pose, x1, y0, z).setColor(r, g, b, a);
+        vc.addVertex(pose, x1, y1, z).setColor(r, g, b, a);
+        vc.addVertex(pose, x0, y1, z).setColor(r, g, b, a);
     }
 
     private static void moveToFace(PoseStack poseStack, Direction face) {

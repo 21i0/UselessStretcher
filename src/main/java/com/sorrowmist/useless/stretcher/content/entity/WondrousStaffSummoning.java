@@ -17,6 +17,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +30,7 @@ public final class WondrousStaffSummoning {
     public static final int MAX_SELECTION = 32;
     private static final int SUMMON_COOLDOWN_TICKS = 10;
     private static final Map<UUID, Long> NEXT_ALLOWED_TICK = new HashMap<>();
+    private static final String SUMMONED_BY = "useless_stretcher_summoned_by";
 
     private WondrousStaffSummoning() {
     }
@@ -63,6 +65,7 @@ public final class WondrousStaffSummoning {
             if (spawnPos == null) continue;
             Entity entity = type.spawn(level, spawnPos, MobSpawnType.COMMAND);
             if (entity != null) {
+                entity.getPersistentData().putUUID(SUMMONED_BY, player.getUUID());
                 if (entity instanceof Mob mob && !(mob instanceof EnderDragon)) mob.setNoAi(true);
                 spawned++;
             }
@@ -74,6 +77,25 @@ public final class WondrousStaffSummoning {
             player.displayClientMessage(Component.translatable(
                     "msg.useless_stretcher.staff_summon_failed"), false);
         }
+    }
+
+    /** Removes all living entities created by this player's staff. */
+    public static void recall(ServerPlayer player, ItemStack staff) {
+        if (!StretcherConfig.enableStaffSummon() || !staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        int removed = 0;
+        for (ServerLevel level : player.getServer().getAllLevels()) {
+            List<Entity> snapshot = new java.util.ArrayList<>();
+            level.getAllEntities().forEach(snapshot::add);
+            for (Entity entity : snapshot) {
+                if (entity.getPersistentData().hasUUID(SUMMONED_BY)
+                        && player.getUUID().equals(entity.getPersistentData().getUUID(SUMMONED_BY))) {
+                    entity.discard();
+                    removed++;
+                }
+            }
+        }
+        player.displayClientMessage(Component.translatable(removed > 0
+                ? "msg.useless_stretcher.staff_recalled" : "msg.useless_stretcher.staff_recall_failed"), false);
     }
 
     private static BlockPos findSpawnPos(ServerPlayer player, int index) {

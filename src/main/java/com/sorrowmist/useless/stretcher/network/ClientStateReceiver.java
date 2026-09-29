@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.network;
 import com.sorrowmist.useless.stretcher.client.WondrousStaffCloudTime;
 import com.sorrowmist.useless.stretcher.screen.OmniversalMyriadScreen;
 import com.sorrowmist.useless.stretcher.client.RangeAccelerationHistoryScreen;
+import com.sorrowmist.useless.stretcher.client.ReclaimerScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -47,5 +48,9 @@ public final class ClientStateReceiver {
         if (minecraft.screen instanceof RangeAccelerationHistoryScreen screen) {
             screen.onHistory(payload.fields());
         }
+    }
+
+    public static void handleReclaimer(Network.ReclaimerStatePayload payload) {
+        Minecraft.getInstance().setScreen(new ReclaimerScreen(payload.entries()));
     }
 }

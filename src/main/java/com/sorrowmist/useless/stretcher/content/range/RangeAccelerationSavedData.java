@@ -230,6 +230,19 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 .toList();
     }
 
+    /** Snapshot of every placed range for the operator reclaimer. */
+    public List<Summary> allFields() {
+        return fields.values().stream()
+                .sorted(Comparator.comparingLong(Field::createdAt).reversed())
+                .map(Field::summary)
+                .toList();
+    }
+
+    /** Full field snapshot for the server-side operator management screen. */
+    public List<Field> operatorFields() {
+        return List.copyOf(fields.values());
+    }
+
     public boolean setEnabled(MinecraftServer server, UUID owner, UUID id, boolean enabled) {
         Field field = fields.get(id);
         if (field == null || !field.owner.equals(owner)) return false;
@@ -359,7 +372,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
             int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
             if (executions > 0) {
-                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions);
+                    work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions, work);
                 nextTarget = (targetIndex + 1) % targetCount;
             }
         }

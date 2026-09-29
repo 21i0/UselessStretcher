@@ -76,19 +76,23 @@ public final class WondrousStaffSummonScreen extends Screen {
                 panelLeft + panelWidth - 105, panelTop + 8, 96, 18,
                 enabledMessage(), ignored -> toggleEnabled()));
         addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 9, panelTop + 218, 110, 18,
+                panelLeft + 9, panelTop + 218, 82, 18,
                 Component.translatable("gui.useless_stretcher.staff_summon.select_visible"),
                 ignored -> selectVisible()));
         addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 122, panelTop + 218, 110, 18,
+                panelLeft + 94, panelTop + 218, 72, 18,
                 Component.translatable("gui.useless_stretcher.staff_summon.clear"),
                 ignored -> selected.clear()));
         summonActionButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 235, panelTop + 218, 82, 18,
+                panelLeft + 169, panelTop + 218, 82, 18,
                 summonActionMessage(),
                 ignored -> summonSelected()));
         addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 68, panelTop + 218, 59, 18,
+                panelLeft + 254, panelTop + 218, 67, 18,
+                Component.translatable("gui.useless_stretcher.staff_summon.recall"),
+                ignored -> Network.recallWondrousStaff(hand)));
+        addRenderableWidget(new SelectableAE2Button(
+                panelLeft + panelWidth - 64, panelTop + 218, 55, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
         enabledButton.setSelected(isEnabled());
         enabledButton.active = StretcherConfig.enableStaffSummon();
