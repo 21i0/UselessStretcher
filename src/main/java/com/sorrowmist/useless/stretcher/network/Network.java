@@ -7,6 +7,7 @@ import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -308,6 +309,7 @@ public final class Network {
     private static void handleWondrousStaffSpeed(WondrousStaffSpeedPayload payload,
                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (held.getItem() != com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get()) return;
@@ -338,6 +340,7 @@ public final class Network {
     private static void handleWondrousStaffFeatures(WondrousStaffFeaturesPayload payload,
                                                     net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
@@ -350,6 +353,7 @@ public final class Network {
     private static void handleWondrousStaffSummon(WondrousStaffSummonPayload payload,
                                                   net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
@@ -364,6 +368,7 @@ public final class Network {
     }
 
     private static void sendReclaimerState(ServerPlayer player) {
+        if (!StretcherConfig.serverRemoteReclaimer()) return;
         if (player == null || (!player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
                 && !player.getOffhandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get()))) return;
         List<ReclaimerEntry> result = new ArrayList<>();
@@ -376,10 +381,13 @@ public final class Network {
         for (ServerLevel level : player.getServer().getAllLevels()) {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof WondrousStaffAccelerationEntity marker)
-                        || marker.isEntityMode() || marker.isTimeMode() || marker.getOwnerUuid() == null) continue;
+                        || marker.isEntityMode() || marker.isTimeMode() || marker.getOwnerUuid() == null
+                        || !marker.isPermanent()) continue;
                 if (result.size() >= MAX_RECLAIM_ENTRIES) break;
                 BlockPos pos = marker.getTargetPos();
-                String label = level.getBlockState(pos).getBlock().getName().getString();
+                String label = level.getBlockState(pos).getBlock().getName().getString()
+                        + " · x" + marker.getSpeed()
+                        + (marker.isIdleThrottleDisabled() ? " · 无休眠降频" : " · 动态降频");
                 result.add(new ReclaimerEntry(false, marker.getUUID(), marker.getOwnerUuid(),
                         ownerName(player, marker.getOwnerUuid()), level.dimension().location(), pos, label));
             }
@@ -395,6 +403,7 @@ public final class Network {
     private static void handleReclaimerAction(ReclaimerActionPayload payload,
                                                net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverRemoteReclaimer()) return;
         ItemStack tool = player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
                 ? player.getMainHandItem() : player.getOffhandItem();
         if (!tool.is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())) return;
@@ -435,6 +444,10 @@ public final class Network {
 
     public static void requestReclaimer() {
         PacketDistributor.sendToServer(new ReclaimerRequestPayload());
+    }
+
+    public static void requestReclaimerState(ServerPlayer player) {
+        sendReclaimerState(player);
     }
 
     public static void reclaimTarget(boolean range, UUID id) {

@@ -59,9 +59,9 @@ public class WondrousStaffAccelerationRenderer
                 ? 1.0F
                 : Mth.clamp(entity.getRemainingTime()
                         / (float) WondrousStaffAcceleration.DEFAULT_DURATION_TICKS, 0.0F, 1.0F);
-        float fillR = permanent ? 1.0F : 0.25F;
-        float fillG = permanent ? 0.7F : 0.8F;
-        float fillB = permanent ? 0.1F : 1.0F;
+        float fillR = permanent ? 1.0F : 0.20F;
+        float fillG = permanent ? 0.65F : 0.85F;
+        float fillB = permanent ? 0.05F : 1.0F;
 
         for (Direction face : Direction.values()) {
             poseStack.pushPose();
@@ -92,9 +92,9 @@ public class WondrousStaffAccelerationRenderer
         this.font.drawInBatch(text, -this.font.width(text) / 2.0F, 0.0F, 0xFFFFFF, false,
                 poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, packedLight);
         drawProgressBar(poseStack, buffer, fraction,
-                permanent ? 1.0F : 0.25F,
-                permanent ? 0.7F : 0.8F,
-                permanent ? 0.1F : 1.0F);
+                permanent ? 1.0F : 0.20F,
+                permanent ? 0.65F : 0.85F,
+                permanent ? 0.05F : 1.0F);
         poseStack.popPose();
     }
 
@@ -106,13 +106,13 @@ public class WondrousStaffAccelerationRenderer
         float y1 = BAR_Y + BAR_HEIGHT;
 
         VertexConsumer vc = buffer.getBuffer(RenderType.debugQuads());
-        addQuad(vc, poseStack, x0, y0, x1, y1, 0.0F, 0.15F, 0.15F, 0.15F, 0.85F);
+        addQuad(vc, poseStack, x0, y0, x1, y1, 0.0F, 0.18F, 0.18F, 0.18F, 0.95F);
 
         float fillX = x0 + BAR_WIDTH * fraction;
         if (fillX > x0) {
             // Keep the fill fractionally closer to the camera than the gray track. Both quads
             // otherwise share one plane and flicker due to depth-buffer Z-fighting.
-            addQuad(vc, poseStack, x0, y0, fillX, y1, -0.01F, r, g, b, 0.9F);
+            addQuad(vc, poseStack, x0, y0, fillX, y1, -0.01F, r, g, b, 1.0F);
         }
     }
 

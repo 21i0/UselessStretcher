@@ -6,6 +6,7 @@ import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.network.Network;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
@@ -93,8 +94,13 @@ public final class WondrousStaffRightClickHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
         if (event.getEntity().isShiftKeyDown()
-                && event.getItemStack().is(ModItems.RANGE_RECLAIMER.get())) {
-            if (event.getLevel().isClientSide) Network.requestReclaimer();
+                && event.getItemStack().is(ModItems.RANGE_RECLAIMER.get())
+                && StretcherConfig.serverRemoteReclaimer()) {
+            if (event.getLevel().isClientSide) {
+                Network.requestReclaimer();
+            } else if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
+                Network.requestReclaimerState(player);
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -280,6 +281,7 @@ public final class RangeNetwork {
 
     private static void handleSettings(SettingsPayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverRangeAcceleration()) return;
         ItemStack staff = heldStaff(player, payload.offhand);
         if (staff.isEmpty()) return;
         RangeAccelerationSettings.set(staff, payload.placementMode, payload.filterMarkingMode,
@@ -293,6 +295,7 @@ public final class RangeNetwork {
 
     private static void handlePlace(PlacePayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverRangeAcceleration()) return;
         ItemStack staff = heldStaff(player, payload.offhand);
         if (staff.isEmpty() || !RangeAccelerationSettings.placementMode(staff)
                 || RangeAccelerationSettings.filterMarkingMode(staff)
@@ -349,6 +352,7 @@ public final class RangeNetwork {
 
     private static void handleFilterToggle(FilterTogglePayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player) || !near(player, payload.targetPos)) return;
+        if (!StretcherConfig.serverRangeAcceleration()) return;
         ItemStack staff = heldStaff(player, payload.offhand);
         if (staff.isEmpty() || !RangeAccelerationSettings.filterMarkingMode(staff)) return;
         ServerLevel level = player.serverLevel();
@@ -386,6 +390,7 @@ public final class RangeNetwork {
 
     private static void handleHistoryToggle(HistoryTogglePayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverRangeAcceleration()) return;
         RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
         data.setEnabled(player.getServer(), player.getUUID(), payload.id, payload.enabled);
         sendHistory(player);
@@ -393,6 +398,7 @@ public final class RangeNetwork {
 
     private static void handleHistoryReclaim(HistoryReclaimPayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
+        if (!StretcherConfig.serverRangeAcceleration()) return;
         RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
         RangeAccelerationSavedData.Summary reclaimed = data.reclaim(
                 player.getServer(), player.getUUID(), payload.id());

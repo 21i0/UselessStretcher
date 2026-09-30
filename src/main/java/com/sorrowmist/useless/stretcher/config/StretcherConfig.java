@@ -23,6 +23,9 @@ public final class StretcherConfig {
     public static final ModConfigSpec.DoubleValue STAFF_LEAF_DROP_PROBABILITY;
     public static final ModConfigSpec.BooleanValue ENABLE_STAFF_SUMMON;
     public static final ModConfigSpec.BooleanValue ENABLE_STAFF_LOOT_REFRESH;
+    public static final ModConfigSpec.BooleanValue SERVER_STAFF_ACCELERATION;
+    public static final ModConfigSpec.BooleanValue SERVER_RANGE_ACCELERATION;
+    public static final ModConfigSpec.BooleanValue SERVER_REMOTE_RECLAIMER;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -45,6 +48,21 @@ public final class StretcherConfig {
                         "加速效果结束或目标消失时会恢复目标原本的 AI 状态。")
                 .translation("useless_stretcher.configuration.acceleration.entity_disable_ai")
                 .define("entity_disable_ai", true);
+        BUILDER.pop();
+
+        BUILDER.translation("useless_stretcher.configuration.server_controls").push("server_controls");
+        SERVER_STAFF_ACCELERATION = BUILDER
+                .comment("服务器是否允许手杖加速功能。关闭后全服手杖加速请求都会被拒绝。")
+                .translation("useless_stretcher.configuration.server_controls.staff_acceleration")
+                .define("staff_acceleration", true);
+        SERVER_RANGE_ACCELERATION = BUILDER
+                .comment("服务器是否允许范围加速。关闭后不能放置或启用新的范围加速。")
+                .translation("useless_stretcher.configuration.server_controls.range_acceleration")
+                .define("range_acceleration", true);
+        SERVER_REMOTE_RECLAIMER = BUILDER
+                .comment("服务器是否允许时间流逝回收器远程管理和回收。")
+                .translation("useless_stretcher.configuration.server_controls.remote_reclaimer")
+                .define("remote_reclaimer", true);
         BUILDER.pop();
 
         // Keep all staff-specific categories adjacent in the generated config UI while retaining
@@ -144,6 +162,18 @@ public final class StretcherConfig {
 
     public static boolean enableStaffLootRefresh() {
         return ENABLE_STAFF_LOOT_REFRESH.get();
+    }
+
+    public static boolean serverStaffAcceleration() {
+        return SERVER_STAFF_ACCELERATION.get();
+    }
+
+    public static boolean serverRangeAcceleration() {
+        return SERVER_RANGE_ACCELERATION.get();
+    }
+
+    public static boolean serverRemoteReclaimer() {
+        return SERVER_REMOTE_RECLAIMER.get();
     }
 
     /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */
