@@ -16,7 +16,7 @@ item_ids:
 
 ## 合成
 
-<RecipeFor id="useless_stretcher:useless_stretcher" />
+<Recipe id="useless_stretcher:useless_stretcher" fallbackText="此配方已被当前整合包移除。" />
 
 无序合成：万象万物之块和一个 AE2 空白样板。
 

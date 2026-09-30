@@ -81,7 +81,8 @@ public final class WondrousStaffSummoning {
 
     /** Removes all living entities created by this player's staff. */
     public static void recall(ServerPlayer player, ItemStack staff) {
-        if (!StretcherConfig.enableStaffSummon() || !staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        if (!StretcherConfig.enableStaffSummon()
+                || !staff.is(ModItems.WONDROUS_STAFF.get())) return;
         int removed = 0;
         for (ServerLevel level : player.getServer().getAllLevels()) {
             List<Entity> snapshot = new java.util.ArrayList<>();

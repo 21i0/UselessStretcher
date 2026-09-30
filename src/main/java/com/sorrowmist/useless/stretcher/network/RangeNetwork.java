@@ -390,7 +390,7 @@ public final class RangeNetwork {
 
     private static void handleHistoryToggle(HistoryTogglePayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        if (!StretcherConfig.serverRangeAcceleration()) return;
+        if (payload.enabled && !StretcherConfig.serverRangeAcceleration()) return;
         RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
         data.setEnabled(player.getServer(), player.getUUID(), payload.id, payload.enabled);
         sendHistory(player);
@@ -398,7 +398,6 @@ public final class RangeNetwork {
 
     private static void handleHistoryReclaim(HistoryReclaimPayload payload, IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        if (!StretcherConfig.serverRangeAcceleration()) return;
         RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
         RangeAccelerationSavedData.Summary reclaimed = data.reclaim(
                 player.getServer(), player.getUUID(), payload.id());

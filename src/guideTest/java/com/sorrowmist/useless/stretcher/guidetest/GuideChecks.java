@@ -45,6 +45,35 @@ public final class GuideChecks {
         try {
             check(++ticks < 2400, "guide preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;
+            if (page >= PAGES.size()) {
+                if (waitFrames == 0) {
+                    if (page == PAGES.size()) {
+                        client.setScreen(new com.sorrowmist.useless.stretcher.client.StretcherConfigScreen(null));
+                    } else {
+                        var owner = java.util.UUID.randomUUID();
+                        client.setScreen(new com.sorrowmist.useless.stretcher.client.ReclaimerScreen(null, List.of(
+                                new com.sorrowmist.useless.stretcher.network.Network.ReclaimerEntry(false,
+                                        java.util.UUID.randomUUID(), owner, "测试玩家", ResourceLocation.parse("minecraft:overworld"),
+                                        new net.minecraft.core.BlockPos(20, 64, 100), "高炉 · x1024 · 无休眠降频"),
+                                new com.sorrowmist.useless.stretcher.network.Network.ReclaimerEntry(true,
+                                        java.util.UUID.randomUUID(), owner, "测试玩家", ResourceLocation.parse("minecraft:overworld"),
+                                        new net.minecraft.core.BlockPos(40, 64, 100), "工厂范围 · x16")), false));
+                    }
+                    waitFrames = 20;
+                    return;
+                }
+                if (--waitFrames != 0) return;
+                try (var image = Screenshot.takeScreenshot(client.getMainRenderTarget())) {
+                    image.writeToFile(client.gameDirectory.toPath().resolve("screenshots")
+                            .resolve(page == PAGES.size() ? "config-category.png" : "reclaimer.png"));
+                }
+                if (++page > PAGES.size() + 1) {
+                    LogUtils.getLogger().info("UI CHECKS PASSED: config category and reclaimer rendered");
+                    finished = true;
+                    client.stop();
+                }
+                return;
+            }
             var guide = Guides.getById(GUIDE_ID);
             if (guide == null) return;
             if (!checked) {
@@ -95,8 +124,6 @@ public final class GuideChecks {
             }
             if (++page == PAGES.size()) {
                 LogUtils.getLogger().info("GUIDE CHECKS PASSED: AE2 guide pages compiled/rendered, images and three tooltip entries resolved");
-                finished = true;
-                client.stop();
             }
         } catch (Throwable failure) {
             LogUtils.getLogger().error("GUIDE CHECKS FAILED", failure);

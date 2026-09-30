@@ -7,7 +7,6 @@ import com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog;
 import com.sorrowmist.useless.content.recipe.MoldMatcher;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.item.StaffMiningContext;
-import com.sorrowmist.useless.stretcher.content.item.RangeReclaimerItem;
 import com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem;
 import com.sorrowmist.useless.stretcher.content.item.WondrousStaffLootRefresh;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
@@ -95,6 +94,8 @@ public final class RegressionChecks {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
         try {
             ServerLevel level = event.getServer().overworld();
+            ServerConfigChecks.run(level);
+            ReclaimerInteractionChecks.run(level);
             storage(level);
             molds(level);
             drops();
@@ -308,7 +309,8 @@ public final class RegressionChecks {
                 "first target receives work allowance");
         check(AccelerationExecutionBudget.take(server, fast, 1024) > 0,
                 "one target cannot consume all count allowance before another");
-        AccelerationExecutionBudget.recordWork(server, System.nanoTime() - 10_000_000L);
+        long workLimit = field(AccelerationExecutionBudget.class, "MAX_WORK_NANOS").getLong(null);
+        AccelerationExecutionBudget.recordWork(server, System.nanoTime() - workLimit - 1_000_000L);
         check(AccelerationExecutionBudget.take(server, new Object(), 1024) == 0,
                 "elapsed budget prevents further grants");
         check(WondrousStaffAcceleration.tickTarget(level, BlockPos.ZERO, 1024) == 0,
@@ -400,11 +402,12 @@ public final class RegressionChecks {
         var reclaimMarker = (TimeFlowEntity) level.getEntity(placed.id());
         check(reclaimMarker != null && reclaimMarker.isPickable(),
                 "reclaimer target is ray-pickable");
-        check(RangeReclaimerItem.tryReclaim(operator,
-                        new ItemStack(ModItems.RANGE_RECLAIMER.get()), reclaimMarker)
-                        == InteractionResult.SUCCESS
-                        && liveRanges.getField(placed.id()) == null && reclaimMarker.isRemoved(),
-                "right-click reclaimer path removes another player's range without block interaction");
+        operator.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.RANGE_RECLAIMER.get()));
+        check(reclaimMarker.interact(operator, InteractionHand.MAIN_HAND) == InteractionResult.PASS
+                        && liveRanges.getField(placed.id()) != null && !reclaimMarker.isRemoved(),
+                "ordinary right-click no longer reclaims another player's range");
+        check(liveRanges.reclaimByOperator(server, placed.id()) != null && reclaimMarker.isRemoved(),
+                "UI reclaim service still removes another player's range");
         AccelerationExecutionBudget.removeServer(server);
         LogUtils.getLogger().info("REGRESSION acceleration: budget, revisions, pause, reclaim and unload passed");
     }

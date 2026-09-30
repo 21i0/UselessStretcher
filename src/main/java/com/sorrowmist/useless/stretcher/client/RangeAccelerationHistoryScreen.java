@@ -4,6 +4,7 @@ import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.network.RangeNetwork;
+import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -84,6 +85,10 @@ public final class RangeAccelerationHistoryScreen extends Screen {
                     }
                 }));
         next.active = page + 1 < pages;
+        addRenderableWidget(new SelectableAE2Button(
+                panelLeft + 90, panelTop + 199, 105, 18,
+                Component.translatable("gui.useless_stretcher.history.machines"),
+                ignored -> Network.requestPersonalReclaimer()));
         addRenderableWidget(new SelectableAE2Button(
                 panelLeft + panelWidth - 76, panelTop + 199, 67, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));

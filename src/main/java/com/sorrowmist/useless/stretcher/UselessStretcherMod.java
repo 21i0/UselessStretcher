@@ -1,6 +1,7 @@
 package com.sorrowmist.useless.stretcher;
 
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.config.ServerConfigSync;
 import com.sorrowmist.useless.stretcher.dimension.DimensionCompat;
 import com.sorrowmist.useless.stretcher.init.ModBlockEntities;
 import com.sorrowmist.useless.stretcher.init.ModBlocks;
@@ -15,6 +16,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(UselessStretcherMod.MODID)
@@ -32,6 +35,11 @@ public final class UselessStretcherMod {
         DimensionCompat.init(modBus);
         modBus.addListener(Network::register);
         modBus.addListener(ModItemDefaults::modifyDefaultComponents);
-        container.registerConfig(ModConfig.Type.COMMON, StretcherConfig.COMMON_SPEC);
+        // All gameplay switches live in the server config. NeoForge synchronizes this
+        // spec to every client connected to the world, so the host/server setting is authoritative.
+        ServerConfigSync.migrateLegacy(FMLPaths.CONFIGDIR.get(), FMLPaths.GAMEDIR.get().resolve("defaultconfigs"));
+        container.registerConfig(ModConfig.Type.SERVER, StretcherConfig.SERVER_SPEC);
+        modBus.addListener(ServerConfigSync::onReload);
+        NeoForge.EVENT_BUS.addListener(ServerConfigSync::onLogin);
     }
 }

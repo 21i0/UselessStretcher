@@ -16,7 +16,7 @@ item_ids:
 
 ## 合成与按键
 
-<RecipeFor id="useless_stretcher:wondrous_staff" />
+<Recipe id="useless_stretcher:wondrous_staff" fallbackText="此配方已被当前整合包移除。" />
 
 无序合成：万象担架和无用之物的造化垂青之杖（`useless_mod:endless_beaf_item` 或兼容的工具标签）。
 

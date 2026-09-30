@@ -16,12 +16,15 @@ navigation:
 
 ## 游戏内配置
 
-配置文件为游戏目录的 `config/useless_stretcher-common.toml`。也可以在“设置 → 模组 → 万象担架 → 配置”中修改，点“完成/保存”后写回文件。
+所有配置（包括高亮显示）统一收纳在模组配置页的“服务端配置”分类。单机或局域网主机进入世界后，在“模组 → 万象担架 → 配置 → 服务端配置”中修改，返回最外层配置页时保存并同步给在线玩家。联机玩家不能用自己的配置覆盖服务端。
+
+专用服务器由服主编辑 `config/useless_stretcher-server.toml`；如果世界的 `serverconfig` 目录已有同名文件，则以世界内文件为准（单机通常为 `saves/世界名/serverconfig/`，服务器通常为 `world/serverconfig/`）。配置按钮悬停可查看当前实际文件路径。首次升级会在没有服务端配置及默认模板时导入旧 `useless_stretcher-common.toml`，旧文件保留备份，以后修改服务端文件即可。
 
 主要选项：
 
 * `acceleration.idle_throttle`：永久模式和选择休眠降频的范围是否对空闲机器降频，默认开启。
 * `acceleration.entity_disable_ai`：实体加速时是否关闭 Mob AI，默认开启；结束后恢复原状态。
+* `summoning.enable`、`loot_refresh.enable`：召唤生物、战利品箱刷新，默认关闭，各自独立控制。
 * `staff_leaf_drop.enable`：是否开启树叶掉落手杖彩蛋。
 * `staff_leaf_drop.probability`：树叶触发概率，默认 `0.00001`。
 * 配方兼容选项：可隐藏 Ender IO 半自磨机重复的磨珠配方变体。

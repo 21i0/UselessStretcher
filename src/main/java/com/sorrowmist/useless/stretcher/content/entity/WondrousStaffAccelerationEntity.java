@@ -1,5 +1,7 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
+import com.sorrowmist.useless.stretcher.content.acceleration.PermanentAccelerationHistory;
+
 import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
@@ -145,8 +147,21 @@ public class WondrousStaffAccelerationEntity extends Entity {
             return;
         }
         int remaining = getRemainingTime();
+        PermanentAccelerationHistory history = PermanentAccelerationHistory.get(level.getServer());
+        if (history.isReclaimed(getUUID())) {
+            discard();
+            return;
+        }
+        if (tickCount % 20 == 1) history.track(level, this);
         if (remaining != PERMANENT && remaining <= 0) {
             this.discard();
+            return;
+        }
+        if (!StretcherConfig.serverStaffAcceleration()) {
+            pendingTicks = 0L;
+            restoreEntityAi();
+            if (isTimeMode() && tickCount % 10 == 1) Network.sendTimeAccelerationState(level, 0);
+            if (remaining != PERMANENT) setRemainingTime(remaining - 1);
             return;
         }
         // Entity targets can move. Keep both the marker and the persisted lookup position in sync
@@ -236,7 +251,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
             discard();
             return;
         }
-
         this.targetPos = target.blockPosition();
         this.setPos(target.position());
         updateEntityAi(target);
@@ -460,6 +474,9 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     @Override
     public void remove(RemovalReason reason) {
+        if (reason.shouldDestroy() && level() instanceof ServerLevel serverLevel) {
+            PermanentAccelerationHistory.get(serverLevel.getServer()).forget(getUUID());
+        }
         pendingTicks = 0L;
         lastState = null;
         lastEnergy = -1L;

@@ -51,6 +51,12 @@ public final class ClientStateReceiver {
     }
 
     public static void handleReclaimer(Network.ReclaimerStatePayload payload) {
-        Minecraft.getInstance().setScreen(new ReclaimerScreen(payload.entries()));
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.screen instanceof ReclaimerScreen screen && screen.personal() == payload.personal()) {
+            screen.update(payload.entries());
+        } else {
+            minecraft.setScreen(new ReclaimerScreen(payload.personal() ? minecraft.screen : null,
+                    payload.entries(), payload.personal()));
+        }
     }
 }

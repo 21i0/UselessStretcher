@@ -16,7 +16,7 @@ item_ids:
 
 ## 合成
 
-<RecipeFor id="useless_stretcher:omniversal_myriad" />
+<Recipe id="useless_stretcher:omniversal_myriad" fallbackText="此配方已被当前整合包移除。" />
 
 配方为无序合成：小合金炉（`useless_mod:advanced_alloy_furnace_block`）和一个 AE2 空白样板（`ae2:blank_pattern`）。
 

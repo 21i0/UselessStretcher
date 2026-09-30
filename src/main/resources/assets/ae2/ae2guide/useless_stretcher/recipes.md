@@ -12,9 +12,9 @@ navigation:
 
 ## 核心物品
 
-<RecipeFor id="useless_stretcher:omniversal_myriad" />
-<RecipeFor id="useless_stretcher:useless_stretcher" />
-<RecipeFor id="useless_stretcher:wondrous_staff" />
+<Recipe id="useless_stretcher:omniversal_myriad" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:useless_stretcher" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:wondrous_staff" fallbackText="此配方已被当前整合包移除。" />
 
 * 万象万物之块：小合金炉 + AE2 空白样板。
 * 万象担架：万象万物之块 + AE2 空白样板。
@@ -24,17 +24,17 @@ navigation:
 
 这些配方用于把常见稀有掉落物转换为工作台配方，具体输入和输出以 JEI/REI 或下列配方预览为准。
 
-<RecipeFor id="minecraft:goat_horn" />
-<RecipeFor id="minecraft:turtle_scute" />
-<RecipeFor id="minecraft:enchanted_golden_apple" />
-<RecipeFor id="minecraft:wither_rose" />
-<RecipeFor id="minecraft:dragon_head" />
-<RecipeFor id="minecraft:shulker_shell" />
-<RecipeFor id="minecraft:phantom_membrane" />
-<RecipeFor id="minecraft:dragon_breath" />
-<RecipeFor id="minecraft:elytra" />
-<RecipeFor id="minecraft:totem_of_undying" />
-<RecipeFor id="minecraft:wither_skeleton_skull" />
+<Recipe id="useless_stretcher:goat_horn" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:turtle_scute" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:enchanted_golden_apple" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:wither_rose" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:dragon_head" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:shulker_shell" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:phantom_membrane" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:dragon_breath" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:elytra" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:totem_of_undying" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:wither_skeleton_skull" fallbackText="此配方已被当前整合包移除。" />
 
 当前包含：山羊角、海龟鳞片、附魔金苹果、凋零玫瑰、龙首、潜影壳、幻翼膜、龙息、鞘翅、不死图腾和凋零骷髅头。幻翼膜配方是白色染料 + 皮革；其它配方的完整摆放方式直接由配方预览显示。
 

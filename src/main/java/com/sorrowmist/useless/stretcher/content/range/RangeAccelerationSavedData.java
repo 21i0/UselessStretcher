@@ -297,6 +297,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     }
 
     public void tick(MinecraftServer server) {
+        if (!StretcherConfig.serverRangeAcceleration() || !StretcherConfig.serverStaffAcceleration()) {
+            runtime.clear();
+            return;
+        }
         if (fields.isEmpty()) return;
         List<Field> snapshot = List.copyOf(fields.values());
         int start = Math.floorMod(executionCursor++, snapshot.size());

@@ -73,7 +73,8 @@ public final class WondrousStaffAcceleration {
 
     /** The inherited G-menu "时间加速" toggle is the master switch for this staff. */
     public static boolean isEnabled(ItemStack stack) {
-        return stack.getOrDefault(UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
+        return StretcherConfig.serverStaffAcceleration()
+                && stack.getOrDefault(UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
     }
 
     public static InteractionResult tryUse(UseOnContext ctx) {

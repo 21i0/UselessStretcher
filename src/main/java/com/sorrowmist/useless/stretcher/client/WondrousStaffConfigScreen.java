@@ -194,9 +194,13 @@ public final class WondrousStaffConfigScreen extends Screen {
     }
 
     private void updateSelection() {
+        boolean allowAcceleration = StretcherConfig.serverStaffAcceleration();
+        speedButtons.forEach(entry -> entry.button().active = allowAcceleration);
+        modeButtons.forEach(entry -> entry.button().active = allowAcceleration);
         speedButtons.forEach(entry -> entry.button().setSelected(entry.value() == selectedSpeed));
         modeButtons.forEach(entry -> entry.button().setSelected(entry.value() == selectedMode));
         if (accelerationButton != null) {
+            accelerationButton.active = allowAcceleration;
             accelerationButton.setSelected(accelerationEnabled);
             accelerationButton.setMessage(accelerationMessage());
         }
@@ -216,6 +220,12 @@ public final class WondrousStaffConfigScreen extends Screen {
                     ? summonOpenMessage()
                     : Component.translatable("gui.useless_stretcher.staff_summon.disabled"));
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        updateSelection(); // Reflect live server config updates while this screen stays open.
     }
 
     private Component accelerationMessage() {

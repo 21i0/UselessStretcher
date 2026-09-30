@@ -96,7 +96,7 @@ public final class WondrousStaffSummonScreen extends Screen {
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
         enabledButton.setSelected(isEnabled());
         enabledButton.active = StretcherConfig.enableStaffSummon();
-        summonActionButton.active = StretcherConfig.enableStaffSummon();
+        summonActionButton.active = enabledButton.active;
     }
 
     @Override
@@ -203,6 +203,7 @@ public final class WondrousStaffSummonScreen extends Screen {
     }
 
     private void toggleEnabled() {
+        if (!StretcherConfig.enableStaffSummon()) return;
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         boolean enabled = !isEnabled();
@@ -213,6 +214,16 @@ public final class WondrousStaffSummonScreen extends Screen {
         summonActionButton.setMessage(summonActionMessage());
         Network.sendWondrousStaffFeatures(enabled,
                 WondrousStaffAcceleration.isLootRefreshEnabled(staff), hand);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        enabledButton.active = StretcherConfig.enableStaffSummon();
+        enabledButton.setSelected(isEnabled());
+        enabledButton.setMessage(enabledMessage());
+        summonActionButton.active = enabledButton.active;
+        summonActionButton.setMessage(summonActionMessage());
     }
 
     private void summonSelected() {

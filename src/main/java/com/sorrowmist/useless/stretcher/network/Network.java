@@ -8,6 +8,8 @@ import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.config.ServerConfigSync;
+import com.sorrowmist.useless.stretcher.content.acceleration.PermanentAccelerationHistory;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -220,36 +222,41 @@ public final class Network {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
-    public record ReclaimerStatePayload(List<ReclaimerEntry> entries) implements CustomPacketPayload {
+    public record ReclaimerStatePayload(List<ReclaimerEntry> entries, boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerStatePayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_state"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerStatePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
+                    buf.writeBoolean(value.personal());
                     int count = Math.min(MAX_RECLAIM_ENTRIES, value.entries().size()); buf.writeVarInt(count);
                     for (int i = 0; i < count; i++) ReclaimerEntry.STREAM_CODEC.encode(buf, value.entries().get(i));
                 }, buf -> {
-                    int count = Math.min(MAX_RECLAIM_ENTRIES, Math.max(0, buf.readVarInt()));
+                    boolean personal = buf.readBoolean();
+                    int count = buf.readVarInt();
+                    if (count < 0 || count > MAX_RECLAIM_ENTRIES) throw new IllegalArgumentException("Invalid reclaim count");
                     List<ReclaimerEntry> entries = new ArrayList<>(count);
                     for (int i = 0; i < count; i++) entries.add(ReclaimerEntry.STREAM_CODEC.decode(buf));
-                    return new ReclaimerStatePayload(entries);
+                    return new ReclaimerStatePayload(entries, personal);
                 });
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
-    public record ReclaimerRequestPayload() implements CustomPacketPayload {
+    public record ReclaimerRequestPayload(boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerRequestPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_request"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerRequestPayload> STREAM_CODEC =
-                StreamCodec.of((buf, value) -> {}, buf -> new ReclaimerRequestPayload());
+                StreamCodec.of((buf, value) -> buf.writeBoolean(value.personal()),
+                        buf -> new ReclaimerRequestPayload(buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
-    public record ReclaimerActionPayload(boolean range, UUID id) implements CustomPacketPayload {
+    public record ReclaimerActionPayload(boolean range, UUID id, boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerActionPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_action"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerActionPayload> STREAM_CODEC =
-                StreamCodec.of((buf, value) -> { buf.writeBoolean(value.range()); buf.writeUUID(value.id()); },
-                        buf -> new ReclaimerActionPayload(buf.readBoolean(), buf.readUUID()));
+                StreamCodec.of((buf, value) -> {
+                    buf.writeBoolean(value.range()); buf.writeUUID(value.id()); buf.writeBoolean(value.personal());
+                }, buf -> new ReclaimerActionPayload(buf.readBoolean(), buf.readUUID(), buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
@@ -272,7 +279,10 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("4");
+        PayloadRegistrar registrar = event.registrar("5");
+        registrar.playToClient(ServerConfigSync.Payload.TYPE, ServerConfigSync.Payload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() ->
+                        com.sorrowmist.useless.stretcher.client.StretcherConfigScreen.accept(payload)));
 
         registrar.playToServer(MyriadActionPayload.TYPE, MyriadActionPayload.STREAM_CODEC, Network::handleAction);
         registrar.playToClient(MyriadStatePayload.TYPE, MyriadStatePayload.STREAM_CODEC,
@@ -298,7 +308,8 @@ public final class Network {
         registrar.playToServer(WondrousStaffRecallPayload.TYPE, WondrousStaffRecallPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffRecall(payload, context)));
         registrar.playToServer(ReclaimerRequestPayload.TYPE, ReclaimerRequestPayload.STREAM_CODEC,
-                (payload, context) -> context.enqueueWork(() -> sendReclaimerState((ServerPlayer) context.player())));
+                (payload, context) -> context.enqueueWork(() ->
+                        sendReclaimerState((ServerPlayer) context.player(), payload.personal())));
         registrar.playToServer(ReclaimerActionPayload.TYPE, ReclaimerActionPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleReclaimerAction(payload, context)));
         registrar.playToClient(ReclaimerStatePayload.TYPE, ReclaimerStatePayload.STREAM_CODEC,
@@ -340,7 +351,6 @@ public final class Network {
     private static void handleWondrousStaffFeatures(WondrousStaffFeaturesPayload payload,
                                                     net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
@@ -353,7 +363,6 @@ public final class Network {
     private static void handleWondrousStaffSummon(WondrousStaffSummonPayload payload,
                                                   net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
@@ -367,64 +376,61 @@ public final class Network {
         WondrousStaffSummoning.recall(player, held);
     }
 
-    private static void sendReclaimerState(ServerPlayer player) {
-        if (!StretcherConfig.serverRemoteReclaimer()) return;
-        if (player == null || (!player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
-                && !player.getOffhandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get()))) return;
+    private static boolean canManage(ServerPlayer player, boolean personal) {
+        if (player == null || (!personal && !StretcherConfig.serverRemoteReclaimer())) return false;
+        var item = personal ? com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get()
+                : com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get();
+        return player.getMainHandItem().is(item) || player.getOffhandItem().is(item);
+    }
+
+    private static void sendReclaimerState(ServerPlayer player, boolean personal) {
+        if (!canManage(player, personal)) return;
         List<ReclaimerEntry> result = new ArrayList<>();
         RangeAccelerationSavedData data = RangeAccelerationSavedData.get(player.getServer());
         for (RangeAccelerationSavedData.Field field : data.operatorFields()) {
+            if (personal && !field.owner().equals(player.getUUID())) continue;
             if (result.size() >= MAX_RECLAIM_ENTRIES) break;
             result.add(new ReclaimerEntry(true, field.id(), field.owner(), ownerName(player, field.owner()),
-                    field.dimension(), field.center(), "时间流逝 " + field.speed() + "x"));
+                    field.dimension(), field.center(), (field.name().isBlank() ? "时间流逝" : field.name())
+                            + " · x" + field.speed()));
         }
-        for (ServerLevel level : player.getServer().getAllLevels()) {
-            for (Entity entity : level.getAllEntities()) {
-                if (!(entity instanceof WondrousStaffAccelerationEntity marker)
-                        || marker.isEntityMode() || marker.isTimeMode() || marker.getOwnerUuid() == null
-                        || !marker.isPermanent()) continue;
-                if (result.size() >= MAX_RECLAIM_ENTRIES) break;
-                BlockPos pos = marker.getTargetPos();
-                String label = level.getBlockState(pos).getBlock().getName().getString()
-                        + " · x" + marker.getSpeed()
-                        + (marker.isIdleThrottleDisabled() ? " · 无休眠降频" : " · 动态降频");
-                result.add(new ReclaimerEntry(false, marker.getUUID(), marker.getOwnerUuid(),
-                        ownerName(player, marker.getOwnerUuid()), level.dimension().location(), pos, label));
-            }
+        for (var entry : PermanentAccelerationHistory.get(player.getServer())
+                .activeEntries(personal ? player.getUUID() : null)) {
+            if (result.size() >= MAX_RECLAIM_ENTRIES) break;
+            result.add(new ReclaimerEntry(false, entry.id(), entry.owner(), ownerName(player, entry.owner()),
+                    entry.dimension(), entry.pos(), entry.label()));
         }
-        PacketDistributor.sendToPlayer(player, new ReclaimerStatePayload(result));
+        result.sort(java.util.Comparator.comparing(ReclaimerEntry::ownerName)
+                .thenComparing(entry -> entry.owner().toString()).thenComparing(ReclaimerEntry::label));
+        PacketDistributor.sendToPlayer(player, new ReclaimerStatePayload(result, personal));
     }
 
     private static String ownerName(ServerPlayer viewer, UUID owner) {
         ServerPlayer online = viewer.getServer().getPlayerList().getPlayer(owner);
-        return online != null ? online.getGameProfile().getName() : owner.toString();
+        if (online != null) return online.getGameProfile().getName();
+        var cache = viewer.getServer().getProfileCache();
+        return cache == null ? owner.toString()
+                : cache.get(owner).map(com.mojang.authlib.GameProfile::getName).orElse(owner.toString());
     }
 
     private static void handleReclaimerAction(ReclaimerActionPayload payload,
                                                net.neoforged.neoforge.network.handling.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
-        if (!StretcherConfig.serverRemoteReclaimer()) return;
-        ItemStack tool = player.getMainHandItem().is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())
-                ? player.getMainHandItem() : player.getOffhandItem();
-        if (!tool.is(com.sorrowmist.useless.stretcher.init.ModItems.RANGE_RECLAIMER.get())) return;
+        if (!canManage(player, payload.personal())) return;
         boolean removed = false;
         if (payload.range()) {
-            removed = RangeAccelerationSavedData.get(player.getServer())
-                    .reclaimByOperator(player.getServer(), payload.id()) != null;
+            var ranges = RangeAccelerationSavedData.get(player.getServer());
+            removed = payload.personal()
+                    ? ranges.reclaim(player.getServer(), player.getUUID(), payload.id()) != null
+                    : ranges.reclaimByOperator(player.getServer(), payload.id()) != null;
         } else {
-            for (ServerLevel level : player.getServer().getAllLevels()) {
-                Entity entity = level.getEntity(payload.id());
-                if (entity instanceof WondrousStaffAccelerationEntity marker) {
-                    marker.discard();
-                    removed = true;
-                    break;
-                }
-            }
+            removed = PermanentAccelerationHistory.get(player.getServer())
+                    .reclaim(player.getServer(), payload.id(), payload.personal() ? player.getUUID() : null);
         }
         player.displayClientMessage(Component.translatable(removed
                 ? "msg.useless_stretcher.reclaimer.removed"
                 : "msg.useless_stretcher.reclaimer.missing"), true);
-        sendReclaimerState(player);
+        sendReclaimerState(player, payload.personal());
     }
 
     public static void sendWondrousStaffFeatures(boolean summonEnabled, boolean lootRefresh,
@@ -443,15 +449,19 @@ public final class Network {
     }
 
     public static void requestReclaimer() {
-        PacketDistributor.sendToServer(new ReclaimerRequestPayload());
+        PacketDistributor.sendToServer(new ReclaimerRequestPayload(false));
+    }
+
+    public static void requestPersonalReclaimer() {
+        PacketDistributor.sendToServer(new ReclaimerRequestPayload(true));
     }
 
     public static void requestReclaimerState(ServerPlayer player) {
-        sendReclaimerState(player);
+        sendReclaimerState(player, false);
     }
 
-    public static void reclaimTarget(boolean range, UUID id) {
-        PacketDistributor.sendToServer(new ReclaimerActionPayload(range, id));
+    public static void reclaimTarget(boolean range, UUID id, boolean personal) {
+        PacketDistributor.sendToServer(new ReclaimerActionPayload(range, id, personal));
     }
 
     public static void sendStaffTutorial(ServerPlayer player) {

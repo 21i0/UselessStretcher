@@ -3,37 +3,45 @@ package com.sorrowmist.useless.stretcher.content.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
-import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import net.minecraft.world.level.Level;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.network.Network;
 
 import java.util.List;
 
-/** Administrative tool for removing any placed time-flow field. */
+/** Opens the server-authoritative reclaimer UI; using the item never deletes a target. */
 public final class RangeReclaimerItem extends Item {
     public RangeReclaimerItem(Properties properties) {
         super(properties.stacksTo(1));
     }
 
-    public static InteractionResult tryReclaim(Player player, ItemStack stack, TimeFlowEntity marker) {
-        if (stack.getItem() != ModItems.RANGE_RECLAIMER.get()) return InteractionResult.PASS;
-        if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.SUCCESS;
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        return new InteractionResultHolder<>(tryOpen(player, stack), stack);
+    }
 
-        RangeAccelerationSavedData.Summary reclaimed = RangeAccelerationSavedData
-                .get(serverPlayer.getServer()).reclaimByOperator(serverPlayer.getServer(), marker.getUUID());
-        if (reclaimed == null) {
-            serverPlayer.displayClientMessage(
-                    Component.translatable("msg.useless_stretcher.range_reclaimer.missing"), true);
-        } else {
-            serverPlayer.displayClientMessage(Component.translatable(
-                    "msg.useless_stretcher.range_reclaimer.reclaimed",
-                    reclaimed.center().getX(), reclaimed.center().getY(), reclaimed.center().getZ()), true);
+    public static InteractionResult tryOpen(Player player, ItemStack stack) {
+        if (!player.isShiftKeyDown() || !stack.is(ModItems.RANGE_RECLAIMER.get())) {
+            return InteractionResult.PASS;
         }
+        if (player instanceof ServerPlayer serverPlayer) {
+            if (StretcherConfig.serverRemoteReclaimer()) {
+                Network.requestReclaimerState(serverPlayer);
+            } else {
+                serverPlayer.displayClientMessage(Component.translatable(
+                        "msg.useless_stretcher.reclaimer.disabled"), true);
+            }
+        }
+        // Consume the same gesture on both sides; only the server sends the screen's state.
         return InteractionResult.SUCCESS;
     }
 
