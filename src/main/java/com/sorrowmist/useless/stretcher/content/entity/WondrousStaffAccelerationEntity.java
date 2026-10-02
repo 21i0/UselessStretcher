@@ -1,10 +1,11 @@
 package com.sorrowmist.useless.stretcher.content.entity;
 
 import com.sorrowmist.useless.stretcher.content.acceleration.PermanentAccelerationHistory;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 
-import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
+import com.sorrowmist.useless.stretcher.content.acceleration.MachineActivityProbe;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
@@ -20,15 +21,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.UUID;
 
@@ -46,7 +44,7 @@ import java.util.UUID;
  * to {@value #IDLE_EXECUTIONS_PER_TICK}. Throttling removes ~98% of the idle cost while guaranteeing
  * the target is never stopped outright; a wrongly throttled machine only runs slower for a moment,
  * and any activity signal restores full speed on the very next tick. Only a machine that has already
- * proven it can be observed working (see {@link #isWorking}) is ever throttled, so a machine whose
+ * proven it can be observed working is ever throttled, so a machine whose
  * activity we cannot observe is never slowed down. The staff's third mode can explicitly disable
  * this throttle for machines whose activity signals are unreliable.
  */
@@ -60,8 +58,6 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private static final int IDLE_WINDOW_TICKS = 200;
     /** Extra ticks per game tick while throttled. Never 0: the target must keep progressing. */
     private static final int IDLE_EXECUTIONS_PER_TICK = 4;
-    /** A {@code setChanged()} call within this many ticks counts as "working". */
-    private static final int CHANGED_WINDOW_TICKS = 120;
 
     public static final int MODE_BLOCK = 0;
     public static final int MODE_ENTITY = 1;
@@ -81,6 +77,8 @@ public class WondrousStaffAccelerationEntity extends Entity {
     /** Whether entity mode should suppress Mob AI while this marker is active. */
     private static final EntityDataAccessor<Boolean> ENTITY_AI_DISABLED =
             SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ENTITY_TIMER_MODE =
+            SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.BOOLEAN);
     /** Current target height, used to keep the world-space entity progress bar above its head. */
     private static final EntityDataAccessor<Float> TARGET_HEIGHT =
             SynchedEntityData.defineId(WondrousStaffAccelerationEntity.class, EntityDataSerializers.FLOAT);
@@ -89,18 +87,18 @@ public class WondrousStaffAccelerationEntity extends Entity {
     private UUID targetUuid;
     /** Player who created this marker; used by the operator reclaimer. */
     private UUID ownerUuid;
+    /** Non-null when this marker is owned by a placed range field rather than direct staff use. */
+    private UUID rangeFieldUuid;
     private long pendingTicks;
-    private long lastEnergy = -1L;
-    private int lastItemFingerprint;
-    private int lastFluidFingerprint;
-    private int capabilitySampleTicks;
-    private BlockState lastState;
+    private final MachineActivityProbe activityProbe = new MachineActivityProbe();
+    private BlockEntity observedTarget;
     private int idleTicks;
     /** Set once the target has ever emitted an activity signal we can rely on for waking up. */
     private boolean observedWorking;
     /** Original Mob AI state, captured before entity acceleration changes it. */
     private boolean originalNoAi;
     private boolean aiStateCaptured;
+    private int restockCooldown;
 
     public WondrousStaffAccelerationEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -148,17 +146,29 @@ public class WondrousStaffAccelerationEntity extends Entity {
         }
         int remaining = getRemainingTime();
         PermanentAccelerationHistory history = PermanentAccelerationHistory.get(level.getServer());
+        if (rangeFieldUuid != null) {
+            RangeAccelerationSavedData.Field field =
+                    RangeAccelerationSavedData.get(level.getServer()).getField(rangeFieldUuid);
+            if (field == null || !field.enabled() || !StretcherConfig.serverRangeAcceleration()
+                    || !field.dimension().equals(level.dimension().location())
+                    || targetUuid == null || !field.contains(getTargetPos())) {
+                discard();
+                return;
+            }
+            applyRangeSettings(field);
+        }
         if (history.isReclaimed(getUUID())) {
             discard();
             return;
         }
-        if (tickCount % 20 == 1) history.track(level, this);
+        if (rangeFieldUuid == null && tickCount % 20 == 1) history.track(level, this);
         if (remaining != PERMANENT && remaining <= 0) {
             this.discard();
             return;
         }
         if (!StretcherConfig.serverStaffAcceleration()) {
             pendingTicks = 0L;
+            resetActivity();
             restoreEntityAi();
             if (isTimeMode() && tickCount % 10 == 1) Network.sendTimeAccelerationState(level, 0);
             if (remaining != PERMANENT) setRemainingTime(remaining - 1);
@@ -203,24 +213,33 @@ public class WondrousStaffAccelerationEntity extends Entity {
                 return;
             }
 
-            // Idle throttle: only ever slow down a machine that has already proven we can observe
-            // it working, so a machine we cannot observe is never throttled by mistake.
-            boolean working = isWorking(level, this.targetPos);
-            if (working) {
-                observedWorking = true;
-                idleTicks = 0;
-            } else {
-                idleTicks++;
+            BlockEntity target = level.getBlockEntity(this.targetPos);
+            if (target != observedTarget) {
+                pendingTicks = 0L;
+                resetActivity();
+                observedTarget = target;
             }
             // Lightning rods are deliberately driven by command-style lightning rather than
             // vanilla's weather scheduler. They do not mutate a block entity, energy buffer, or
             // inventory, so the generic activity probe can never observe them as "working".
             // Never let dynamic idle throttling silently reduce a rod to the fallback rate.
-            boolean throttled = !(level.getBlockState(this.targetPos).getBlock()
-                    instanceof net.minecraft.world.level.block.LightningRodBlock)
-                    && StretcherConfig.idleThrottle() && observedWorking
-                    && !isIdleThrottleDisabled()
-                    && idleTicks > IDLE_WINDOW_TICKS;
+            boolean mayThrottle = isPermanent() && !isIdleThrottleDisabled() && StretcherConfig.idleThrottle()
+                    && !(level.getBlockState(this.targetPos).getBlock()
+                    instanceof net.minecraft.world.level.block.LightningRodBlock);
+            boolean throttled = false;
+            if (mayThrottle) {
+                if (activityProbe.isWorking(level, this.targetPos, level.getBlockState(this.targetPos))) {
+                    observedWorking = true;
+                    idleTicks = 0;
+                } else {
+                    idleTicks++;
+                }
+                throttled = observedWorking && idleTicks > IDLE_WINDOW_TICKS;
+            } else {
+                activityProbe.reset();
+                observedWorking = false;
+                idleTicks = 0;
+            }
             setIdleThrottled(throttled);
             if (throttled) {
                 // Do not bank a backlog while throttled, otherwise waking up would fire a huge burst.
@@ -254,6 +273,22 @@ public class WondrousStaffAccelerationEntity extends Entity {
         this.targetPos = target.blockPosition();
         this.setPos(target.position());
         updateEntityAi(target);
+
+        if (isEntityTimerMode() && target instanceof LivingEntity living) {
+            pendingTicks = 0L;
+            EntityTimerAcceleration.advance(living, getSpeed());
+            if (living instanceof Villager villager) {
+                if (restockCooldown > 0) restockCooldown--;
+                if (restockCooldown == 0) {
+                    // Bound trade inspection even when no offer currently needs restocking.
+                    restockCooldown = 20;
+                    if (villager.getOffers().stream().anyMatch(net.minecraft.world.item.trading.MerchantOffer::needsRestock)) {
+                        villager.restock();
+                    }
+                }
+            }
+            return;
+        }
 
         // Run the target's complete tick instead of only changing an AgeableMob's age. This
         // accelerates movement, item/projectile lifetime, status effects, cooldowns and modded
@@ -315,88 +350,12 @@ public class WondrousStaffAccelerationEntity extends Entity {
         aiStateCaptured = false;
     }
 
-    /**
-     * Cheap activity check; any signal counts as "working":
-     * <ol>
-     *   <li>the block entity called {@code setChanged()} recently; this works even for
-     *       creative / infinite-energy machines whose FE buffer never moves,</li>
-     *   <li>the block state changed,</li>
-     *   <li>stored FE changed in either direction (consuming or generating),</li>
-     *   <li>an AE grid node of the machine is active.</li>
-     * </ol>
-     */
-    private boolean isWorking(ServerLevel level, BlockPos pos) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null) return true;
-
-        long now = level.getGameTime();
-        if (blockEntity instanceof ChangedTickAccessor accessor) {
-            long lastChanged = accessor.uselessStretcher$getLastChangedTick();
-            if (lastChanged >= 0L && now - lastChanged <= CHANGED_WINDOW_TICKS) {
-                return true;
-            }
-        }
-
-        BlockState state = level.getBlockState(pos);
-        if (!state.equals(lastState)) {
-            lastState = state;
-            return true;
-        }
-
-        if (blockEntity instanceof IInWorldGridNodeHost host
-                && WondrousStaffAcceleration.isAeDeviceWorking(host)) {
-            return true;
-        }
-
-        IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, pos, null);
-        if (energy != null) {
-            int current = energy.getEnergyStored();
-            if (lastEnergy < 0L || current != lastEnergy) {
-                lastEnergy = current;
-                return true;
-            }
-        }
-        if (++capabilitySampleTicks >= 5) {
-            capabilitySampleTicks = 0;
-            IItemHandler items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
-            if (items != null) {
-                int fingerprint = itemFingerprint(items);
-                if (fingerprint != lastItemFingerprint) {
-                    lastItemFingerprint = fingerprint;
-                    return true;
-                }
-            }
-            IFluidHandler fluids = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
-            if (fluids != null) {
-                int fingerprint = fluidFingerprint(fluids);
-                if (fingerprint != lastFluidFingerprint) {
-                    lastFluidFingerprint = fingerprint;
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private static int itemFingerprint(IItemHandler handler) {
-        int hash = handler.getSlots();
-        for (int slot = 0; slot < handler.getSlots(); slot++) {
-            net.minecraft.world.item.ItemStack stack = handler.getStackInSlot(slot);
-            hash = 31 * hash + net.minecraft.world.item.ItemStack.hashItemAndComponents(stack);
-            hash = 31 * hash + stack.getCount();
-        }
-        return hash;
-    }
-
-    private static int fluidFingerprint(IFluidHandler handler) {
-        int hash = handler.getTanks();
-        for (int tank = 0; tank < handler.getTanks(); tank++) {
-            var fluid = handler.getFluidInTank(tank);
-            hash = 31 * hash + fluid.getFluid().hashCode();
-            hash = 31 * hash + fluid.getAmount();
-            hash = 31 * hash + fluid.getComponentsPatch().hashCode();
-        }
-        return hash;
+    private void resetActivity() {
+        activityProbe.reset();
+        observedTarget = null;
+        idleTicks = 0;
+        observedWorking = false;
+        setIdleThrottled(false);
     }
 
     public BlockPos getTargetPos() {
@@ -404,6 +363,10 @@ public class WondrousStaffAccelerationEntity extends Entity {
     }
 
     public void setTargetPos(BlockPos pos) {
+        if (!java.util.Objects.equals(this.targetPos, pos)) {
+            pendingTicks = 0L;
+            resetActivity();
+        }
         this.targetPos = pos == null ? null : pos.immutable();
     }
 
@@ -417,6 +380,28 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     public void setOwnerUuid(UUID ownerUuid) {
         this.ownerUuid = ownerUuid;
+    }
+
+    public UUID getRangeFieldUuid() {
+        return rangeFieldUuid;
+    }
+
+    public void setRangeFieldUuid(UUID rangeFieldUuid) {
+        this.rangeFieldUuid = rangeFieldUuid;
+        if (rangeFieldUuid != null) {
+            setPermanent();
+        }
+    }
+
+    /** Applies persisted range settings without resetting pending work when nothing changed. */
+    public void applyRangeSettings(RangeAccelerationSavedData.Field field) {
+        int desiredSpeed = field.entityTimerMode() ? field.entityTimerSpeed() : field.speed();
+        if (isEntityTimerMode() != field.entityTimerMode()) setEntityTimerMode(field.entityTimerMode());
+        if (getSpeed() != desiredSpeed) setSpeed(desiredSpeed);
+        boolean aiDisabled = StretcherConfig.entityDisableAi();
+        if (isEntityAiDisabled() != aiDisabled) setEntityAiDisabled(aiDisabled);
+        if (!isPermanent()) setPermanent();
+        setIdleThrottleDisabled(true);
     }
 
     public int getMode() {
@@ -478,10 +463,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
             PermanentAccelerationHistory.get(serverLevel.getServer()).forget(getUUID());
         }
         pendingTicks = 0L;
-        lastState = null;
-        lastEnergy = -1L;
-        idleTicks = 0;
-        observedWorking = false;
+        resetActivity();
         // Chunk-unload removal is temporary and this marker is saved with the target; retain both
         // states so the field can resume after reload. Every terminal removal restores the target.
         if (reason != RemovalReason.UNLOADED_TO_CHUNK) restoreEntityAi();
@@ -496,7 +478,19 @@ public class WondrousStaffAccelerationEntity extends Entity {
     }
 
     public void setSpeed(int speed) {
-        this.entityData.set(SPEED, Math.max(1, speed));
+        this.entityData.set(SPEED, isEntityMode() && isEntityTimerMode()
+                ? Math.max(1, Math.min(EntityTimerAcceleration.MAX_SPEED, speed)) : Math.max(1, speed));
+    }
+
+    public boolean isEntityTimerMode() { return this.entityData.get(ENTITY_TIMER_MODE); }
+
+    public void setEntityTimerMode(boolean timers) {
+        if (isEntityTimerMode() == timers) return;
+        this.entityData.set(ENTITY_TIMER_MODE, timers);
+        pendingTicks = 0L;
+        restockCooldown = 0;
+        if (!timers) this.entityData.set(SPEED, Math.min(MAX_MULTIPLIER, getSpeed()));
+        setSpeed(getSpeed());
     }
 
     public int getRemainingTime() {
@@ -523,6 +517,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
         builder.define(IDLE_THROTTLE_DISABLED, false);
         builder.define(IDLE_THROTTLED, false);
         builder.define(ENTITY_AI_DISABLED, false);
+        builder.define(ENTITY_TIMER_MODE, false);
         builder.define(TARGET_HEIGHT, 1.0F);
     }
 
@@ -531,7 +526,9 @@ public class WondrousStaffAccelerationEntity extends Entity {
         if (tag.contains("targetPos")) this.targetPos = BlockPos.of(tag.getLong("targetPos"));
         if (tag.hasUUID("targetUuid")) this.targetUuid = tag.getUUID("targetUuid");
         if (tag.hasUUID("ownerUuid")) this.ownerUuid = tag.getUUID("ownerUuid");
+        if (tag.hasUUID("rangeFieldUuid")) this.rangeFieldUuid = tag.getUUID("rangeFieldUuid");
         setMode(tag.getInt("mode"));
+        setEntityTimerMode(tag.getBoolean("entityTimerMode"));
         setSpeed(tag.getInt("speed"));
         setRemainingTime(tag.getInt("remainingTime"));
         setIdleThrottleDisabled(tag.getBoolean("idleThrottleDisabled"));
@@ -547,12 +544,14 @@ public class WondrousStaffAccelerationEntity extends Entity {
         if (this.targetPos != null) tag.putLong("targetPos", this.targetPos.asLong());
         if (this.targetUuid != null) tag.putUUID("targetUuid", this.targetUuid);
         if (this.ownerUuid != null) tag.putUUID("ownerUuid", this.ownerUuid);
+        if (this.rangeFieldUuid != null) tag.putUUID("rangeFieldUuid", this.rangeFieldUuid);
         tag.putInt("mode", getMode());
         tag.putInt("speed", getSpeed());
         tag.putInt("remainingTime", getRemainingTime());
         tag.putBoolean("idleThrottleDisabled", isIdleThrottleDisabled());
         tag.putBoolean("idleThrottled", isIdleThrottled());
         tag.putBoolean("entityAiDisabled", isEntityAiDisabled());
+        tag.putBoolean("entityTimerMode", isEntityTimerMode());
         tag.putFloat("targetHeight", getTargetHeight());
         tag.putBoolean("originalNoAi", originalNoAi);
         tag.putBoolean("aiStateCaptured", aiStateCaptured);

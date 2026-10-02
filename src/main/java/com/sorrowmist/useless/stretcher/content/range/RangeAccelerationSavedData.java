@@ -1,10 +1,10 @@
 package com.sorrowmist.useless.stretcher.content.range;
 
-import appeng.api.networking.IInWorldGridNodeHost;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
-import com.sorrowmist.useless.stretcher.content.entity.ChangedTickAccessor;
+import com.sorrowmist.useless.stretcher.content.acceleration.MachineActivityProbe;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
+import com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
 import net.minecraft.core.BlockPos;
@@ -19,14 +19,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -54,14 +54,16 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
     private static final long PLACEMENT_COOLDOWN_TICKS = 5L;
     private static final int IDLE_WINDOW_TICKS = 200;
     private static final int IDLE_EXECUTIONS_PER_TICK = 4;
-    private static final int CHANGED_WINDOW_TICKS = 120;
     private static final int TARGET_RESCAN_TICKS = 20;
+    /** Prevent a crowded mob farm from creating an unbounded number of marker entities. */
+    private static final int MAX_ENTITY_TARGETS = 256;
 
     private final Map<UUID, Field> fields = new LinkedHashMap<>();
     private final Map<UUID, FieldRuntime> runtime = new HashMap<>();
     private final Map<UUID, Long> lastPlacementTicks = new HashMap<>();
     /** Runtime-only cursor so a busy field cannot permanently starve later fields. */
     private int executionCursor;
+    private boolean disabledMarkersCleared;
 
     public static RangeAccelerationSavedData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
@@ -125,7 +127,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 RangeAccelerationSettings.offsetZ(staff),
                 RangeAccelerationSettings.whitelistMode(staff),
                 RangeAccelerationSettings.sleepWhitelistMode(staff),
-                List.of(), List.of(), List.of(), true, "");
+                List.of(), List.of(), List.of(), true, "",
+                WondrousStaffAcceleration.usesEntityTimers(staff),
+                WondrousStaffAcceleration.getEntityTimerSpeed(staff));
         fields.put(id, field);
         pruneHistory(owner.getUUID());
         setDirty();
@@ -142,6 +146,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             if (removeCount <= 0) break;
             if (field.enabled) continue;
             fields.remove(field.id);
+            // Pruned fields are disabled, but their entity markers may still be loaded.
             runtime.remove(field.id);
             removeCount--;
         }
@@ -154,6 +159,15 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         }
     }
 
+    /** Removes a field and all entity markers owned by it. */
+    public void remove(MinecraftServer server, UUID id) {
+        Field field = fields.remove(id);
+        if (field == null) return;
+        clearEntityMarkers(server, field);
+        runtime.remove(id);
+        setDirty();
+    }
+
     /** Permanently removes an owned field and its loaded visual marker. */
     public Summary reclaim(MinecraftServer server, UUID owner, UUID id) {
         Field field = fields.get(id);
@@ -161,6 +175,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
         Summary summary = field.summary();
         fields.remove(id);
+        clearEntityMarkers(server, field);
         runtime.remove(id);
         setDirty();
 
@@ -260,6 +275,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         field.idleThrottled = false;
         field.revision++;
         runtime.remove(id);
+        if (!enabled) clearEntityMarkers(server, field);
         setDirty();
 
         ServerLevel level = server.getLevel(field.dimensionKey());
@@ -286,6 +302,17 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         return field.summary();
     }
 
+    /** Updates the entity mode for a field while retaining its machine geometry and marks. */
+    public Summary editEntitySettings(MinecraftServer server, UUID owner, UUID id,
+                                      boolean timerMode, int timerSpeed) {
+        Field field = fields.get(id);
+        if (field == null || !field.owner.equals(owner)) return null;
+        field.setEntitySettings(timerMode, timerSpeed);
+        runtime.remove(id);
+        setDirty();
+        return field.summary();
+    }
+
     public boolean rename(MinecraftServer server, UUID owner, UUID id, String name) {
         Field field = fields.get(id);
         if (field == null || !field.owner.equals(owner)) return false;
@@ -298,9 +325,14 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
     public void tick(MinecraftServer server) {
         if (!StretcherConfig.serverRangeAcceleration() || !StretcherConfig.serverStaffAcceleration()) {
+            if (!disabledMarkersCleared) {
+                for (Field field : fields.values()) clearEntityMarkers(server, field);
+                disabledMarkersCleared = true;
+            }
             runtime.clear();
             return;
         }
+        disabledMarkersCleared = false;
         if (fields.isEmpty()) return;
         List<Field> snapshot = List.copyOf(fields.values());
         int start = Math.floorMod(executionCursor++, snapshot.size());
@@ -313,6 +345,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             }
             ensureMarker(level, field);
             if (!field.enabled) {
+                clearEntityMarkers(server, field);
                 runtime.remove(field.id);
                 continue;
             }
@@ -333,6 +366,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         long now = level.getGameTime();
         if (state.revision != field.revision || now - state.lastScanTick >= TARGET_RESCAN_TICKS) {
             state.targets = scanTargets(level, field);
+            reconcileEntityMarkers(level, field, state);
             state.revision = field.revision;
             state.lastScanTick = now;
             Set<Long> retained = new LinkedHashSet<>();
@@ -358,15 +392,20 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             }
 
             TargetWork work = state.targetWork.computeIfAbsent(target.asLong(), ignored -> new TargetWork());
-            boolean throttled = field.allowsSleep(target) && StretcherConfig.idleThrottle()
-                    && work.shouldThrottle(level, target, targetState);
+            work.updateTarget(level.getBlockEntity(target));
+            boolean throttled = false;
+            if (field.allowsSleep(target) && StretcherConfig.idleThrottle()) {
+                throttled = work.shouldThrottle(level, target, targetState);
+            } else {
+                work.resetActivity();
+            }
             if (throttled) {
                 anyTargetThrottled = true;
                 work.pendingTicks = 0L;
                 int executions = AccelerationExecutionBudget.take(
                         level.getServer(), work, IDLE_EXECUTIONS_PER_TICK);
                 if (executions > 0) {
-                    WondrousStaffAcceleration.tickTarget(level, target, executions);
+                    WondrousStaffAcceleration.tickTarget(level, target, executions, work);
                     nextTarget = (targetIndex + 1) % targetCount;
                 }
                 continue;
@@ -376,7 +415,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             int requested = (int) Math.min(work.pendingTicks, MAX_EXECUTIONS_PER_TARGET);
             int executions = AccelerationExecutionBudget.take(level.getServer(), work, requested);
             if (executions > 0) {
-                    work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions, work);
+                work.pendingTicks -= WondrousStaffAcceleration.tickTarget(level, target, executions, work);
                 nextTarget = (targetIndex + 1) % targetCount;
             }
         }
@@ -405,6 +444,70 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             }
         }
         return List.copyOf(targets);
+    }
+
+    /**
+     * Maintains one invisible entity marker for each eligible entity in this field. Markers are
+     * separate entities so their complete-tick path and timer path naturally share the global
+     * acceleration budget with block targets.
+     */
+    private static void reconcileEntityMarkers(ServerLevel level, Field field, FieldRuntime state) {
+        AABB area = bounds(field.effectiveCenter(), field.sizeX, field.sizeY, field.sizeZ);
+        Map<UUID, WondrousStaffAccelerationEntity> byTarget = new HashMap<>();
+        for (WondrousStaffAccelerationEntity marker : level.getEntitiesOfClass(
+                WondrousStaffAccelerationEntity.class, area.inflate(1.0D),
+                candidate -> field.id.equals(candidate.getRangeFieldUuid()))) {
+            UUID target = marker.getTargetUuid();
+            if (target != null) byTarget.putIfAbsent(target, marker);
+            state.entityMarkerIds.add(marker.getUUID());
+        }
+
+        Set<UUID> retained = new LinkedHashSet<>();
+        Vec3 center = Vec3.atCenterOf(field.effectiveCenter());
+        List<Entity> candidates = level.getEntities((Entity) null, area, candidate ->
+                candidate.isAlive() && !candidate.isRemoved()
+                        && !(candidate instanceof Player)
+                        && !(candidate instanceof WondrousStaffAccelerationEntity));
+        candidates.sort(Comparator.comparingDouble(entity -> entity.distanceToSqr(center)));
+        for (Entity target : candidates.stream().limit(MAX_ENTITY_TARGETS).toList()) {
+            WondrousStaffAccelerationEntity marker = byTarget.get(target.getUUID());
+            if (marker == null || marker.isRemoved()) {
+                marker = new WondrousStaffAccelerationEntity(level, target, field.speed());
+                marker.setRangeFieldUuid(field.id);
+                marker.setOwnerUuid(field.owner);
+                marker.applyRangeSettings(field);
+                level.addFreshEntity(marker);
+            } else {
+                marker.setOwnerUuid(field.owner);
+                marker.applyRangeSettings(field);
+            }
+            retained.add(marker.getUUID());
+            state.entityMarkerIds.add(marker.getUUID());
+        }
+
+        // The runtime set also covers markers that moved outside the AABB since the previous scan.
+        for (UUID markerId : List.copyOf(state.entityMarkerIds)) {
+            if (retained.contains(markerId)) continue;
+            Entity entity = level.getEntity(markerId);
+            if (entity instanceof WondrousStaffAccelerationEntity marker
+                    && field.id.equals(marker.getRangeFieldUuid())) {
+                marker.discard();
+            }
+            state.entityMarkerIds.remove(markerId);
+        }
+    }
+
+    private static void clearEntityMarkers(MinecraftServer server, Field field) {
+        ServerLevel level = server.getLevel(field.dimensionKey());
+        if (level == null) return;
+        // Cleanup is infrequent (reclaim/disable), so scan loaded entities to catch markers that
+        // followed a moving target outside the field's current bounds.
+        for (Entity entity : level.getAllEntities()) {
+            if (entity instanceof WondrousStaffAccelerationEntity marker
+                    && field.id.equals(marker.getRangeFieldUuid())) {
+                marker.discard();
+            }
+        }
     }
 
     public static AABB bounds(BlockPos center, int sizeX, int sizeY, int sizeZ) {
@@ -446,7 +549,14 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
     public record Summary(UUID id, ResourceLocation dimension, BlockPos center, long createdAt,
                           boolean enabled, int speed, int sizeX, int sizeY, int sizeZ,
-                          int offsetX, int offsetY, int offsetZ, String name) {
+                          int offsetX, int offsetY, int offsetZ, String name,
+                          boolean entityTimerMode, int entityTimerSpeed) {
+        public Summary(UUID id, ResourceLocation dimension, BlockPos center, long createdAt,
+                       boolean enabled, int speed, int sizeX, int sizeY, int sizeZ,
+                       int offsetX, int offsetY, int offsetZ, String name) {
+            this(id, dimension, center, createdAt, enabled, speed, sizeX, sizeY, sizeZ,
+                    offsetX, offsetY, offsetZ, name, false, EntityTimerAcceleration.DEFAULT_SPEED);
+        }
     }
 
     public enum PlacementStatus {
@@ -491,6 +601,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         /** Only populated while migrating a pre-positional, block-type list. */
         private final Set<ResourceLocation> legacyFilters;
         private boolean positionalLists;
+        /** Entity acceleration mode captured with the staff when this field was placed. */
+        private boolean entityTimerMode;
+        private int entityTimerSpeed;
         /** Runtime-only aggregate state, synchronized by TimeFlowEntity and never persisted. */
         private boolean idleThrottled;
         private int revision;
@@ -500,7 +613,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                       int offsetX, int offsetY, int offsetZ,
                       boolean accelerationWhitelistMode, boolean sleepWhitelistMode,
                       Iterable<Long> accelerationMarks, Iterable<Long> sleepMarks,
-                      Iterable<ResourceLocation> legacyFilters, boolean positionalLists, String name) {
+                      Iterable<ResourceLocation> legacyFilters, boolean positionalLists, String name,
+                      boolean entityTimerMode, int entityTimerSpeed) {
             this.id = id;
             this.owner = owner;
             this.dimension = dimension;
@@ -524,6 +638,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 if (idValue != null && this.legacyFilters.size() < MAX_FILTERS) this.legacyFilters.add(idValue);
             }
             this.positionalLists = positionalLists;
+            this.entityTimerMode = entityTimerMode;
+            this.entityTimerSpeed = EntityTimerAcceleration.normalizeSpeed(entityTimerSpeed);
             trimMarksToBounds();
         }
 
@@ -540,6 +656,9 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             offsetZ = RangeAccelerationSettings.offsetZ(staff);
             accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
             sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
+            entityTimerMode = WondrousStaffAcceleration.usesEntityTimers(staff);
+            entityTimerSpeed = EntityTimerAcceleration.normalizeSpeed(
+                    WondrousStaffAcceleration.getEntityTimerSpeed(staff));
             trimMarksToBounds();
             idleThrottled = false;
             revision++;
@@ -568,6 +687,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         public int sleepMarkCount() { return sleepMarks.size(); }
         public boolean idleThrottled() { return idleThrottled; }
         public int revision() { return revision; }
+        public boolean entityTimerMode() { return entityTimerMode; }
+        public int entityTimerSpeed() { return entityTimerSpeed; }
 
         private void editGeometry(int speed, int sizeX, int sizeY, int sizeZ,
                                   int offsetX, int offsetY, int offsetZ) {
@@ -580,6 +701,12 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             this.offsetZ = clampOffset(offsetZ);
             trimMarksToBounds();
             idleThrottled = false;
+            revision++;
+        }
+
+        private void setEntitySettings(boolean timerMode, int timerSpeed) {
+            this.entityTimerMode = timerMode;
+            this.entityTimerSpeed = EntityTimerAcceleration.normalizeSpeed(timerSpeed);
             revision++;
         }
 
@@ -607,7 +734,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             return sleepWhitelistMode ? listed : !listed;
         }
 
-        private boolean contains(BlockPos pos) {
+        public boolean contains(BlockPos pos) {
             return bounds(effectiveCenter(), sizeX, sizeY, sizeZ).contains(Vec3.atCenterOf(pos));
         }
 
@@ -679,7 +806,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
         private Summary summary() {
             return new Summary(id, dimension, center, createdAt, enabled, speed, sizeX, sizeY, sizeZ,
-                    offsetX, offsetY, offsetZ, name);
+                    offsetX, offsetY, offsetZ, name, entityTimerMode, entityTimerSpeed);
         }
 
         private CompoundTag save() {
@@ -701,6 +828,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
             tag.putBoolean("acceleration_whitelist", accelerationWhitelistMode);
             tag.putBoolean("sleep_whitelist", sleepWhitelistMode);
             tag.putBoolean("positional_lists", positionalLists);
+            tag.putBoolean("entity_timer_mode", entityTimerMode);
+            tag.putInt("entity_timer_speed", entityTimerSpeed);
             tag.putLongArray("acceleration_marks", accelerationMarks.stream().mapToLong(Long::longValue).toArray());
             tag.putLongArray("sleep_marks", sleepMarks.stream().mapToLong(Long::longValue).toArray());
             ListTag filterTags = new ListTag();
@@ -736,7 +865,10 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                     tag.getInt("size_x"), tag.getInt("size_y"), tag.getInt("size_z"),
                     tag.getInt("offset_x"), tag.getInt("offset_y"), tag.getInt("offset_z"),
                     accelerationWhitelist, sleepWhitelist, accelerationMarks, sleepMarks,
-                    filters, positionalLists, tag.contains("name") ? tag.getString("name") : "");
+                    filters, positionalLists, tag.contains("name") ? tag.getString("name") : "",
+                    tag.getBoolean("entity_timer_mode"),
+                    tag.contains("entity_timer_speed")
+                            ? tag.getInt("entity_timer_speed") : EntityTimerAcceleration.DEFAULT_SPEED);
         }
 
         private static String normalizeName(String value) {
@@ -753,20 +885,31 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         private int targetCursor;
         private List<BlockPos> targets = List.of();
         private final Map<Long, TargetWork> targetWork = new HashMap<>();
+        private final Set<UUID> entityMarkerIds = new LinkedHashSet<>();
     }
 
     private static final class TargetWork {
         private long pendingTicks;
-        private long lastEnergy = Long.MIN_VALUE;
-        private int lastItems;
-        private int lastFluids;
-        private int capabilitySampleTicks;
-        private BlockState lastState;
+        private final MachineActivityProbe activityProbe = new MachineActivityProbe();
+        private BlockEntity observedTarget;
         private int idleTicks;
         private boolean observedWorking;
 
+        private void updateTarget(BlockEntity target) {
+            if (target == observedTarget) return;
+            pendingTicks = 0L;
+            resetActivity();
+            observedTarget = target;
+        }
+
+        private void resetActivity() {
+            activityProbe.reset();
+            idleTicks = 0;
+            observedWorking = false;
+        }
+
         private boolean shouldThrottle(ServerLevel level, BlockPos pos, BlockState state) {
-            boolean working = isWorking(level, pos, state);
+            boolean working = activityProbe.isWorking(level, pos, state);
             if (working) {
                 observedWorking = true;
                 idleTicks = 0;
@@ -774,60 +917,6 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 idleTicks++;
             }
             return observedWorking && idleTicks > IDLE_WINDOW_TICKS;
-        }
-
-        private boolean isWorking(ServerLevel level, BlockPos pos, BlockState state) {
-            BlockEntity target = level.getBlockEntity(pos);
-            if (target == null) return true;
-            if (target instanceof ChangedTickAccessor accessor) {
-                long changed = accessor.uselessStretcher$getLastChangedTick();
-                if (changed >= 0L && level.getGameTime() - changed <= CHANGED_WINDOW_TICKS) return true;
-            }
-            if (!state.equals(lastState)) {
-                lastState = state;
-                return true;
-            }
-            if (target instanceof IInWorldGridNodeHost host
-                    && WondrousStaffAcceleration.isAeDeviceWorking(host)) return true;
-            IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, pos, null);
-            if (energy != null) {
-                int stored = energy.getEnergyStored();
-                if (lastEnergy == Long.MIN_VALUE || stored != lastEnergy) {
-                    lastEnergy = stored;
-                    return true;
-                }
-            }
-            if (++capabilitySampleTicks >= 5) {
-                capabilitySampleTicks = 0;
-                var items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
-                if (items != null) {
-                    int fingerprint = items.getSlots();
-                    for (int slot = 0; slot < items.getSlots(); slot++) {
-                        ItemStack stack = items.getStackInSlot(slot);
-                        fingerprint = 31 * fingerprint + ItemStack.hashItemAndComponents(stack);
-                        fingerprint = 31 * fingerprint + stack.getCount();
-                    }
-                    if (fingerprint != lastItems) {
-                        lastItems = fingerprint;
-                        return true;
-                    }
-                }
-                var fluids = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
-                if (fluids != null) {
-                    int fingerprint = fluids.getTanks();
-                    for (int tank = 0; tank < fluids.getTanks(); tank++) {
-                        var stack = fluids.getFluidInTank(tank);
-                        fingerprint = 31 * fingerprint + stack.getFluid().hashCode();
-                        fingerprint = 31 * fingerprint + stack.getAmount();
-                        fingerprint = 31 * fingerprint + stack.getComponentsPatch().hashCode();
-                    }
-                    if (fingerprint != lastFluids) {
-                        lastFluids = fingerprint;
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 

@@ -5,6 +5,8 @@
   "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BeeTimerAccessor",
+    "TurtleTimerAccessor",
     "AdapterUtilsMoldMixin",
     "AdapterUtilsItemRepresentativeMixin",
     "MoldHubMultiMoldMixin",

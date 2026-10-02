@@ -1,24 +1,25 @@
 package com.sorrowmist.useless.stretcher.client;
 
 import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration;
 import com.sorrowmist.useless.stretcher.network.RangeNetwork;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 /** Edits an existing Time Flow's speed and geometry without replacing its persistent field UUID. */
-public final class RangeAccelerationHistoryEditScreen extends Screen {
-    private static final int PANEL_WIDTH = 276;
-    private static final int PANEL_HEIGHT = 246;
+public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
     private static final int[] SPEED_PRESETS = {1, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
 
     private final Screen parent;
     private final RangeAccelerationSavedData.Summary field;
-    private int panelLeft;
-    private int panelTop;
+    private int groupWidth;
+    private int offsetLeft;
+    private int offsetTop;
     private int speed;
     private int sizeX;
     private int sizeY;
@@ -26,11 +27,16 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
     private int offsetX;
     private int offsetY;
     private int offsetZ;
+    private boolean entityTimerMode;
+    private int entityTimerSpeed;
+    private SelectableAE2Button timerButton;
+    private SelectableAE2Button timerSpeedButton;
     private SelectableAE2Button speedButton;
 
     public RangeAccelerationHistoryEditScreen(Screen parent,
                                               RangeAccelerationSavedData.Summary field) {
-        super(Component.translatable("gui.useless_stretcher.range.edit_title"));
+        super(Component.translatable("gui.useless_stretcher.range.edit_title"),
+                "range_edit", 300, 304, 250, 140);
         this.parent = parent;
         this.field = field;
         speed = RangeAccelerationSavedData.clampSpeed(field.speed());
@@ -40,37 +46,68 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
         offsetX = field.offsetX();
         offsetY = field.offsetY();
         offsetZ = field.offsetZ();
+        entityTimerMode = field.entityTimerMode();
+        entityTimerSpeed = EntityTimerAcceleration.normalizeSpeed(field.entityTimerSpeed());
     }
 
     @Override
-    protected void init() {
-        super.init();
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        panelLeft = (width - panelWidth) / 2;
-        panelTop = Math.max(6, (height - PANEL_HEIGHT) / 2);
-        int sliderLeft = panelLeft + 12;
-        int sliderWidth = panelWidth - 24;
+    protected void initContent() {
+        int left = contentLeft();
+        int top = contentTop();
+        int bodyWidth = contentWidth();
+        int sliderLeft = left + 4;
+        int sliderWidth = Math.max(1, bodyWidth - 8);
 
         addRenderableWidget(new SelectableAE2Button(
-                sliderLeft, panelTop + 38, 18, 18, Component.literal("-"), ignored -> stepSpeed(-1)));
+                sliderLeft, top + 32, 18, 18, Component.literal("-"), ignored -> stepSpeed(-1)))
+                .setTooltip(net.minecraft.client.gui.components.Tooltip.create(
+                        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("edit_speed")));
         speedButton = addRenderableWidget(new SelectableAE2Button(
-                sliderLeft + 20, panelTop + 38, sliderWidth - 40, 18,
+                sliderLeft + 20, top + 32, Math.max(1, sliderWidth - 40), 18,
                 speedMessage(), ignored -> { }));
         speedButton.active = false;
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(speedButton, "edit_speed");
         addRenderableWidget(new SelectableAE2Button(
-                sliderLeft + sliderWidth - 18, panelTop + 38, 18, 18,
-                Component.literal("+"), ignored -> stepSpeed(1)));
+                sliderLeft + sliderWidth - 18, top + 32, 18, 18,
+                Component.literal("+"), ignored -> stepSpeed(1)))
+                .setTooltip(net.minecraft.client.gui.components.Tooltip.create(
+                com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("edit_speed")));
 
-        addSlider(sliderLeft, panelTop + 72, sliderWidth, 'X', false, sizeX);
-        addSlider(sliderLeft, panelTop + 92, sliderWidth, 'Y', false, sizeY);
-        addSlider(sliderLeft, panelTop + 112, sliderWidth, 'Z', false, sizeZ);
-        addSlider(sliderLeft, panelTop + 148, sliderWidth, 'X', true, offsetX);
-        addSlider(sliderLeft, panelTop + 168, sliderWidth, 'Y', true, offsetY);
-        addSlider(sliderLeft, panelTop + 188, sliderWidth, 'Z', true, offsetZ);
+        int timerY = top + 56;
+        timerButton = addRenderableWidget(new SelectableAE2Button(
+                sliderLeft, timerY, Math.max(1, sliderWidth / 2 - 2), 18,
+                timerMessage(), ignored -> {
+                    entityTimerMode = !entityTimerMode;
+                    timerButton.setMessage(timerMessage());
+                    timerSpeedButton.active = entityTimerMode;
+                    persist();
+                }));
+        timerButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(
+                com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("entity_timer")));
+        timerSpeedButton = addRenderableWidget(new SelectableAE2Button(
+                sliderLeft + sliderWidth / 2 + 2, timerY,
+                Math.max(1, sliderWidth / 2 - 2), 18,
+                timerSpeedMessage(), ignored -> stepTimerSpeed(1)));
+        timerSpeedButton.active = entityTimerMode;
+        timerSpeedButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(
+                com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("entity_timer_speed")));
+
+        boolean sideBySide = bodyWidth >= 480;
+        groupWidth = sideBySide ? (bodyWidth - 8) / 2 : bodyWidth;
+        offsetLeft = sideBySide ? groupWidth + 8 : 0;
+        offsetTop = sideBySide ? 64 : 156;
+        int groupSliderWidth = Math.max(1, groupWidth - 8);
+        addSlider(left + 4, top + 80, groupSliderWidth, 'X', false, sizeX);
+        addSlider(left + 4, top + 100, groupSliderWidth, 'Y', false, sizeY);
+        addSlider(left + 4, top + 120, groupSliderWidth, 'Z', false, sizeZ);
+        addSlider(left + offsetLeft + 4, top + offsetTop + 16, groupSliderWidth, 'X', true, offsetX);
+        addSlider(left + offsetLeft + 4, top + offsetTop + 36, groupSliderWidth, 'Y', true, offsetY);
+        addSlider(left + offsetLeft + 4, top + offsetTop + 56, groupSliderWidth, 'Z', true, offsetZ);
 
         addRenderableWidget(new SelectableAE2Button(
-                panelLeft + 9, panelTop + 215, panelWidth - 18, 18,
+                left, top + offsetTop + 92, bodyWidth, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
+        setContentExtent(offsetTop + 114);
     }
 
     private void stepSpeed(int delta) {
@@ -96,9 +133,9 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
                 left + 21, y, width - 42, 18, String.valueOf(axis), min, max, initialValue,
                 value -> setValue(axis, offset, value)));
         addRenderableWidget(new SelectableAE2Button(
-                left, y, 18, 18, Component.literal("-"), ignored -> slider.step(-1)));
+                left, y, 18, 18, Component.literal("-"), ignored -> slider.step(-1))).setTooltip(slider.getTooltip());
         addRenderableWidget(new SelectableAE2Button(
-                left + width - 18, y, 18, 18, Component.literal("+"), ignored -> slider.step(1)));
+                left + width - 18, y, 18, 18, Component.literal("+"), ignored -> slider.step(1))).setTooltip(slider.getTooltip());
     }
 
     private void setValue(char axis, boolean offset, int value) {
@@ -119,38 +156,36 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
     }
 
     private void persist() {
-        RangeNetwork.editHistory(field.id(), speed, sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ);
+        RangeNetwork.editHistory(field.id(), speed, sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ,
+                entityTimerMode, entityTimerSpeed);
+    }
+
+    private void stepTimerSpeed(int delta) {
+        entityTimerSpeed = EntityTimerAcceleration.normalizeSpeed(entityTimerSpeed << delta);
+        if (timerSpeedButton != null) timerSpeedButton.setMessage(timerSpeedMessage());
+        persist();
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.fill(0, 0, width, height, 0x33000000);
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, PANEL_HEIGHT);
-        graphics.drawString(font, title, panelLeft + 9, panelTop + 9,
-                StretcherScreenStyle.TEXT_COLOR, false);
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int left = contentLeft();
+        int top = contentTop();
+        int bodyWidth = contentWidth();
         Component location = Component.literal(field.dimension() + "  "
                 + field.center().getX() + ", " + field.center().getY() + ", " + field.center().getZ());
-        graphics.drawString(font, font.plainSubstrByWidth(location.getString(), panelWidth - 18),
-                panelLeft + 9, panelTop + 23, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+        graphics.drawString(font, font.plainSubstrByWidth(location.getString(), bodyWidth),
+                left, top, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
 
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 8, panelTop + 32,
-                panelLeft + panelWidth - 8, panelTop + 60);
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 8, panelTop + 64,
-                panelLeft + panelWidth - 8, panelTop + 137);
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 8, panelTop + 140,
-                panelLeft + panelWidth - 8, panelTop + 213);
+        StretcherScreenStyle.drawInset(graphics, left, top + 16, left + bodyWidth, top + 56);
+        StretcherScreenStyle.drawInset(graphics, left, top + 64, left + groupWidth, top + 148);
+        StretcherScreenStyle.drawInset(graphics, left + offsetLeft, top + offsetTop,
+                left + offsetLeft + groupWidth, top + offsetTop + 84);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.speed_group"),
-                panelLeft + 12, panelTop + 34, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+                left + 4, top + 20, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.size_group"),
-                panelLeft + 12, panelTop + 66, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+                left + 4, top + 68, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.offset_group"),
-                panelLeft + 12, panelTop + 142, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                left + offsetLeft + 4, top + offsetTop + 4, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
     }
 
     @Override
@@ -167,5 +202,14 @@ public final class RangeAccelerationHistoryEditScreen extends Screen {
 
     private Component speedMessage() {
         return Component.literal("x" + speed);
+    }
+
+    private Component timerMessage() {
+        return Component.translatable("gui.useless_stretcher.range.entity_timer_" +
+                (entityTimerMode ? "on" : "off"));
+    }
+
+    private Component timerSpeedMessage() {
+        return Component.literal("T x" + entityTimerSpeed);
     }
 }

@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.client;
 import com.sorrowmist.useless.core.component.UComponents;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
@@ -10,7 +11,6 @@ import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlainTextButton;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -19,11 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Button-based acceleration selector styled after Useless Mod's current G configuration screen. */
-public final class WondrousStaffConfigScreen extends Screen {
+public final class WondrousStaffConfigScreen extends FloatingScreen {
     private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
-    private static final int PANEL_WIDTH = 260;
-    private static final int PANEL_COLLAPSED_HEIGHT = 258;
-    private static final int PANEL_EXPANDED_HEIGHT = 293;
 
     private final InteractionHand hand;
     private final List<ChoiceButton> speedButtons = new ArrayList<>();
@@ -40,39 +37,46 @@ public final class WondrousStaffConfigScreen extends Screen {
     private boolean summonEnabled;
     private boolean lootRefreshEnabled;
     private boolean extrasCollapsed = true;
+    private boolean settingsLoaded;
+    private int speedTop, speedHeight, modeTop, modeHeight, featuresTop, featuresHeight;
 
     public WondrousStaffConfigScreen(InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_config.title"));
+        super(Component.translatable("gui.useless_stretcher.staff_config.title"), "staff", 282, 310, 244, 150);
         this.hand = hand;
     }
 
     @Override
-    protected void init() {
-        super.init();
-        panelLeft = (width - Math.min(PANEL_WIDTH, width - 12)) / 2;
-        panelTop = Math.max(6, (height - panelHeight()) / 2);
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        ItemStack staff = currentStaff();
-        selectedSpeed = WondrousStaffAcceleration.getSpeed(staff);
-        selectedMode = WondrousStaffAcceleration.getMode(staff);
-        accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
-        summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
-        lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+    protected void initContent() {
+        panelLeft = contentLeft();
+        panelTop = contentTop();
+        int panelWidth = contentWidth();
+        if (!settingsLoaded) {
+            ItemStack staff = currentStaff();
+            selectedSpeed = WondrousStaffAcceleration.getSpeed(staff);
+            selectedMode = WondrousStaffAcceleration.getMode(staff);
+            accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
+            summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+            lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+            settingsLoaded = true;
+        }
 
         speedButtons.clear();
         modeButtons.clear();
         accelerationButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 96, panelTop + 5, 88, 16,
+                panelLeft + panelWidth - 104, panelTop, 104, 18,
                 accelerationMessage(), ignored -> toggleAcceleration()));
 
-        int cardLeft = panelLeft + 7;
-        int cardWidth = panelWidth - 14;
+        int cardLeft = panelLeft;
+        int cardWidth = panelWidth;
         int gap = 3;
-        int buttonWidth = (cardWidth - 10 - gap * 4) / 5;
+        int columns = Math.max(2, Math.min(GEARS.length, (cardWidth - 10 + gap) / 46));
+        int buttonWidth = (cardWidth - 10 - gap * (columns - 1)) / columns;
+        speedTop = panelTop + 23;
+        speedHeight = 23 + ((GEARS.length + columns - 1) / columns) * 20;
         for (int i = 0; i < GEARS.length; i++) {
             int speed = GEARS[i];
-            int x = cardLeft + 5 + (i % 5) * (buttonWidth + gap);
-            int y = panelTop + 41 + (i / 5) * 19;
+            int x = cardLeft + 5 + (i % columns) * (buttonWidth + gap);
+            int y = speedTop + 18 + (i / columns) * 20;
             Component label = speed == 0
                     ? Component.translatable("gui.useless_stretcher.speed_off")
                     : Component.literal("x" + speed);
@@ -86,10 +90,15 @@ public final class WondrousStaffConfigScreen extends Screen {
                 "gui.useless_stretcher.mode_permanent",
                 "gui.useless_stretcher.mode_permanent_no_throttle"
         };
+        modeTop = speedTop + speedHeight + 4;
+        int modeColumns = cardWidth >= 490 ? 3 : 1;
+        modeHeight = 23 + (3 / modeColumns) * 20;
+        int modeButtonWidth = (cardWidth - 10 - (modeColumns - 1) * gap) / modeColumns;
         for (int mode = 0; mode < modeKeys.length; mode++) {
             int value = mode;
             SelectableAE2Button button = addRenderableWidget(new SelectableAE2Button(
-                    cardLeft + 5, panelTop + 102 + mode * 19, cardWidth - 10, 17,
+                    cardLeft + 5 + (mode % modeColumns) * (modeButtonWidth + gap),
+                    modeTop + 18 + (mode / modeColumns) * 20, modeButtonWidth, 17,
                     Component.translatable(modeKeys[mode]), ignored -> selectMode(value)));
             modeButtons.add(new ChoiceButton(mode, button));
         }
@@ -97,15 +106,23 @@ public final class WondrousStaffConfigScreen extends Screen {
                 ? "gui.useless_stretcher.staff_summon.expand"
                 : "gui.useless_stretcher.staff_summon.collapse");
         int foldWidth = font.width(foldText);
+        featuresTop = modeTop + modeHeight + 4;
+        featuresHeight = extrasCollapsed ? 42 : 83;
+        addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, cardWidth - foldWidth - 20, 17,
+                Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
+                ignored -> minecraft.setScreen(new EntityAccelerationConfigScreen(this, hand))))
+                .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                        "gui.useless_stretcher.entity_acceleration.open_tooltip")));
         extrasFoldText = addRenderableWidget(new PlainTextButton(
-                cardLeft + (cardWidth - foldWidth) / 2, panelTop + 190, foldWidth, 10,
+                cardLeft + cardWidth - foldWidth - 6, featuresTop + 22, foldWidth, 10,
                 foldText, ignored -> toggleExtrasFold(), font));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(extrasFoldText, "fold");
         if (!extrasCollapsed) {
             lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
-                    cardLeft + 5, panelTop + 205, cardWidth - 10, 17,
+                    cardLeft + 5, featuresTop + 39, cardWidth - 10, 17,
                     lootRefreshMessage(), ignored -> toggleLootRefresh()));
             summonOpenButton = addRenderableWidget(new SelectableAE2Button(
-                    cardLeft + 5, panelTop + 225, cardWidth - 10, 17,
+                    cardLeft + 5, featuresTop + 60, cardWidth - 10, 17,
                     summonOpenMessage(),
                     ignored -> minecraft.setScreen(new WondrousStaffSummonScreen(this, hand))));
         } else {
@@ -114,7 +131,7 @@ public final class WondrousStaffConfigScreen extends Screen {
         }
 
         int footerWidth = (cardWidth - 3) / 2;
-        int footerY = panelTop + (extrasCollapsed ? 231 : 266);
+        int footerY = Math.max(featuresTop + featuresHeight + 5, panelTop + contentHeight() - 20);
         addRenderableWidget(new SelectableAE2Button(
                 cardLeft, footerY, footerWidth, 17,
                 Component.translatable("gui.useless_stretcher.range.open"),
@@ -124,34 +141,22 @@ public final class WondrousStaffConfigScreen extends Screen {
                 Component.translatable("gui.useless_stretcher.range.history"),
                 ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
         updateSelection();
+        setContentExtent(footerY - panelTop + 20);
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.fill(0, 0, width, height, 0x33000000);
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, panelHeight());
-        graphics.drawString(font, title, panelLeft + 8, panelTop + 8,
-                StretcherScreenStyle.TEXT_COLOR, false);
-
-        int cardLeft = panelLeft + 7;
-        int cardRight = panelLeft + panelWidth - 7;
-        StretcherScreenStyle.drawInset(graphics, cardLeft, panelTop + 24, cardRight, panelTop + 80);
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int cardLeft = panelLeft;
+        int cardRight = panelLeft + contentWidth();
+        StretcherScreenStyle.drawInset(graphics, cardLeft, speedTop, cardRight, speedTop + speedHeight);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.speed"),
-                cardLeft + 5, panelTop + 29, StretcherScreenStyle.TEXT_COLOR, false);
-        StretcherScreenStyle.drawInset(graphics, cardLeft, panelTop + 84, cardRight, panelTop + 163);
+                cardLeft + 5, speedTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, cardLeft, modeTop, cardRight, modeTop + modeHeight);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.duration"),
-                cardLeft + 5, panelTop + 89, StretcherScreenStyle.TEXT_COLOR, false);
-        StretcherScreenStyle.drawInset(graphics, cardLeft, panelTop + 167, cardRight,
-                panelTop + (extrasCollapsed ? 224 : 259));
+                cardLeft + 5, modeTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, cardLeft, featuresTop, cardRight, featuresTop + featuresHeight);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.features"),
-                cardLeft + 5, panelTop + 172, StretcherScreenStyle.TEXT_COLOR, false);
-        super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // The panel is drawn before Screen.render; allowing the default background here would blur the UI itself.
+                cardLeft + 5, featuresTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
     }
 
     private void selectSpeed(int speed) {
@@ -248,10 +253,6 @@ public final class WondrousStaffConfigScreen extends Screen {
     private void toggleExtrasFold() {
         extrasCollapsed = !extrasCollapsed;
         rebuildWidgets();
-    }
-
-    private int panelHeight() {
-        return extrasCollapsed ? PANEL_COLLAPSED_HEIGHT : PANEL_EXPANDED_HEIGHT;
     }
 
     private ItemStack currentStaff() {

@@ -26,6 +26,13 @@ public final class StretcherComponents {
                     .persistent(Codec.INT)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
 
+    /** Opt-in timer-only entity acceleration. Old stacks retain complete-tick behavior. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> ENTITY_TIMER_MODE =
+            register("entity_timer_mode", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENTITY_TIMER_SPEED =
+            integerComponent("entity_timer_speed");
+
     /** When true, the acceleration never expires. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PERMANENT =
             register("wondrous_staff_permanent", builder -> builder

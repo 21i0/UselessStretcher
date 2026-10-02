@@ -67,7 +67,7 @@ public final class StretcherConfig {
                 .define("idle_throttle", true);
         SERVER_ENTITY_DISABLE_AI = BUILDER
                 .comment("实体加速时是否关闭目标 Mob 的 AI。",
-                        "开启后，目标不会执行寻路、攻击等 AI 行为，但仍会按加速倍率执行实体 tick。",
+                        "开启后，目标不会执行寻路、攻击等 AI 行为；完整 tick 模式仍执行实体 tick，计时器模式只推进支持的生物计时器。",
                         "加速效果结束或目标消失时会恢复目标原本的 AI 状态。")
                 .translation("useless_stretcher.configuration.acceleration.entity_disable_ai")
                 .define("entity_disable_ai", true);

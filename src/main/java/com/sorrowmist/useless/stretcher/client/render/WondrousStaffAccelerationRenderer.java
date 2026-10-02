@@ -106,13 +106,14 @@ public class WondrousStaffAccelerationRenderer
         float y1 = BAR_Y + BAR_HEIGHT;
 
         VertexConsumer vc = buffer.getBuffer(RenderType.debugQuads());
-        addQuad(vc, poseStack, x0, y0, x1, y1, 0.0F, 0.18F, 0.18F, 0.18F, 0.95F);
-
-        float fillX = x0 + BAR_WIDTH * fraction;
+        float fillX = x0 + BAR_WIDTH * Mth.clamp(fraction, 0.0F, 1.0F);
+        // The opaque fill replaces the track, rather than overlapping it. This also avoids
+        // depth fighting at a distance. Local +Z faces out of the block/toward the camera.
+        if (fillX < x1) {
+            addQuad(vc, poseStack, fillX, y0, x1, y1, 0.0F, 0.18F, 0.18F, 0.18F, 0.95F);
+        }
         if (fillX > x0) {
-            // Keep the fill fractionally closer to the camera than the gray track. Both quads
-            // otherwise share one plane and flicker due to depth-buffer Z-fighting.
-            addQuad(vc, poseStack, x0, y0, fillX, y1, -0.01F, r, g, b, 1.0F);
+            addQuad(vc, poseStack, x0, y0, fillX, y1, 0.01F, r, g, b, 1.0F);
         }
     }
 

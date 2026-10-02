@@ -8,6 +8,7 @@ import appeng.api.networking.ticking.TickRateModulation;
 import appeng.me.service.TickManagerService;
 import com.sorrowmist.useless.core.component.UComponents;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.content.ae.JdteAeVirtualTickBridge;
 import com.sorrowmist.useless.stretcher.content.item.StaffTutorialData;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
@@ -15,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +43,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -50,8 +51,7 @@ import java.util.Set;
  * ticker; AE2 machines are ticked through their own {@link IGridTickable} grid service, which is
  * what makes AE machines "run on their own AE tick".
  *
- * <p>Lightning rods are special-cased: vanilla redirects natural thunderstorm lightning to a rod
- * through a rare random roll, so the staff simply rolls that chance faster.
+ * <p>Lightning rods are special-cased to emit command-style lightning, independent of weather.
  */
 public final class WondrousStaffAcceleration {
     public static final int STAFF_MODE_NORMAL = 0;
@@ -136,6 +136,8 @@ public final class WondrousStaffAcceleration {
 
         AABB area = target.getBoundingBox().inflate(4.0D);
         int speed = getSpeed(staff);
+        boolean timers = usesEntityTimers(staff) && target instanceof net.minecraft.world.entity.LivingEntity;
+        if (speed > 0 && timers) speed = getEntityTimerSpeed(staff);
         int staffMode = getMode(staff);
         boolean permanent = isPermanentMode(staffMode);
         boolean noIdleThrottle = skipsIdleThrottle(staffMode);
@@ -151,6 +153,8 @@ public final class WondrousStaffAcceleration {
         if (effect == null) {
             WondrousStaffAccelerationEntity created =
                     new WondrousStaffAccelerationEntity(serverLevel, target, speed);
+            created.setEntityTimerMode(timers);
+            created.setSpeed(speed);
             created.setOwnerUuid(player.getUUID());
             if (permanent) created.setPermanent();
             created.setIdleThrottleDisabled(noIdleThrottle);
@@ -158,6 +162,7 @@ public final class WondrousStaffAcceleration {
             serverLevel.addFreshEntity(created);
         } else {
             if (effect.getOwnerUuid() == null) effect.setOwnerUuid(player.getUUID());
+            effect.setEntityTimerMode(timers);
             effect.setSpeed(speed);
             effect.setIdleThrottleDisabled(noIdleThrottle);
             effect.setEntityAiDisabled(StretcherConfig.entityDisableAi());
@@ -210,6 +215,15 @@ public final class WondrousStaffAcceleration {
 
     public static int getSpeed(ItemStack stack) {
         return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
+    }
+
+    public static boolean usesEntityTimers(ItemStack stack) {
+        return stack.getOrDefault(StretcherComponents.ENTITY_TIMER_MODE.get(), false);
+    }
+
+    public static int getEntityTimerSpeed(ItemStack stack) {
+        return EntityTimerAcceleration.normalizeSpeed(stack.getOrDefault(
+                StretcherComponents.ENTITY_TIMER_SPEED.get(), EntityTimerAcceleration.DEFAULT_SPEED));
     }
 
     public static boolean isSummonEnabled(ItemStack stack) {
@@ -309,7 +323,8 @@ public final class WondrousStaffAcceleration {
         if (blockEntity != null) {
             if (isUnsafeAccelerationTarget(blockEntity)) return false;
             if (blockEntity instanceof IInWorldGridNodeHost) return true;
-            return state.getTicker(level, blockEntity.getType()) != null;
+            return state.getTicker(level, blockEntity.getType()) != null
+                    || findAeHost(level, pos, blockEntity) != null;
         }
         return state.isRandomlyTicking();
     }
@@ -447,23 +462,26 @@ public final class WondrousStaffAcceleration {
             return executed;
         }
 
-        // 1. AE2 machines that expose IGridTickable endpoints run on their own AE grid ticks.
-        int aeExecuted = tickAeNodes(level, pos, speed, deadline);
-        if (aeExecuted >= 0) return aeExecuted;
+        var ticker = state.getTicker(level, blockEntity.getType());
+        var endpoints = findAeEndpoints(findAeHost(level, pos, blockEntity));
+        ticker = selectOrdinaryTicker(BuiltInRegistries.BLOCK.getKey(state.getBlock()), ticker,
+                !endpoints.isEmpty());
+        return tickBlockAndAeNodes(level, pos, blockEntity, state, ticker, endpoints, speed, deadline);
+    }
 
-        // 2. Everything else uses its normal block-entity ticker. This fallback matters for
-        //    AE machines (e.g. AE2 Crystal Science) that are grid node hosts but do NOT
-        //    implement IGridTickable — they would otherwise never be accelerated.
-        @SuppressWarnings("rawtypes")
-        BlockEntityTicker ticker = state.getTicker(level, blockEntity.getType());
-        if (ticker == null) return speed;
-        int executed = 0;
-        for (; executed < speed && System.nanoTime() < deadline; executed++) {
-            if (blockEntity.isRemoved() || level.getBlockState(pos) != state) return executed;
-            //noinspection unchecked
-            ticker.tick(level, pos, state, blockEntity);
+    private static <T extends BlockEntity> BlockEntityTicker<T> selectOrdinaryTicker(
+            ResourceLocation blockId, BlockEntityTicker<T> ticker, boolean hasAeEndpoints) {
+        // These three recipe machines use the ordinary ticker only for wireless-link upkeep.
+        // Do not infer this from AEBaseBlockEntity: other AE addons, including AE2LT's
+        // overloaded interface, perform independent production/energy work in both paths.
+        if (hasAeEndpoints && blockId != null && "ae2lt".equals(blockId.getNamespace())) {
+            return switch (blockId.getPath()) {
+                case "lightning_simulation_room", "lightning_assembly_chamber",
+                     "overload_processing_factory" -> null;
+                default -> ticker;
+            };
         }
-        return executed;
+        return ticker;
     }
 
     /**
@@ -484,74 +502,83 @@ public final class WondrousStaffAcceleration {
         }
     }
 
-    /**
-     * Ticks every distinct active AE endpoint exposed by this block. A multipart host may return
-     * the same node from several faces, so identity de-duplication is required. An endpoint that
-     * reports {@link TickRateModulation#SLEEP} is removed immediately instead of receiving up to
-     * another 1023 empty calls during the same real server tick.
-     *
-     * @return consumed virtual ticks, or -1 when no usable {@link IGridTickable} endpoint was
-     * found and the normal block-entity ticker should be attempted
-     */
-    private static int tickAeNodes(ServerLevel level, BlockPos pos, int speed, long deadline) {
-        IInWorldGridNodeHost host = GridHelper.getNodeHost(level, pos);
-        if (host == null) return -1;
+    private static IInWorldGridNodeHost findAeHost(Level level, BlockPos pos, BlockEntity blockEntity) {
+        try {
+            IInWorldGridNodeHost host = GridHelper.getNodeHost(level, pos);
+            if (host != null) return host;
+        } catch (RuntimeException | LinkageError ignored) {
+            // A broken optional ME capability must not disable the machine's ordinary ticker.
+        }
+        return blockEntity instanceof IInWorldGridNodeHost host ? host : null;
+    }
 
+    private static List<AeEndpoint> findAeEndpoints(IInWorldGridNodeHost host) {
+        if (host == null) return List.of();
         Set<IGridNode> seen = Collections.newSetFromMap(new IdentityHashMap<>());
-        List<AeEndpoint> active = new ArrayList<>();
-        // AE machines commonly expose their real ticker on the host's primary node
-        // (getGridNode(null)); FE-only machines may have that node without an attached grid.
-        // Include it alongside the side nodes so acceleration does not depend on network
-        // connectivity or on which face the block happens to expose.
-        IGridNode primary = host.getGridNode(null);
-        if (primary != null && seen.add(primary)) {
-            IGridTickable tickable = primary.getService(IGridTickable.class);
-            if (tickable != null) active.add(new AeEndpoint(primary, tickable));
-        }
+        List<AeEndpoint> endpoints = new ArrayList<>(2);
+        addAeEndpoint(host, null, seen, endpoints);
         for (Direction direction : DIRECTIONS) {
-            IGridNode node = host.getGridNode(direction);
-            // A number of AE-compatible machines run entirely on FE until they are connected
-            // to an AE network. Their node has no grid in that state, but the public AE2
-            // IGridTickable service is still the machine's real tick entrypoint.
-            if (node == null || !seen.add(node)) continue;
-            IGridTickable tickable = node.getService(IGridTickable.class);
-            if (tickable != null) active.add(new AeEndpoint(node, tickable));
+            addAeEndpoint(host, direction, seen, endpoints);
         }
-        if (active.isEmpty()) return -1;
+        return endpoints;
+    }
 
+    private static void addAeEndpoint(IInWorldGridNodeHost host, Direction side, Set<IGridNode> seen,
+                                      List<AeEndpoint> endpoints) {
+        try {
+            // Null exposes the primary node on some FE-only machines. Other hosts only accept
+            // real faces, so failure of this optional probe must not hide their side nodes.
+            IGridNode node = host.getGridNode(side);
+            if (node == null || !seen.add(node)) return;
+            IGridTickable tickable = node.getService(IGridTickable.class);
+            if (tickable != null) endpoints.add(new AeEndpoint(node, tickable));
+        } catch (RuntimeException | LinkageError ignored) {
+            // Isolate each optional node/service lookup, not just tickingRequest below.
+        }
+    }
+
+    /**
+     * A machine's normal ticker and its AE service are separate world entrypoints. An attached
+     * ME upgrade must not replace the production ticker. SLEEP only retires that AE endpoint for
+     * this batch; the final successful callback still counts, and the normal ticker continues.
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static int tickBlockAndAeNodes(ServerLevel level, BlockPos pos, BlockEntity blockEntity,
+                                           BlockState state, BlockEntityTicker ticker,
+                                           List<AeEndpoint> active, int speed, long deadline) {
         int executed = 0;
-        int successfulCalls = 0;
-        for (; executed < speed && !active.isEmpty() && System.nanoTime() < deadline; executed++) {
-            Iterator<AeEndpoint> iterator = active.iterator();
-            while (iterator.hasNext()) {
-                AeEndpoint endpoint = iterator.next();
-                try {
-                    // tickingRequest is the public AE2 execution entrypoint. Its SLEEP return
-                    // describes the normal grid scheduler's preferred cadence; it must not
-                    // cancel this explicit acceleration call, especially for FE-only machines
-                    // whose node has no grid at all.
-                    TickRateModulation modulation = endpoint.tickable.tickingRequest(endpoint.node, 1);
-                    if (modulation == TickRateModulation.SLEEP) {
-                        // Repeatedly probing a sleeping ME/MI bridge once per virtual tick can
-                        // be more expensive than the machine's normal ticker (and was the main
-                        // reason x1024 could lose to the upstream x256 wand). Remove the quiet
-                        // endpoint for this round; if every endpoint sleeps, the caller falls
-                        // back to the block-entity ticker, which also covers FE-only machines.
-                        iterator.remove();
-                    } else {
-                        successfulCalls++;
+        for (; executed < speed && System.nanoTime() < deadline; executed++) {
+            if (blockEntity.isRemoved() || blockEntity.getBlockState() != state) return executed;
+            if (ticker == null && active.isEmpty()) return speed;
+            boolean ranCallback = false;
+            try (JdteAeVirtualTickBridge.Scope ignored =
+                         JdteAeVirtualTickBridge.enter(level.getGameTime() + executed)) {
+                if (ticker != null) {
+                    ticker.tick(level, pos, state, blockEntity);
+                    ranCallback = true;
+                    if (blockEntity.isRemoved() || blockEntity.getBlockState() != state) return executed + 1;
+                }
+                for (int index = 0; index < active.size();) {
+                    if (System.nanoTime() >= deadline) return executed + (ranCallback ? 1 : 0);
+                    AeEndpoint endpoint = active.get(index);
+                    ranCallback = true;
+                    try {
+                        // Preserve target-local virtual ticks. Batching this argument or advancing
+                        // the whole grid would change recipes/energy accounting outside the target.
+                        TickRateModulation modulation = endpoint.tickable.tickingRequest(endpoint.node, 1);
+                        if (modulation == TickRateModulation.SLEEP) {
+                            active.remove(index);
+                        } else {
+                            index++;
+                        }
+                    } catch (RuntimeException | LinkageError ignoredEndpoint) {
+                        active.remove(index);
                     }
-                } catch (RuntimeException ignored) {
-                    // A device may reject an out-of-band tick (e.g. while not loaded/active).
-                    // Remove only that endpoint; other faces/nodes can continue normally.
-                    iterator.remove();
+                    if (blockEntity.isRemoved() || blockEntity.getBlockState() != state) return executed + 1;
                 }
             }
         }
-        // If every exposed AE endpoint rejected the out-of-band call, report that no AE tick
-        // was consumed so the caller can use the normal block-entity ticker (important for
-        // FE-only machines and Mekanism ME-upgrade bridges).
-        return successfulCalls == 0 ? -1 : executed;
+        return executed;
     }
 
     private record AeEndpoint(IGridNode node, IGridTickable tickable) {
@@ -559,33 +586,16 @@ public final class WondrousStaffAcceleration {
 
     /** True when an AE device currently requests ticks instead of reporting itself asleep. */
     public static boolean isAeDeviceWorking(IInWorldGridNodeHost host) {
-        IGridNode primary = host.getGridNode(null);
-        if (primary != null && primary.getGrid() != null && primary.isActive()) {
-            IGridTickable tickable = primary.getService(IGridTickable.class);
-            if (tickable != null) {
-                try {
-                    if (primary.getGrid().getTickManager() instanceof TickManagerService manager) {
-                        if (!manager.getStatus(primary).sleeping()) return true;
-                    } else if (!tickable.getTickingRequest(primary).isSleeping()) {
-                        return true;
-                    }
-                } catch (RuntimeException ignored) {
-                    return true;
-                }
-            }
-        }
-        for (Direction direction : DIRECTIONS) {
-            IGridNode node = host.getGridNode(direction);
-            if (node == null || node.getGrid() == null || !node.isActive()) continue;
-            IGridTickable tickable = node.getService(IGridTickable.class);
-            if (tickable == null) continue;
+        for (AeEndpoint endpoint : findAeEndpoints(host)) {
             try {
-                if (node.getGrid().getTickManager() instanceof TickManagerService manager) {
-                    if (!manager.getStatus(node).sleeping()) return true;
+                var grid = endpoint.node.getGrid();
+                if (grid == null || !endpoint.node.isActive()) continue;
+                if (grid.getTickManager() instanceof TickManagerService manager) {
+                    if (!manager.getStatus(endpoint.node).sleeping()) return true;
                     continue;
                 }
-                if (!tickable.getTickingRequest(node).isSleeping()) return true;
-            } catch (RuntimeException ignored) {
+                if (!endpoint.tickable.getTickingRequest(endpoint.node).isSleeping()) return true;
+            } catch (RuntimeException | LinkageError ignored) {
                 // If a device cannot expose its state safely, keep it at full speed.
                 return true;
             }

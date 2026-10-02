@@ -23,6 +23,7 @@ public final class AE2RangeSlider extends AbstractSliderButton {
         this.onValueChanged = onValueChanged;
         this.lastValue = currentValue();
         updateMessage();
+        ButtonHelp.set(this, min < 0 ? "offset_axis" : "size_axis", axis);
     }
 
     @Override

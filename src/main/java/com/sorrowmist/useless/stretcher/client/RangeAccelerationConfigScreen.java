@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.client;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
@@ -15,9 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Button-based range setup using the same visual language as the upstream G screen. */
-public final class RangeAccelerationConfigScreen extends Screen {
-    private static final int PANEL_WIDTH = 276;
-    private static final int PANEL_HEIGHT = 174;
+public final class RangeAccelerationConfigScreen extends FloatingScreen {
 
     private final Screen parent;
     private final InteractionHand hand;
@@ -43,54 +42,57 @@ public final class RangeAccelerationConfigScreen extends Screen {
     private SelectableAE2Button offsetXButton;
     private SelectableAE2Button offsetYButton;
     private SelectableAE2Button offsetZButton;
+    private boolean settingsLoaded;
 
     public RangeAccelerationConfigScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.range.title"));
+        super(Component.translatable("gui.useless_stretcher.range.title"), "range_settings", 293, 203, 260, 145);
         this.parent = parent;
         this.hand = hand;
     }
 
     @Override
-    protected void init() {
-        super.init();
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        panelLeft = (width - panelWidth) / 2;
-        panelTop = Math.max(6, (height - PANEL_HEIGHT) / 2);
-        ItemStack staff = currentStaff();
-        placementMode = RangeAccelerationSettings.placementMode(staff);
-        filterMarkingMode = RangeAccelerationSettings.filterMarkingMode(staff);
-        markSleepList = RangeAccelerationSettings.markSleepList(staff);
-        sizeX = RangeAccelerationSettings.sizeX(staff);
-        sizeY = RangeAccelerationSettings.sizeY(staff);
-        sizeZ = RangeAccelerationSettings.sizeZ(staff);
-        offsetX = RangeAccelerationSettings.offsetX(staff);
-        offsetY = RangeAccelerationSettings.offsetY(staff);
-        offsetZ = RangeAccelerationSettings.offsetZ(staff);
-        accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
-        sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
-        accelerationMarkCount = RangeAccelerationSettings.accelerationMarkCount(staff);
-        sleepMarkCount = RangeAccelerationSettings.sleepMarkCount(staff);
+    protected void initContent() {
+        int panelWidth = contentWidth();
+        panelLeft = contentLeft();
+        panelTop = contentTop();
+        if (!settingsLoaded) {
+            ItemStack staff = currentStaff();
+            placementMode = RangeAccelerationSettings.placementMode(staff);
+            filterMarkingMode = RangeAccelerationSettings.filterMarkingMode(staff);
+            markSleepList = RangeAccelerationSettings.markSleepList(staff);
+            sizeX = RangeAccelerationSettings.sizeX(staff);
+            sizeY = RangeAccelerationSettings.sizeY(staff);
+            sizeZ = RangeAccelerationSettings.sizeZ(staff);
+            offsetX = RangeAccelerationSettings.offsetX(staff);
+            offsetY = RangeAccelerationSettings.offsetY(staff);
+            offsetZ = RangeAccelerationSettings.offsetZ(staff);
+            accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
+            sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
+            accelerationMarkCount = RangeAccelerationSettings.accelerationMarkCount(staff);
+            sleepMarkCount = RangeAccelerationSettings.sleepMarkCount(staff);
+            settingsLoaded = true;
+        }
 
         placementButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 103, panelTop + 5, 95, 17,
+                panelLeft + panelWidth - 103, panelTop, 103, 17,
                 placementMessage(), ignored -> {
                     placementMode = !placementMode;
                     if (placementMode) filterMarkingMode = false;
                     apply();
                 }));
         markingButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 103, panelTop + 25, 95, 17,
+                panelLeft + panelWidth - 103, panelTop + 20, 103, 17,
                 markingMessage(), ignored -> {
                     filterMarkingMode = !filterMarkingMode;
                     if (filterMarkingMode) placementMode = false;
                     apply();
                 }));
 
-        int cardLeft = panelLeft + 7;
-        int cardWidth = panelWidth - 14;
-        addAxisSlider(cardLeft + 5, panelTop + 46, 'X', sizeX, offsetX);
-        addAxisSlider(cardLeft + 5, panelTop + 65, 'Y', sizeY, offsetY);
-        addAxisSlider(cardLeft + 5, panelTop + 84, 'Z', sizeZ, offsetZ);
+        int cardLeft = panelLeft;
+        int cardWidth = panelWidth;
+        addAxisSlider(cardLeft + 5, panelTop + 44, cardWidth - 10, 'X', sizeX, offsetX);
+        addAxisSlider(cardLeft + 5, panelTop + 64, cardWidth - 10, 'Y', sizeY, offsetY);
+        addAxisSlider(cardLeft + 5, panelTop + 84, cardWidth - 10, 'Z', sizeZ, offsetZ);
 
         int half = (cardWidth - 13) / 2;
         accelerationListButton = addRenderableWidget(new SelectableAE2Button(
@@ -107,36 +109,45 @@ public final class RangeAccelerationConfigScreen extends Screen {
                     else sleepWhitelistMode = !sleepWhitelistMode;
                     apply();
                 }));
+        int footerY = panelTop + Math.max(143, contentHeight() - 21);
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 5, panelTop + 143, (cardWidth - 13) / 2, 18,
+                cardLeft + 5, footerY, (cardWidth - 13) / 2, 18,
                 Component.translatable("gui.useless_stretcher.range.history"),
                 ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
         addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 8 + (cardWidth - 13) / 2, panelTop + 143,
+                cardLeft + 8 + (cardWidth - 13) / 2, footerY,
                 cardWidth - 13 - (cardWidth - 13) / 2, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
         updateButtons();
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(accelerationListButton, "acceleration_list");
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(sleepListButton, "sleep_list");
+        setContentExtent(footerY - panelTop + 21);
     }
 
-    private void addAxisSlider(int left, int y, char axis, int initialValue, int initialOffset) {
+    private void addAxisSlider(int left, int y, int rowWidth, char axis, int initialValue, int initialOffset) {
+        int offsetLeft = left + rowWidth - 74;
+        int plusLeft = offsetLeft - 22;
         AE2RangeSlider slider = addRenderableWidget(new AE2RangeSlider(
-                left + 21, y, 135, 18, String.valueOf(axis),
+                left + 21, y, Math.max(20, plusLeft - left - 24), 18, String.valueOf(axis),
                 1, 15, initialValue, value -> setAxis(axis, value)));
         addRenderableWidget(new SelectableAE2Button(left, y, 18, 18,
-                Component.literal("-"), ignored -> slider.step(-1)));
-        addRenderableWidget(new SelectableAE2Button(left + 158, y, 18, 18,
-                Component.literal("+"), ignored -> slider.step(1)));
+                Component.literal("-"), ignored -> slider.step(-1))).setTooltip(slider.getTooltip());
+        addRenderableWidget(new SelectableAE2Button(plusLeft, y, 18, 18,
+                Component.literal("+"), ignored -> slider.step(1))).setTooltip(slider.getTooltip());
 
-        SelectableAE2Button decrement = new SelectableAE2Button(left + 178, y, 18, 18,
+        SelectableAE2Button decrement = new SelectableAE2Button(offsetLeft, y, 18, 18,
                 Component.literal("-"), ignored -> stepOffset(axis, -1));
-        SelectableAE2Button value = new SelectableAE2Button(left + 198, y, 34, 18,
+        SelectableAE2Button value = new SelectableAE2Button(offsetLeft + 20, y, 34, 18,
                 offsetMessage(initialOffset), ignored -> { });
         value.active = false;
-        SelectableAE2Button increment = new SelectableAE2Button(left + 234, y, 18, 18,
+        SelectableAE2Button increment = new SelectableAE2Button(offsetLeft + 56, y, 18, 18,
                 Component.literal("+"), ignored -> stepOffset(axis, 1));
         addRenderableWidget(decrement);
         addRenderableWidget(value);
         addRenderableWidget(increment);
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(decrement, "offset_decrease", String.valueOf(axis));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(value, "offset_axis", String.valueOf(axis));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(increment, "offset_increase", String.valueOf(axis));
         switch (axis) {
             case 'X' -> offsetXButton = value;
             case 'Y' -> offsetYButton = value;
@@ -210,25 +221,16 @@ public final class RangeAccelerationConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.fill(0, 0, width, height, 0x33000000);
-        int panelWidth = Math.min(PANEL_WIDTH, width - 12);
-        StretcherScreenStyle.drawPanel(graphics, panelLeft, panelTop, panelWidth, PANEL_HEIGHT);
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 7, panelTop + 24,
-                panelLeft + panelWidth - 7, panelTop + 108);
-        StretcherScreenStyle.drawInset(graphics, panelLeft + 7, panelTop + 109,
-                panelLeft + panelWidth - 7, panelTop + 138);
-        graphics.drawString(font, title, panelLeft + 8, panelTop + 9,
-                StretcherScreenStyle.TEXT_COLOR, false);
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int panelWidth = contentWidth();
+        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 40,
+                panelLeft + panelWidth, panelTop + 108);
+        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 109,
+                panelLeft + panelWidth, panelTop + 138);
         graphics.drawString(font,
                 Component.translatable("gui.useless_stretcher.range.speed",
                         WondrousStaffAcceleration.getSpeed(currentStaff())),
-                panelLeft + 12, panelTop + 29, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                panelLeft + 5, panelTop + 6, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
     }
 
     @Override

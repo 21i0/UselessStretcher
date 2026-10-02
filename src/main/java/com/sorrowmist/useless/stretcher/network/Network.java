@@ -149,6 +149,20 @@ public final class Network {
         }
     }
 
+    public record EntityTimerSettingsPayload(boolean timers, int speed, boolean offhand) implements CustomPacketPayload {
+        public static final Type<EntityTimerSettingsPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "entity_timer_settings"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, EntityTimerSettingsPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, EntityTimerSettingsPayload::timers,
+                        ByteBufCodecs.VAR_INT, EntityTimerSettingsPayload::speed,
+                        ByteBufCodecs.BOOL, EntityTimerSettingsPayload::offhand, EntityTimerSettingsPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public static void sendEntityTimerSettings(boolean timers, int speed, InteractionHand hand) {
+        PacketDistributor.sendToServer(new EntityTimerSettingsPayload(timers, speed, hand == InteractionHand.OFF_HAND));
+    }
+
     /** Staff-only feature toggles edited by the X screen. */
     public record WondrousStaffFeaturesPayload(boolean summonEnabled,
                                                 boolean lootRefresh, boolean offhand)
@@ -279,7 +293,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("5");
+        PayloadRegistrar registrar = event.registrar("6");
         registrar.playToClient(ServerConfigSync.Payload.TYPE, ServerConfigSync.Payload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() ->
                         com.sorrowmist.useless.stretcher.client.StretcherConfigScreen.accept(payload)));
@@ -301,6 +315,15 @@ public final class Network {
                 (payload, context) -> ClientStateReceiver.handleTimeAcceleration(payload));
         registrar.playToServer(WondrousStaffSpeedPayload.TYPE, WondrousStaffSpeedPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSpeed(payload, context)));
+        registrar.playToServer(EntityTimerSettingsPayload.TYPE, EntityTimerSettingsPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (!(context.player() instanceof ServerPlayer player) || !StretcherConfig.serverStaffAcceleration()) return;
+                    ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+                    if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+                    held.set(StretcherComponents.ENTITY_TIMER_MODE.get(), payload.timers());
+                    held.set(StretcherComponents.ENTITY_TIMER_SPEED.get(),
+                            com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration.normalizeSpeed(payload.speed()));
+                }));
         registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
         registrar.playToServer(WondrousStaffSummonPayload.TYPE, WondrousStaffSummonPayload.STREAM_CODEC,

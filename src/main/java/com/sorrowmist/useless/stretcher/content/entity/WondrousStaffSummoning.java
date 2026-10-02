@@ -17,6 +17,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -33,6 +34,15 @@ public final class WondrousStaffSummoning {
     private static final String SUMMONED_BY = "useless_stretcher_summoned_by";
 
     private WondrousStaffSummoning() {
+    }
+
+    /** Registry-only test shared by the client list and the server action. MISC is not
+     * synonymous with non-living: villagers and golems also use that category. */
+    public static boolean canSummonType(EntityType<?> type) {
+        return type != null && type.canSummon() && (type.getCategory() != MobCategory.MISC
+                || type == EntityType.VILLAGER || type == EntityType.WANDERING_TRADER
+                || type == EntityType.IRON_GOLEM || type == EntityType.SNOW_GOLEM
+                || SpawnEggItem.byId(type) != null);
     }
 
     public static void summon(ServerPlayer player, ItemStack staff, List<String> rawIds) {
@@ -59,7 +69,7 @@ public final class WondrousStaffSummoning {
             ResourceLocation id = ResourceLocation.tryParse(rawId);
             if (id == null || !ids.add(id)) continue;
             EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);
-            if (type == null || !type.canSummon() || type.getCategory() == MobCategory.MISC) continue;
+            if (!canSummonType(type)) continue;
 
             BlockPos spawnPos = findSpawnPos(player, spawned);
             if (spawnPos == null) continue;

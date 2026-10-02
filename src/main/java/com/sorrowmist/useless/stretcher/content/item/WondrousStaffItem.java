@@ -65,6 +65,12 @@ public class WondrousStaffItem extends EndlessBeafItem {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) {
             return false;
         }
+        // Acceleration owns machine interaction while enabled.  Do not advertise wrench
+        // abilities to mods that consult NeoForge's ItemAbility API before RightClickBlock.
+        // This complements the event interception without changing the G-menu wrench toggle.
+        if (WondrousStaffAcceleration.isEnabled(stack) && isWrenchAbility(ability)) {
+            return false;
+        }
         // Keep the same mining/tool abilities as the upstream staff.  The acceleration
         // interaction is intercepted by onItemUseFirst/useOn, so exposing these abilities
         // is safe and lets Apotheosis and the newer tool-mode UI classify the staff correctly.

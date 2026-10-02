@@ -122,7 +122,8 @@ public final class RangeNetwork {
     }
 
     public record HistoryEditPayload(UUID id, int speed, int sizeX, int sizeY, int sizeZ,
-                                     int offsetX, int offsetY, int offsetZ) implements CustomPacketPayload {
+                                     int offsetX, int offsetY, int offsetZ,
+                                     boolean entityTimerMode, int entityTimerSpeed) implements CustomPacketPayload {
         public static final Type<HistoryEditPayload> TYPE = RangeNetwork.type("range_history_edit");
         public static final StreamCodec<RegistryFriendlyByteBuf, HistoryEditPayload> STREAM_CODEC =
                 StreamCodec.of(
@@ -135,10 +136,13 @@ public final class RangeNetwork {
                             buf.writeVarInt(value.offsetX);
                             buf.writeVarInt(value.offsetY);
                             buf.writeVarInt(value.offsetZ);
+                            buf.writeBoolean(value.entityTimerMode);
+                            buf.writeVarInt(value.entityTimerSpeed);
                         },
                         buf -> new HistoryEditPayload(buf.readUUID(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
-                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
+                                buf.readBoolean(), buf.readVarInt()));
 
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -173,6 +177,8 @@ public final class RangeNetwork {
                         buf.writeVarInt(field.offsetY());
                         buf.writeVarInt(field.offsetZ());
                         buf.writeUtf(field.name(), 48);
+                        buf.writeBoolean(field.entityTimerMode());
+                        buf.writeVarInt(field.entityTimerSpeed());
                     }
                 },
                 buf -> {
@@ -184,7 +190,8 @@ public final class RangeNetwork {
                                 buf.readUUID(), ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(),
                                 buf.readLong(), buf.readBoolean(), buf.readVarInt(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
-                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readUtf(48)));
+                                buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readUtf(48),
+                                buf.readBoolean(), buf.readVarInt()));
                     }
                     return new HistoryStatePayload(fields);
                 });
@@ -261,9 +268,16 @@ public final class RangeNetwork {
     }
 
     public static void editHistory(UUID id, int speed, int sizeX, int sizeY, int sizeZ,
-                                   int offsetX, int offsetY, int offsetZ) {
+                                   int offsetX, int offsetY, int offsetZ,
+                                   boolean entityTimerMode, int entityTimerSpeed) {
         PacketDistributor.sendToServer(new HistoryEditPayload(id, speed, sizeX, sizeY, sizeZ,
-                offsetX, offsetY, offsetZ));
+                offsetX, offsetY, offsetZ, entityTimerMode, entityTimerSpeed));
+    }
+
+    public static void editHistory(UUID id, int speed, int sizeX, int sizeY, int sizeZ,
+                                   int offsetX, int offsetY, int offsetZ) {
+        editHistory(id, speed, sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ, false,
+                com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration.DEFAULT_SPEED);
     }
 
     public static void renameHistory(UUID id, String name) {
@@ -334,7 +348,7 @@ public final class RangeNetwork {
             marker.sync(field);
             if (!level.addFreshEntity(marker)
                     && result.status() == RangeAccelerationSavedData.PlacementStatus.CREATED) {
-                data.remove(fieldId);
+                data.remove(level.getServer(), fieldId);
                 return;
             }
         }
@@ -414,6 +428,8 @@ public final class RangeNetwork {
         data.editGeometry(player.getServer(), player.getUUID(), payload.id(),
                 payload.speed(), payload.sizeX(), payload.sizeY(), payload.sizeZ(),
                 payload.offsetX(), payload.offsetY(), payload.offsetZ());
+        data.editEntitySettings(player.getServer(), player.getUUID(), payload.id(),
+                payload.entityTimerMode(), payload.entityTimerSpeed());
         sendHistory(player);
     }
 

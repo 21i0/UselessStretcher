@@ -7,6 +7,10 @@ navigation:
 
 # 万象担架附属
 
+本模组界面的操作按钮、滑块、模具勾选和样板获取区均可悬停查看说明。高倍率生物计时器模式需在手杖 X 界面手动选择；默认仍保留原有完整实体 tick 模式。
+
+本模组自有窗口可以拖动标题栏移动，拖动边缘或四角缩放。内容会重新排布，小窗口放不下的内容可滚动查看；右上角叠放方框恢复默认大小和居中，叉号关闭或返回上一层。窗口位置和大小保存在本机，不改变服务器设置、倍率或勾选状态。AE2 指南和无用之物原有 G 界面仍由对应模组管理。
+
 <Row gap="12">
   <ItemImage id="useless_stretcher:omniversal_myriad" scale="3" />
   <ItemImage id="useless_stretcher:useless_stretcher" scale="3" />

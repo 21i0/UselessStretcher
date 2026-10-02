@@ -1,9 +1,11 @@
 package com.sorrowmist.useless.stretcher.content.acceleration;
 
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -12,16 +14,21 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Nameable;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.WeakHashMap;
 
 /** World-owned index: history/reclaim never loads the machine's chunk or stores work on a player. */
 public final class PermanentAccelerationHistory extends SavedData {
     private final Map<UUID, Entry> entries = new LinkedHashMap<>();
+    // Values must not retain the block entity (or its chunk); failures expire with that instance.
+    private final Map<BlockEntity, Boolean> failedNames = new WeakHashMap<>();
 
     public record Entry(UUID id, UUID owner, ResourceLocation dimension, BlockPos pos,
                         String label, boolean reclaimed) {}
@@ -46,14 +53,33 @@ public final class PermanentAccelerationHistory extends SavedData {
         if (isReclaimed(marker.getUUID())) return;
         BlockPos pos = marker.getTargetPos();
         if (pos == null || !level.hasChunkAt(pos)) return;
-        String name = level.getBlockEntity(pos) instanceof Nameable named
-                ? named.getDisplayName().getString() : level.getBlockState(pos).getBlock().getName().getString();
+        String name = machineName(level.getBlockEntity(pos), level.getBlockState(pos).getBlock());
         String label = name + " · x" + marker.getSpeed()
                 + (marker.isIdleThrottleDisabled() ? " · 无休眠降频" : " · 动态降频");
         if (label.length() > 128) label = label.substring(0, 128);
         Entry next = new Entry(marker.getUUID(), marker.getOwnerUuid(), level.dimension().location(),
                 pos.immutable(), label, false);
         if (!next.equals(entries.put(next.id(), next))) setDirty();
+    }
+
+    private String machineName(BlockEntity target, Block block) {
+        if (target instanceof Nameable named && !failedNames.containsKey(target)) {
+            try {
+                String name = named.getDisplayName().getString();
+                if (!name.isBlank()) return name;
+            } catch (RuntimeException | LinkageError failure) {
+                failedNames.put(target, Boolean.TRUE);
+                LogUtils.getLogger().warn("Cannot read acceleration target name for {} at {}; using block name",
+                        BuiltInRegistries.BLOCK.getKey(block), target.getBlockPos(), failure);
+            }
+        }
+        try {
+            String name = block.getName().getString();
+            if (!name.isBlank()) return name;
+        } catch (RuntimeException | LinkageError ignored) {
+            // A display-only addon error must not prevent acceleration or remote reclaim.
+        }
+        return BuiltInRegistries.BLOCK.getKey(block).toString();
     }
 
     public List<Entry> activeEntries(UUID owner) {

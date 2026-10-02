@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.LightningRodBlock;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -46,8 +47,21 @@ public final class WondrousStaffRightClickHandler {
         // acceleration action.  Outside placement mode, an enabled staff owns rod clicks even
         // without Shift so the upstream staff cannot run its lightning-collector action first.
         if (RangeAccelerationSettings.placementMode(stack) && !player.isShiftKeyDown()) return;
-        if (!player.isShiftKeyDown() && !lightningRod) return;
         if (!WondrousStaffAcceleration.isEnabled(stack)) return;
+
+        // The upstream staff only guards the sneaking path.  Wrench implementations commonly
+        // handle an ordinary RightClickBlock event themselves, however, so an enabled
+        // acceleration staff could still dismantle/rotate a machine before its own action ran.
+        // Suppress that path for modded block entities as well; vanilla containers and normal
+        // tool actions remain available.  This deliberately does not add another item tag or
+        // event listener for wrench classification.
+        if (!player.isShiftKeyDown() && !lightningRod) {
+            if (isModdedBlockEntity(event.getLevel().getBlockEntity(event.getPos()))) {
+                event.setCanceled(true);
+                event.setCancellationResult(InteractionResult.SUCCESS);
+            }
+            return;
+        }
         if (RangeAccelerationSettings.placementMode(stack)) {
             // The client sends a dedicated placement packet. The server side of this event only
             // suppresses the machine's normal use and tool actions.
@@ -62,6 +76,10 @@ public final class WondrousStaffRightClickHandler {
         WondrousStaffAcceleration.tryUse(ctx);
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
+    }
+
+    private static boolean isModdedBlockEntity(BlockEntity blockEntity) {
+        return blockEntity != null && !blockEntity.getClass().getName().startsWith("net.minecraft.");
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)

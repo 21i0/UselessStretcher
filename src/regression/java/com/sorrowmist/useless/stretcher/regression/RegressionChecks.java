@@ -100,6 +100,11 @@ public final class RegressionChecks {
             molds(level);
             drops();
             acceleration(level);
+            AccelerationHistoryChecks.run(level);
+            AeAccelerationChecks.run(level);
+            RealAeMachineChecks.run(level);
+            ActivityProbeChecks.run(level);
+            EntityFeatureChecks.run(level);
             lightningRodInteraction(level);
             toolCompatibility();
             lootRefresh(level);
@@ -229,6 +234,12 @@ public final class RegressionChecks {
         MyriadMoldData.writeEnabledMolds(wildcard, Set.of(ResourceLocation.parse("minecraft:iron_ingot")), level);
         var enabled = MoldMatcher.prepare(Map.of(0, wildcard));
         check(enabled.matches(List.of(iron, iron, iron)), "wildcard has unlimited mold semantics");
+        var gold = Ingredient.of(Items.GOLD_INGOT);
+        MyriadMoldData.writeEnabledMolds(wildcard, Set.of(ResourceLocation.parse("minecraft:iron_ingot"),
+                ResourceLocation.parse("minecraft:gold_ingot")), level);
+        var oneOccupiedSlot = MoldMatcher.prepare(Map.of(0, wildcard));
+        check(oneOccupiedSlot.matches(List.of(iron, gold, iron)), "hub virtual molds need no additional empty slots");
+        check(!oneOccupiedSlot.matches(List.of(Ingredient.of(Items.DIAMOND))), "unselected mold cannot be supplied by empty slot");
         check(!empty.matches(List.of(iron)), "prepared snapshot unaffected by later item edit");
         MyriadMoldData.writeEnabledMolds(wildcard, Set.of(), level);
         check(MyriadMoldData.readEnabledMolds(wildcard).isEmpty(), "component cache invalidates on edit");

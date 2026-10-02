@@ -1,6 +1,8 @@
 package com.sorrowmist.useless.stretcher.screen;
 
-import appeng.client.gui.widgets.AE2Button;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
+import com.sorrowmist.useless.stretcher.client.gui.ButtonHelp;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingWindow;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.mold.MoldCatalog;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
@@ -14,7 +16,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -24,10 +25,9 @@ import java.util.Set;
 
 public final class OmniversalMyriadScreen extends AbstractContainerScreen<OmniversalMyriadMenu> {
     private static final int ROW_HEIGHT = 18;
-    private static final int LIST_TOP = 50;
-    private static final int LIST_BOTTOM = 226;
 
     private final BlockPos pos;
+    private final FloatingWindow window = new FloatingWindow("myriad", 310, 265, 260, 160);
     private Map<String, List<MoldCatalog.MoldEntry>> catalog = Map.of();
     private final Set<ResourceLocation> enabled = new LinkedHashSet<>();
     private final Set<ResourceLocation> patternMolds = new LinkedHashSet<>();
@@ -40,6 +40,11 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private boolean aeBound;
     private int scroll;
     private EditBox search;
+    private SelectableAE2Button clearButton;
+    private boolean initialized;
+    private int listTop;
+    private int listBottom;
+    private boolean stackedFooter;
     private MoldCatalog.Builder catalogBuilder;
     private List<Row> rowCache;
     private String fetchProgress = "";
@@ -50,8 +55,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     public OmniversalMyriadScreen(OmniversalMyriadMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.pos = menu.getPos();
-        this.imageWidth = 300;
-        this.imageHeight = 264;
+        this.imageWidth = 310;
+        this.imageHeight = 265;
     }
 
     public boolean matches(BlockPos target) {
@@ -94,26 +99,92 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     }
 
     @Override
-    protected void init() {
-        super.init();
-        this.catalogBuilder = MoldCatalog.start(Minecraft.getInstance().level);
-        this.catalog = catalogBuilder.result();
-        this.rowCache = null;
+    protected void rebuildWidgets() {
+        // Screen clears focus before init when the viewport changes. Reuse the same editor.
+        var focused = getFocused();
+        super.rebuildWidgets();
+        if (focused == null || children().contains(focused)) setFocused(focused);
+    }
 
-        this.search = new EditBox(this.font, leftPos + 8, topPos + 25, 192, 18, Component.empty());
-        this.search.setMaxLength(64);
-        this.search.setResponder(value -> { rowCache = null; scroll = 0; });
-        this.search.setHint(Component.translatable("gui.useless_stretcher.search_hint"));
-        this.search.setTextColor(StretcherScreenStyle.TEXT_COLOR);
-        this.search.setTextColorUneditable(StretcherScreenStyle.MUTED_TEXT_COLOR);
+    @Override
+    protected void init() {
+        boolean searchFocused = search != null && search.isFocused();
+        super.init();
+        window.init(width, height);
+        if (!initialized) {
+            this.catalogBuilder = MoldCatalog.start(Minecraft.getInstance().level);
+            this.catalog = catalogBuilder.result();
+            this.rowCache = null;
+            this.search = new EditBox(this.font, 0, 0, 192, 18, Component.empty());
+            this.search.setMaxLength(64);
+            this.search.setResponder(value -> { rowCache = null; scroll = 0; });
+            this.search.setHint(Component.translatable("gui.useless_stretcher.search_hint"));
+            this.search.setTextColor(StretcherScreenStyle.TEXT_COLOR);
+            this.search.setTextColorUneditable(StretcherScreenStyle.MUTED_TEXT_COLOR);
+            this.clearButton = new SelectableAE2Button(0, 0, 86, 18,
+                    Component.translatable("gui.useless_stretcher.clear"), ignored -> {
+                        patternMolds.clear();
+                        lastPatternToggled = null;
+                        Network.clearPatterns(pos);
+                    });
+            initialized = true;
+            Network.requestState(pos);
+        }
+        applyWindowLayout();
         addRenderableWidget(search);
-        addRenderableWidget(new AE2Button(leftPos + 206, topPos + 25, 86, 18,
-                Component.translatable("gui.useless_stretcher.clear"), ignored -> {
-                    patternMolds.clear();
-                    lastPatternToggled = null;
-                    Network.clearPatterns(pos);
-                }));
-        Network.requestState(pos);
+        addRenderableWidget(clearButton);
+        if (searchFocused) setFocused(search);
+        search.setFocused(searchFocused);
+    }
+
+    private void applyWindowLayout() {
+        leftPos = window.left();
+        topPos = window.top();
+        imageWidth = window.width();
+        imageHeight = window.height();
+        int clearWidth = Math.min(86, Math.max(44, window.bodyWidth() / 3));
+        search.setX(window.bodyLeft());
+        search.setY(window.bodyTop());
+        search.setWidth(Math.max(20, window.bodyWidth() - clearWidth - 6));
+        clearButton.setX(window.bodyLeft() + window.bodyWidth() - clearWidth);
+        clearButton.setY(window.bodyTop());
+        clearButton.setWidth(clearWidth);
+        updateListBounds();
+        window.consumeLayoutChanged();
+    }
+
+    private void updateListBounds() {
+        stackedFooter = font.width(patternCountText()) + font.width(bindingText()) + 14 > window.bodyWidth();
+        listTop = window.bodyTop() + 24;
+        listBottom = Math.max(listTop + ROW_HEIGHT,
+                window.bodyTop() + window.bodyHeight() - (stackedFooter ? 46 : 32));
+    }
+
+    private Component patternCountText() {
+        return Component.translatable("gui.useless_stretcher.patterns", patternsCount);
+    }
+
+    private Component bindingText() {
+        return Component.translatable(aeBound ? "gui.useless_stretcher.ae_bound"
+                : "gui.useless_stretcher.ae_unbound");
+    }
+
+    private int rowLeft() {
+        return window.bodyLeft() + 2;
+    }
+
+    private int rowRight() {
+        return window.bodyLeft() + window.bodyWidth() - 5;
+    }
+
+    private boolean containsList(double mouseX, double mouseY) {
+        return mouseY >= listTop && mouseY < listBottom
+                && mouseX >= rowLeft() && mouseX < rowRight();
+    }
+
+    private void drawClippedText(GuiGraphics graphics, Component text, int x, int y, int maxWidth, int color) {
+        graphics.drawString(font, font.plainSubstrByWidth(text.getString(), Math.max(0, maxWidth)),
+                x, y, color, false);
     }
 
     @Override
@@ -129,6 +200,19 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.render(graphics, mouseX, mouseY, partialTick);
         this.renderTooltip(graphics, mouseX, mouseY);
+        if (!window.capturing() && containsList(mouseX, mouseY)) {
+            int index = (mouseY - listTop + scroll) / ROW_HEIGHT;
+            List<Row> rows = visibleRows();
+            if (index >= 0 && index < rows.size()) {
+                Row row = rows.get(index);
+                boolean patterns = mouseX >= rowRight() - 44;
+                String help = row instanceof HeaderRow
+                        ? patterns ? "mod_patterns" : mouseX >= rowRight() - 66 ? "mod_molds" : "fold_mod"
+                        : patterns ? "fetch_pattern" : "enable_mold";
+                graphics.renderTooltip(font, font.split(ButtonHelp.text(help), 260), mouseX, mouseY);
+            }
+        }
+        window.renderTooltip(graphics, font, mouseX, mouseY);
     }
 
     @Override
@@ -137,24 +221,24 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        StretcherScreenStyle.drawPanel(graphics, leftPos, topPos, imageWidth, imageHeight);
-        graphics.drawString(this.font, title, leftPos + 8, topPos + 8,
-                StretcherScreenStyle.TEXT_COLOR, false);
-        StretcherScreenStyle.drawInset(graphics, leftPos + 7, topPos + LIST_TOP - 1,
-                leftPos + imageWidth - 7, topPos + LIST_BOTTOM + 1);
+        updateListBounds();
+        window.renderFrame(graphics, font, title, mouseX, mouseY);
+        StretcherScreenStyle.drawInset(graphics, window.bodyLeft(), listTop - 1,
+                window.bodyLeft() + window.bodyWidth(), listBottom + 1);
 
-        graphics.drawString(this.font,
-                Component.translatable("gui.useless_stretcher.patterns", patternsCount),
-                leftPos + 8, topPos + LIST_BOTTOM + 7, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        graphics.drawString(this.font,
-                Component.translatable(aeBound ? "gui.useless_stretcher.ae_bound" : "gui.useless_stretcher.ae_unbound"),
-                leftPos + 174, topPos + LIST_BOTTOM + 7,
-                aeBound ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR, false);
+        int bindingWidth = Math.min(window.bodyWidth(), font.width(bindingText()));
+        drawClippedText(graphics, patternCountText(), window.bodyLeft(), listBottom + 7,
+                stackedFooter ? window.bodyWidth() : window.bodyWidth() - bindingWidth - 10,
+                StretcherScreenStyle.SUBTLE_TEXT_COLOR);
+        drawClippedText(graphics, bindingText(),
+                stackedFooter ? window.bodyLeft() : window.bodyLeft() + window.bodyWidth() - bindingWidth,
+                listBottom + (stackedFooter ? 21 : 7), window.bodyWidth(),
+                aeBound ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR);
 
         if (catalogBuilder != null && !catalogBuilder.done()) {
-            graphics.drawString(font, Component.translatable("gui.useless_stretcher.catalog_loading",
-                    catalogBuilder.progress()), leftPos + 12, topPos + LIST_TOP + 8,
-                    StretcherScreenStyle.TEXT_COLOR, false);
+            drawClippedText(graphics, Component.translatable("gui.useless_stretcher.catalog_loading",
+                    catalogBuilder.progress()), rowLeft() + 3, listTop + 8,
+                    rowRight() - rowLeft() - 6, StretcherScreenStyle.TEXT_COLOR);
         }
         if (!fetchProgress.isEmpty()) {
             String key = "failed".equals(fetchProgress) ? "gui.useless_stretcher.fetch_failed"
@@ -163,41 +247,40 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                     : "select".equals(fetchProgress) ? "gui.useless_stretcher.fetch_select"
                     : "gui.useless_stretcher.fetch_progress";
             String value = fetchProgress.startsWith("index:") ? fetchProgress.substring(6) : fetchProgress;
-            graphics.drawString(font, Component.translatable(key, value), leftPos + 8,
-                    topPos + LIST_BOTTOM + 21, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+            drawClippedText(graphics, Component.translatable(key, value), window.bodyLeft(),
+                    listBottom + (stackedFooter ? 35 : 21), window.bodyWidth(),
+                    StretcherScreenStyle.SUBTLE_TEXT_COLOR);
         }
 
         List<Row> rows = visibleRows();
-        int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (LIST_BOTTOM - LIST_TOP));
+        int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (listBottom - listTop));
         if (scroll > maxScroll) scroll = maxScroll;
 
-        graphics.enableScissor(leftPos + 8, topPos + LIST_TOP, leftPos + imageWidth - 8, topPos + LIST_BOTTOM);
+        graphics.enableScissor(window.bodyLeft() + 1, listTop,
+                window.bodyLeft() + window.bodyWidth() - 1, listBottom);
         try {
-            int index = 0;
-            for (Row row : rows) {
-                int y = topPos + LIST_TOP + index * ROW_HEIGHT - scroll;
-                if (y + ROW_HEIGHT < topPos + LIST_TOP || y > topPos + LIST_BOTTOM) {
-                    index++;
-                    continue;
-                }
+            int first = Math.max(0, scroll / ROW_HEIGHT);
+            int end = Math.min(rows.size(), (scroll + listBottom - listTop + ROW_HEIGHT - 1) / ROW_HEIGHT);
+            for (int index = first; index < end; index++) {
+                Row row = rows.get(index);
+                int y = listTop + index * ROW_HEIGHT - scroll;
                 if (row instanceof HeaderRow header) {
                     renderHeader(graphics, header, y, mouseX, mouseY);
                 } else if (row instanceof MoldRow mold) {
                     renderMold(graphics, mold, y, mouseX, mouseY);
                 }
-                index++;
             }
         } finally {
             graphics.disableScissor();
         }
 
         if (maxScroll > 0) {
-            int trackX = leftPos + imageWidth - 11;
-            int trackHeight = LIST_BOTTOM - LIST_TOP - 4;
-            int thumbHeight = Math.max(18, trackHeight * (LIST_BOTTOM - LIST_TOP)
-                    / Math.max(LIST_BOTTOM - LIST_TOP, rows.size() * ROW_HEIGHT));
-            int thumbY = topPos + LIST_TOP + 2 + (trackHeight - thumbHeight) * scroll / maxScroll;
-            graphics.fill(trackX, topPos + LIST_TOP + 2, trackX + 2, topPos + LIST_BOTTOM - 2,
+            int trackX = rowRight() + 1;
+            int trackHeight = listBottom - listTop - 4;
+            int thumbHeight = Math.min(trackHeight, Math.max(18, trackHeight * (listBottom - listTop)
+                    / Math.max(listBottom - listTop, rows.size() * ROW_HEIGHT)));
+            int thumbY = listTop + 2 + (trackHeight - thumbHeight) * scroll / maxScroll;
+            graphics.fill(trackX, listTop + 2, trackX + 2, listBottom - 2,
                     StretcherScreenStyle.SLOT_SHADOW_COLOR);
             graphics.fill(trackX, thumbY, trackX + 2, thumbY + thumbHeight,
                     StretcherScreenStyle.ACTIVE_COLOR);
@@ -206,8 +289,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     private void renderHeader(GuiGraphics graphics, HeaderRow header, int y, int mouseX, int mouseY) {
         boolean expanded = expandedMods.contains(header.sourceId());
-        int rowLeft = leftPos + 9;
-        int rowRight = leftPos + imageWidth - 12;
+        int rowLeft = rowLeft();
+        int rowRight = rowRight();
         boolean hovered = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_HEIGHT;
         graphics.fill(rowLeft, y, rowRight, y + ROW_HEIGHT - 1,
                 hovered ? StretcherScreenStyle.HIGHLIGHT_COLOR : StretcherScreenStyle.SLOT_COLOR);
@@ -230,8 +313,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         boolean fetched = patternMolds.contains(mold.entry().id());
         String query = search == null ? "" : search.getValue().trim();
         boolean highlighted = !query.isEmpty() && matches(mold.entry(), query);
-        int rowLeft = leftPos + 9;
-        int rowRight = leftPos + imageWidth - 12;
+        int rowLeft = rowLeft();
+        int rowRight = rowRight();
         boolean hovered = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_HEIGHT;
         int background = highlighted ? 0xFFFFE3A0
                 : hovered ? StretcherScreenStyle.HIGHLIGHT_COLOR : StretcherScreenStyle.PANEL_COLOR;
@@ -315,26 +398,48 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0) {
+        if (window.mouseClicked(mouseX, mouseY, button)) {
+            if (window.consumeLayoutChanged()) applyWindowLayout();
+            if (window.consumeCloseRequested()) onClose();
+            return true;
+        }
+        // This menu has no slots: frame/outside clicks must never reach container drop handling.
+        if (!window.containsBody(mouseX, mouseY)) return true;
+        if (button == 0 && containsList(mouseX, mouseY)) {
             List<Row> rows = visibleRows();
-            int index = 0;
-            for (Row row : rows) {
-                int y = topPos + LIST_TOP + index * ROW_HEIGHT - scroll;
-                if (mouseY >= topPos + LIST_TOP && mouseY < topPos + LIST_BOTTOM
-                        && mouseX >= leftPos + 9 && mouseX <= leftPos + imageWidth - 12
-                        && mouseY >= y && mouseY < y + ROW_HEIGHT) {
-                    handleClick(row, mouseX, mouseY);
-                    return true;
-                }
-                index++;
+            int index = (int) (mouseY - listTop + scroll) / ROW_HEIGHT;
+            if (index >= 0 && index < rows.size()) {
+                handleClick(rows.get(index), mouseX, mouseY);
+                return true;
             }
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (window.mouseDragged(mouseX, mouseY, button)) {
+            if (window.consumeLayoutChanged()) applyWindowLayout();
+            return true;
+        }
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (window.mouseReleased(button)) return true;
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public void removed() {
+        window.save();
+        super.removed();
+    }
+
     private void handleClick(Row row, double mouseX, double mouseY) {
         if (row instanceof HeaderRow header) {
-            int rowRight = leftPos + imageWidth - 12;
+            int rowRight = rowRight();
             boolean hitPattern = mouseX >= rowRight - 44;
             boolean hitToggle = mouseX >= rowRight - 66 && !hitPattern;
             if (hitPattern) {
@@ -351,7 +456,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 rowCache = null;
             }
         } else if (row instanceof MoldRow mold) {
-            int rowRight = leftPos + imageWidth - 12;
+            int rowRight = rowRight();
             boolean hitPattern = mouseX >= rowRight - 44;
             if (hitPattern) {
                 ResourceLocation id = mold.entry().id();
@@ -438,8 +543,11 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        if (!containsList(mouseX, mouseY) || window.capturing()) {
+            return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        }
         List<Row> rows = visibleRows();
-        int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (LIST_BOTTOM - LIST_TOP));
+        int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (listBottom - listTop));
         scroll = Math.max(0, Math.min(maxScroll, scroll - (int) scrollY * 18));
         return true;
     }

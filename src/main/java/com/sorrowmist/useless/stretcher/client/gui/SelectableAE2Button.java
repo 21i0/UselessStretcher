@@ -10,9 +10,21 @@ import net.minecraft.util.Mth;
 /** AE2-style button with a persistent selected state for mutually exclusive choices. */
 public final class SelectableAE2Button extends AE2Button {
     private boolean selected;
+    private net.minecraft.client.gui.components.Tooltip labelTooltip;
 
     public SelectableAE2Button(int x, int y, int width, int height, Component message, OnPress onPress) {
         super(x, y, width, height, message, onPress);
+        ButtonHelp.automatic(this, message);
+        labelTooltip = getTooltip();
+    }
+
+    @Override public void setMessage(Component message) {
+        super.setMessage(message);
+        // Refresh state-derived help, without replacing explicit contextual tooltips.
+        if (getTooltip() == labelTooltip) {
+            ButtonHelp.automatic(this, message);
+            labelTooltip = getTooltip();
+        }
     }
 
     public void setSelected(boolean selected) {
