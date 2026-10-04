@@ -4,24 +4,27 @@ import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.ButtonHelp;
 import com.sorrowmist.useless.stretcher.client.gui.FloatingWindow;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.search.LocalizedSearchIndex;
 import com.sorrowmist.useless.stretcher.content.mold.MoldCatalog;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.network.Network;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public final class OmniversalMyriadScreen extends AbstractContainerScreen<OmniversalMyriadMenu> {
     private static final int ROW_HEIGHT = 18;
@@ -45,9 +48,17 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private int listTop;
     private int listBottom;
     private boolean stackedFooter;
-    private MoldCatalog.Builder catalogBuilder;
     private List<Row> rowCache;
+    private final Map<MoldCatalog.MoldEntry, LocalizedSearchIndex.Document> searchDocuments = new IdentityHashMap<>();
+    private LocalizedSearchIndex searchIndex;
+    private long searchRevision = -1;
+    private int searchRefreshTicks;
     private String fetchProgress = "";
+    private String catalogProgress = "";
+    private String catalogStatus = "checking";
+    private boolean catalogLoading = true;
+    private final Map<String, List<MoldCatalog.MoldEntry>> receivedCatalog = new TreeMap<>();
+    private int expectedCatalogPart;
     private final List<String> receivedEnabled = new ArrayList<>();
     private final List<String> receivedPatterns = new ArrayList<>();
     private int expectedPart;
@@ -98,6 +109,39 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         receivedPatterns.clear();
     }
 
+    public void onCatalog(Network.MoldCatalogPayload payload) {
+        if (payload.parts() == 0) {
+            catalogStatus = payload.status();
+            catalogLoading = !"failed".equals(payload.status());
+            catalogProgress = payload.progress();
+            return;
+        }
+        if (payload.part() == 0) {
+            receivedCatalog.clear();
+            expectedCatalogPart = 0;
+        }
+        if (payload.part() != expectedCatalogPart || payload.parts() <= 0) return;
+        expectedCatalogPart++;
+        for (int i = 0; i < payload.itemIds().size(); i++) {
+            ResourceLocation id = ResourceLocation.tryParse(payload.itemIds().get(i));
+            if (id == null || !BuiltInRegistries.ITEM.containsKey(id)) continue;
+            var item = BuiltInRegistries.ITEM.get(id);
+            String source = payload.sourceIds().get(i);
+            var stack = new net.minecraft.world.item.ItemStack(item);
+            receivedCatalog.computeIfAbsent(source, ignored -> new ArrayList<>())
+                    .add(new MoldCatalog.MoldEntry(source, id, stack));
+        }
+        if (payload.part() + 1 < payload.parts()) return;
+        Map<String, List<MoldCatalog.MoldEntry>> completed = new TreeMap<>();
+        receivedCatalog.forEach((source, entries) -> completed.put(source, List.copyOf(entries)));
+        catalog = java.util.Collections.unmodifiableMap(completed);
+        receivedCatalog.clear();
+        rebuildSearchDocuments();
+        catalogLoading = false;
+        catalogProgress = "";
+        catalogStatus = "done";
+    }
+
     @Override
     protected void rebuildWidgets() {
         // Screen clears focus before init when the viewport changes. Reuse the same editor.
@@ -112,8 +156,6 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         super.init();
         window.init(width, height);
         if (!initialized) {
-            this.catalogBuilder = MoldCatalog.start(Minecraft.getInstance().level);
-            this.catalog = catalogBuilder.result();
             this.rowCache = null;
             this.search = new EditBox(this.font, 0, 0, 192, 18, Component.empty());
             this.search.setMaxLength(64);
@@ -128,6 +170,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                         Network.clearPatterns(pos);
                     });
             initialized = true;
+            Network.requestMoldCatalog(pos);
             Network.requestState(pos);
         }
         applyWindowLayout();
@@ -142,7 +185,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         topPos = window.top();
         imageWidth = window.width();
         imageHeight = window.height();
-        int clearWidth = Math.min(86, Math.max(44, window.bodyWidth() / 3));
+        int clearWidth = Math.min(76, Math.max(44, window.bodyWidth() / 4));
         search.setX(window.bodyLeft());
         search.setY(window.bodyTop());
         search.setWidth(Math.max(20, window.bodyWidth() - clearWidth - 6));
@@ -155,9 +198,9 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
 
     private void updateListBounds() {
         stackedFooter = font.width(patternCountText()) + font.width(bindingText()) + 14 > window.bodyWidth();
-        listTop = window.bodyTop() + 24;
+        listTop = window.bodyTop() + (catalogLoading || "failed".equals(catalogStatus) ? 48 : 24);
         listBottom = Math.max(listTop + ROW_HEIGHT,
-                window.bodyTop() + window.bodyHeight() - (stackedFooter ? 46 : 32));
+                window.bodyTop() + window.bodyHeight() - (stackedFooter ? 50 : 36));
     }
 
     private Component patternCountText() {
@@ -190,8 +233,9 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     @Override
     protected void containerTick() {
         super.containerTick();
-        if (catalogBuilder != null && !catalogBuilder.done() && catalogBuilder.advance()) {
-            catalog = catalogBuilder.result();
+        if (searchIndex != LocalizedSearchIndex.current()) rebuildSearchDocuments();
+        if (++searchRefreshTicks % 5 == 0 && searchRevision != searchIndex.revision()) {
+            searchRevision = searchIndex.revision();
             rowCache = null;
         }
     }
@@ -235,10 +279,17 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                 listBottom + (stackedFooter ? 21 : 7), window.bodyWidth(),
                 aeBound ? StretcherScreenStyle.SUCCESS_COLOR : StretcherScreenStyle.MUTED_TEXT_COLOR);
 
-        if (catalogBuilder != null && !catalogBuilder.done()) {
-            drawClippedText(graphics, Component.translatable("gui.useless_stretcher.catalog_loading",
-                    catalogBuilder.progress()), rowLeft() + 3, listTop + 8,
+        if (catalogLoading || "failed".equals(catalogStatus)) {
+            String key = switch (catalogStatus) {
+                case "waiting" -> "gui.useless_stretcher.catalog_waiting";
+                case "failed" -> "gui.useless_stretcher.catalog_failed";
+                case "checking" -> "gui.useless_stretcher.catalog_checking";
+                default -> "gui.useless_stretcher.catalog_loading";
+            };
+            drawClippedText(graphics, Component.translatable(key,
+                    catalogProgress), rowLeft() + 3, window.bodyTop() + 27,
                     rowRight() - rowLeft() - 6, StretcherScreenStyle.TEXT_COLOR);
+            drawProgressBar(graphics, catalogProgress, window.bodyTop() + 39);
         }
         if (!fetchProgress.isEmpty()) {
             String key = "failed".equals(fetchProgress) ? "gui.useless_stretcher.fetch_failed"
@@ -250,6 +301,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
             drawClippedText(graphics, Component.translatable(key, value), window.bodyLeft(),
                     listBottom + (stackedFooter ? 35 : 21), window.bodyWidth(),
                     StretcherScreenStyle.SUBTLE_TEXT_COLOR);
+            drawProgressBar(graphics, value, listBottom + (stackedFooter ? 46 : 32));
         }
 
         List<Row> rows = visibleRows();
@@ -287,6 +339,23 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         }
     }
 
+    private void drawProgressBar(GuiGraphics graphics, String value, int y) {
+        int left = window.bodyLeft();
+        int width = window.bodyWidth();
+        graphics.fill(left, y, left + width, y + 3, StretcherScreenStyle.SLOT_SHADOW_COLOR);
+        String[] values = value.split("/", 2);
+        if (values.length != 2) return;
+        try {
+            long completed = Long.parseLong(values[0]);
+            long total = Long.parseLong(values[1]);
+            if (total <= 0) return;
+            int filled = (int) (width * Math.clamp((double) completed / total, 0.0D, 1.0D));
+            graphics.fill(left, y, left + filled, y + 3, StretcherScreenStyle.ACTIVE_COLOR);
+        } catch (NumberFormatException ignored) {
+            // Non-numeric statuses have a label but no misleading completion percentage.
+        }
+    }
+
     private void renderHeader(GuiGraphics graphics, HeaderRow header, int y, int mouseX, int mouseY) {
         boolean expanded = expandedMods.contains(header.sourceId());
         int rowLeft = rowLeft();
@@ -311,8 +380,8 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private void renderMold(GuiGraphics graphics, MoldRow mold, int y, int mouseX, int mouseY) {
         boolean on = enabled.contains(mold.entry().id());
         boolean fetched = patternMolds.contains(mold.entry().id());
-        String query = search == null ? "" : search.getValue().trim();
-        boolean highlighted = !query.isEmpty() && matches(mold.entry(), query);
+        var query = LocalizedSearchIndex.Query.parse(search == null ? "" : search.getValue());
+        boolean highlighted = !query.empty() && query.matches(searchDocuments.get(mold.entry()));
         int rowLeft = rowLeft();
         int rowRight = rowRight();
         boolean hovered = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_HEIGHT;
@@ -365,15 +434,16 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     }
 
     private List<Row> visibleRows() {
+        if (searchIndex != LocalizedSearchIndex.current()) rebuildSearchDocuments();
         if (rowCache != null) return rowCache;
-        String query = search == null ? "" : search.getValue().trim();
-        boolean searching = !query.isEmpty();
+        var query = LocalizedSearchIndex.Query.parse(search == null ? "" : search.getValue());
+        boolean searching = !query.empty();
         List<Row> rows = new ArrayList<>();
         for (Map.Entry<String, List<MoldCatalog.MoldEntry>> entry : catalog.entrySet()) {
             String modId = entry.getKey();
             List<MoldCatalog.MoldEntry> filtered = new ArrayList<>();
             for (MoldCatalog.MoldEntry mold : entry.getValue()) {
-                if (matches(mold, query)) filtered.add(mold);
+                if (query.empty() || query.matches(searchDocuments.get(mold))) filtered.add(mold);
             }
             if (filtered.isEmpty()) continue;
             rows.add(new HeaderRow(modId, filtered));
@@ -385,15 +455,16 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         return rowCache;
     }
 
-    private static boolean matches(MoldCatalog.MoldEntry mold, String query) {
-        if (query == null || query.isEmpty()) return true;
-        if (query.startsWith("@")) {
-            String mod = query.substring(1).toLowerCase(java.util.Locale.ROOT);
-            return mold.sourceId().toLowerCase(java.util.Locale.ROOT).contains(mod);
+    private void rebuildSearchDocuments() {
+        searchIndex = LocalizedSearchIndex.current();
+        searchDocuments.clear();
+        for (var molds : catalog.values()) {
+            for (var mold : molds) {
+                searchDocuments.put(mold, searchIndex.document(mold.displayName(), mold.id().toString(), mold.sourceId()));
+            }
         }
-        String lower = query.toLowerCase(java.util.Locale.ROOT);
-        return mold.displayName().toLowerCase(java.util.Locale.ROOT).contains(lower)
-                || mold.sourceId().toLowerCase(java.util.Locale.ROOT).contains(lower);
+        searchRevision = searchIndex.revision();
+        rowCache = null;
     }
 
     @Override

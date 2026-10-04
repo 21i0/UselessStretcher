@@ -7,6 +7,7 @@ import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
 import com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem;
+import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
@@ -48,7 +49,8 @@ public final class WondrousStaffHighlight {
         Player player = minecraft.player;
         if (player == null || minecraft.level == null) return;
         ItemStack held = findHeldStaff(player);
-        if (held.isEmpty()) return;
+        ItemStack apotheosisStaff = findHeldStaffForApotheosis(player);
+        if (held.isEmpty() && apotheosisStaff.isEmpty()) return;
 
         boolean seeThrough = StretcherConfig.highlightSeeThrough();
         Camera camera = event.getCamera();
@@ -56,11 +58,35 @@ public final class WondrousStaffHighlight {
         PoseStack poseStack = event.getPoseStack();
         VertexConsumer quads = minecraft.renderBuffers().bufferSource().getBuffer(RenderType.debugQuads());
 
-        if (minecraft.hitResult instanceof EntityHitResult hit
+        if (!held.isEmpty() && minecraft.hitResult instanceof EntityHitResult hit
                 && hit.getEntity() instanceof AgeableMob ageable) {
             drawSolidOutline(poseStack, quads, ageable.getBoundingBox().inflate(0.05D), camPos,
                     0.0F, 1.0F, 0.4F, 0.9F, seeThrough);
         }
+
+        if (StretcherConfig.enableApotheosisCompat() && ApotheosisStaffSettings.isEnchantingAvailable()
+                && !apotheosisStaff.isEmpty() && ApotheosisStaffSettings.selectionMode(apotheosisStaff)
+                && minecraft.hitResult instanceof net.minecraft.world.phys.BlockHitResult hit
+                && ApotheosisStaffSettings.isTable(minecraft.level.getBlockState(hit.getBlockPos()))) {
+            drawSolidOutline(poseStack, quads, new AABB(hit.getBlockPos()).inflate(0.025D), camPos,
+                    0.18F, 0.42F, 1.0F, 1.0F, seeThrough);
+        }
+
+        if (StretcherConfig.enableApotheosisCompat() && ApotheosisStaffSettings.isEnchantingAvailable()
+                && !apotheosisStaff.isEmpty()) {
+            for (var table : ApotheosisClientState.tables(minecraft.level.dimension().location())) {
+                if (table.distSqr(player.blockPosition()) > 64.0D * 64.0D
+                        || !minecraft.level.hasChunkAt(table)
+                        || !ApotheosisStaffSettings.isTable(minecraft.level.getBlockState(table))) continue;
+                if (ApotheosisStaffSettings.selectionMode(apotheosisStaff)
+                        && minecraft.hitResult instanceof net.minecraft.world.phys.BlockHitResult hit
+                        && hit.getBlockPos().equals(table)) continue;
+                drawSolidOutline(poseStack, quads, new AABB(table).inflate(0.025D), camPos,
+                        0.18F, 0.42F, 1.0F, 1.0F, seeThrough);
+            }
+        }
+
+        if (held.isEmpty()) return;
 
         List<WondrousStaffAccelerationEntity> machines = minecraft.level.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class,
@@ -81,6 +107,16 @@ public final class WondrousStaffHighlight {
         ItemStack offHand = player.getOffhandItem();
         return offHand.getItem() instanceof WondrousStaffItem
                 && WondrousStaffAcceleration.isEnabled(offHand) ? offHand : ItemStack.EMPTY;
+    }
+
+    private static ItemStack findHeldStaffForApotheosis(Player player) {
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
+        if (main.getItem() instanceof WondrousStaffItem && ApotheosisStaffSettings.selectionMode(main)) return main;
+        if (off.getItem() instanceof WondrousStaffItem && ApotheosisStaffSettings.selectionMode(off)) return off;
+        if (main.getItem() instanceof WondrousStaffItem) return main;
+        return off.getItem() instanceof WondrousStaffItem
+                ? off : ItemStack.EMPTY;
     }
 
     static void drawSolidOutline(PoseStack poseStack, VertexConsumer quads, AABB box, Vec3 camPos,

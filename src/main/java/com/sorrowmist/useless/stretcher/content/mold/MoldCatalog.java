@@ -16,6 +16,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.WeakHashMap;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 
 /** Incremental UI catalog; repeated EIO/JDTE molds are inspected once per recipe snapshot/source. */
 public final class MoldCatalog {
@@ -38,6 +42,26 @@ public final class MoldCatalog {
             CACHE.put(level.getRecipeManager(), cached);
         }
         return cached;
+    }
+
+    /** Lightweight persisted-cache key; the recipe catalog identity already includes recipe inputs. */
+    public static String fingerprint(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            for (var entry : recipes) {
+                update(digest, entry.sourceId());
+                update(digest, entry.identity().recipeId().toString());
+                update(digest, entry.identity().fingerprint());
+            }
+            return HexFormat.of().formatHex(digest.digest());
+        } catch (NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("SHA-256 is unavailable", exception);
+        }
+    }
+
+    private static void update(MessageDigest digest, String value) {
+        digest.update(value.getBytes(StandardCharsets.UTF_8));
+        digest.update((byte) 0);
     }
 
     public static final class Builder {

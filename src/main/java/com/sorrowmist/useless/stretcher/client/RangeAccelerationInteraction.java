@@ -26,6 +26,9 @@ public final class RangeAccelerationInteraction {
 
         ItemStack staff = event.getItemStack();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        if (com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.selectionMode(staff)
+                && com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.isTable(
+                        event.getLevel().getBlockState(event.getPos()))) return;
 
         if (RangeAccelerationSettings.filterMarkingMode(staff)) {
             if (WondrousStaffAcceleration.isValidTarget(event.getLevel(), event.getPos())) {

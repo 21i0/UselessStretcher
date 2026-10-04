@@ -11,28 +11,20 @@ import java.util.List;
  * Useless Mod versions. Reflection keeps the addon loadable with older supported base jars.
  */
 final class RecipeCatalogAccess {
-    private static final Method ENTRIES_IF_READY = find("entriesIfReady", Level.class);
-    private static final Method IS_READY = find("isReady", Level.class);
+    private static final Reader READER = Reader.find(AlloyFurnaceRecipeCatalog.class, Level.class);
     private static final Method PREWARM_ASYNC = find("prewarmAsync", Level.class);
+    private static final Method GENERATION = find("generation");
 
     private RecipeCatalogAccess() {
     }
 
     static Snapshot read(Level level) {
         if (level == null) return new Snapshot(List.of(), true);
-        if (ENTRIES_IF_READY == null || IS_READY == null) {
-            // Old base versions have no non-blocking API; preserve their established behavior.
-            return new Snapshot(AlloyFurnaceRecipeCatalog.entries(level), true);
-        }
         try {
-            boolean ready = (boolean) IS_READY.invoke(null, level);
-            @SuppressWarnings("unchecked")
-            List<AlloyFurnaceRecipeCatalog.Entry> entries =
-                    (List<AlloyFurnaceRecipeCatalog.Entry>) ENTRIES_IF_READY.invoke(null, level);
-            return new Snapshot(entries, ready);
+            return READER.read(level);
         } catch (ReflectiveOperationException | RuntimeException exception) {
-            // A mismatched optional base build should not make the storage block unusable.
-            return new Snapshot(AlloyFurnaceRecipeCatalog.entries(level), true);
+            // Report an incompatible API as an error, not an infinitely pending build.
+            throw new IllegalStateException("Cannot read the base recipe catalog without rebuilding it", exception);
         }
     }
 
@@ -45,11 +37,65 @@ final class RecipeCatalogAccess {
         }
     }
 
+    static long generation() {
+        if (GENERATION == null) return 0L;
+        try {
+            return ((Number) GENERATION.invoke(null)).longValue();
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            return 0L;
+        }
+    }
+
     private static Method find(String name, Class<?>... parameterTypes) {
         try {
             return AlloyFurnaceRecipeCatalog.class.getMethod(name, parameterTypes);
         } catch (NoSuchMethodException ignored) {
             return null;
+        }
+    }
+
+    /** 2.4.5.x retains the non-blocking snapshot internally but omits its public wrappers. */
+    static final class Reader {
+        private final Method ready;
+        private final Method snapshot;
+        private final Method entries;
+
+        private Reader(Method ready, Method snapshot, Method entries) {
+            this.ready = ready;
+            this.snapshot = snapshot;
+            this.entries = entries;
+        }
+
+        static Reader find(Class<?> catalogClass, Class<?> levelClass) {
+            try {
+                return new Reader(catalogClass.getMethod("isReady", levelClass), null,
+                        catalogClass.getMethod("entriesIfReady", levelClass));
+            } catch (NoSuchMethodException ignored) {
+                try {
+                    Method snapshot = catalogClass.getDeclaredMethod("snapshotIfReady", levelClass);
+                    Method entries = snapshot.getReturnType().getDeclaredMethod("entries");
+                    if (snapshot.trySetAccessible() && entries.trySetAccessible()) {
+                        return new Reader(null, snapshot, entries);
+                    }
+                } catch (ReflectiveOperationException | RuntimeException ignoredPrivateApi) {
+                    // No synchronous entries(Level) fallback: it can freeze a large modpack.
+                }
+                return new Reader(null, null, null);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        Snapshot read(Object level) throws ReflectiveOperationException {
+            if (entries == null) throw new NoSuchMethodException("No non-blocking recipe catalog API");
+            if (snapshot != null) {
+                Object value = snapshot.invoke(null, level);
+                return value == null ? new Snapshot(List.of(), false)
+                        : new Snapshot((List<AlloyFurnaceRecipeCatalog.Entry>) entries.invoke(value), true);
+            }
+            if (!(boolean) ready.invoke(null, level)) return new Snapshot(List.of(), false);
+            var values = (List<AlloyFurnaceRecipeCatalog.Entry>) entries.invoke(null, level);
+            return (boolean) ready.invoke(null, level) ? new Snapshot(values, true)
+                    : new Snapshot(List.of(), false);
         }
     }
 

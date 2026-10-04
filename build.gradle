@@ -14,6 +14,7 @@ group = mod_group_id
 
 repositories {
     maven { name = 'Modmaven'; url = uri('https://modmaven.dev/') }
+    maven { name = 'Shadowsoffire'; url = uri('https://maven.shadowsoffire.dev/releases') }
     maven { name = 'cursemaven'; url = uri('https://www.cursemaven.com') }
     mavenCentral()
 }
@@ -107,4 +108,5 @@ dependencies {
     // for older pack references without allowing Gradle to select its older classpath.
     compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'],
             excludes: ['useless_mod-1.21.1-2.3.6.1.jar'])
+    compileOnly('dev.shadowsoffire:ApothicEnchanting:1.21.1-1.6.2')
 }

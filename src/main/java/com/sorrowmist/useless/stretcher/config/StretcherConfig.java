@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.config;
 
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public final class StretcherConfig {
     public static final ModConfigSpec.DoubleValue SERVER_STAFF_LEAF_DROP_PROBABILITY;
     public static final ModConfigSpec.BooleanValue SERVER_STAFF_SUMMON;
     public static final ModConfigSpec.BooleanValue SERVER_STAFF_LOOT_REFRESH;
+    public static final ModConfigSpec.BooleanValue SERVER_TIME_STOP;
+    public static final ModConfigSpec.BooleanValue SERVER_APOTHEOSIS_COMPAT;
     public static final ModConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> SERVER_DIMENSION_FLOOR_BLACKLIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> SERVER_DIMENSION_FLOOR_WHITELIST;
@@ -43,6 +46,10 @@ public final class StretcherConfig {
                 .comment("服务器是否允许时间流逝回收器远程管理和回收。")
                 .translation("useless_stretcher.configuration.server.remote_reclaimer")
                 .define("remote_reclaimer", true);
+        SERVER_TIME_STOP = BUILDER
+                .comment("是否允许手杖使用一次性时间暂停。每次启动固定暂停 12 秒，结束后自动恢复。")
+                .translation("useless_stretcher.configuration.server.time_stop")
+                .define("time_stop", true);
         BUILDER.pop();
 
         BUILDER.translation("useless_stretcher.configuration.highlight").push("highlight");
@@ -90,6 +97,18 @@ public final class StretcherConfig {
                 .translation("useless_stretcher.configuration.loot_refresh.enable")
                 .define("enable", false);
         BUILDER.pop();
+
+        if (ModList.get().isLoaded("apotheosis")) {
+            BUILDER.translation("useless_stretcher.configuration.apotheosis").push("apotheosis");
+            SERVER_APOTHEOSIS_COMPAT = BUILDER
+                    .comment("是否允许手杖修改 Apotheosis 世界等级并为已标记的附魔台添加属性。默认关闭。",
+                            "需要 Apotheosis 与 Apothic Enchanting。关闭后已保存的附魔台数据保留，但不参与附魔计算。")
+                    .translation("useless_stretcher.configuration.apotheosis.enable")
+                    .define("enable", false);
+            BUILDER.pop();
+        } else {
+            SERVER_APOTHEOSIS_COMPAT = null;
+        }
 
         BUILDER.translation("useless_stretcher.configuration.staff_leaf_drop").push("staff_leaf_drop");
         SERVER_STAFF_LEAF_DROP = BUILDER
@@ -169,6 +188,14 @@ public final class StretcherConfig {
         return value(SERVER_STAFF_LOOT_REFRESH);
     }
 
+    public static boolean hasApotheosisConfig() {
+        return SERVER_APOTHEOSIS_COMPAT != null;
+    }
+
+    public static boolean enableApotheosisCompat() {
+        return SERVER_APOTHEOSIS_COMPAT != null && value(SERVER_APOTHEOSIS_COMPAT);
+    }
+
     public static boolean serverStaffAcceleration() {
         return value(SERVER_STAFF_ACCELERATION);
     }
@@ -179,6 +206,10 @@ public final class StretcherConfig {
 
     public static boolean serverRemoteReclaimer() {
         return value(SERVER_REMOTE_RECLAIMER);
+    }
+
+    public static boolean serverTimeStop() {
+        return value(SERVER_TIME_STOP);
     }
 
     /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */

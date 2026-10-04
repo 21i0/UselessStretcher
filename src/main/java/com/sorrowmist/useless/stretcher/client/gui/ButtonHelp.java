@@ -36,10 +36,13 @@ public final class ButtonHelp {
                 case "gui.useless_stretcher.reclaimer.category_count" -> "category";
                 case "gui.useless_stretcher.reclaimer.refresh" -> "refresh";
                 case "gui.useless_stretcher.staff_summon.open" -> "summon_open";
+                case "gui.useless_stretcher.staff_apotheosis.open" -> "apotheosis_open";
                 case "gui.useless_stretcher.staff_config.loot_refresh" -> "loot";
                 case "gui.useless_stretcher.staff_config.loot_refresh_disabled", "gui.useless_stretcher.staff_config.summon_disabled",
-                        "gui.useless_stretcher.staff_summon.disabled" -> "disabled";
-                case "gui.useless_stretcher.staff_summon.mode" -> "summon_mode";
+                        "gui.useless_stretcher.staff_summon.disabled",
+                        "gui.useless_stretcher.staff_apotheosis.disabled",
+                        "gui.useless_stretcher.staff_apotheosis.missing_enchanting" -> "disabled";
+                case "gui.useless_stretcher.staff_summon.mode", "gui.useless_stretcher.staff_summon.mode_short" -> "summon_mode";
                 case "gui.useless_stretcher.staff_summon.select_visible" -> "select_visible";
                 case "gui.useless_stretcher.staff_summon.clear" -> "clear_selection";
                 case "gui.useless_stretcher.staff_summon.summon" -> "summon";

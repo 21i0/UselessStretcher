@@ -33,6 +33,19 @@ public final class WondrousStaffRightClickHandler {
         Player player = event.getEntity();
         ItemStack stack = event.getItemStack();
         if (stack.getItem() != ModItems.WONDROUS_STAFF.get()) return;
+        if (com.sorrowmist.useless.stretcher.config.StretcherConfig.enableApotheosisCompat()
+                && com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.isEnchantingAvailable()
+                && com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.selectionMode(stack)
+                && com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.isTable(
+                        event.getLevel().getBlockState(event.getPos()))) {
+            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings.markTable(
+                        serverPlayer, event.getHand(), event.getPos());
+            }
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            return;
+        }
         if (RangeAccelerationSettings.filterMarkingMode(stack)) {
             // The client sends a dedicated filter packet. The logical server must suppress any
             // vanilla block use that still arrives while marking is active.

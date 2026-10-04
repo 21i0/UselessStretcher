@@ -35,5 +35,6 @@ public final class ClientSetup {
     @SubscribeEvent
     public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
         event.register(StretcherKeyBindings.WONDROUS_STAFF_MODE);
+        event.register(StretcherKeyBindings.WONDROUS_STAFF_TIME_STOP);
     }
 }

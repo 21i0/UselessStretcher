@@ -5,6 +5,7 @@ import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
@@ -28,6 +29,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
     private SelectableAE2Button accelerationButton;
     private SelectableAE2Button lootRefreshButton;
     private SelectableAE2Button summonOpenButton;
+    private SelectableAE2Button apotheosisOpenButton;
     private PlainTextButton extrasFoldText;
     private int panelLeft;
     private int panelTop;
@@ -41,7 +43,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
     private int speedTop, speedHeight, modeTop, modeHeight, featuresTop, featuresHeight;
 
     public WondrousStaffConfigScreen(InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_config.title"), "staff", 282, 310, 244, 150);
+        super(Component.translatable("gui.useless_stretcher.staff_config.title"), "staff", 310, 250, 244, 150);
         this.hand = hand;
     }
 
@@ -88,11 +90,11 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         String[] modeKeys = {
                 "gui.useless_stretcher.mode_normal",
                 "gui.useless_stretcher.mode_permanent",
-                "gui.useless_stretcher.mode_permanent_no_throttle"
+                "gui.useless_stretcher.mode_no_throttle_short"
         };
         modeTop = speedTop + speedHeight + 4;
-        int modeColumns = cardWidth >= 490 ? 3 : 1;
-        modeHeight = 23 + (3 / modeColumns) * 20;
+        int modeColumns = 3;
+        modeHeight = 43;
         int modeButtonWidth = (cardWidth - 10 - (modeColumns - 1) * gap) / modeColumns;
         for (int mode = 0; mode < modeKeys.length; mode++) {
             int value = mode;
@@ -101,14 +103,18 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                     modeTop + 18 + (mode / modeColumns) * 20, modeButtonWidth, 17,
                     Component.translatable(modeKeys[mode]), ignored -> selectMode(value)));
             modeButtons.add(new ChoiceButton(mode, button));
+            com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(button,
+                    mode == 0 ? "normal" : mode == 1 ? "permanent" : "no_throttle");
         }
         Component foldText = Component.translatable(extrasCollapsed
                 ? "gui.useless_stretcher.staff_summon.expand"
                 : "gui.useless_stretcher.staff_summon.collapse");
         int foldWidth = font.width(foldText);
         featuresTop = modeTop + modeHeight + 4;
-        featuresHeight = extrasCollapsed ? 42 : 83;
-        addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, cardWidth - foldWidth - 20, 17,
+        boolean showApotheosis = StretcherConfig.hasApotheosisConfig();
+        int featureWidth = (cardWidth - 13) / 2;
+        featuresHeight = extrasCollapsed ? 42 : 84;
+        addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, featureWidth, 17,
                 Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
                 ignored -> minecraft.setScreen(new EntityAccelerationConfigScreen(this, hand))))
                 .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
@@ -119,15 +125,24 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(extrasFoldText, "fold");
         if (!extrasCollapsed) {
             lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
-                    cardLeft + 5, featuresTop + 39, cardWidth - 10, 17,
+                    cardLeft + 5, featuresTop + 39, featureWidth, 17,
                     lootRefreshMessage(), ignored -> toggleLootRefresh()));
             summonOpenButton = addRenderableWidget(new SelectableAE2Button(
-                    cardLeft + 5, featuresTop + 60, cardWidth - 10, 17,
+                    cardLeft + 8 + featureWidth, featuresTop + 39, featureWidth, 17,
                     summonOpenMessage(),
                     ignored -> minecraft.setScreen(new WondrousStaffSummonScreen(this, hand))));
+            if (showApotheosis) {
+                apotheosisOpenButton = addRenderableWidget(new SelectableAE2Button(
+                        cardLeft + 5, featuresTop + 60, featureWidth, 17,
+                        apotheosisOpenMessage(), ignored -> minecraft.setScreen(
+                                new WondrousStaffApotheosisScreen(this, hand))));
+            } else {
+                apotheosisOpenButton = null;
+            }
         } else {
             lootRefreshButton = null;
             summonOpenButton = null;
+            apotheosisOpenButton = null;
         }
 
         int footerWidth = (cardWidth - 3) / 2;
@@ -225,6 +240,13 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                     ? summonOpenMessage()
                     : Component.translatable("gui.useless_stretcher.staff_summon.disabled"));
         }
+        if (apotheosisOpenButton != null) {
+            boolean configEnabled = StretcherConfig.enableApotheosisCompat();
+            apotheosisOpenButton.active = configEnabled && ApotheosisStaffSettings.isApotheosisLoaded();
+            apotheosisOpenButton.setMessage(configEnabled
+                    ? apotheosisOpenMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_apotheosis.disabled"));
+        }
     }
 
     @Override
@@ -242,6 +264,10 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
 
     private Component summonOpenMessage() {
         return Component.translatable("gui.useless_stretcher.staff_summon.open");
+    }
+
+    private Component apotheosisOpenMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_apotheosis.open");
     }
 
     private Component lootRefreshMessage() {

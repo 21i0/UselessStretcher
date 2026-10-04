@@ -102,8 +102,9 @@ public final class ReclaimerScreen extends FloatingScreen {
             for (int i = 0; i < 2; i++) {
                 boolean ranges = i == 1;
                 long count = owned.stream().filter(entry -> entry.range() == ranges).count();
-                addRenderableWidget(new SelectableAE2Button(left + 4, top + LIST_TOP + i * ROW_HEIGHT + 3,
-                        panelWidth - 8, 20, Component.translatable("gui.useless_stretcher.reclaimer.category_count", category(ranges), count),
+                int categoryWidth = (panelWidth - 11) / 2;
+                addRenderableWidget(new SelectableAE2Button(left + 4 + i * (categoryWidth + 3), top + LIST_TOP + 3,
+                        categoryWidth, 20, Component.translatable("gui.useless_stretcher.reclaimer.category_count", category(ranges), count),
                         ignored -> {
                             range = ranges;
                             targets = byOwner.getOrDefault(selectedOwner, List.of()).stream()

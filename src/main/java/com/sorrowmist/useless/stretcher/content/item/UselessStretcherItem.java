@@ -15,6 +15,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,6 +53,8 @@ public final class UselessStretcherItem extends Item {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_full")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_repository")
+                .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
     }
 
@@ -62,6 +66,15 @@ public final class UselessStretcherItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         return handleUse(context);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (!player.isShiftKeyDown()) {
+            if (level.isClientSide) Network.requestStretcherPatternPage(hand, 0);
+            return InteractionResultHolder.success(player.getItemInHand(hand));
+        }
+        return super.use(level, player, hand);
     }
 
     private InteractionResult handleUse(UseOnContext context) {

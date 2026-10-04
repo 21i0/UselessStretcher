@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.client;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.search.LocalizedSearchIndex;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
@@ -24,7 +25,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 /** Searchable, mod-grouped entity selector for the staff summon action. */
@@ -36,7 +36,10 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
 
     private final Screen parent;
     private final InteractionHand hand;
-    private final List<Entry> entries;
+    private List<Entry> entries;
+    private LocalizedSearchIndex searchIndex;
+    private long searchRevision;
+    private int searchRefreshTicks;
     private final Set<ResourceLocation> selected = new HashSet<>();
     private final Set<String> expandedMods = new LinkedHashSet<>();
     private final List<Row> rows = new ArrayList<>();
@@ -58,6 +61,8 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
         this.parent = parent;
         this.hand = hand;
         this.entries = SummonCatalog.entries();
+        this.searchIndex = LocalizedSearchIndex.current();
+        this.searchRevision = searchIndex.revision();
         rebuildRows("");
     }
 
@@ -243,6 +248,15 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
     @Override
     public void tick() {
         super.tick();
+        if (searchIndex != LocalizedSearchIndex.current()) {
+            searchIndex = LocalizedSearchIndex.current();
+            entries = SummonCatalog.entries();
+            rebuildRows(searchBox == null ? "" : searchBox.getValue());
+            searchRevision = searchIndex.revision();
+        } else if (++searchRefreshTicks % 5 == 0 && searchRevision != searchIndex.revision()) {
+            searchRevision = searchIndex.revision();
+            if (searchBox != null && !searchBox.getValue().isBlank()) rebuildRows(searchBox.getValue());
+        }
         enabledButton.active = StretcherConfig.enableStaffSummon();
         enabledButton.setSelected(isEnabled());
         enabledButton.setMessage(enabledMessage());
@@ -287,9 +301,10 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
 
     private Component enabledMessage() {
         if (!StretcherConfig.enableStaffSummon()) {
-            return Component.translatable("gui.useless_stretcher.staff_config.summon_disabled");
+            return Component.translatable("gui.useless_stretcher.staff_summon.mode_short",
+                    Component.translatable("gui.useless_stretcher.staff_config.disabled_short"));
         }
-        return Component.translatable("gui.useless_stretcher.staff_summon.mode",
+        return Component.translatable("gui.useless_stretcher.staff_summon.mode_short",
                 Component.translatable(isEnabled() ? "gui.useless_stretcher.staff_config.on"
                         : "gui.useless_stretcher.staff_config.off"));
     }
@@ -302,15 +317,15 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
 
     private void rebuildRows(String query) {
         rows.clear();
-        String normalized = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
+        var normalized = LocalizedSearchIndex.Query.parse(query);
         String lastMod = null;
         for (Entry entry : entries) {
-            if (!normalized.isEmpty() && !entry.searchText().contains(normalized)) continue;
+            if (!normalized.matches(entry.searchText())) continue;
             if (!entry.modId().equals(lastMod)) {
                 rows.add(new Row(true, entry));
                 lastMod = entry.modId();
             }
-            if (!normalized.isEmpty() || expandedMods.contains(entry.modId())) {
+            if (!normalized.empty() || expandedMods.contains(entry.modId())) {
                 rows.add(new Row(false, entry));
             }
         }
@@ -327,24 +342,25 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
         }
     }
 
-    private record Entry(ResourceLocation id, String modId, String name, String searchText) {
+    private record Entry(ResourceLocation id, String modId, String name, LocalizedSearchIndex.Document searchText) {
     }
 
     /** Client-only registry catalog; it never constructs entity instances during indexing. */
     private static final class SummonCatalog {
         private static List<Entry> cached;
+        private static LocalizedSearchIndex searchIndex;
 
         private static List<Entry> entries() {
-            if (cached != null) return cached;
+            LocalizedSearchIndex current = LocalizedSearchIndex.current();
+            if (cached != null && searchIndex == current) return cached;
+            searchIndex = current;
             List<Entry> result = new ArrayList<>();
             for (var entry : BuiltInRegistries.ENTITY_TYPE.entrySet()) {
                 EntityType<?> type = entry.getValue();
                 ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(type);
                 if (!WondrousStaffSummoning.canSummonType(type)) continue;
                 String translated = type.getDescription().getString();
-                String path = id.getPath().replace('_', ' ');
-                String search = (translated + " " + path + " " + id + " " + id.getNamespace())
-                        .toLowerCase(Locale.ROOT);
+                var search = searchIndex.document(translated, id.toString(), id.getNamespace());
                 result.add(new Entry(id, id.getNamespace(), translated, search));
             }
             result.sort(Comparator.comparing(Entry::modId)

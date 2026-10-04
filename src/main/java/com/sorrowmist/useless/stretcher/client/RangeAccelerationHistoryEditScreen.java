@@ -105,7 +105,7 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
         addSlider(left + offsetLeft + 4, top + offsetTop + 56, groupSliderWidth, 'Z', true, offsetZ);
 
         addRenderableWidget(new SelectableAE2Button(
-                left, top + offsetTop + 92, bodyWidth, 18,
+                left + bodyWidth - 64, top + offsetTop + 92, 64, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
         setContentExtent(offsetTop + 114);
     }

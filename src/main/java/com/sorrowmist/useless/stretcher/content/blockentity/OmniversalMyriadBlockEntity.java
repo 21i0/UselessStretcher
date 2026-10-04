@@ -110,6 +110,11 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
         return store == null ? 0 : store.count(patternRef);
     }
 
+    /** Marks the shared pattern library and this block entity dirty after UI edits. */
+    public void markPatternsChanged() {
+        setChanged();
+    }
+
     public void replacePatternKeys(ResourceLocation moldId, Set<AEItemKey> patterns) {
         MyriadPatternStore store = store();
         if (store == null) return;

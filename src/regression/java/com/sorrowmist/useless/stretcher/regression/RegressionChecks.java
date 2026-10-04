@@ -142,6 +142,7 @@ public final class RegressionChecks {
             int size = queued.getPatternCount();
             var keys = queued.getPatterns().stream().map(AEItemKey::of).toList();
             var level = event.getServer().overworld();
+            if (firstFetch == null) verifyOmniversalRepository(level, keys);
             check(MoldRecipeIndex.get(level) == sessionIndex, "completed fetch retains session index");
             queued.clearPatterns();
             check(queued.getPatternCount() == 0, "clear removes all shared references");
@@ -174,6 +175,42 @@ public final class RegressionChecks {
         tag.putInt("recipe", id);
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         return stack;
+    }
+
+    private static void verifyOmniversalRepository(ServerLevel level, List<AEItemKey> keys) throws Exception {
+        var registry = level.registryAccess();
+        for (var key : keys) {
+            var stack = key.toStack(1);
+            check(stack.is(com.sorrowmist.useless.init.ModItems.OMNIVERSAL_PATTERN.get()),
+                    "fetch returns actual omniversal items, not processing items");
+            var data = stack.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
+            check(data != null && data.requiresMold() && (data.displayMold().isPresent() || !data.displayMolds().isEmpty()),
+                    "real recipe identity and mold display metadata retained");
+            check(appeng.api.crafting.PatternDetailsHelper.decodePattern(stack, level) != null,
+                    "actual omniversal pattern remains executable");
+        }
+        var page = new Network.PatternPagePayload(BlockPos.ZERO, 0, 2, true, true, false,
+                keys.stream().limit(Network.PatternPagePayload.MAX_PAGE).toList());
+        var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), registry);
+        try {
+            Network.PatternPagePayload.STREAM_CODEC.encode(buf, page);
+            check(Network.PatternPagePayload.STREAM_CODEC.decode(buf).equals(page),
+                    "repository page preserves full omniversal components");
+        } finally { buf.release(); }
+        var store = new MyriadPatternStore();
+        var id = UUID.randomUUID();
+        store.replace(id, A, new LinkedHashSet<>(keys));
+        store.replace(id, B, Set.of(keys.getFirst()));
+        var loaded = MyriadPatternStore.load(store.save(new CompoundTag(), registry), registry);
+        loaded.removeKeys(id, List.of(keys.getFirst()));
+        check(loaded.count(id) == keys.size() - 1 && !loaded.keys(id).contains(keys.getFirst()),
+                "deleting a real pattern removes all shared memberships, retaining others");
+        CompoundTag fixture = new CompoundTag();
+        ListTag stacks = new ListTag();
+        for (var key : page.patterns()) stacks.add(key.toStack(1).save(registry));
+        fixture.put("patterns", stacks);
+        net.minecraft.nbt.NbtIo.writeCompressed(fixture, java.nio.file.Path.of("omniversal-ui-fixture.nbt"));
+        LogUtils.getLogger().info("REGRESSION real omniversal repository: {} items, metadata, decode, page roundtrip, deletion passed", keys.size());
     }
 
     private static void storage(ServerLevel level) {

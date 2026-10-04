@@ -60,6 +60,22 @@ public final class StretcherComponents {
                     .persistent(Codec.BOOL)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
 
+    /** Last-used virtual bookshelf settings, copied onto a table when selected. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_ETERNA =
+            integerComponent("apotheosis_eterna");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_QUANTA =
+            integerComponent("apotheosis_quanta");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_ARCANA =
+            integerComponent("apotheosis_arcana");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_CLUES =
+            integerComponent("apotheosis_clues");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> APOTHEOSIS_TABLE_SELECTION =
+            register("apotheosis_table_selection", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> APOTHEOSIS_WORLD_TIER =
+            register("apotheosis_world_tier", builder -> builder.persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
     /** Whether Shift+right-click places an independent range instead of accelerating one target. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_PLACEMENT_MODE =
             register("range_placement_mode", builder -> builder

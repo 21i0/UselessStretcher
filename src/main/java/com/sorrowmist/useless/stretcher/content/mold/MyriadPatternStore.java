@@ -47,8 +47,25 @@ public final class MyriadPatternStore extends SavedData {
         return library == null ? List.of() : Collections.unmodifiableSet(library.references.keySet());
     }
 
+    public PatternSearchIndex searchIndex(UUID id) {
+        Library library = entries.get(id);
+        if (library == null) return null;
+        if (library.searchIndex == null) library.searchIndex = new PatternSearchIndex(library.references.keySet());
+        return library.searchIndex;
+    }
+
     public List<ItemStack> flatten(UUID id) {
         return keys(id).stream().map(key -> key.toStack(1)).toList();
+    }
+
+    /** Removes selected pattern keys from every mold group in this library. */
+    public int removeKeys(UUID id, Collection<AEItemKey> keys) {
+        Library library = entries.get(id);
+        if (library == null || keys == null || keys.isEmpty()) return 0;
+        int removed = library.removeKeys(keys);
+        if (library.groups.isEmpty()) entries.remove(id);
+        if (removed > 0) setDirty();
+        return removed;
     }
 
     public void replace(UUID id, ResourceLocation mold, Set<AEItemKey> patterns) {
@@ -67,8 +84,10 @@ public final class MyriadPatternStore extends SavedData {
     public static final class Library {
         private final Map<ResourceLocation, Set<AEItemKey>> groups = new LinkedHashMap<>();
         private final Map<AEItemKey, Integer> references = new LinkedHashMap<>();
+        private PatternSearchIndex searchIndex;
 
         public void replace(ResourceLocation mold, Set<AEItemKey> patterns) {
+            searchIndex = null;
             Set<AEItemKey> replacement = new LinkedHashSet<>(patterns);
             Set<AEItemKey> old = groups.remove(mold);
             if (old != null) {
@@ -83,6 +102,23 @@ public final class MyriadPatternStore extends SavedData {
         }
 
         public int size() { return references.size(); }
+
+        private int removeKeys(Collection<AEItemKey> selected) {
+            int removed = 0;
+            for (ResourceLocation mold : new ArrayList<>(groups.keySet())) {
+                Set<AEItemKey> group = groups.get(mold);
+                if (group == null) continue;
+                for (AEItemKey key : selected) {
+                    if (group.remove(key)) {
+                        removed++;
+                        references.computeIfPresent(key, (ignored, count) -> count <= 1 ? null : count - 1);
+                    }
+                }
+                if (group.isEmpty()) groups.remove(mold);
+            }
+            if (removed > 0) searchIndex = null;
+            return removed;
+        }
     }
 
     @Override

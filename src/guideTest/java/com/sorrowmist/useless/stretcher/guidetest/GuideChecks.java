@@ -37,6 +37,7 @@ public final class GuideChecks {
     private static int waitFrames;
     private static boolean checked;
     private static boolean uiChecked;
+    private static boolean ui153Checked;
     private static boolean finished;
 
     @SubscribeEvent
@@ -47,6 +48,10 @@ public final class GuideChecks {
             check(++ticks < 2400, "guide preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;
             if (page >= PAGES.size()) {
+                if (!ui153Checked) {
+                    ui153Checked = Ui153Checks.tick(client);
+                    return;
+                }
                 if (!uiChecked) {
                     uiChecked = Ui152Checks.tick(client);
                     return;

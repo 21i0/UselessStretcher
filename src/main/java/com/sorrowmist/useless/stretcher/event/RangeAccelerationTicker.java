@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.event;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import com.sorrowmist.useless.stretcher.content.entity.TimeStopManager;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
@@ -21,6 +22,7 @@ public final class RangeAccelerationTicker {
 
     @SubscribeEvent
     public static void onServerTickEnd(ServerTickEvent.Post event) {
+        if (TimeStopManager.remaining(event.getServer()) > 0) return;
         RangeAccelerationSavedData.get(event.getServer()).tick(event.getServer());
     }
 

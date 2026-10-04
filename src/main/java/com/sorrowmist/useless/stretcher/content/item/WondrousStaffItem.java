@@ -4,6 +4,7 @@ import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.content.items.EndlessBeafItem;
 import com.sorrowmist.useless.content.items.BeefToolVariants;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.client.StretcherKeyBindings;
@@ -135,6 +136,10 @@ public class WondrousStaffItem extends EndlessBeafItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_speed")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_player")
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_time_stop")
+                .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.hint_mode",
                         StretcherKeyBindings.WONDROUS_STAFF_MODE.getTranslatedKeyMessage())
                 .withStyle(ChatFormatting.GRAY));
@@ -149,7 +154,11 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
+        InteractionResult apotheosis = selectApotheosisTable(stack, ctx);
+        if (apotheosis != InteractionResult.PASS) return apotheosis;
         if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
+        InteractionResult brush = StaffBrushHelper.tryBrush(stack, ctx);
+        if (brush != InteractionResult.PASS) return brush;
         Player player = ctx.getPlayer();
         if (isEnabledLightningRodTarget(stack, ctx)) {
             return WondrousStaffAcceleration.tryUse(ctx);
@@ -172,7 +181,11 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
+        InteractionResult apotheosis = selectApotheosisTable(ctx.getItemInHand(), ctx);
+        if (apotheosis != InteractionResult.PASS) return apotheosis;
         if (RangeAccelerationSettings.filterMarkingMode(ctx.getItemInHand())) return InteractionResult.FAIL;
+        InteractionResult brush = StaffBrushHelper.tryBrush(ctx.getItemInHand(), ctx);
+        if (brush != InteractionResult.PASS) return brush;
         Player player = ctx.getPlayer();
         if (isEnabledLightningRodTarget(ctx.getItemInHand(), ctx)) {
             return WondrousStaffAcceleration.tryUse(ctx);
@@ -191,6 +204,18 @@ public class WondrousStaffItem extends EndlessBeafItem {
         return super.useOn(ctx);
     }
 
+    private static InteractionResult selectApotheosisTable(ItemStack stack, UseOnContext ctx) {
+        if (!StretcherConfig.enableApotheosisCompat() || !ApotheosisStaffSettings.isEnchantingAvailable()
+                || !ApotheosisStaffSettings.selectionMode(stack)
+                || !ApotheosisStaffSettings.isTable(ctx.getLevel().getBlockState(ctx.getClickedPos()))) {
+            return InteractionResult.PASS;
+        }
+        if (ctx.getPlayer() instanceof ServerPlayer player) {
+            ApotheosisStaffSettings.markTable(player, ctx.getHand(), ctx.getClickedPos());
+        }
+        return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide);
+    }
+
     /**
      * The upstream item handles lightning rods before its normal acceleration hook.  Keep a
      * direct item-level guard as a fallback for interaction paths that do not dispatch the
@@ -206,7 +231,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity,
                                                   InteractionHand hand) {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
-        if (player.isShiftKeyDown() && !(entity instanceof Player)
+        if (player.isShiftKeyDown()
                 && !entity.isRemoved()) {
             InteractionResult result = WondrousStaffAcceleration.tryUseEntity(player, entity, stack);
             if (result != InteractionResult.PASS) return result;

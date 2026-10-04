@@ -44,7 +44,8 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
         int bodyWidth = contentWidth();
         for (int i = 0; i < 2; i++) {
             boolean mode = i == 1;
-            var button = new SelectableAE2Button(left, top + i * 22, bodyWidth, 19,
+            int modeWidth = (bodyWidth - 3) / 2;
+            var button = new SelectableAE2Button(left + i * (modeWidth + 3), top, modeWidth, 19,
                     Component.translatable("gui.useless_stretcher.entity_acceleration." + (mode ? "timers" : "ticks")),
                     ignored -> { timers = mode; save(); });
             button.setSelected(timers == mode);
@@ -58,14 +59,14 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
         for (int i = 0; i < 15; i++) {
             int gear = 1 << (i + 1);
             var button = new SelectableAE2Button(left + (i % columns) * (gearWidth + 3),
-                    top + 64 + (i / columns) * 21, gearWidth, 18, Component.literal("x" + gear),
+                    top + 42 + (i / columns) * 21, gearWidth, 18, Component.literal("x" + gear),
                     ignored -> { speed = gear; save(); });
             button.setSelected(speed == gear);
             button.setTooltip(Tooltip.create(Component.translatable("gui.useless_stretcher.entity_acceleration.speed_tooltip", gear)));
             button.active = timers && StretcherConfig.serverStaffAcceleration();
             addRenderableWidget(button);
         }
-        hintTop = 72 + ((15 + columns - 1) / columns) * 21;
+        hintTop = 50 + ((15 + columns - 1) / columns) * 21;
         int hintHeight = font.split(hint(), Math.max(1, bodyWidth)).size() * (font.lineHeight + 2);
         int backTop = hintTop + hintHeight + 8;
         addRenderableWidget(new SelectableAE2Button(left + Math.max(0, bodyWidth - 80), top + backTop,
@@ -90,7 +91,7 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
 
     @Override protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.entity_acceleration.speed"),
-                contentLeft(), contentTop() + 50, StretcherScreenStyle.TEXT_COLOR, false);
+                contentLeft(), contentTop() + 28, StretcherScreenStyle.TEXT_COLOR, false);
         int y = contentTop() + hintTop;
         for (var line : font.split(hint(), Math.max(1, contentWidth()))) {
             graphics.drawString(font, line, contentLeft(), y, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);

@@ -103,14 +103,18 @@ public abstract class FloatingScreen extends Screen {
         return clickContent(x, y, button);
     }
     protected boolean clickContent(double x, double y, int button) { return super.mouseClicked(x, y, button); }
+    protected boolean dragContent(double x, double y, int button, double dx, double dy) { return false; }
+    protected boolean releaseContent(double x, double y, int button) { return false; }
     @Override public final boolean mouseDragged(double x, double y, int button, double dx, double dy) {
         if (window.mouseDragged(x, y, button)) { if (window.consumeLayoutChanged()) relayoutContent(); return true; }
         if (scrollbarDragging && button == 0) { dragScrollbar(y); return true; }
+        if (window.containsBody(x, y) && dragContent(x, y, button, dx, dy)) return true;
         return super.mouseDragged(x, y, button, dx, dy);
     }
     @Override public final boolean mouseReleased(double x, double y, int button) {
         if (window.mouseReleased(button)) return true;
         if (button == 0 && scrollbarDragging) { scrollbarDragging = false; return true; }
+        if (releaseContent(x, y, button)) return true;
         return super.mouseReleased(x, y, button);
     }
     @Override public final boolean mouseScrolled(double x, double y, double dx, double dy) {

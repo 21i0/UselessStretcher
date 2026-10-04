@@ -18,6 +18,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -124,18 +125,33 @@ public final class WondrousStaffAcceleration {
         return InteractionResult.sidedSuccess(false);
     }
 
-    /** Accelerates an entity. Never targets players or an acceleration marker itself. */
+    /** Accelerates an entity; players receive a bounded 30-second Speed/Haste boost. */
     public static InteractionResult tryUseEntity(Player player, Entity target, ItemStack staff) {
-        if (target == null || target instanceof Player || target instanceof WondrousStaffAccelerationEntity
+        if (target == null || target instanceof WondrousStaffAccelerationEntity
                 || target.isRemoved()) return InteractionResult.PASS;
-        if (!isEnabled(staff)) return InteractionResult.PASS;
         Level level = target.level();
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
         sendAccelerationTutorial(player);
 
-        AABB area = target.getBoundingBox().inflate(4.0D);
         int speed = getSpeed(staff);
+        if (target instanceof ServerPlayer targetPlayer) {
+            if (!StretcherConfig.serverStaffAcceleration()) return InteractionResult.PASS;
+            // A disabled staff is the explicit cancel gesture for a previously boosted player.
+            if (!isEnabled(staff)) speed = 0;
+            PlayerAccelerationManager.apply(targetPlayer, speed);
+            if (speed <= 0) {
+                targetPlayer.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                        "msg.useless_stretcher.player_acceleration.off"), true);
+            } else {
+                targetPlayer.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                        "msg.useless_stretcher.player_acceleration.on", speed), true);
+            }
+            return InteractionResult.sidedSuccess(false);
+        }
+        if (!isEnabled(staff)) return InteractionResult.PASS;
+        if (target instanceof Player) return InteractionResult.PASS;
+        AABB area = target.getBoundingBox().inflate(4.0D);
         boolean timers = usesEntityTimers(staff) && target instanceof net.minecraft.world.entity.LivingEntity;
         if (speed > 0 && timers) speed = getEntityTimerSpeed(staff);
         int staffMode = getMode(staff);
@@ -158,14 +174,14 @@ public final class WondrousStaffAcceleration {
             created.setOwnerUuid(player.getUUID());
             if (permanent) created.setPermanent();
             created.setIdleThrottleDisabled(noIdleThrottle);
-            created.setEntityAiDisabled(StretcherConfig.entityDisableAi());
+            created.setEntityAiDisabled(StretcherConfig.entityDisableAi() && !timers);
             serverLevel.addFreshEntity(created);
         } else {
             if (effect.getOwnerUuid() == null) effect.setOwnerUuid(player.getUUID());
             effect.setEntityTimerMode(timers);
             effect.setSpeed(speed);
             effect.setIdleThrottleDisabled(noIdleThrottle);
-            effect.setEntityAiDisabled(StretcherConfig.entityDisableAi());
+            effect.setEntityAiDisabled(StretcherConfig.entityDisableAi() && !timers);
             if (permanent) effect.setPermanent();
             else effect.setRemainingTime(DEFAULT_DURATION_TICKS);
         }

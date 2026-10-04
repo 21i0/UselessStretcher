@@ -398,7 +398,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
         int desiredSpeed = field.entityTimerMode() ? field.entityTimerSpeed() : field.speed();
         if (isEntityTimerMode() != field.entityTimerMode()) setEntityTimerMode(field.entityTimerMode());
         if (getSpeed() != desiredSpeed) setSpeed(desiredSpeed);
-        boolean aiDisabled = StretcherConfig.entityDisableAi();
+        boolean aiDisabled = StretcherConfig.entityDisableAi() && !field.entityTimerMode();
         if (isEntityAiDisabled() != aiDisabled) setEntityAiDisabled(aiDisabled);
         if (!isPermanent()) setPermanent();
         setIdleThrottleDisabled(true);

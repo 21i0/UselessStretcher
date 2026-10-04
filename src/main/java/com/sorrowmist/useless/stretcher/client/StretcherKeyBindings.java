@@ -14,6 +14,11 @@ public final class StretcherKeyBindings {
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_X,
             CATEGORY);
+    public static final KeyMapping WONDROUS_STAFF_TIME_STOP = new KeyMapping(
+            "key.useless_stretcher.wondrous_staff_time_stop",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_P,
+            CATEGORY);
 
 
     private StretcherKeyBindings() {
