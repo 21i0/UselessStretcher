@@ -150,7 +150,8 @@ public final class Network {
         }
         public static final Type<PatternPagePayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page"));
-        public static final int MAX_PAGE = 64;
+        // Hard wire cap; the actual page size is requested per view (see PatternPageRequestPayload).
+        public static final int MAX_PAGE = 256;
         public static final StreamCodec<RegistryFriendlyByteBuf, PatternPagePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBlockPos(value.pos());
@@ -189,9 +190,12 @@ public final class Network {
 
     public record PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand,
                                             int requestId, String query, byte[] matchingItems,
-                                            byte[] matchingFluids) implements CustomPacketPayload {
+                                            byte[] matchingFluids, int pageSize) implements CustomPacketPayload {
         public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand) {
-            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0]);
+            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], 64);
+        }
+        public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand, int pageSize) {
+            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], pageSize);
         }
         public static final Type<PatternPageRequestPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page_request"));
@@ -201,16 +205,18 @@ public final class Network {
                     buf.writeBoolean(value.item()); buf.writeBoolean(value.offhand());
                     buf.writeVarInt(value.requestId()); buf.writeUtf(value.query(), 128);
                     buf.writeByteArray(value.matchingItems()); buf.writeByteArray(value.matchingFluids());
+                    buf.writeVarInt(value.pageSize());
                 }, buf -> new PatternPageRequestPayload(buf.readBlockPos(), buf.readVarInt(),
                         buf.readBoolean(), buf.readBoolean(), buf.readVarInt(), buf.readUtf(128),
-                        buf.readByteArray(131072), buf.readByteArray(131072)));
+                        buf.readByteArray(131072), buf.readByteArray(131072),
+                        Math.max(1, Math.min(PatternPagePayload.MAX_PAGE, buf.readVarInt()))));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
     public record PatternDeletePayload(BlockPos pos, boolean item, boolean offhand, List<AEItemKey> patterns) implements CustomPacketPayload {
         public static final Type<PatternDeletePayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_delete"));
-        private static final int MAX_DELETE = 64;
+        private static final int MAX_DELETE = PatternPagePayload.MAX_PAGE;
         public static final StreamCodec<RegistryFriendlyByteBuf, PatternDeletePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBlockPos(value.pos());
@@ -911,10 +917,11 @@ public final class Network {
             return;
         }
         var all = store.keys(ref);
-        int pages = Math.max(1, (all.size() + PatternPagePayload.MAX_PAGE - 1) / PatternPagePayload.MAX_PAGE);
+        int pageSize = Math.max(1, Math.min(PatternPagePayload.MAX_PAGE, request.pageSize()));
+        int pages = Math.max(1, (all.size() + pageSize - 1) / pageSize);
         int page = Math.min(requestedPage, pages - 1);
-        int from = page * PatternPagePayload.MAX_PAGE;
-        List<AEItemKey> pageKeys = all.stream().skip(from).limit(PatternPagePayload.MAX_PAGE).toList();
+        int from = page * pageSize;
+        List<AEItemKey> pageKeys = all.stream().skip(from).limit(pageSize).toList();
         PacketDistributor.sendToPlayer(player, new PatternPagePayload(pos, page, pages, aeBound, item, offhand,
                 pageKeys, request.requestId(), ""));
     }
@@ -1006,8 +1013,13 @@ public final class Network {
 
     public static void requestStretcherPatternPage(InteractionHand hand, int page, int requestId,
                                                   String query, byte[] items, byte[] fluids) {
+        requestStretcherPatternPage(hand, page, requestId, query, items, fluids, 64);
+    }
+
+    public static void requestStretcherPatternPage(InteractionHand hand, int page, int requestId,
+                                                  String query, byte[] items, byte[] fluids, int pageSize) {
         PacketDistributor.sendToServer(new PatternPageRequestPayload(BlockPos.ZERO, Math.max(0, page), true,
-                hand == InteractionHand.OFF_HAND, requestId, query, items, fluids));
+                hand == InteractionHand.OFF_HAND, requestId, query, items, fluids, Math.max(1, pageSize)));
     }
 
     public static void deletePatterns(BlockPos pos, List<AEItemKey> patterns) {
