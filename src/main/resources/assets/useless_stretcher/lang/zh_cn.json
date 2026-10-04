@@ -138,6 +138,7 @@
   "gui.useless_stretcher.staff_apotheosis.disabled": "神话功能：服务端已关闭",
   "gui.useless_stretcher.staff_apotheosis.missing_enchanting": "缺少 Apothic Enchanting",
   "gui.useless_stretcher.staff_apotheosis.world_tier": "世界等级（直接设置）",
+  "gui.useless_stretcher.staff_apotheosis.tier_unavailable": "世界等级需要 Apotheosis 模组",
   "gui.useless_stretcher.staff_apotheosis.stats": "附魔台虚拟书架属性",
   "gui.useless_stretcher.staff_apotheosis.tier.haven": "避难所",
   "gui.useless_stretcher.staff_apotheosis.tier.frontier": "边境",

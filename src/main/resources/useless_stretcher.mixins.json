@@ -40,7 +40,6 @@
     "UselessDimensionConfigManagerMixin",
     "UselessDimensionsMixin",
     "ApotheosisEnchantingStatsMixin",
-    "ApotheosisEnchantingStatsLegacyMixin",
     "EnchantmentMenuAccessor",
     "ApotheosisEnchantingMenuMixin"
   ],

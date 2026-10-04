@@ -38,14 +38,11 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
             return isModLoadedEarly("apothic_enchanting");
         }
         if (mixinClassName.endsWith(".ApotheosisEnchantingStatsMixin")) {
-            // Mixin plugins are queried during the loader's early bootstrap, before
-            // ModList.get() is guaranteed to be initialized.  Use the loading list
-            // first; a direct ModList lookup is only a late-bootstrap fallback.
-            return isModLoadedEarly("apothic_enchanting") && isNewApothicEnchantingSignature();
-        }
-        if (mixinClassName.endsWith(".ApotheosisEnchantingStatsLegacyMixin")) {
-            return isModLoadedEarly("apotheosis") && isModLoadedEarly("apothic_enchanting")
-                    && !isNewApothicEnchantingSignature();
+            // The stats mixin declares both gatherStats descriptors with require = 0, so it
+            // self-adapts to the installed Apothic Enchanting ABI and only needs the mod
+            // itself to be present. Apothic Enchanting is standalone; Apotheosis is not
+            // required for the virtual-bookshelf boost.
+            return isModLoadedEarly("apothic_enchanting");
         }
         if (!Boolean.TRUE.equals(native4096)) return true;
         String simpleName = mixinClassName.substring(mixinClassName.lastIndexOf('.') + 1);
@@ -64,20 +61,6 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
         try {
             var modList = net.neoforged.fml.ModList.get();
             return modList != null && modList.isLoaded(modId);
-        } catch (RuntimeException | LinkageError ignored) {
-            return false;
-        }
-    }
-
-    private static boolean isNewApothicEnchantingSignature() {
-        try {
-            String version = FMLLoader.getLoadingModList().getMods().stream()
-                    .filter(mod -> mod.getModId().equals("apothic_enchanting"))
-                    .map(mod -> extractModVersion(mod.getVersion().toString()))
-                    .findFirst().orElse("");
-            // The 1.5 line added the table-level int parameter. Later versions may
-            // remove it again, so only select this path for the known 1.5 ABI.
-            return version.startsWith("1.5.");
         } catch (RuntimeException | LinkageError ignored) {
             return false;
         }

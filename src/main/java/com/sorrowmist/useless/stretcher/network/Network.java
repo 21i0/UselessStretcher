@@ -608,7 +608,8 @@ public final class Network {
     }
 
     private static boolean apotheosisAllowed() {
-        return StretcherConfig.enableApotheosisCompat() && ApotheosisStaffSettings.isAvailable();
+        // Boost/selection options only need Apothic Enchanting, which is standalone.
+        return StretcherConfig.enableApotheosisCompat() && ApotheosisStaffSettings.isEnchantingAvailable();
     }
 
     private static void handleApotheosisTier(ApotheosisTierPayload payload,
@@ -632,8 +633,7 @@ public final class Network {
 
     private static void handleApotheosisOptions(ApotheosisOptionsPayload payload,
             net.neoforged.neoforge.network.handling.IPayloadContext context) {
-        if (!(context.player() instanceof ServerPlayer player) || !apotheosisAllowed()
-                || !ApotheosisStaffSettings.isAvailable()) return;
+        if (!(context.player() instanceof ServerPlayer player) || !apotheosisAllowed()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
