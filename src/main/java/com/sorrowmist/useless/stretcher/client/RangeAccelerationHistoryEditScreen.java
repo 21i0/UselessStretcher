@@ -27,6 +27,7 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
     private int offsetX;
     private int offsetY;
     private int offsetZ;
+    private static final int SIZE_TOP = 80;
     private boolean entityTimerMode;
     private int entityTimerSpeed;
     private SelectableAE2Button timerButton;
@@ -36,7 +37,7 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
     public RangeAccelerationHistoryEditScreen(Screen parent,
                                               RangeAccelerationSavedData.Summary field) {
         super(Component.translatable("gui.useless_stretcher.range.edit_title"),
-                "range_edit", 300, 304, 250, 140);
+                "range_edit", 300, 320, 250, 140);
         this.parent = parent;
         this.field = field;
         speed = RangeAccelerationSavedData.clampSpeed(field.speed());
@@ -95,11 +96,13 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
         boolean sideBySide = bodyWidth >= 480;
         groupWidth = sideBySide ? (bodyWidth - 8) / 2 : bodyWidth;
         offsetLeft = sideBySide ? groupWidth + 8 : 0;
-        offsetTop = sideBySide ? 64 : 156;
+        // Keep the entity-timer row above both groups. The old group top (64)
+        // overlapped the timer buttons and hid the size-group label.
+        offsetTop = sideBySide ? SIZE_TOP : 172;
         int groupSliderWidth = Math.max(1, groupWidth - 8);
-        addSlider(left + 4, top + 80, groupSliderWidth, 'X', false, sizeX);
-        addSlider(left + 4, top + 100, groupSliderWidth, 'Y', false, sizeY);
-        addSlider(left + 4, top + 120, groupSliderWidth, 'Z', false, sizeZ);
+        addSlider(left + 4, top + SIZE_TOP + 16, groupSliderWidth, 'X', false, sizeX);
+        addSlider(left + 4, top + SIZE_TOP + 36, groupSliderWidth, 'Y', false, sizeY);
+        addSlider(left + 4, top + SIZE_TOP + 56, groupSliderWidth, 'Z', false, sizeZ);
         addSlider(left + offsetLeft + 4, top + offsetTop + 16, groupSliderWidth, 'X', true, offsetX);
         addSlider(left + offsetLeft + 4, top + offsetTop + 36, groupSliderWidth, 'Y', true, offsetY);
         addSlider(left + offsetLeft + 4, top + offsetTop + 56, groupSliderWidth, 'Z', true, offsetZ);
@@ -177,13 +180,14 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
                 left, top, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
 
         StretcherScreenStyle.drawInset(graphics, left, top + 16, left + bodyWidth, top + 56);
-        StretcherScreenStyle.drawInset(graphics, left, top + 64, left + groupWidth, top + 148);
+        StretcherScreenStyle.drawInset(graphics, left, top + SIZE_TOP,
+                left + groupWidth, top + SIZE_TOP + 84);
         StretcherScreenStyle.drawInset(graphics, left + offsetLeft, top + offsetTop,
                 left + offsetLeft + groupWidth, top + offsetTop + 84);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.speed_group"),
                 left + 4, top + 20, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.size_group"),
-                left + 4, top + 68, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+                left + 4, top + SIZE_TOP + 4, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.range.offset_group"),
                 left + offsetLeft + 4, top + offsetTop + 4, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
     }

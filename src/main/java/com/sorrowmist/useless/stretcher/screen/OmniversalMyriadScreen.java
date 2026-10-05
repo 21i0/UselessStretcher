@@ -44,6 +44,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private int scroll;
     private EditBox search;
     private SelectableAE2Button clearButton;
+    private SelectableAE2Button allMoldsButton;
     private boolean initialized;
     private int listTop;
     private int listBottom;
@@ -107,6 +108,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         this.fetchProgress = progress;
         receivedEnabled.clear();
         receivedPatterns.clear();
+        updateAllMoldsButton();
     }
 
     public void onCatalog(Network.MoldCatalogPayload payload) {
@@ -140,6 +142,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         catalogLoading = false;
         catalogProgress = "";
         catalogStatus = "done";
+        updateAllMoldsButton();
     }
 
     @Override
@@ -169,13 +172,18 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
                         lastPatternToggled = null;
                         Network.clearPatterns(pos);
                     });
+            this.allMoldsButton = new SelectableAE2Button(0, 0, 86, 18,
+                    Component.translatable("gui.useless_stretcher.all_molds"), ignored -> toggleAllMolds());
+            ButtonHelp.set(this.allMoldsButton, "all_molds");
             initialized = true;
             Network.requestMoldCatalog(pos);
             Network.requestState(pos);
         }
         applyWindowLayout();
         addRenderableWidget(search);
+        if (allMoldsButton != null) addRenderableWidget(allMoldsButton);
         addRenderableWidget(clearButton);
+        updateAllMoldsButton();
         if (searchFocused) setFocused(search);
         search.setFocused(searchFocused);
     }
@@ -186,14 +194,56 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         imageWidth = window.width();
         imageHeight = window.height();
         int clearWidth = Math.min(76, Math.max(44, window.bodyWidth() / 4));
+        int moldsWidth = clearWidth;
         search.setX(window.bodyLeft());
         search.setY(window.bodyTop());
-        search.setWidth(Math.max(20, window.bodyWidth() - clearWidth - 6));
+        search.setWidth(Math.max(20, window.bodyWidth() - clearWidth - moldsWidth - 9));
+        if (allMoldsButton != null) {
+            allMoldsButton.setX(window.bodyLeft() + window.bodyWidth() - clearWidth - moldsWidth - 3);
+            allMoldsButton.setY(window.bodyTop());
+            allMoldsButton.setWidth(moldsWidth);
+        }
         clearButton.setX(window.bodyLeft() + window.bodyWidth() - clearWidth);
         clearButton.setY(window.bodyTop());
         clearButton.setWidth(clearWidth);
         updateListBounds();
         window.consumeLayoutChanged();
+    }
+
+    private boolean allMoldsEnabled() {
+        boolean hasMolds = false;
+        for (List<MoldCatalog.MoldEntry> entries : catalog.values()) {
+            for (MoldCatalog.MoldEntry entry : entries) {
+                hasMolds = true;
+                if (!enabled.contains(entry.id())) return false;
+            }
+        }
+        return hasMolds;
+    }
+
+    private List<ResourceLocation> allMoldIds() {
+        LinkedHashSet<ResourceLocation> ids = new LinkedHashSet<>();
+        for (List<MoldCatalog.MoldEntry> entries : catalog.values()) {
+            for (MoldCatalog.MoldEntry entry : entries) ids.add(entry.id());
+        }
+        return List.copyOf(ids);
+    }
+
+    private void updateAllMoldsButton() {
+        if (allMoldsButton == null) return;
+        boolean all = allMoldsEnabled();
+        allMoldsButton.setMessage(Component.translatable(all
+                ? "gui.useless_stretcher.all_molds_clear" : "gui.useless_stretcher.all_molds"));
+        allMoldsButton.active = !catalogLoading && !catalog.isEmpty();
+    }
+
+    private void toggleAllMolds() {
+        if (catalogLoading || catalog.isEmpty()) return;
+        List<ResourceLocation> ids = allMoldIds();
+        if (allMoldsEnabled()) enabled.removeAll(ids);
+        else enabled.addAll(ids);
+        pushEnabled();
+        updateAllMoldsButton();
     }
 
     private void updateListBounds() {
