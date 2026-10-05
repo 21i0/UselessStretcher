@@ -277,6 +277,7 @@
   "msg.useless_stretcher.player_acceleration.on": "Player acceleration enabled: x%s (30 seconds)",
   "msg.useless_stretcher.player_acceleration.off": "Player acceleration disabled; staff effects cleared",
   "msg.useless_stretcher.time_stop.start": "Time stop started: 12 seconds",
+  "msg.useless_stretcher.time_stop.countdown": "Time stop: %s seconds remaining",
   "msg.useless_stretcher.time_stop.end": "Time stop ended",
   "msg.useless_stretcher.loot_refresh.success": "Refreshed the container from its original loot table",
   "msg.useless_stretcher.loot_refresh.lootr_success": "Refreshed this Lootr container and every player's personal loot",

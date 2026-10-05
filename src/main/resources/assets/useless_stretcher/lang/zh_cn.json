@@ -300,6 +300,7 @@
   "msg.useless_stretcher.player_acceleration.on": "玩家加速已启用：x%s（持续30秒）",
   "msg.useless_stretcher.player_acceleration.off": "玩家加速已关闭，已清除手杖给予的效果",
   "msg.useless_stretcher.time_stop.start": "时间暂停已启动：持续12秒",
+  "msg.useless_stretcher.time_stop.countdown": "时间暂停：剩余 %s 秒",
   "msg.useless_stretcher.time_stop.end": "时间暂停结束",
   "msg.useless_stretcher.loot_refresh.success": "已按原战利品表刷新容器",
   "msg.useless_stretcher.loot_refresh.lootr_success": "已刷新 Lootr 容器及所有玩家的独立战利品",

@@ -66,7 +66,9 @@ public final class ReclaimerScreen extends FloatingScreen {
         rebuildWidgets();
     }
 
-    private int rowCount() { return page == Page.PLAYERS ? owners.size() : page == Page.TYPES ? 2 : targets.size(); }
+    private int rowCount() {
+        return page == Page.PLAYERS ? (owners.size() + 1) / 2 : page == Page.TYPES ? 2 : targets.size();
+    }
     private Component category(boolean ranges) {
         return Component.translatable("gui.useless_stretcher.reclaimer." + (ranges ? "ranges" : "permanent"));
     }
@@ -81,21 +83,26 @@ public final class ReclaimerScreen extends FloatingScreen {
         top = contentTop();
         scroll = Mth.clamp(scroll, 0, Math.max(0, rowCount() - visibleRows));
         if (page == Page.PLAYERS) {
-            for (int i = 0; i < visibleRows && scroll + i < owners.size(); i++) {
-                UUID owner = owners.get(scroll + i);
-                var owned = byOwner.get(owner);
-                String name = owned.getFirst().ownerName();
-                var button = new SelectableAE2Button(left + 4, top + LIST_TOP + i * ROW_HEIGHT + 3,
-                        panelWidth - 8, 20,
-                        Component.literal(font.plainSubstrByWidth(name, panelWidth - 88) + " (" + owned.size() + ")"),
+            int playerWidth = (panelWidth - 11) / 2;
+            for (int row = 0; row < visibleRows; row++) {
+                int first = (scroll + row) * 2;
+                for (int column = 0; column < 2 && first + column < owners.size(); column++) {
+                    int index = first + column;
+                    UUID owner = owners.get(index);
+                    var owned = byOwner.get(owner);
+                    String name = owned.getFirst().ownerName();
+                    var button = new SelectableAE2Button(left + 4 + column * (playerWidth + 3),
+                        top + LIST_TOP + row * ROW_HEIGHT + 3, playerWidth, 20,
+                        Component.literal(font.plainSubstrByWidth(name, playerWidth - 48) + " (" + owned.size() + ")"),
                         ignored -> {
                             selectedOwner = owner;
                             selectedName = name;
                             navigate(Page.TYPES);
                         });
-                button.setTooltip(Tooltip.create(Component.literal(name + " (" + owner + ") ")
+                    button.setTooltip(Tooltip.create(Component.literal(name + " (" + owner + ") ")
                         .append(com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("player"))));
-                addRenderableWidget(button);
+                    addRenderableWidget(button);
+                }
             }
         } else if (page == Page.TYPES) {
             var owned = byOwner.getOrDefault(selectedOwner, List.of());

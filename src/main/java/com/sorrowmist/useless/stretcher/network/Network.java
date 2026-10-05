@@ -359,6 +359,14 @@ public final class Network {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
+    public record TimeStopStatePayload(int remaining) implements CustomPacketPayload {
+        public static final Type<TimeStopStatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "time_stop_state"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TimeStopStatePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TimeStopStatePayload::remaining, TimeStopStatePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     public record EntityTimerSettingsPayload(boolean timers, int speed, boolean offhand) implements CustomPacketPayload {
         public static final Type<EntityTimerSettingsPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "entity_timer_settings"));
@@ -585,6 +593,8 @@ public final class Network {
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSpeed(payload, context)));
         registrar.playToServer(StaffTimeStopPayload.TYPE, StaffTimeStopPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleStaffTimeStop(payload, context)));
+        registrar.playToClient(TimeStopStatePayload.TYPE, TimeStopStatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTimeStop(payload)));
         registrar.playToServer(EntityTimerSettingsPayload.TYPE, EntityTimerSettingsPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
                     if (!(context.player() instanceof ServerPlayer player) || !StretcherConfig.serverStaffAcceleration()) return;
@@ -654,6 +664,10 @@ public final class Network {
 
     public static void sendStaffTimeStop(InteractionHand hand) {
         PacketDistributor.sendToServer(new StaffTimeStopPayload(hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendTimeStopState(ServerPlayer player, int remaining) {
+        PacketDistributor.sendToPlayer(player, new TimeStopStatePayload(Math.max(0, remaining)));
     }
 
     public static void sendWondrousStaffSpeed(int speed, int mode, boolean accelerationEnabled,
@@ -944,6 +958,7 @@ public final class Network {
             ref = be.getPatternRef();
         }
         if (ref == null) return;
+        com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
         MyriadPatternStore.get((ServerLevel) player.level()).removeKeys(ref, payload.patterns());
         if (be != null) { be.markPatternsChanged(); replyState(player, be); }
         // The item screen follows deletion with its current tagged search request. An untagged

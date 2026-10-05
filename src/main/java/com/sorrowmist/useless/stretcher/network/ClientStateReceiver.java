@@ -62,6 +62,16 @@ public final class ClientStateReceiver {
         WondrousStaffCloudTime.accept(payload.dimension(), payload.speed());
     }
 
+    public static void handleTimeStop(Network.TimeStopStatePayload payload) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (payload.remaining() <= 0) {
+            minecraft.gui.setOverlayMessage(Component.translatable("msg.useless_stretcher.time_stop.end"), false);
+        } else {
+            int seconds = (payload.remaining() + 19) / 20;
+            minecraft.gui.setOverlayMessage(Component.translatable("msg.useless_stretcher.time_stop.countdown", seconds), false);
+        }
+    }
+
     public static void handleRangeHistory(RangeNetwork.HistoryStatePayload payload) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof RangeAccelerationHistoryScreen screen) {

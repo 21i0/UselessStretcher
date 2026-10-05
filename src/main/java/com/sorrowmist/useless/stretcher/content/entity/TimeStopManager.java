@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.network.Network;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.resources.ResourceLocation;
@@ -25,10 +26,13 @@ public final class TimeStopManager {
         MinecraftServer server = player.getServer();
         if (remaining(server) > 0) return false;
         ACTIVE.put(server, new State(player.serverLevel().dimension().location(), player.getUUID(), DURATION_TICKS));
+        player.serverLevel().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE,
+                net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
         for (ServerPlayer online : server.getPlayerList().getPlayers()) {
             online.displayClientMessage(net.minecraft.network.chat.Component.translatable(
                     "msg.useless_stretcher.time_stop.start"), true);
         }
+        broadcast(server, DURATION_TICKS);
         return true;
     }
 
@@ -38,11 +42,28 @@ public final class TimeStopManager {
         int remaining = state.remaining() - 1;
         if (remaining == 0) {
             ACTIVE.remove(server);
+            broadcast(server, 0);
+            ServerLevel level = null;
+            for (ServerLevel candidate : server.getAllLevels()) {
+                if (candidate.dimension().location().equals(state.dimension())) {
+                    level = candidate;
+                    break;
+                }
+            }
+            if (level != null) level.playSound(null, level.getSharedSpawnPos(),
+                    net.minecraft.sounds.SoundEvents.BEACON_DEACTIVATE, net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
                         "msg.useless_stretcher.time_stop.end"), true);
             }
-        } else ACTIVE.put(server, new State(state.dimension(), state.actor(), remaining));
+        } else {
+            ACTIVE.put(server, new State(state.dimension(), state.actor(), remaining));
+            if (remaining % 20 == 0) broadcast(server, remaining);
+        }
+    }
+
+    private static void broadcast(MinecraftServer server, int remaining) {
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) Network.sendTimeStopState(player, remaining);
     }
 
     /**
