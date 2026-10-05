@@ -486,7 +486,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("7");
+        PayloadRegistrar registrar = event.registrar("8");
         registrar.playToClient(ServerConfigSync.Payload.TYPE, ServerConfigSync.Payload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() ->
                         com.sorrowmist.useless.stretcher.client.StretcherConfigScreen.accept(payload)));
