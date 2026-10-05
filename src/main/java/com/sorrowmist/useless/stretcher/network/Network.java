@@ -15,6 +15,7 @@ import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettin
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisTableData;
 import com.sorrowmist.useless.stretcher.content.entity.TimeStopManager;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
+import com.sorrowmist.useless.stretcher.content.mold.PatternSearchIndex;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
@@ -143,10 +144,20 @@ public final class Network {
     /** A bounded page of stored AE patterns. Keys keep their full component data. */
     public record PatternPagePayload(BlockPos pos, int page, int pages, boolean aeBound,
                                      boolean item, boolean offhand, List<AEItemKey> patterns,
-                                     int requestId, String progress) implements CustomPacketPayload {
+                                     int requestId, String progress, byte[] duplicates,
+                                     PatternSearchIndex.DuplicatePage selection) implements CustomPacketPayload {
+        public PatternPagePayload(BlockPos pos, int page, int pages, boolean aeBound, boolean item, boolean offhand,
+                                  List<AEItemKey> patterns, int requestId, String progress, byte[] duplicates) {
+            this(pos, page, pages, aeBound, item, offhand, patterns, requestId, progress, duplicates,
+                    PatternSearchIndex.DuplicatePage.EMPTY);
+        }
         public PatternPagePayload(BlockPos pos, int page, int pages, boolean aeBound,
                                   boolean item, boolean offhand, List<AEItemKey> patterns) {
-            this(pos, page, pages, aeBound, item, offhand, patterns, 0, "");
+            this(pos, page, pages, aeBound, item, offhand, patterns, 0, "", new byte[0]);
+        }
+        public PatternPagePayload(BlockPos pos, int page, int pages, boolean aeBound,
+                                  boolean item, boolean offhand, List<AEItemKey> patterns, int requestId, String progress) {
+            this(pos, page, pages, aeBound, item, offhand, patterns, requestId, progress, new byte[0]);
         }
         public static final Type<PatternPagePayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page"));
@@ -165,6 +176,11 @@ public final class Network {
                     int size = Math.min(MAX_PAGE, value.patterns().size());
                     buf.writeVarInt(size);
                     for (int i = 0; i < size; i++) AEKey.writeKey(buf, value.patterns().get(i));
+                    buf.writeByteArray(value.duplicates());
+                    buf.writeLong(value.selection().revision());
+                    buf.writeVarInt(value.selection().count());
+                    buf.writeByteArray(value.selection().keepMost());
+                    buf.writeByteArray(value.selection().keepLeast());
                 }, buf -> {
                     BlockPos pos = buf.readBlockPos();
                     int page = buf.readVarInt();
@@ -183,19 +199,30 @@ public final class Network {
                         var key = AEKey.readKey(buf);
                         if (key instanceof AEItemKey itemKey) values.add(itemKey);
                     }
-                    return new PatternPagePayload(pos, page, pages, bound, item, offhand, values, requestId, progress);
+                    return new PatternPagePayload(pos, page, pages, bound, item, offhand, values, requestId, progress,
+                            buf.readByteArray((MAX_PAGE + 7) / 8),
+                            new PatternSearchIndex.DuplicatePage(buf.readLong(), buf.readVarInt(),
+                                    buf.readByteArray((MAX_PAGE + 7) / 8), buf.readByteArray((MAX_PAGE + 7) / 8)));
                 });
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
     public record PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand,
                                             int requestId, String query, byte[] matchingItems,
-                                            byte[] matchingFluids, int pageSize) implements CustomPacketPayload {
+                                            byte[] matchingFluids, int pageSize, PatternSearchIndex.Mode mode) implements CustomPacketPayload {
         public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand) {
-            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], 64);
+            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], 64, PatternSearchIndex.Mode.ALL);
         }
         public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand, int pageSize) {
-            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], pageSize);
+            this(pos, page, item, offhand, 0, "", new byte[0], new byte[0], pageSize, PatternSearchIndex.Mode.ALL);
+        }
+        public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand,
+                int requestId, String query, byte[] items, byte[] fluids) {
+            this(pos, page, item, offhand, requestId, query, items, fluids, 64, PatternSearchIndex.Mode.ALL);
+        }
+        public PatternPageRequestPayload(BlockPos pos, int page, boolean item, boolean offhand,
+                int requestId, String query, byte[] items, byte[] fluids, int pageSize) {
+            this(pos, page, item, offhand, requestId, query, items, fluids, pageSize, PatternSearchIndex.Mode.ALL);
         }
         public static final Type<PatternPageRequestPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page_request"));
@@ -206,10 +233,33 @@ public final class Network {
                     buf.writeVarInt(value.requestId()); buf.writeUtf(value.query(), 128);
                     buf.writeByteArray(value.matchingItems()); buf.writeByteArray(value.matchingFluids());
                     buf.writeVarInt(value.pageSize());
+                    buf.writeEnum(value.mode());
                 }, buf -> new PatternPageRequestPayload(buf.readBlockPos(), buf.readVarInt(),
                         buf.readBoolean(), buf.readBoolean(), buf.readVarInt(), buf.readUtf(128),
                         buf.readByteArray(131072), buf.readByteArray(131072),
-                        Math.max(1, Math.min(PatternPagePayload.MAX_PAGE, buf.readVarInt()))));
+                        Math.max(1, Math.min(PatternPagePayload.MAX_PAGE, buf.readVarInt())),
+                        buf.readEnum(PatternSearchIndex.Mode.class)));
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record PatternTrimPayload(PatternPageRequestPayload request) implements CustomPacketPayload {
+        public static final Type<PatternTrimPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_trim"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, PatternTrimPayload> STREAM_CODEC = StreamCodec.composite(
+                PatternPageRequestPayload.STREAM_CODEC, PatternTrimPayload::request, PatternTrimPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record PatternDeduplicatePayload(PatternPageRequestPayload request, PatternSearchIndex.Keep keep,
+                                            long revision) implements CustomPacketPayload {
+        public static final Type<PatternDeduplicatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_deduplicate"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, PatternDeduplicatePayload> STREAM_CODEC = StreamCodec.of(
+                (buf, value) -> {
+                    PatternPageRequestPayload.STREAM_CODEC.encode(buf, value.request());
+                    buf.writeEnum(value.keep()); buf.writeLong(value.revision());
+                }, buf -> new PatternDeduplicatePayload(PatternPageRequestPayload.STREAM_CODEC.decode(buf),
+                        buf.readEnum(PatternSearchIndex.Keep.class), buf.readLong()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
@@ -486,7 +536,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("8");
+        PayloadRegistrar registrar = event.registrar("10");
         registrar.playToClient(ServerConfigSync.Payload.TYPE, ServerConfigSync.Payload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() ->
                         com.sorrowmist.useless.stretcher.client.StretcherConfigScreen.accept(payload)));
@@ -500,6 +550,23 @@ public final class Network {
                 (payload, context) -> context.enqueueWork(() -> handlePatternPageRequest(payload, context)));
         registrar.playToServer(PatternDeletePayload.TYPE, PatternDeletePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handlePatternDelete(payload, context)));
+        registrar.playToServer(PatternTrimPayload.TYPE, PatternTrimPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    var request = payload.request();
+                    if (context.player() instanceof ServerPlayer player && request.item())
+                        sendPatternPage(player, BlockPos.ZERO, request.page(), true, request.offhand(), request, true);
+                }));
+        registrar.playToServer(PatternDeduplicatePayload.TYPE, PatternDeduplicatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    var request = payload.request();
+                    if (!(context.player() instanceof ServerPlayer player) || !request.item()) return;
+                    var held = player.getItemInHand(request.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+                    if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.USELESS_STRETCHER.get())) return;
+                    UUID ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
+                    if (ref == null) return;
+                    com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.deduplicate(player, ref,
+                            MyriadPatternStore.get(player.serverLevel()), payload);
+                }));
         registrar.playToClient(MoldCatalogPayload.TYPE, MoldCatalogPayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.acceptMoldCatalog(payload));
         registrar.playToClient(FullSlotsPayload.TYPE, FullSlotsPayload.STREAM_CODEC,
@@ -892,6 +959,11 @@ public final class Network {
 
     private static void sendPatternPage(ServerPlayer player, BlockPos pos, int requestedPage,
                                         boolean item, boolean offhand, PatternPageRequestPayload request) {
+        sendPatternPage(player, pos, requestedPage, item, offhand, request, false);
+    }
+
+    private static void sendPatternPage(ServerPlayer player, BlockPos pos, int requestedPage,
+                                        boolean item, boolean offhand, PatternPageRequestPayload request, boolean trim) {
         UUID ref;
         boolean aeBound;
         if (item) {
@@ -911,9 +983,9 @@ public final class Network {
         }
         var store = MyriadPatternStore.get((ServerLevel) player.level());
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
-        if (!request.query().isBlank() && ref != null) {
+        if ((item || !request.query().isBlank()) && ref != null) {
             com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.request(
-                    player, ref, store, request, aeBound);
+                    player, ref, store, request, aeBound, trim);
             return;
         }
         var all = store.keys(ref);
@@ -1018,13 +1090,31 @@ public final class Network {
 
     public static void requestStretcherPatternPage(InteractionHand hand, int page, int requestId,
                                                   String query, byte[] items, byte[] fluids, int pageSize) {
+        requestStretcherPatternPage(hand, page, requestId, query, items, fluids, pageSize, PatternSearchIndex.Mode.ALL);
+    }
+
+    public static void requestStretcherPatternPage(InteractionHand hand, int page, int requestId,
+            String query, byte[] items, byte[] fluids, int pageSize, PatternSearchIndex.Mode mode) {
         PacketDistributor.sendToServer(new PatternPageRequestPayload(BlockPos.ZERO, Math.max(0, page), true,
-                hand == InteractionHand.OFF_HAND, requestId, query, items, fluids, Math.max(1, pageSize)));
+                hand == InteractionHand.OFF_HAND, requestId, query, items, fluids, Math.max(1, pageSize), mode));
+    }
+
+    public static void trimStretcherPatterns(InteractionHand hand, int page, int requestId, int pageSize) {
+        PacketDistributor.sendToServer(new PatternTrimPayload(new PatternPageRequestPayload(BlockPos.ZERO,
+                Math.max(0, page), true, hand == InteractionHand.OFF_HAND, requestId, "", new byte[0], new byte[0],
+                Math.max(1, pageSize), PatternSearchIndex.Mode.OUTPUT)));
     }
 
     public static void deletePatterns(BlockPos pos, List<AEItemKey> patterns) {
         if (patterns == null || patterns.isEmpty()) return;
         PacketDistributor.sendToServer(new PatternDeletePayload(pos, false, false, List.copyOf(patterns)));
+    }
+
+    public static void deduplicateStretcherPatterns(InteractionHand hand, int page, int requestId, int pageSize,
+                                                    PatternSearchIndex.Keep keep, long revision) {
+        PacketDistributor.sendToServer(new PatternDeduplicatePayload(new PatternPageRequestPayload(BlockPos.ZERO,
+                Math.max(0, page), true, hand == InteractionHand.OFF_HAND, requestId, "", new byte[0], new byte[0],
+                Math.max(1, pageSize), PatternSearchIndex.Mode.OUTPUT), keep, revision));
     }
 
     public static void deleteStretcherPatterns(InteractionHand hand, List<AEItemKey> patterns) {

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -80,13 +81,85 @@ public final class MyriadPatternStore extends SavedData {
         if (id != null && entries.remove(id) != null) setDirty();
     }
 
+    public Rewrite stripByproducts(UUID id) {
+        Library source = entries.get(id);
+        return source == null ? null : new Rewrite(id, source, PatternOutputs::withoutByproducts, "trim:");
+    }
+
+    public Rewrite removeDuplicates(UUID id, PatternSearchIndex index, PatternSearchIndex.Keep keep) {
+        Library source = entries.get(id);
+        if (source == null || source.searchIndex != index || !index.ready()) return null;
+        return new Rewrite(id, source, key -> index.discard(key, keep) ? null : key, "dedup:");
+    }
+
+    /** Build a replacement under the query budget; publish it only if its source is unchanged. */
+    public final class Rewrite {
+        private final UUID id;
+        private final Library source, replacement = new Library();
+        private final long revision;
+        private final Iterator<Map.Entry<ResourceLocation, Set<AEItemKey>>> groups;
+        private final Iterator<AEItemKey> orderedKeys;
+        private final Map<AEItemKey, AEItemKey> rewritten = new HashMap<>();
+        private final java.util.function.UnaryOperator<AEItemKey> transform;
+        private final String progressPrefix;
+        private Iterator<AEItemKey> current = Collections.emptyIterator();
+        private Set<AEItemKey> target;
+        private ResourceLocation currentMold;
+        private int changed, scanned;
+
+        private Rewrite(UUID id, Library source, java.util.function.UnaryOperator<AEItemKey> transform, String progressPrefix) {
+            this.id = id; this.source = source; revision = source.revision;
+            this.transform = transform; this.progressPrefix = progressPrefix;
+            groups = source.groups.entrySet().iterator();
+            orderedKeys = source.references.keySet().iterator();
+        }
+        public boolean valid() { return entries.get(id) == source && source.revision == revision; }
+        public int changed() { return changed; }
+        public String progress() { return progressPrefix + scanned; }
+        public boolean advance(long deadline) {
+            if (!valid()) throw new IllegalStateException("Pattern library changed during rewrite");
+            int steps = 0;
+            while (steps++ < 128 && System.nanoTime() < deadline) {
+                if (orderedKeys.hasNext()) {
+                    AEItemKey original = orderedKeys.next();
+                    AEItemKey key = transform.apply(original);
+                    if (!original.equals(key)) changed++;
+                    rewritten.put(original, key);
+                    // Seed the old global order before rebuilding cross-mold memberships.
+                    if (key != null) replacement.references.putIfAbsent(key, 0);
+                    scanned++;
+                    continue;
+                }
+                if (!current.hasNext()) {
+                    if (target != null && target.isEmpty()) replacement.groups.remove(currentMold);
+                    if (!groups.hasNext()) {
+                        if (changed > 0) { entries.put(id, replacement); setDirty(); }
+                        return true;
+                    }
+                    var group = groups.next();
+                    currentMold = group.getKey();
+                    current = group.getValue().iterator();
+                    target = new LinkedHashSet<>();
+                    replacement.groups.put(group.getKey(), target);
+                    continue;
+                }
+                AEItemKey original = current.next();
+                AEItemKey key = rewritten.get(original);
+                if (key != null && target.add(key)) replacement.references.merge(key, 1, Integer::sum);
+            }
+            return false;
+        }
+    }
+
     /** Hash equality includes every component. A hash collision never merges distinct patterns. */
     public static final class Library {
         private final Map<ResourceLocation, Set<AEItemKey>> groups = new LinkedHashMap<>();
         private final Map<AEItemKey, Integer> references = new LinkedHashMap<>();
         private PatternSearchIndex searchIndex;
+        private long revision;
 
         public void replace(ResourceLocation mold, Set<AEItemKey> patterns) {
+            revision++;
             searchIndex = null;
             Set<AEItemKey> replacement = new LinkedHashSet<>(patterns);
             Set<AEItemKey> old = groups.remove(mold);
@@ -116,7 +189,7 @@ public final class MyriadPatternStore extends SavedData {
                 }
                 if (group.isEmpty()) groups.remove(mold);
             }
-            if (removed > 0) searchIndex = null;
+            if (removed > 0) { searchIndex = null; revision++; }
             return removed;
         }
     }
@@ -190,6 +263,16 @@ public final class MyriadPatternStore extends SavedData {
                     }
                 }
                 library.replace(mold, patterns);
+            }
+            if (!palette.isEmpty()) {
+                Map<AEItemKey, Integer> ordered = new LinkedHashMap<>();
+                for (AEItemKey key : palette) {
+                    Integer count = library.references.get(key);
+                    if (count != null) ordered.put(key, count);
+                }
+                ordered.putAll(library.references);
+                library.references.clear();
+                library.references.putAll(ordered);
             }
             if (library.size() > 0) store.entries.put(id, library);
         }

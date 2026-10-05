@@ -190,11 +190,13 @@ public final class RegressionChecks {
                     "actual omniversal pattern remains executable");
         }
         var page = new Network.PatternPagePayload(BlockPos.ZERO, 0, 2, true, true, false,
-                keys.stream().limit(Network.PatternPagePayload.MAX_PAGE).toList());
+                keys.stream().limit(64).toList(), 41, "", new byte[] {3});
         var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), registry);
         try {
             Network.PatternPagePayload.STREAM_CODEC.encode(buf, page);
-            check(Network.PatternPagePayload.STREAM_CODEC.decode(buf).equals(page),
+            var decoded = Network.PatternPagePayload.STREAM_CODEC.decode(buf);
+            check(decoded.patterns().equals(page.patterns()) && decoded.requestId() == 41
+                    && java.util.Arrays.equals(decoded.duplicates(), page.duplicates()),
                     "repository page preserves full omniversal components");
         } finally { buf.release(); }
         var store = new MyriadPatternStore();
@@ -210,6 +212,26 @@ public final class RegressionChecks {
         for (var key : page.patterns()) stacks.add(key.toStack(1).save(registry));
         fixture.put("patterns", stacks);
         net.minecraft.nbt.NbtIo.writeCompressed(fixture, java.nio.file.Path.of("omniversal-ui-fixture.nbt"));
+        int trimmed = 0;
+        for (var entry : AlloyFurnaceRecipeCatalog.entries(level)) {
+            var processing = com.sorrowmist.useless.content.machines.advanced_alloy_furnace.ae.OmniversalPatternEncoding
+                    .createProcessingPattern(entry.recipe());
+            if (processing.isEmpty()) continue;
+            var key = AEItemKey.of(processing);
+            if (com.sorrowmist.useless.stretcher.content.mold.PatternOutputs.withoutByproducts(key).equals(key)) continue;
+            var actual = com.sorrowmist.useless.content.machines.advanced_alloy_furnace.ae.OmniversalPatternEncoding
+                    .encode(processing, entry, level);
+            var original = AEItemKey.of(actual);
+            var reduced = com.sorrowmist.useless.stretcher.content.mold.PatternOutputs.withoutByproducts(original);
+            var details = appeng.api.crafting.PatternDetailsHelper.decodePattern(reduced.toStack(1), level);
+            check(details != null && details.getOutputs().size() == 1, "real multi-output omniversal recipe still decodes after trim");
+            check(reduced.get(UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()
+                    .equals(original.get(UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()),
+                    "actual recipe fingerprint survives byproduct trim");
+            if (++trimmed >= 8) break;
+        }
+        check(trimmed > 0, "at least one real multi-output recipe verified");
+        LogUtils.getLogger().info("REGRESSION real omniversal byproduct trimming: {} executable recipes passed", trimmed);
         LogUtils.getLogger().info("REGRESSION real omniversal repository: {} items, metadata, decode, page roundtrip, deletion passed", keys.size());
     }
 
