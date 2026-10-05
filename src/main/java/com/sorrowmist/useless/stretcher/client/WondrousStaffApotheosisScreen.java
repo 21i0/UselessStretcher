@@ -60,9 +60,12 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
         panelTop = contentTop();
         int panelWidth = contentWidth();
 
+        // World tiers live in the Apotheosis adventure module; only Apothic Enchanting is
+        // standalone. Skip the selector when it is absent so the buttons cannot no-op.
+        boolean tierSupported = ApotheosisStaffSettings.isApotheosisLoaded();
         int tierGap = 3;
         int tierWidth = (panelWidth - 8 - tierGap * 4) / 5;
-        for (int i = 0; i < TIERS.length; i++) {
+        for (int i = 0; tierSupported && i < TIERS.length; i++) {
             String tier = TIERS[i];
             SelectableAE2Button button = addRenderableWidget(new SelectableAE2Button(
                     panelLeft + 4 + i * (tierWidth + tierGap), panelTop + 20, tierWidth, 18,
@@ -138,6 +141,10 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
                 panelLeft + contentWidth(), panelTop + 43);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.world_tier"),
                 panelLeft + 5, panelTop + 7, StretcherScreenStyle.TEXT_COLOR, false);
+        if (!ApotheosisStaffSettings.isApotheosisLoaded()) {
+            graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.tier_unavailable"),
+                    panelLeft + 5, panelTop + 26, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+        }
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.stats"),
                 panelLeft + 4, panelTop + 48, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
     }

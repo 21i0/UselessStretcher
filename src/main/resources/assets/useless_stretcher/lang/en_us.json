@@ -305,6 +305,7 @@
   "gui.useless_stretcher.staff_apotheosis.disabled": "Apotheosis: disabled by server",
   "gui.useless_stretcher.staff_apotheosis.missing_enchanting": "Apothic Enchanting required",
   "gui.useless_stretcher.staff_apotheosis.world_tier": "World tier (direct selection)",
+  "gui.useless_stretcher.staff_apotheosis.tier_unavailable": "World tiers require the Apotheosis mod",
   "gui.useless_stretcher.staff_apotheosis.stats": "Virtual bookshelf stats",
   "gui.useless_stretcher.staff_apotheosis.tier.haven": "Haven",
   "gui.useless_stretcher.staff_apotheosis.tier.frontier": "Frontier",

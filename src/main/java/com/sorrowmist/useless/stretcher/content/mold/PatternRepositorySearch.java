@@ -52,7 +52,13 @@ public final class PatternRepositorySearch {
             var entry = iterator.next();
             ServerPlayer player = event.getServer().getPlayerList().getPlayer(entry.getKey());
             Job job = entry.getValue();
-            if (!job.valid(player)) { iterator.remove(); continue; }
+            if (!job.valid(player)) {
+                iterator.remove();
+                // A dropped job must never leave the client waiting forever; report failure so
+                // the screen re-arms its buttons instead of staying pending until reopened.
+                if (player != null) reply(player, job.request, job.aeBound, List.of(), "failed");
+                continue;
+            }
             try {
                 if (job.store.searchIndex(job.ref) != job.index) {
                     reply(player, job.request, job.aeBound, List.of(), "changed");
@@ -77,12 +83,13 @@ public final class PatternRepositorySearch {
 
     private static void reply(ServerPlayer player, Network.PatternPageRequestPayload request, boolean bound,
                               List<AEItemKey> matches, String progress) {
-        int pages = Math.max(1, (matches.size() + Network.PatternPagePayload.MAX_PAGE - 1) / Network.PatternPagePayload.MAX_PAGE);
+        int pageSize = Math.max(1, Math.min(Network.PatternPagePayload.MAX_PAGE, request.pageSize()));
+        int pages = Math.max(1, (matches.size() + pageSize - 1) / pageSize);
         int page = Math.min(Math.max(0, request.page()), pages - 1);
-        int from = page * Network.PatternPagePayload.MAX_PAGE;
+        int from = page * pageSize;
         PacketDistributor.sendToPlayer(player, new Network.PatternPagePayload(request.pos(), page, pages, bound,
                 request.item(), request.offhand(), List.copyOf(matches.subList(from,
-                Math.min(matches.size(), from + Network.PatternPagePayload.MAX_PAGE))), request.requestId(), progress));
+                Math.min(matches.size(), from + pageSize))), request.requestId(), progress));
     }
 
     @SubscribeEvent

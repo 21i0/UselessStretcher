@@ -46,6 +46,7 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
     private String maskQuery = "", searchProgress = "";
     private int queryId, searchDelay = -1, targetPage;
     private boolean awaitingPinyin;
+    private int pendingTicks;
 
     public MyriadPatternRepositoryScreen(Screen parent, BlockPos pos, InteractionHand hand) {
         super(Component.translatable("gui.useless_stretcher.pattern_repository.title"),
@@ -62,6 +63,7 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
 
     public void onPage(Network.PatternPagePayload payload) {
         if (!matches(payload)) return;
+        pendingTicks = 0;
         if (!payload.progress().isEmpty()) {
             searchProgress = payload.progress();
             if ("changed".equals(searchProgress)) queueSearch(0, 0);
@@ -117,6 +119,9 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
                 Component.literal(">"), ignored -> requestPage(page + 1)));
         setContentExtent(contentHeight());
         updateButtons();
+        // The pre-open prefetch uses the legacy page size; ask again with the real grid
+        // capacity so a resized window never shows permanently dead bottom rows.
+        if (queryId == 0 && patterns.isEmpty() && !pending) queueSearch(0, 0);
     }
 
     private SelectableAE2Button button(int x, int y, int width, String key, Runnable action) {
@@ -136,6 +141,7 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
         targetPage = target;
         searchDelay = delay;
         pending = true;
+        pendingTicks = 0;
         selected.clear(); dragging = false; lastDrag = -1;
         searchProgress = "";
         updateButtons();
@@ -144,6 +150,14 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
     @Override public void tick() {
         super.tick();
         if (minecraft.getConnection() == null) return;
+        // Watchdog: the server silently drops requests in a few cases (hand swapped mid-flight,
+        // dimension change, cancel from another view). Re-query periodically instead of leaving
+        // the footer buttons disabled forever, which looked like a broken delete key.
+        if (pending && ++pendingTicks >= 100) {
+            pendingTicks = 0;
+            queueSearch(targetPage, 0);
+            return;
+        }
         String text = search == null ? "" : search.getValue().trim();
         if (!text.isEmpty()) {
             var current = RegistrySearchCatalog.current();
@@ -168,7 +182,8 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
             awaitingPinyin = !text.isEmpty() && searchCatalog.transliterating();
         }
         searchDelay = -1;
-        Network.requestStretcherPatternPage(hand, targetPage, queryId, text, searchMasks.items(), searchMasks.fluids());
+        Network.requestStretcherPatternPage(hand, targetPage, queryId, text, searchMasks.items(), searchMasks.fluids(),
+                Math.max(1, columns * rows));
     }
 
     private void updateButtons() {

@@ -98,11 +98,11 @@ public final class StretcherConfig {
                 .define("enable", false);
         BUILDER.pop();
 
-        if (ModList.get().isLoaded("apotheosis")) {
+        if (ModList.get().isLoaded("apotheosis") || ModList.get().isLoaded("apothic_enchanting")) {
             BUILDER.translation("useless_stretcher.configuration.apotheosis").push("apotheosis");
             SERVER_APOTHEOSIS_COMPAT = BUILDER
                     .comment("是否允许手杖修改 Apotheosis 世界等级并为已标记的附魔台添加属性。默认关闭。",
-                            "需要 Apotheosis 与 Apothic Enchanting。关闭后已保存的附魔台数据保留，但不参与附魔计算。")
+                            "附魔台属性需要 Apothic Enchanting（可独立安装）；世界等级需要 Apotheosis。关闭后已保存的附魔台数据保留，但不参与附魔计算。")
                     .translation("useless_stretcher.configuration.apotheosis.enable")
                     .define("enable", false);
             BUILDER.pop();

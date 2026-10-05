@@ -19,11 +19,12 @@ public final class ApotheosisStaffSettings {
     private ApotheosisStaffSettings() { }
 
     public static boolean isAvailable() {
-        return isApotheosisLoaded();
+        return isApotheosisLoaded() || isEnchantingAvailable();
     }
 
+    /** The table boost only needs Apothic Enchanting, which is a standalone mod. */
     public static boolean isEnchantingAvailable() {
-        return isApotheosisLoaded() && ModList.get().isLoaded("apothic_enchanting");
+        return ModList.get().isLoaded("apothic_enchanting");
     }
 
     public static boolean isApotheosisLoaded() {
