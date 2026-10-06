@@ -35,8 +35,10 @@ navigation:
 <Recipe id="useless_stretcher:elytra" fallbackText="此配方已被当前整合包移除。" />
 <Recipe id="useless_stretcher:totem_of_undying" fallbackText="此配方已被当前整合包移除。" />
 <Recipe id="useless_stretcher:wither_skeleton_skull" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:conduit" fallbackText="此配方已被当前整合包移除。" />
+<Recipe id="useless_stretcher:rabbit_foot" fallbackText="此配方已被当前整合包移除。" />
 
-当前包含：山羊角、海龟鳞片、附魔金苹果、凋零玫瑰、龙首、潜影壳、幻翼膜、龙息、鞘翅、不死图腾和凋零骷髅头。幻翼膜配方是白色染料 + 皮革；其它配方的完整摆放方式直接由配方预览显示。
+当前包含：山羊角、海龟鳞片、附魔金苹果、凋零玫瑰、龙首、潜影壳、幻翼膜、龙息、鞘翅、不死图腾、凋零骷髅头、潮涌核心和兔子脚。幻翼膜配方是白色染料 + 皮革；潮涌核心配方是钻石 + 棕色染料；兔子脚配方是皮革 + 棕色染料；其它配方的完整摆放方式直接由配方预览显示。
 
 ## 配方与样板
 

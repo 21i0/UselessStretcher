@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:diamond" },
+    { "item": "minecraft:brown_dye" }
+  ],
+  "result": {
+    "id": "minecraft:conduit",
+    "count": 1
+  }
+}

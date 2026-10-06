@@ -97,10 +97,10 @@ final class ServerConfigChecks {
 
         for (String id : List.of("goat_horn", "turtle_scute", "enchanted_golden_apple", "wither_rose",
                 "dragon_head", "shulker_shell", "phantom_membrane", "dragon_breath", "elytra", "totem_of_undying",
-                "wither_skeleton_skull", "omniversal_myriad", "useless_stretcher", "wondrous_staff")) {
+                "wither_skeleton_skull", "conduit", "rabbit_foot", "omniversal_myriad", "useless_stretcher", "wondrous_staff")) {
             check(level.getRecipeManager().byKey(net.minecraft.resources.ResourceLocation.parse("useless_stretcher:" + id)).isPresent(),
                     "GuideME exact recipe exists: " + id);
         }
-        LogUtils.getLogger().info("REGRESSION 1.5.1: server config, migration, payload, save, permanent history ownership/unload/reclaim and 14 guide recipes passed");
+        LogUtils.getLogger().info("REGRESSION 1.5.1: server config, migration, payload, save, permanent history ownership/unload/reclaim and 16 guide recipes passed");
     }
 }
