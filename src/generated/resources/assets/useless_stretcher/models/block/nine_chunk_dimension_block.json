@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "useless_stretcher:block/nine_chunk_dimension_block"
-  }
-}

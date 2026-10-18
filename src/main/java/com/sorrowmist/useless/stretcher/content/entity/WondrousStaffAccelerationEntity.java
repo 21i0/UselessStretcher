@@ -179,7 +179,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
         // leaving its first block.
         if (isEntityMode()) {
             Entity target = findEntity(level);
-            if (target == null || target.isRemoved() || target instanceof Player) {
+            if (!WondrousStaffAcceleration.isEntityTargetAllowed(target) || target instanceof Player) {
                 discard();
                 return;
             }
@@ -266,7 +266,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
 
     private void advanceEntity(ServerLevel level) {
         Entity target = findEntity(level);
-        if (target == null || target.isRemoved() || target instanceof Player) {
+        if (!WondrousStaffAcceleration.isEntityTargetAllowed(target) || target instanceof Player) {
             discard();
             return;
         }

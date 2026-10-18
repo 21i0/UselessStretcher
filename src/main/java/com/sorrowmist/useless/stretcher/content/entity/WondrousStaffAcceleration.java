@@ -79,6 +79,8 @@ public final class WondrousStaffAcceleration {
     }
 
     public static InteractionResult tryUse(UseOnContext ctx) {
+        if (com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings.placementMode(ctx.getItemInHand()))
+            return InteractionResult.FAIL;
         Level level = ctx.getLevel();
         Player player = ctx.getPlayer();
         // Lightning rods are the one block interaction that intentionally works without Shift:
@@ -127,8 +129,7 @@ public final class WondrousStaffAcceleration {
 
     /** Accelerates an entity; players receive a bounded 30-second Speed/Haste boost. */
     public static InteractionResult tryUseEntity(Player player, Entity target, ItemStack staff) {
-        if (target == null || target instanceof WondrousStaffAccelerationEntity
-                || target.isRemoved()) return InteractionResult.PASS;
+        if (!isEntityTargetAllowed(target)) return InteractionResult.FAIL;
         Level level = target.level();
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.PASS;
@@ -231,6 +232,29 @@ public final class WondrousStaffAcceleration {
 
     public static int getSpeed(ItemStack stack) {
         return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
+    }
+
+    /** Shared by direct clicks, range discovery and previously saved acceleration markers. */
+    public static boolean isEntityTargetAllowed(Entity entity) {
+        return entity != null && !entity.isRemoved()
+                && !(entity instanceof TwoIDollEntity)
+                && !(entity instanceof TimeFlowEntity)
+                && !(entity instanceof StaffLeafRewardEntity)
+                && !(entity instanceof WondrousStaffAccelerationEntity)
+                && !isExternalAccelerationCarrier(entity);
+    }
+
+    private static boolean isExternalAccelerationCarrier(Entity entity) {
+        // These are clocks/requests, not work targets. Extra ticks consume their lifetimes
+        // and can remove JDT/JDTE's acceleration before the player upgrades it again.
+        // Registry IDs keep both mods optional and leave their ordinary entities eligible.
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        return id != null && switch (id.getNamespace()) {
+            case "jdte" -> id.getPath().equals("time_accelerator_effect")
+                    || id.getPath().equals("ultimate_time_wand");
+            case "justdirethings" -> id.getPath().equals("time_wand_entity");
+            default -> false;
+        };
     }
 
     public static boolean usesEntityTimers(ItemStack stack) {
@@ -338,6 +362,7 @@ public final class WondrousStaffAcceleration {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity != null) {
             if (isUnsafeAccelerationTarget(blockEntity)) return false;
+            if (com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.ticker(blockEntity) != null) return true;
             if (blockEntity instanceof IInWorldGridNodeHost) return true;
             return state.getTicker(level, blockEntity.getType()) != null
                     || findAeHost(level, pos, blockEntity) != null;
@@ -479,6 +504,8 @@ public final class WondrousStaffAcceleration {
         }
 
         var ticker = state.getTicker(level, blockEntity.getType());
+        var compatibilityTicker = com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.ticker(blockEntity);
+        if (compatibilityTicker != null) ticker = compatibilityTicker;
         var endpoints = findAeEndpoints(findAeHost(level, pos, blockEntity));
         ticker = selectOrdinaryTicker(BuiltInRegistries.BLOCK.getKey(state.getBlock()), ticker,
                 !endpoints.isEmpty());
@@ -570,6 +597,8 @@ public final class WondrousStaffAcceleration {
             try (JdteAeVirtualTickBridge.Scope ignored =
                          JdteAeVirtualTickBridge.enter(level.getGameTime() + executed)) {
                 if (ticker != null) {
+                    if (blockEntity instanceof com.sorrowmist.useless.stretcher.content.acceleration.ExtraTickClock clock)
+                        clock.uselessStretcher$advanceClock();
                     ticker.tick(level, pos, state, blockEntity);
                     ranCallback = true;
                     if (blockEntity.isRemoved() || blockEntity.getBlockState() != state) return executed + 1;

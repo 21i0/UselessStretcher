@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "useless_stretcher:entity/two_i",
+      "sprite": "useless_stretcher:entity/two_i"
+    }
+  ]
+}

@@ -39,6 +39,12 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.WONDROUS_STAFF.get());
                         output.accept(ModItems.OMNIVERSAL_MYRIAD.get());
                         output.accept(ModItems.RANGE_RECLAIMER.get());
+                        output.accept(ModItems.TWO_I_DOLL.get());
+                        output.accept(ModItems.DIMENSION_CAPSULE.get());
+                        output.accept(ModItems.USEFUL_ARMOR_HELMET.get());
+                        output.accept(ModItems.USEFUL_ARMOR_CHESTPLATE.get());
+                        output.accept(ModItems.USEFUL_ARMOR_LEGGINGS.get());
+                        output.accept(ModItems.USEFUL_ARMOR_BOOTS.get());
                     })
                     .build()
     );

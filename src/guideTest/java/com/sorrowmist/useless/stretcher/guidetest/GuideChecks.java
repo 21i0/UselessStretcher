@@ -31,7 +31,7 @@ public final class GuideChecks {
             "useless_stretcher/index.md", "useless_stretcher/myriad.md",
             "useless_stretcher/stretcher.md", "useless_stretcher/staff.md",
             "useless_stretcher/range.md", "useless_stretcher/recipes.md",
-            "useless_stretcher/extras.md");
+            "useless_stretcher/extras.md", "useless_stretcher/two_i.md", "useless_stretcher/capsule.md");
     private static int ticks;
     private static int page;
     private static int waitFrames;
@@ -48,6 +48,11 @@ public final class GuideChecks {
             check(++ticks < 2400, "guide preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;
             if (page >= PAGES.size()) {
+                if (Boolean.getBoolean("useless_stretcher.guide_pages_only")) {
+                    finished = true;
+                    client.stop();
+                    return;
+                }
                 if (!ui153Checked) {
                     ui153Checked = Ui153Checks.tick(client);
                     return;
@@ -93,6 +98,7 @@ public final class GuideChecks {
                 check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "omniversal_myriad")) != null, "myriad tooltip entry");
                 check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "useless_stretcher")) != null, "stretcher tooltip entry");
                 check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "wondrous_staff")) != null, "staff tooltip entry");
+                check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "dimension_capsule")) != null, "capsule tooltip entry");
                 checked = true;
             }
             if (waitFrames == 0) {
@@ -111,7 +117,7 @@ public final class GuideChecks {
                 image.writeToFile(screenshots.resolve("guide-" + name + ".png"));
             }
             if (++page == PAGES.size()) {
-                LogUtils.getLogger().info("GUIDE CHECKS PASSED: AE2 guide pages compiled/rendered, images and three tooltip entries resolved");
+                LogUtils.getLogger().info("GUIDE CHECKS PASSED: {} AE2 guide pages compiled/rendered, images and four tooltip entries resolved", PAGES.size());
             }
         } catch (Throwable failure) {
             LogUtils.getLogger().error("GUIDE CHECKS FAILED", failure);

@@ -1,0 +1,5 @@
+{
+  "multipart": [
+    { "apply": { "model": "useless_stretcher:block/two_i_doll_display" } }
+  ]
+}

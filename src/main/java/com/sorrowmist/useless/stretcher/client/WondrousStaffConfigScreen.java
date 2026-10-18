@@ -30,6 +30,9 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
     private SelectableAE2Button lootRefreshButton;
     private SelectableAE2Button summonOpenButton;
     private SelectableAE2Button apotheosisOpenButton;
+    private SelectableAE2Button phaseButton;
+    private SelectableAE2Button phaseInteractionButton;
+    private SelectableAE2Button radiationButton;
     private PlainTextButton extrasFoldText;
     private int panelLeft;
     private int panelTop;
@@ -38,6 +41,9 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
     private boolean accelerationEnabled;
     private boolean summonEnabled;
     private boolean lootRefreshEnabled;
+    private boolean phaseEnabled;
+    private boolean phaseInteractionEnabled;
+    private boolean radiationEnabled;
     private boolean extrasCollapsed = true;
     private boolean settingsLoaded;
     private int speedTop, speedHeight, modeTop, modeHeight, featuresTop, featuresHeight;
@@ -59,6 +65,10 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
             accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
             summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
             lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+            phaseEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+            radiationEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
+            phaseInteractionEnabled = staff.getOrDefault(
+                    StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
             settingsLoaded = true;
         }
 
@@ -113,7 +123,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         featuresTop = modeTop + modeHeight + 4;
         boolean showApotheosis = StretcherConfig.hasApotheosisConfig();
         int featureWidth = (cardWidth - 13) / 2;
-        featuresHeight = extrasCollapsed ? 42 : 84;
+        featuresHeight = extrasCollapsed ? 42 : 105;
         addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, featureWidth, 17,
                 Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
                 ignored -> minecraft.setScreen(new EntityAccelerationConfigScreen(this, hand))))
@@ -133,16 +143,28 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                     ignored -> minecraft.setScreen(new WondrousStaffSummonScreen(this, hand))));
             if (showApotheosis) {
                 apotheosisOpenButton = addRenderableWidget(new SelectableAE2Button(
-                        cardLeft + 5, featuresTop + 60, featureWidth, 17,
+                        cardLeft + 5, featuresTop + 81, featureWidth, 17,
                         apotheosisOpenMessage(), ignored -> minecraft.setScreen(
                                 new WondrousStaffApotheosisScreen(this, hand))));
             } else {
                 apotheosisOpenButton = null;
             }
+            phaseButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5, featuresTop + 60, featureWidth, 17,
+                    phaseMessage(), ignored -> togglePhase()));
+            phaseInteractionButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 8 + featureWidth, featuresTop + 60, featureWidth, 17,
+                    phaseInteractionMessage(), ignored -> togglePhaseInteraction()));
+            radiationButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + (showApotheosis ? 8 + featureWidth : 5), featuresTop + 81, featureWidth, 17,
+                    radiationMessage(), ignored -> toggleRadiation()));
         } else {
             lootRefreshButton = null;
             summonOpenButton = null;
             apotheosisOpenButton = null;
+            phaseButton = null;
+            phaseInteractionButton = null;
+            radiationButton = null;
         }
 
         int footerWidth = (cardWidth - 3) / 2;
@@ -247,6 +269,26 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                     ? apotheosisOpenMessage()
                     : Component.translatable("gui.useless_stretcher.staff_apotheosis.disabled"));
         }
+        if (phaseButton != null) {
+            phaseButton.setSelected(phaseEnabled);
+            phaseButton.setMessage(phaseMessage());
+            phaseButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.phase")));
+        }
+        if (radiationButton != null) {
+            radiationButton.active = net.neoforged.fml.ModList.get().isLoaded("mekanism");
+            radiationButton.setSelected(radiationEnabled);
+            radiationButton.setMessage(radiationMessage());
+            radiationButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.radiation")));
+        }
+        if (phaseInteractionButton != null) {
+            phaseInteractionButton.setSelected(phaseInteractionEnabled);
+            phaseInteractionButton.setMessage(phaseInteractionMessage());
+            phaseInteractionButton.active = phaseEnabled;
+            phaseInteractionButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.phase_interaction")));
+        }
     }
 
     @Override
@@ -276,9 +318,53 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                         : "gui.useless_stretcher.staff_config.off"));
     }
 
+    private Component phaseMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.phase",
+                Component.translatable(phaseEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component phaseInteractionMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.phase_interaction",
+                Component.translatable(phaseInteractionEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private void togglePhase() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        phaseEnabled = !phaseEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), phaseEnabled);
+        Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
+        updateSelection();
+    }
+
+    private void togglePhaseInteraction() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !phaseEnabled) return;
+        phaseInteractionEnabled = !phaseInteractionEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), phaseInteractionEnabled);
+        Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
+        updateSelection();
+    }
+
     private void toggleExtrasFold() {
         extrasCollapsed = !extrasCollapsed;
         rebuildWidgets();
+    }
+
+    private Component radiationMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.radiation", Component.translatable(
+                radiationEnabled ? "gui.useless_stretcher.staff_config.on" : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private void toggleRadiation() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !net.neoforged.fml.ModList.get().isLoaded("mekanism")) return;
+        radiationEnabled = !radiationEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), radiationEnabled);
+        Network.sendWondrousStaffRadiation(radiationEnabled, hand);
+        updateSelection();
     }
 
     private ItemStack currentStaff() {

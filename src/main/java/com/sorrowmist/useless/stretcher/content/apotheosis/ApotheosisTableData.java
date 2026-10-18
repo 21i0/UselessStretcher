@@ -59,6 +59,15 @@ public final class ApotheosisTableData extends SavedData {
         return tables.containsKey(new TableKey(dimension, pos.asLong()));
     }
 
+    /** Removes both the saved bonus and its ownership marker when the table is destroyed. */
+    public java.util.UUID remove(ResourceLocation dimension, BlockPos pos) {
+        TableKey key = new TableKey(dimension, pos.asLong());
+        boolean hadTable = tables.remove(key) != null;
+        java.util.UUID owner = owners.remove(key);
+        if (hadTable || owner != null) setDirty();
+        return owner;
+    }
+
     /** Applies a newly saved staff preset to every table marked by that same player. */
     public int updateOwned(java.util.UUID owner, Boost boost) {
         Boost normalized = boost.normalized();

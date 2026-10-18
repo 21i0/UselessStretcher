@@ -26,4 +26,21 @@ public abstract class BeefTimeAccelerationMixin {
             cir.setReturnValue(InteractionResult.PASS);
         }
     }
+
+    /** Newer upstream tools have their own entity path, separate from tryUse(block). */
+    @Inject(method = "tryUseOnEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/InteractionResult;",
+            at = @At("HEAD"), cancellable = true, require = 0)
+    private static void uselessStretcher$entityFallback(net.minecraft.world.item.ItemStack staff,
+            net.minecraft.world.entity.player.Player player, net.minecraft.world.entity.LivingEntity target,
+            CallbackInfoReturnable<InteractionResult> cir) {
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity)
+            cir.setReturnValue(InteractionResult.FAIL);
+        else if (staff.getItem() instanceof WondrousStaffItem) cir.setReturnValue(InteractionResult.PASS);
+    }
+
+    @Inject(method = "accelerateEntityTimers", at = @At("HEAD"), cancellable = true, require = 0)
+    private static void uselessStretcher$stopDollTimers(net.minecraft.world.entity.LivingEntity target,
+            int speed, org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity) ci.cancel();
+    }
 }

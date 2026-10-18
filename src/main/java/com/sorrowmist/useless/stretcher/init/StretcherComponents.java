@@ -1,6 +1,7 @@
 package com.sorrowmist.useless.stretcher.init;
 
 import com.mojang.serialization.Codec;
+import com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -59,6 +60,52 @@ public final class StretcherComponents {
             register("wondrous_staff_loot_refresh", builder -> builder
                     .persistent(Codec.BOOL)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Lets the holder pass through solid blocks while this staff is held. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PHASE_ENABLED =
+            register("wondrous_staff_phase_enabled", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Keeps normal block/entity interaction available while phase mode is active. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PHASE_INTERACTION =
+            register("wondrous_staff_phase_interaction", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Clears and shields personal Mekanism radiation while this staff is carried. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_RADIATION_PROTECTION =
+            register("wondrous_staff_radiation_protection", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Rotation of the 2i mascot while it is held as an item. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_ROTATION =
+            integerComponent("two_i_rotation");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_GIFT_SCORE =
+            integerComponent("two_i_gift_score");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_BOND =
+            integerComponent("two_i_bond");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_OWNER =
+            register("two_i_owner", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
+                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                            buffer -> buffer.readUUID())));
+    /** Stable physical identity distinguishes two held dolls when the player swaps hands. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_DOLL_ID =
+            register("two_i_doll_id", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
+                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                            buffer -> buffer.readUUID())));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<TwoIDollMemory>> TWO_I_MEMORY =
+            register("two_i_memory", builder -> builder.persistent(TwoIDollMemory.CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> TWO_I_INVITATION_USED =
+            register("two_i_invitation_used", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Server-validated structure selected by a dimension capsule. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> CAPSULE_STRUCTURE =
+            register("capsule_structure", builder -> builder.persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CAPSULE_ROTATION =
+            integerComponent("capsule_rotation");
 
     /** Last-used virtual bookshelf settings, copied onto a table when selected. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_ETERNA =

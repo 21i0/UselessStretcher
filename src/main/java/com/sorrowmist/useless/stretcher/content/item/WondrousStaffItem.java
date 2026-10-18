@@ -154,6 +154,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
+        if (RangeAccelerationSettings.placementMode(stack)) return InteractionResult.FAIL;
         InteractionResult apotheosis = selectApotheosisTable(stack, ctx);
         if (apotheosis != InteractionResult.PASS) return apotheosis;
         if (RangeAccelerationSettings.filterMarkingMode(stack)) return InteractionResult.FAIL;
@@ -181,6 +182,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
+        if (RangeAccelerationSettings.placementMode(ctx.getItemInHand())) return InteractionResult.FAIL;
         InteractionResult apotheosis = selectApotheosisTable(ctx.getItemInHand(), ctx);
         if (apotheosis != InteractionResult.PASS) return apotheosis;
         if (RangeAccelerationSettings.filterMarkingMode(ctx.getItemInHand())) return InteractionResult.FAIL;

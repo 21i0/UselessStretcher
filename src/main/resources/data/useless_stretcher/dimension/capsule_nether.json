@@ -1,0 +1,11 @@
+{
+  "type": "useless_stretcher:capsule_nether",
+  "generator": {
+    "type": "useless_stretcher:two_i_starfield_gen",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:nether_wastes"
+    },
+    "platform": false
+  }
+}

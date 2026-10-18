@@ -1,0 +1,15 @@
+{
+  "result": "JAR CHECKS PASSED",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0-test-2i-final-20261017.jar",
+  "version": "1.21.1-1.6.0",
+  "bytes": 12433288,
+  "sha256": "82486B08184F7852664B460AB892826505816C2A035A679B9E10EB1EFACCAE6E",
+  "production_sources_with_matching_class": 212,
+  "production_classes_with_matching_bytecode": 386,
+  "source_resources_with_matching_hash": 113,
+  "json_mcmeta_parsed": 70,
+  "story_chapters": 6,
+  "story_images": 17,
+  "original_ogg_files": 7,
+  "forbidden_entries": 0
+}

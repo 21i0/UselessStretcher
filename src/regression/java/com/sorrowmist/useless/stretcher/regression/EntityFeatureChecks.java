@@ -6,7 +6,10 @@ import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
+import com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffSummoning;
+import com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity;
+import com.sorrowmist.useless.stretcher.content.entity.TwoIStarfieldData;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.mixin.TurtleTimerAccessor;
@@ -15,6 +18,8 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -39,7 +44,27 @@ final class EntityFeatureChecks {
         }
         var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "EntityRegression"));
         player.setPos(4.5, 160, 4.5);
+        checkTwoIDollPersistence(level);
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        check(!staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false),
+                "phase staff default is off");
+        check(staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true),
+                "phase interaction default is on");
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, staff);
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        check(StaffPhaseManager.state(player).phase(), "held phase staff enables player phase state");
+        check(!StaffPhaseManager.blocksInteraction(player), "phase interaction remains available by default");
+        StaffPhaseManager.setNoPhysics(player, false);
+        StaffPhaseManager.apply(player);
+        check(StaffPhaseManager.noPhysics(player), "phase staff temporarily disables block collision");
+        StaffPhaseManager.setNoPhysics(player, false); // another mod changes its collision state while phasing
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
+        check(StaffPhaseManager.blocksInteraction(player), "phase interaction switch can suppress interaction");
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+        StaffPhaseManager.apply(player);
+        check(!StaffPhaseManager.noPhysics(player), "disabling phase preserves a newer external collision-state change");
+        check(!StaffPhaseManager.state(player).phase(), "phase state clears when staff phase is off");
+        checkUselessModPhaseCompatibility(player, staff);
         check(!WondrousStaffAcceleration.usesEntityTimers(staff), "old staff defaults to complete ticks");
         boolean summonEnabled = StretcherConfig.enableStaffSummon();
         try {
@@ -136,6 +161,50 @@ final class EntityFeatureChecks {
         LogUtils.getLogger().info("REGRESSION 1.5.2 entities: summon, timers, AI, legacy saves, duration, restocking, packets and independent speeds passed");
     }
 
+    private static void checkTwoIDollPersistence(ServerLevel level) throws Exception {
+        UUID owner = UUID.randomUUID();
+        TwoIDollEntity doll = com.sorrowmist.useless.stretcher.init.ModEntities.TWO_I_DOLL.get().create(level);
+        check(doll != null, "2i entity type creates");
+        doll.setPos(12.5D, 150.0D, 12.5D);
+        doll.setOwnerId(owner);
+        doll.restoreBond(7, true);
+        check(level.addFreshEntity(doll), "2i entity enters level");
+        check(TwoIDollEntity.trackedFor(level.getServer(), owner).contains(doll), "loaded 2i enters remote index");
+        var toucher = FakePlayerFactory.get(level, new GameProfile(owner, "2iPatRegression"));
+        toucher.setPos(12.5D, 150.0D, 14.0D);
+        check(net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.getKey(
+                com.sorrowmist.useless.stretcher.init.ModSounds.TWO_I_PAT.get()).toString().equals("useless_stretcher:two_i_pat"),
+                "head pat uses our registered original sound on a dedicated server");
+        check(doll.patBy(toucher) && doll.getPoseAction() == TwoIDollEntity.ACTION_PATTED,
+                "pat interaction triggers the synchronized response and sound path");
+        check(!doll.patBy(toucher), "pat interaction is cooldown limited");
+        check(!doll.isAttackable() && doll.isPickable()
+                        && !doll.hurt(level.damageSources().generic(), 100.0F),
+                "2i remains ray-interactable and immune to damage");
+
+        CompoundTag savedDoll = doll.saveWithoutId(new CompoundTag());
+        TwoIDollEntity restored = com.sorrowmist.useless.stretcher.init.ModEntities.TWO_I_DOLL.get().create(level);
+        check(restored != null, "2i entity can be restored");
+        restored.load(savedDoll);
+        check(restored.getGiftScore() == 8 && restored.isInvitationUsed(), "2i gift score including pat reward and invite state persist");
+        doll.discardForReclaim();
+        check(!TwoIDollEntity.trackedFor(level.getServer(), owner).contains(doll), "removed 2i leaves remote index");
+
+        TwoIStarfieldData data = new TwoIStarfieldData();
+        int first = data.slotFor(owner);
+        int second = data.slotFor(UUID.randomUUID());
+        check(first != second, "starfield players get distinct slots");
+        data.setReturnPoint(owner, level, new net.minecraft.world.phys.Vec3(3.5D, 72.0D, -8.5D), 45.0F, 10.0F);
+        CompoundTag saved = data.save(new CompoundTag(), level.registryAccess());
+        var load = TwoIStarfieldData.class.getDeclaredMethod("load", CompoundTag.class,
+                net.minecraft.core.HolderLookup.Provider.class);
+        load.setAccessible(true);
+        TwoIStarfieldData restoredData = (TwoIStarfieldData) load.invoke(null, saved, level.registryAccess());
+        check(restoredData.slotFor(owner) == first, "starfield coordinate assignment survives save/load");
+        check(restoredData.returnPoint(owner).equals(data.returnPoint(owner)), "return location survives save/load");
+        LogUtils.getLogger().info("REGRESSION 1.6.0 2i: damage immunity, loaded-entity indexing, gift state and private starfield save/load passed");
+    }
+
     private static final class CountingChicken extends Chicken {
         int calls;
         CountingChicken(ServerLevel level) { super(EntityType.CHICKEN, level); }
@@ -147,4 +216,48 @@ final class EntityFeatureChecks {
         @Override public void restock() { restocks++; super.restock(); }
     }
     private static void check(boolean value, String message) { if (!value) throw new AssertionError(message); }
+
+    /** Exercise the optional upstream modes against phase control when that mod is present. */
+    private static void checkUselessModPhaseCompatibility(
+            net.minecraft.server.level.ServerPlayer player, ItemStack staff) throws Exception {
+        if (!net.neoforged.fml.ModList.get().isLoaded("useless_mod")) return;
+        Class<?> components = Class.forName("com.sorrowmist.useless.core.component.UComponents");
+        Object protectedHolder = components.getField("BeefInvulnerabilityEnabledComponent").get(null);
+        Object stealthHolder = components.getField("BeefAdvancedStealthEnabledComponent").get(null);
+        var deferredHolder = protectedHolder.getClass().getMethod("get");
+        @SuppressWarnings("unchecked")
+        var protectedMode = (net.minecraft.core.component.DataComponentType<Boolean>) deferredHolder.invoke(protectedHolder);
+        @SuppressWarnings("unchecked")
+        var stealthMode = (net.minecraft.core.component.DataComponentType<Boolean>) deferredHolder.invoke(stealthHolder);
+        var beefItem = BuiltInRegistries.ITEM.get(ResourceLocation.parse("useless_mod:endless_beaf_item"));
+        check(!beefItem.equals(Items.AIR), "upstream endless beef tool is registered for phase compatibility check");
+        ItemStack beef = new ItemStack(beefItem);
+        beef.set(protectedMode, true);
+        beef.set(stealthMode, true);
+        player.getInventory().add(beef);
+
+        Class<?> handler = Class.forName("com.sorrowmist.useless.event.EventHandler");
+        var protectedQuery = handler.getMethod("hasBeefInvulnerabilityItem", net.minecraft.world.entity.player.Player.class);
+        var stealthQuery = handler.getMethod("hasBeefAdvancedStealthItem", net.minecraft.world.entity.player.Player.class);
+        check((boolean) protectedQuery.invoke(null, player), "upstream player protection is active before phasing");
+        check((boolean) stealthQuery.invoke(null, player), "upstream advanced stealth is active before phasing");
+
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        StaffPhaseManager.apply(player);
+        check(StaffPhaseManager.noPhysics(player), "phase and upstream protections can be active together");
+        // The upstream Useless Mod may normalize its inventory copy while its
+        // server-side mode sets are refreshed.  The authoritative compatibility
+        // contract is the two public queries below, rather than the pre-inventory
+        // ItemStack object that was handed to Inventory#add.
+        check((boolean) protectedQuery.invoke(null, player) && (boolean) stealthQuery.invoke(null, player),
+                "upstream player protection and advanced stealth remain effective while phasing");
+
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+        StaffPhaseManager.apply(player);
+        check(!StaffPhaseManager.noPhysics(player), "phase release restores collision while upstream modes stay enabled");
+        check((boolean) protectedQuery.invoke(null, player) && (boolean) stealthQuery.invoke(null, player),
+                "upstream protections remain effective after phase release");
+        player.getInventory().removeItem(beef);
+        LogUtils.getLogger().info("REGRESSION staff phase and Useless Mod player protection/advanced stealth coexistence passed");
+    }
 }

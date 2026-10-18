@@ -63,6 +63,12 @@ public final class WondrousStaffClient {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || mc.screen != null) return;
+        if (StretcherKeyBindings.STANDALONE_TELEPORT.consumeClick()) {
+            Network.sendStandaloneTeleport();
+        }
+        if (StretcherKeyBindings.TWO_I_REMOTE_RECLAIM.consumeClick()) {
+            Network.sendTwoIDollRemoteReclaim();
+        }
         if (StretcherKeyBindings.WONDROUS_STAFF_TIME_STOP.consumeClick()) {
             InteractionHand stopHand = findStaffHand(player);
             if (stopHand != null) {

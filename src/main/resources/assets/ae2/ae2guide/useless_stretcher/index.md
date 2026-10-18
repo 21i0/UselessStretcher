@@ -15,6 +15,7 @@ navigation:
   <ItemImage id="useless_stretcher:omniversal_myriad" scale="3" />
   <ItemImage id="useless_stretcher:useless_stretcher" scale="3" />
   <ItemImage id="useless_stretcher:wondrous_staff" scale="3" />
+  <ItemImage id="useless_stretcher:two_i_doll" scale="3" />
 </Row>
 
 万象担架是无用之物的 AE2 附属模组。万物之块可以集中管理无用之物万象合金炉使用的模具和 AE 样板，万象担架可以把样板送入远处的机器，荒辰移晷之杖则可以加速普通机器、AE2 设备、实体和范围内的目标。
@@ -28,12 +29,14 @@ navigation:
 * [万象担架](stretcher.md)
 * [荒辰移晷之杖](staff.md)
 * [范围加速与时间流逝](range.md)
+* [2i 玩偶与星空庭院](two_i.md)
+* [维度胶囊](capsule.md)
 * [配置、树叶彩蛋与升级](extras.md)
 
 ## 使用前准备
 
 需要安装 Minecraft 1.21.1、无用之物、AE2，以及客户端可选的 GuideME。GuideME 只负责客户端指南界面；未安装 GuideME 时，本模组的机器、样板、担架和加速功能仍可正常使用。
 
-无用之物 2.3.7 及更新版已经原生支持 4096 个样板槽位，万象担架会自动使用本体容量。旧版无用之物仍由本模组提供兼容处理；升级或回退前建议备份世界。
+1.6.0 最低需要无用之物 2.4.6，直接使用本体原生提供的 4096 样板槽位。旧版扩容补丁已删除。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。
 
 材质与游戏内鸣谢署名：虾比。

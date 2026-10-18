@@ -14,6 +14,9 @@ import com.sorrowmist.useless.stretcher.content.mold.MoldCatalogService;
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisTableData;
 import com.sorrowmist.useless.stretcher.content.entity.TimeStopManager;
+import com.sorrowmist.useless.stretcher.content.capsule.DimensionCapsuleCatalog;
+import com.sorrowmist.useless.stretcher.content.capsule.DimensionCapsuleService;
+import com.sorrowmist.useless.stretcher.content.item.DimensionCapsuleItem;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
 import com.sorrowmist.useless.stretcher.content.mold.PatternSearchIndex;
 import appeng.api.stacks.AEItemKey;
@@ -350,6 +353,18 @@ public final class Network {
     }
 
     /** One-shot key action; the server owns the 12-second lifetime and ignores repeats while active. */
+    public record StandaloneTeleportPayload() implements CustomPacketPayload {
+        public static final Type<StandaloneTeleportPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "standalone_teleport"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StandaloneTeleportPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> {}, buf -> new StandaloneTeleportPayload());
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public static void sendStandaloneTeleport() {
+        PacketDistributor.sendToServer(new StandaloneTeleportPayload());
+    }
+
     public record StaffTimeStopPayload(boolean offhand) implements CustomPacketPayload {
         public static final Type<StaffTimeStopPayload> TYPE = new Type<>(
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_time_stop"));
@@ -364,6 +379,205 @@ public final class Network {
                 ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "time_stop_state"));
         public static final StreamCodec<RegistryFriendlyByteBuf, TimeStopStatePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TimeStopStatePayload::remaining, TimeStopStatePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Opens or refreshes the client-side conversation panel for the author mascot. */
+    public record TwoIDialoguePayload(int entityId, boolean inviteReady, int giftScore, boolean open) implements CustomPacketPayload {
+        public static final Type<TwoIDialoguePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_dialogue"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDialoguePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDialoguePayload::entityId,
+                        ByteBufCodecs.BOOL, TwoIDialoguePayload::inviteReady,
+                        ByteBufCodecs.VAR_INT, TwoIDialoguePayload::giftScore,
+                        ByteBufCodecs.BOOL, TwoIDialoguePayload::open,
+                        TwoIDialoguePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Opens the item panel only after the server has verified its owner. */
+    public record TwoIItemDialoguePayload(boolean offhand, int bond, boolean invitationUsed) implements CustomPacketPayload {
+        public static final Type<TwoIItemDialoguePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_item_dialogue"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIItemDialoguePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, TwoIItemDialoguePayload::offhand,
+                        ByteBufCodecs.VAR_INT, TwoIItemDialoguePayload::bond,
+                        ByteBufCodecs.BOOL, TwoIItemDialoguePayload::invitationUsed, TwoIItemDialoguePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record DimensionCapsuleCatalogPayload(List<String> entries, boolean offhand, int part, int parts)
+            implements CustomPacketPayload {
+        public static final int PAGE_SIZE = 128;
+        public static final Type<DimensionCapsuleCatalogPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "dimension_capsule_catalog"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, DimensionCapsuleCatalogPayload> STREAM_CODEC =
+                StreamCodec.of((buf, payload) -> {
+                    buf.writeBoolean(payload.offhand());
+                    buf.writeVarInt(payload.part());
+                    buf.writeVarInt(payload.parts());
+                    if (payload.entries().size() > PAGE_SIZE) throw new IllegalArgumentException("Capsule page too large");
+                    buf.writeVarInt(payload.entries().size());
+                    payload.entries().forEach(value -> buf.writeUtf(value, 512));
+                }, buf -> {
+                    boolean offhand = buf.readBoolean();
+                    int part = buf.readVarInt();
+                    int parts = buf.readVarInt();
+                    int count = buf.readVarInt();
+                    if (count < 0 || count > PAGE_SIZE || parts < 1
+                            || parts > (DimensionCapsuleCatalog.MAX_ENTRIES + PAGE_SIZE - 1) / PAGE_SIZE
+                            || part < 0 || part >= parts) throw new IllegalArgumentException("Invalid capsule page");
+                    List<String> entries = new ArrayList<>(count);
+                    for (int i = 0; i < count; i++) entries.add(buf.readUtf(512));
+                    return new DimensionCapsuleCatalogPayload(List.copyOf(entries), offhand, part, parts);
+                });
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** action 0 stores a selection, action 2 enters or returns. */
+    public record DimensionCapsuleRequestPayload(boolean offhand, int index, int rotation, int action)
+            implements CustomPacketPayload {
+        public static final Type<DimensionCapsuleRequestPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "dimension_capsule_request"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, DimensionCapsuleRequestPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, DimensionCapsuleRequestPayload::offhand,
+                        ByteBufCodecs.VAR_INT, DimensionCapsuleRequestPayload::index,
+                        ByteBufCodecs.VAR_INT, DimensionCapsuleRequestPayload::rotation,
+                        ByteBufCodecs.VAR_INT, DimensionCapsuleRequestPayload::action,
+                        DimensionCapsuleRequestPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Requests conversion of one nearby mascot entity back into its item. */
+    public record TwoIDollReclaimPayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollReclaimPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_reclaim"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollReclaimPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollReclaimPayload::entityId,
+                        TwoIDollReclaimPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record TwoIDollGiftPayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollGiftPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_gift"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollGiftPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollGiftPayload::entityId,
+                        TwoIDollGiftPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record TwoIDollInvitePayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollInvitePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_invite"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollInvitePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollInvitePayload::entityId,
+                        TwoIDollInvitePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record TwoIDollPatPayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollPatPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_pat"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollPatPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollPatPayload::entityId,
+                        TwoIDollPatPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Requests one short, server-authoritative conversation with 2i. */
+    public record TwoIDollTalkPayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollTalkPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_talk"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollTalkPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollTalkPayload::entityId,
+                        TwoIDollTalkPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Requests a server-owned story without triggering the ordinary random chat. */
+    public record TwoIDollStoryStartPayload(int entityId) implements CustomPacketPayload {
+        public static final Type<TwoIDollStoryStartPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_start"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollStoryStartPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollStoryStartPayload::entityId,
+                        TwoIDollStoryStartPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Keeps an already-authorized doll interaction alive or closes it. */
+    public record TwoIInteractionPayload(int entityId, boolean active) implements CustomPacketPayload {
+        public static final Type<TwoIInteractionPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_interaction"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIInteractionPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIInteractionPayload::entityId,
+                        ByteBufCodecs.BOOL, TwoIInteractionPayload::active, TwoIInteractionPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record TwoIStoryLibraryRequestPayload(int requestId) implements CustomPacketPayload {
+        public static final Type<TwoIStoryLibraryRequestPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_library_request"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryLibraryRequestPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryLibraryRequestPayload::requestId,
+                        TwoIStoryLibraryRequestPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Only the calling player's saved unlocks are returned; this request performs no writes. */
+    public record TwoIStoryLibraryStatePayload(int requestId, int completedMask) implements CustomPacketPayload {
+        public static final Type<TwoIStoryLibraryStatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_library_state"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryLibraryStatePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryLibraryStatePayload::requestId,
+                        ByteBufCodecs.VAR_INT, TwoIStoryLibraryStatePayload::completedMask,
+                        TwoIStoryLibraryStatePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** A choice must name the exact session issued to this player. */
+    public record TwoIDollStoryPayload(int entityId, long sessionId, int choice) implements CustomPacketPayload {
+        public static final Type<TwoIDollStoryPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_choice"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollStoryPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollStoryPayload::entityId,
+                        ByteBufCodecs.VAR_LONG, TwoIDollStoryPayload::sessionId,
+                        ByteBufCodecs.VAR_INT, TwoIDollStoryPayload::choice,
+                        TwoIDollStoryPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** result: 0 = started/resumed, 1 = choice accepted, 2 = unavailable. */
+    public record TwoIStoryStatePayload(int entityId, long sessionId, int chapter, int bond, int result, int round)
+            implements CustomPacketPayload {
+        public static final Type<TwoIStoryStatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_state"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryStatePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::entityId,
+                        ByteBufCodecs.VAR_LONG, TwoIStoryStatePayload::sessionId,
+                        ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::chapter,
+                        ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::bond,
+                        ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::result,
+                        ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::round,
+                        TwoIStoryStatePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public record TwoIDollDeployPayload(boolean offhand) implements CustomPacketPayload {
+        public static final Type<TwoIDollDeployPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_deploy"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollDeployPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, TwoIDollDeployPayload::offhand,
+                        TwoIDollDeployPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Requests a server-side long ray trace for the player's owned 2i entity. */
+    public record TwoIDollRemoteReclaimPayload() implements CustomPacketPayload {
+        public static final Type<TwoIDollRemoteReclaimPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_remote_reclaim"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollRemoteReclaimPayload> STREAM_CODEC =
+                StreamCodec.of((buf, value) -> {}, buf -> new TwoIDollRemoteReclaimPayload());
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
@@ -399,6 +613,41 @@ public final class Network {
         public Type<? extends CustomPacketPayload> type() {
             return TYPE;
         }
+    }
+
+    /** Client request for the staff phase and interaction switches. */
+    public record WondrousStaffPhasePayload(boolean phaseEnabled, boolean interactionEnabled,
+                                            boolean offhand) implements CustomPacketPayload {
+        public static final Type<WondrousStaffPhasePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_phase"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffPhasePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, WondrousStaffPhasePayload::phaseEnabled,
+                        ByteBufCodecs.BOOL, WondrousStaffPhasePayload::interactionEnabled,
+                        ByteBufCodecs.BOOL, WondrousStaffPhasePayload::offhand,
+                        WondrousStaffPhasePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Validated per-staff radiation switch. */
+    public record WondrousStaffRadiationPayload(boolean enabled, boolean offhand) implements CustomPacketPayload {
+        public static final Type<WondrousStaffRadiationPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_radiation"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffRadiationPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, WondrousStaffRadiationPayload::enabled,
+                        ByteBufCodecs.BOOL, WondrousStaffRadiationPayload::offhand, WondrousStaffRadiationPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    /** Server-authoritative phase state; sent whenever the held staff changes or the player logs in. */
+    public record StaffPhaseStatePayload(boolean phaseEnabled, boolean interactionEnabled)
+            implements CustomPacketPayload {
+        public static final Type<StaffPhaseStatePayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_phase_state"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StaffPhaseStatePayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, StaffPhaseStatePayload::phaseEnabled,
+                        ByteBufCodecs.BOOL, StaffPhaseStatePayload::interactionEnabled,
+                        StaffPhaseStatePayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
     public record ApotheosisTierPayload(String tier) implements CustomPacketPayload {
@@ -544,7 +793,18 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("10");
+        PayloadRegistrar registrar = event.registrar("20");
+        CapsuleNetwork.register(registrar);
+        registrar.playToServer(WondrousStaffRadiationPayload.TYPE, WondrousStaffRadiationPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player)
+                        com.sorrowmist.useless.stretcher.compat.StaffRadiationProtection.configure(player, payload.offhand(), payload.enabled());
+                }));
+        registrar.playToServer(StandaloneTeleportPayload.TYPE, StandaloneTeleportPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player)
+                        com.sorrowmist.useless.stretcher.content.travel.StandaloneTeleport.activate(player);
+                }));
         registrar.playToClient(ServerConfigSync.Payload.TYPE, ServerConfigSync.Payload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() ->
                         com.sorrowmist.useless.stretcher.client.StretcherConfigScreen.accept(payload)));
@@ -589,12 +849,61 @@ public final class Network {
                 }));
         registrar.playToClient(TimeAccelerationStatePayload.TYPE, TimeAccelerationStatePayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.handleTimeAcceleration(payload));
+        registrar.playToClient(StaffPhaseStatePayload.TYPE, StaffPhaseStatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleStaffPhase(payload)));
         registrar.playToServer(WondrousStaffSpeedPayload.TYPE, WondrousStaffSpeedPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffSpeed(payload, context)));
         registrar.playToServer(StaffTimeStopPayload.TYPE, StaffTimeStopPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleStaffTimeStop(payload, context)));
         registrar.playToClient(TimeStopStatePayload.TYPE, TimeStopStatePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTimeStop(payload)));
+        registrar.playToClient(TwoIDialoguePayload.TYPE, TwoIDialoguePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTwoIDialogue(payload)));
+        registrar.playToClient(TwoIItemDialoguePayload.TYPE, TwoIItemDialoguePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTwoIItemDialogue(payload)));
+        registrar.playToClient(DimensionCapsuleCatalogPayload.TYPE, DimensionCapsuleCatalogPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleDimensionCapsule(payload)));
+        registrar.playToServer(DimensionCapsuleRequestPayload.TYPE, DimensionCapsuleRequestPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleDimensionCapsuleRequest(payload, context)));
+        registrar.playToServer(TwoIDollReclaimPayload.TYPE, TwoIDollReclaimPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollReclaim(payload, context)));
+        registrar.playToServer(TwoIDollGiftPayload.TYPE, TwoIDollGiftPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollGift(payload, context)));
+        registrar.playToServer(TwoIDollInvitePayload.TYPE, TwoIDollInvitePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollInvite(payload, context)));
+        registrar.playToServer(TwoIDollPatPayload.TYPE, TwoIDollPatPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollPat(payload, context)));
+        registrar.playToServer(TwoIDollTalkPayload.TYPE, TwoIDollTalkPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollTalk(payload, context)));
+        registrar.playToServer(TwoIDollStoryStartPayload.TYPE, TwoIDollStoryStartPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollStoryStart(payload, context)));
+        registrar.playToServer(TwoIDollStoryPayload.TYPE, TwoIDollStoryPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollStory(payload, context)));
+        registrar.playToClient(TwoIStoryStatePayload.TYPE, TwoIStoryStatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTwoIStoryState(payload)));
+        registrar.playToServer(TwoIStoryLibraryRequestPayload.TYPE, TwoIStoryLibraryRequestPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) {
+                        int completed = com.sorrowmist.useless.stretcher.content.entity.TwoIStoryData
+                                .get(player.serverLevel().getServer()).completedMask(player.getUUID());
+                        PacketDistributor.sendToPlayer(player,
+                                new TwoIStoryLibraryStatePayload(payload.requestId(), completed));
+                    }
+                }));
+        registrar.playToClient(TwoIStoryLibraryStatePayload.TYPE, TwoIStoryLibraryStatePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> ClientStateReceiver.handleTwoIStoryLibrary(payload)));
+        registrar.playToServer(TwoIInteractionPayload.TYPE, TwoIInteractionPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player
+                            && player.serverLevel().getEntity(payload.entityId()) instanceof
+                            com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) {
+                        doll.keepInteraction(player, payload.active());
+                    }
+                }));
+        registrar.playToServer(TwoIDollDeployPayload.TYPE, TwoIDollDeployPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollDeploy(payload, context)));
+        registrar.playToServer(TwoIDollRemoteReclaimPayload.TYPE, TwoIDollRemoteReclaimPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleTwoIDollRemoteReclaim(context)));
         registrar.playToServer(EntityTimerSettingsPayload.TYPE, EntityTimerSettingsPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
                     if (!(context.player() instanceof ServerPlayer player) || !StretcherConfig.serverStaffAcceleration()) return;
@@ -606,6 +915,8 @@ public final class Network {
                 }));
         registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
+        registrar.playToServer(WondrousStaffPhasePayload.TYPE, WondrousStaffPhasePayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> handleWondrousStaffPhase(payload, context)));
         registrar.playToServer(ApotheosisTierPayload.TYPE, ApotheosisTierPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleApotheosisTier(payload, context)));
         registrar.playToServer(ApotheosisOptionsPayload.TYPE, ApotheosisOptionsPayload.STREAM_CODEC,
@@ -670,6 +981,229 @@ public final class Network {
         PacketDistributor.sendToPlayer(player, new TimeStopStatePayload(Math.max(0, remaining)));
     }
 
+    public static void sendTwoIDialogue(ServerPlayer player, int entityId, boolean inviteReady, int giftScore) {
+        PacketDistributor.sendToPlayer(player, new TwoIDialoguePayload(entityId, inviteReady, giftScore, true));
+    }
+
+    public static void sendTwoIItemDialogue(ServerPlayer player, InteractionHand hand, ItemStack stack) {
+        if (!player.getUUID().equals(stack.get(StretcherComponents.TWO_I_OWNER.get()))) return;
+        PacketDistributor.sendToPlayer(player, new TwoIItemDialoguePayload(hand == InteractionHand.OFF_HAND,
+                com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.getBond(stack),
+                stack.getOrDefault(StretcherComponents.TWO_I_INVITATION_USED.get(), false)));
+    }
+
+    public static void sendDimensionCapsuleCatalog(ServerPlayer player, boolean offhand) {
+        List<String> entries = DimensionCapsuleCatalog.scan(player).stream()
+                .map(DimensionCapsuleCatalog.Entry::wire).toList();
+        int pageSize = DimensionCapsuleCatalogPayload.PAGE_SIZE;
+        int parts = Math.max(1, (entries.size() + pageSize - 1) / pageSize);
+        for (int part = 0; part < parts; part++) {
+            PacketDistributor.sendToPlayer(player, new DimensionCapsuleCatalogPayload(
+                    entries.subList(part * pageSize, Math.min(entries.size(), (part + 1) * pageSize)),
+                    offhand, part, parts));
+        }
+    }
+
+    public static void sendDimensionCapsuleRequest(int index, int rotation, int action, boolean offhand) {
+        PacketDistributor.sendToServer(new DimensionCapsuleRequestPayload(offhand, index, rotation, action));
+    }
+
+    private static void handleDimensionCapsuleRequest(DimensionCapsuleRequestPayload payload,
+                                                       net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack stack = player.getItemInHand(hand);
+        if (!DimensionCapsuleItem.is(stack)) return;
+        if (payload.action() != 0 && payload.action() != 2) return;
+        if (payload.action() == 2 && DimensionCapsuleService.hasReturnPoint(player)) {
+            DimensionCapsuleItem.enter(player, hand);
+            return;
+        }
+        List<DimensionCapsuleCatalog.Entry> entries = DimensionCapsuleCatalog.scan(player);
+        if (payload.index() < 0 || payload.index() >= entries.size()) return;
+        DimensionCapsuleCatalog.Entry entry = entries.get(payload.index());
+        if (entry.dimensionHint().isEmpty()) return;
+        com.sorrowmist.useless.stretcher.content.capsule.NativeCapsules.request(player, entry.id().toString(),
+                entry.dimensionHint().split(",")[0], payload.action() == 2 ? 2 : 0, payload.rotation() & 3);
+    }
+
+    public static void updateTwoIDialogue(ServerPlayer player, int entityId, boolean inviteReady, int giftScore) {
+        PacketDistributor.sendToPlayer(player, new TwoIDialoguePayload(entityId, inviteReady, giftScore, false));
+    }
+
+    public static void sendTwoIDollReclaim(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollReclaimPayload(entityId));
+    }
+
+    public static void sendTwoIDollGift(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollGiftPayload(entityId));
+    }
+
+    public static void sendTwoIDollInvite(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollInvitePayload(entityId));
+    }
+
+    public static void sendTwoIDollPat(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollPatPayload(entityId));
+    }
+
+    public static void sendTwoIDollTalk(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollTalkPayload(entityId));
+    }
+
+    public static void sendTwoIDollStoryStart(int entityId) {
+        PacketDistributor.sendToServer(new TwoIDollStoryStartPayload(entityId));
+    }
+
+    public static void requestTwoIStoryLibrary(int requestId) {
+        PacketDistributor.sendToServer(new TwoIStoryLibraryRequestPayload(requestId));
+    }
+
+    public static void sendTwoIInteraction(int entityId, boolean active) {
+        PacketDistributor.sendToServer(new TwoIInteractionPayload(entityId, active));
+    }
+
+    public static void sendTwoIDollStory(int entityId, long sessionId, int choice) {
+        PacketDistributor.sendToServer(new TwoIDollStoryPayload(entityId, sessionId, choice));
+    }
+
+    public static void sendTwoIStoryState(ServerPlayer player, int entityId, long sessionId,
+                                         int chapter, int bond, int result) {
+        sendTwoIStoryState(player, entityId, sessionId, chapter, bond, result, 0);
+    }
+
+    public static void sendTwoIStoryState(ServerPlayer player, int entityId, long sessionId,
+                                         int chapter, int bond, int result, int round) {
+        PacketDistributor.sendToPlayer(player, new TwoIStoryStatePayload(entityId, sessionId, chapter, bond, result, round));
+    }
+
+    public static void sendTwoIDollDeploy(InteractionHand hand) {
+        PacketDistributor.sendToServer(new TwoIDollDeployPayload(hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendTwoIDollRemoteReclaim() {
+        PacketDistributor.sendToServer(new TwoIDollRemoteReclaimPayload());
+    }
+
+    private static void handleTwoIDollReclaim(TwoIDollReclaimPayload payload,
+                                               net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll
+                && !doll.isRemoved() && doll.distanceToSqr(player) <= 64.0D) {
+            doll.reclaim(player);
+        }
+    }
+
+    private static void handleTwoIDollGift(TwoIDollGiftPayload payload,
+                                           net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) doll.acceptGift(player);
+    }
+
+    private static void handleTwoIDollInvite(TwoIDollInvitePayload payload,
+                                             net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) doll.acceptInvitation(player);
+    }
+
+    private static void handleTwoIDollPat(TwoIDollPatPayload payload,
+                                          net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll)
+            doll.patBy(player);
+    }
+
+    private static void handleTwoIDollTalk(TwoIDollTalkPayload payload,
+                                           net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll)
+            doll.talkTo(player);
+    }
+
+    private static void handleTwoIDollStoryStart(TwoIDollStoryStartPayload payload,
+                                                 net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) {
+            doll.startStory(player);
+        } else {
+            sendTwoIStoryState(player, payload.entityId(), 0L, 0, 0, 2);
+        }
+    }
+
+    private static void handleTwoIDollStory(TwoIDollStoryPayload payload,
+                                            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        if (payload.choice() < 0 || payload.choice() >= 9) {
+            sendTwoIStoryState(player, payload.entityId(), payload.sessionId(), 0, 0, 2,
+                    Math.clamp(payload.choice() / 3, 0, 2));
+            return;
+        }
+        Entity target = player.serverLevel().getEntity(payload.entityId());
+        if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) {
+            doll.storyChoice(player, payload.sessionId(), payload.choice());
+        } else {
+            sendTwoIStoryState(player, payload.entityId(), payload.sessionId(), 0, 0, 2, payload.choice() / 3);
+        }
+    }
+
+    private static void handleTwoIDollDeploy(TwoIDollDeployPayload payload,
+                                             net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.deploy(player,
+                payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+    }
+
+    private static void handleTwoIDollRemoteReclaim(
+            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        if (com.sorrowmist.useless.stretcher.content.entity.TwoIDollService.returnFromStarfield(player)) return;
+        var start = player.getEyePosition();
+        var direction = player.getLookAngle().normalize();
+        com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity best = null;
+        double bestDistance = Double.MAX_VALUE;
+        for (var doll : com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity
+                .trackedFor(player.getServer(), player.getUUID())) {
+            if (doll.isRemoved() || doll.level() != player.level()) continue;
+            var to = doll.getBoundingBox().getCenter().subtract(start);
+            double projection = to.dot(direction);
+            if (projection < 0.0D || projection >= bestDistance) continue;
+            var point = start.add(direction.scale(projection));
+            if (!doll.getBoundingBox().inflate(0.6D).contains(point)) continue;
+            var target = doll.getBoundingBox().getCenter();
+            if (!hasLoadedLine(player.serverLevel(), start, target)) continue;
+            var visible = player.serverLevel().clip(new net.minecraft.world.level.ClipContext(start,
+                    target, net.minecraft.world.level.ClipContext.Block.COLLIDER,
+                    net.minecraft.world.level.ClipContext.Fluid.NONE, player));
+            if (visible.getType() != net.minecraft.world.phys.HitResult.Type.MISS) continue;
+            best = doll;
+            bestDistance = projection;
+        }
+        if (best != null) {
+            best.reclaimRemote(player);
+        } else {
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                    "msg.useless_stretcher.two_i.reclaim_not_found"), true);
+        }
+    }
+
+    private static boolean hasLoadedLine(net.minecraft.server.level.ServerLevel level,
+                                         net.minecraft.world.phys.Vec3 start,
+                                         net.minecraft.world.phys.Vec3 end) {
+        var delta = end.subtract(start);
+        int steps = (int) Math.ceil(delta.length() / 8.0D);
+        for (int i = 1; i < steps; i++) {
+            var point = start.add(delta.scale(i / (double) steps));
+            if (!level.hasChunkAt(net.minecraft.core.BlockPos.containing(point))) return false;
+        }
+        return true;
+    }
+
     public static void sendWondrousStaffSpeed(int speed, int mode, boolean accelerationEnabled,
                                               InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffSpeedPayload(
@@ -686,6 +1220,17 @@ public final class Network {
         held.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(),
                 payload.lootRefresh()
                         && com.sorrowmist.useless.stretcher.config.StretcherConfig.enableStaffLootRefresh());
+    }
+
+    private static void handleWondrousStaffPhase(WondrousStaffPhasePayload payload,
+                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        if (!(context.player() instanceof ServerPlayer player)) return;
+        InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack held = player.getItemInHand(hand);
+        if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+        held.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), payload.phaseEnabled());
+        held.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), payload.interactionEnabled());
+        com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager.apply(player);
     }
 
     private static boolean apotheosisAllowed() {
@@ -818,6 +1363,21 @@ public final class Network {
                                                  InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffFeaturesPayload(
                 summonEnabled, lootRefresh, hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendWondrousStaffPhase(boolean phaseEnabled, boolean interactionEnabled,
+                                              InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffPhasePayload(
+                phaseEnabled, interactionEnabled, hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendStaffPhaseState(ServerPlayer player, boolean phaseEnabled,
+                                           boolean interactionEnabled) {
+        PacketDistributor.sendToPlayer(player, new StaffPhaseStatePayload(phaseEnabled, interactionEnabled));
+    }
+
+    public static void sendWondrousStaffRadiation(boolean enabled, InteractionHand hand) {
+        PacketDistributor.sendToServer(new WondrousStaffRadiationPayload(enabled, hand == InteractionHand.OFF_HAND));
     }
 
     public static void setApotheosisTier(String tier) {

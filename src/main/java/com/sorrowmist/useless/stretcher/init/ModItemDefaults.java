@@ -31,6 +31,9 @@ public final class ModItemDefaults {
                         // permanent component for stacks created before this three-state mode.
                         .set(StretcherComponents.WONDROUS_STAFF_MODE.get(), 0)
                         .set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false)
-                        .set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false));
+                        .set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false)
+                        .set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false)
+                        .set(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false)
+                        .set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true));
     }
 }

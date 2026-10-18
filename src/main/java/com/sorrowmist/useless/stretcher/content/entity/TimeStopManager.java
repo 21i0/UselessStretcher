@@ -17,6 +17,8 @@ import java.util.WeakHashMap;
 /** Server-owned one-shot time stop state. The pause is scoped to the actor's dimension. */
 public final class TimeStopManager {
     public static final int DURATION_TICKS = 240;
+    /** Maximum number of extra windows in a panic burst. */
+    private static final int MAX_PANIC_CYCLES = 4;
     private static final Map<MinecraftServer, State> ACTIVE = new WeakHashMap<>();
 
     private TimeStopManager() { }
@@ -25,7 +27,7 @@ public final class TimeStopManager {
         if (player == null || player.getServer() == null || !StretcherConfig.serverTimeStop()) return false;
         MinecraftServer server = player.getServer();
         if (remaining(server) > 0) return false;
-        ACTIVE.put(server, new State(player.serverLevel().dimension().location(), player.getUUID(), DURATION_TICKS));
+        ACTIVE.put(server, new State(player.serverLevel().dimension().location(), player.getUUID(), DURATION_TICKS, 0));
         player.serverLevel().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE,
                 net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
         for (ServerPlayer online : server.getPlayerList().getPlayers()) {
@@ -36,11 +38,44 @@ public final class TimeStopManager {
         return true;
     }
 
+    /** Starts a bounded sequence of consecutive time-stop windows for 2i's panic event. */
+    public static boolean startPanic(ServerPlayer player) {
+        if (player == null || player.getServer() == null || !StretcherConfig.serverTimeStop()) return false;
+        MinecraftServer server = player.getServer();
+        if (remaining(server) > 0) {
+            State active = ACTIVE.get(server);
+            if (active == null || !active.dimension().equals(player.serverLevel().dimension().location())) return false;
+            // Promote an existing normal stop rather than silently dropping the panic reaction.
+            ACTIVE.put(server, new State(active.dimension(), active.actor(), active.remaining(), MAX_PANIC_CYCLES));
+            return true;
+        }
+        ACTIVE.put(server, new State(player.serverLevel().dimension().location(), player.getUUID(),
+                DURATION_TICKS, MAX_PANIC_CYCLES));
+        player.serverLevel().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE,
+                net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 0.72F);
+        for (ServerPlayer online : server.getPlayerList().getPlayers()) {
+            online.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                    "msg.useless_stretcher.two_i.panic_time_stop"), true);
+        }
+        broadcast(server, DURATION_TICKS);
+        return true;
+    }
+
     public static void tick(MinecraftServer server) {
         State state = ACTIVE.get(server);
         if (state == null) return;
         int remaining = state.remaining() - 1;
         if (remaining == 0) {
+            if (state.panicCyclesRemaining() > 0 && StretcherConfig.serverTimeStop()) {
+                int cycles = state.panicCyclesRemaining() - 1;
+                ACTIVE.put(server, new State(state.dimension(), state.actor(), DURATION_TICKS, cycles));
+                for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                            "msg.useless_stretcher.two_i.panic_time_stop"), true);
+                }
+                broadcast(server, DURATION_TICKS);
+                return;
+            }
             ACTIVE.remove(server);
             broadcast(server, 0);
             ServerLevel level = null;
@@ -57,7 +92,7 @@ public final class TimeStopManager {
                         "msg.useless_stretcher.time_stop.end"), true);
             }
         } else {
-            ACTIVE.put(server, new State(state.dimension(), state.actor(), remaining));
+            ACTIVE.put(server, new State(state.dimension(), state.actor(), remaining, state.panicCyclesRemaining()));
             if (remaining % 20 == 0) broadcast(server, remaining);
         }
     }
@@ -107,5 +142,5 @@ public final class TimeStopManager {
         return entity instanceof ServerPlayer player && mayPlayerTickDuringPause(player);
     }
 
-    private record State(ResourceLocation dimension, UUID actor, int remaining) { }
+    private record State(ResourceLocation dimension, UUID actor, int remaining, int panicCyclesRemaining) { }
 }

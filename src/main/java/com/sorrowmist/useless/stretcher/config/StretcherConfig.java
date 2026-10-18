@@ -1,11 +1,8 @@
 package com.sorrowmist.useless.stretcher.config;
 
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.fml.ModList;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Addon configuration. The grinding-ball toggle mirrors Useless Mod's own recipe-compat toggles:
@@ -22,13 +19,14 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue SERVER_ENTITY_DISABLE_AI;
     public static final ModConfigSpec.BooleanValue SERVER_STAFF_LEAF_DROP;
     public static final ModConfigSpec.DoubleValue SERVER_STAFF_LEAF_DROP_PROBABILITY;
+    public static final ModConfigSpec.BooleanValue SERVER_DOLL_LEAF_DROP;
+    public static final ModConfigSpec.DoubleValue SERVER_DOLL_LEAF_DROP_PROBABILITY;
     public static final ModConfigSpec.BooleanValue SERVER_STAFF_SUMMON;
     public static final ModConfigSpec.BooleanValue SERVER_STAFF_LOOT_REFRESH;
     public static final ModConfigSpec.BooleanValue SERVER_TIME_STOP;
     public static final ModConfigSpec.BooleanValue SERVER_APOTHEOSIS_COMPAT;
     public static final ModConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> SERVER_DIMENSION_FLOOR_BLACKLIST;
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> SERVER_DIMENSION_FLOOR_WHITELIST;
+    public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_RECIPES;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -121,6 +119,17 @@ public final class StretcherConfig {
                 .defineInRange("probability", 0.00001D, 0.0D, 1.0D);
         BUILDER.pop();
 
+        BUILDER.translation("useless_stretcher.configuration.doll_leaf_drop").push("doll_leaf_drop");
+        SERVER_DOLL_LEAF_DROP = BUILDER
+                .comment("是否允许打树叶独立掉落 2i 玩偶；不受手杖一次性掉落记录影响。")
+                .translation("useless_stretcher.configuration.doll_leaf_drop.enable")
+                .define("enable", true);
+        SERVER_DOLL_LEAF_DROP_PROBABILITY = BUILDER
+                .comment("每次打树叶独立获得 2i 玩偶的概率，0.0001 为万分之一；每位玩家每个存档只领取一次。")
+                .translation("useless_stretcher.configuration.doll_leaf_drop.probability")
+                .defineInRange("probability", 0.0001D, 0.0D, 1.0D);
+        BUILDER.pop();
+
         BUILDER.translation("useless_stretcher.configuration.recipe_compat").push("recipe_compat");
         SERVER_HIDE_ENDERIO_GRINDING_BALLS = BUILDER
                 .comment("隐藏 Ender IO 半自磨机（SAG Mill）的磨珠配方变体。",
@@ -130,19 +139,12 @@ public final class StretcherConfig {
                 .define("hide_enderio_grinding_balls", true);
         BUILDER.pop();
 
-        BUILDER.translation("useless_stretcher.configuration.dimension_floor").push("dimension_floor");
-        SERVER_DIMENSION_FLOOR_BLACKLIST = BUILDER
-                .comment("四联/九联维度地板方块黑名单（方块 ID，例如 minecraft:stone）。",
-                        "黑名单内的方块不会被用作边框/地板/中心方块，会自动回退到默认发光塑料。",
-                        "支持 modid:* 通配整包禁用；留空则不额外限制（仍会走无用之物自带的黑名单）。")
-                .translation("useless_stretcher.configuration.dimension_floor.blacklist")
-                .defineList("blacklist", ArrayList::new, o -> o instanceof String);
-        SERVER_DIMENSION_FLOOR_WHITELIST = BUILDER
-                .comment("四联/九联维度地板方块白名单（方块 ID）。",
-                        "白名单非空时，只允许名单内的方块；名单外的方块回退到默认发光塑料。",
-                        "支持 modid:* 通配；留空则不额外限制。")
-                .translation("useless_stretcher.configuration.dimension_floor.whitelist")
-                .defineList("whitelist", ArrayList::new, o -> o instanceof String);
+        BUILDER.translation("useless_stretcher.configuration.useful_armor").push("useful_armor");
+        SERVER_USEFUL_ARMOR_RECIPES = BUILDER
+                .comment("是否允许用有用锭合成装甲，默认关闭。修改后重启服务器或执行 /reload。",
+                        "配方关闭时仍可从创造栏获得；穿齐四件始终锁定创造模式，脱下任意一件恢复原模式。")
+                .translation("useless_stretcher.configuration.server.useful_armor_recipes")
+                .define("enable_recipes", false);
         BUILDER.pop();
 
         SERVER_SPEC = BUILDER.build();
@@ -180,6 +182,14 @@ public final class StretcherConfig {
         return value(SERVER_STAFF_LEAF_DROP_PROBABILITY);
     }
 
+    public static boolean enableDollLeafDrop() {
+        return value(SERVER_DOLL_LEAF_DROP);
+    }
+
+    public static double dollLeafDropProbability() {
+        return value(SERVER_DOLL_LEAF_DROP_PROBABILITY);
+    }
+
     public static boolean enableStaffSummon() {
         return value(SERVER_STAFF_SUMMON);
     }
@@ -212,30 +222,8 @@ public final class StretcherConfig {
         return value(SERVER_TIME_STOP);
     }
 
-    /** True when a dimension floor block id is allowed by this addon's own black/whitelist. */
-    public static boolean isDimensionFloorBlockAllowed(ResourceLocation id) {
-        if (id == null) return false;
-        String key = id.toString();
-        String namespace = id.getNamespace();
-        for (String entry : value(SERVER_DIMENSION_FLOOR_BLACKLIST)) {
-            if (matches(entry, key, namespace)) return false;
-        }
-        List<? extends String> whitelist = value(SERVER_DIMENSION_FLOOR_WHITELIST);
-        if (!whitelist.isEmpty()) {
-            for (String entry : whitelist) {
-                if (matches(entry, key, namespace)) return true;
-            }
-            return false;
-        }
-        return true;
+    public static boolean usefulArmorRecipesEnabled() {
+        return value(SERVER_USEFUL_ARMOR_RECIPES);
     }
 
-    private static boolean matches(String entry, String key, String namespace) {
-        if (entry == null || entry.isBlank()) return false;
-        String pattern = entry.trim();
-        if (pattern.endsWith(":*")) {
-            return namespace.equals(pattern.substring(0, pattern.length() - 2));
-        }
-        return pattern.equals(key);
-    }
 }

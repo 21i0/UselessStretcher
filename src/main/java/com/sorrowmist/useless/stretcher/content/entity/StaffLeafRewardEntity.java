@@ -8,6 +8,8 @@ import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.core.component.UComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,8 +23,11 @@ import java.util.UUID;
 
 /** Untouchable visual carrier used while a player's one-time leaf reward is waiting for space. */
 public final class StaffLeafRewardEntity extends Entity {
+    private static final EntityDataAccessor<Boolean> DOLL_REWARD =
+            SynchedEntityData.defineId(StaffLeafRewardEntity.class, EntityDataSerializers.BOOLEAN);
     private UUID ownerId;
-    private final ItemStack displayStack = new ItemStack(ModItems.WONDROUS_STAFF.get());
+    private boolean dollReward;
+    private ItemStack displayStack = new ItemStack(ModItems.WONDROUS_STAFF.get());
 
 
     public StaffLeafRewardEntity(EntityType<? extends StaffLeafRewardEntity> type, Level level) {
@@ -35,6 +40,12 @@ public final class StaffLeafRewardEntity extends Entity {
     public StaffLeafRewardEntity(Level level, UUID ownerId) {
         this(ModEntities.STAFF_LEAF_REWARD.get(), level);
         this.ownerId = ownerId;
+    }
+
+    public StaffLeafRewardEntity(Level level, UUID ownerId, boolean dollReward) {
+        this(level, ownerId);
+        setDollReward(dollReward);
+        this.displayStack = new ItemStack(dollReward ? ModItems.TWO_I_DOLL.get() : ModItems.WONDROUS_STAFF.get());
     }
 
     @Override
@@ -52,7 +63,24 @@ public final class StaffLeafRewardEntity extends Entity {
     }
 
     public ItemStack getDisplayStack() {
+        // The carrier can be created on the server and rendered on a client that only
+        // learns its type through entity synchronization. Read the synced value here so
+        // a full inventory reward never appears as a staff on the client.
+        boolean syncedDoll = entityData.get(DOLL_REWARD);
+        if (syncedDoll != dollReward) {
+            dollReward = syncedDoll;
+            displayStack = new ItemStack(dollReward ? ModItems.TWO_I_DOLL.get() : ModItems.WONDROUS_STAFF.get());
+        }
         return displayStack;
+    }
+
+    public boolean isDollReward() {
+        return entityData.get(DOLL_REWARD);
+    }
+
+    private void setDollReward(boolean value) {
+        dollReward = value;
+        entityData.set(DOLL_REWARD, value);
     }
 
     @Override
@@ -72,15 +100,19 @@ public final class StaffLeafRewardEntity extends Entity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(DOLL_REWARD, false);
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
         ownerId = tag.hasUUID("owner") ? tag.getUUID("owner") : null;
+        setDollReward(tag.getBoolean("doll"));
+        displayStack = new ItemStack(dollReward ? ModItems.TWO_I_DOLL.get() : ModItems.WONDROUS_STAFF.get());
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
         if (ownerId != null) tag.putUUID("owner", ownerId);
+        tag.putBoolean("doll", dollReward);
     }
 }

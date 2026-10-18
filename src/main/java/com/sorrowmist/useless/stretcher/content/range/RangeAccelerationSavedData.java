@@ -465,9 +465,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         Set<UUID> retained = new LinkedHashSet<>();
         Vec3 center = Vec3.atCenterOf(field.effectiveCenter());
         List<Entity> candidates = level.getEntities((Entity) null, area, candidate ->
-                candidate.isAlive() && !candidate.isRemoved()
-                        && !(candidate instanceof Player)
-                        && !(candidate instanceof WondrousStaffAccelerationEntity));
+                candidate.isAlive() && WondrousStaffAcceleration.isEntityTargetAllowed(candidate)
+                        && !(candidate instanceof Player));
         candidates.sort(Comparator.comparingDouble(entity -> entity.distanceToSqr(center)));
         for (Entity target : candidates.stream().limit(MAX_ENTITY_TARGETS).toList()) {
             WondrousStaffAccelerationEntity marker = byTarget.get(target.getUUID());

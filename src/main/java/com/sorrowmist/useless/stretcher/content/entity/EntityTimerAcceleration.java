@@ -9,7 +9,7 @@ import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.Turtle;
 
-/** Constant-count timer updates, compatible with Useless Mod versions before its timer API. */
+/** Constant-count vanilla timers and bounded optional production jobs, independent of upstream timer APIs. */
 public final class EntityTimerAcceleration {
     public static final int MAX_SPEED = 32768;
     public static final int DEFAULT_SPEED = 256;
@@ -21,6 +21,7 @@ public final class EntityTimerAcceleration {
 
     public static void advance(LivingEntity target, int speed) {
         int extra = normalizeSpeed(speed);
+        if (com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.advanceSpirit(target, extra)) return;
         if (target instanceof AgeableMob ageable) {
             int age = ageable.getAge();
             if (age != 0) {

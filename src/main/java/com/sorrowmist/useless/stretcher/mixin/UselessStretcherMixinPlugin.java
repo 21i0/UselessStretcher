@@ -1,8 +1,6 @@
 package com.sorrowmist.useless.stretcher.mixin;
 
 import net.neoforged.fml.loading.FMLLoader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -10,30 +8,20 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-/** Selects the legacy capacity patches only for Useless Mod versions before 2.3.7. */
+/** Only load integration mixins when their optional mods are present. */
 public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
-    private static final Logger LOGGER = LogManager.getLogger("UselessStretcher/MixinPlugin");
-    private static final Set<String> LEGACY_4096_MIXINS = Set.of(
-            "ConfigManagerMixin", "RecoverableItemStackHandlerMixin", "ItemStackHandlerMixin",
-            "PassiveCraftingHatchBlockEntityMixin", "PassiveCraftingHatchMenuMixin",
-            "PassiveCraftingStatusPacketMixin", "PagedRecoverableMenuMixin",
-            "PagedRecoverableMenuPageViewMixin", "PagedRecoverableScreenMixin",
-            "PatternAssemblyScreenMixin", "PassiveCraftingHatchScreenMixin",
-            "OreGeneratorMenuMixin", "OreGeneratorScreenMixin");
-
-    private static Boolean native4096;
-
     @Override
-    public void onLoad(String mixinPackage) {
-        if (native4096 == null) {
-            native4096 = detectNative4096Support();
-            LOGGER.info("Useless Mod native 4096 support detected: {}; legacy capacity/UI mixins enabled: {}",
-                    native4096, !native4096);
-        }
-    }
+    public void onLoad(String mixinPackage) { }
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".OccultismRitualClockMixin")) return isModLoadedEarly("occultism");
+        if (mixinClassName.endsWith(".StaffRadiationShieldingMixin") || mixinClassName.endsWith(".StaffRadiationEntityMixin"))
+            return isModLoadedEarly("mekanism");
+        if (mixinClassName.endsWith(".TwoIArsRitualMixin") || mixinClassName.endsWith(".TwoIArsJarMixin"))
+            return isModLoadedEarly("ars_nouveau");
+        if (mixinClassName.endsWith(".TwoIBeeEncaseMixin") || mixinClassName.endsWith(".TwoIAmberMixin"))
+            return isModLoadedEarly("productivebees");
         if (mixinClassName.endsWith(".ApotheosisEnchantingMenuMixin")) {
             return isModLoadedEarly("apothic_enchanting");
         }
@@ -44,9 +32,7 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
             // required for the virtual-bookshelf boost.
             return isModLoadedEarly("apothic_enchanting");
         }
-        if (!Boolean.TRUE.equals(native4096)) return true;
-        String simpleName = mixinClassName.substring(mixinClassName.lastIndexOf('.') + 1);
-        return !LEGACY_4096_MIXINS.contains(simpleName);
+        return true;
     }
 
     private static boolean isModLoadedEarly(String modId) {
@@ -64,41 +50,6 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
         } catch (RuntimeException | LinkageError ignored) {
             return false;
         }
-    }
-
-    private static boolean detectNative4096Support() {
-        try {
-            String version = FMLLoader.getLoadingModList().getMods().stream()
-                    .filter(mod -> mod.getModId().equals("useless_mod"))
-                    .map(mod -> mod.getVersion().toString())
-                    .findFirst()
-                    .orElse("");
-            return compareVersion(extractModVersion(version), List.of(2, 3, 7)) >= 0;
-        } catch (RuntimeException | LinkageError ignored) {
-            return false;
-        }
-    }
-
-    private static String extractModVersion(String value) {
-        int dash = value.lastIndexOf('-');
-        return dash >= 0 ? value.substring(dash + 1) : value;
-    }
-
-    private static int compareVersion(String actual, List<Integer> expected) {
-        String[] parts = actual.split("[.-]");
-        for (int i = 0; i < expected.size(); i++) {
-            int actualPart = 0;
-            if (i < parts.length) {
-                String digits = parts[i].replaceAll("[^0-9].*", "");
-                if (!digits.isEmpty()) {
-                    try { actualPart = Integer.parseInt(digits); }
-                    catch (NumberFormatException ignored) { return -1; }
-                }
-            }
-            int result = Integer.compare(actualPart, expected.get(i));
-            if (result != 0) return result;
-        }
-        return 0;
     }
 
     @Override public String getRefMapperConfig() { return null; }

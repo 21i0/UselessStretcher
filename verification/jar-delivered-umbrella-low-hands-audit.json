@@ -1,0 +1,15 @@
+{
+  "result": "JAR CHECKS PASSED",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0-test-2i-umbrella-hand-stable.jar",
+  "version": "1.21.1-1.6.0",
+  "bytes": 12305955,
+  "sha256": "BB7DB8698A3BF30BC5C34E9AEBB51AAA2ED04F68B8343D7957645F5D5D365E4D",
+  "production_sources_with_matching_class": 194,
+  "production_classes_with_matching_bytecode": 348,
+  "source_resources_with_matching_hash": 110,
+  "json_mcmeta_parsed": 68,
+  "story_chapters": 6,
+  "story_images": 17,
+  "original_ogg_files": 7,
+  "forbidden_entries": 0
+}

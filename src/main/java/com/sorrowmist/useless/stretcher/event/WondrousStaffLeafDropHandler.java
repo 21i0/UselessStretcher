@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -32,47 +33,50 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/** Adds the very rare wondrous staff easter egg to all Minecraft leaf blocks. */
+/** Rolls the one-time staff and 2i doll independently for tree leaves. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
 public final class WondrousStaffLeafDropHandler {
     private static final ResourceLocation ADVANCEMENT_ID =
             ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_leaf_drop");
     private static final String ADVANCEMENT_CRITERION = "main";
-    private static final Map<UUID, UUID> VISIBLE_REWARDS = new HashMap<>();
+    private static final Map<UUID, Map<Boolean, UUID>> VISIBLE_REWARDS = new HashMap<>();
 
     private WondrousStaffLeafDropHandler() {
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onBlockDrops(BlockDropsEvent event) {
         if (event.isCanceled()
                 || !(event.getBreaker() instanceof ServerPlayer player)
-                || player.isCreative()
-                || !isLeafBlock(event.getState())
-                || !StretcherConfig.enableStaffLeafDrop()) {
-            return;
-        }
+                || player.isCreative() || player.isSpectator() || !player.isAlive() || player.isRemoved()
+                || !isLeafBlock(event.getState())) return;
+
+        boolean staffEnabled = StretcherConfig.enableStaffLeafDrop();
+        boolean dollEnabled = StretcherConfig.enableDollLeafDrop();
+        if (!staffEnabled && !dollEnabled) return;
 
         StaffLeafDropData data = StaffLeafDropData.get(player.getServer());
         UUID playerId = player.getUUID();
-        if (data.hasTriggered(playerId)
-                || event.getLevel().getRandom().nextDouble() >= StretcherConfig.staffLeafDropProbability()
-                || !data.beginDelivery(playerId)) {
-            return;
+        boolean awarded = false;
+        if (staffEnabled && !data.hasRolledStaff(playerId)
+                && event.getLevel().getRandom().nextDouble() < StretcherConfig.staffLeafDropProbability()
+                && data.beginStaffDelivery(playerId)) {
+            awardAdvancement(player);
+            awarded = true;
         }
+        if (dollEnabled && !data.hasRolledDoll(playerId)
+                && event.getLevel().getRandom().nextDouble() < StretcherConfig.dollLeafDropProbability()
+                && data.beginDollDelivery(playerId)) {
+            awarded = true;
+        }
+        if (!awarded && !data.isPending(playerId)) return;
 
-        awardAdvancement(player);
-        if (tryDeliver(player)) {
-            data.completeDelivery(playerId);
-        } else {
-            ensureRewardEntity(player.getServer(), player);
-        }
+        deliverAvailable(player, data);
+        ensurePendingRewards(player.getServer(), player, data);
     }
 
     private static boolean isLeafBlock(BlockState state) {
@@ -96,12 +100,8 @@ public final class WondrousStaffLeafDropHandler {
             UUID playerId = player.getUUID();
             if (!data.isPending(playerId) || !player.isAlive() || player.isRemoved()) continue;
 
-            if (tryDeliver(player)) {
-                data.completeDelivery(playerId);
-                discardRewardEntities(server, playerId);
-            } else {
-                ensureRewardEntity(server, player);
-            }
+            deliverAvailable(player, data);
+            ensurePendingRewards(server, player, data);
         }
     }
 
@@ -113,26 +113,35 @@ public final class WondrousStaffLeafDropHandler {
         }
 
         UUID owner = reward.getOwnerId();
-        if (owner == null
-                || !StaffLeafDropData.get(level.getServer()).isPending(owner)) {
+        StaffLeafDropData data = StaffLeafDropData.get(level.getServer());
+        if (owner == null || (reward.isDollReward()
+                ? !data.hasPendingDoll(owner) : !data.hasPendingStaff(owner))) {
             event.setCanceled(true);
             return;
         }
 
-        StaffLeafRewardEntity existing = findTrackedReward(level.getServer(), owner);
+        StaffLeafRewardEntity existing = findTrackedReward(level.getServer(), owner, reward.isDollReward());
         if (existing != null && existing != reward && !existing.isRemoved()) {
             event.setCanceled(true);
             return;
         }
 
-        VISIBLE_REWARDS.put(owner, reward.getUUID());
+        VISIBLE_REWARDS.computeIfAbsent(owner, ignored -> new HashMap<>())
+                .put(reward.isDollReward(), reward.getUUID());
     }
 
     @SubscribeEvent
     public static void onRewardEntityUnloaded(EntityLeaveLevelEvent event) {
+        if (!(event.getLevel() instanceof ServerLevel)) return;
         if (!(event.getEntity() instanceof StaffLeafRewardEntity reward)) return;
         UUID owner = reward.getOwnerId();
-        if (owner != null) VISIBLE_REWARDS.remove(owner, reward.getUUID());
+        if (owner != null) {
+            Map<Boolean, UUID> rewards = VISIBLE_REWARDS.get(owner);
+            if (rewards != null) {
+                rewards.remove(reward.isDollReward(), reward.getUUID());
+                if (rewards.isEmpty()) VISIBLE_REWARDS.remove(owner);
+            }
+        }
     }
 
     @SubscribeEvent
@@ -140,19 +149,39 @@ public final class WondrousStaffLeafDropHandler {
         VISIBLE_REWARDS.clear();
     }
 
-    private static boolean tryDeliver(ServerPlayer player) {
-        ItemStack staff = createLeafStaff(player);
-        if (player.getInventory().getSlotWithRemainingSpace(staff) < 0
-                && player.getInventory().getFreeSlot() < 0) {
-            return false;
+    private static void deliverAvailable(ServerPlayer player, StaffLeafDropData data) {
+        UUID id = player.getUUID();
+        boolean changed = false;
+        if (data.hasPendingStaff(id) && tryInsert(player, createLeafStaff(player))) {
+            data.markStaffDelivered(id);
+            discardRewardEntity(player.getServer(), id, false);
+            changed = true;
         }
-        boolean inserted = player.getInventory().add(staff);
-        if (inserted && staff.isEmpty()) {
+        ItemStack doll = new ItemStack(ModItems.TWO_I_DOLL.get());
+        doll.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.TWO_I_OWNER.get(), id);
+        com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.ensureIdentity(doll);
+        ItemStack acquiredDoll = doll.copy();
+        if (data.hasPendingDoll(id) && tryInsert(player, doll)) {
+            data.markDollDelivered(id);
+            discardRewardEntity(player.getServer(), id, true);
+            com.sorrowmist.useless.stretcher.content.item.TwoIDollAcquisition.notifyAcquired(player, acquiredDoll);
+            changed = true;
+        }
+        if (changed) {
             player.getInventory().setChanged();
             player.containerMenu.broadcastChanges();
-            return true;
         }
-        return false;
+    }
+
+    private static void ensurePendingRewards(MinecraftServer server, ServerPlayer player, StaffLeafDropData data) {
+        if (data.hasPendingStaff(player.getUUID())) ensureRewardEntity(server, player, false);
+        if (data.hasPendingDoll(player.getUUID())) ensureRewardEntity(server, player, true);
+    }
+
+    private static boolean tryInsert(ServerPlayer player, ItemStack stack) {
+        if (player.getInventory().getSlotWithRemainingSpace(stack) < 0
+                && player.getInventory().getFreeSlot() < 0) return false;
+        return player.getInventory().add(stack) && stack.isEmpty();
     }
 
     /** Builds the same fully initialized precise-mode tool as a newly obtained base staff. */
@@ -181,9 +210,9 @@ public final class WondrousStaffLeafDropHandler {
     }
 
 
-    private static void ensureRewardEntity(MinecraftServer server, ServerPlayer player) {
+    private static void ensureRewardEntity(MinecraftServer server, ServerPlayer player, boolean doll) {
         UUID owner = player.getUUID();
-        StaffLeafRewardEntity reward = findTrackedReward(server, owner);
+        StaffLeafRewardEntity reward = findTrackedReward(server, owner, doll);
         if (reward != null && reward.level() != player.level()) {
             reward.discard();
             reward = null;
@@ -191,41 +220,37 @@ public final class WondrousStaffLeafDropHandler {
 
         if (reward == null) {
             ServerLevel level = player.serverLevel();
-            reward = new StaffLeafRewardEntity(level, owner);
+            reward = new StaffLeafRewardEntity(level, owner, doll);
             reward.setPos(player.getX(), player.getY() + 0.15D, player.getZ());
             if (!level.addFreshEntity(reward)) return;
-            VISIBLE_REWARDS.put(owner, reward.getUUID());
+            VISIBLE_REWARDS.computeIfAbsent(owner, ignored -> new HashMap<>()).put(doll, reward.getUUID());
         }
 
         reward.setPos(player.getX(), player.getY() + 0.15D, player.getZ());
     }
 
-    private static StaffLeafRewardEntity findTrackedReward(MinecraftServer server, UUID owner) {
-        UUID entityId = VISIBLE_REWARDS.get(owner);
+    private static StaffLeafRewardEntity findTrackedReward(MinecraftServer server, UUID owner, boolean doll) {
+        Map<Boolean, UUID> rewards = VISIBLE_REWARDS.get(owner);
+        UUID entityId = rewards == null ? null : rewards.get(doll);
         if (entityId == null) return null;
         for (ServerLevel level : server.getAllLevels()) {
             Entity entity = level.getEntity(entityId);
             if (entity instanceof StaffLeafRewardEntity reward
+                    && !reward.isRemoved() && reward.isDollReward() == doll
                     && owner.equals(reward.getOwnerId())) {
                 return reward;
             }
         }
-        VISIBLE_REWARDS.remove(owner, entityId);
+        if (rewards != null) {
+            rewards.remove(doll, entityId);
+            if (rewards.isEmpty()) VISIBLE_REWARDS.remove(owner);
+        }
         return null;
     }
 
-    private static void discardRewardEntities(MinecraftServer server, UUID owner) {
-        VISIBLE_REWARDS.remove(owner);
-        List<StaffLeafRewardEntity> rewards = new ArrayList<>();
-        for (ServerLevel level : server.getAllLevels()) {
-            for (Entity entity : level.getAllEntities()) {
-                if (entity instanceof StaffLeafRewardEntity reward
-                        && owner.equals(reward.getOwnerId())) {
-                    rewards.add(reward);
-                }
-            }
-        }
-        rewards.forEach(Entity::discard);
+    private static void discardRewardEntity(MinecraftServer server, UUID owner, boolean doll) {
+        StaffLeafRewardEntity reward = findTrackedReward(server, owner, doll);
+        if (reward != null) reward.discard();
     }
 
     private static void awardAdvancement(ServerPlayer player) {

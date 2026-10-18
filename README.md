@@ -5,20 +5,23 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 《无用之物 / Useless Mod》的附属模组：把模具变成万能通配、把样板投送变成远程，
-样板与被动仓在旧版前置上扩到 **4096 槽**（无用之物 2.3.7+ 使用上游原生实现），
+使用无用之物 2.4.6+ 原生 **4096 槽**容量，
 以及一根能完整加速机器、AE、实体、昼夜、天气与云层，并可放置独立范围的 **荒辰移晷之杖**。
 
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
-**4096** pattern slots with legacy compatibility (native in Useless Mod 2.3.7+), and a time-acceleration staff.
+native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## 1.4.1 正式版
+## 1.6.0
 
-已通过独立服务器回归及用户完整整合包测试（包括 EIO）。正式版功能代码与 `1.4.1-test.2` 一致。
+加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
+维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
+新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
+正式文件名为 `useless_stretcher-1.21.1-1.6.0.jar`。源码已按 1.6.0 整理，GitHub Release 待用户测试确认后发布。详见仓库的更新、使用说明及 `verification` 验证记录。
+新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
 
-升级前请备份完整世界，客户端和服务端同时更新。1.4.1 使用新的样板存档格式，旧 UUID 和绑定保留；
-回退 1.4.0 或更旧版本必须恢复升级前的世界备份，不能只换回旧 JAR。
+此清理版仅支持新存档：旧四种多联维度及旧版扩容补丁已删除。保留旧 JAR 和完整世界备份，客户端与服务端需同时更新。
 
 ---
 
@@ -27,9 +30,9 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 | 项目 | 要求 |
 |---|---|
 | Minecraft | 1.21.1 |
-| Mod 加载器 | NeoForge 21.1.x（构建于 21.1.219） |
+| Mod 加载器 | NeoForge 21.1.x（构建于 21.1.249） |
 | Java | **21** |
-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（≥ `1.21.1-2.2.4`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（≥ `19.2`） |
+| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（≥ `1.21.1-2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（≥ `19.2`） |
 | 安装位置 | 客户端 **与** 服务端都要装 |
 
 > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
@@ -57,18 +60,14 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 配方缓存由服务器共享，获取完成、取消、清空或拆除方块都不清除；停服释放，配方重载时重建。
 获取任务按服务器余量分批执行，样板编码仍使用当前 AE 网络选材，不冻结材料优选结果。
 
-### 4096 槽兼容 + 分页界面
-旧版无用之物由本模组将样板总成与被动合成仓扩到 4096 格，分页每页 90 格（10×9）；
-无用之物 2.3.7 及更新版本已原生提供容量，本模组自动跳过旧版扩容 Mixin。
-老存档里的 540 槽数据会**原地升级**，方块不需要重新放置。
+### 原生容量与样板存储
+无用之物 2.3.7 及更新版本原生提供 4096 容量及分页界面，本附属不再保留旧版扩容代码。
 样板总成被挖掉时，完整库存保存在服务端，掉落物仅携带 UUID 引用；
 旧版物品会自动迁移，避免大容量样板 NBT 超过原版实体同步包上限。
 
-### 旧维度兼容
-无用之物 2.3.9 已在原有维度配置中提供多联模式，新建请使用本体功能。
-本附属四联 / 九联及奇数中心变体不再提供合成或创造栏入口，并加入通用配方查看器隐藏标签。
-本体未接管我们的旧维度 ID，因此保留旧方块、传送入口、生成器和维度，避免已有建筑无法访问；不自动转换或删除旧数据。
-旧维度地板名单与太阳能兼容继续保留，但不因此获得本体的新多联配置功能。
+### 维度清理
+多联维度请使用无用之物本体功能。本附属旧四联 / 九联及奇数中心变体的注册、生成器、方块和资源已删除；不再提供旧世界兼容。
+2i 星空庭院使用独立的永夜超平坦维度，不依赖旧维度代码。
 
 ### 荒辰移晷之杖（Chronoshift Staff）
 由「万象担架」+「造化垂青之杖」合成，完整继承造化垂青之杖的功能，并新增：
@@ -92,7 +91,7 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 ### 其它
 - 内置 11 个原版物品工作台配方（龙息、鞘翅、幻翼膜、海龟鳞片、附魔金苹果、凋零玫瑰、潜影壳等）
 - 每玩家每存档有一次默认十万分之一的树叶掉手杖彩蛋，支持原版及模组树叶（含未正确加入树叶标签的常见实现），满包时奖励会安全跟随，并有紫色隐藏挑战
-- 配置项：实体加速关闭 AI、树叶掉落概率、EIO 磨珠配方屏蔽、高亮框透视、维度地板名单、空闲降频
+- 配置项：实体加速关闭 AI、树叶掉落概率、EIO 磨珠配方屏蔽、高亮框透视、空闲降频
 - x512/x1024 保留选定档位；实际执行受全服 MSPT/时间预算保护，昂贵目标吞吐可能低于设定倍率，建议配合名单及休眠降频
 
 ## 配置文件 / Config
@@ -115,9 +114,6 @@ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 [highlight]
     highlight_see_through = false        # 机器高亮框是否透视
 
-[dimension_floor]
-    blacklist = []            # 四联/九联维度地板方块黑名单（支持 modid:*）
-    whitelist = []            # 非空时只允许名单内的方块
 ```
 
 ## 从源码构建 / Building

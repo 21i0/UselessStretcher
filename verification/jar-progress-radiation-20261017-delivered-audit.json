@@ -1,0 +1,17 @@
+{
+  "result": "JAR CHECKS PASSED",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0-test-progress-radiation-20261017.jar",
+  "version": "1.21.1-1.6.0",
+  "minimum_useless_mod": "1.21.1-2.4.6",
+  "animated_armor_items": 4,
+  "bytes": 12459057,
+  "sha256": "442390B9D6ABF39746A4A685BAD85F03435E62580A65E772137D1EF9EE71F02C",
+  "production_sources_with_matching_class": 221,
+  "production_classes_with_matching_bytecode": 396,
+  "source_resources_with_matching_hash": 125,
+  "json_mcmeta_parsed": 78,
+  "story_chapters": 6,
+  "story_images": 17,
+  "original_ogg_files": 7,
+  "forbidden_entries": 0
+}

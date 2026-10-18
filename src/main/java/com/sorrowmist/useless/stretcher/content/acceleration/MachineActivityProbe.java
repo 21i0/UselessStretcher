@@ -43,6 +43,7 @@ public final class MachineActivityProbe {
         long now = level.getGameTime();
         if (now < failureUntil) return true;
         try {
+            if (com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.isWorking(current)) return true;
             if (current instanceof ChangedTickAccessor accessor) {
                 long changed = accessor.uselessStretcher$getLastChangedTick();
                 if (changed >= 0L && now >= changed && now - changed <= CHANGED_WINDOW_TICKS) return true;

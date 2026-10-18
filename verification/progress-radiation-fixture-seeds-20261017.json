@@ -1,0 +1,7 @@
+{
+  "seed": "762571125965729090",
+  "first_random_seed": "5333403082031103755",
+  "reference_world": "build/regression-native-final-20261017/world/level.dat",
+  "first_result": "native planning exhausted 1024 candidates without matching biome",
+  "rerun_directory": "build\\regression-progress-radiation-20261017-fixed"
+}

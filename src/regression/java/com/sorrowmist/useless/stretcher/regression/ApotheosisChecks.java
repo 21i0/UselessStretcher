@@ -69,8 +69,11 @@ public final class ApotheosisChecks {
             data.set(owner, dimension, other, new ApotheosisTableData.Boost(40, 20, 10, 3));
             var restored = ApotheosisTableData.load(data.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
             check(restored.contains(dimension, zero) && owner.equals(restored.owner(dimension, zero)), "zero binding/owner survives save");
+            check(owner.equals(restored.remove(dimension, zero))
+                    && !restored.contains(dimension, zero) && restored.owner(dimension, zero) == null,
+                    "destroyed table removes zero binding and owner marker");
             var boost = new ApotheosisTableData.Boost(60, 50, 40, 8);
-            check(restored.updateOwned(owner, boost) == 2, "both persistent tables receive a live edit");
+            check(restored.updateOwned(owner, boost) == 1, "remaining persistent table receives a live edit");
             check(restored.updateOwned(owner, boost) == 0, "repeated value never triggers menu broadcasts");
             check(restored.ownedTables(owner, dimension, 1).size() == 1, "bounded marker lookup");
             ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());

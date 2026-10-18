@@ -2,7 +2,7 @@ package com.sorrowmist.useless.stretcher;
 
 import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.config.ServerConfigSync;
-import com.sorrowmist.useless.stretcher.dimension.DimensionCompat;
+import com.sorrowmist.useless.stretcher.dimension.world.TwoIStarfieldDimensions;
 import com.sorrowmist.useless.stretcher.init.ModBlockEntities;
 import com.sorrowmist.useless.stretcher.init.ModBlocks;
 import com.sorrowmist.useless.stretcher.init.ModCreativeTabs;
@@ -10,6 +10,7 @@ import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItemDefaults;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.ModMenuTypes;
+import com.sorrowmist.useless.stretcher.init.ModSounds;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.neoforged.bus.api.IEventBus;
@@ -31,10 +32,17 @@ public final class UselessStretcherMod {
         ModMenuTypes.MENUS.register(modBus);
         ModCreativeTabs.CREATIVE_TAB.register(modBus);
         ModEntities.ENTITIES.register(modBus);
+        ModSounds.SOUNDS.register(modBus);
+        modBus.addListener(ModEntities::registerAttributes);
         StretcherComponents.init(modBus);
-        DimensionCompat.init(modBus);
+        TwoIStarfieldDimensions.init(modBus);
+        com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions.init(modBus);
         modBus.addListener(Network::register);
         modBus.addListener(ModItemDefaults::modifyDefaultComponents);
+        modBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) -> {
+            if (net.neoforged.fml.ModList.get().isLoaded("curios"))
+                event.enqueueWork(com.sorrowmist.useless.stretcher.compat.TwoICuriosCompat::register);
+        });
         // All gameplay switches live in the server config. NeoForge synchronizes this
         // spec to every client connected to the world, so the host/server setting is authoritative.
         ServerConfigSync.migrateLegacy(FMLPaths.CONFIGDIR.get(), FMLPaths.GAMEDIR.get().resolve("defaultconfigs"));

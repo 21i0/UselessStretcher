@@ -4,10 +4,12 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.StaffLeafRewardEntity;
 import com.sorrowmist.useless.stretcher.content.entity.TimeFlowEntity;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity;
+import com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 import java.util.function.Supplier;
 
@@ -45,6 +47,20 @@ public final class ModEntities {
                             .fireImmune()
                             .noSummon()
                             .build("time_flow"));
+
+    public static final Supplier<EntityType<TwoIDollEntity>> TWO_I_DOLL =
+            ENTITIES.register("two_i_doll",
+                    () -> EntityType.Builder.<TwoIDollEntity>of(TwoIDollEntity::new, MobCategory.MISC)
+                            .sized(0.44F, 0.96F)
+                            .clientTrackingRange(10)
+                            .updateInterval(2)
+                            .fireImmune()
+                            .noSummon()
+                            .build("two_i_doll"));
+
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(TWO_I_DOLL.get(), TwoIDollEntity.createAttributes().build());
+    }
 
     private ModEntities() {
     }
