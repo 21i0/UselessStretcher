@@ -990,7 +990,8 @@ public final class TwoIDollEntity extends PathfinderMob {
     }
 
     public boolean canInvite() {
-        return giftScore >= MAX_BOND || invitationUsed;
+        return com.sorrowmist.useless.stretcher.config.StretcherConfig.starfieldInvitationEnabled()
+                && (giftScore >= MAX_BOND || invitationUsed);
     }
 
     public void acceptInvitation(ServerPlayer player) {

@@ -16,4 +16,11 @@ public final class StaffPhaseClientEvents {
     public static void tick(ClientTickEvent.Post event) {
         ClientStateReceiver.tickStaffPhase();
     }
+
+    @SubscribeEvent
+    public static void overlay(net.neoforged.neoforge.client.event.RenderBlockScreenEffectEvent event) {
+        if (event.getOverlayType() == net.neoforged.neoforge.client.event.RenderBlockScreenEffectEvent.OverlayType.BLOCK
+                && com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager.state(event.getPlayer()).phase())
+            event.setCanceled(true);
+    }
 }

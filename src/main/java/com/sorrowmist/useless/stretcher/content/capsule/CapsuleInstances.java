@@ -279,6 +279,8 @@ public final class CapsuleInstances extends SavedData {
         long cleanCursor, trimCursor, bedrockCursor;
         int minX, minY, minZ, maxX, maxY, maxZ;
         boolean ready, afterPlaced, terrainCleaned, cleanupEntitiesRemoved, boundsKnown;
+        boolean completionNotified;
+        boolean generating;
         /** Versioned marker for the complete XZ bedrock projection beneath the structure. */
         int bedrockVersion;
         int relocations;
@@ -318,6 +320,8 @@ public final class CapsuleInstances extends SavedData {
             tag.putInt("cleanup_version", cleanupVersion);
             tag.putInt("progress", progress);
             tag.putBoolean("after_placed", afterPlaced);
+            tag.putBoolean("completion_notified", completionNotified);
+            tag.putBoolean("generating", generating);
             tag.putBoolean("terrain_cleaned", terrainCleaned); tag.putBoolean("cleanup_entities_removed", cleanupEntitiesRemoved);
             tag.putBoolean("bounds_known", boundsKnown); tag.putInt("relocations", relocations);
             tag.putInt("bedrock_version", bedrockVersion);
@@ -378,6 +382,7 @@ public final class CapsuleInstances extends SavedData {
             room.trimPass = Math.clamp(e.getInt("trim_pass"), 0, 7);
             room.bedrockChunk = Math.max(0, e.getInt("bedrock_chunk"));
             room.mapCursor = Math.clamp(e.getInt("map_cursor"), 0, 4096); room.ready = e.getBoolean("ready");
+            room.completionNotified = e.contains("completion_notified") ? e.getBoolean("completion_notified") : room.ready;
             room.previewCursor = Math.clamp(e.getInt("preview_cursor"), 0, 4096);
             room.afterPlaced = e.getBoolean("after_placed");
             room.terrainCleaned = e.getBoolean("terrain_cleaned");
@@ -387,6 +392,8 @@ public final class CapsuleInstances extends SavedData {
             room.phase = e.contains("phase", Tag.TAG_STRING) ? e.getString("phase") : (room.ready ? "ready" : "placing");
             room.planningOffThread = e.getBoolean("planning_off_thread");
             room.error = e.getString("error"); int[] pixels = e.getIntArray("pixels");
+            room.generating = e.contains("generating") ? e.getBoolean("generating")
+                    : !room.ready && room.error.isEmpty() && !room.plan.isEmpty();
             if (pixels.length == 4096) System.arraycopy(pixels, 0, room.pixels, 0, pixels.length);
             int[] bounds = e.getIntArray("bounds");
             if (bounds.length == 6) {

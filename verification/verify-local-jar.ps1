@@ -24,6 +24,21 @@ try {
     if ($metadata -notmatch '(?s)modId="useless_mod"\s+type="required"\s+versionRange="\[1\.21\.1-2\.4\.6,\)"') {
         throw 'Wrong minimum Useless Mod dependency'
     }
+    $networkSource = [IO.File]::ReadAllText((Join-Path $repo 'src/main/java/com/sorrowmist/useless/stretcher/network/Network.java'))
+    if ($networkSource -notmatch 'event\.registrar\("21"\)') { throw 'Wrong network protocol source' }
+    $mixins = (Read-Entry $zip.GetEntry('useless_stretcher.mixins.json')) | ConvertFrom-Json -AsHashtable
+    foreach ($mixin in @('StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
+            'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin')) {
+        if ($mixins.mixins -notcontains $mixin) { throw "Missing common mixin: $mixin" }
+    }
+    foreach ($mixin in @('StaffPhaseLocalMovementMixin', 'StaffPhaseVisibilityMixin')) {
+        if ($mixins.client -notcontains $mixin) { throw "Missing client mixin: $mixin" }
+    }
+    $guidePages = @($zip.Entries | Where-Object { $_.FullName -match '^assets/ae2/ae2guide/useless_stretcher/.*\.md$' })
+    if ($guidePages.Count -ne 9) { throw 'Incomplete GuideME pages' }
+    foreach ($page in $guidePages) {
+        if ((Read-Entry $page) -match 'useful_armor|有用锭装备') { throw "Hidden armor remains in GuideME: $($page.FullName)" }
+    }
     $armorPieces = @('helmet', 'chestplate', 'leggings', 'boots')
     $hiddenEntry = $zip.GetEntry('data/c/tags/item/hidden_from_recipe_viewers.json')
     if (!$hiddenEntry) { throw 'Missing Useful Ingot armor recipe-viewer hide tag' }
@@ -101,6 +116,8 @@ try {
         result = 'JAR CHECKS PASSED'
         jar = $artifact
         version = '1.21.1-1.6.0'
+        network_protocol = 21
+        guide_pages_without_hidden_armor = $guidePages.Count
         minimum_useless_mod = '1.21.1-2.4.6'
         animated_armor_items = $armorPieces.Count
         armor_hidden_from_recipe_viewers = $expectedHidden.Count

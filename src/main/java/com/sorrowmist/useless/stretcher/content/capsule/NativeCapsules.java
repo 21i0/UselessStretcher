@@ -78,6 +78,7 @@ public final class NativeCapsules {
         return thread;
     });
     private static final ArrayDeque<Job> JOBS = new ArrayDeque<>();
+    private static final ArrayDeque<CapsuleInstances.Instance> RESUMING = new ArrayDeque<>();
     private static final TicketType<ChunkPos> TICKET = TicketType.create("useless_stretcher_native_capsule",
             Comparator.comparingLong(ChunkPos::toLong));
     private static final TicketType<ChunkPos> START_TICKET = TicketType.create("useless_stretcher_capsule_start",
@@ -143,10 +144,9 @@ public final class NativeCapsules {
                 data.setDirty();
             }
         }
-        if (action == 1 && (room.error.equals("planning_timeout") || room.error.equals("planning_memory")
-                || room.error.equals("too_large"))) {
+        if (action == 1 && !room.error.isEmpty()) {
             room.error = "";
-            room.attempt = Math.min(room.attempt, 1023);
+            if (room.plan.isEmpty()) room.attempt = 0;
             data.setDirty();
         }
         Job current = null;
@@ -156,6 +156,9 @@ public final class NativeCapsules {
                 CapsuleNetwork.state(player, id, dimension, "queue_full", 0, new int[0], 0, 0, 0); return;
             }
             current = new Job(data, room, level, sourceLevel, structure);
+            room.generating = true;
+            room.completionNotified = false;
+            data.setDirty();
             JOBS.add(current);
         }
         if (action == 2 && room.ready && !ENTRIES.containsKey(player.getUUID())
@@ -197,6 +200,7 @@ public final class NativeCapsules {
 
     @SubscribeEvent public static void tick(ServerTickEvent.Post event) {
         ENTRIES.values().removeIf(PendingEntry::tick);
+        resumeNext(event.getServer());
         Job job = JOBS.poll();
         if (job == null) return;
         try {
@@ -215,7 +219,9 @@ public final class NativeCapsules {
             else {
                 job.release();
                 job.room.ready = job.room.phase.equals("ready");
+                job.room.generating = false;
                 job.data.setDirty();
+                if (job.room.ready) notifyReady(job.data, job.room);
                 if (!job.room.ready) LogUtils.getLogger().error(
                         "Native capsule job ended before finalization completed: structure={} phase={} trim={}/{} bedrock={}/{}",
                         job.room.structure, job.room.phase, job.room.trimChunk, job.chunkCount,
@@ -225,13 +231,69 @@ public final class NativeCapsules {
             }
         } catch (Exception failure) {
             job.release(); job.room.error = "failed"; job.data.setDirty();
+            job.room.generating = false;
             if (failure instanceof CapsuleLimitException limit) job.room.error = limit.code;
             LogUtils.getLogger().error("Native capsule {} failed; partial instance retained", job.room.key(), failure);
         }
     }
     @SubscribeEvent public static void stopped(ServerStoppedEvent event) {
         while (!JOBS.isEmpty()) JOBS.remove().release();
+        RESUMING.clear();
         ENTRIES.values().forEach(PendingEntry::release); ENTRIES.clear();
+    }
+
+    @SubscribeEvent public static void started(net.neoforged.neoforge.event.server.ServerStartedEvent event) {
+        RESUMING.clear();
+        for (var room : CapsuleInstances.get(event.getServer()).rooms.values())
+            if (room.generating && !room.ready && room.error.isEmpty()) RESUMING.add(room);
+    }
+
+    /** Reload only accepted jobs, retaining their plan and cursors; never regenerate finished rooms. */
+    private static void resumeNext(net.minecraft.server.MinecraftServer server) {
+        if (RESUMING.isEmpty() || JOBS.size() >= 4) return;
+        var room = RESUMING.remove();
+        if (!room.generating || room.ready || !room.error.isEmpty()
+                || JOBS.stream().anyMatch(job -> job.room.key().equals(room.key()))) return;
+        if (JOBS.stream().anyMatch(job -> job.room.owner.equals(room.owner))) {
+            RESUMING.addLast(room); return;
+        }
+        var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.dimension)));
+        var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.sourceDimension)));
+        var structure = server.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(room.structure));
+        var data = CapsuleInstances.get(server);
+        try {
+            if (target == null || source == null || source.getSeed() != room.sourceSeed || structure == null)
+                throw new CapsuleLimitException("source_environment_unavailable");
+            JOBS.addLast(new Job(data, room, target, source, structure));
+            LogUtils.getLogger().info("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
+        } catch (RuntimeException failure) {
+            room.generating = false;
+            room.error = failure instanceof CapsuleLimitException limit ? limit.code : "failed";
+            data.setDirty();
+            LogUtils.getLogger().error("Cannot resume capsule {}", room.key(), failure);
+        }
+    }
+
+    private static void notifyReady(CapsuleInstances data, CapsuleInstances.Instance room) {
+        if (room.completionNotified || !room.ready) return;
+        var server = net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer();
+        var player = server == null ? null : server.getPlayerList().getPlayer(room.owner);
+        if (player == null) return; // Persist pending notification for the next login.
+        notifyReady(data, room, player);
+    }
+
+    static void notifyReady(CapsuleInstances data, CapsuleInstances.Instance room, ServerPlayer player) {
+        if (!room.ready || room.completionNotified || !room.owner.equals(player.getUUID())) return;
+        room.completionNotified = true;
+        data.setDirty();
+        CapsuleNetwork.complete(player, room.structure, room.dimension, room.instanceId);
+        sendState(player, room, null);
+    }
+
+    @SubscribeEvent public static void login(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        var data = CapsuleInstances.get(player.getServer());
+        for (var room : data.rooms.values()) if (room.owner.equals(player.getUUID())) notifyReady(data, room, player);
     }
 
     private static final class Job {
@@ -345,7 +407,7 @@ public final class NativeCapsules {
             return base + (int) (weight * Math.clamp(done / Math.max(1L, total), 0D, 1D));
         }
         void describe() {
-            bounds = start.getBoundingBox();
+            bounds = placementEnvelope();
             long xSpan = bounds.getXSpan();
             long ySpan = bounds.getYSpan();
             long zSpan = bounds.getZSpan();
@@ -414,9 +476,10 @@ public final class NativeCapsules {
                             ChunkPos anchor = sourceAnchor(offset);
                             if (anchor == null) return StructureStart.INVALID_START;
                             plannedAnchor = anchor;
-                            return structure.generate(sourceLevel.registryAccess(), generator, generator.getBiomeSource(),
+                            StructureStart candidate = structure.generate(sourceLevel.registryAccess(), generator, generator.getBiomeSource(),
                                     sourceLevel.getChunkSource().randomState(), sourceLevel.getStructureManager(), generationSeed(), anchor,
                                     0, sourceLevel, structure.biomes()::contains);
+                            return candidate != null && candidate.isValid() ? anchorScatteredPieces(candidate) : candidate;
                         } finally {
                             PLANNER_BUSY.set(false);
                         }
@@ -574,13 +637,62 @@ public final class NativeCapsules {
                     start.getReferences(), new PiecesContainer(start.getPieces()));
         }
 
+        /** Ground-dependent pieces must resolve against their source before entering void storage. */
+        private StructureStart anchorScatteredPieces(StructureStart candidate) {
+            if (candidate.getPieces().stream().noneMatch(piece ->
+                    piece instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)) return candidate;
+            boolean changed = false;
+            CompoundTag saved = candidate.createTag(serializationContext(), candidate.getChunkPos());
+            var children = saved.getList("Children", net.minecraft.nbt.Tag.TAG_COMPOUND);
+            for (int index = 0; index < candidate.getPieces().size(); index++) {
+                if (Thread.currentThread().isInterrupted()) throw new java.util.concurrent.CancellationException();
+                var piece = candidate.getPieces().get(index);
+                if (!(piece instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)
+                        || children.getCompound(index).getInt("HPos") >= 0) continue;
+                BoundingBox box = piece.getBoundingBox();
+                boolean lowest = piece instanceof net.minecraft.world.level.levelgen.structure.structures.DesertPyramidPiece;
+                int ground = lowest ? Integer.MAX_VALUE : 0, samples = 0;
+                for (int x = box.minX(); x <= box.maxX(); x++) for (int z = box.minZ(); z <= box.maxZ(); z++) {
+                    if (Thread.currentThread().isInterrupted()) throw new java.util.concurrent.CancellationException();
+                    int height = sourceLevel.getChunkSource().getGenerator().getBaseHeight(x, z,
+                            net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                            sourceLevel, sourceLevel.getChunkSource().randomState());
+                    if (lowest) ground = Math.min(ground, height); else ground += height;
+                    samples++;
+                }
+                if (!lowest) ground /= Math.max(1, samples);
+                int burial = lowest ? RandomSource.create(generationSeed() ^ box.getCenter().asLong()).nextInt(3) : 0;
+                piece.move(0, ground - burial - box.minY(), 0);
+                CompoundTag child = piece.createTag(serializationContext());
+                child.putInt("HPos", ground);
+                child.putBoolean("useless_stretcher_ground_anchor", true);
+                children.set(index, child);
+                changed = true;
+            }
+            if (changed) {
+                candidate = StructureStart.loadStaticStart(serializationContext(), saved, generationSeed());
+                if (candidate == null || !candidate.isValid()) throw new IllegalStateException("Ground-anchored native plan could not be restored");
+            }
+            return candidate;
+        }
+
+        /** Scattered pieces place basements below the coarse vanilla Piece box. */
+        private BoundingBox placementEnvelope() {
+            BoundingBox envelope = start.getBoundingBox();
+            int minY = envelope.minY();
+            for (var piece : start.getPieces()) {
+                if (piece instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)
+                    minY = Math.min(minY, piece.getBoundingBox().minY() - 16);
+            }
+            return new BoundingBox(envelope.minX(), minY, envelope.minZ(), envelope.maxX(), envelope.maxY(), envelope.maxZ());
+        }
+
         /** Keep the complete native envelope above the bedrock support layer. */
         private boolean ensureBedrockSpace() {
             if (start.getPieces().isEmpty()) throw new CapsuleLimitException("too_large");
             // Native terrain adaptation can expand the Piece bounds (vanilla uses 12 blocks).
             // Calculate a fresh adjusted envelope rather than reusing StructureStart's cache.
-            BoundingBox envelope = start.getStructure().adjustBoundingBox(
-                    new PiecesContainer(start.getPieces()).calculateBoundingBox());
+            BoundingBox envelope = placementEnvelope();
             long lift = Math.max(0L, (long) level.getMinBuildHeight() + 1 - envelope.minY());
             if (lift > Integer.MAX_VALUE || (long) envelope.maxY() + lift >= level.getMaxBuildHeight())
                 throw new CapsuleLimitException("too_large");
@@ -652,8 +764,11 @@ public final class NativeCapsules {
                 if (room.piece < pieces.size()) {
                     var first = pieces.getFirst().getBoundingBox();
                     long began = System.nanoTime();
-                    pieces.get(room.piece).postProcess(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(),
-                            random, clip, chunk, new BlockPos(first.getCenter().getX(), first.minY(), first.getCenter().getZ()));
+                    try (var context = new CapsuleGenerationContext(level, sourceLevel, room,
+                            pieces.get(room.piece) instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)) {
+                        pieces.get(room.piece).postProcess(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(),
+                                random, clip, chunk, new BlockPos(first.getCenter().getX(), first.minY(), first.getCenter().getZ()));
+                    }
                     long elapsed = System.nanoTime() - began;
                     if (elapsed > CALLBACK_WARN_NANOS) {
                         LogUtils.getLogger().warn("Native capsule callback took {} ms for {} chunk {} piece {}",
@@ -663,8 +778,10 @@ public final class NativeCapsules {
                 }
                 if (!room.afterPlaced) {
                     long began = System.nanoTime();
-                    structure.afterPlace(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(), random,
-                            clip, chunk, new PiecesContainer(pieces));
+                    try (var context = new CapsuleGenerationContext(level, sourceLevel, room)) {
+                        structure.afterPlace(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(), random,
+                                clip, chunk, new PiecesContainer(pieces));
+                    }
                     long elapsed = System.nanoTime() - began;
                     if (elapsed > CALLBACK_WARN_NANOS) {
                         LogUtils.getLogger().warn("Native capsule afterPlace took {} ms for {} chunk {}",
@@ -776,6 +893,11 @@ public final class NativeCapsules {
                 if (!state.isAir()) {
                     boolean nativeStructureBlock = level.structureManager()
                             .getStructureWithPieceAt(pos, start.getStructure()).isValid();
+                    if (!nativeStructureBlock) nativeStructureBlock = start.getPieces().stream().anyMatch(piece ->
+                            piece instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece
+                                    && x >= piece.getBoundingBox().minX() && x <= piece.getBoundingBox().maxX()
+                                    && z >= piece.getBoundingBox().minZ() && z <= piece.getBoundingBox().maxZ()
+                                    && y >= piece.getBoundingBox().minY() - 16 && y <= piece.getBoundingBox().maxY());
                     if (!nativeStructureBlock) {
                         level.removeBlockEntity(pos);
                         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);

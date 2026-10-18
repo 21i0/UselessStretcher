@@ -28,6 +28,7 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
     public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_ENABLE;
     public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_RECIPES;
+    public static final ModConfigSpec.BooleanValue SERVER_STARFIELD_INVITATION;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -129,6 +130,14 @@ public final class StretcherConfig {
                 .comment("每次打树叶独立获得 2i 玩偶的概率，0.0001 为万分之一；每位玩家每个存档只领取一次。")
                 .translation("useless_stretcher.configuration.doll_leaf_drop.probability")
                 .defineInRange("probability", 0.0001D, 0.0D, 1.0D);
+        BUILDER.pop();
+
+        BUILDER.translation("useless_stretcher.configuration.two_i").push("two_i");
+        SERVER_STARFIELD_INVITATION = BUILDER
+                .comment("是否允许 2i 发出星空庭院邀请和重游，默认开启。",
+                        "关闭只阻止新的进入，不删除好感、邀请或奖励记录；庭院内玩家仍可安全返回。")
+                .translation("useless_stretcher.configuration.two_i.starfield_invitation")
+                .define("starfield_invitation", true);
         BUILDER.pop();
 
         BUILDER.translation("useless_stretcher.configuration.recipe_compat").push("recipe_compat");
@@ -234,6 +243,10 @@ public final class StretcherConfig {
 
     public static boolean usefulArmorEnabled() {
         return value(SERVER_USEFUL_ARMOR_ENABLE);
+    }
+
+    public static boolean starfieldInvitationEnabled() {
+        return value(SERVER_STARFIELD_INVITATION);
     }
 
 }

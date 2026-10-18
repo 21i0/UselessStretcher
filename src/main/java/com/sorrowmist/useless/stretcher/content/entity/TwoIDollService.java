@@ -53,6 +53,10 @@ public final class TwoIDollService {
     }
 
     public static boolean sendPlayerToStarfield(ServerPlayer player, boolean firstInvitation, TwoIDollEntity companion) {
+        if (!com.sorrowmist.useless.stretcher.config.StretcherConfig.starfieldInvitationEnabled()) {
+            message(player, "starfield_disabled", true);
+            return false;
+        }
         if (companion != null && (companion.isRemoved() || companion.level() != player.level()
                 || !player.getUUID().equals(companion.getOwnerId()) || companion.distanceToSqr(player) > 100.0D)) {
             message(player, "starfield_owner_only", true);

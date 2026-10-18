@@ -14,6 +14,13 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class CapsuleNetwork {
     private CapsuleNetwork() { }
+    public record Complete(String id, String dimension, int instanceId) implements CustomPacketPayload {
+        static final Type<Complete> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "capsule_complete"));
+        static final StreamCodec<RegistryFriendlyByteBuf, Complete> CODEC = StreamCodec.of((buf, p) -> {
+            buf.writeUtf(p.id, 256); buf.writeUtf(p.dimension, 256); buf.writeVarInt(p.instanceId);
+        }, buf -> new Complete(buf.readUtf(256), buf.readUtf(256), buf.readVarInt()));
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
     public record Request(String id, String dimension, int action, int side, boolean offhand, int instanceId) implements CustomPacketPayload {
         public Request(String id, String dimension, int action, int side, boolean offhand) {
             this(id, dimension, action, side, offhand, 0);
@@ -48,6 +55,8 @@ public final class CapsuleNetwork {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
     public static void register(PayloadRegistrar registrar) {
+        registrar.playToClient(Complete.TYPE, Complete.CODEC, (p, context) -> context.enqueueWork(() ->
+                ClientStateReceiver.handleCapsuleReady(p)));
         registrar.playToServer(Request.TYPE, Request.CODEC, (p, context) -> context.enqueueWork(() -> {
             if (!(context.player() instanceof ServerPlayer player) || p.action < 0 || p.action > 3 || p.side < 0 || p.side > 3 || p.instanceId < 0) return;
             if (!DimensionCapsuleItem.is(player.getItemInHand(p.offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND))) return;
@@ -72,6 +81,9 @@ public final class CapsuleNetwork {
     }
     public static void state(ServerPlayer player, String id, String dimension, String phase, int progress, int[] pixels, int sx, int sy, int sz) {
         state(player, id, dimension, 0, phase, progress, pixels, sx, sy, sz);
+    }
+    public static void complete(ServerPlayer player, String id, String dimension, int instanceId) {
+        PacketDistributor.sendToPlayer(player, new Complete(id, dimension, instanceId));
     }
     public static void state(ServerPlayer player, String id, String dimension, int instanceId, String phase, int progress, int[] pixels, int sx, int sy, int sz) {
         state(player, id, dimension, instanceId, 0, 0, 0, phase, progress, pixels, sx, sy, sz);

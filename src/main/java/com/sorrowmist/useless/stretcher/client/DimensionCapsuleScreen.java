@@ -135,7 +135,9 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
     private void updateButtons() {
         if (generate == null) return;
         generate.active = selected >= 0 && !target().isEmpty() && (state == null || state.phase().equals("empty")
-                || state.phase().equals("paused") || state.phase().equals("queue_full"));
+                || state.phase().equals("paused") || state.phase().equals("queue_full")
+                || java.util.Set.of("failed", "below_world", "too_large", "planning_timeout", "planning_memory",
+                        "allocation_conflict", "timeout", "source_environment_unavailable", "source_dimension_missing").contains(state.phase()));
         enter.active = state != null && state.phase().equals("ready");
         adjacent.active = state != null && state.phase().equals("ready");
         dimensionButton.active = selected >= 0 && entry().dimensions.size() > 1;

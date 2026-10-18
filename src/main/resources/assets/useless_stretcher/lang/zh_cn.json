@@ -803,5 +803,10 @@
   "msg.useless_stretcher.dimension_capsule.too_large": "结构体积超过安全上限 %s 方块，已拒绝生成以避免卡顿。",
   "msg.useless_stretcher.dimension_capsule.planning_timeout": "结构规划时间过长，已安全停止本次生成以避免卡顿。",
   "msg.useless_stretcher.dimension_capsule.entered": "已进入 %s（模板目标维度：%s）。再次使用胶囊可返回。",
-   "subtitles.useless_stretcher.two_i_pat": "2i 发出可爱的声音"
+   "subtitles.useless_stretcher.two_i_pat": "2i 发出可爱的声音",
+  "useless_stretcher.configuration.two_i": "2i 玩偶",
+  "useless_stretcher.configuration.two_i.starfield_invitation": "星空庭院邀请",
+  "msg.useless_stretcher.two_i.starfield_disabled": "星空庭院邀请已由服务器关闭。",
+  "toast.useless_stretcher.capsule_ready": "结构已加载完成",
+  "toast.useless_stretcher.capsule_enter": "打开维度胶囊即可进入"
 }

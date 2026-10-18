@@ -134,6 +134,7 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
             systemProperty 'useless_stretcher.environment_only', providers.gradleProperty('environmentOnly').getOrElse('false')
             systemProperty 'useless_stretcher.acceleration_only', providers.gradleProperty('accelerationOnly').getOrElse('false')
             systemProperty 'useless_stretcher.jdte_only', providers.gradleProperty('jdteOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.surface_only', providers.gradleProperty('surfaceOnly').getOrElse('false')
         }
     }
 }
@@ -176,6 +177,7 @@ if (providers.gradleProperty('storyTests').isPresent()) {
             systemProperty 'useless_stretcher.story_test', 'true'
             systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
             systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
             jvmArguments.addAll '-Xmx2G', '-Xms1G'
         }
     }

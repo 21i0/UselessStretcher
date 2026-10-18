@@ -803,5 +803,10 @@
   "msg.useless_stretcher.dimension_capsule.too_large": "The structure exceeds the safe limit of %s blocks and was rejected to prevent a stall.",
   "msg.useless_stretcher.dimension_capsule.planning_timeout": "Structure planning took too long, so generation was stopped safely to prevent a stall.",
   "msg.useless_stretcher.dimension_capsule.entered": "Entered %s (template target: %s). Use the capsule again to return.",
-  "subtitles.useless_stretcher.two_i_pat": "2i makes a cute sound"
+  "subtitles.useless_stretcher.two_i_pat": "2i makes a cute sound",
+  "useless_stretcher.configuration.two_i": "2i Doll",
+  "useless_stretcher.configuration.two_i.starfield_invitation": "Starfield courtyard invitations",
+  "msg.useless_stretcher.two_i.starfield_disabled": "Starfield courtyard invitations are disabled by the server.",
+  "toast.useless_stretcher.capsule_ready": "Structure ready",
+  "toast.useless_stretcher.capsule_enter": "Open your dimension capsule to enter"
 }

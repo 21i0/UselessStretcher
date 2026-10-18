@@ -56,7 +56,8 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
     }
 
     public static TwoIDialogueScreen forItem(InteractionHand hand, int giftScore, boolean invitationUsed) {
-        return new TwoIDialogueScreen(-1, true, hand, giftScore >= 100 || invitationUsed,
+        return new TwoIDialogueScreen(-1, true, hand,
+                giftScore >= 100 || invitationUsed,
                 invitationUsed, giftScore);
     }
 
@@ -97,7 +98,7 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
             Network.sendTwoIDollInvite(entityId);
             onClose();
         });
-        inviteButton.active = inviteReady;
+        inviteButton.active = inviteReady && com.sorrowmist.useless.stretcher.config.StretcherConfig.starfieldInvitationEnabled();
         reclaimButton = addAction(actionX, firstY + 52, buttonWidth, "reclaim", button -> {
             Network.sendTwoIDollReclaim(entityId);
             onClose();
@@ -150,12 +151,15 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
     public void tick() {
         super.tick();
         if (startWait > 0 && --startWait == 0) onStoryUnavailable();
+        if (inviteButton != null) inviteButton.active = inviteReady
+                && com.sorrowmist.useless.stretcher.config.StretcherConfig.starfieldInvitationEnabled();
     }
 
     public void updateGiftStatus(boolean inviteReady, int bond) {
         this.inviteReady = inviteReady;
         this.bond = Math.max(-100, Math.min(100, bond));
-        if (inviteButton != null) inviteButton.active = inviteReady;
+        if (inviteButton != null) inviteButton.active = inviteReady
+                && com.sorrowmist.useless.stretcher.config.StretcherConfig.starfieldInvitationEnabled();
     }
 
     @Override

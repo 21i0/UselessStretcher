@@ -93,6 +93,17 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.surface_only")) {
+            try {
+                EntityFeatureChecks.run(event.getServer().overworld());
+                com.sorrowmist.useless.stretcher.content.entity.TwoIStarfieldServerChecks.run(event.getServer().overworld());
+                com.sorrowmist.useless.stretcher.content.capsule.SurfaceCapsuleChecks.start(event.getServer());
+            } catch (Throwable failure) {
+                LogUtils.getLogger().error("SURFACE CAPSULE CHECKS FAILED", failure);
+                event.getServer().halt(false);
+            }
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.jdte_only")) return;
         if (Boolean.getBoolean("useless_stretcher.environment_only")) {
             try {
@@ -181,6 +192,18 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.surface_only")) {
+            try {
+                if (com.sorrowmist.useless.stretcher.content.capsule.SurfaceCapsuleChecks.tick(event.getServer())) {
+                    LogUtils.getLogger().info("SURFACE CAPSULE CHECKS PASSED");
+                    event.getServer().halt(false);
+                }
+            } catch (Throwable failure) {
+                LogUtils.getLogger().error("SURFACE CAPSULE CHECKS FAILED", failure);
+                event.getServer().halt(false);
+            }
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.jdte_only")) {
             if (++ticks < 41) return;
             try {

@@ -19,10 +19,11 @@ public final class ClientStateReceiver {
     private static boolean capsuleOffhand;
     private static boolean staffPhaseEnabled;
     private static boolean staffPhaseInteraction;
-    private static Boolean staffPhasePreviousNoPhysics;
-    private static Boolean staffPhaseLastAppliedNoPhysics;
-    private static net.minecraft.client.player.LocalPlayer staffPhasePlayer;
     private ClientStateReceiver() {
+    }
+
+    public static void handleCapsuleReady(CapsuleNetwork.Complete payload) {
+        com.sorrowmist.useless.stretcher.client.CapsuleReadyToast.show(payload.id(), payload.dimension(), payload.instanceId());
     }
 
     public static void accept(Network.MyriadStatePayload payload) {
@@ -82,9 +83,7 @@ public final class ClientStateReceiver {
         if (Minecraft.getInstance().level == null) {
             staffPhaseEnabled = false;
             staffPhaseInteraction = true;
-            staffPhasePreviousNoPhysics = null;
-            staffPhaseLastAppliedNoPhysics = null;
-            staffPhasePlayer = null;
+            com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager.clientTick(null);
             return;
         }
         applyStaffPhase();
@@ -95,37 +94,10 @@ public final class ClientStateReceiver {
     }
 
     private static void applyStaffPhase() {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null) return;
-        if (staffPhasePlayer != minecraft.player) {
-            staffPhasePlayer = minecraft.player;
-            staffPhasePreviousNoPhysics = null;
-            staffPhaseLastAppliedNoPhysics = null;
-        }
-        if (staffPhaseEnabled) {
-            boolean current = com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager
-                    .noPhysics(minecraft.player);
-            if (staffPhasePreviousNoPhysics == null) {
-                staffPhasePreviousNoPhysics = current;
-                staffPhaseLastAppliedNoPhysics = true;
-            } else if (staffPhaseLastAppliedNoPhysics == null || current != staffPhaseLastAppliedNoPhysics) {
-                // Remember an external change as the desired value after the staff
-                // releases collision control.
-                staffPhasePreviousNoPhysics = current;
-                staffPhaseLastAppliedNoPhysics = true;
-            }
-            com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager
-                    .setNoPhysics(minecraft.player, true);
-        } else if (staffPhasePreviousNoPhysics != null) {
-            boolean current = com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager
-                    .noPhysics(minecraft.player);
-            if (staffPhaseLastAppliedNoPhysics != null && current == staffPhaseLastAppliedNoPhysics) {
-                com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager
-                        .setNoPhysics(minecraft.player, staffPhasePreviousNoPhysics);
-            }
-            staffPhasePreviousNoPhysics = null;
-            staffPhaseLastAppliedNoPhysics = null;
-        }
+        // Movement owns collision/flight for the entire vanilla tick. Reapplying a
+        // second snapshot here could capture our own true flag and restore it on disable.
+        var player = Minecraft.getInstance().player;
+        com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager.clientTick(player);
     }
 
     public static void handleTimeStop(Network.TimeStopStatePayload payload) {

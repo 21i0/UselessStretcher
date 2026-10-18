@@ -57,13 +57,33 @@ final class EntityFeatureChecks {
         StaffPhaseManager.setNoPhysics(player, false);
         StaffPhaseManager.apply(player);
         check(StaffPhaseManager.noPhysics(player), "phase staff temporarily disables block collision");
+        player.getAbilities().mayfly = false;
+        player.getAbilities().flying = false;
+        player.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
+        player.doTick();
+        check(StaffPhaseManager.noPhysics(player) && player.getAbilities().flying && player.getAbilities().mayfly,
+                "actual vanilla player tick cannot overwrite phase or free flight");
+        var phaseStart = player.position();
+        for (int x=4; x<=9; x++) for (int y=160; y<=163; y++)
+            level.setBlockAndUpdate(new net.minecraft.core.BlockPos(x,y,4), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        player.move(net.minecraft.world.entity.MoverType.SELF, new net.minecraft.world.phys.Vec3(5,2,0));
+        check(player.position().distanceToSqr(phaseStart.add(5,2,0)) < 0.0001, "actual movement traverses thick wall in all axes");
         StaffPhaseManager.setNoPhysics(player, false); // another mod changes its collision state while phasing
         staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
         check(StaffPhaseManager.blocksInteraction(player), "phase interaction switch can suppress interaction");
         staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
         StaffPhaseManager.apply(player);
+        StaffPhaseManager.movementTick(player);
+        check(!player.getAbilities().flying, "phase shutdown restores prior flight intent while upstream mayfly stays available");
         check(!StaffPhaseManager.noPhysics(player), "disabling phase preserves a newer external collision-state change");
         check(!StaffPhaseManager.state(player).phase(), "phase state clears when staff phase is off");
+        var persistedFlight = new CompoundTag();
+        persistedFlight.putBoolean("mayfly", false); persistedFlight.putBoolean("flying", false);
+        player.getPersistentData().put("useless_stretcher_phase_flight", persistedFlight);
+        player.getAbilities().mayfly = true; player.getAbilities().flying = true;
+        StaffPhaseManager.movementTick(player);
+        check(!player.getAbilities().flying && !player.getPersistentData().contains("useless_stretcher_phase_flight"),
+                "restored player releases persistent phase flight snapshot after restart");
         checkUselessModPhaseCompatibility(player, staff);
         check(!WondrousStaffAcceleration.usesEntityTimers(staff), "old staff defaults to complete ticks");
         boolean summonEnabled = StretcherConfig.enableStaffSummon();

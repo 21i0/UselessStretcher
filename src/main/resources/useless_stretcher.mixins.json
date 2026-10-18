@@ -6,11 +6,16 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CapsuleDimensionBootstrapMixin",
+    "CapsuleGenerationHeightMixin",
+    "CapsuleScatteredHeightMixin",
+    "DesertPyramidCheckpointMixin",
     "OccultismRitualClockMixin",
     "StaffRadiationShieldingMixin",
     "StaffRadiationEntityMixin",
     "UsefulArmorGameModeMixin",
     "EntityNoPhysicsAccessor",
+    "StaffPhaseMovementMixin",
+    "StaffPhasePacketMovementMixin",
     "LivingHealthDataAccessor",
     "TwoIDollRemovalGuardMixin",
     "TwoIDollUselessKillGuardMixin",
@@ -48,6 +53,8 @@
     "ApotheosisEnchantingMenuMixin"
   ],
   "client": [
+    "StaffPhaseLocalMovementMixin",
+    "StaffPhaseVisibilityMixin",
     "UsefulArmorLayerMixin",
     "TwoIPlayerArmMixin",
     "TwoIHeldDollMixin",

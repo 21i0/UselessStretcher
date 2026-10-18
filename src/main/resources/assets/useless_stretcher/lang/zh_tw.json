@@ -763,5 +763,10 @@
   "msg.useless_stretcher.dimension_capsule.not_found": "結構模板已失效或未載入。",
   "msg.useless_stretcher.dimension_capsule.too_large": "結構體積超過安全上限 %s 方塊，已拒絕生成以避免卡頓。",
   "msg.useless_stretcher.dimension_capsule.planning_timeout": "結構規劃時間過長，已安全停止本次生成以避免卡頓。",
-  "msg.useless_stretcher.dimension_capsule.entered": "已進入 %s（模板目標維度：%s）。再次使用膠囊可返回。"
+  "msg.useless_stretcher.dimension_capsule.entered": "已進入 %s（模板目標維度：%s）。再次使用膠囊可返回。",
+  "useless_stretcher.configuration.two_i": "2i 玩偶",
+  "useless_stretcher.configuration.two_i.starfield_invitation": "星空庭院邀請",
+  "msg.useless_stretcher.two_i.starfield_disabled": "星空庭院邀請已由伺服器關閉。",
+  "toast.useless_stretcher.capsule_ready": "結構已載入完成",
+  "toast.useless_stretcher.capsule_enter": "開啟維度膠囊即可進入"
 }

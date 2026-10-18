@@ -91,6 +91,18 @@ public final class TwoIStarfieldServerChecks {
         Vec3 originalPosition = player.position();
         player.fallDistance = 80.0F;
         player.setDeltaMovement(1.0D, -8.0D, 1.0D);
+        var invitationConfig = com.sorrowmist.useless.stretcher.config.StretcherConfig.SERVER_STARFIELD_INVITATION;
+        boolean enabled = invitationConfig.get();
+        try {
+            invitationConfig.set(false);
+            check(!TwoIDollService.sendPlayerToStarfield(player, true), "disabled invitation blocks direct requests");
+            check(player.level() == overworld && data.returnPoint(id) == null, "disabled invitation preserves position and visit data");
+            var doll = com.sorrowmist.useless.stretcher.init.ModEntities.TWO_I_DOLL.get().create(overworld);
+            doll.setOwnerId(id); doll.restoreBond(100, false);
+            check(!doll.canInvite(), "disabled invitation blocks full-affection doll");
+            doll.restoreBond(100, true);
+            check(!doll.canInvite(), "disabled invitation blocks revisits");
+        } finally { invitationConfig.set(enabled); }
         check(TwoIDollService.sendPlayerToStarfield(player, true), "service accepts first invitation");
         check(player.level() == stars && player.position().equals(outsideGate), "invitation lands outside the courtyard gate");
         check(!TwoIDollService.tryStartCourtyardShow(player, data) && data.celebrationEnd(id) == 0L,
@@ -140,7 +152,9 @@ public final class TwoIStarfieldServerChecks {
         }
         for (int i = 0; i < 5; i++) data.recordRewardDrop(id);
 
-        check(TwoIDollService.returnFromStarfield(player), "return request is handled");
+        invitationConfig.set(false);
+        try { check(TwoIDollService.returnFromStarfield(player), "disabled invitation still allows return"); }
+        finally { invitationConfig.set(enabled); }
         check(player.level() == overworld && player.position().equals(originalPosition),
                 "service returns to exact safe original location");
         check(player.getYRot() == 63.0F && player.getXRot() == -12.0F, "return preserves original view direction");
