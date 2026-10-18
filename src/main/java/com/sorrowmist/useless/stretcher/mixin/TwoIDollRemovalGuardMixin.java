@@ -14,4 +14,9 @@ public abstract class TwoIDollRemovalGuardMixin {
     private void uselessStretcher$guardDollRemoval(Entity.RemovalReason reason, CallbackInfo ci) {
         if ((Object)this instanceof TwoIDollEntity doll && doll.blocksDestructiveRemoval(reason)) ci.cancel();
     }
+
+    @Inject(method = "setPosRaw", at = @At("HEAD"), cancellable = true)
+    private void uselessStretcher$guardDollPosition(double x, double y, double z, CallbackInfo ci) {
+        if ((Object)this instanceof TwoIDollEntity doll && doll.blocksInvalidPosition(x, y, z)) ci.cancel();
+    }
 }

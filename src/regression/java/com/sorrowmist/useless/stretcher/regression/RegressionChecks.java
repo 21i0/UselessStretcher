@@ -93,6 +93,18 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.protection_only")) {
+            try {
+                TwoIForcedKillChecks.run(event.getServer().overworld());
+                TwoIDollProtectionChecks.run(event.getServer().overworld());
+                com.sorrowmist.useless.stretcher.content.entity.TwoIStarfieldServerChecks.run(event.getServer().overworld());
+                LogUtils.getLogger().info("2I FORCED KILL PROTECTION CHECKS PASSED");
+            } catch (Throwable failure) {
+                LogUtils.getLogger().error("2I FORCED KILL PROTECTION CHECKS FAILED", failure);
+            }
+            event.getServer().halt(false);
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.surface_only")) {
             try {
                 EntityFeatureChecks.run(event.getServer().overworld());
@@ -192,6 +204,7 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.protection_only")) return;
         if (Boolean.getBoolean("useless_stretcher.surface_only")) {
             try {
                 if (com.sorrowmist.useless.stretcher.content.capsule.SurfaceCapsuleChecks.tick(event.getServer())) {

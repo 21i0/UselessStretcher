@@ -264,6 +264,7 @@ public final class TwoIDollEntity extends PathfinderMob {
 
     @Override
     public void onRemovedFromLevel() {
+        if (TwoILifecycleGuard.blocks(this)) return;
         storySessions.clear();
         interactionViewers.clear();
         clearFriendship();
@@ -598,7 +599,43 @@ public final class TwoIDollEntity extends PathfinderMob {
         if (key.equals(healthKey) && getEntityData().get(healthKey) != 20.0F) {
             getEntityData().set(healthKey, 20.0F);
         }
+        if (key.equals(DATA_SHARED_FLAGS_ID)) {
+            byte flags = getEntityData().get(DATA_SHARED_FLAGS_ID);
+            if ((flags & 32) != 0) getEntityData().set(DATA_SHARED_FLAGS_ID, (byte) (flags & ~32));
+        } else if (key.equals(DATA_POSE) && getPose() == net.minecraft.world.entity.Pose.DYING) {
+            getEntityData().set(DATA_POSE, net.minecraft.world.entity.Pose.STANDING);
+        }
         super.onSyncedDataUpdated(key);
+    }
+
+    @Override
+    public void setInvisible(boolean invisible) {
+        // Forced-kill fallbacks often hide a target after its health/removal guards reject death.
+        super.setInvisible(false);
+    }
+
+    @Override
+    public void setPose(net.minecraft.world.entity.Pose pose) {
+        if (pose != net.minecraft.world.entity.Pose.DYING) super.setPose(pose);
+    }
+
+    /** Reject exile/NaN before the final setPosRaw updates section indexes or loads a remote chunk. */
+    public boolean blocksInvalidPosition(double x, double y, double z) {
+        return isAddedToLevel() && !isRemoved() && (!Double.isFinite(x) || !Double.isFinite(y)
+                || !Double.isFinite(z) || Math.abs(x) > 30_000_000D || Math.abs(z) > 30_000_000D
+                || y < level().getMinBuildHeight() - 16D);
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        // A death animation packet must not make a healthy, protected doll look killed.
+        if (id != 3) super.handleEntityEvent(id);
+    }
+
+    @Override
+    public void setLevelCallback(net.minecraft.world.level.entity.EntityInLevelCallback callback) {
+        if (callback == net.minecraft.world.level.entity.EntityInLevelCallback.NULL && TwoILifecycleGuard.blocks(this)) return;
+        super.setLevelCallback(callback);
     }
 
     @Override
@@ -631,7 +668,7 @@ public final class TwoIDollEntity extends PathfinderMob {
 
     /** Used by the final Entity.setRemoved mixin as well as the normal remove path. */
     public boolean blocksDestructiveRemoval(Entity.RemovalReason reason) {
-        return !level().isClientSide && isAddedToLevel() && !authorizedReclaim
+        return isAddedToLevel() && !authorizedReclaim && !TwoILifecycleGuard.allows(this)
                 && (reason == Entity.RemovalReason.KILLED || reason == Entity.RemovalReason.DISCARDED);
     }
 

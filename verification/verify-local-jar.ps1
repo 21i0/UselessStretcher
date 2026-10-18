@@ -28,10 +28,12 @@ try {
     if ($networkSource -notmatch 'event\.registrar\("21"\)') { throw 'Wrong network protocol source' }
     $mixins = (Read-Entry $zip.GetEntry('useless_stretcher.mixins.json')) | ConvertFrom-Json -AsHashtable
     foreach ($mixin in @('StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
-            'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin')) {
+            'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin', 'TwoIDollRemovalGuardMixin',
+            'TwoIDollLookupGuardMixin', 'TwoIDollTickListGuardMixin', 'TwoIDollSectionGuardMixin',
+            'TwoIDollManagerLifecycleMixin', 'TwoIDollSectionLifecycleMixin', 'TwoIDollLevelCallbackGuardMixin')) {
         if ($mixins.mixins -notcontains $mixin) { throw "Missing common mixin: $mixin" }
     }
-    foreach ($mixin in @('StaffPhaseLocalMovementMixin', 'StaffPhaseVisibilityMixin')) {
+    foreach ($mixin in @('StaffPhaseLocalMovementMixin', 'StaffPhaseVisibilityMixin', 'TwoIDollClientRemovalMixin')) {
         if ($mixins.client -notcontains $mixin) { throw "Missing client mixin: $mixin" }
     }
     $guidePages = @($zip.Entries | Where-Object { $_.FullName -match '^assets/ae2/ae2guide/useless_stretcher/.*\.md$' })

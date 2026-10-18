@@ -135,6 +135,7 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
             systemProperty 'useless_stretcher.acceleration_only', providers.gradleProperty('accelerationOnly').getOrElse('false')
             systemProperty 'useless_stretcher.jdte_only', providers.gradleProperty('jdteOnly').getOrElse('false')
             systemProperty 'useless_stretcher.surface_only', providers.gradleProperty('surfaceOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.protection_only', providers.gradleProperty('protectionOnly').getOrElse('false')
         }
     }
 }
@@ -168,6 +169,7 @@ if (providers.gradleProperty('guideTests').isPresent()) {
 // Opt-in story UI checks use a separate client directory and cannot enter a release jar.
 if (providers.gradleProperty('storyTests').isPresent()) {
     sourceSets.main.java.srcDir 'src/storyTest/java'
+    if (providers.gradleProperty('protectionTests').isPresent()) sourceSets.main.java.srcDir 'src/regression/java'
     sourceSets.main.resources.srcDir 'src/regression/resources'
     neoForge.runs {
         storyPreview {
@@ -178,6 +180,7 @@ if (providers.gradleProperty('storyTests').isPresent()) {
             systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
             systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
             systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.forced_kill_client_only', providers.gradleProperty('forcedKillClientOnly').getOrElse('false')
             jvmArguments.addAll '-Xmx2G', '-Xms1G'
         }
     }

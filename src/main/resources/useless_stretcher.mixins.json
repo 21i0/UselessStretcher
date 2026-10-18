@@ -18,6 +18,12 @@
     "StaffPhasePacketMovementMixin",
     "LivingHealthDataAccessor",
     "TwoIDollRemovalGuardMixin",
+    "TwoIDollLookupGuardMixin",
+    "TwoIDollTickListGuardMixin",
+    "TwoIDollSectionGuardMixin",
+    "TwoIDollManagerLifecycleMixin",
+    "TwoIDollSectionLifecycleMixin",
+    "TwoIDollLevelCallbackGuardMixin",
     "TwoIDollUselessKillGuardMixin",
     "TwoIDollSpawnEggMixin",
     "TwoIDollBrainTargetMixin",
@@ -53,6 +59,7 @@
     "ApotheosisEnchantingMenuMixin"
   ],
   "client": [
+    "TwoIDollClientRemovalMixin",
     "StaffPhaseLocalMovementMixin",
     "StaffPhaseVisibilityMixin",
     "UsefulArmorLayerMixin",

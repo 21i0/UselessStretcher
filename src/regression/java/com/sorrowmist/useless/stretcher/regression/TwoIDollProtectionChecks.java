@@ -143,6 +143,8 @@ public final class TwoIDollProtectionChecks {
             TwoIDollEntity lifecycle = spawn(level, owner.getUUID());
             lifecycle.setRemoved(reason);
             check(lifecycle.isRemoved() && !lifecycle.isAlive(), "unload/dimension lifecycle is not blocked: " + reason);
+            check(level.getEntity(lifecycle.getUUID()) == null && level.getEntity(lifecycle.getId()) == null,
+                    "lawful unload/transfer clears world indexes: " + reason);
         }
         TwoIDollEntity unregistered = ModEntities.TWO_I_DOLL.get().create(level);
         unregistered.discard();
