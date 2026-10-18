@@ -1,10 +1,10 @@
 万象担架 1.6.0 使用说明（2026-10-18，正式命名）
 本节优先于下方历史包名、协议与旧说明。
 文件：D:/AI/useless_stretcher-1.21.1-1.6.0.jar
-大小：12487693 字节；SHA256：4A1FF8C14836F69B3CEAF50B65AF7D362E09D648F60F6DD544D95B7727016F31
+大小：12487179 字节；SHA256：EF5FD79A319EF13275B3F6D58A9B6146BCE2BE9ECBC3D03B1743F2FBC2476A71
 需要 Minecraft 1.21.1、Java 21、NeoForge 21.1.x（构建于 21.1.249）、无用之物至少 1.21.1-2.4.6 和 AE2 至少 19.2；客户端与服务端同时安装同包，协议 20。
 源码按最新要求推送 GitHub；Release 等用户测试确认后再上传。由 1.5.x 升级请使用新存档；本轮保留此前 1.6.0 胶囊实例及入口。
-本次有用锭装备修复继续同步 GitHub main，提交与远端核实记录见 verification/github-160-armor-default-off-sync-20261018.json；Release 等实测后再上传。
+本次移除 GuideME 中有用锭装备的展示与全部说明，源码同步 GitHub main，详情见 verification/1.6.0-guide-armor-removed-20261018.md；Release 等实测后再上传。
 
 维度胶囊怎么用
 右键打开窗口，按模组分类或输入名称、@模组搜索。选择结构和环境后生成，地图下方显示规划活动指示以及清理检查、放置、基岩、收尾的进度，完成为 100%。关闭窗口不会取消任务。
@@ -25,9 +25,9 @@
 手杖 X 页面“展开”可设置穿墙与 MEK 辐射防护，默认关闭；辐射开关清除并免疫自身剂量，移走有效手杖或关闭后恢复正常规则。独立传送键默认未绑定，普通按键瞬移，潜行使用旅行锚。
 Occultism 矿井/仪式、三种加工精灵和 RFToolsBuilder 建造机/采掘卡支持原生材料与供能条件下的加速。
 有用锭装备功能与合成配方均默认关闭，四件装备始终在 JEI 隐藏。服主可在 config/useless_stretcher-server.toml 的 [useful_armor] 下设置 enable=true 启用套装功能；若存档 serverconfig 目录已有同名配置，则以存档内文件为准，游戏内配置按钮悬停可查看实际路径。需要合成时再设置 enable_recipes=true，修改后重启服务器或 /reload。只有总开关开启，穿齐四件才锁定创造；脱下一件或关闭总开关恢复原模式。旧配置仅开启 enable_recipes 不会生成配方，JEI 在功能开启后仍隐藏四件装备。钻石甲属性、动画图标与隐藏装甲层保留，创造栏仍可取得物品。
-安装 GuideME 后从 AE2 原有指南的“万象担架附属”查看操作。维度胶囊、2i、手杖等支持悬停物品后按阅读键直达对应页面。全部 9 页已完成客户端编译和渲染检查。
+安装 GuideME 后从 AE2 原有指南的“万象担架附属”查看操作。维度胶囊、2i、手杖等支持悬停物品后按阅读键直达对应页面。指南已移除有用锭装备的图片、章节和配置/效果说明。全部 9 页已完成客户端编译和渲染检查。
 
-正式包身份与本次测试见仓库 verification/1.6.0-armor-default-off-20261018.md 和 verification/jar-20261018-armor-default-off-delivered-audit.json。JDTE 与胶囊原实测证据保留。旧项目 JAR 可恢复归档，D:/AI 根目录只保留上述正式命名项目包，其它项目 JAR 保留。
+正式包身份与本次指南验证见仓库 verification/1.6.0-guide-armor-removed-20261018.md 和 verification/jar-20261018-guide-armor-removed-delivered-audit.json。装备默认关闭/真实 JEI、JDTE 与胶囊原实测证据保留。旧项目 JAR 可恢复归档，D:/AI 根目录只保留上述正式命名项目包，其它项目 JAR 保留。
 
 以下为历史说明，旧“当前测试包”和交付约束以上方为准。
 

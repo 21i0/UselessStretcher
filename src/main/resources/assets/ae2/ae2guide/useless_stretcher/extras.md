@@ -41,8 +41,6 @@ navigation:
 * `staff_leaf_drop.probability`：树叶触发概率，默认 `0.00001`。
 * `doll_leaf_drop.enable`、`doll_leaf_drop.probability`：独立玩偶掉落开关与概率，默认开启、`0.0001`。两种奖励的开关互不影响，关闭新抽取不会删除待领取奖励。
 * 配方兼容选项：可隐藏 Ender IO 半自磨机重复的磨珠配方变体。
-* `useful_armor.enable_recipes`：是否允许用有用锭按原版盔甲形状合成四件装备，默认关闭；修改后重启或执行 `/reload`。
-* `useful_armor.enable`：有用锭装甲功能总开关，默认关闭；关闭后不会锁定创造模式，已被套装切换的玩家恢复原模式。
 
 范围的倍率、名单、偏移和历史由世界数据保存；不需要把配置或范围缓存放进玩家 NBT。修改配方目录过滤后，按游戏提示重载世界或重启游戏。
 
@@ -55,19 +53,6 @@ navigation:
 ## 升级提醒
 
 客户端和服务端应同时更新。1.6.0 最低需要无用之物 2.4.6，旧版扩容补丁已经删除。样板索引、去重缓存与大容量模具服务端存储仍然保留。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。详细操作见[维度胶囊](capsule.md)。
-
-## 有用锭装甲
-
-<Row gap="12">
-  <ItemImage id="useless_stretcher:useful_armor_helmet" scale="3" />
-  <ItemImage id="useless_stretcher:useful_armor_chestplate" scale="3" />
-  <ItemImage id="useless_stretcher:useful_armor_leggings" scale="3" />
-  <ItemImage id="useless_stretcher:useful_armor_boots" scale="3" />
-</Row>
-
-有用锭装甲功能默认关闭，四件装备始终在 JEI 隐藏。只有服主开启 `useful_armor.enable` 后，穿齐才会强制进入创造模式并限制模式切换；脱下一件或关闭功能总开关，会恢复穿戴前的游戏模式。关闭功能时，已有装备也不会强制切换模式。
-
-四件装备使用钻石盔甲的防御与耐久，物品图标使用有用锭动画，玩家身上不显示其装甲层。合成配方也默认关闭，装备仍可从创造栏取得；同时开启 `useful_armor.enable` 和 `useful_armor.enable_recipes` 后，可按原版盔甲形状合成。仅关闭配方不会停用已开启的套装功能；JEI 在功能开启后仍隐藏四件装备。
 
 ## 鸣谢
 
