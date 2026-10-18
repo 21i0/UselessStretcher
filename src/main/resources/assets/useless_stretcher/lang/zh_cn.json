@@ -639,6 +639,7 @@
   "useless_stretcher.configuration.server.remote_reclaimer": "允许远程回收",
   "useless_stretcher.configuration.server.time_stop": "允许手杖时间暂停",
   "useless_stretcher.configuration.server.useful_armor_recipes": "启用有用锭装甲合成配方",
+  "useless_stretcher.configuration.server.useful_armor_enable": "启用有用锭装甲功能",
   "useless_stretcher.configuration.useful_armor": "有用锭装甲",
   "useless_stretcher.configuration.acceleration.idle_throttle": "永久加速动态降频",
   "useless_stretcher.configuration.acceleration.idle_throttle.tooltip": "永久模式下是否对空闲机器自动降频以节省性能。普通模式始终满速。",

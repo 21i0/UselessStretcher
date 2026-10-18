@@ -23,16 +23,39 @@ final class UsefulArmorChecks {
     private UsefulArmorChecks() { }
 
     static void run(ServerLevel level) {
-        check(!StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.getDefault(), "only armor crafting defaults off");
+        check(!StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.getDefault(), "armor functionality defaults off");
+        check(!StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.getDefault(), "armor crafting defaults off");
+        var hidden = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
+                ResourceLocation.parse("c:hidden_from_recipe_viewers"));
+        for (var piece : java.util.List.of(ModItems.USEFUL_ARMOR_HELMET, ModItems.USEFUL_ARMOR_CHESTPLATE,
+                ModItems.USEFUL_ARMOR_LEGGINGS, ModItems.USEFUL_ARMOR_BOOTS)) {
+            check(new ItemStack(piece.get()).is(hidden), "real recipe-viewer hide tag contains " + piece.getId());
+        }
+        check(!new ItemStack(Items.DIAMOND_HELMET).is(hidden), "normal diamond armor not hidden");
         check(ModItems.USEFUL_ARMOR_HELMET.get().getDefense() == 3
                         && ModItems.USEFUL_ARMOR_CHESTPLATE.get().getDefense() == 8
                         && ModItems.USEFUL_ARMOR_LEGGINGS.get().getDefense() == 6
                         && ModItems.USEFUL_ARMOR_BOOTS.get().getDefense() == 3,
                 "useful armor uses diamond defense values");
 
-        boolean previous = StretcherConfig.usefulArmorRecipesEnabled();
+        boolean previousEnabled = StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.get();
+        boolean previousRecipes = StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.get();
         var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "UsefulArmorRegression"));
         try {
+            StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(false);
+            StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(true);
+            UsefulArmorRecipes.apply(level.getRecipeManager());
+            check(level.getRecipeManager().byKey(ModItems.USEFUL_ARMOR_HELMET.getId()).isEmpty(),
+                    "master switch prevents crafting even when legacy recipe flag is enabled");
+            player.gameMode.changeGameModeForPlayer(GameType.ADVENTURE);
+            equip(player);
+            tick(player);
+            check(player.gameMode.getGameModeForPlayer() == GameType.ADVENTURE,
+                    "disabled complete suit does not force creative");
+            check(player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL),
+                    "disabled complete suit permits direct game mode changes");
+            player.getInventory().clearContent();
+            StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(true);
             recipes(level);
             StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(false);
             player.gameMode.changeGameModeForPlayer(GameType.ADVENTURE);
@@ -61,13 +84,24 @@ final class UsefulArmorChecks {
                     "removing the suit restores the mode from before activation");
             equip(player);
             tick(player);
+            check(player.gameMode.getGameModeForPlayer() == GameType.CREATIVE, "enabled set activates again");
+            StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(false);
+            tick(player);
+            check(player.gameMode.getGameModeForPlayer() == GameType.ADVENTURE,
+                    "disabling functionality restores original mode while still wearing complete suit");
+            check(player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL), "disabled lock releases controller");
+            StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(true);
+            player.gameMode.changeGameModeForPlayer(GameType.ADVENTURE);
+            equip(player);
+            tick(player);
             player.getInventory().clearContent();
             player.getPersistentData().putInt("useless_stretcher_useful_armor_previous_mode", 999);
             tick(player);
             check(player.gameMode.getGameModeForPlayer() == GameType.SURVIVAL, "invalid saved prior mode falls back to survival");
-            LogUtils.getLogger().info("REGRESSION useful armor: recipes default off/on/off, real crafting, diamond stats, partial suit, command/direct creative lock, clone and mode restore passed");
+            LogUtils.getLogger().info("REGRESSION useful armor: functionality/recipes default off, disabled full suit, legacy recipe gate, real crafting, enabled creative lock, disable-while-equipped restoration, clone and mode restore passed");
         } finally {
-            StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(previous);
+            StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(previousEnabled);
+            StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(previousRecipes);
             UsefulArmorRecipes.apply(level.getRecipeManager());
             player.getInventory().clearContent();
             tick(player);

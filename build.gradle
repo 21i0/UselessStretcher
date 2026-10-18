@@ -175,6 +175,7 @@ if (providers.gradleProperty('storyTests').isPresent()) {
             programArguments.addAll '--width', '1280', '--height', '800'
             systemProperty 'useless_stretcher.story_test', 'true'
             systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
             jvmArguments.addAll '-Xmx2G', '-Xms1G'
         }
     }

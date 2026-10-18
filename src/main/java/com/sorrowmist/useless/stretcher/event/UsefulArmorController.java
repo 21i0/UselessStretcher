@@ -1,6 +1,7 @@
 package com.sorrowmist.useless.stretcher.event;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +13,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-/** Server-authoritative full-set creative lock, independent of the crafting recipe switch. */
+/** Server-authoritative, opt-in full-set creative lock with safe restoration when disabled. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
 public final class UsefulArmorController {
     private static final String FORCED = "useless_stretcher_useful_armor_forced";
@@ -70,7 +71,8 @@ public final class UsefulArmorController {
     }
 
     public static boolean hasCompleteSet(ServerPlayer player) {
-        return isPiece(player.getItemBySlot(EquipmentSlot.HEAD), ModItems.USEFUL_ARMOR_HELMET.get())
+        return StretcherConfig.usefulArmorEnabled()
+                && isPiece(player.getItemBySlot(EquipmentSlot.HEAD), ModItems.USEFUL_ARMOR_HELMET.get())
                 && isPiece(player.getItemBySlot(EquipmentSlot.CHEST), ModItems.USEFUL_ARMOR_CHESTPLATE.get())
                 && isPiece(player.getItemBySlot(EquipmentSlot.LEGS), ModItems.USEFUL_ARMOR_LEGGINGS.get())
                 && isPiece(player.getItemBySlot(EquipmentSlot.FEET), ModItems.USEFUL_ARMOR_BOOTS.get());

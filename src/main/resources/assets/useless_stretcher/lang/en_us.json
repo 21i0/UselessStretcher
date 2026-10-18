@@ -632,6 +632,7 @@
   "useless_stretcher.configuration.server.remote_reclaimer": "Allow remote reclaiming",
   "useless_stretcher.configuration.server.time_stop": "Allow staff time stop",
   "useless_stretcher.configuration.server.useful_armor_recipes": "Enable Useful Ingot armor crafting recipes",
+  "useless_stretcher.configuration.server.useful_armor_enable": "Enable Useful Ingot armor functionality",
   "useless_stretcher.configuration.useful_armor": "Useful Ingot armor",
   "useless_stretcher.configuration.acceleration.idle_throttle": "Dynamic idle throttling",
   "useless_stretcher.configuration.acceleration.idle_throttle.tooltip": "Automatically throttle idle machines in permanent mode to save performance. Normal mode always runs at full speed.",

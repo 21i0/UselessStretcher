@@ -26,6 +26,7 @@ public final class StretcherConfig {
     public static final ModConfigSpec.BooleanValue SERVER_TIME_STOP;
     public static final ModConfigSpec.BooleanValue SERVER_APOTHEOSIS_COMPAT;
     public static final ModConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
+    public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_ENABLE;
     public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_RECIPES;
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -140,9 +141,14 @@ public final class StretcherConfig {
         BUILDER.pop();
 
         BUILDER.translation("useless_stretcher.configuration.useful_armor").push("useful_armor");
+        SERVER_USEFUL_ARMOR_ENABLE = BUILDER
+                .comment("是否启用有用锭装甲的创造模式套装功能，默认关闭。",
+                        "关闭后已有套装也不会锁定创造，已被套装切换的玩家恢复原模式。四件装备始终在 JEI 隐藏。")
+                .translation("useless_stretcher.configuration.server.useful_armor_enable")
+                .define("enable", false);
         SERVER_USEFUL_ARMOR_RECIPES = BUILDER
                 .comment("是否允许用有用锭合成装甲，默认关闭。修改后重启服务器或执行 /reload。",
-                        "配方关闭时仍可从创造栏获得；穿齐四件始终锁定创造模式，脱下任意一件恢复原模式。")
+                        "同时需要开启有用锭装甲功能总开关；四件装备始终在 JEI 隐藏。")
                 .translation("useless_stretcher.configuration.server.useful_armor_recipes")
                 .define("enable_recipes", false);
         BUILDER.pop();
@@ -223,7 +229,11 @@ public final class StretcherConfig {
     }
 
     public static boolean usefulArmorRecipesEnabled() {
-        return value(SERVER_USEFUL_ARMOR_RECIPES);
+        return usefulArmorEnabled() && value(SERVER_USEFUL_ARMOR_RECIPES);
+    }
+
+    public static boolean usefulArmorEnabled() {
+        return value(SERVER_USEFUL_ARMOR_ENABLE);
     }
 
 }

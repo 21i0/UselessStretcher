@@ -54,6 +54,10 @@ public final class StoryChecks {
     public static void tick(ClientTickEvent.Post event) {
         if (!Boolean.getBoolean("useless_stretcher.story_test") || finished) return;
         Minecraft client = Minecraft.getInstance();
+        if (Boolean.getBoolean("useless_stretcher.armor_jei_only")) {
+            UsefulArmorJeiChecks.tick(client);
+            return;
+        }
         try {
             check(++ticks < 6000, "story preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;

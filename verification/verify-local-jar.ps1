@@ -25,6 +25,14 @@ try {
         throw 'Wrong minimum Useless Mod dependency'
     }
     $armorPieces = @('helmet', 'chestplate', 'leggings', 'boots')
+    $hiddenEntry = $zip.GetEntry('data/c/tags/item/hidden_from_recipe_viewers.json')
+    if (!$hiddenEntry) { throw 'Missing Useful Ingot armor recipe-viewer hide tag' }
+    $hiddenTag = (Read-Entry $hiddenEntry) | ConvertFrom-Json -AsHashtable
+    $expectedHidden = @($armorPieces | ForEach-Object { "useless_stretcher:useful_armor_$_" })
+    if ($hiddenTag.replace -ne $false -or $hiddenTag.values.Count -ne 4 -or
+            @(Compare-Object $expectedHidden $hiddenTag.values).Count -ne 0) {
+        throw 'Armor hide tag must add exactly the four armor items without replacing other mods'
+    }
     foreach ($piece in $armorPieces) {
         $modelEntry = $zip.GetEntry("assets/useless_stretcher/models/item/useful_armor_$piece.json")
         $textureEntry = $zip.GetEntry("assets/useless_stretcher/textures/item/useful_armor_$piece.png")
@@ -95,6 +103,7 @@ try {
         version = '1.21.1-1.6.0'
         minimum_useless_mod = '1.21.1-2.4.6'
         animated_armor_items = $armorPieces.Count
+        armor_hidden_from_recipe_viewers = $expectedHidden.Count
         bytes = (Get-Item -LiteralPath $artifact).Length
         sha256 = (Get-FileHash -LiteralPath $artifact -Algorithm SHA256).Hash
         production_sources_with_matching_class = $sourceCount
