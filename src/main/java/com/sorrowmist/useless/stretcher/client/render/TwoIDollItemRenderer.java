@@ -61,11 +61,17 @@ public final class TwoIDollItemRenderer extends BlockEntityWithoutLevelRenderer 
 
     public void renderCarried(ItemStack stack, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay,
                               TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather) {
+        renderCarried(stack,poseStack,buffer,light,overlay,motion,weather,animationTime());
+    }
+
+    /** One shared clock for body, weather and secondary motion, also used by the visual fixture. */
+    public void renderCarried(ItemStack stack, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay,
+                              TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather, float time) {
         if (model == null) model = new TwoIDollRenderer.Model(
                 Minecraft.getInstance().getEntityModels().bakeLayer(TwoIDollRenderer.LAYER));
-        model.setupDecoration(animationTime());
-        model.applyCarriedMotion(motion, animationTime());
-        model.applyWeather(weather, animationTime());
+        model.setupDecoration(time);
+        model.applyCarriedMotion(motion, time);
+        model.applyWeather(weather, time);
         poseStack.pushPose();
         motion.apply(poseStack);
         poseStack.translate(0.0D, TwoIDollRenderer.FEET_Y / 16.0F * TwoIDollRenderer.RENDER_SCALE, 0.0D);

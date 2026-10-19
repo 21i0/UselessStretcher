@@ -514,6 +514,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
         public float tailPitch() { return tail.tipPitch(); }
         public float tailBottom() { return tail.bottom(); }
         public net.minecraft.world.phys.Vec3 tailTip() { return tail.tip(); }
+        public net.minecraft.world.phys.Vec3 tailAttachment() { return tail.attachment(); }
 
         private void copySkinLayers() {
             hat.copyFrom(head);

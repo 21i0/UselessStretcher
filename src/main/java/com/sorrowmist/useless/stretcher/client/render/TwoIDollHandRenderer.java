@@ -74,6 +74,12 @@ public final class TwoIDollHandRenderer {
     public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
                                     boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light,
                                     TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather) {
+        renderOnPalm(stack,arm,skin,visible,sleeveVisible,pose,buffers,light,motion,weather,TwoIDollItemRenderer.animationTime());
+    }
+
+    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
+                                    boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light,
+                                    TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather, float time) {
         if (visible) {
             boolean isSlim = skin.model() == PlayerSkin.Model.SLIM;
             var models = Minecraft.getInstance().getEntityModels();
@@ -103,6 +109,6 @@ public final class TwoIDollHandRenderer {
         }
         // Bypass generic item centering here: the shared doll feet are exactly
         // on the palm, regardless of texture, dominant hand or idle gesture.
-        TwoIDollItemRenderer.get().renderCarried(stack, pose, buffers, light, OverlayTexture.NO_OVERLAY, motion, weather);
+        TwoIDollItemRenderer.get().renderCarried(stack, pose, buffers, light, OverlayTexture.NO_OVERLAY, motion, weather,time);
     }
 }

@@ -32,11 +32,13 @@ final class TwoISkinTailChecks {
     private static int ticks, frames, shot;
     private static java.util.concurrent.CompletableFuture<Void> reload;
     private static Gallery gallery;
+    private static MotionGallery motionGallery;
+    private static int motionFrame;
 
     static void tick(Minecraft client) {
         if (finished) return;
         try {
-            check(++ticks < 2400, "client timeout");
+        check(++ticks < 3600, "client timeout");
             if (client.getOverlay() != null || client.screen == null) return;
             if (!started) {
                 started = true;
@@ -62,6 +64,13 @@ final class TwoISkinTailChecks {
             if (shot == 3) { client.setScreen(DollRenderChecks.preview()); frames=12; return; }
             if (shot == 4) { client.setScreen(DollRenderChecks.environmentPreview()); frames=12; return; }
             if (shot == 5) { client.setScreen(new Closeup()); frames=12; return; }
+            if (shot == 6) { motionGallery=new MotionGallery();client.setScreen(motionGallery);frames=3;return; }
+            if (shot >= 7) {
+                try (NativeImage image=Screenshot.takeScreenshot(client.getMainRenderTarget())) {
+                    image.writeToFile(client.gameDirectory.toPath().resolve("screenshots/motion-%03d.png".formatted(motionFrame)));
+                }
+                if(++motionFrame<96){motionGallery.frame=motionFrame;frames=3;return;}
+            }
             LogUtils.getLogger().info("2I SKIN TAIL CHECKS PASSED: exact artist skin, reloaded blink palette, both real particle sprites, bounded idle/run/jump/fall tail, unchanged hand swaps/grip and all visual contexts");
             finished = true; client.stop();
         } catch (Throwable failure) {
@@ -104,7 +113,31 @@ final class TwoISkinTailChecks {
         check(spring.pose(1).speed()>.9F,"steady sprint retains tail motion after initial acceleration");
         for (int i=0;i<120;i++) spring.step(0,0,0,false,0);
         check(spring.pose(1).speed()<.001F,"motion settles without hand jitter");
-        for (int i=0;i<400;i++) {
+        spring.step(0,0,.42F,true,0);
+        float jump=spring.pose(1).tailPitch();
+        for(int i=0;i<12;i++)spring.step(0,0,-.65F,true,i*.65F);
+        float fall=spring.pose(1).tailPitch();
+        spring.step(0,0,0,false,0);
+        check(Math.abs(fall-jump)>.25F,"dedicated tail spring distinguishes jump and fall");
+        for(int i=0;i<30;i++)spring.step(0,0,0,false,0,12);
+        check(Math.abs(spring.pose(1).tailYaw())>.25F,"turning produces visible tail inertia");
+        for(int i=0;i<150;i++)spring.step(0,0,0,false,0);
+        check(Math.abs(spring.pose(1).tailYaw())<.001F&&Math.abs(spring.pose(1).tailPitch())<.001F,"tail springs settle");
+        double minX=100,maxX=-100,meanX=0;double maxStep=0;net.minecraft.world.phys.Vec3 previous=null;
+        for(int i=0;i<960;i++) {
+            model.setupDecoration(i);
+            var anchor=model.tailAttachment();
+            check(Math.abs(anchor.x)<.001 && Math.abs(anchor.y-model.body.y-5.8)<.001 && Math.abs(anchor.z-1.25)<.001,
+                    "tail base remains embedded inside jacket, ground clearance never moves the root");
+            var tip=model.tailTip();minX=Math.min(minX,tip.x);maxX=Math.max(maxX,tip.x);meanX+=tip.x;
+            check(tip.distanceTo(anchor)<14,"ground contact does not stretch tail away from its root");
+            if(previous!=null)maxStep=Math.max(maxStep,tip.distanceTo(previous));previous=tip;
+        }
+        check(minX<-5&&maxX>5,"tail sweeps visibly past both body sides: "+minX+" / "+maxX);
+        check(Math.abs(meanX/960)<.6,"seated tail has no permanent left bias: "+meanX/960);
+        check(maxStep<1.2,"no abrupt gesture/ground correction snapping: "+maxStep);
+        LogUtils.getLogger().info("2I LIVELY TAIL PASSED: left/right tip {}/{}, mean {}, max tick step {}; jump/fall/turn/settle springs",minX,maxX,meanX/960,maxStep);
+        for (int i=0;i<960;i++) {
             model.setupStanding(i*.2F,.4F,i,0,0,0,0);
             check(Float.isFinite(model.tailYaw())&&Float.isFinite(model.tailPitch()),"finite tail locomotion");
             check(model.tailBottom()<=TwoIDollRenderer.FEET_Y,"walking tail stays above ground");
@@ -114,10 +147,63 @@ final class TwoISkinTailChecks {
             model.setupDecoration(i*5);
             check(model.tailBottom()<=TwoIDollRenderer.FEET_Y-.1F,"seated tail and bow retain support-plane clearance throughout idle gestures");
         }
+        long start=System.nanoTime();
+        for(int i=0;i<2000;i++)model.setupDecoration(i*.33F);
+        LogUtils.getLogger().info("2I TAIL POSE TIMING: {} microseconds/pose (2000 local samples, no server work)",(System.nanoTime()-start)/2_000_000.0);
         LogUtils.getLogger().info("2I NEW SKIN AND PARTICLE ATLAS PASSED: artist SHA256, reload, all 4096 pixels on item/block sprites, full gold-eye closure; tail gravity/sprint/reset/idle checks passed");
     }
 
     private static void check(boolean ok, String reason) { if (!ok) throw new AssertionError("2i skin/tail: " + reason); }
+
+    private static final class MotionGallery extends Screen {
+        private TwoIDollRenderer.Model model;
+        private int frame;
+        private final TwoIDollCarryMotion.Pose[] motion=new TwoIDollCarryMotion.Pose[96];
+        MotionGallery(){
+            super(Component.literal("2i | soft tail / hand-front visibility / jump, fall, land / turn inertia"));
+            var spring=new TwoIDollCarryMotion.Spring();
+            for(int f=0;f<96;f++) {
+                for(int t=0;t<5;t++) {
+                    int tick=f*5+t;int loop=tick%160;
+                    float vertical=loop<20?0:loop<30?.42F-(loop-20)*.04F:loop<65?-.35F-(loop-30)*.015F:0;
+                    spring.step(loop<20?.25F:0,0,vertical,loop>=20&&loop<65,loop>30&&loop<65?(loop-30)*.45F:0,
+                            loop>85&&loop<100?10:loop>110&&loop<125?-10:0);
+                }
+                motion[f]=spring.pose(1);
+            }
+        }
+        @Override public void render(GuiGraphics g,int mouseX,int mouseY,float partial){
+            if(model==null)model=new TwoIDollRenderer.Model(minecraft.getEntityModels().bakeLayer(TwoIDollRenderer.LAYER));
+            g.fill(0,0,width,height,0xFFCAD4E0);
+            g.drawCenteredString(font,title,width/2,18,0xFF24364C);
+            String[] names={"seated back: relaxed sweep","seated side: tip curls","hand front: tail peeks both sides","standing back: same soft rig","jump / fall / landing (side)","turn inertia (front)"};
+            for(int i=0;i<6;i++) {
+                float time=frame*5;
+                if(i==3)model.setupStanding(0,0,time,0,0,0,0);else model.setupDecoration(time);
+                if(i>=4)model.applyCarriedMotion(motion[frame],time);
+                float scale=125;int x=width*(i%3+1)/4,base=i<3?355:705;
+                if(i==2||i==5) {
+                    var pose=g.pose();pose.pushPose();pose.translate(x,base,100);pose.scale(220,-220,-220);
+                    pose.mulPose(Axis.YP.rotationDegrees(180));
+                    var buffers=minecraft.renderBuffers().bufferSource();
+                    TwoIDollHandRenderer.renderOnPalm(new ItemStack(ModItems.TWO_I_DOLL.get()),HumanoidArm.RIGHT,
+                            new net.minecraft.client.resources.PlayerSkin(ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png"),
+                                    null,null,null,net.minecraft.client.resources.PlayerSkin.Model.WIDE,true),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
+                            i==5?motion[frame]:TwoIDollCarryMotion.Pose.STILL,TwoIDollWeather.Pose.CLEAR,time);
+                    buffers.endBatch();pose.popPose();
+                    g.drawCenteredString(font,i==2?"actual palm: tail peeks on both sides":"actual palm: jump / fall / land / turn",x,base+10,0xFF24364C);
+                    continue;
+                }
+                var pose=g.pose();pose.pushPose();pose.translate(x,base-24/16F*scale,100);pose.scale(scale,scale,scale);
+                pose.mulPose(Axis.YP.rotationDegrees(i==1||i==4?90:i==2||i==5?180:0));
+                var buffers=minecraft.renderBuffers().bufferSource();
+                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);buffers.endBatch();pose.popPose();
+                g.fill(x-120,base+1,x+120,base+2,0xFF65758A);g.drawCenteredString(font,names[i],x,base+10,0xFF24364C);
+            }
+            g.drawString(font,"t="+(frame*5)+"   jump 20-30 / fall 30-65 / land 65 / turn 85-125 (160 tick cycle)",18,height-20,0xFF24364C);
+        }
+    }
 
     private static final class Closeup extends Screen {
         private TwoIDollRenderer.Model model;

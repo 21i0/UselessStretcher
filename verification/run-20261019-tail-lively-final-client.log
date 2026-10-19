@@ -1,0 +1,36 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+D:\AI\sources\UselessStretcher\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoISkinTailChecks.java:185: 错误: 找不到符号
+                            net.minecraft.client.resources.DefaultPlayerSkin.getDefaultSkin(),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
+                                                                            ^
+  符号:   方法 getDefaultSkin()
+  位置: 类 DefaultPlayerSkin
+注: D:\AI\sources\UselessStretcher\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoISkinTailChecks.java使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+
+1 个错误
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///D:/AI/sources/UselessStretcher/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  注: D:\AI\sources\UselessStretcher\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoISkinTailChecks.java使用或覆盖了已过时的 API。
+  注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+  D:\AI\sources\UselessStretcher\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoISkinTailChecks.java:185: 错误: 找不到符号
+                              net.minecraft.client.resources.DefaultPlayerSkin.getDefaultSkin(),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
+                                                                              ^
+    符号:   方法 getDefaultSkin()
+    位置: 类 DefaultPlayerSkin
+  1 个错误
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights.
+
+BUILD FAILED in 5s
+2 actionable tasks: 1 executed, 1 up-to-date
