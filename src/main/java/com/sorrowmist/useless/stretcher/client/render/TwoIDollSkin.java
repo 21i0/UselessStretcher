@@ -84,7 +84,7 @@ public final class TwoIDollSkin {
         return copy;
     }
 
-    /** Close just the standard skin's eye pixels; preserve head geometry, hair and clothing. */
+    /** Artist's three-row gold eyes: close the iris as well as the white, without painting over hair. */
     public static NativeImage blinkCopy(NativeImage skin, boolean closed) {
         NativeImage copy = new NativeImage(skin.getWidth(), skin.getHeight(), false);
         copy.copyFrom(skin);
@@ -92,15 +92,15 @@ public final class TwoIDollSkin {
         int scale = skin.getWidth() / 64;
         for (int eye : new int[]{9, 13}) for (int px = 0; px < 2 * scale; px++) {
             int x = eye * scale + px;
-            int complexion = skin.getPixelRGBA(x, 15 * scale);
-            int lash = skin.getPixelRGBA(x, 13 * scale);
-            for (int py = 0; py < scale; py++) {
-                int y = 14 * scale + py;
-                int color = closed ? (py == scale / 2 ? lash : complexion)
-                        : (py < Math.max(1, scale / 2) ? complexion : skin.getPixelRGBA(x, y));
+            int complexion = skin.getPixelRGBA(11 * scale, 15 * scale);
+            int lash = skin.getPixelRGBA(8 * scale, 8 * scale);
+            for (int py = 0; py < 3 * scale; py++) {
+                int y = 12 * scale + py;
+                int color = closed ? (py == 2 * scale ? lash : complexion)
+                        : (py < scale ? complexion : skin.getPixelRGBA(x, y));
                 copy.setPixelRGBA(x, y, color);
                 // An opaque face overlay must close too, while transparent hair pixels stay transparent.
-                if ((skin.getPixelRGBA(x + 32 * scale, y) >>> 24) != 0)
+                if (py >= scale && (skin.getPixelRGBA(x + 32 * scale, y) >>> 24) != 0)
                     copy.setPixelRGBA(x + 32 * scale, y, color);
             }
         }

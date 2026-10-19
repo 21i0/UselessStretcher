@@ -181,6 +181,7 @@ if (providers.gradleProperty('storyTests').isPresent()) {
             systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
             systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
             systemProperty 'useless_stretcher.forced_kill_client_only', providers.gradleProperty('forcedKillClientOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.skin_tail_only', providers.gradleProperty('skinTailOnly').getOrElse('false')
             jvmArguments.addAll '-Xmx2G', '-Xms1G'
         }
     }

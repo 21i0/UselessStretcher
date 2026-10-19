@@ -13,7 +13,10 @@ public final class TwoIDollCarryMotion {
     private static final Map<LivingEntity, Sample> SAMPLES = new WeakHashMap<>();
     private TwoIDollCarryMotion() { }
 
-    public record Pose(float lift, float pitch, float roll, float airborne, float falling) {
+    public record Pose(float lift, float pitch, float roll, float airborne, float falling, float speed) {
+        public Pose(float lift, float pitch, float roll, float airborne, float falling) {
+            this(lift, pitch, roll, airborne, falling, 0);
+        }
         public static final Pose STILL = new Pose(0, 0, 0, 0, 0);
         public void apply(PoseStack stack) {
             stack.translate(0, lift, 0);
@@ -22,7 +25,8 @@ public final class TwoIDollCarryMotion {
         }
         public Pose blend(Pose next, float t) {
             return new Pose(Mth.lerp(t, lift, next.lift), Mth.lerp(t, pitch, next.pitch),
-                    Mth.lerp(t, roll, next.roll), Mth.lerp(t, airborne, next.airborne), Mth.lerp(t, falling, next.falling));
+                    Mth.lerp(t, roll, next.roll), Mth.lerp(t, airborne, next.airborne), Mth.lerp(t, falling, next.falling),
+                    Mth.lerp(t, speed, next.speed));
         }
     }
 
@@ -47,7 +51,9 @@ public final class TwoIDollCarryMotion {
                     (lastForward - forward) * 0.7F - forward * 0.15F, -0.16F, 0.16F));
             float roll = Mth.lerp(0.28F, current.roll, Mth.clamp(
                     (sideways - lastSide) * 0.7F + sideways * 0.15F, -0.14F, 0.14F));
-            current = new Pose(lift, pitch, roll, excitement, arms);
+            float speed = Mth.lerp(0.25F, current.speed,
+                    Mth.clamp((float)Math.sqrt(forward * forward + sideways * sideways) * 3, 0, 1));
+            current = new Pose(lift, pitch, roll, excitement, arms, speed);
             lastForward = forward; lastSide = sideways; lastVertical = vertical;
         }
         public Pose pose(float partialTick) { return previous.blend(current, Mth.clamp(partialTick, 0, 1)); }

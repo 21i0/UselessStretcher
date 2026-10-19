@@ -1,0 +1,15 @@
+2i tail geometry attribution
+
+Adapted from the Winefox model in Touhou Little Maid by tartaric_acid and contributors.
+Source: https://github.com/TartaricAcid/TouhouLittleMaid
+Revision: 8a3ac5e9eacf0c6d63adf8832949f3ce81484fe6
+Original asset: src/main/resources/assets/touhou_little_maid/tlm_custom_pack/touhou_little_maid-1.0.0/assets/geckolib/models/entity/winefox.json
+Copyright (c) 2019-2025 tartaric_acid, for the assets part.
+
+The tail portion was converted to the 2i coordinate system, resized, and given a
+separate 2i pose/animation rig, original cream/slate markings and blue bow.
+The adapted geometry in assets/useless_stretcher/models/entity/two_i_tail.json
+is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0.
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+Full asset license: TWO_I_TAIL_LICENSE.txt
+The Winefox body, skin texture and animation files are not redistributed here.

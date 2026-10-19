@@ -111,7 +111,7 @@ public final class DollRenderChecks {
             for (int y=0;y<64;y++) for (int x=0;x<64;x++) {
                 if (original.getPixelRGBA(x,y) != closed.getPixelRGBA(x,y)) {
                     changed++;
-                    check(y == 14 && ((x>=9 && x<=10)||(x>=13 && x<=14)||(x>=41 && x<=42)||(x>=45 && x<=46)),
+                    check(y >= 12 && y <= 14 && ((x>=9 && x<=10)||(x>=13 && x<=14)||(x>=41 && x<=42)||(x>=45 && x<=46)),
                             "blink changes only eye pixels");
                 }
             }
@@ -290,6 +290,7 @@ public final class DollRenderChecks {
                     var buffers = minecraft.renderBuffers().bufferSource();
                     model.renderToBuffer(pose, buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),
                             LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+                    model.renderAccessories(pose, buffers, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
                     buffers.endBatch();
                     pose.popPose();
                     graphics.fill(x - 30, baseY + 1, x + 30, baseY + 2, 0xFF71899B);

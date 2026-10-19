@@ -86,6 +86,9 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
 
         private final ModelPart umbrella;
         private final ModelPart noseDrop;
+        private final TwoIDollTail tail = new TwoIDollTail();
+        private float tailStride, tailMoving;
+        private TwoIDollCarryMotion.Pose carryMotion = TwoIDollCarryMotion.Pose.STILL;
         private float blink;
         private boolean seated;
         private boolean sharedUmbrella;
@@ -119,6 +122,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             setupStanding(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
                     entity.getPoseAction(), entity.getPoseActionProgress(ageInTicks - entity.tickCount));
             setSharedUmbrella(entity.hasSharedUmbrella(), entity.isSharedUmbrellaHolder());
+            applyTailMotion(TwoIDollCarryMotion.sample(entity, ageInTicks - entity.tickCount), ageInTicks);
             applyWeather(TwoIDollWeather.sample(entity, entity.level(), entity.blockPosition(),
                     ageInTicks - entity.tickCount, entity.getUUID().hashCode()), ageInTicks);
         }
@@ -135,6 +139,8 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
                                   int environmentAction, float environmentProgress) {
             resetDoll();
             float moving = Mth.clamp(limbSwingAmount * 2.4F, 0, 1);
+            tailStride = limbSwing;
+            tailMoving = moving;
             float still = 1 - moving;
             float phase = limbSwing * 0.92F;
             float step = Mth.sin(phase);
@@ -297,6 +303,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
                         rightArm.y + handX * rollSin + reachY * rollCos,
                         rightArm.z + handY * (float)Math.sin(rightArm.xRot));
             }
+            updateTail(time);
             copySkinLayers();
         }
 
@@ -309,6 +316,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
         public boolean noseVisible() { return noseDrop.visible; }
         public void renderAccessories(PoseStack pose, net.minecraft.client.renderer.MultiBufferSource buffers,
                                       int light, int overlay) {
+            tail.render(pose, buffers, light, overlay);
             var vertices = buffers.getBuffer(net.minecraft.client.renderer.RenderType.entityCutoutNoCull(ACCESSORIES));
             umbrella.render(pose, vertices, light, overlay);
             if (noseDrop.visible) {
@@ -351,6 +359,8 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             umbrella.visible = false;
             noseDrop.visible = false;
             blink = 0;
+            carryMotion = TwoIDollCarryMotion.Pose.STILL;
+            tailStride = tailMoving = 0;
             seated = false;
             body.xScale = 0.875F;
             body.yScale = BODY_HEIGHT;
@@ -468,6 +478,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             // Seated swinging feet may lift, but never clip through the shelf.
             seatLeg(leftLeg);
             seatLeg(rightLeg);
+            updateTail(time);
             copySkinLayers();
         }
 
@@ -479,6 +490,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
         }
 
         public void applyCarriedMotion(TwoIDollCarryMotion.Pose motion, float time) {
+            applyTailMotion(motion, time);
             head.yRot += Mth.sin(time * 0.17F) * 0.32F * motion.airborne();
             head.xRot -= 0.15F * motion.airborne();
             head.zRot += 0.08F * Mth.sin(time * 0.12F) * motion.airborne();
@@ -488,6 +500,20 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             rightArm.zRot = Mth.lerp(motion.falling(), rightArm.zRot, -0.45F);
             copySkinLayers();
         }
+
+        public void applyTailMotion(TwoIDollCarryMotion.Pose motion, float time) {
+            carryMotion = motion;
+            updateTail(time);
+        }
+
+        private void updateTail(float time) {
+            tail.pose(seated, body.y, body.zRot, time, tailStride, tailMoving, carryMotion);
+        }
+
+        public float tailYaw() { return tail.tipYaw(); }
+        public float tailPitch() { return tail.tipPitch(); }
+        public float tailBottom() { return tail.bottom(); }
+        public net.minecraft.world.phys.Vec3 tailTip() { return tail.tip(); }
 
         private void copySkinLayers() {
             hat.copyFrom(head);

@@ -66,6 +66,23 @@ try {
         }
     }
     $jsonCount = 0
+    $skinHash = '597DBE84E55288118666187E127167F30686E426D3C0693B398AA63EA6B4E44D'
+    if ((Entry-Hash $zip.GetEntry('assets/useless_stretcher/textures/entity/two_i.png')) -ne $skinHash) {
+        throw '2i skin differs from the supplied artist skin'
+    }
+    $oldSkinHash = 'FE85AC40D1952D4A4A8FAA123FA0DD496DC080C7BF777F1EACD962CF8CD4D322'
+    foreach ($entry in $zip.Entries) {
+        if ($entry.FullName.EndsWith('.png') -and (Entry-Hash $entry) -eq $oldSkinHash) {
+            throw "Old 2i skin remains: $($entry.FullName)"
+        }
+    }
+    foreach ($modelPath in @('assets/useless_stretcher/models/item/two_i_doll.json', 'assets/useless_stretcher/models/block/two_i_doll_display.json')) {
+        $particleModel = (Read-Entry $zip.GetEntry($modelPath)) | ConvertFrom-Json -AsHashtable
+        if ($particleModel.textures.particle -ne 'useless_stretcher:entity/two_i') { throw "Old 2i particle reference: $modelPath" }
+    }
+    foreach ($tailResource in @('assets/useless_stretcher/models/entity/two_i_tail.json', 'assets/useless_stretcher/textures/entity/two_i_tail.png', 'TWO_I_TAIL_CREDITS.txt', 'TWO_I_TAIL_LICENSE.txt')) {
+        if (!$zip.GetEntry($tailResource)) { throw "Missing tail resource: $tailResource" }
+    }
     foreach ($entry in $zip.Entries) {
         if ($entry.FullName -match '\.(json|mcmeta)$') {
             $null = (Read-Entry $entry) | ConvertFrom-Json -AsHashtable
@@ -133,5 +150,8 @@ try {
         story_images = $pictures.Count
         original_ogg_files = $sounds.Count
         forbidden_entries = $forbidden.Count
+        artist_skin_sha256 = $skinHash
+        old_skin_png_matches = 0
+        tail_geometry_texture_and_attribution = $true
     } | ConvertTo-Json
 } finally { $zip.Dispose() }
