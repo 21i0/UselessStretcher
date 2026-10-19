@@ -130,24 +130,47 @@ public final class TwoIDollTail {
         // Rounded, shallow folded loops, narrow knot, two clean swallow-tail streamers.
         for (int side=-1;side<=1;side+=2) {
             float[] xs={.16F,.55F,1.15F,1.65F,1.83F}, heights={.14F,.38F,.60F,.62F,.43F};
+            Point[][] rings=new Point[5][8];
+            for(int i=0;i<5;i++)for(int j=0;j<8;j++) {
+                float angle=j*Mth.TWO_PI/8;
+                rings[i][j]=new Point(side*xs[i],-.12F*xs[i]+Mth.cos(angle)*heights[i],
+                        .22F+Mth.sin(angle)*(.10F+heights[i]*.28F));
+            }
             for(int i=0;i<4;i++)for(int j=0;j<8;j++) {
-                Point[] p=new Point[4];
-                for(int k=0;k<4;k++) {
-                    int ring=i+(k==1||k==2?1:0), edge=j+(k>=2?1:0);
-                    float angle=edge*Mth.TWO_PI/8;
-                    p[k]=new Point(side*xs[ring],-.12F*xs[ring]+Mth.cos(angle)*heights[ring],
-                            .22F+Mth.sin(angle)*(.10F+heights[ring]*.28F));
-                }
+                int next=(j+1)%8;
+                Point[] p={rings[i][j],rings[i+1][j],rings[i+1][next],rings[i][next]};
                 int tint=j==1||j==2?0xE6EFFC:j<4?0xC8DDF8:j==4||j==7?0xA4C2EC:0xB6D0F2;
-                face(mesh,p,0,1,2,3,false,tint);
+                if(side>0)face(mesh,p,3,2,1,0,false,tint);else face(mesh,p,0,1,2,3,false,tint);
+            }
+            // Both ends of each folded loop are capped; shared ring vertices close the seam exactly.
+            for(int end:new int[]{0,4}) {
+                Point center=new Point(side*xs[end],-.12F*xs[end],.22F);
+                for(int j=0;j<8;j++) {
+                    Point a=rings[end][j],b=rings[end][(j+1)%8];
+                    int tint=end==0?0xBED5F3:0xC8DDF8;
+                    if((end==4)==(side>0))triangle(mesh,center,a,b,tint);else triangle(mesh,center,b,a,tint);
+                }
             }
             // Two broad ribbons, with a small V cut into each end.
             Point t0=new Point(side*.24F,.20F,.13F),t1=new Point(side*.83F,.26F,.11F);
             Point t2=new Point(side*1.04F,2.02F,.18F),t3=new Point(side*.73F,1.72F,.24F);
             Point t4=new Point(side*.50F,2.10F,.16F),t5=new Point(side*.39F,1.10F,.34F);
-            triangle(mesh,t0,t1,t5,0xD9E8FC);triangle(mesh,t1,t2,t5,0xAAC8F0);
-            triangle(mesh,t2,t3,t5,0x91B5E8);triangle(mesh,t3,t4,t5,0xBDD6F5);
-            triangle(mesh,t4,t0,t5,0xC9DEF8);
+            Point[] front={t0,t1,t2,t3,t4},back=new Point[5];
+            Point backCenter=new Point(t5.x,t5.y,t5.z-.08F);
+            int[] colors={0xD9E8FC,0xAAC8F0,0x91B5E8,0xBDD6F5,0xC9DEF8};
+            for(int j=0;j<5;j++)back[j]=new Point(front[j].x,front[j].y,front[j].z-.08F);
+            for(int j=0;j<5;j++) {
+                int next=(j+1)%5;
+                if(side>0) {
+                    triangle(mesh,front[j],front[next],t5,colors[j]);
+                    triangle(mesh,back[next],back[j],backCenter,colors[j]);
+                    face(mesh,new Point[]{front[j],back[j],back[next],front[next]},0,1,2,3,false,0x9DBCE8);
+                } else {
+                    triangle(mesh,front[next],front[j],t5,colors[j]);
+                    triangle(mesh,back[j],back[next],backCenter,colors[j]);
+                    face(mesh,new Point[]{front[j],front[next],back[next],back[j]},0,1,2,3,false,0x9DBCE8);
+                }
+            }
         }
         box(mesh,0,.02F,.32F,.48F,.52F,.38F,0,0,0,0xC2D9F6);
         box(mesh,0,.05F,.55F,.24F,.24F,.07F,0,0,Mth.PI/4,0xDECBA3);

@@ -34,11 +34,12 @@ final class TwoISkinTailChecks {
     private static Gallery gallery;
     private static MotionGallery motionGallery;
     private static int motionFrame;
+    private static boolean bowShown;
 
     static void tick(Minecraft client) {
         if (finished) return;
         try {
-        check(++ticks < 3600, "client timeout");
+            check(++ticks < 3600, "client timeout");
             if (client.getOverlay() != null || client.screen == null) return;
             if (!started) {
                 started = true;
@@ -65,11 +66,15 @@ final class TwoISkinTailChecks {
             if (shot == 4) { client.setScreen(DollRenderChecks.environmentPreview()); frames=12; return; }
             if (shot == 5) { client.setScreen(new Closeup()); frames=12; return; }
             if (shot == 6) { motionGallery=new MotionGallery();client.setScreen(motionGallery);frames=3;return; }
-            if (shot >= 7) {
+            if (shot >= 7 && !bowShown) {
                 try (NativeImage image=Screenshot.takeScreenshot(client.getMainRenderTarget())) {
                     image.writeToFile(client.gameDirectory.toPath().resolve("screenshots/motion-%03d.png".formatted(motionFrame)));
                 }
                 if(++motionFrame<96){motionGallery.frame=motionFrame;frames=3;return;}
+                bowShown=true;client.setScreen(new BowCloseup());frames=12;return;
+            }
+            if(bowShown)try(NativeImage image=Screenshot.takeScreenshot(client.getMainRenderTarget())) {
+                image.writeToFile(client.gameDirectory.toPath().resolve("screenshots/bow-closed.png"));
             }
             LogUtils.getLogger().info("2I SKIN TAIL CHECKS PASSED: exact artist skin, reloaded blink palette, both real particle sprites, bounded idle/run/jump/fall tail, unchanged hand swaps/grip and all visual contexts");
             finished = true; client.stop();
@@ -80,6 +85,23 @@ final class TwoISkinTailChecks {
     }
 
     private static void validate(Minecraft client) throws Exception {
+        // Inspect the rendered mesh, including mirrored loops and both solid ribbon streamers.
+        var ribbon=TwoIDollTail.class.getDeclaredField("RIBBON");ribbon.setAccessible(true);
+        java.util.Map<String,Integer> edges=new java.util.HashMap<>();
+        for(Object face:(java.util.List<?>)ribbon.get(null)) {
+            Object[] points=new Object[4];
+            for(int i=0;i<4;i++) {
+                var accessor=face.getClass().getDeclaredMethod(new String[]{"a","b","c","d"}[i]);accessor.setAccessible(true);
+                points[i]=accessor.invoke(face);
+            }
+            for(int i=0;i<4;i++) {
+                String a=points[i].toString(),b=points[(i+1)%4].toString();if(a.equals(b))continue;
+                String key=a.compareTo(b)<0?a+"|"+b:b+"|"+a;
+                edges.merge(key,1,Integer::sum);
+            }
+        }
+        check(edges.values().stream().allMatch(count->count==2),"bow mesh closed: every non-degenerate edge has two faces");
+        LogUtils.getLogger().info("2I CLOSED BOW PASSED: {} mesh edges shared by exactly two faces",edges.size());
         try (var input = client.getResourceManager().open(TwoIDollRenderer.TEXTURE)) {
             String hash = HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(input.readAllBytes()));
             check(hash.equals("597dbe84e55288118666187e127167f30686e426d3c0693b398aa63ea6b4e44d"), "exact new skin bytes");
@@ -154,6 +176,24 @@ final class TwoISkinTailChecks {
     }
 
     private static void check(boolean ok, String reason) { if (!ok) throw new AssertionError("2i skin/tail: " + reason); }
+
+    private static final class BowCloseup extends Screen {
+        private final TwoIDollTail tail=new TwoIDollTail();
+        BowCloseup(){super(Component.literal("2i closed bow: front / side / back"));}
+        @Override public void render(GuiGraphics g,int mouseX,int mouseY,float partial) {
+            g.fill(0,0,width,height,0xFFCAD4E0);g.drawCenteredString(font,title,width/2,20,0xFF24364C);
+            tail.pose(false,9,0,0,0,0,TwoIDollCarryMotion.Pose.STILL);
+            var tip=tail.tip();
+            for(int i=0;i<3;i++) {
+                int x=width*(i+1)/4;
+                g.enableScissor(x-180,80,x+180,height-65);
+                var pose=g.pose();pose.pushPose();pose.translate(x,height/2,100);pose.scale(750,750,750);
+                pose.mulPose(Axis.YP.rotationDegrees(i*90));pose.translate(-tip.x/16,-tip.y/16,-tip.z/16);
+                var buffers=minecraft.renderBuffers().bufferSource();tail.render(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                buffers.endBatch();pose.popPose();g.disableScissor();
+            }
+        }
+    }
 
     private static final class MotionGallery extends Screen {
         private TwoIDollRenderer.Model model;
