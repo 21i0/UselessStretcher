@@ -395,7 +395,7 @@
   "help.useless_stretcher.apotheosis_select_table": "切换框选模式，用手杖右键绑定附魔台。绑定后持续生效并显示蓝框；再次点击关闭框选，不会取消已有绑定。",
   "help.useless_stretcher.apotheosis_save": "属性会自动保存；点击立即应用当前数值，并更新自己已绑定的附魔台。",
   "help.useless_stretcher.apotheosis_stat": "调整 %s 虚拟书架加成并自动保存，同步自己已绑定的附魔台。Eterna、Quanta、Arcana 为 0-100，线索为 0-15。",
-  "help.useless_stretcher.staff_config.phase": "手持这把手杖时允许玩家穿过固体方块。服务端负责移动判定，切换手中物品后自动恢复碰撞。",
+  "help.useless_stretcher.staff_config.phase": "开启后随身携带这把手杖即可穿墙，放在背包、快捷栏或副手都生效。关闭或移走最后一把开启穿墙的手杖后恢复碰撞。",
   "help.useless_stretcher.staff_config.phase_interaction": "穿墙时保留普通方块、物品和实体交互；关闭后穿墙状态只允许移动，不会执行交互。",
   "help.useless_stretcher.select_visible": "批量勾选当前页面可见的生物条目，累计最多选择 32 种；不会立即召唤。",
   "help.useless_stretcher.clear_selection": "取消所有已选生物，只清空选择，不会删除已召唤的生物。",

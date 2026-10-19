@@ -84,6 +84,7 @@ final class EntityFeatureChecks {
         StaffPhaseManager.movementTick(player);
         check(!player.getAbilities().flying && !player.getPersistentData().contains("useless_stretcher_phase_flight"),
                 "restored player releases persistent phase flight snapshot after restart");
+        checkCarriedPhaseStaff(player, staff);
         checkUselessModPhaseCompatibility(player, staff);
         check(!WondrousStaffAcceleration.usesEntityTimers(staff), "old staff defaults to complete ticks");
         boolean summonEnabled = StretcherConfig.enableStaffSummon();
@@ -236,6 +237,57 @@ final class EntityFeatureChecks {
         @Override public void restock() { restocks++; super.restock(); }
     }
     private static void check(boolean value, String message) { if (!value) throw new AssertionError(message); }
+
+    private static void checkCarriedPhaseStaff(
+            net.minecraft.server.level.ServerPlayer player, ItemStack staff) {
+        var inventory = player.getInventory();
+        inventory.clearContent();
+        inventory.selected = 0;
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
+        for (int slot = 0; slot < inventory.items.size(); slot++) {
+            inventory.setItem(slot, staff);
+            check(StaffPhaseManager.state(player).phase(), "carried phase staff found in slot " + slot);
+            StaffPhaseManager.movementTick(player);
+            check(StaffPhaseManager.noPhysics(player) && player.getAbilities().flying,
+                    "carried staff grants collision-free flight in slot " + slot);
+            inventory.setItem(slot, ItemStack.EMPTY);
+            StaffPhaseManager.movementTick(player);
+            check(!StaffPhaseManager.state(player).phase() && !StaffPhaseManager.noPhysics(player)
+                            && !player.getAbilities().flying,
+                    "removing last staff restores collision and flight in same tick, slot " + slot);
+        }
+        inventory.setItem(17, staff);
+        var disabled = new ItemStack(ModItems.WONDROUS_STAFF.get());
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, disabled);
+        player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, disabled.copy());
+        check(StaffPhaseManager.state(player).phase() && !StaffPhaseManager.blocksInteraction(player),
+                "disabled held staffs do not hide an enabled backpack staff");
+        var blocked = staff.copy();
+        blocked.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
+        inventory.setItem(8, blocked);
+        check(StaffPhaseManager.blocksInteraction(player), "first enabled inventory slot controls interaction");
+        player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, staff.copy());
+        check(!StaffPhaseManager.blocksInteraction(player), "offhand precedes inventory interaction setting");
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, blocked.copy());
+        check(StaffPhaseManager.blocksInteraction(player), "main hand precedes offhand interaction setting");
+        inventory.selected = 2;
+        StaffPhaseManager.movementTick(player);
+        check(StaffPhaseManager.state(player).phase() && StaffPhaseManager.noPhysics(player),
+                "selecting another hotbar slot keeps carried phase active");
+        inventory.setItem(0, ItemStack.EMPTY);
+        inventory.setItem(8, ItemStack.EMPTY);
+        inventory.setItem(17, ItemStack.EMPTY);
+        StaffPhaseManager.movementTick(player);
+        check(StaffPhaseManager.noPhysics(player), "removing inventory staffs preserves enabled offhand");
+        player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, ItemStack.EMPTY);
+        StaffPhaseManager.movementTick(player);
+        check(!StaffPhaseManager.noPhysics(player) && !player.getAbilities().flying,
+                "removing final offhand staff releases phase");
+        inventory.selected = 0;
+        inventory.setItem(17, staff);
+        LogUtils.getLogger().info("REGRESSION CARRIED STAFF PHASE PASSED: all 36 inventory slots, offhand, hotbar selection, multiple staffs, interaction priority and immediate removal restoration");
+    }
 
     /** Exercise the optional upstream modes against phase control when that mod is present. */
     private static void checkUselessModPhaseCompatibility(

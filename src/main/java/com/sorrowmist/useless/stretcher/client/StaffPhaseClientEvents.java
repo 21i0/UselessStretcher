@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-/** Keeps the client collision flag aligned with the server while the phase staff is held. */
+/** Keeps client collision aligned with the server while an enabled phase staff is carried. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)
 public final class StaffPhaseClientEvents {
     private StaffPhaseClientEvents() {}

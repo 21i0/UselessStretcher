@@ -62,7 +62,14 @@ public final class StaffPhaseManager {
         State main = from(player.getMainHandItem());
         if (main.phase()) return main;
         State off = from(player.getOffhandItem());
-        return off.phase() ? off : State.OFF;
+        if (off.phase()) return off;
+        // Both sides use the same live inventory order; moving a staff or removing
+        // the last enabled one must take effect without a stale cached state.
+        for (ItemStack stack : player.getInventory().items) {
+            State carried = from(stack);
+            if (carried.phase()) return carried;
+        }
+        return State.OFF;
     }
 
     public static boolean blocksInteraction(Player player) {

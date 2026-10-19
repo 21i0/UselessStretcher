@@ -1,0 +1,25 @@
+{
+  "manifest": "verification/skin-tail-fixture-20261019.json",
+  "checks": [
+    {
+      "directory": "build/mod-fixture-surface-full-20261018",
+      "external_jars": 26,
+      "all_hashes_match": true
+    },
+    {
+      "directory": "build/regression-phase-inventory-20261019/mods",
+      "external_jars": 26,
+      "all_hashes_match": true
+    },
+    {
+      "directory": "build/story-phase-inventory-20261019/mods",
+      "external_jars": 26,
+      "all_hashes_match": true
+    },
+    {
+      "directory": "build/guide-phase-inventory-20261019/mods",
+      "external_jars": 26,
+      "all_hashes_match": true
+    }
+  ]
+}

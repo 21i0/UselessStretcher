@@ -61,7 +61,7 @@ public final class StretcherComponents {
                     .persistent(Codec.BOOL)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
 
-    /** Lets the holder pass through solid blocks while this staff is held. */
+    /** Lets the carrier pass through solid blocks while this staff is in their inventory or offhand. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PHASE_ENABLED =
             register("wondrous_staff_phase_enabled", builder -> builder
                     .persistent(Codec.BOOL)

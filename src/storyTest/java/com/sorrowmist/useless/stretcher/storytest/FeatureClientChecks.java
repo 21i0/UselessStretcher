@@ -33,6 +33,7 @@ final class FeatureClientChecks {
         if (finished) return;
         try {
             check(++ticks < 5000, "feature client timeout at stage "+stage);
+            check(serverPhase.get() != -1, "integrated server phase check failed; see server exception");
             if (ticks % 100 == 0) LogUtils.getLogger().info("FEATURE CLIENT PROGRESS stage={} age={} screen={} paused={} player={} menu={}",
                     stage,age,client.screen==null?"none":client.screen.getClass().getSimpleName(),client.isPaused(),
                     client.player==null?"none":client.player.position(),client.player==null?"none":client.player.containerMenu.getClass().getSimpleName());
@@ -53,21 +54,29 @@ final class FeatureClientChecks {
             if(stage==0) {
                 stage=1;
                 client.getSingleplayerServer().execute(()->{
-                    var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
-                    player.setGameMode(GameType.SURVIVAL);
-                    for(int x=-3;x<=3;x++)for(int z=0;z<=9;z++)for(int y=99;y<=105;y++)
-                        player.serverLevel().setBlockAndUpdate(new BlockPos(x,y,z),(z>=2&&z<=6?Blocks.STONE:Blocks.AIR).defaultBlockState());
-                    player.serverLevel().setBlockAndUpdate(new BlockPos(1,101,0),Blocks.CHEST.defaultBlockState());
-                    var staff=new ItemStack(ModItems.WONDROUS_STAFF.get());
-                    staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),true);
-                    player.setItemInHand(InteractionHand.MAIN_HAND,staff);
-                    player.connection.teleport(0.5,101,0.5,0,0);
-                    StaffPhaseManager.apply(player);
-                    serverPhase.set(1);
+                    try {
+                        var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
+                        player.setGameMode(GameType.SURVIVAL);
+                        for(int x=-3;x<=3;x++)for(int z=0;z<=9;z++)for(int y=99;y<=105;y++)
+                            player.serverLevel().setBlockAndUpdate(new BlockPos(x,y,z),(z>=2&&z<=6?Blocks.STONE:Blocks.AIR).defaultBlockState());
+                        player.serverLevel().setBlockAndUpdate(new BlockPos(1,101,0),Blocks.CHEST.defaultBlockState());
+                        var staff=new ItemStack(ModItems.WONDROUS_STAFF.get());
+                        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),true);
+                        player.getInventory().clearContent();
+                        player.getInventory().selected=0;
+                        player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.WONDROUS_STAFF.get()));
+                        player.getInventory().setItem(17,staff);
+                        player.connection.teleport(0.5,101,0.5,0,0);
+                        StaffPhaseManager.apply(player);
+                        serverPhase.set(1);
+                    } catch(Throwable e) {
+                        LogUtils.getLogger().error("FEATURE CLIENT SERVER CHECK FAILED",e);serverPhase.set(-1);
+                    }
                 }); return;
             }
             if(stage==1) {
                 if(serverPhase.get()!=1 || !client.player.getMainHandItem().is(ModItems.WONDROUS_STAFF.get())
+                        || !client.player.getInventory().getItem(17).getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false)
                         || !StaffPhaseManager.noPhysics(client.player) || client.player.getY()<100
                         || !client.level.getBlockState(new BlockPos(1,101,0)).is(Blocks.CHEST))return;
                 client.setScreen(null);
@@ -90,6 +99,27 @@ final class FeatureClientChecks {
                 check(client.player.getZ()>7,"real forward input traverses five-block thick stone wall: "+client.player.position());
                 check(Math.abs(client.player.getY()-start.y)<0.1,"free flight hovers without falling");
                 check(!client.player.isSpectator() && !client.player.isCreative(),"survival mode preserved");
+                check(!client.player.getMainHandItem().getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false),
+                        "wall traversal uses backpack staff while held staff remains disabled");
+                stage=13;age=0;
+                client.getSingleplayerServer().execute(()->{
+                    try {
+                        var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
+                        check(StaffPhaseManager.noPhysics(player),"server accepts backpack phase movement");
+                        player.getInventory().setItem(8,player.getInventory().removeItemNoUpdate(17));
+                        serverPhase.set(2);
+                    } catch(Throwable e) {
+                        LogUtils.getLogger().error("FEATURE CLIENT SERVER CHECK FAILED",e);serverPhase.set(-1);
+                    }
+                });return;
+            }
+            if(stage==13) {
+                if(serverPhase.get()!=2 || !client.player.getInventory().getItem(8).getOrDefault(
+                        StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false))return;
+                client.player.getInventory().selected=2;
+                if(++age<15)return;
+                check(client.player.getMainHandItem().isEmpty() && StaffPhaseManager.noPhysics(client.player),
+                        "unselected hotbar staff keeps empty-hand phase active after changing selected slot");
                 beforeVertical=client.player.position();stage=3;age=0;return;
             }
             if(stage==3) {
@@ -105,18 +135,25 @@ final class FeatureClientChecks {
                 client.options.keyShift.setDown(false);
                 check(client.player.getY()<beforeVertical.y-1,"sneak input descends");
                 client.getSingleplayerServer().execute(()->{
-                    var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
-                    LogUtils.getLogger().info("PHASE SERVER BEFORE DISABLE mayfly={} flying={} gameMode={}",player.getAbilities().mayfly,player.getAbilities().flying,player.gameMode.getGameModeForPlayer());
+                    try {
+                        var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
+                        check(player.getInventory().selected==2 && StaffPhaseManager.noPhysics(player),
+                                "server keeps phasing with unselected hotbar staff and empty hand");
+                        player.getInventory().setItem(8,ItemStack.EMPTY);
+                        serverPhase.set(3);
+                    } catch(Throwable e) {
+                        LogUtils.getLogger().error("FEATURE CLIENT SERVER CHECK FAILED",e);serverPhase.set(-1);
+                    }
                 });
-                Network.sendWondrousStaffPhase(false,true,InteractionHand.MAIN_HAND);
                 stage=5;age=0;return;
             }
             if(stage==5) {
-                if(++age<15)return;
-                check(!StaffPhaseManager.noPhysics(client.player) && !client.player.isNoGravity(),"disable restores survival collision/gravity: collision="
+                if(serverPhase.get()!=3 || ++age<15)return;
+                check(!StaffPhaseManager.state(client.player).phase() && !StaffPhaseManager.noPhysics(client.player)
+                        && !client.player.isNoGravity(),"removing last enabled staff restores survival collision/gravity: collision="
                         +StaffPhaseManager.noPhysics(client.player)+" mayfly="+client.player.getAbilities().mayfly+" flying="
                         +client.player.getAbilities().flying+" noGravity="+client.player.isNoGravity());
-                LogUtils.getLogger().info("PHASE CLIENT MOVEMENT PASSED: real chest interaction while phasing, survival forward input through five-block stone wall, hover, jump ascent, sneak descent, shutdown restores collision/gravity, upstream flight remains available");
+                LogUtils.getLogger().info("PHASE CLIENT MOVEMENT PASSED: backpack slot 17 with disabled held staff, real chest interaction, five-block wall traversal and hover; move staff to unselected hotbar slot 8, select empty slot 2, jump ascent and sneak descent; removing final enabled staff restores collision/gravity");
                 stage=6;
                 client.getSingleplayerServer().execute(()->{
                     var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());

@@ -668,7 +668,7 @@
   "help.useless_stretcher.apotheosis_select_table": "Toggle table selection, then right-click tables to bind them. Blue outlines and bonuses persist. Turning selection off keeps existing bindings.",
   "help.useless_stretcher.apotheosis_save": "Changes save automatically. Click to apply pending values immediately to your bound tables.",
   "help.useless_stretcher.apotheosis_stat": "Adjust %s, save automatically and update your bound tables. Eterna, Quanta and Arcana: 0-100; Clues: 0-15.",
-  "help.useless_stretcher.staff_config.phase": "While this staff is held, the player can pass through solid blocks. The server owns collision checks and restores them when the staff is no longer held.",
+  "help.useless_stretcher.staff_config.phase": "Once enabled, this staff allows phasing from your inventory, hotbar or offhand. Collision is restored when the last enabled staff is disabled or removed.",
   "help.useless_stretcher.staff_config.phase_interaction": "Keep ordinary block, item and entity interaction while phasing. Turn this off to make phasing movement-only.",
   "gui.useless_stretcher.staff_apotheosis.title": "Wondrous Staff · Apotheosis",
   "gui.useless_stretcher.staff_apotheosis.open": "Apotheosis tier and enchanting table",
