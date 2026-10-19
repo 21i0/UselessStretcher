@@ -1,3 +1,10 @@
+万象担架 1.6.0 正式 Release（2026-10-19）
+发布页：https://github.com/21i0/UselessStretcher/releases/tag/v1.6.0
+正式文件：useless_stretcher-1.21.1-1.6.0.jar，12,550,692 字节。
+SHA256：F1476F9A37D9E7EBFB82CF254D0FD09E8273EDE241C3B71DA70F2B5997273123。
+按用户“创建 Release”授权发布 v1.6.0，附件为最终正式 JAR、changelog-1.6.0.txt 与 usage-1.6.0.txt。下面历史记录中的“等待测试/暂不创建 Release”不再适用。
+此次发布沿用已经完成回归和双审计的同一 JAR，没有更改生产代码或重建包。客户端与服务端请同时更新，依赖无用之物 1.21.1-2.4.6+、AE2 19.2+。
+
 万象担架 1.6.0 背包手杖穿墙（2026-10-19，当前交付）
 正式文件：D:/AI/useless_stretcher-1.21.1-1.6.0.jar；12,550,692 字节。
 SHA256：F1476F9A37D9E7EBFB82CF254D0FD09E8273EDE241C3B71DA70F2B5997273123。

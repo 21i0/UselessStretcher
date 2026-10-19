@@ -17,7 +17,7 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-正式文件名为 `useless_stretcher-1.21.1-1.6.0.jar`。源码已按 1.6.0 整理，GitHub Release 待用户测试确认后发布。详见仓库的更新、使用说明及 `verification` 验证记录。
+正式文件名为 `useless_stretcher-1.21.1-1.6.0.jar`，可从 [1.6.0 正式 Release](https://github.com/21i0/UselessStretcher/releases/tag/v1.6.0) 下载。更新内容和使用方法见 [发布说明](release-1.6.0.md)、[使用说明](usage-1.6.0.txt) 及 `verification` 验证记录。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
