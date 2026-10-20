@@ -72,7 +72,7 @@ public final class CapsuleNetwork {
             try { NativeCapsules.request(player, p.id, p.dimension, p.action, p.side, p.instanceId); }
             catch (RuntimeException failure) {
                 com.mojang.logging.LogUtils.getLogger().error("Capsule request failed for {}", p.id, failure);
-                state(player, p.id, p.dimension, "failed", 0, new int[0], 0, 0, 0);
+                state(player, p.id, p.dimension, p.instanceId, "failed", 0, new int[0], 0, 0, 0);
             }
         }));
         registrar.playToClient(State.TYPE, State.CODEC, (p, context) -> context.enqueueWork(() -> ClientStateReceiver.handleNativeCapsule(p)));

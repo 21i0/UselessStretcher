@@ -1,0 +1,45 @@
+// Real Forge worlds, opt-in and separate from the distributed artifact.
+tasks.named('jar') {
+    exclude '**/*ForgeCapsule*Checks*.class', '**/capsulecheck/**', 'data/stretcher_capsule_check/**'
+}
+if (providers.gradleProperty('capsuleChecks').isPresent()) {
+    sourceSets.main.java.srcDir 'src/capsuleCheck/java'
+    sourceSets.main.resources.srcDir 'src/capsuleCheck/resources'
+    dependencies {
+        modCompileOnly 'maven.modrinth:692GClaE:J0YtwRxM'
+        modRuntimeOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP'
+        modRuntimeOnly 'maven.modrinth:guideme:i7Tp1AHw'
+        if (!providers.gradleProperty('capsuleWithoutJei').isPresent())
+            modRuntimeOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ'
+        runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        if (providers.gradleProperty('accelerationChecks').isPresent()) {
+            modRuntimeOnly 'maven.modrinth:sbJh4AZw:hs5pHmiU'
+            modRuntimeOnly 'maven.modrinth:smartbrainlib:YkeJNm33'
+            modRuntimeOnly 'maven.modrinth:692GClaE:J0YtwRxM'
+            modRuntimeOnly 'maven.modrinth:vvuO3ImH:IPQlZkz1'
+            modRuntimeOnly 'maven.modrinth:8BmcQJ2H:aVW7Z5da'
+            modRuntimeOnly 'maven.modrinth:e0IclJLr:DrVfKfKP'
+            modRuntimeOnly 'maven.modrinth:1Zu0uTEE:GIASnLXz'
+            modRuntimeOnly 'maven.modrinth:hIO8IsD8:dYvtIH7M'
+        }
+    }
+    legacyForge.runs {
+        capsuleCheck {
+            server()
+            gameDirectory = file(providers.gradleProperty('capsuleCheckDirectory').getOrElse('run/capsule-check'))
+            programArgument '--nogui'
+            systemProperty 'stretcher.capsule.check', providers.gradleProperty('capsuleCheckMode').getOrElse('checkpoint')
+        }
+        capsuleClientCheck {
+            client()
+            gameDirectory = file('run/capsule-client-check')
+            systemProperty 'stretcher.capsule.clientCheck', 'true'
+        }
+        accelerationCheck {
+            server()
+            gameDirectory = file('run/acceleration-check')
+            programArgument '--nogui'
+            systemProperty 'stretcher.acceleration.check', 'true'
+        }
+    }
+}

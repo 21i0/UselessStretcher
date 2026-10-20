@@ -20,7 +20,7 @@ public abstract class OccultismRitualClockMixin implements ExtraTickClock {
     }
 
     @Redirect(method = "tick", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/world/level/Level;getGameTime()J"))
+            target = "Lnet/minecraft/world/level/Level;getGameTime()J", remap = true))
     private long uselessStretcher$ritualTime(Level level) {
         return level.getGameTime() + uselessStretcher$extraTicks;
     }

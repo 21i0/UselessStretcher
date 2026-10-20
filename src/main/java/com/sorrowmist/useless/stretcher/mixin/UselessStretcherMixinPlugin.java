@@ -16,6 +16,7 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.endsWith(".OccultismRitualClockMixin")) return isModLoadedEarly("occultism");
+        if (mixinClassName.endsWith(".BuilderProgressAccessor")) return isModLoadedEarly("rftoolsbuilder");
         if (mixinClassName.endsWith(".StaffRadiationShieldingMixin") || mixinClassName.endsWith(".StaffRadiationEntityMixin"))
             return isModLoadedEarly("mekanism");
         if (mixinClassName.endsWith(".TwoIArsRitualMixin") || mixinClassName.endsWith(".TwoIArsJarMixin"))

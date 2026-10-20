@@ -24,7 +24,8 @@ public final class CapsuleInstances extends SavedData {
     final Map<String, Instance> rooms = new LinkedHashMap<>();
     private int nextSlot;
     public static CapsuleInstances get(MinecraftServer server) {
-        return server.overworld().getDataStorage().computeIfAbsent(tag -> CapsuleInstances.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), CapsuleInstances::new, "useless_stretcher_native_capsules");
+        return server.overworld().getDataStorage().computeIfAbsent(tag -> load(tag, server.registryAccess()),
+                CapsuleInstances::new, "useless_stretcher_native_capsules");
     }
     static String key(UUID owner, String structure, String dimension) { return key(owner, structure, dimension, 0); }
     static String key(UUID owner, String structure, String dimension, int instanceId) {
@@ -166,7 +167,7 @@ public final class CapsuleInstances extends SavedData {
         if (!room.boundsKnown) return new int[]{0, 0};
         boolean hasNeighbor = rooms.values().stream()
                 .anyMatch(existing -> existing != room && existing.dimension.equals(room.dimension));
-        if (!hasNeighbor || isAdjacentToExisting(room) && !overlapsAnother(room)) return new int[]{0, 0};
+        if (!hasNeighbor || isAdjacentToExisting(room) && isFree(room.dimension, boxFor(room), room)) return new int[]{0, 0};
         int oldMinX = room.minX;
         int oldMinZ = room.minZ;
         allocateAdjacent(room);
@@ -331,13 +332,13 @@ public final class CapsuleInstances extends SavedData {
         }
     }
     @Override public CompoundTag save(CompoundTag tag) {
-        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
-    }
-
-    public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
         tag.putInt("next", nextSlot);
         ListTag entries = new ListTag(); rooms.values().forEach(room -> entries.add(room.save()));
         tag.put("rooms", entries); return tag;
+    }
+
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
+        return save(tag);
     }
     private static CapsuleInstances load(CompoundTag tag, HolderLookup.Provider provider) {
         CapsuleInstances data = new CapsuleInstances(); data.nextSlot = Math.max(0, tag.getInt("next"));

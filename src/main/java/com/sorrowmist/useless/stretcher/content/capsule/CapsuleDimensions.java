@@ -31,6 +31,12 @@ public final class CapsuleDimensions {
     private CapsuleDimensions() { }
     public static void init(IEventBus bus) { GENERATORS.register(bus); }
 
+    /** Forge mods can add worlds after MinecraftServer.createLevels has returned. */
+    public interface ServerAccess { void stretcher$ensureCapsuleDimensions(); }
+    public static void ensure(MinecraftServer server) {
+        ((ServerAccess) server).stretcher$ensureCapsuleDimensions();
+    }
+
     public static boolean isCapsule(ResourceLocation id) {
         return id.getNamespace().equals(UselessStretcherMod.MODID) && id.getPath().startsWith("capsule_");
     }
@@ -62,11 +68,11 @@ public final class CapsuleDimensions {
                 server.forgeGetWorldMap().put(target, mirror);
                 server.markWorldsDirty();
                 MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
+                LogUtils.getLogger().info("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
+                        source.dimension().location(), source.dimensionTypeRegistration().unwrapKey().orElse(null),
+                        mirror.getMinBuildHeight(), mirror.getHeight());
             }
             if (mirror.getChunkSource().getGenerator() instanceof CapsuleVoidChunkGenerator generator) generator.bindSource(source);
-            LogUtils.getLogger().info("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
-                    source.dimension().location(), source.dimensionTypeRegistration().unwrapKey().orElse(null),
-                    mirror.getMinBuildHeight(), mirror.getHeight());
         }
     }
 }
