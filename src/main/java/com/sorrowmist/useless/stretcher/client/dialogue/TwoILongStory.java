@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Authored prose lives in small resource-pack replaceable files, not a generated wall of filler. */
-@net.neoforged.fml.common.EventBusSubscriber(modid = "useless_stretcher",
-        value = net.neoforged.api.distmarker.Dist.CLIENT,
-        bus = net.neoforged.fml.common.EventBusSubscriber.Bus.MOD)
+@net.minecraftforge.fml.common.Mod.EventBusSubscriber(modid = "useless_stretcher",
+        value = net.minecraftforge.api.distmarker.Dist.CLIENT,
+        bus = net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD)
 public final class TwoILongStory {
     public record Choice(String text, List<TwoIStoryScript.Line> lines) { }
     public record Round(List<TwoIStoryScript.Line> prompt, List<Choice> choices) {
@@ -38,8 +38,8 @@ public final class TwoILongStory {
 
     private TwoILongStory() { }
 
-    @net.neoforged.bus.api.SubscribeEvent
-    public static void registerReload(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+    @net.minecraftforge.eventbus.api.SubscribeEvent
+    public static void registerReload(net.minecraftforge.client.event.RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new net.minecraft.server.packs.resources.SimplePreparableReloadListener<Boolean>() {
             @Override protected Boolean prepare(net.minecraft.server.packs.resources.ResourceManager manager,
                                                 net.minecraft.util.profiling.ProfilerFiller profiler) { return true; }
@@ -63,16 +63,16 @@ public final class TwoILongStory {
             java.util.Arrays.fill(CACHE, null);
             TwoIStoryDirection.clearLongDirections();
         }
-        int index = Math.clamp(chapter, 0, 5);
+        int index = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(chapter, 0, 5);
         if (CACHE[index] == null) CACHE[index] = load(index, selected);
         return CACHE[index];
     }
 
     private static Chapter load(int chapter, String language) {
         var manager = Minecraft.getInstance().getResourceManager();
-        var localized = ResourceLocation.fromNamespaceAndPath("useless_stretcher",
+        var localized = new ResourceLocation("useless_stretcher",
                 "dialogue/long_stories/" + language + "/chapter_" + chapter + ".json");
-        var fallback = ResourceLocation.fromNamespaceAndPath("useless_stretcher",
+        var fallback = new ResourceLocation("useless_stretcher",
                 "dialogue/long_stories/chapter_" + chapter + ".json");
         var resource = manager.getResource(localized).or(() -> manager.getResource(fallback));
         if (resource.isEmpty()) return EMPTY;

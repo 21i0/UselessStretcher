@@ -14,17 +14,17 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /** One plush-doll rig, standing as a companion or sitting as an animated item. */
 @OnlyIn(Dist.CLIENT)
 public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDollRenderer.Model> {
     /** Standard 64x64 Steve skin UVs are deliberately identical in every form. */
     public static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("useless_stretcher", "textures/entity/two_i.png");
+            new ResourceLocation("useless_stretcher", "textures/entity/two_i.png");
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(
-            ResourceLocation.fromNamespaceAndPath("useless_stretcher", "two_i_doll"), "main");
+            new ResourceLocation("useless_stretcher", "two_i_doll"), "main");
     public static final float RENDER_SCALE = 0.62F;
     public static final float FEET_Y = 24.0F;
 
@@ -93,7 +93,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
         private boolean seated;
         private boolean sharedUmbrella;
         private boolean umbrellaHolder = true;
-        private static final ResourceLocation ACCESSORIES = ResourceLocation.fromNamespaceAndPath(
+        private static final ResourceLocation ACCESSORIES = new ResourceLocation(
                 "useless_stretcher", "textures/entity/two_i_accessories.png");
 
         public Model(ModelPart root) {

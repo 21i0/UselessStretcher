@@ -8,11 +8,11 @@ import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -64,7 +64,8 @@ public final class PatternRepositorySearch {
     }
 
     @SubscribeEvent
-    public static void tick(ServerTickEvent.Post event) {
+    public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         var jobs = JOBS.get(event.getServer());
         if (jobs == null || jobs.isEmpty()) return;
         long deadline = System.nanoTime() + 2_000_000L;

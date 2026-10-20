@@ -10,7 +10,6 @@ import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -28,8 +27,8 @@ public abstract class TwoIHeldDollMixin {
         if (!stack.is(ModItems.TWO_I_DOLL.get()) || !(entity instanceof AbstractClientPlayer player)) return;
         var parent = ((ItemInHandLayer<?, ?>)(Object)this).getParentModel();
         if (!(parent instanceof PlayerModel<?> model)) return;
-        float partial = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
-        TwoIDollThirdPerson.render(stack, model, arm, player.getSkin().model() == PlayerSkin.Model.SLIM,
+        float partial = Minecraft.getInstance().getFrameTime();
+        TwoIDollThirdPerson.render(stack, model, arm, "slim".equals(player.getModelName()),
                 pose, buffers, light, TwoIDollCarryMotion.sample(player, partial),
                 TwoIDollWeather.sample(player, player.level(), player.blockPosition(), partial, player.getUUID().hashCode()));
         ci.cancel();

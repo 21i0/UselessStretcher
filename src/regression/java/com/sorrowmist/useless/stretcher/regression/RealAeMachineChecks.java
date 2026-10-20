@@ -27,11 +27,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.capabilities.Capabilities;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -78,7 +78,7 @@ final class RealAeMachineChecks {
     private static void lightningTech(ServerLevel level, boolean range) throws Exception {
         if (!ModList.get().isLoaded("ae2lt")) return;
         BlockPos pos = new BlockPos(44, 150, 44);
-        var block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("ae2lt:lightning_simulation_room"));
+        var block = BuiltInRegistries.BLOCK.get(new ResourceLocation("ae2lt:lightning_simulation_room"));
         check(block != Blocks.AIR, "real Lightning Tech simulation chamber is registered");
         level.setBlockAndUpdate(pos, block.defaultBlockState());
         var machine = (appeng.blockentity.grid.AENetworkedBlockEntity) level.getBlockEntity(pos);
@@ -108,16 +108,16 @@ final class RealAeMachineChecks {
             storage = machine.getMainNode().getGrid().getStorageService();
             storage.addGlobalStorageProvider(provider);
             inventory.setStackInSlot(0, new ItemStack(BuiltInRegistries.ITEM.get(
-                    ResourceLocation.parse("ae2lt:overload_alloy_blank"))));
+                    new ResourceLocation("ae2lt:overload_alloy_blank"))));
             inventory.setStackInSlot(1, new ItemStack(BuiltInRegistries.ITEM.get(
-                    ResourceLocation.parse("ae2lt:overload_crystal_dust")), 4));
+                    new ResourceLocation("ae2lt:overload_crystal_dust")), 4));
             check(energy.receiveEnergy(20000, false) == 20000, "Lightning Tech accepts recipe FE");
             long initialGameTime = level.getGameTime();
             for (int batch = 0; batch < 100 && inventory.getStackInSlot(4).isEmpty(); batch++) {
                 driver.tick();
             }
             check(inventory.getStackInSlot(4).is(BuiltInRegistries.ITEM.get(
-                            ResourceLocation.parse("ae2lt:overload_alloy"))) && inventory.getStackInSlot(4).getCount() == 1,
+                            new ResourceLocation("ae2lt:overload_alloy"))) && inventory.getStackInSlot(4).getCount() == 1,
                     "Lightning Tech completes a real lightning simulation recipe");
             check(inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty()
                             && remainingLightning[0] == 0 && energy.getEnergyStored() == 0,
@@ -134,7 +134,7 @@ final class RealAeMachineChecks {
     private static void crystalScience(ServerLevel level, boolean range) throws Exception {
         if (!ModList.get().isLoaded("ae2cs")) return;
         BlockPos pos = new BlockPos(40, 150, 40);
-        var block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("ae2cs:crystal_pulverizer"));
+        var block = BuiltInRegistries.BLOCK.get(new ResourceLocation("ae2cs:crystal_pulverizer"));
         check(block != Blocks.AIR, "real Crystal Science pulverizer is registered");
         level.setBlockAndUpdate(pos, block.defaultBlockState());
         var machine = level.getBlockEntity(pos);
@@ -175,11 +175,11 @@ final class RealAeMachineChecks {
             if (range) {
                 ranges = new RangeAccelerationSavedData();
                 ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-                staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
-                staff.set(StretcherComponents.RANGE_SIZE_X.get(), 1);
-                staff.set(StretcherComponents.RANGE_SIZE_Y.get(), 1);
-                staff.set(StretcherComponents.RANGE_SIZE_Z.get(), 1);
-                staff.set(StretcherComponents.RANGE_IDLE_THROTTLE_DISABLED.get(), true);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_X.get(), 1);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Y.get(), 1);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Z.get(), 1);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_IDLE_THROTTLE_DISABLED.get(), true);
                 var player = FakePlayerFactory.get(level, new GameProfile(owner, "RealAeRange"));
                 var placed = ranges.place(level, player, pos, staff);
                 check(placed.status() == RangeAccelerationSavedData.PlacementStatus.CREATED, "real machine range placed");

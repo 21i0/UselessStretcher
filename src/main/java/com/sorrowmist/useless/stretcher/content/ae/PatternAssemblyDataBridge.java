@@ -18,11 +18,11 @@ public final class PatternAssemblyDataBridge {
     }
 
     public static UUID externalize(ServerLevel level, ItemStack stack, UUID preferredReference) {
-        MultiblockPartData inline = stack.get(UComponents.MULTIBLOCK_PART_DATA.get());
+        MultiblockPartData inline = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, UComponents.MULTIBLOCK_PART_DATA.get());
         if (inline == null) return null;
         UUID id = PatternAssemblyItemStore.get(level).release(preferredReference, inline);
-        stack.remove(UComponents.MULTIBLOCK_PART_DATA.get());
-        stack.set(StretcherComponents.PATTERN_ASSEMBLY_REF.get(), id.toString());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.remove(stack, UComponents.MULTIBLOCK_PART_DATA.get());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.PATTERN_ASSEMBLY_REF.get(), id.toString());
         return id;
     }
 
@@ -35,7 +35,7 @@ public final class PatternAssemblyDataBridge {
     }
 
     public static UUID reference(ItemStack stack) {
-        String value = stack.get(StretcherComponents.PATTERN_ASSEMBLY_REF.get());
+        String value = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.PATTERN_ASSEMBLY_REF.get());
         if (value == null || value.isBlank()) return null;
         try {
             return UUID.fromString(value);

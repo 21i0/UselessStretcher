@@ -42,17 +42,17 @@ final class Ui152Checks {
                 case 1 -> {
                     reclaimer = new ReclaimerScreen(null, ENTRIES, false);
                     client.setScreen(reclaimer);
-                    check(buttons(reclaimer).getFirst().getMessage().getString().startsWith("Alpha_ID"), "player ID sort");
+                    check(buttons(reclaimer).get(0).getMessage().getString().startsWith("Alpha_ID"), "player ID sort");
                 }
                 case 2 -> {
-                    buttons(reclaimer).getFirst().onPress();
-                    check(buttons(reclaimer).getFirst().getMessage().getString().startsWith(tr("permanent")), "second-level categories");
+                    buttons(reclaimer).get(0).onPress();
+                    check(buttons(reclaimer).get(0).getMessage().getString().startsWith(tr("permanent")), "second-level categories");
                 }
                 case 3 -> {
-                    buttons(reclaimer).getFirst().onPress();
+                    buttons(reclaimer).get(0).onPress();
                     var targets = (List<?>) field(reclaimer, "targets");
-                    check(targets.size() == 1 && ((Network.ReclaimerEntry) targets.getFirst()).owner().equals(ALPHA)
-                            && !((Network.ReclaimerEntry) targets.getFirst()).range(), "filters by player and permanent kind");
+                    check(targets.size() == 1 && ((Network.ReclaimerEntry) targets.get(0)).owner().equals(ALPHA)
+                            && !((Network.ReclaimerEntry) targets.get(0)).range(), "filters by player and permanent kind");
                 }
                 case 4 -> {
                     reclaimer.update(ENTRIES.stream().filter(e -> !e.owner().equals(ALPHA) || e.range()).toList());
@@ -63,7 +63,7 @@ final class Ui152Checks {
                     reclaimer.onClose();
                     buttons(reclaimer).get(1).onPress();
                     var targets = (List<?>) field(reclaimer, "targets");
-                    check(targets.size() == 1 && ((Network.ReclaimerEntry) targets.getFirst()).range(), "range category independent");
+                    check(targets.size() == 1 && ((Network.ReclaimerEntry) targets.get(0)).range(), "range category independent");
                 }
                 case 6 -> {
                     reclaimer.onClose();
@@ -120,7 +120,7 @@ final class Ui152Checks {
     private static String tr(String key) { return Component.translatable("gui.useless_stretcher.reclaimer." + key).getString(); }
     private static com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData.Summary rangeSummary() {
         return new com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData.Summary(UUID.randomUUID(),
-                ResourceLocation.parse("minecraft:overworld"), new BlockPos(20, 64, 100), 0, true, 16, 3, 3, 3, 0, 0, 0, "测试工厂");
+                new ResourceLocation("minecraft:overworld"), new BlockPos(20, 64, 100), 0, true, 16, 3, 3, 3, 0, 0, 0, "测试工厂");
     }
     private static List<AbstractButton> buttons(Screen screen) {
         return screen.children().stream().filter(AbstractButton.class::isInstance).map(AbstractButton.class::cast).toList();
@@ -131,7 +131,7 @@ final class Ui152Checks {
         return field.get(value);
     }
     private static Network.ReclaimerEntry entry(UUID owner, String name, boolean range, String label) {
-        return new Network.ReclaimerEntry(range, UUID.randomUUID(), owner, name, ResourceLocation.parse("minecraft:overworld"),
+        return new Network.ReclaimerEntry(range, UUID.randomUUID(), owner, name, new ResourceLocation("minecraft:overworld"),
                 new BlockPos(20, 64, 100), label);
     }
     private static void check(boolean value, String message) { if (!value) throw new AssertionError(message); }

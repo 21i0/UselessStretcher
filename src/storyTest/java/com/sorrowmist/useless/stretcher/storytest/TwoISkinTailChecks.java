@@ -115,7 +115,7 @@ final class TwoISkinTailChecks {
             var itemSprite = client.getItemRenderer().getModel(new ItemStack(ModItems.TWO_I_DOLL.get()),null,null,0).getParticleIcon();
             var blockSprite = client.getBlockRenderer().getBlockModel(ModBlocks.TWO_I_DOLL_DISPLAY.get().defaultBlockState()).getParticleIcon();
             for (var sprite : new net.minecraft.client.renderer.texture.TextureAtlasSprite[]{itemSprite,blockSprite}) {
-                check(sprite.contents().name().equals(ResourceLocation.parse("useless_stretcher:entity/two_i")), "shared new particle sprite");
+                check(sprite.contents().name().equals(new ResourceLocation("useless_stretcher:entity/two_i")), "shared new particle sprite");
                 var pixels = sprite.contents().getOriginalImage();
                 for (int y=0;y<64;y++) for(int x=0;x<64;x++) check(pixels.getPixelRGBA(x,y)==image.getPixelRGBA(x,y),
                         "actual baked atlas pixels equal new skin, no old mining/item particle texture");
@@ -227,7 +227,7 @@ final class TwoISkinTailChecks {
                     pose.mulPose(Axis.YP.rotationDegrees(180));
                     var buffers=minecraft.renderBuffers().bufferSource();
                     TwoIDollHandRenderer.renderOnPalm(new ItemStack(ModItems.TWO_I_DOLL.get()),HumanoidArm.RIGHT,
-                            new net.minecraft.client.resources.PlayerSkin(ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png"),
+                            new net.minecraft.client.resources.PlayerSkin(new ResourceLocation("textures/entity/player/wide/steve.png"),
                                     null,null,null,net.minecraft.client.resources.PlayerSkin.Model.WIDE,true),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
                             i==5?motion[frame]:TwoIDollCarryMotion.Pose.STILL,TwoIDollWeather.Pose.CLEAR,time);
                     buffers.endBatch();pose.popPose();
@@ -301,7 +301,7 @@ final class TwoISkinTailChecks {
                 pose.mulPose(Axis.YP.rotationDegrees(150));
                 TwoIDollThirdPerson.poseArm(player,HumanoidArm.RIGHT,60);
                 TwoIDollThirdPerson.poseArm(player,HumanoidArm.LEFT,60);
-                player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png"))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation("textures/entity/player/wide/steve.png"))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
                 if(i==0)TwoIDollHeadLayer.renderOnHead(item,player.head,pose,buffers,LightTexture.FULL_BRIGHT);
                 else if(i==1||i==2){TwoIDollThirdPerson.render(item,player,HumanoidArm.RIGHT,false,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);TwoIDollThirdPerson.render(item,player,HumanoidArm.LEFT,false,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);}
                 else {pose.scale(.7F,.7F,.7F);TwoIDollItemRenderer.get().renderByItem(item,ItemDisplayContext.GUI,pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);}

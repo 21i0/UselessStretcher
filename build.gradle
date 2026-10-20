@@ -1,217 +1,116 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.107'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.107'
     id 'idea'
 }
-
-tasks.named('wrapper', Wrapper).configure {
-    distributionType = Wrapper.DistributionType.BIN
-}
-
 version = mod_version
 group = mod_group_id
-
+base { archivesName = mod_id }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 repositories {
-    maven { name = 'Modmaven'; url = uri('https://modmaven.dev/') }
-    maven { name = 'Shadowsoffire'; url = uri('https://maven.shadowsoffire.dev/releases') }
-    maven { name = 'cursemaven'; url = uri('https://www.cursemaven.com') }
-    maven { name = 'Curios'; url = uri('https://maven.theillusivec4.top/') }
     mavenCentral()
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+    exclusiveContent {
+        forRepository { maven { url = 'https://cursemaven.com' } }
+        filter { includeGroup 'curse.maven' }
+    }
+    maven { url = 'https://maven.createmod.net' }
+    maven { url = 'https://maven.tterrag.com' }
+    maven { url = 'https://maven.minecraftforge.net/' }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
 }
-
-base {
-    archivesName = mod_id
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+    runs {
+        client { client(); gameDirectory = file('run/port-client') }
+        server { server(); gameDirectory = file('run/port-server'); programArgument '--nogui' }
+    }
+    mods { "${mod_id}" { sourceSet sourceSets.main } }
 }
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
-
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+// Compile against the deobfuscated development jar, never the reobfuscated release jar.
+// Build the matching UselessMod checkout first, or provide -PuselessModDevJar=/path/to/dev.jar.
+def uselessModDevJar = providers.gradleProperty('uselessModDevJar')
+        .map { file(it) }.getOrElse(file('../UselessMod/build/devlibs/useless_mod-20.2.4.6.jar'))
+configurations.modCompileOnly.transitive = false
+tasks.named('compileJava') {
+    doFirst {
+        if (!uselessModDevJar.isFile()) throw new GradleException(
+            'Build UselessMod 20.2.4.6 with gradlew jar first, or set -PuselessModDevJar to its build/devlibs jar.')
+    }
+}
+dependencies {
+    modCompileOnly 'maven.modrinth:rxYaglEe:orFPvySe' // advancedae-1.2.7-1.20.1
+    modCompileOnly 'maven.modrinth:rqFWfVlz:tT3CLYvK' // apotheosis-1.20.1-7.4.8
+    modCompileOnly 'maven.modrinth:IiATswDj:d9GM663Q' // applied-mekanistics-1.4.2
+    modCompileOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP' // appliedenergistics2-forge-15.4.8
+    modCompileOnly 'curse.maven:applied-flux-965012:6755986' // appliedflux-1.20-1.3.2-forge
+    modCompileOnly 'maven.modrinth:lhGA9TYQ:1MKTLiiG' // architectury-9.2.14-forge
+    modCompileOnly 'maven.modrinth:uy4Cnpcm:tNwsir0K' // bookshelf-forge-1.20.1-20.2.13
+    modCompileOnly 'maven.modrinth:U6BUTZ7K:9bH71LWw' // botanypots-forge-1.20.1-13.0.41
+    modCompileOnly 'maven.modrinth:iFDWVIFV:qFTHdrDH' // brandonscore-1.20.1-3.2.1.302-universal
+    modCompileOnly 'maven.modrinth:LNytGWDc:JjPQsQVw' // create-1.20.1-6.0.6
+    modCompileOnly 'maven.modrinth:vvuO3ImH:IPQlZkz1' // curios-forge-5.14.1-1.20.1
+    modCompileOnly 'maven.modrinth:nBqivi8H:YR33MHbk' // draconic-evolution-1.20.1-3.1.2.621-universal
+    modCompileOnly 'maven.modrinth:49ZofO4f:1na1IiE8' // enderio-1.20.1-6.2.13-beta-all
+    modCompileOnly 'curse.maven:ex-deorum-901420:6614784' // exdeorum-1.46
+    modCompileOnly 'curse.maven:extendedae-892005:7005572' // extendedae-1.20-1.4.6-forge
+    modCompileOnly 'maven.modrinth:5JMG1gql:NtEZsGjO' // extendedcrafting-1.20.1-6.1.5u
+    modCompileOnly 'curse.maven:flux-networks-248020:5234697' // fluxnetworks-1.20.1-7.2.1.15
+    modCompileOnly 'curse.maven:ftb-chunks-314906:6431735' // ftb-chunks-forge-2001.3.6
+    modCompileOnly 'curse.maven:ftb-teams-404468:6130786' // ftb-teams-forge-2001.3.1
+    modCompileOnly 'curse.maven:ftb-ultimine-386134:6899418' // ftb-ultimine-forge-2001.1.7
+    modCompileOnly 'maven.modrinth:8BmcQJ2H:aVW7Z5da' // geckolib-forge-1.20.1-4.8.2
+    modCompileOnly 'maven.modrinth:6bLUlbZn:6ByGTKSc' // hostileneuralnetworks-1.20.1-5.3.3
+    modCompileOnly 'maven.modrinth:lWxpUd04:O8YO7ORj' // industrial-foregoing-1.20.1-3.5.19
+    modCompileOnly 'maven.modrinth:nvQzSEkH:LecuGude' // jade-1.20.1-forge-11.13.2
+    modCompileOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ' // jei-1.20.1-forge-15.20.0.116
+    modCompileOnly 'maven.modrinth:umyGl7zF:g5igndAv' // kubejs-forge-2001.6.5-build.16
+    modCompileOnly 'maven.modrinth:Ce6I4WUE:9iboPfea' // mekanism-1.20.1-10.4.15.75
+    modCompileOnly 'maven.modrinth:OFVYKsAk:x9re7wt4' // mekanismgenerators-1.20.1-10.4.15.75
+    modCompileOnly 'maven.modrinth:tCkE8p2N:6SkuAGoz' // placebo-1.20.1-8.6.3
+    modCompileOnly 'maven.modrinth:KZO4S4DO:xDOvxyqP' // powah-5.0.11
+    modCompileOnly 'maven.modrinth:sk9knFPE:uNALdylI' // rhino-forge-2001.2.3-build.10
+    modCompileOnly 'maven.modrinth:19smZ71v:zAGXClGI' // summoningrituals-forge-1.20.1-2.0.8
+    modCompileOnly 'maven.modrinth:1Ro7m06l:8krhHkrZ' // titanium-1.20.1-3.8.32
+    compileOnly files(uselessModDevJar)
+    compileOnly 'io.github.llamalad7:mixinextras-common:0.5.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.5.0'
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.15.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+tasks.named('jar') {
+    manifest.attributes('MixinConfigs': "${mod_id}.mixins.json")
+}
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '1500']
 }
-
-neoForge {
-    version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
-
-    runs {
-        client {
-            client()
-            gameDirectory = file(providers.gradleProperty('compatClientDirectory').getOrElse('build/compat-client'))
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            jvmArguments.addAll '-Xmx3G', '-Xms3G'
-        }
-        server {
-            server()
-            programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            jvmArguments.addAll '-Xmx3G', '-Xms3G'
-        }
-        gameTestServer {
-            type = 'gameTestServer'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-        data {
-            data()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-        }
-        configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.INFO
-        }
-    }
-
-    mods {
-        "${mod_id}" {
-            sourceSet(sourceSets.main)
-        }
+tasks.named('test', Test) {
+    dependsOn 'jar', 'reobfJar'
+    useJUnitPlatform()
+}
+tasks.named('processResources', ProcessResources) {
+    inputs.property 'mod_version', mod_version
+    filesMatching('META-INF/mods.toml') {
+        expand mod_id: mod_id, mod_name: mod_name, mod_version: mod_version
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-def defaultCompatibilityMods = file('build/client-mod-fixture-useful-armor-20261017')
-
-tasks.register('prepareCompatClientMods', Copy) {
-    if (providers.gradleProperty('compatibilityModsDirectory').isPresent()) {
-        from(file(providers.gradleProperty('compatibilityModsDirectory').get())) {
-            include '*.jar'
-            exclude 'useless_stretcher-*.jar'
-        }
-    } else {
-        from(defaultCompatibilityMods) {
-            include '*.jar'
-            exclude 'useless_stretcher-*.jar'
-        }
-    }
-    into file(providers.gradleProperty('compatClientDirectory').getOrElse('build/compat-client') + '/mods')
-}
-
-tasks.named('runClient') { dependsOn 'prepareCompatClientMods' }
-
-// Test source sets deliberately share the game classpath, but never the distributable artifact.
-tasks.named('jar') {
-    exclude 'com/sorrowmist/useless/stretcher/regression/**'
-    exclude 'com/sorrowmist/useless/stretcher/storytest/**'
-    exclude 'com/sorrowmist/useless/stretcher/guidetest/**'
-    exclude '**/*Checks*.class'
-    exclude 'data/useless_stretcher_test/**'
-}
-
-// Opt-in integration checks run in an isolated world and are excluded from release jars.
-if (providers.gradleProperty('regressionTests').isPresent()) {
-    sourceSets.main.java.srcDir 'src/regression/java'
-    sourceSets.main.resources.srcDir 'src/regression/resources'
-    tasks.named('compileJava') { outputs.upToDateWhen { false } }
-    tasks.register('copyRegressionFixtureMods', Copy) {
-        if (providers.gradleProperty('compatibilityModsDirectory').isPresent()) {
-            from(file(providers.gradleProperty('compatibilityModsDirectory').get())) {
-                include '*.jar'
-                exclude 'useless_stretcher-*.jar'
-            }
-        } else {
-            from(defaultCompatibilityMods) {
-                include '*.jar'
-                exclude 'useless_stretcher-*.jar'
-            }
-        }
-        into file(providers.gradleProperty('regressionDirectory').getOrElse('build/regression-server') + '/mods')
-    }
-    neoForge.runs {
-        regression {
-            server()
-            gameDirectory = file(providers.gradleProperty('regressionDirectory').getOrElse('build/regression-server'))
-            taskBefore tasks.named('copyRegressionFixtureMods')
-            programArguments.add '--nogui'
-            systemProperty 'useless_stretcher.regression', 'true'
-            systemProperty 'useless_stretcher.atm_only', providers.gradleProperty('atmOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.armor_only', providers.gradleProperty('armorOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.native_only', providers.gradleProperty('nativeOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.environment_only', providers.gradleProperty('environmentOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.acceleration_only', providers.gradleProperty('accelerationOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.jdte_only', providers.gradleProperty('jdteOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.surface_only', providers.gradleProperty('surfaceOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.protection_only', providers.gradleProperty('protectionOnly').getOrElse('false')
-        }
-    }
-}
-
-// Optional visual guide check in its own client directory; never part of release jars.
-if (providers.gradleProperty('guideTests').isPresent()) {
-    sourceSets.main.java.srcDir 'src/guideTest/java'
-    neoForge.runs {
-        guidePreview {
-            client()
-            gameDirectory = file(providers.gradleProperty('guideDirectory').getOrElse('build/guide-client'))
-            programArguments.addAll '--width', '1280', '--height', '800'
-            systemProperty 'useless_stretcher.guide_test', 'true'
-            systemProperty 'useless_stretcher.guide_pages_only', providers.gradleProperty('guidePagesOnly').getOrElse('false')
-            jvmArguments.addAll '-Xmx3G', '-Xms1G'
-        }
-    }
-    tasks.register('prepareGuidePreviewMods', Copy) {
-        from(file(providers.gradleProperty('guideModsDirectory').getOrElse(defaultCompatibilityMods.path))) {
-            include '*.jar'
-            exclude 'useless_stretcher-*.jar'
-        }
-        into file(providers.gradleProperty('guideDirectory').getOrElse('build/guide-client') + '/mods')
-    }
-    tasks.named('runGuidePreview') { dependsOn 'prepareGuidePreviewMods' }
-    dependencies {
-        compileOnly('org.appliedenergistics:guideme:21.1.17') { transitive = false }
-    }
-}
-
-// Opt-in story UI checks use a separate client directory and cannot enter a release jar.
-if (providers.gradleProperty('storyTests').isPresent()) {
-    sourceSets.main.java.srcDir 'src/storyTest/java'
-    if (providers.gradleProperty('protectionTests').isPresent()) sourceSets.main.java.srcDir 'src/regression/java'
-    sourceSets.main.resources.srcDir 'src/regression/resources'
-    neoForge.runs {
-        storyPreview {
-            client()
-            gameDirectory = file(providers.gradleProperty('storyDirectory').getOrElse('build/story-client'))
-            programArguments.addAll '--width', '1280', '--height', '800'
-            systemProperty 'useless_stretcher.story_test', 'true'
-            systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.forced_kill_client_only', providers.gradleProperty('forcedKillClientOnly').getOrElse('false')
-            systemProperty 'useless_stretcher.skin_tail_only', providers.gradleProperty('skinTailOnly').getOrElse('false')
-            jvmArguments.addAll '-Xmx2G', '-Xms1G'
-        }
-    }
-    tasks.register('prepareStoryPreviewMods', Copy) {
-        if (providers.gradleProperty('storyModsDirectory').isPresent()) {
-            from(file(providers.gradleProperty('storyModsDirectory').get())) { include '*.jar' }
-        } else {
-            // Keep the default story client aligned with the complete compatibility
-            // fixture used by the native regression runs. The project mod itself is
-            // supplied by ModDev, so only external jars are copied here.
-            from(defaultCompatibilityMods) { include '*.jar'; exclude 'useless_stretcher-*.jar' }
-        }
-        into file(providers.gradleProperty('storyDirectory').getOrElse('build/story-client') + '/mods')
-    }
-    tasks.named('runStoryPreview') { dependsOn 'prepareStoryPreviewMods' }
-    tasks.named('jar') { exclude 'com/sorrowmist/useless/stretcher/storytest/**' }
-}
-
-dependencies {
-    // Compile against the locally built Useless Mod and AE2. Both are resolved
-    // at runtime by the host pack, so they stay compileOnly here.
-    // Compile against the latest upstream tool-switch API; keep the legacy jar on disk
-    // for older pack references without allowing Gradle to select its older classpath.
-    compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'],
-            excludes: ['useless_mod-1.21.1-2.3.6.1.jar', 'useless_mod-latest.jar'])
-    compileOnly('dev.shadowsoffire:ApothicEnchanting:1.21.1-1.6.2')
-    // Optional integration: the host pack supplies Curios, and no Curios classes enter our jar.
-    compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api') { transitive = false }
-    if (providers.gradleProperty('regressionTests').isPresent()
-            || providers.gradleProperty('storyTests').isPresent()) {
-        compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1') { transitive = false }
-    }
+sourceSets.main.java {
+    exclude 'com/sorrowmist/useless/stretcher/compat/OccultismAccelerationCompat.java'
+    exclude 'com/sorrowmist/useless/stretcher/compat/RftoolsBuilderAccelerationCompat.java'
 }

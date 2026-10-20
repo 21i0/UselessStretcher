@@ -12,11 +12,11 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.BlockPos;
 import org.joml.Vector3f;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
+import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
 
 /** Vanilla sky/particles only: one show-state packet, no new textures, entity ticks or particle broadcasts. */
 public final class TwoIStarfieldEffects extends DimensionSpecialEffects {
@@ -65,7 +65,8 @@ public final class TwoIStarfieldEffects extends DimensionSpecialEffects {
         }
 
         @SubscribeEvent
-        public static void tick(ClientTickEvent.Post event) {
+        public static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null || mc.player == null || !mc.level.dimension().equals(TwoIStarfieldDimensions.KEY)) {
                 showCenter = null;

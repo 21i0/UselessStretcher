@@ -19,7 +19,7 @@ public final class PatternAssemblyItemStore extends SavedData {
 
     public static PatternAssemblyItemStore get(ServerLevel level) {
         return level.getServer().overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(PatternAssemblyItemStore::new, PatternAssemblyItemStore::load), NAME);
+                tag -> PatternAssemblyItemStore.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), PatternAssemblyItemStore::new, NAME);
     }
 
     public UUID put(MultiblockPartData data) {
@@ -57,7 +57,10 @@ public final class PatternAssemblyItemStore extends SavedData {
         return new Claim(claimedId, entry.data());
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         entries.forEach((id, stored) -> {

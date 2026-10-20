@@ -17,7 +17,7 @@ public final class TwoIDollAcquisitionData extends SavedData {
 
     public static TwoIDollAcquisitionData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(TwoIDollAcquisitionData::new, TwoIDollAcquisitionData::load),
+                tag -> TwoIDollAcquisitionData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), TwoIDollAcquisitionData::new,
                 "useless_stretcher_two_i_acquisitions");
     }
 
@@ -27,7 +27,10 @@ public final class TwoIDollAcquisitionData extends SavedData {
         return true;
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag ids = new ListTag();
         for (UUID id : announced) {

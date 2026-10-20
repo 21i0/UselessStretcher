@@ -11,9 +11,9 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.neoforged.fml.config.ConfigTracker;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.minecraftforge.fml.config.ConfigTracker;
+import net.minecraftforge.fml.config.ModConfig;
+import com.sorrowmist.useless.client.gui.PortConfigScreen;
 
 /** One server category. LAN hosts may edit it even after publishing their world. */
 public final class StretcherConfigScreen extends FloatingScreen {
@@ -32,8 +32,8 @@ public final class StretcherConfigScreen extends FloatingScreen {
         var server = addRenderableWidget(new SelectableAE2Button(contentLeft(), contentTop() + 4,
                 contentWidth(), 20,
                 Component.translatable("useless_stretcher.configuration.server"), ignored ->
-                        minecraft.setScreen(new ConfigurationScreen.ConfigurationSectionScreen(this,
-                                ModConfig.Type.SERVER, config,
+                        minecraft.setScreen(new PortConfigScreen(this,
+                                StretcherConfig.SERVER_SPEC,
                                 Component.translatable("useless_stretcher.configuration.server")))));
         server.active = editable;
         server.setTooltip(Tooltip.create(editable ? com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.text("server_config")
@@ -51,7 +51,7 @@ public final class StretcherConfigScreen extends FloatingScreen {
         // The integrated server owns this same spec in memory: don't replace its writable config.
         if (Minecraft.getInstance().hasSingleplayerServer()) return;
         var config = ServerConfigSync.config();
-        if (config != null) ConfigTracker.acceptSyncedConfig(config, payload.contents());
+        if (config != null) config.acceptSyncedConfig(payload.contents());
     }
 
     @Override protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {

@@ -27,12 +27,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.RenderHighlightEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -163,7 +163,7 @@ public final class RangeAccelerationPreview {
                         || !minecraft.level.isLoaded(pos)
                         || !WondrousStaffAcceleration.isValidTarget(minecraft.level, pos)) continue;
                 List<LabelLine> labels = labelsFor(field, packedPos);
-                int tint = labels.isEmpty() ? 0xFFFFFF : labels.getFirst().color();
+                int tint = labels.isEmpty() ? 0xFFFFFF : labels.get(0).color();
                 WondrousStaffHighlight.drawFlowingOutline(poseStack, outlines,
                         new AABB(pos).inflate(0.006D), cameraPos,
                         gameTime, false, 0.78F, seeThrough, tint);

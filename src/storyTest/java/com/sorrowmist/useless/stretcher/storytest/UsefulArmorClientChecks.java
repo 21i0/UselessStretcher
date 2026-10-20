@@ -32,8 +32,8 @@ final class UsefulArmorClientChecks {
         var suffixes = List.of("helmet", "chestplate", "leggings", "boots");
         for (int i = 0; i < pieces.size(); i++) {
             var piece = pieces.get(i);
-            var texture = ResourceLocation.fromNamespaceAndPath("useless_stretcher", "textures/item/" + piece.getId().getPath() + ".png");
-            var vanilla = ResourceLocation.withDefaultNamespace("textures/item/diamond_" + suffixes.get(i) + ".png");
+            var texture = new ResourceLocation("useless_stretcher", "textures/item/" + piece.getId().getPath() + ".png");
+            var vanilla = new ResourceLocation("textures/item/diamond_" + suffixes.get(i) + ".png");
             try (var stream = client.getResourceManager().open(texture);
                  var maskStream = client.getResourceManager().open(vanilla);
                  NativeImage image = NativeImage.read(stream); NativeImage mask = NativeImage.read(maskStream)) {

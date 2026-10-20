@@ -11,7 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -49,7 +49,7 @@ public final class TwoIDollProtectionChecks {
                 check(doll.getMaxHealth() == 20, "poisoned maximum-health attribute does not alter doll maximum");
                 check(doll.getHealth() == 20 && doll.isAlive() && !doll.isDeadOrDying(),
                         "max-health poisoning and direct tracked-data write cannot fake death");
-                if (net.neoforged.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
+                if (net.minecraftforge.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
                     Class<?> helper = Class.forName("sen.manaita_plus_legacy_core.util.CallBackHelper");
                     check((float) helper.getMethod("getHealth", LivingEntity.class).invoke(null, doll) == 20,
                             "actual Manaita raw-health bypass sees healthy synchronized data");
@@ -73,7 +73,7 @@ public final class TwoIDollProtectionChecks {
 
             TwoIDollUselessKillChecks.run(level, doll);
 
-            if (net.neoforged.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
+            if (net.minecraftforge.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
                 Class<?> utils = Class.forName("sen.manaita_plus_legacy.common.util.ManaitaPlusUtils");
                 var attack = utils.getMethod("attack", Entity.class, net.minecraft.world.entity.player.Player.class, boolean.class);
                 attack.invoke(null, doll, owner, false);

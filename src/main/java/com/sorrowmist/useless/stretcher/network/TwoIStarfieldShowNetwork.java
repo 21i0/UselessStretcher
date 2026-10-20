@@ -2,15 +2,15 @@ package com.sorrowmist.useless.stretcher.network;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.RegisterPayloadHandlersEvent;
 
 /** One small packet at entry/reconnect; particle animation is entirely client-side thereafter. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -30,16 +30,16 @@ public final class TwoIStarfieldShowNetwork {
     }
 
     public record Show(BlockPos center, long endTime) implements CustomPacketPayload {
-        static final Type<Show> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(
+        static final Type<Show> TYPE = new Type<>(new ResourceLocation(
                 UselessStretcherMod.MODID, "two_i_starfield_show"));
-        static final StreamCodec<RegistryFriendlyByteBuf, Show> CODEC = new StreamCodec<>() {
+        static final StreamCodec<FriendlyByteBuf, Show> CODEC = new StreamCodec<>() {
             @Override
-            public Show decode(RegistryFriendlyByteBuf buffer) {
+            public Show decode(FriendlyByteBuf buffer) {
                 return new Show(buffer.readBlockPos(), buffer.readLong());
             }
 
             @Override
-            public void encode(RegistryFriendlyByteBuf buffer, Show value) {
+            public void encode(FriendlyByteBuf buffer, Show value) {
                 buffer.writeBlockPos(value.center());
                 buffer.writeLong(value.endTime());
             }

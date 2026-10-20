@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class TwoIDollClientRemovalMixin {
     @Shadow public abstract Entity getEntity(int id);
 
-    @WrapMethod(method = "removeEntity")
+    @WrapMethod(method = "removeEntity", require = 1)
     private void serverAuthorizedRemoval(int id, Entity.RemovalReason reason, Operation<Void> original) {
         if (getEntity(id) instanceof TwoIDollEntity doll) {
             try (var scope = TwoILifecycleGuard.allow(doll)) { original.call(id, reason); }

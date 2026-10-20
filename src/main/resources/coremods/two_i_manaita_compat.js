@@ -1,6 +1,6 @@
 /*
  * ManaitaPlus-Legacy 0.1.0 excludes Mixins on its sen.* classes via its
- * LaunchPluginHandler. NeoForge coremods are ITransformers in TransformStore,
+ * LaunchPluginHandler. Forge coremods are ITransformers in TransformStore,
  * not launch plugins. Target ONLY its three public damage/removal entry classes;
  * never patch the launcher, exempt the mod globally, or scan/resurrect entities.
  */
@@ -14,7 +14,7 @@ function initializeCoreMod() {
     var InsnNode = Java.type('org.objectweb.asm.tree.InsnNode');
     var LabelNode = Java.type('org.objectweb.asm.tree.LabelNode');
     var FrameNode = Java.type('org.objectweb.asm.tree.FrameNode');
-    var ASMAPI = Java.type('net.neoforged.coremod.api.ASMAPI');
+    var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
     var doll = 'com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity';
     var entity = 'Lnet/minecraft/world/entity/Entity;';
     var player = 'Lnet/minecraft/world/entity/player/Player;';

@@ -1,7 +1,7 @@
 package com.sorrowmist.useless.stretcher.content.capsule;
 
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -15,17 +15,17 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.DerivedLevelData;
 import net.minecraft.world.level.storage.LevelStorageSource;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.level.LevelEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.LevelEvent;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
 /** One stable, terrain-free storage world per real dimension, recreated before player login. */
 public final class CapsuleDimensions {
-    private static final DeferredRegister<MapCodec<? extends ChunkGenerator>> GENERATORS =
+    private static final DeferredRegister<Codec<? extends ChunkGenerator>> GENERATORS =
             DeferredRegister.create(Registries.CHUNK_GENERATOR, UselessStretcherMod.MODID);
     static { GENERATORS.register("capsule_void", () -> CapsuleVoidChunkGenerator.CODEC); }
     private CapsuleDimensions() { }
@@ -45,7 +45,7 @@ public final class CapsuleDimensions {
         List<ServerLevel> sources = new ArrayList<>();
         server.getAllLevels().forEach(level -> { if (!isCapsule(level.dimension().location())) sources.add(level); });
         for (ServerLevel source : sources) {
-            ResourceKey<Level> target = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(targetFor(source.dimension().location())));
+            ResourceKey<Level> target = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(targetFor(source.dimension().location())));
             ServerLevel mirror = server.getLevel(target);
             if (mirror == null) {
                 CapsuleVoidChunkGenerator generator = new CapsuleVoidChunkGenerator(
@@ -61,7 +61,7 @@ public final class CapsuleDimensions {
                 // border must not exclude the capsule allocator's reserved rooms.
                 server.forgeGetWorldMap().put(target, mirror);
                 server.markWorldsDirty();
-                NeoForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
+                MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
             }
             if (mirror.getChunkSource().getGenerator() instanceof CapsuleVoidChunkGenerator generator) generator.bindSource(source);
             LogUtils.getLogger().info("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),

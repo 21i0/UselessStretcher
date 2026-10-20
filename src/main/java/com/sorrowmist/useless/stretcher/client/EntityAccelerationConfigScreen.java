@@ -78,8 +78,8 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
     private void save() {
         ItemStack held = staff();
         if (!held.is(ModItems.WONDROUS_STAFF.get())) return;
-        held.set(StretcherComponents.ENTITY_TIMER_MODE.get(), timers);
-        held.set(StretcherComponents.ENTITY_TIMER_SPEED.get(), speed);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.ENTITY_TIMER_MODE.get(), timers);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.ENTITY_TIMER_SPEED.get(), speed);
         Network.sendEntityTimerSettings(timers, speed, hand);
         rebuildWidgets();
     }

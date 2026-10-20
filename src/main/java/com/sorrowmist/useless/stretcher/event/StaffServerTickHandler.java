@@ -4,17 +4,18 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.PlayerAccelerationManager;
 import com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager;
 import com.sorrowmist.useless.stretcher.content.entity.TimeStopManager;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
 public final class StaffServerTickHandler {
     private StaffServerTickHandler() { }
 
     @SubscribeEvent
-    public static void tick(ServerTickEvent.Post event) {
+    public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         TimeStopManager.tick(event.getServer());
         PlayerAccelerationManager.tick(event.getServer(), TimeStopManager.remaining(event.getServer()) > 0);
         StaffPhaseManager.tick(event.getServer());

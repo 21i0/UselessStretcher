@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -27,8 +27,8 @@ final class TwoIDollHeadwearChecks {
         player.getInventory().selected = 0;
         var menu = player.inventoryMenu;
         ItemStack original = new ItemStack(ModItems.TWO_I_DOLL.get());
-        original.set(StretcherComponents.TWO_I_BOND.get(), 47);
-        original.set(StretcherComponents.TWO_I_INVITATION_USED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), 47);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
         original.set(DataComponents.CUSTOM_NAME, Component.literal("2i headwear memory"));
         CompoundTag future = new CompoundTag();
         future.putString("future_skin", "unchanged-by-equipment");

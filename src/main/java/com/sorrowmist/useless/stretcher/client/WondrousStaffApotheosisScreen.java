@@ -62,7 +62,7 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
 
         // World tiers live in the Apotheosis adventure module; only Apothic Enchanting is
         // standalone. Skip the selector when it is absent so the buttons cannot no-op.
-        boolean tierSupported = ApotheosisStaffSettings.isApotheosisLoaded();
+        boolean tierSupported = ApotheosisStaffSettings.isWorldTierAvailable();
         int tierGap = 3;
         int tierWidth = (panelWidth - 8 - tierGap * 4) / 5;
         for (int i = 0; tierSupported && i < TIERS.length; i++) {
@@ -141,7 +141,7 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
                 panelLeft + contentWidth(), panelTop + 43);
         graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.world_tier"),
                 panelLeft + 5, panelTop + 7, StretcherScreenStyle.TEXT_COLOR, false);
-        if (!ApotheosisStaffSettings.isApotheosisLoaded()) {
+        if (!ApotheosisStaffSettings.isWorldTierAvailable()) {
             graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.tier_unavailable"),
                     panelLeft + 5, panelTop + 26, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
         }
@@ -196,8 +196,8 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
         ApotheosisStaffSettings.setBoost(staff, boost);
         ApotheosisStaffSettings.setSelectionMode(staff, selectionMode);
         if (selectionMode) {
-            staff.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_FILTER_MARKING_MODE.get(), false);
-            staff.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_FILTER_MARKING_MODE.get(), false);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
         }
         Network.sendApotheosisOptions(selectionMode, boost, hand);
         lastSent = boost;

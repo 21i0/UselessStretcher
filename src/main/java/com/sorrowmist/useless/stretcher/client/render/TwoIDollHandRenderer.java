@@ -11,17 +11,16 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.RenderHandEvent;
 
 /** First person actually shows the owner's palm underneath the sitting doll. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)
@@ -50,7 +49,7 @@ public final class TwoIDollHandRenderer {
                 + 0.04F * swing, -0.88F);
         pose.mulPose(Axis.YP.rotationDegrees(side * (5 - 8 * swing)));
         pose.mulPose(Axis.ZP.rotationDegrees(side * -3 * swing));
-        renderOnPalm(event.getItemStack(), arm, player.getSkin(), !player.isInvisible(),
+        renderOnPalm(event.getItemStack(), arm, NativePlayerSkin.of(player), !player.isInvisible(),
                 player.isModelPartShown(arm == HumanoidArm.RIGHT ? PlayerModelPart.RIGHT_SLEEVE : PlayerModelPart.LEFT_SLEEVE),
                 pose, event.getMultiBufferSource(), event.getPackedLight(),
                 TwoIDollCarryMotion.sample(player, event.getPartialTick()), TwoIDollWeather.sample(player, player.level(),
@@ -60,28 +59,28 @@ public final class TwoIDollHandRenderer {
     }
 
     /** Shared with the isolated visual fixture; (0,0,0) is the top of the palm. */
-    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
+    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, NativePlayerSkin skin, boolean visible,
                                     boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light) {
         renderOnPalm(stack, arm, skin, visible, sleeveVisible, pose, buffers, light, TwoIDollCarryMotion.Pose.STILL);
     }
 
-    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
+    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, NativePlayerSkin skin, boolean visible,
                                     boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light,
                                     TwoIDollCarryMotion.Pose motion) {
         renderOnPalm(stack, arm, skin, visible, sleeveVisible, pose, buffers, light, motion, TwoIDollWeather.Pose.CLEAR);
     }
 
-    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
+    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, NativePlayerSkin skin, boolean visible,
                                     boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light,
                                     TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather) {
         renderOnPalm(stack,arm,skin,visible,sleeveVisible,pose,buffers,light,motion,weather,TwoIDollItemRenderer.animationTime());
     }
 
-    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, PlayerSkin skin, boolean visible,
+    public static void renderOnPalm(ItemStack stack, HumanoidArm arm, NativePlayerSkin skin, boolean visible,
                                     boolean sleeveVisible, PoseStack pose, MultiBufferSource buffers, int light,
                                     TwoIDollCarryMotion.Pose motion, TwoIDollWeather.Pose weather, float time) {
         if (visible) {
-            boolean isSlim = skin.model() == PlayerSkin.Model.SLIM;
+            boolean isSlim = "slim".equals(skin.model());
             var models = Minecraft.getInstance().getEntityModels();
             PlayerModel<LivingEntity> playerModel;
             if (isSlim) {

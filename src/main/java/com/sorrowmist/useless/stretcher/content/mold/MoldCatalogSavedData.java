@@ -21,7 +21,7 @@ public final class MoldCatalogSavedData extends SavedData {
 
     public static MoldCatalogSavedData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(MoldCatalogSavedData::new, MoldCatalogSavedData::load),
+                tag -> MoldCatalogSavedData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), MoldCatalogSavedData::new,
                 "useless_stretcher_mold_catalog");
     }
 
@@ -48,7 +48,10 @@ public final class MoldCatalogSavedData extends SavedData {
         setDirty();
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putString("fingerprint", fingerprint);
         ListTag sources = new ListTag();

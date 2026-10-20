@@ -1,9 +1,9 @@
 {
   "required": true,
-  "minVersion": "0.8.5",
+  "minVersion": "0.8",
   "package": "com.sorrowmist.useless.stretcher.mixin",
   "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CapsuleDimensionBootstrapMixin",
     "CapsuleGenerationHeightMixin",
@@ -45,6 +45,8 @@
     "BrushableBlockEntityMixin",
     "ServerLevelTimeStopMixin",
     "RandomizableContainerLootMemoryMixin",
+    "LootContainerAccessor",
+    "BlockLeafDropMixin",
     "MinecartContainerLootMemoryMixin",
     "BeefTimeAccelerationMixin",
     "UselessModLightningRodMixin",
@@ -67,5 +69,6 @@
     "TwoIHeldDollMixin",
     "LevelRendererCloudMixin"
   ],
-  "server": []
+  "server": [],
+  "refmap": "useless_stretcher.refmap.json"
 }

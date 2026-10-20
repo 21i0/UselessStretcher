@@ -9,9 +9,9 @@ import com.sorrowmist.useless.stretcher.config.StretcherConfig;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -19,9 +19,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.IPayloadContext;
+import com.sorrowmist.useless.compat.forge1201.network.PayloadRegistrar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public final class RangeNetwork {
                                   boolean accelerationWhitelistMode,
                                   boolean sleepWhitelistMode) implements CustomPacketPayload {
         public static final Type<SettingsPayload> TYPE = RangeNetwork.type("range_settings");
-        public static final StreamCodec<RegistryFriendlyByteBuf, SettingsPayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, SettingsPayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.offhand);
                     buf.writeBoolean(value.placementMode);
@@ -67,7 +67,7 @@ public final class RangeNetwork {
     public record PlacePayload(boolean offhand, BlockPos clickedPos, Direction face)
             implements CustomPacketPayload {
         public static final Type<PlacePayload> TYPE = RangeNetwork.type("range_place");
-        public static final StreamCodec<RegistryFriendlyByteBuf, PlacePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, PlacePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.offhand);
                     buf.writeBlockPos(value.clickedPos);
@@ -81,7 +81,7 @@ public final class RangeNetwork {
     public record FilterTogglePayload(boolean offhand, BlockPos targetPos, boolean sameType)
             implements CustomPacketPayload {
         public static final Type<FilterTogglePayload> TYPE = RangeNetwork.type("range_filter_toggle");
-        public static final StreamCodec<RegistryFriendlyByteBuf, FilterTogglePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, FilterTogglePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.offhand);
                     buf.writeBlockPos(value.targetPos);
@@ -94,7 +94,7 @@ public final class RangeNetwork {
 
     public record HistoryRequestPayload() implements CustomPacketPayload {
         public static final Type<HistoryRequestPayload> TYPE = RangeNetwork.type("range_history_request");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryRequestPayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, HistoryRequestPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> { }, buf -> new HistoryRequestPayload());
 
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -102,7 +102,7 @@ public final class RangeNetwork {
 
     public record HistoryTogglePayload(UUID id, boolean enabled) implements CustomPacketPayload {
         public static final Type<HistoryTogglePayload> TYPE = RangeNetwork.type("range_history_toggle");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryTogglePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, HistoryTogglePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeUUID(value.id);
                     buf.writeBoolean(value.enabled);
@@ -114,7 +114,7 @@ public final class RangeNetwork {
 
     public record HistoryReclaimPayload(UUID id) implements CustomPacketPayload {
         public static final Type<HistoryReclaimPayload> TYPE = RangeNetwork.type("range_history_reclaim");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryReclaimPayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, HistoryReclaimPayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> buf.writeUUID(value.id),
                 buf -> new HistoryReclaimPayload(buf.readUUID()));
 
@@ -125,7 +125,7 @@ public final class RangeNetwork {
                                      int offsetX, int offsetY, int offsetZ,
                                      boolean entityTimerMode, int entityTimerSpeed) implements CustomPacketPayload {
         public static final Type<HistoryEditPayload> TYPE = RangeNetwork.type("range_history_edit");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryEditPayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, HistoryEditPayload> STREAM_CODEC =
                 StreamCodec.of(
                         (buf, value) -> {
                             buf.writeUUID(value.id);
@@ -149,7 +149,7 @@ public final class RangeNetwork {
 
     public record HistoryRenamePayload(UUID id, String name) implements CustomPacketPayload {
         public static final Type<HistoryRenamePayload> TYPE = RangeNetwork.type("range_history_rename");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryRenamePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, HistoryRenamePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> { buf.writeUUID(value.id); buf.writeUtf(value.name, 48); },
                 buf -> new HistoryRenamePayload(buf.readUUID(), buf.readUtf(48)));
 
@@ -159,13 +159,13 @@ public final class RangeNetwork {
     public record HistoryStatePayload(List<RangeAccelerationSavedData.Summary> fields)
             implements CustomPacketPayload {
         public static final Type<HistoryStatePayload> TYPE = RangeNetwork.type("range_history_state");
-        public static final StreamCodec<RegistryFriendlyByteBuf, HistoryStatePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, HistoryStatePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     if (value.fields.size() > MAX_HISTORY) throw new IllegalArgumentException("Too many range fields");
                     buf.writeVarInt(value.fields.size());
                     for (RangeAccelerationSavedData.Summary field : value.fields) {
                         buf.writeUUID(field.id());
-                        ResourceLocation.STREAM_CODEC.encode(buf, field.dimension());
+                        com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.encode(buf, field.dimension());
                         buf.writeBlockPos(field.center());
                         buf.writeLong(field.createdAt());
                         buf.writeBoolean(field.enabled());
@@ -187,7 +187,7 @@ public final class RangeNetwork {
                     List<RangeAccelerationSavedData.Summary> fields = new ArrayList<>(count);
                     for (int i = 0; i < count; i++) {
                         fields.add(new RangeAccelerationSavedData.Summary(
-                                buf.readUUID(), ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(),
+                                buf.readUUID(), com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.decode(buf), buf.readBlockPos(),
                                 buf.readLong(), buf.readBoolean(), buf.readVarInt(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                                 buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readUtf(48),
@@ -359,7 +359,7 @@ public final class RangeNetwork {
                 center.getX(), center.getY(), center.getZ()), true);
         // A successful placement consumes the preview mode so the next right-click cannot
         // accidentally place/update another field before the player re-enables it.
-        staff.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, com.sorrowmist.useless.stretcher.init.StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
         player.getInventory().setChanged();
         player.containerMenu.broadcastChanges();
     }
@@ -467,7 +467,7 @@ public final class RangeNetwork {
 
     private static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> type(String path) {
         return new CustomPacketPayload.Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, path));
+                new ResourceLocation(UselessStretcherMod.MODID, path));
     }
 
 }

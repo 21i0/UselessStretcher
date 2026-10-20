@@ -8,18 +8,18 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 /** Stable flat dimension used only for 2i's private starfield visits. */
 public final class TwoIStarfieldDimensions {
     public static final ResourceKey<Level> KEY = ResourceKey.create(
-            Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_starfield"));
+            Registries.DIMENSION, new ResourceLocation(UselessStretcherMod.MODID, "two_i_starfield"));
 
-    private static final DeferredRegister<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATORS =
+    private static final DeferredRegister<com.mojang.serialization.Codec<? extends ChunkGenerator>> CHUNK_GENERATORS =
             DeferredRegister.create(Registries.CHUNK_GENERATOR, UselessStretcherMod.MODID);
 
-    public static final Supplier<MapCodec<? extends ChunkGenerator>> GENERATOR = CHUNK_GENERATORS.register(
+    public static final Supplier<com.mojang.serialization.Codec<? extends ChunkGenerator>> GENERATOR = CHUNK_GENERATORS.register(
             "two_i_starfield_gen", () -> TwoIStarfieldChunkGenerator.CODEC);
 
     private TwoIStarfieldDimensions() {

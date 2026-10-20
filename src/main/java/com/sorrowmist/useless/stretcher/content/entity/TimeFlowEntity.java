@@ -187,17 +187,17 @@ public final class TimeFlowEntity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(SIZE_X, 3);
-        builder.define(SIZE_Y, 3);
-        builder.define(SIZE_Z, 3);
-        builder.define(OFFSET_X, 0);
-        builder.define(OFFSET_Y, 0);
-        builder.define(OFFSET_Z, 0);
-        builder.define(ENABLED, true);
-        builder.define(IDLE_THROTTLED, false);
-        builder.define(CREATED_AT, 0L);
-        builder.define(LIST_STATE, new CompoundTag());
+    protected void defineSynchedData() {
+        this.entityData.define(SIZE_X, 3);
+        this.entityData.define(SIZE_Y, 3);
+        this.entityData.define(SIZE_Z, 3);
+        this.entityData.define(OFFSET_X, 0);
+        this.entityData.define(OFFSET_Y, 0);
+        this.entityData.define(OFFSET_Z, 0);
+        this.entityData.define(ENABLED, true);
+        this.entityData.define(IDLE_THROTTLED, false);
+        this.entityData.define(CREATED_AT, 0L);
+        this.entityData.define(LIST_STATE, new CompoundTag());
     }
 
     @Override

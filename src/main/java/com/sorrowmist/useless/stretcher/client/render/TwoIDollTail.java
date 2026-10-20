@@ -17,7 +17,7 @@ import java.util.List;
 
 /** Adapted Winefox bind geometry; attribution and asset license in TWO_I_TAIL_CREDITS.txt. */
 public final class TwoIDollTail {
-    private static final ResourceLocation FUR = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation FUR = new ResourceLocation(
             "useless_stretcher", "textures/entity/two_i_tail.png");
     private record Point(float x, float y, float z, float u, float v, int a, int b, float weight) {
         Point(float x,float y,float z) { this(x,y,z,0,0,0,0,0); }
@@ -316,8 +316,8 @@ public final class TwoIDollTail {
         nx=Mth.lerp(rootWeight,attachment.m00()*f.nx+attachment.m10()*f.ny+attachment.m20()*f.nz,nx);
         ny=Mth.lerp(rootWeight,attachment.m01()*f.nx+attachment.m11()*f.ny+attachment.m21()*f.nz,ny);
         nz=Mth.lerp(rootWeight,attachment.m02()*f.nx+attachment.m12()*f.ny+attachment.m22()*f.nz,nz);
-        out.addVertex(pose.last(),x/16,y/16,z/16).setColor(255,255,255,255)
-                .setUv(seam&&p.u<.5F?p.u+1:p.u,p.v).setOverlay(overlay).setLight(light).setNormal(pose.last(),nx,ny,nz);
+        out.vertex(pose.last().pose(),x/16,y/16,z/16).color(255,255,255,255)
+                .uv(seam&&p.u<.5F?p.u+1:p.u,p.v).overlayCoords(overlay).uv2(light).normal(pose.last().normal(),nx,ny,nz).endVertex();
     }
     private void vertex(VertexConsumer out,PoseStack pose,Point p,float u,float v,Face f,int light,int overlay) {
         float x=ribbonMatrix.m00()*p.x+ribbonMatrix.m10()*p.y+ribbonMatrix.m20()*p.z+ribbonMatrix.m30();
@@ -326,7 +326,7 @@ public final class TwoIDollTail {
         float nx=ribbonMatrix.m00()*f.nx+ribbonMatrix.m10()*f.ny+ribbonMatrix.m20()*f.nz;
         float ny=ribbonMatrix.m01()*f.nx+ribbonMatrix.m11()*f.ny+ribbonMatrix.m21()*f.nz;
         float nz=ribbonMatrix.m02()*f.nx+ribbonMatrix.m12()*f.ny+ribbonMatrix.m22()*f.nz;
-        out.addVertex(pose.last(),x/16,y/16,z/16).setColor(f.tint>>16&255,f.tint>>8&255,f.tint&255,255)
-                .setUv(u,v).setOverlay(overlay).setLight(light).setNormal(pose.last(),nx,ny,nz);
+        out.vertex(pose.last().pose(),x/16,y/16,z/16).color(f.tint>>16&255,f.tint>>8&255,f.tint&255,255)
+                .uv(u,v).overlayCoords(overlay).uv2(light).normal(pose.last().normal(),nx,ny,nz).endVertex();
     }
 }

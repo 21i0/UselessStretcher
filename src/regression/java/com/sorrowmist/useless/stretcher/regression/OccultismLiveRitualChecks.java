@@ -24,9 +24,9 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.neoforge.common.NeoForge;
+import net.minecraftforge.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ final class OccultismLiveRitualChecks {
     private static boolean restarted;
 
     static boolean tick(ServerLevel level) {
-        if (!net.neoforged.fml.ModList.get().isLoaded("occultism")) return true;
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("occultism")) return true;
         if (SESSIONS.isEmpty()) {
             start = level.getGameTime();
             for (int mode = 0; mode < 4; mode++) SESSIONS.add(new Session(level, new BlockPos(64 + 20 * mode, 180, 80), mode));
@@ -80,7 +80,7 @@ final class OccultismLiveRitualChecks {
         check(elapsed < 300, "x1024 ritual must finish within the bounded real-time window");
         if (!complete) return false;
         LogUtils.getLogger().info("OCCULTISM LIVE RITUAL CHECKS PASSED: exactModVersion={} lowSpeedTicks=100 highSpeedTicks={} normal/permanent/range, native outputs",
-                net.neoforged.fml.ModList.get().getModContainerById("occultism").orElseThrow().getModInfo().getVersion(), elapsed - 100);
+                net.minecraftforge.fml.ModList.get().getModContainerById("occultism").orElseThrow().getModInfo().getVersion(), elapsed - 100);
         for (Session session : SESSIONS) session.close(level);
         SESSIONS.clear();
         delayed = true;
@@ -188,7 +188,7 @@ final class OccultismLiveRitualChecks {
         final BlockPos pos;
         GoldenSacrificialBowlBlockEntity bowl;
         final List<BlockPos> offerings = new ArrayList<>();
-        final net.neoforged.neoforge.common.util.FakePlayer player;
+        final net.minecraftforge.neoforge.common.util.FakePlayer player;
         final ItemStack stack = new ItemStack(ModItems.WONDROUS_STAFF.get());
         final RangeAccelerationSavedData ranges;
         final UUID rangeId;

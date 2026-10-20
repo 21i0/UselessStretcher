@@ -8,11 +8,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandler;
 
 /** Bounded, target-owned observation. Unknown activity must never put a machine to sleep. */
 public final class MachineActivityProbe {
@@ -45,8 +45,7 @@ public final class MachineActivityProbe {
         if (now < failureUntil) return true;
         try {
             Boolean known = com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.knownActivity(current);
-            // Give a new known target one initial observation, then trust its native idle state.
-            // Sync/save notifications and missing public capabilities do not mean ritual progress.
+            // Observe a newly acquired target once, then trust its native idle state.
             if (known != null) return newTarget || known;
             if (com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.isWorking(current)) return true;
             if (current instanceof ChangedTickAccessor accessor) {
@@ -61,15 +60,15 @@ public final class MachineActivityProbe {
             nextSampleTick = now + SAMPLE_INTERVAL_TICKS;
             if (current instanceof IInWorldGridNodeHost host
                     && WondrousStaffAcceleration.isAeDeviceWorking(host)) return true;
-            IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, pos, null);
+            IEnergyStorage energy = com.sorrowmist.useless.compat.forge1201.capability.CapabilityAccess.get(level, ForgeCapabilities.ENERGY, pos, null);
             long stored = energy == null ? Long.MIN_VALUE : energy.getEnergyStored();
             if (stored != lastEnergy) {
                 lastEnergy = stored;
                 return true;
             }
             return sampleCapabilities(energy,
-                    level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null),
-                    level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null));
+                    com.sorrowmist.useless.compat.forge1201.capability.CapabilityAccess.get(level, ForgeCapabilities.ITEM_HANDLER, pos, null),
+                    com.sorrowmist.useless.compat.forge1201.capability.CapabilityAccess.get(level, ForgeCapabilities.FLUID_HANDLER, pos, null));
         } catch (RuntimeException | LinkageError ignored) {
             // Observation is optional. A broken external capability must not break acceleration,
             // and must not be retried for every target tick while the machine is still present.
@@ -103,7 +102,7 @@ public final class MachineActivityProbe {
             ItemStack stack = itemHandler.getStackInSlot(slot);
             ItemStack previous = items[slot];
             if (previous == null || previous.getCount() != stack.getCount()
-                    || !ItemStack.isSameItemSameComponents(previous, stack)) {
+                    || !ItemStack.isSameItemSameTags(previous, stack)) {
                 items[slot] = stack.copy();
                 changed = true;
             }
@@ -117,7 +116,7 @@ public final class MachineActivityProbe {
             FluidStack previous = fluids[tank];
             if (previous == null || previous.getAmount() != stack.getAmount()
                     || previous.getFluid() != stack.getFluid()
-                    || !previous.getComponentsPatch().equals(stack.getComponentsPatch())) {
+                    || !java.util.Objects.equals(previous.getTag(), stack.getTag())) {
                 fluids[tank] = stack.copy();
                 changed = true;
             }

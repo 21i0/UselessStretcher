@@ -12,15 +12,15 @@ import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.ModBlockEntities;
 import com.sorrowmist.useless.stretcher.init.ModMenuTypes;
 import com.sorrowmist.useless.stretcher.screen.OmniversalMyriadScreen;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public final class ClientSetup {
@@ -28,14 +28,14 @@ public final class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void setupOptionalCurios(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
-        if (net.neoforged.fml.ModList.get().isLoaded("curios"))
+    public static void setupOptionalCurios(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent event) {
+        if (net.minecraftforge.fml.ModList.get().isLoaded("curios"))
             event.enqueueWork(com.sorrowmist.useless.stretcher.client.render.TwoIDollCurioRenderer::register);
     }
 
     @SubscribeEvent
-    public static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(ModMenuTypes.OMNIVERSAL_MYRIAD.get(), OmniversalMyriadScreen::new);
+    public static void registerScreens(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> MenuScreens.register(ModMenuTypes.OMNIVERSAL_MYRIAD.get(), OmniversalMyriadScreen::new));
     }
 
     @SubscribeEvent
@@ -53,14 +53,13 @@ public final class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.TWO_I_DOLL_DISPLAY.get(), TwoIDollDisplayRenderer::new);
     }
 
-    @SubscribeEvent
-    public static void registerItemRenderers(RegisterClientExtensionsEvent event) {
-        event.registerItem(new IClientItemExtensions() {
+    public static void registerItemRenderer(java.util.function.Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             @Override
             public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return TwoIDollItemRenderer.get();
             }
-        }, ModItems.TWO_I_DOLL.get());
+        });
     }
 
     @SubscribeEvent

@@ -14,8 +14,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.tick.PlayerTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.common.event.CuriosEventHandler;
@@ -30,7 +30,7 @@ public final class TwoICuriosChecks {
     private TwoICuriosChecks() { }
 
     public static void run(ServerLevel level) throws Exception {
-        if (!net.neoforged.fml.ModList.get().isLoaded("curios")) {
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("curios")) {
             LogUtils.getLogger().info("2I CURIOS SKIPPED: optional mod absent");
             return;
         }
@@ -52,7 +52,7 @@ public final class TwoICuriosChecks {
                     var menuSlot = new CurioSlot(player, handler.getStacks(), i, entry.getKey(), 0, 0,
                             handler.getRenders(), handler.getActiveStates(), true, true, false);
                     check(menuSlot.mayPlace(doll) && handler.getStacks().isItemValid(i, doll), "real menu and handler accept " + entry.getKey() + i);
-                    check(!doll.has(StretcherComponents.TWO_I_OWNER.get()) && !doll.has(StretcherComponents.TWO_I_DOLL_ID.get()),
+                    check(!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(doll, StretcherComponents.TWO_I_OWNER.get()) && !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(doll, StretcherComponents.TWO_I_DOLL_ID.get()),
                             "simulated validation does not bind/mutate an unequipped item");
                     check(handler.getCosmeticStacks().isItemValid(i, doll), "cosmetic validation accepts " + entry.getKey());
                 }
@@ -64,13 +64,13 @@ public final class TwoICuriosChecks {
             check(!CuriosApi.getCurio(doll).orElseThrow().canEquipFromUse(context), "right-click remains the doll panel, never Curios auto-equip");
             check(custom.getStacks().insertItem(0, doll, false).isEmpty(), "actual insert succeeds in restrictive slot");
             // Curios invokes inventoryTick and onEquip on the living-tick event.
-            new CuriosEventHandler().tick(new net.neoforged.neoforge.event.tick.EntityTickEvent.Post(player));
+            new CuriosEventHandler().tick(new net.minecraftforge.event.tick.EntityTickEvent.Post(player));
             ItemStack equipped = custom.getStacks().getStackInSlot(0);
-            check(OWNER.equals(equipped.get(StretcherComponents.TWO_I_OWNER.get())) && equipped.has(StretcherComponents.TWO_I_DOLL_ID.get()),
+            check(OWNER.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(equipped, StretcherComponents.TWO_I_OWNER.get())) && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(equipped, StretcherComponents.TWO_I_DOLL_ID.get()),
                     "real Curios tick claims first equip once");
-            UUID id = equipped.get(StretcherComponents.TWO_I_DOLL_ID.get());
-            equipped.set(StretcherComponents.TWO_I_BOND.get(), 37);
-            equipped.set(StretcherComponents.TWO_I_MEMORY.get(), TwoIDollMemory.empty());
+            UUID id = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(equipped, StretcherComponents.TWO_I_DOLL_ID.get());
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(equipped, StretcherComponents.TWO_I_BOND.get(), 37);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(equipped, StretcherComponents.TWO_I_MEMORY.get(), TwoIDollMemory.empty());
             var other = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "TwoICurioOther"));
             var otherHandler = CuriosApi.getCuriosInventory(other).orElseThrow().getStacksHandler("two_i_custom").orElseThrow();
             check(!otherHandler.getStacks().isItemValid(0, equipped) && !otherHandler.getCosmeticStacks().isItemValid(0, equipped),
@@ -115,8 +115,8 @@ public final class TwoICuriosChecks {
                 var nbt = net.minecraft.nbt.NbtIo.read(restartFile);
                 inventory.loadInventory(nbt.getList("Inventory", 10));
                 ItemStack previous = inventory.getStacksHandler("two_i_custom").orElseThrow().getStacks().getStackInSlot(0);
-                check(RESTART_DOLL.equals(previous.get(StretcherComponents.TWO_I_DOLL_ID.get()))
-                                && OWNER.equals(previous.get(StretcherComponents.TWO_I_OWNER.get())) && TwoIDollItem.getBond(previous) == 42,
+                check(RESTART_DOLL.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(previous, StretcherComponents.TWO_I_DOLL_ID.get()))
+                                && OWNER.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(previous, StretcherComponents.TWO_I_OWNER.get())) && TwoIDollItem.getBond(previous) == 42,
                         "prior-process Curios item inventory retained ownership/identity/bond");
                 check(data.progress(RESTART_DOLL, TwoIDollMemory.empty()).ticks() == 2300,
                         "prior-process world timer retains accessory progress");
@@ -124,9 +124,9 @@ public final class TwoICuriosChecks {
             }
             clear(inventory);
             ItemStack restart = new ItemStack(ModItems.TWO_I_DOLL.get());
-            restart.set(StretcherComponents.TWO_I_OWNER.get(), OWNER);
-            restart.set(StretcherComponents.TWO_I_DOLL_ID.get(), RESTART_DOLL);
-            restart.set(StretcherComponents.TWO_I_BOND.get(), 42);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(restart, StretcherComponents.TWO_I_OWNER.get(), OWNER);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(restart, StretcherComponents.TWO_I_DOLL_ID.get(), RESTART_DOLL);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(restart, StretcherComponents.TWO_I_BOND.get(), 42);
             inventory.getStacksHandler("two_i_custom").orElseThrow().getStacks().setStackInSlot(0, restart);
             var fixture = new TwoIDollMemory(TwoIDollMemory.empty().cooldowns(),
                     new TwoIDollMemory.Interaction(10, 0, 0, 0, 0, 2300, -1, "", 0, 0), 240_000);

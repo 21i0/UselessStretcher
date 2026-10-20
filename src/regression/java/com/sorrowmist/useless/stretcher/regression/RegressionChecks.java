@@ -24,9 +24,9 @@ import com.sorrowmist.useless.stretcher.content.mold.MoldRecipeIndex;
 import com.sorrowmist.useless.stretcher.event.MyriadWorkQueue;
 import com.sorrowmist.useless.content.recipe.AdvancedAlloyFurnaceRecipe;
 import com.sorrowmist.useless.core.component.UComponents;
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
-import net.neoforged.neoforge.common.crafting.IngredientType;
+import net.minecraftforge.common.crafting.DataComponentIngredient;
+import net.minecraftforge.common.crafting.ICustomIngredient;
+import net.minecraftforge.common.crafting.IngredientType;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.network.MyriadSelectionBatches;
 import com.sorrowmist.useless.stretcher.network.Network;
@@ -53,10 +53,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraftforge.common.ToolActions;
+import net.minecraft.network.FriendlyByteBuf;
 import io.netty.buffer.Unpooled;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.vehicle.MinecartChest;
@@ -65,12 +65,12 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.tick.ServerTickEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -82,8 +82,8 @@ import java.util.UUID;
 /** Opt-in tests, compiled only with -PregressionTests. Never included in the delivered jar. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
 public final class RegressionChecks {
-    private static final ResourceLocation A = ResourceLocation.parse("minecraft:furnace");
-    private static final ResourceLocation B = ResourceLocation.parse("minecraft:crafting_table");
+    private static final ResourceLocation A = new ResourceLocation("minecraft:furnace");
+    private static final ResourceLocation B = new ResourceLocation("minecraft:crafting_table");
     private static OmniversalMyriadBlockEntity queued;
     private static MoldRecipeIndex sessionIndex;
     private static List<AEItemKey> firstFetch;
@@ -139,7 +139,7 @@ public final class RegressionChecks {
             return;
         }
         if (Boolean.getBoolean("useless_stretcher.native_only")) {
-            if (net.neoforged.fml.ModList.get().isLoaded("mekanism")) {
+            if (net.minecraftforge.fml.ModList.get().isLoaded("mekanism")) {
                 try { StaffRadiationChecks.run(event.getServer().overworld()); }
                 catch (Throwable failure) {
                     LogUtils.getLogger().error("STAFF MEKANISM RADIATION CHECKS FAILED", failure);
@@ -353,7 +353,7 @@ public final class RegressionChecks {
             var stack = key.toStack(1);
             check(stack.is(com.sorrowmist.useless.init.ModItems.OMNIVERSAL_PATTERN.get()),
                     "fetch returns actual omniversal items, not processing items");
-            var data = stack.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
+            var data = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, UComponents.OMNIVERSAL_PATTERN_DATA.get());
             check(data != null && data.requiresMold() && (data.displayMold().isPresent() || !data.displayMolds().isEmpty()),
                     "real recipe identity and mold display metadata retained");
             check(appeng.api.crafting.PatternDetailsHelper.decodePattern(stack, level) != null,
@@ -361,7 +361,7 @@ public final class RegressionChecks {
         }
         var page = new Network.PatternPagePayload(BlockPos.ZERO, 0, 2, true, true, false,
                 keys.stream().limit(64).toList(), 41, "", new byte[] {3});
-        var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), registry);
+        var buf = new FriendlyByteBuf(Unpooled.buffer(), registry);
         try {
             Network.PatternPagePayload.STREAM_CODEC.encode(buf, page);
             var decoded = Network.PatternPagePayload.STREAM_CODEC.decode(buf);
@@ -372,10 +372,10 @@ public final class RegressionChecks {
         var store = new MyriadPatternStore();
         var id = UUID.randomUUID();
         store.replace(id, A, new LinkedHashSet<>(keys));
-        store.replace(id, B, Set.of(keys.getFirst()));
+        store.replace(id, B, Set.of(keys.get(0)));
         var loaded = MyriadPatternStore.load(store.save(new CompoundTag(), registry), registry);
-        loaded.removeKeys(id, List.of(keys.getFirst()));
-        check(loaded.count(id) == keys.size() - 1 && !loaded.keys(id).contains(keys.getFirst()),
+        loaded.removeKeys(id, List.of(keys.get(0)));
+        check(loaded.count(id) == keys.size() - 1 && !loaded.keys(id).contains(keys.get(0)),
                 "deleting a real pattern removes all shared memberships, retaining others");
         CompoundTag fixture = new CompoundTag();
         ListTag stacks = new ListTag();
@@ -395,8 +395,8 @@ public final class RegressionChecks {
             var reduced = com.sorrowmist.useless.stretcher.content.mold.PatternOutputs.withoutByproducts(original);
             var details = appeng.api.crafting.PatternDetailsHelper.decodePattern(reduced.toStack(1), level);
             check(details != null && details.getOutputs().size() == 1, "real multi-output omniversal recipe still decodes after trim");
-            check(reduced.get(UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()
-                    .equals(original.get(UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()),
+            check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(reduced, UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()
+                    .equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(original, UComponents.OMNIVERSAL_PATTERN_DATA.get()).recipeFingerprint()),
                     "actual recipe fingerprint survives byproduct trim");
             if (++trimmed >= 8) break;
         }
@@ -465,19 +465,19 @@ public final class RegressionChecks {
         check(empty.matches(null) && empty.matches(List.of()), "null/empty requirements handled");
         var mixed = MoldMatcher.prepare(Map.of(0, wildcard, 1, new ItemStack(Items.IRON_INGOT)));
         check(mixed.matches(List.of(iron)), "ordinary mold remains usable beside empty wildcard");
-        MyriadMoldData.writeEnabledMolds(wildcard, Set.of(ResourceLocation.parse("minecraft:iron_ingot")), level);
+        MyriadMoldData.writeEnabledMolds(wildcard, Set.of(new ResourceLocation("minecraft:iron_ingot")), level);
         var enabled = MoldMatcher.prepare(Map.of(0, wildcard));
         check(enabled.matches(List.of(iron, iron, iron)), "wildcard has unlimited mold semantics");
         var gold = Ingredient.of(Items.GOLD_INGOT);
-        MyriadMoldData.writeEnabledMolds(wildcard, Set.of(ResourceLocation.parse("minecraft:iron_ingot"),
-                ResourceLocation.parse("minecraft:gold_ingot")), level);
+        MyriadMoldData.writeEnabledMolds(wildcard, Set.of(new ResourceLocation("minecraft:iron_ingot"),
+                new ResourceLocation("minecraft:gold_ingot")), level);
         var oneOccupiedSlot = MoldMatcher.prepare(Map.of(0, wildcard));
         check(oneOccupiedSlot.matches(List.of(iron, gold, iron)), "hub virtual molds need no additional empty slots");
         check(!oneOccupiedSlot.matches(List.of(Ingredient.of(Items.DIAMOND))), "unselected mold cannot be supplied by empty slot");
         check(!empty.matches(List.of(iron)), "prepared snapshot unaffected by later item edit");
         MyriadMoldData.writeEnabledMolds(wildcard, Set.of(), level);
         check(MyriadMoldData.readEnabledMolds(wildcard).isEmpty(), "component cache invalidates on edit");
-        check(MoldMatch.matchingIds(iron, Set.of(ResourceLocation.parse("minecraft:iron_ingot"))).size() == 1,
+        check(MoldMatch.matchingIds(iron, Set.of(new ResourceLocation("minecraft:iron_ingot"))).size() == 1,
                 "indexed ordinary mold match");
     }
 
@@ -664,7 +664,7 @@ public final class RegressionChecks {
         var player = FakePlayerFactory.get(level,
                 new GameProfile(UUID.randomUUID(), "LightningRodRegression"));
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
         player.setItemInHand(InteractionHand.MAIN_HAND, staff);
 
         BlockPos rodPos = new BlockPos(8, 200 + level.getRandom().nextInt(40), 8);
@@ -680,7 +680,7 @@ public final class RegressionChecks {
         // own its target at HIGHEST priority instead of silently doing nothing.
         enabledClick.setCanceled(true);
         enabledClick.setCancellationResult(InteractionResult.FAIL);
-        NeoForge.EVENT_BUS.post(enabledClick);
+        MinecraftForge.EVENT_BUS.post(enabledClick);
         int lightningAfter = level.getEntitiesOfClass(LightningBolt.class, area).size();
         List<WondrousStaffAccelerationEntity> effects = level.getEntitiesOfClass(
                 WondrousStaffAccelerationEntity.class, new AABB(rodPos),
@@ -693,10 +693,10 @@ public final class RegressionChecks {
         check(effects.size() == 1, "enabled rod click creates one wondrous acceleration marker");
 
         effects.forEach(WondrousStaffAccelerationEntity::discard);
-        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
         var disabledClick = new PlayerInteractEvent.RightClickBlock(
                 player, InteractionHand.MAIN_HAND, rodPos, hit);
-        NeoForge.EVENT_BUS.post(disabledClick);
+        MinecraftForge.EVENT_BUS.post(disabledClick);
         check(level.getEntitiesOfClass(LightningBolt.class, area).size() == lightningBefore + 1,
                 "disabled rod click preserves the upstream one-shot lightning feature");
 
@@ -717,7 +717,7 @@ public final class RegressionChecks {
         check(!shared.isFor(new ArrayList<>(actual)), "new catalog identity invalidates index even at same size");
         verifyQuery(shared, actual, Set.of(A));
         verifyQuery(shared, actual, Set.of(A, B));
-        verifyQuery(shared, actual, Set.of(ResourceLocation.parse("regression:absent")));
+        verifyQuery(shared, actual, Set.of(new ResourceLocation("regression:absent")));
         AlloyFurnaceRecipeCatalog.invalidate();
         check(MoldRecipeIndex.get(level) != shared, "real upstream invalidation replaces cached index");
         // The released base now rebuilds synchronously in its reload lifecycle, not in reads.
@@ -737,7 +737,7 @@ public final class RegressionChecks {
                 withMolds(base, 4, List.of()));
         var fixtureIndex = new MoldRecipeIndex(fixtures);
         while (!fixtureIndex.ready()) fixtureIndex.advance();
-        var selected = Set.of(A, B, ResourceLocation.parse("minecraft:iron_ingot"));
+        var selected = Set.of(A, B, new ResourceLocation("minecraft:iron_ingot"));
         verifyQuery(fixtureIndex, fixtures, selected);
         var cancelled = fixtureIndex.query(Set.of(A, B));
         while (!cancelled.prepared()) cancelled.prepareStep();
@@ -788,17 +788,17 @@ public final class RegressionChecks {
                 level.enabledFeatures(), true, level.registryAccess()));
         check(tab.getDisplayItems().stream().anyMatch(stack -> stack.is(ModItems.RANGE_RECLAIMER.get())),
                 "range reclaimer is visible to creative tabs and recipe viewers");
-        check(level.getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(
+        check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), new ResourceLocation(
                         UselessStretcherMod.MODID, "range_reclaimer")).isEmpty(),
                 "range reclaimer remains non-craftable");
         for (String name : List.of("quad_chunk", "nine_chunk", "quad_chunk_odd", "nine_chunk_odd")) {
-            var id = ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, name + "_dimension_block");
+            var id = new ResourceLocation(UselessStretcherMod.MODID, name + "_dimension_block");
             var item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
             var block = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(id);
             check(item == Items.AIR && block == Blocks.AIR, "retired dimension block and item registrations removed");
-            check(level.getRecipeManager().byKey(id).isEmpty(), "retired dimension recipe removed");
+            check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), id).isEmpty(), "retired dimension recipe removed");
             var dimension = net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,
-                    ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, name));
+                    new ResourceLocation(UselessStretcherMod.MODID, name));
             check(level.getServer().getLevel(dimension) == null, "retired dimensions are absent in new worlds");
         }
         check(level.getServer().getLevel(com.sorrowmist.useless.stretcher.dimension.world.TwoIStarfieldDimensions.KEY) != null,
@@ -807,17 +807,17 @@ public final class RegressionChecks {
     }
 
     private static void guideRecipeRemoved(ServerLevel level) {
-        var id = ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "guide");
-        check(level.getRecipeManager().byKey(id).isEmpty(), "standalone guide recipe is removed");
+        var id = new ResourceLocation(UselessStretcherMod.MODID, "guide");
+        check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), id).isEmpty(), "standalone guide recipe is removed");
         LogUtils.getLogger().info("REGRESSION guide: standalone guide recipe absent; pages are merged into AE2 guide");
     }
 
     private static void toolCompatibility() {
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
         check(staff.getItem() instanceof WondrousStaffItem, "staff keeps its item identity");
-        check(staff.getItem().canPerformAction(staff, ItemAbilities.SHEARS_DIG),
+        check(staff.getItem().canPerformAction(staff, ToolActions.SHEARS_DIG),
                 "shears capability enabled by default");
-        check(staff.getItem().canPerformAction(staff, ItemAbilities.FIRESTARTER_LIGHT),
+        check(staff.getItem().canPerformAction(staff, ToolActions.FIRESTARTER_LIGHT),
                 "flint capability enabled by default");
         boolean hasExtraSwitches;
         try {
@@ -828,32 +828,32 @@ public final class RegressionChecks {
             hasExtraSwitches = false;
         }
         if (hasExtraSwitches) {
-            staff.set(UComponents.BeefShearsComponent.get(), false);
-            staff.set(UComponents.BeefFlintAndSteelComponent.get(), false);
-            check(!staff.getItem().canPerformAction(staff, ItemAbilities.SHEARS_DIG),
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefShearsComponent.get(), false);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefFlintAndSteelComponent.get(), false);
+            check(!staff.getItem().canPerformAction(staff, ToolActions.SHEARS_DIG),
                     "shears capability follows its G-menu switch");
-            check(!staff.getItem().canPerformAction(staff, ItemAbilities.FIRESTARTER_LIGHT),
+            check(!staff.getItem().canPerformAction(staff, ToolActions.FIRESTARTER_LIGHT),
                     "flint capability follows its G-menu switch");
         } else {
             LogUtils.getLogger().info("REGRESSION tools: base has no shears/flint toggles; legacy enabled defaults checked");
         }
         var wrenchTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
-                ResourceLocation.parse("c:tools/wrench"));
+                new ResourceLocation("c:tools/wrench"));
         var wrenchesTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
-                ResourceLocation.parse("c:wrenches"));
+                new ResourceLocation("c:wrenches"));
         var mekanismConfiguratorTag = net.minecraft.tags.TagKey.create(Registries.ITEM,
-                ResourceLocation.parse("mekanism:configurators"));
-        staff.set(UComponents.WrenchTagEnabledComponent.get(), false);
+                new ResourceLocation("mekanism:configurators"));
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.WrenchTagEnabledComponent.get(), false);
         check(!staff.is(wrenchTag), "disabled wrench tag is not advertised");
         check(!staff.is(wrenchesTag), "disabled aggregate wrench tag is not advertised");
         check(!staff.is(mekanismConfiguratorTag), "disabled Mekanism configurator tag is not advertised");
         for (String abilityName : List.of("wrench_dismantle", "wrench_rotate", "wrench_empty", "wrench_configure",
                 "wrench_configure_chemicals", "wrench_configure_energy", "wrench_configure_fluids",
                 "wrench_configure_heat", "wrench_configure_items")) {
-            check(!staff.getItem().canPerformAction(staff, net.neoforged.neoforge.common.ItemAbility.get(abilityName)),
+            check(!staff.getItem().canPerformAction(staff, net.minecraftforge.common.ToolAction.get(abilityName)),
                     "disabled wrench ability is blocked: " + abilityName);
         }
-        staff.set(UComponents.WrenchTagEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.WrenchTagEnabledComponent.get(), true);
         check(staff.is(wrenchTag), "enabled wrench tag is advertised");
         check(staff.is(wrenchesTag), "enabled aggregate wrench tag is advertised");
         check(staff.is(mekanismConfiguratorTag), "enabled Mekanism configurator tag is advertised");
@@ -868,7 +868,7 @@ public final class RegressionChecks {
     private static AlloyFurnaceRecipeCatalog.Entry withMolds(AlloyFurnaceRecipeCatalog.Entry template, int ordinal,
                                                              List<Ingredient> molds) {
         var recipe = template.recipe();
-        var replacement = new AdvancedAlloyFurnaceRecipe(ResourceLocation.parse("regression:recipe_" + ordinal),
+        var replacement = new AdvancedAlloyFurnaceRecipe(new ResourceLocation("regression:recipe_" + ordinal),
                 recipe.inputs(), recipe.inputFluids(), recipe.keyInputs(), recipe.outputs(), recipe.outputFluids(),
                 recipe.keyOutputs(), recipe.energy(), recipe.processTime(), recipe.catalyst(), recipe.catalystUses(),
                 molds, recipe.mode(), recipe.tier());
@@ -938,9 +938,9 @@ public final class RegressionChecks {
     private static void largeMoldDrop(ServerLevel level) throws Exception {
         Set<ResourceLocation> selected = new LinkedHashSet<>();
         for (int i = 0; i < 50_000; i++) {
-            selected.add(ResourceLocation.parse("regression:" + "m".repeat(120) + i));
+            selected.add(new ResourceLocation("regression:" + "m".repeat(120) + i));
         }
-        selected.add(ResourceLocation.parse("minecraft:iron_ingot"));
+        selected.add(new ResourceLocation("minecraft:iron_ingot"));
         var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "MoldRegression"));
         BlockPos pos = new BlockPos(8, 100, 8);
         BlockPos restoredPos = new BlockPos(9, 100, 8);
@@ -954,7 +954,7 @@ public final class RegressionChecks {
         for (int i = 0; i < batches.size(); i++) {
             String phase = i == 0 ? "begin" : i == batches.size() - 1 ? "end" : "append";
             var payload = new Network.MyriadActionPayload(pos, Network.ACTION_SET_ENABLED, phase, batches.get(i));
-            var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+            var buffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
             Network.MyriadActionPayload decoded;
             try {
                 Network.MyriadActionPayload.STREAM_CODEC.encode(buffer, payload);
@@ -969,7 +969,7 @@ public final class RegressionChecks {
             }
             var statePacket = new Network.MyriadStatePayload(pos, batches.get(i), batches.get(i), 18000,
                     true, "0", i, batches.size());
-            var stateBuffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+            var stateBuffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
             try {
                 Network.MyriadStatePayload.STREAM_CODEC.encode(stateBuffer, statePacket);
                 check(stateBuffer.readableBytes() < 20_000, "state packet size bounded");
@@ -992,7 +992,7 @@ public final class RegressionChecks {
         ItemStack tool = new ItemStack(ModItems.WONDROUS_STAFF.get());
         var directDrops = Block.getDrops(state, level, pos, entity, player, tool);
         check(directDrops.size() == 1, "direct mining API returns exactly one configured block");
-        ItemStack drop = directDrops.getFirst();
+        ItemStack drop = directDrops.get(0);
         check(MyriadMoldData.readEnabledMolds(drop).equals(selected), "large mold set survives drop");
         check(!drop.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).contains("enabled_molds"),
                 "drop never contains inline selection");
@@ -1000,12 +1000,12 @@ public final class RegressionChecks {
                 && MyriadMoldData.readAeRef(drop).equals(aeRef), "other UUID bindings unchanged");
         UUID moldRef = MyriadMoldData.readMoldRef(drop);
         int bytes;
-        var itemBuffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+        var itemBuffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
         try {
-            ItemStack.STREAM_CODEC.encode(itemBuffer, drop);
+            com.sorrowmist.useless.compat.forge1201.network.PortCodecs.ITEM_STACK.encode(itemBuffer, drop);
             bytes = itemBuffer.readableBytes();
             check(bytes < 512, "50k molds serialize as a compact item");
-            drop = ItemStack.STREAM_CODEC.decode(itemBuffer);
+            drop = com.sorrowmist.useless.compat.forge1201.network.PortCodecs.ITEM_STACK.decode(itemBuffer);
         } finally { itemBuffer.release(); }
         var store = MyriadMoldStore.get(level.getServer());
         var loaded = MyriadMoldStore.load(store.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
@@ -1028,7 +1028,7 @@ public final class RegressionChecks {
         check(restored.getEnabledMolds().equals(selected) && patternRef.equals(restored.getPatternRef()),
                 "replacement restores selections and pattern UUID");
         restored.setEnabledMolds(Set.of(A));
-        ItemStack changed = Block.getDrops(state, level, restoredPos, restored, player, tool).getFirst();
+        ItemStack changed = Block.getDrops(state, level, restoredPos, restored, player, tool).get(0);
         check(MyriadMoldData.readEnabledMolds(changed).equals(Set.of(A))
                 && MyriadMoldData.readEnabledMolds(drop).equals(selected), "copied items edit independently");
 
@@ -1038,7 +1038,7 @@ public final class RegressionChecks {
         level.removeBlock(pos, false);
         block.playerDestroy(level, player, pos, state, entity, tool);
         var spawned = level.getEntitiesOfClass(ItemEntity.class, area);
-        check(spawned.size() == 1 && MyriadMoldData.readEnabledMolds(spawned.getFirst().getItem()).equals(selected),
+        check(spawned.size() == 1 && MyriadMoldData.readEnabledMolds(spawned.get(0).getItem()).equals(selected),
                 "normal mining spawns one complete externalized drop");
         spawned.forEach(ItemEntity::discard);
 

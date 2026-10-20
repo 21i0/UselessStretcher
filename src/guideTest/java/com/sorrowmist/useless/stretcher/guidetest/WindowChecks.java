@@ -47,7 +47,7 @@ final class WindowChecks {
     private static final String[] NAMES = {"staff", "range", "entity", "range-edit", "history", "reclaimer",
             "summon", "myriad", "config", "confirm"};
     private static final String[] VARIANTS = {"default", "wide", "narrow"};
-    private static final ResourceLocation VILLAGER = ResourceLocation.parse("minecraft:villager");
+    private static final ResourceLocation VILLAGER = new ResourceLocation("minecraft:villager");
     private static int stage, variant, frames;
     private static Screen screen;
     private static int defaultWidth, defaultHeight;
@@ -231,7 +231,7 @@ final class WindowChecks {
         if (target instanceof OmniversalMyriadScreen) {
             EditBox search = (EditBox) field(target, "search");
             check(search.getValue().equals("iron") && search.isFocused(), label + " search and focus retained");
-            check(((Set<?>) field(target, "enabled")).contains(ResourceLocation.parse("minecraft:iron_ingot")),
+            check(((Set<?>) field(target, "enabled")).contains(new ResourceLocation("minecraft:iron_ingot")),
                     label + " mold selection retained");
         }
     }
@@ -343,12 +343,12 @@ final class WindowChecks {
     }
 
     private static RangeAccelerationSavedData.Summary summary(int index) {
-        return new RangeAccelerationSavedData.Summary(new UUID(0, index + 1), ResourceLocation.parse("minecraft:overworld"),
+        return new RangeAccelerationSavedData.Summary(new UUID(0, index + 1), new ResourceLocation("minecraft:overworld"),
                 new BlockPos(20 + index, 64, 100), index, true, 128, 5, 7, 9, 3, -2, 4, "测试工厂 " + index);
     }
     private static List<Network.ReclaimerEntry> reclaimerEntries() {
         return java.util.stream.IntStream.range(0, 30).mapToObj(i -> new Network.ReclaimerEntry(i % 2 == 0,
-                new UUID(1, i), new UUID(2, i), "Player_" + String.format("%02d", i), ResourceLocation.parse("minecraft:overworld"),
+                new UUID(1, i), new UUID(2, i), "Player_" + String.format("%02d", i), new ResourceLocation("minecraft:overworld"),
                 new BlockPos(i, 64, 0), "工厂设备 " + i)).toList();
     }
 
@@ -367,10 +367,10 @@ final class WindowChecks {
         set(screen, "clearButton", new SelectableAE2Button(0, 0, 86, 18,
                 Component.translatable("gui.useless_stretcher.clear"), ignored -> {}));
         var entries = java.util.stream.IntStream.range(0, 36).mapToObj(i -> new MoldCatalog.MoldEntry("minecraft",
-                ResourceLocation.fromNamespaceAndPath("minecraft", "sample_" + i), new ItemStack(i % 2 == 0 ? Items.IRON_INGOT : Items.GOLD_INGOT))).toList();
+                new ResourceLocation("minecraft", "sample_" + i), new ItemStack(i % 2 == 0 ? Items.IRON_INGOT : Items.GOLD_INGOT))).toList();
         set(screen, "catalog", Map.of("minecraft", entries));
         ((Set<String>) field(screen, "expandedMods")).add("minecraft");
-        ((Set<ResourceLocation>) field(screen, "enabled")).add(ResourceLocation.parse("minecraft:iron_ingot"));
+        ((Set<ResourceLocation>) field(screen, "enabled")).add(new ResourceLocation("minecraft:iron_ingot"));
         return screen;
     }
 

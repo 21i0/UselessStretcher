@@ -225,8 +225,9 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(CompoundTag tag) {
+        HolderLookup.Provider registries = level == null ? net.minecraft.core.RegistryAccess.EMPTY : level.registryAccess();
+        super.saveAdditional(tag);
 
         if (moldRef == null && level instanceof ServerLevel serverLevel) {
             moldRef = MyriadMoldStore.get(serverLevel.getServer()).snapshot(getEnabledMolds());
@@ -244,8 +245,9 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    public void load(CompoundTag tag) {
+        HolderLookup.Provider registries = level == null ? net.minecraft.core.RegistryAccess.EMPTY : level.registryAccess();
+        super.load(tag);
         enabledMolds.clear();
         moldRef = tag.hasUUID("MoldRef") ? tag.getUUID("MoldRef") : null;
         resolveMolds = moldRef != null;

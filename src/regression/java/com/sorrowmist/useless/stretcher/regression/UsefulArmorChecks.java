@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ final class UsefulArmorChecks {
         check(!StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.getDefault(), "armor functionality defaults off");
         check(!StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.getDefault(), "armor crafting defaults off");
         var hidden = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
-                ResourceLocation.parse("c:hidden_from_recipe_viewers"));
+                new ResourceLocation("c:hidden_from_recipe_viewers"));
         for (var piece : java.util.List.of(ModItems.USEFUL_ARMOR_HELMET, ModItems.USEFUL_ARMOR_CHESTPLATE,
                 ModItems.USEFUL_ARMOR_LEGGINGS, ModItems.USEFUL_ARMOR_BOOTS)) {
             check(new ItemStack(piece.get()).is(hidden), "real recipe-viewer hide tag contains " + piece.getId());
@@ -45,7 +45,7 @@ final class UsefulArmorChecks {
             StretcherConfig.SERVER_USEFUL_ARMOR_ENABLE.set(false);
             StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(true);
             UsefulArmorRecipes.apply(level.getRecipeManager());
-            check(level.getRecipeManager().byKey(ModItems.USEFUL_ARMOR_HELMET.getId()).isEmpty(),
+            check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), ModItems.USEFUL_ARMOR_HELMET.getId()).isEmpty(),
                     "master switch prevents crafting even when legacy recipe flag is enabled");
             player.gameMode.changeGameModeForPlayer(GameType.ADVENTURE);
             equip(player);
@@ -74,7 +74,7 @@ final class UsefulArmorChecks {
             var replacement = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "UsefulArmorClone"));
             replacement.gameMode.changeGameModeForPlayer(GameType.CREATIVE);
             com.sorrowmist.useless.stretcher.event.UsefulArmorController.clone(
-                    new net.neoforged.neoforge.event.entity.player.PlayerEvent.Clone(replacement, player, false));
+                    new net.minecraftforge.event.entity.player.PlayerEvent.Clone(replacement, player, false));
             tick(replacement);
             check(replacement.gameMode.getGameModeForPlayer() == GameType.ADVENTURE,
                     "clone without the suit restores the persistent pre-suit mode");
@@ -114,30 +114,30 @@ final class UsefulArmorChecks {
                 ModItems.USEFUL_ARMOR_LEGGINGS, ModItems.USEFUL_ARMOR_BOOTS);
         StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(false);
         UsefulArmorRecipes.apply(manager);
-        int count = manager.getRecipes().size();
-        check(pieces.stream().noneMatch(piece -> manager.byKey(piece.getId()).isPresent()), "disabled recipes absent from synced manager");
+        int count = com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.getRecipes(manager).size();
+        check(pieces.stream().noneMatch(piece -> com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(manager, piece.getId()).isPresent()), "disabled recipes absent from synced manager");
         StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(true);
         UsefulArmorRecipes.apply(manager);
         UsefulArmorRecipes.apply(manager);
-        check(manager.getRecipes().size() == count + 4, "enabling twice installs exactly four recipes");
-        var ingot = BuiltInRegistries.ITEM.get(ResourceLocation.parse("useless_mod:useful_ingot"));
+        check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.getRecipes(manager).size() == count + 4, "enabling twice installs exactly four recipes");
+        var ingot = BuiltInRegistries.ITEM.get(new ResourceLocation("useless_mod:useful_ingot"));
         check(ingot != Items.AIR, "current upstream useful ingot exists");
         for (var piece : pieces) {
-            var recipe = (net.minecraft.world.item.crafting.ShapedRecipe) manager.byKey(piece.getId()).orElseThrow().value();
+            var recipe = (net.minecraft.world.item.crafting.ShapedRecipe) com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(manager, piece.getId()).orElseThrow().value();
             var inputs = recipe.getIngredients().stream().map(ingredient -> ingredient.isEmpty()
                     ? ItemStack.EMPTY : new ItemStack(ingot)).toList();
             var input = CraftingInput.of(recipe.getWidth(), recipe.getHeight(), inputs);
-            var matched = manager.getRecipeFor(RecipeType.CRAFTING, input, level).orElseThrow();
+            var matched = com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.getRecipeFor(manager, RecipeType.CRAFTING, input, level).orElseThrow();
             check(matched.value().assemble(input, level.registryAccess()).is(piece.get()), "real armor pattern crafts " + piece.getId());
         }
         StretcherConfig.SERVER_USEFUL_ARMOR_RECIPES.set(false);
         UsefulArmorRecipes.apply(manager);
-        check(manager.getRecipes().size() == count, "disabling removes exactly four recipes and preserves other recipes");
+        check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.getRecipes(manager).size() == count, "disabling removes exactly four recipes and preserves other recipes");
     }
 
     private static void tick(net.minecraft.server.level.ServerPlayer player) {
         com.sorrowmist.useless.stretcher.event.UsefulArmorController.tick(
-                new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
+                new net.minecraftforge.event.tick.PlayerTickEvent.Post(player));
     }
 
     private static void equip(net.minecraft.server.level.ServerPlayer player) {

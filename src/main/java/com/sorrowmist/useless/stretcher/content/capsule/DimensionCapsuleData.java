@@ -20,7 +20,7 @@ public final class DimensionCapsuleData extends SavedData {
 
     public static DimensionCapsuleData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(DimensionCapsuleData::new, DimensionCapsuleData::load),
+                tag -> DimensionCapsuleData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), DimensionCapsuleData::new,
                 "useless_stretcher_capsule_rooms");
     }
 
@@ -50,7 +50,10 @@ public final class DimensionCapsuleData extends SavedData {
         }
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putInt("next_slot", nextSlot);
         ListTag entries = new ListTag();
@@ -68,7 +71,7 @@ public final class DimensionCapsuleData extends SavedData {
 
     static DimensionCapsuleData load(CompoundTag tag, HolderLookup.Provider registries) {
         DimensionCapsuleData data = new DimensionCapsuleData();
-        data.nextSlot = Math.clamp(tag.getInt("next_slot"), 0, MAX_ROOMS);
+        data.nextSlot = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(tag.getInt("next_slot"), 0, MAX_ROOMS);
         ListTag entries = tag.getList("rooms", Tag.TAG_COMPOUND);
         java.util.Set<Integer> occupied = new java.util.HashSet<>();
         for (int i = 0; i < entries.size(); i++) {

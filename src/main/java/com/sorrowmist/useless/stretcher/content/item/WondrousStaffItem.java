@@ -23,10 +23,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LightningRodBlock;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.ItemAbilities;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 
 import java.util.List;
 
@@ -36,6 +36,16 @@ import java.util.List;
  * AE 节点的 {@code IGridTickable}。
  */
 public class WondrousStaffItem extends EndlessBeafItem {
+
+    @Override public Object componentDefault(com.sorrowmist.useless.compat.forge1201.component.DataComponentType<?> key) {
+        if ("useless_stretcher".equals(key.id().getNamespace())) return switch (key.id().getPath()) {
+            case "wondrous_staff_mode" -> 0;
+            case "wondrous_staff_summon_enabled", "wondrous_staff_loot_refresh", "wondrous_staff_phase_enabled", "wondrous_staff_radiation_protection" -> false;
+            case "wondrous_staff_phase_interaction" -> true;
+            default -> null;
+        };
+        return super.componentDefault(key);
+    }
 
     public WondrousStaffItem() {
         super(ToolTypeMode.NONE_MODE, true);
@@ -62,12 +72,12 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     /** Exposes the upstream tool and shears abilities while acceleration interactions stay explicit. */
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility ability) {
+    public boolean canPerformAction(ItemStack stack, ToolAction ability) {
         if (RangeAccelerationSettings.filterMarkingMode(stack)) {
             return false;
         }
         // Acceleration owns machine interaction while enabled.  Do not advertise wrench
-        // abilities to mods that consult NeoForge's ItemAbility API before RightClickBlock.
+        // abilities to mods that consult MinecraftForge's ToolAction API before RightClickBlock.
         // This complements the event interception without changing the G-menu wrench toggle.
         if (WondrousStaffAcceleration.isEnabled(stack) && isWrenchAbility(ability)) {
             return false;
@@ -75,21 +85,21 @@ public class WondrousStaffItem extends EndlessBeafItem {
         // Keep the same mining/tool abilities as the upstream staff.  The acceleration
         // interaction is intercepted by onItemUseFirst/useOn, so exposing these abilities
         // is safe and lets Apotheosis and the newer tool-mode UI classify the staff correctly.
-        if (ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(ability)
-                || ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability)
-                || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(ability)
-                || ItemAbilities.DEFAULT_HOE_ACTIONS.contains(ability)
-                || ItemAbilities.DEFAULT_BRUSH_ACTIONS.contains(ability)
-                || (ItemAbilities.DEFAULT_SHEARS_ACTIONS.contains(ability)
+        if (ToolActions.DEFAULT_PICKAXE_ACTIONS.contains(ability)
+                || ToolActions.DEFAULT_AXE_ACTIONS.contains(ability)
+                || ToolActions.DEFAULT_SHOVEL_ACTIONS.contains(ability)
+                || ToolActions.DEFAULT_HOE_ACTIONS.contains(ability)
+                || "brush_brush".equals(ability.name())
+                || (ToolActions.DEFAULT_SHEARS_ACTIONS.contains(ability)
                         && staffShearsEnabled(stack))
-                || (ItemAbilities.DEFAULT_FLINT_ACTIONS.contains(ability)
+                || (ability == net.minecraftforge.common.ToolAction.get("firestarter_light")
                         && staffFlintAndSteelEnabled(stack))
-                || (ability == ItemAbilities.FIRESTARTER_LIGHT
+                || (ability == net.minecraftforge.common.ToolAction.get("firestarter_light")
                         && staffFlintAndSteelEnabled(stack))
-                || ability == ItemAbilities.SWORD_SWEEP) {
+                || ability == ToolActions.SWORD_SWEEP) {
             return true;
         }
-        if (ability == ItemAbilities.SWORD_DIG) {
+        if (ability == ToolActions.SWORD_DIG) {
             return false;
         }
         // The upstream base item exposes mode-specific abilities. Keep the staff in NONE_MODE,
@@ -100,7 +110,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
         return super.canPerformAction(stack, ability);
     }
 
-    private static boolean isWrenchAbility(ItemAbility ability) {
+    private static boolean isWrenchAbility(ToolAction ability) {
         String name = ability.name();
         return name.startsWith("wrench_") || name.equals("wrench");
     }
@@ -124,7 +134,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip,
+    public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> tooltip,
                                 TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.useless_stretcher.wondrous_staff.flavor")
                 .withStyle(ChatFormatting.GOLD));
@@ -221,7 +231,7 @@ public class WondrousStaffItem extends EndlessBeafItem {
     /**
      * The upstream item handles lightning rods before its normal acceleration hook.  Keep a
      * direct item-level guard as a fallback for interaction paths that do not dispatch the
-     * NeoForge block event (and for servers with a different event-handler ordering).
+     * MinecraftForge block event (and for servers with a different event-handler ordering).
      */
     private static boolean isEnabledLightningRodTarget(ItemStack stack, UseOnContext ctx) {
         return WondrousStaffAcceleration.isEnabled(stack)

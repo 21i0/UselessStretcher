@@ -25,7 +25,7 @@ public final class StaffTutorialData extends SavedData {
 
     public static StaffTutorialData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(StaffTutorialData::new, StaffTutorialData::load), NAME);
+                tag -> StaffTutorialData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), StaffTutorialData::new, NAME);
     }
 
     /** Marks the X configuration UI as opened, suppressing any remaining hints for this player. */
@@ -43,7 +43,10 @@ public final class StaffTutorialData extends SavedData {
         return true;
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag players = new ListTag();
         for (Map.Entry<UUID, Integer> hintEntry : shownHints.entrySet()) {

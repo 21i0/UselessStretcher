@@ -5,7 +5,6 @@ import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -53,22 +52,22 @@ public final class TwoIDollDisplayBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected BlockState rotate(BlockState state, Rotation rotation) {
+    public BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(ROTATION, rotation.rotate(state.getValue(ROTATION), 16));
     }
 
     @Override
-    protected BlockState mirror(BlockState state, Mirror mirror) {
+    public BlockState mirror(BlockState state, Mirror mirror) {
         return state.setValue(ROTATION, mirror.mirror(state.getValue(ROTATION), 16));
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
@@ -87,28 +86,21 @@ public final class TwoIDollDisplayBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(net.minecraft.world.level.BlockGetter level, BlockPos pos, BlockState state) {
         return level.getBlockEntity(pos) instanceof TwoIDollDisplayBlockEntity display
                 ? display.copyDoll() : new ItemStack(ModItems.TWO_I_DOLL.get());
     }
 
     @Override
-    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         return List.of(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY)
                 instanceof TwoIDollDisplayBlockEntity display ? display.copyDoll()
                 : new ItemStack(ModItems.TWO_I_DOLL.get()));
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                               Player player, InteractionHand hand, BlockHitResult hit) {
-        interact(state, level, pos, player);
-        return ItemInteractionResult.SUCCESS;
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                                Player player, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                                Player player, InteractionHand hand, BlockHitResult hit) {
         return interact(state, level, pos, player);
     }
 
@@ -118,7 +110,7 @@ public final class TwoIDollDisplayBlock extends Block implements EntityBlock {
                 ItemStack owned = display.copyDoll();
                 if (!com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.claimOrCheckOwner(owned, player))
                     return InteractionResult.FAIL;
-                if (!ItemStack.isSameItemSameComponents(owned, display.copyDoll())) display.setDoll(owned);
+                if (!ItemStack.isSameItemSameTags(owned, display.copyDoll())) display.setDoll(owned);
             }
             if (player.isShiftKeyDown()) {
                 ItemStack doll = getCloneItemStack(level, pos, state);

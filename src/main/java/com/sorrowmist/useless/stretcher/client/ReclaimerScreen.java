@@ -54,9 +54,9 @@ public final class ReclaimerScreen extends FloatingScreen {
                 .thenComparing(Network.ReclaimerEntry::id))
                 .forEach(entry -> byOwner.computeIfAbsent(entry.owner(), ignored -> new ArrayList<>()).add(entry));
         owners = List.copyOf(byOwner.keySet());
-        if (personal && selectedOwner == null && !owners.isEmpty()) selectedOwner = owners.getFirst();
+        if (personal && selectedOwner == null && !owners.isEmpty()) selectedOwner = owners.get(0);
         var owned = byOwner.getOrDefault(selectedOwner, List.of());
-        if (!owned.isEmpty()) selectedName = owned.getFirst().ownerName();
+        if (!owned.isEmpty()) selectedName = owned.get(0).ownerName();
         targets = owned.stream().filter(entry -> entry.range() == range).toList();
     }
 
@@ -90,7 +90,7 @@ public final class ReclaimerScreen extends FloatingScreen {
                     int index = first + column;
                     UUID owner = owners.get(index);
                     var owned = byOwner.get(owner);
-                    String name = owned.getFirst().ownerName();
+                    String name = owned.get(0).ownerName();
                     var button = new SelectableAE2Button(left + 4 + column * (playerWidth + 3),
                         top + LIST_TOP + row * ROW_HEIGHT + 3, playerWidth, 20,
                         Component.literal(font.plainSubstrByWidth(name, playerWidth - 48) + " (" + owned.size() + ")"),

@@ -75,7 +75,7 @@ public final class WondrousStaffAcceleration {
     /** The inherited G-menu "时间加速" toggle is the master switch for this staff. */
     public static boolean isEnabled(ItemStack stack) {
         return StretcherConfig.serverStaffAcceleration()
-                && stack.getOrDefault(UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
+                && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, UComponents.BeefTimeAccelerationEnabledComponent.get(), false);
     }
 
     public static InteractionResult tryUse(UseOnContext ctx) {
@@ -231,7 +231,7 @@ public final class WondrousStaffAcceleration {
     }
 
     public static int getSpeed(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.WONDROUS_STAFF_SPEED.get(), DEFAULT_GEAR);
     }
 
     /** Shared by direct clicks, range discovery and previously saved acceleration markers. */
@@ -258,20 +258,20 @@ public final class WondrousStaffAcceleration {
     }
 
     public static boolean usesEntityTimers(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.ENTITY_TIMER_MODE.get(), false);
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.ENTITY_TIMER_MODE.get(), false);
     }
 
     public static int getEntityTimerSpeed(ItemStack stack) {
-        return EntityTimerAcceleration.normalizeSpeed(stack.getOrDefault(
+        return EntityTimerAcceleration.normalizeSpeed(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack,
                 StretcherComponents.ENTITY_TIMER_SPEED.get(), EntityTimerAcceleration.DEFAULT_SPEED));
     }
 
     public static boolean isSummonEnabled(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
     }
 
     public static boolean isLootRefreshEnabled(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
     }
 
     /**
@@ -279,17 +279,17 @@ public final class WondrousStaffAcceleration {
      * stacks made before the mode key was added.
      */
     public static int getMode(ItemStack stack) {
-        Integer mode = stack.get(StretcherComponents.WONDROUS_STAFF_MODE.get());
+        Integer mode = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.WONDROUS_STAFF_MODE.get());
         if (mode != null) return normalizeMode(mode);
-        return stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false)
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false)
                 ? STAFF_MODE_PERMANENT : STAFF_MODE_NORMAL;
     }
 
     /** Writes both the new mode and the legacy boolean so old stacks remain interoperable. */
     public static void setMode(ItemStack stack, int mode) {
         int normalized = normalizeMode(mode);
-        stack.set(StretcherComponents.WONDROUS_STAFF_MODE.get(), normalized);
-        stack.set(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), isPermanentMode(normalized));
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.WONDROUS_STAFF_MODE.get(), normalized);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), isPermanentMode(normalized));
     }
 
     public static boolean isPermanent(ItemStack stack) {
@@ -339,7 +339,7 @@ public final class WondrousStaffAcceleration {
 
     private static double angleDegrees(Vec3 a, Vec3 b) {
         double dot = a.dot(b) / (a.length() * b.length());
-        return Math.toDegrees(Math.acos(Math.clamp(dot, -1.0D, 1.0D)));
+        return Math.toDegrees(Math.acos(com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(dot, -1.0D, 1.0D)));
     }
 
     /**
@@ -428,9 +428,9 @@ public final class WondrousStaffAcceleration {
             }
 
             level.oThunderLevel = level.thunderLevel;
-            level.thunderLevel = Math.clamp(level.thunderLevel + (thundering ? 0.01F : -0.01F), 0.0F, 1.0F);
+            level.thunderLevel = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(level.thunderLevel + (thundering ? 0.01F : -0.01F), 0.0F, 1.0F);
             level.oRainLevel = level.rainLevel;
-            level.rainLevel = Math.clamp(level.rainLevel + (raining ? 0.01F : -0.01F), 0.0F, 1.0F);
+            level.rainLevel = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(level.rainLevel + (raining ? 0.01F : -0.01F), 0.0F, 1.0F);
         }
 
         data.setClearWeatherTime(clearTime);

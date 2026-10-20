@@ -32,7 +32,7 @@ public final class DimensionCapsuleCatalog {
 
     public static List<Entry> scan(ServerPlayer player) {
         List<Entry> entries = new ArrayList<>();
-        var registry = player.registryAccess().registryOrThrow(Registries.STRUCTURE);
+        var registry = player.level().registryAccess().registryOrThrow(Registries.STRUCTURE);
         for (ResourceLocation id : registry.keySet().stream().sorted().toList()) {
             List<String> targets = new ArrayList<>(dimensions(player, registry.get(id)));
             // Keep a previously saved room reachable at its original physical location.
@@ -82,7 +82,7 @@ public final class DimensionCapsuleCatalog {
         if (sourceDimension == null || sourceDimension.isBlank()) return sourceLevel(player, structure, target);
         final ResourceLocation id;
         try {
-            id = ResourceLocation.parse(sourceDimension);
+            id = new ResourceLocation(sourceDimension);
         } catch (RuntimeException invalid) {
             return null;
         }
@@ -123,11 +123,11 @@ public final class DimensionCapsuleCatalog {
 
     private static String legacyTargetFor(ServerLevel level) {
         ResourceLocation id = level.dimension().location();
-        if (id.equals(ResourceLocation.parse("minecraft:the_nether"))
+        if (id.equals(new ResourceLocation("minecraft:the_nether"))
                 || level.dimensionType().ultraWarm()
                 || id.getPath().contains("nether") || id.getPath().contains("hell")) return "useless_stretcher:capsule_nether";
-        if (id.equals(ResourceLocation.parse("minecraft:the_end"))
-                || level.dimensionType().effectsLocation().equals(ResourceLocation.parse("minecraft:the_end"))
+        if (id.equals(new ResourceLocation("minecraft:the_end"))
+                || level.dimensionType().effectsLocation().equals(new ResourceLocation("minecraft:the_end"))
                 || id.getPath().contains("end") || id.getPath().contains("other")) return "useless_stretcher:capsule_end";
         return "useless_stretcher:capsule_overworld";
     }

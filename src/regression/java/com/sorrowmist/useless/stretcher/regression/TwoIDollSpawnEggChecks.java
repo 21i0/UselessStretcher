@@ -29,14 +29,14 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.EventHooks;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.EventHooks;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/** Real upstream capture and real NeoForge spawn paths, including NBT spawners which skip finalizeSpawn. */
+/** Real upstream capture and real MinecraftForge spawn paths, including NBT spawners which skip finalizeSpawn. */
 final class TwoIDollSpawnEggChecks {
     private TwoIDollSpawnEggChecks() { }
 
@@ -59,10 +59,10 @@ final class TwoIDollSpawnEggChecks {
         var capture = Class.forName("com.sorrowmist.useless.utils.UselessItemUtils")
                 .getMethod("tryCaptureSpawnEgg", LivingEntity.class, ItemStack.class, Player.class);
         ItemStack staff = new ItemStack(com.sorrowmist.useless.init.ModItems.ENDLESS_BEAF_ITEM.get());
-        staff.set(UComponents.BeefCaptureEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefCaptureEnabledComponent.get(), true);
         ItemStack mascot = new ItemStack(ModItems.TWO_I_DOLL.get());
-        mascot.set(StretcherComponents.TWO_I_BOND.get(), -23);
-        mascot.set(StretcherComponents.TWO_I_INVITATION_USED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(mascot, StretcherComponents.TWO_I_BOND.get(), -23);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(mascot, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
         mascot.set(DataComponents.CUSTOM_NAME, Component.literal("Pick keeps my custom skin"));
         CompoundTag future = new CompoundTag();
         future.putString("future_skin", "2i-custom.png");
@@ -84,9 +84,9 @@ final class TwoIDollSpawnEggChecks {
         try {
             unchanged(expectedPick, doll.getPickResult(), "middle pick returns full doll item, never a pig carrier egg");
             for (boolean magnet : new boolean[]{false, true}) {
-                staff.set(UComponents.BeefMagnetEnabledComponent.get(), magnet);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefMagnetEnabledComponent.get(), magnet);
                 for (EnchantMode mode : new EnchantMode[]{EnchantMode.FORTUNE, EnchantMode.SILK_TOUCH}) {
-                    staff.set(UComponents.EnchantModeComponent.get(), mode);
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.EnchantModeComponent.get(), mode);
                     int before = eggCount(level, player, area);
                     capture.invoke(null, doll, staff, player);
                     capture.invoke(null, doll, staff, player);
@@ -132,7 +132,7 @@ final class TwoIDollSpawnEggChecks {
                 level.tryAddFreshEntityWithPassengers(nbtSpawner);
                 check(!nbtSpawner.isAddedToLevel() && level.getEntity(nbtSpawner.getUUID()) == null
                                 && dollIds(level, area).equals(dollsBefore),
-                        "NeoForge world insertion also rejects the cancelled NBT-spawner candidate");
+                        "MinecraftForge world insertion also rejects the cancelled NBT-spawner candidate");
             } finally {
                 nbtSpawner.discardForReclaim();
             }
@@ -144,7 +144,7 @@ final class TwoIDollSpawnEggChecks {
             var deployed = level.getEntitiesOfClass(TwoIDollEntity.class, area,
                     entity -> !dollsBefore.contains(entity.getUUID()));
             check(deployed.size() == 1, "normal deployment creates exactly one companion");
-            var companion = deployed.getFirst();
+            var companion = deployed.get(0);
             try {
                 check(player.getUUID().equals(companion.getOwnerId()), "normal deployed doll retains owner");
                 unchanged(expectedPick, companion.getPickResult(), "deployed doll middle pick preserves all components");

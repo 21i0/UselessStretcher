@@ -163,7 +163,7 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBackground(GuiGraphics graphics) {
         // Leave the game world visible around the character panel.
     }
 
@@ -196,8 +196,8 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
             // and pitch.  Render a client-only doll copy so network updates cannot
             // overwrite that orbit while the mouse is moving.
             InventoryScreen.renderEntityInInventoryFollowsMouse(graphics,
-                    panelX + 12, panelY + 35, panelX + 135, panelY + PANEL_HEIGHT - 15, 60,
-                    0.0625F, mouseX, mouseY, doll);
+                    panelX + 74, panelY + PANEL_HEIGHT - 18, 60,
+                    panelX + 74 - mouseX, panelY + PANEL_HEIGHT - 68 - mouseY, doll);
             if (doll instanceof TwoIDollEntity twoI && !twoI.getBubbleText().isEmpty()) {
                 Component bubble = twoI.getBubbleMessage();
                 int bubbleWidth = Math.min(118, font.width(bubble) + 12);

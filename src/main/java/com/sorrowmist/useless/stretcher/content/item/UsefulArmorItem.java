@@ -8,6 +8,6 @@ import net.minecraft.world.item.Item;
 public final class UsefulArmorItem extends ArmorItem {
     public UsefulArmorItem(Type type) {
         super(ArmorMaterials.DIAMOND, type,
-                new Item.Properties().durability(type.getDurability(33)));
+                new Item.Properties().durability(net.minecraft.world.item.ArmorMaterials.NETHERITE.getDurabilityForType(type)));
     }
 }

@@ -23,10 +23,10 @@ import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.ByteBufCodecs;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -34,9 +34,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.RegisterPayloadHandlersEvent;
+import com.sorrowmist.useless.compat.forge1201.network.PayloadRegistrar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +63,8 @@ public final class Network {
             implements CustomPacketPayload {
         private static final int MAX_PART_ENTRIES = 256;
         public static final Type<MoldCatalogPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "mold_catalog"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, MoldCatalogPayload> STREAM_CODEC = StreamCodec.of(
+                new ResourceLocation(UselessStretcherMod.MODID, "mold_catalog"));
+        public static final StreamCodec<FriendlyByteBuf, MoldCatalogPayload> STREAM_CODEC = StreamCodec.of(
                 (buffer, value) -> {
                     buffer.writeBlockPos(value.pos());
                     buffer.writeVarInt(value.part());
@@ -103,9 +103,9 @@ public final class Network {
                                      int patternCount, boolean aeBound, String progress,
                                      int part, int parts) implements CustomPacketPayload {
         public static final Type<MyriadStatePayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_state"));
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "myriad_state"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, MyriadStatePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, MyriadStatePayload> STREAM_CODEC = StreamCodec.of(
                 (buffer, value) -> {
                     buffer.writeBlockPos(value.pos());
                     buffer.writeCollection(value.enabledMolds(), (buf, id) -> buf.writeUtf(id));
@@ -129,10 +129,10 @@ public final class Network {
     public record MyriadActionPayload(BlockPos pos, int action, String moldId, List<String> enabledMolds)
             implements CustomPacketPayload {
         public static final Type<MyriadActionPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_action"));
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "myriad_action"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, MyriadActionPayload> STREAM_CODEC = StreamCodec.composite(
-                BlockPos.STREAM_CODEC, MyriadActionPayload::pos,
+        public static final StreamCodec<FriendlyByteBuf, MyriadActionPayload> STREAM_CODEC = StreamCodec.composite(
+                com.sorrowmist.useless.compat.forge1201.network.PortCodecs.BLOCK_POS, MyriadActionPayload::pos,
                 ByteBufCodecs.VAR_INT, MyriadActionPayload::action,
                 ByteBufCodecs.STRING_UTF8, MyriadActionPayload::moldId,
                 ByteBufCodecs.collection(ArrayList::new, ByteBufCodecs.STRING_UTF8), MyriadActionPayload::enabledMolds,
@@ -163,10 +163,10 @@ public final class Network {
             this(pos, page, pages, aeBound, item, offhand, patterns, requestId, progress, new byte[0]);
         }
         public static final Type<PatternPagePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page"));
+                new ResourceLocation(UselessStretcherMod.MODID, "myriad_pattern_page"));
         // Hard wire cap; the actual page size is requested per view (see PatternPageRequestPayload).
         public static final int MAX_PAGE = 256;
-        public static final StreamCodec<RegistryFriendlyByteBuf, PatternPagePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, PatternPagePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBlockPos(value.pos());
                     buf.writeVarInt(value.page());
@@ -228,8 +228,8 @@ public final class Network {
             this(pos, page, item, offhand, requestId, query, items, fluids, pageSize, PatternSearchIndex.Mode.ALL);
         }
         public static final Type<PatternPageRequestPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_page_request"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, PatternPageRequestPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "myriad_pattern_page_request"));
+        public static final StreamCodec<FriendlyByteBuf, PatternPageRequestPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> {
                     buf.writeBlockPos(value.pos()); buf.writeVarInt(value.page());
                     buf.writeBoolean(value.item()); buf.writeBoolean(value.offhand());
@@ -247,8 +247,8 @@ public final class Network {
 
     public record PatternTrimPayload(PatternPageRequestPayload request) implements CustomPacketPayload {
         public static final Type<PatternTrimPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_trim"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, PatternTrimPayload> STREAM_CODEC = StreamCodec.composite(
+                new ResourceLocation(UselessStretcherMod.MODID, "myriad_pattern_trim"));
+        public static final StreamCodec<FriendlyByteBuf, PatternTrimPayload> STREAM_CODEC = StreamCodec.composite(
                 PatternPageRequestPayload.STREAM_CODEC, PatternTrimPayload::request, PatternTrimPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -256,8 +256,8 @@ public final class Network {
     public record PatternDeduplicatePayload(PatternPageRequestPayload request, PatternSearchIndex.Keep keep,
                                             long revision) implements CustomPacketPayload {
         public static final Type<PatternDeduplicatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_deduplicate"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, PatternDeduplicatePayload> STREAM_CODEC = StreamCodec.of(
+                new ResourceLocation(UselessStretcherMod.MODID, "myriad_pattern_deduplicate"));
+        public static final StreamCodec<FriendlyByteBuf, PatternDeduplicatePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     PatternPageRequestPayload.STREAM_CODEC.encode(buf, value.request());
                     buf.writeEnum(value.keep()); buf.writeLong(value.revision());
@@ -268,9 +268,9 @@ public final class Network {
 
     public record PatternDeletePayload(BlockPos pos, boolean item, boolean offhand, List<AEItemKey> patterns) implements CustomPacketPayload {
         public static final Type<PatternDeletePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "myriad_pattern_delete"));
+                new ResourceLocation(UselessStretcherMod.MODID, "myriad_pattern_delete"));
         private static final int MAX_DELETE = PatternPagePayload.MAX_PAGE;
-        public static final StreamCodec<RegistryFriendlyByteBuf, PatternDeletePayload> STREAM_CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, PatternDeletePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBlockPos(value.pos());
                     buf.writeBoolean(value.item());
@@ -296,9 +296,9 @@ public final class Network {
 
     public record FullSlotsPayload(boolean full) implements CustomPacketPayload {
         public static final Type<FullSlotsPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "full_slots"));
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "full_slots"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, FullSlotsPayload> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<FriendlyByteBuf, FullSlotsPayload> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.BOOL, FullSlotsPayload::full,
                 FullSlotsPayload::new);
 
@@ -310,8 +310,8 @@ public final class Network {
 
     public record StaffTutorialPayload() implements CustomPacketPayload {
         public static final Type<StaffTutorialPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_tutorial"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, StaffTutorialPayload> STREAM_CODEC =
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "staff_tutorial"));
+        public static final StreamCodec<FriendlyByteBuf, StaffTutorialPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> { }, buf -> new StaffTutorialPayload());
 
         @Override
@@ -323,8 +323,8 @@ public final class Network {
     /** Sent once when the player opens the X staff configuration screen. */
     public record StaffTutorialOpenedPayload() implements CustomPacketPayload {
         public static final Type<StaffTutorialOpenedPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_tutorial_opened"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, StaffTutorialOpenedPayload> STREAM_CODEC =
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "staff_tutorial_opened"));
+        public static final StreamCodec<FriendlyByteBuf, StaffTutorialOpenedPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> { }, buf -> new StaffTutorialOpenedPayload());
 
         @Override
@@ -336,9 +336,9 @@ public final class Network {
     public record WondrousStaffSpeedPayload(int speed, int mode, boolean accelerationEnabled, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffSpeedPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_speed"));
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "wondrous_staff_speed"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffSpeedPayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffSpeedPayload> STREAM_CODEC =
                 StreamCodec.composite(
                         ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::speed,
                         ByteBufCodecs.VAR_INT, WondrousStaffSpeedPayload::mode,
@@ -355,8 +355,8 @@ public final class Network {
     /** One-shot key action; the server owns the 12-second lifetime and ignores repeats while active. */
     public record StandaloneTeleportPayload() implements CustomPacketPayload {
         public static final Type<StandaloneTeleportPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "standalone_teleport"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, StandaloneTeleportPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "standalone_teleport"));
+        public static final StreamCodec<FriendlyByteBuf, StandaloneTeleportPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> {}, buf -> new StandaloneTeleportPayload());
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -367,8 +367,8 @@ public final class Network {
 
     public record StaffTimeStopPayload(boolean offhand) implements CustomPacketPayload {
         public static final Type<StaffTimeStopPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_time_stop"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, StaffTimeStopPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "staff_time_stop"));
+        public static final StreamCodec<FriendlyByteBuf, StaffTimeStopPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> buf.writeBoolean(value.offhand()),
                         buf -> new StaffTimeStopPayload(buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -376,8 +376,8 @@ public final class Network {
 
     public record TimeStopStatePayload(int remaining) implements CustomPacketPayload {
         public static final Type<TimeStopStatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "time_stop_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TimeStopStatePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "time_stop_state"));
+        public static final StreamCodec<FriendlyByteBuf, TimeStopStatePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TimeStopStatePayload::remaining, TimeStopStatePayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -385,8 +385,8 @@ public final class Network {
     /** Opens or refreshes the client-side conversation panel for the author mascot. */
     public record TwoIDialoguePayload(int entityId, boolean inviteReady, int giftScore, boolean open) implements CustomPacketPayload {
         public static final Type<TwoIDialoguePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_dialogue"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDialoguePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_dialogue"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDialoguePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDialoguePayload::entityId,
                         ByteBufCodecs.BOOL, TwoIDialoguePayload::inviteReady,
                         ByteBufCodecs.VAR_INT, TwoIDialoguePayload::giftScore,
@@ -398,8 +398,8 @@ public final class Network {
     /** Opens the item panel only after the server has verified its owner. */
     public record TwoIItemDialoguePayload(boolean offhand, int bond, boolean invitationUsed) implements CustomPacketPayload {
         public static final Type<TwoIItemDialoguePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_item_dialogue"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIItemDialoguePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_item_dialogue"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIItemDialoguePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, TwoIItemDialoguePayload::offhand,
                         ByteBufCodecs.VAR_INT, TwoIItemDialoguePayload::bond,
                         ByteBufCodecs.BOOL, TwoIItemDialoguePayload::invitationUsed, TwoIItemDialoguePayload::new);
@@ -410,8 +410,8 @@ public final class Network {
             implements CustomPacketPayload {
         public static final int PAGE_SIZE = 128;
         public static final Type<DimensionCapsuleCatalogPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "dimension_capsule_catalog"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, DimensionCapsuleCatalogPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "dimension_capsule_catalog"));
+        public static final StreamCodec<FriendlyByteBuf, DimensionCapsuleCatalogPayload> STREAM_CODEC =
                 StreamCodec.of((buf, payload) -> {
                     buf.writeBoolean(payload.offhand());
                     buf.writeVarInt(payload.part());
@@ -438,8 +438,8 @@ public final class Network {
     public record DimensionCapsuleRequestPayload(boolean offhand, int index, int rotation, int action)
             implements CustomPacketPayload {
         public static final Type<DimensionCapsuleRequestPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "dimension_capsule_request"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, DimensionCapsuleRequestPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "dimension_capsule_request"));
+        public static final StreamCodec<FriendlyByteBuf, DimensionCapsuleRequestPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, DimensionCapsuleRequestPayload::offhand,
                         ByteBufCodecs.VAR_INT, DimensionCapsuleRequestPayload::index,
                         ByteBufCodecs.VAR_INT, DimensionCapsuleRequestPayload::rotation,
@@ -451,8 +451,8 @@ public final class Network {
     /** Requests conversion of one nearby mascot entity back into its item. */
     public record TwoIDollReclaimPayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollReclaimPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_reclaim"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollReclaimPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_reclaim"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollReclaimPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollReclaimPayload::entityId,
                         TwoIDollReclaimPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -460,8 +460,8 @@ public final class Network {
 
     public record TwoIDollGiftPayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollGiftPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_gift"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollGiftPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_gift"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollGiftPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollGiftPayload::entityId,
                         TwoIDollGiftPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -469,8 +469,8 @@ public final class Network {
 
     public record TwoIDollInvitePayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollInvitePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_invite"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollInvitePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_invite"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollInvitePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollInvitePayload::entityId,
                         TwoIDollInvitePayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -478,8 +478,8 @@ public final class Network {
 
     public record TwoIDollPatPayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollPatPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_pat"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollPatPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_pat"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollPatPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollPatPayload::entityId,
                         TwoIDollPatPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -488,8 +488,8 @@ public final class Network {
     /** Requests one short, server-authoritative conversation with 2i. */
     public record TwoIDollTalkPayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollTalkPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_talk"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollTalkPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_talk"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollTalkPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollTalkPayload::entityId,
                         TwoIDollTalkPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -498,8 +498,8 @@ public final class Network {
     /** Requests a server-owned story without triggering the ordinary random chat. */
     public record TwoIDollStoryStartPayload(int entityId) implements CustomPacketPayload {
         public static final Type<TwoIDollStoryStartPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_start"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollStoryStartPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_story_start"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollStoryStartPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollStoryStartPayload::entityId,
                         TwoIDollStoryStartPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -508,8 +508,8 @@ public final class Network {
     /** Keeps an already-authorized doll interaction alive or closes it. */
     public record TwoIInteractionPayload(int entityId, boolean active) implements CustomPacketPayload {
         public static final Type<TwoIInteractionPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_interaction"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIInteractionPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_interaction"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIInteractionPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIInteractionPayload::entityId,
                         ByteBufCodecs.BOOL, TwoIInteractionPayload::active, TwoIInteractionPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -517,8 +517,8 @@ public final class Network {
 
     public record TwoIStoryLibraryRequestPayload(int requestId) implements CustomPacketPayload {
         public static final Type<TwoIStoryLibraryRequestPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_library_request"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryLibraryRequestPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_story_library_request"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIStoryLibraryRequestPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryLibraryRequestPayload::requestId,
                         TwoIStoryLibraryRequestPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -527,8 +527,8 @@ public final class Network {
     /** Only the calling player's saved unlocks are returned; this request performs no writes. */
     public record TwoIStoryLibraryStatePayload(int requestId, int completedMask) implements CustomPacketPayload {
         public static final Type<TwoIStoryLibraryStatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_library_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryLibraryStatePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_story_library_state"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIStoryLibraryStatePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryLibraryStatePayload::requestId,
                         ByteBufCodecs.VAR_INT, TwoIStoryLibraryStatePayload::completedMask,
                         TwoIStoryLibraryStatePayload::new);
@@ -538,8 +538,8 @@ public final class Network {
     /** A choice must name the exact session issued to this player. */
     public record TwoIDollStoryPayload(int entityId, long sessionId, int choice) implements CustomPacketPayload {
         public static final Type<TwoIDollStoryPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_choice"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollStoryPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_story_choice"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollStoryPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIDollStoryPayload::entityId,
                         ByteBufCodecs.VAR_LONG, TwoIDollStoryPayload::sessionId,
                         ByteBufCodecs.VAR_INT, TwoIDollStoryPayload::choice,
@@ -551,8 +551,8 @@ public final class Network {
     public record TwoIStoryStatePayload(int entityId, long sessionId, int chapter, int bond, int result, int round)
             implements CustomPacketPayload {
         public static final Type<TwoIStoryStatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_story_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIStoryStatePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_story_state"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIStoryStatePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::entityId,
                         ByteBufCodecs.VAR_LONG, TwoIStoryStatePayload::sessionId,
                         ByteBufCodecs.VAR_INT, TwoIStoryStatePayload::chapter,
@@ -565,8 +565,8 @@ public final class Network {
 
     public record TwoIDollDeployPayload(boolean offhand) implements CustomPacketPayload {
         public static final Type<TwoIDollDeployPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_deploy"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollDeployPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_deploy"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollDeployPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, TwoIDollDeployPayload::offhand,
                         TwoIDollDeployPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -575,16 +575,16 @@ public final class Network {
     /** Requests a server-side long ray trace for the player's owned 2i entity. */
     public record TwoIDollRemoteReclaimPayload() implements CustomPacketPayload {
         public static final Type<TwoIDollRemoteReclaimPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "two_i_remote_reclaim"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, TwoIDollRemoteReclaimPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "two_i_remote_reclaim"));
+        public static final StreamCodec<FriendlyByteBuf, TwoIDollRemoteReclaimPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> {}, buf -> new TwoIDollRemoteReclaimPayload());
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
     public record EntityTimerSettingsPayload(boolean timers, int speed, boolean offhand) implements CustomPacketPayload {
         public static final Type<EntityTimerSettingsPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "entity_timer_settings"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, EntityTimerSettingsPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "entity_timer_settings"));
+        public static final StreamCodec<FriendlyByteBuf, EntityTimerSettingsPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, EntityTimerSettingsPayload::timers,
                         ByteBufCodecs.VAR_INT, EntityTimerSettingsPayload::speed,
                         ByteBufCodecs.BOOL, EntityTimerSettingsPayload::offhand, EntityTimerSettingsPayload::new);
@@ -600,9 +600,9 @@ public final class Network {
                                                 boolean lootRefresh, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffFeaturesPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID,
                         "wondrous_staff_features"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffFeaturesPayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffFeaturesPayload> STREAM_CODEC =
                 StreamCodec.composite(
                         ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::summonEnabled,
                         ByteBufCodecs.BOOL, WondrousStaffFeaturesPayload::lootRefresh,
@@ -619,8 +619,8 @@ public final class Network {
     public record WondrousStaffPhasePayload(boolean phaseEnabled, boolean interactionEnabled,
                                             boolean offhand) implements CustomPacketPayload {
         public static final Type<WondrousStaffPhasePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_phase"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffPhasePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "wondrous_staff_phase"));
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffPhasePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, WondrousStaffPhasePayload::phaseEnabled,
                         ByteBufCodecs.BOOL, WondrousStaffPhasePayload::interactionEnabled,
                         ByteBufCodecs.BOOL, WondrousStaffPhasePayload::offhand,
@@ -631,8 +631,8 @@ public final class Network {
     /** Validated per-staff radiation switch. */
     public record WondrousStaffRadiationPayload(boolean enabled, boolean offhand) implements CustomPacketPayload {
         public static final Type<WondrousStaffRadiationPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_radiation"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffRadiationPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "wondrous_staff_radiation"));
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffRadiationPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, WondrousStaffRadiationPayload::enabled,
                         ByteBufCodecs.BOOL, WondrousStaffRadiationPayload::offhand, WondrousStaffRadiationPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -642,8 +642,8 @@ public final class Network {
     public record StaffPhaseStatePayload(boolean phaseEnabled, boolean interactionEnabled)
             implements CustomPacketPayload {
         public static final Type<StaffPhaseStatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_phase_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, StaffPhaseStatePayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "staff_phase_state"));
+        public static final StreamCodec<FriendlyByteBuf, StaffPhaseStatePayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, StaffPhaseStatePayload::phaseEnabled,
                         ByteBufCodecs.BOOL, StaffPhaseStatePayload::interactionEnabled,
                         StaffPhaseStatePayload::new);
@@ -652,8 +652,8 @@ public final class Network {
 
     public record ApotheosisTierPayload(String tier) implements CustomPacketPayload {
         public static final Type<ApotheosisTierPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "apotheosis_tier"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ApotheosisTierPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "apotheosis_tier"));
+        public static final StreamCodec<FriendlyByteBuf, ApotheosisTierPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.STRING_UTF8, ApotheosisTierPayload::tier,
                         ApotheosisTierPayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -662,8 +662,8 @@ public final class Network {
     public record ApotheosisOptionsPayload(boolean selectionMode, int eterna, int quanta, int arcana,
                                            int clues, boolean offhand) implements CustomPacketPayload {
         public static final Type<ApotheosisOptionsPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "apotheosis_options"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ApotheosisOptionsPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "apotheosis_options"));
+        public static final StreamCodec<FriendlyByteBuf, ApotheosisOptionsPayload> STREAM_CODEC =
                 StreamCodec.composite(ByteBufCodecs.BOOL, ApotheosisOptionsPayload::selectionMode,
                         ByteBufCodecs.VAR_INT, ApotheosisOptionsPayload::eterna,
                         ByteBufCodecs.VAR_INT, ApotheosisOptionsPayload::quanta,
@@ -676,9 +676,9 @@ public final class Network {
 
     public record ApotheosisTablePayload(BlockPos pos, boolean offhand) implements CustomPacketPayload {
         public static final Type<ApotheosisTablePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "apotheosis_table"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ApotheosisTablePayload> STREAM_CODEC =
-                StreamCodec.composite(BlockPos.STREAM_CODEC, ApotheosisTablePayload::pos,
+                new ResourceLocation(UselessStretcherMod.MODID, "apotheosis_table"));
+        public static final StreamCodec<FriendlyByteBuf, ApotheosisTablePayload> STREAM_CODEC =
+                StreamCodec.composite(com.sorrowmist.useless.compat.forge1201.network.PortCodecs.BLOCK_POS, ApotheosisTablePayload::pos,
                         ByteBufCodecs.BOOL, ApotheosisTablePayload::offhand, ApotheosisTablePayload::new);
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -687,9 +687,9 @@ public final class Network {
     public record WondrousStaffSummonPayload(List<String> entityIds, boolean offhand)
             implements CustomPacketPayload {
         public static final Type<WondrousStaffSummonPayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID,
                         "wondrous_staff_summon"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffSummonPayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffSummonPayload> STREAM_CODEC =
                 StreamCodec.of((buffer, value) -> {
                     int size = Math.min(value.entityIds().size(), WondrousStaffSummoning.MAX_SELECTION);
                     buffer.writeVarInt(size);
@@ -713,8 +713,8 @@ public final class Network {
 
     public record WondrousStaffRecallPayload(boolean offhand) implements CustomPacketPayload {
         public static final Type<WondrousStaffRecallPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_recall"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, WondrousStaffRecallPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "wondrous_staff_recall"));
+        public static final StreamCodec<FriendlyByteBuf, WondrousStaffRecallPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> buf.writeBoolean(value.offhand()),
                         buf -> new WondrousStaffRecallPayload(buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -725,21 +725,21 @@ public final class Network {
                                  ResourceLocation dimension, BlockPos pos, String label)
             implements CustomPacketPayload {
         public static final Type<ReclaimerEntry> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_entry"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerEntry> STREAM_CODEC = StreamCodec.of(
+                new ResourceLocation(UselessStretcherMod.MODID, "reclaimer_entry"));
+        public static final StreamCodec<FriendlyByteBuf, ReclaimerEntry> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.range()); buf.writeUUID(value.id()); buf.writeUUID(value.owner());
-                    buf.writeUtf(value.ownerName(), 64); ResourceLocation.STREAM_CODEC.encode(buf, value.dimension());
+                    buf.writeUtf(value.ownerName(), 64); com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.encode(buf, value.dimension());
                     buf.writeBlockPos(value.pos()); buf.writeUtf(value.label(), 128);
                 }, buf -> new ReclaimerEntry(buf.readBoolean(), buf.readUUID(), buf.readUUID(), buf.readUtf(64),
-                        ResourceLocation.STREAM_CODEC.decode(buf), buf.readBlockPos(), buf.readUtf(128)));
+                        com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.decode(buf), buf.readBlockPos(), buf.readUtf(128)));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
     public record ReclaimerStatePayload(List<ReclaimerEntry> entries, boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerStatePayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerStatePayload> STREAM_CODEC = StreamCodec.of(
+                new ResourceLocation(UselessStretcherMod.MODID, "reclaimer_state"));
+        public static final StreamCodec<FriendlyByteBuf, ReclaimerStatePayload> STREAM_CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.personal());
                     int count = Math.min(MAX_RECLAIM_ENTRIES, value.entries().size()); buf.writeVarInt(count);
@@ -757,8 +757,8 @@ public final class Network {
 
     public record ReclaimerRequestPayload(boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerRequestPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_request"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerRequestPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "reclaimer_request"));
+        public static final StreamCodec<FriendlyByteBuf, ReclaimerRequestPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> buf.writeBoolean(value.personal()),
                         buf -> new ReclaimerRequestPayload(buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -766,8 +766,8 @@ public final class Network {
 
     public record ReclaimerActionPayload(boolean range, UUID id, boolean personal) implements CustomPacketPayload {
         public static final Type<ReclaimerActionPayload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "reclaimer_action"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ReclaimerActionPayload> STREAM_CODEC =
+                new ResourceLocation(UselessStretcherMod.MODID, "reclaimer_action"));
+        public static final StreamCodec<FriendlyByteBuf, ReclaimerActionPayload> STREAM_CODEC =
                 StreamCodec.of((buf, value) -> {
                     buf.writeBoolean(value.range()); buf.writeUUID(value.id()); buf.writeBoolean(value.personal());
                 }, buf -> new ReclaimerActionPayload(buf.readBoolean(), buf.readUUID(), buf.readBoolean()));
@@ -777,10 +777,10 @@ public final class Network {
     /** Dimension-wide visual clock used only for client cloud movement. */
     public record TimeAccelerationStatePayload(String dimension, int speed) implements CustomPacketPayload {
         public static final Type<TimeAccelerationStatePayload> TYPE =
-                new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID,
+                new Type<>(new ResourceLocation(UselessStretcherMod.MODID,
                         "time_acceleration_state"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, TimeAccelerationStatePayload> STREAM_CODEC =
+        public static final StreamCodec<FriendlyByteBuf, TimeAccelerationStatePayload> STREAM_CODEC =
                 StreamCodec.composite(
                         ByteBufCodecs.STRING_UTF8, TimeAccelerationStatePayload::dimension,
                         ByteBufCodecs.VAR_INT, TimeAccelerationStatePayload::speed,
@@ -909,8 +909,8 @@ public final class Network {
                     if (!(context.player() instanceof ServerPlayer player) || !StretcherConfig.serverStaffAcceleration()) return;
                     ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
                     if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
-                    held.set(StretcherComponents.ENTITY_TIMER_MODE.get(), payload.timers());
-                    held.set(StretcherComponents.ENTITY_TIMER_SPEED.get(),
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.ENTITY_TIMER_MODE.get(), payload.timers());
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.ENTITY_TIMER_SPEED.get(),
                             com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration.normalizeSpeed(payload.speed()));
                 }));
         registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
@@ -939,7 +939,7 @@ public final class Network {
     }
 
     private static void handleWondrousStaffSpeed(WondrousStaffSpeedPayload payload,
-                                                 net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                 com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         if (!StretcherConfig.serverStaffAcceleration()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
@@ -953,9 +953,9 @@ public final class Network {
                 && payload.mode() < com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.STAFF_MODE_COUNT
                 ? payload.mode()
                 : com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.STAFF_MODE_NORMAL;
-        held.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, com.sorrowmist.useless.stretcher.init.StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
         com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration.setMode(held, mode);
-        held.set(com.sorrowmist.useless.core.component.UComponents.BeefTimeAccelerationEnabledComponent.get(),
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, com.sorrowmist.useless.core.component.UComponents.BeefTimeAccelerationEnabledComponent.get(),
                 payload.accelerationEnabled());
         if (StaffTutorialData.get(player.getServer()).markHintShown(player.getUUID(),
                 StaffTutorialData.HINT_GEAR_CHANGE)) {
@@ -964,7 +964,7 @@ public final class Network {
     }
 
     private static void handleStaffTimeStop(StaffTimeStopPayload payload,
-                                            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)
                 || !StretcherConfig.serverTimeStop()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
@@ -986,10 +986,10 @@ public final class Network {
     }
 
     public static void sendTwoIItemDialogue(ServerPlayer player, InteractionHand hand, ItemStack stack) {
-        if (!player.getUUID().equals(stack.get(StretcherComponents.TWO_I_OWNER.get()))) return;
+        if (!player.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_OWNER.get()))) return;
         PacketDistributor.sendToPlayer(player, new TwoIItemDialoguePayload(hand == InteractionHand.OFF_HAND,
                 com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.getBond(stack),
-                stack.getOrDefault(StretcherComponents.TWO_I_INVITATION_USED.get(), false)));
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.TWO_I_INVITATION_USED.get(), false)));
     }
 
     public static void sendDimensionCapsuleCatalog(ServerPlayer player, boolean offhand) {
@@ -1009,7 +1009,7 @@ public final class Network {
     }
 
     private static void handleDimensionCapsuleRequest(DimensionCapsuleRequestPayload payload,
-                                                       net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                       com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack stack = player.getItemInHand(hand);
@@ -1086,7 +1086,7 @@ public final class Network {
     }
 
     private static void handleTwoIDollReclaim(TwoIDollReclaimPayload payload,
-                                               net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                               com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll
@@ -1096,21 +1096,21 @@ public final class Network {
     }
 
     private static void handleTwoIDollGift(TwoIDollGiftPayload payload,
-                                           net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                           com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) doll.acceptGift(player);
     }
 
     private static void handleTwoIDollInvite(TwoIDollInvitePayload payload,
-                                             net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                             com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) doll.acceptInvitation(player);
     }
 
     private static void handleTwoIDollPat(TwoIDollPatPayload payload,
-                                          net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                          com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll)
@@ -1118,7 +1118,7 @@ public final class Network {
     }
 
     private static void handleTwoIDollTalk(TwoIDollTalkPayload payload,
-                                           net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                           com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll)
@@ -1126,7 +1126,7 @@ public final class Network {
     }
 
     private static void handleTwoIDollStoryStart(TwoIDollStoryStartPayload payload,
-                                                 net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                 com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         Entity target = player.serverLevel().getEntity(payload.entityId());
         if (target instanceof com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity doll) {
@@ -1137,11 +1137,11 @@ public final class Network {
     }
 
     private static void handleTwoIDollStory(TwoIDollStoryPayload payload,
-                                            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         if (payload.choice() < 0 || payload.choice() >= 9) {
             sendTwoIStoryState(player, payload.entityId(), payload.sessionId(), 0, 0, 2,
-                    Math.clamp(payload.choice() / 3, 0, 2));
+                    com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(payload.choice() / 3, 0, 2));
             return;
         }
         Entity target = player.serverLevel().getEntity(payload.entityId());
@@ -1153,14 +1153,14 @@ public final class Network {
     }
 
     private static void handleTwoIDollDeploy(TwoIDollDeployPayload payload,
-                                             net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                             com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.deploy(player,
                 payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
     }
 
     private static void handleTwoIDollRemoteReclaim(
-            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         if (com.sorrowmist.useless.stretcher.content.entity.TwoIDollService.returnFromStarfield(player)) return;
         var start = player.getEyePosition();
@@ -1211,25 +1211,25 @@ public final class Network {
     }
 
     private static void handleWondrousStaffFeatures(WondrousStaffFeaturesPayload payload,
-                                                    net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                    com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
-        held.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), payload.summonEnabled());
-        held.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(),
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), payload.summonEnabled());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(),
                 payload.lootRefresh()
                         && com.sorrowmist.useless.stretcher.config.StretcherConfig.enableStaffLootRefresh());
     }
 
     private static void handleWondrousStaffPhase(WondrousStaffPhasePayload payload,
-                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                  com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
         if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
-        held.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), payload.phaseEnabled());
-        held.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), payload.interactionEnabled());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), payload.phaseEnabled());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), payload.interactionEnabled());
         com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager.apply(player);
     }
 
@@ -1239,10 +1239,10 @@ public final class Network {
     }
 
     private static void handleApotheosisTier(ApotheosisTierPayload payload,
-            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)
                 || !StretcherConfig.enableApotheosisCompat()
-                || !ApotheosisStaffSettings.isApotheosisLoaded()) return;
+                || !ApotheosisStaffSettings.isWorldTierAvailable()) return;
         if (!(player.getMainHandItem().getItem() instanceof com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem)
                 && !(player.getOffhandItem().getItem() instanceof com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem)) return;
         String tier = payload.tier().toLowerCase(java.util.Locale.ROOT);
@@ -1258,7 +1258,7 @@ public final class Network {
     }
 
     private static void handleApotheosisOptions(ApotheosisOptionsPayload payload,
-            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player) || !apotheosisAllowed()) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
@@ -1268,8 +1268,8 @@ public final class Network {
         ApotheosisStaffSettings.setBoost(held, boost);
         ApotheosisStaffSettings.setSelectionMode(held, payload.selectionMode());
         if (payload.selectionMode()) {
-            held.set(StretcherComponents.RANGE_FILTER_MARKING_MODE.get(), false);
-            held.set(StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.RANGE_FILTER_MARKING_MODE.get(), false);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.RANGE_PLACEMENT_MODE.get(), false);
         }
         ApotheosisTableData data = ApotheosisTableData.get(player.getServer());
         if (data.updateOwned(player.getUUID(), boost) > 0) {
@@ -1280,14 +1280,14 @@ public final class Network {
     }
 
     private static void handleApotheosisTable(ApotheosisTablePayload payload,
-            net.neoforged.neoforge.network.handling.IPayloadContext context) {
+            com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ApotheosisStaffSettings.markTable(player, hand, payload.pos());
     }
 
     private static void handleWondrousStaffSummon(WondrousStaffSummonPayload payload,
-                                                  net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                  com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack held = player.getItemInHand(hand);
@@ -1296,7 +1296,7 @@ public final class Network {
     }
 
     private static void handleWondrousStaffRecall(WondrousStaffRecallPayload payload,
-                                                   net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                   com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
         WondrousStaffSummoning.recall(player, held);
@@ -1340,7 +1340,7 @@ public final class Network {
     }
 
     private static void handleReclaimerAction(ReclaimerActionPayload payload,
-                                               net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                               com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player)) return;
         if (!canManage(player, payload.personal())) return;
         boolean removed = false;
@@ -1428,11 +1428,11 @@ public final class Network {
     }
 
     public static void sendTimeAccelerationState(net.minecraft.server.level.ServerLevel level, int speed) {
-        PacketDistributor.sendToPlayersInDimension(level, new TimeAccelerationStatePayload(
+        PacketDistributor.sendToPlayersInDimension(level.dimension(), new TimeAccelerationStatePayload(
                 level.dimension().location().toString(), Math.max(0, speed)));
     }
 
-    private static void handleAction(MyriadActionPayload payload, net.neoforged.neoforge.network.handling.IPayloadContext context) {
+    private static void handleAction(MyriadActionPayload payload, com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         context.enqueueWork(() -> {
             ServerPlayer player = (ServerPlayer) context.player();
             if (!(player.containerMenu instanceof OmniversalMyriadMenu menu)
@@ -1492,7 +1492,7 @@ public final class Network {
     }
 
     private static void handlePatternPageRequest(PatternPageRequestPayload payload,
-                                                   net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                                   com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player) || payload.page() < 0) return;
         if (payload.item()) {
             ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
@@ -1504,7 +1504,7 @@ public final class Network {
     }
 
     private static void handlePatternDelete(PatternDeletePayload payload,
-                                              net.neoforged.neoforge.network.handling.IPayloadContext context) {
+                                              com.sorrowmist.useless.compat.forge1201.network.IPayloadContext context) {
         if (!(context.player() instanceof ServerPlayer player) || payload.patterns().isEmpty()) return;
         UUID ref = null;
         OmniversalMyriadBlockEntity be = null;

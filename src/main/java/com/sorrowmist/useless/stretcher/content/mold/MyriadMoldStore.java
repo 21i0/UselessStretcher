@@ -22,7 +22,7 @@ public final class MyriadMoldStore extends SavedData {
 
     public static MyriadMoldStore get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(MyriadMoldStore::new, MyriadMoldStore::load), "useless_stretcher_molds");
+                tag -> MyriadMoldStore.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), MyriadMoldStore::new, "useless_stretcher_molds");
     }
 
     public UUID snapshot(Collection<ResourceLocation> molds) {
@@ -41,7 +41,10 @@ public final class MyriadMoldStore extends SavedData {
         return entries.getOrDefault(id, Set.of());
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         entries.forEach((id, molds) -> {

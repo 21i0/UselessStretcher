@@ -29,8 +29,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.Direction;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +47,10 @@ final class JdteAccelerationChecks {
         furnace.setItem(1, new ItemStack(Items.COAL, 16));
         var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "JdteCarrierChecks"));
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), 1024);
-        staff.set(StretcherComponents.RANGE_SIZE_X.get(), 3);
-        staff.set(StretcherComponents.RANGE_SIZE_Y.get(), 3);
-        staff.set(StretcherComponents.RANGE_SIZE_Z.get(), 3);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SPEED.get(), 1024);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_X.get(), 3);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Y.get(), 3);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Z.get(), 3);
         var ranges = RangeAccelerationSavedData.get(level.getServer());
         UUID fieldId = ranges.place(level, player, pos, staff).id();
         check(fieldId != null, "real range created");
@@ -63,7 +63,7 @@ final class JdteAccelerationChecks {
         long gameTime = level.getGameTime(), dayTime = level.getDayTime();
         try {
             for (String id : types) {
-                var key = ResourceLocation.parse(id);
+                var key = new ResourceLocation(id);
                 if (!BuiltInRegistries.ENTITY_TYPE.containsKey(key)) continue;
                 Entity carrier = create(id, level, pos);
                 carriers.add(carrier);
@@ -116,7 +116,7 @@ final class JdteAccelerationChecks {
                 check(!carrier.isRemoved() && remaining(carrier) == lifetimes.get(i) - 1,
                         "native tick still decrements exactly once");
                 if (BuiltInRegistries.ENTITY_TYPE.getKey(carrier.getType()).toString().equals("jdte:ultimate_time_wand")) {
-                    var wandItem = BuiltInRegistries.ITEM.get(ResourceLocation.parse("jdte:ultimate_time_wand"));
+                    var wandItem = BuiltInRegistries.ITEM.get(new ResourceLocation("jdte:ultimate_time_wand"));
                     try {
                         var enableOverclock = wandItem.getClass().getMethod("setUltimateOverclock", ItemStack.class, boolean.class);
                         ItemStack wand = new ItemStack(wandItem);

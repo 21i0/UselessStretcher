@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * rebuilds a base {@code endless_beaf_item} (太初杖), so a staff that went through OmniTools
  * (or any other tool mode) would silently turn back into the base staff.
  */
-@Mixin(BeefToolVariants.class)
+@Mixin(value = BeefToolVariants.class, remap = false)
 public abstract class BeefToolVariantsMixin {
 
     @Inject(
@@ -39,9 +39,9 @@ public abstract class BeefToolVariantsMixin {
         if (!isWondrousStaffSource(source)) return;
 
         ItemStack result = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        result.applyComponents(source.getComponents());
-        result.set(UComponents.WrenchTagEnabledComponent.get(), enabled);
-        result.set(UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
+        com.sorrowmist.useless.core.component.UComponents.copyState(source,result);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(result, UComponents.WrenchTagEnabledComponent.get(), enabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(result, UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
         cir.setReturnValue(result);
     }
 
@@ -55,15 +55,15 @@ public abstract class BeefToolVariantsMixin {
         if (!isWondrousStaffSource(source)) return;
 
         ItemStack result = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        result.applyComponents(source.getComponents());
-        result.set(UComponents.WrenchTagEnabledComponent.get(), BeefToolVariants.isWrenchTagEnabled(source));
-        result.set(UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
+        com.sorrowmist.useless.core.component.UComponents.copyState(source,result);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(result, UComponents.WrenchTagEnabledComponent.get(), BeefToolVariants.isWrenchTagEnabled(source));
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(result, UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
         cir.setReturnValue(result);
     }
 
     private static boolean isWondrousStaffSource(ItemStack source) {
         return source.getItem() instanceof WondrousStaffItem
-                || source.has(StretcherComponents.WONDROUS_STAFF_SPEED.get())
-                || source.has(StretcherComponents.WONDROUS_STAFF_MODE.get());
+                || com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(source, StretcherComponents.WONDROUS_STAFF_SPEED.get())
+                || com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(source, StretcherComponents.WONDROUS_STAFF_MODE.get());
     }
 }

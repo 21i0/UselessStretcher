@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="useless_stretcher"
+version="${mod_version}"
+displayName="Useless Stretcher"
+description="Wildcard molds, remote pattern delivery, dimension capsules and time-acceleration tools for Useless Mod."
+[[dependencies.useless_stretcher]]
+modId="forge"
+mandatory=true
+versionRange="[47.3.10,48)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.useless_stretcher]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.useless_stretcher]]
+modId="ae2"
+mandatory=true
+versionRange="[15.4.8,16)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.useless_stretcher]]
+modId="useless_mod"
+mandatory=true
+versionRange="[20.2.4.6,21)"
+ordering="AFTER"
+side="BOTH"

@@ -29,7 +29,7 @@ public final class MyriadPatternStore extends SavedData {
 
     public static MyriadPatternStore get(ServerLevel level) {
         return level.getDataStorage().computeIfAbsent(
-                new SavedData.Factory<>(MyriadPatternStore::new, MyriadPatternStore::load), NAME);
+                tag -> MyriadPatternStore.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), MyriadPatternStore::new, NAME);
     }
 
     public Set<ResourceLocation> molds(UUID id) {
@@ -194,7 +194,10 @@ public final class MyriadPatternStore extends SavedData {
         }
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         for (var entry : entries.entrySet()) {
@@ -205,7 +208,7 @@ public final class MyriadPatternStore extends SavedData {
             ListTag palette = new ListTag();
             for (AEItemKey key : entry.getValue().references.keySet()) {
                 indices.put(key, palette.size());
-                palette.add(key.toStack(1).saveOptional(registries));
+                palette.add(com.sorrowmist.useless.compat.forge1201.nbt.NativeStackNbt.saveItem(key.toStack(1), registries));
             }
             entryTag.put("palette", palette);
             ListTag groups = new ListTag();
@@ -237,7 +240,7 @@ public final class MyriadPatternStore extends SavedData {
             List<AEItemKey> palette = new ArrayList<>();
             ListTag paletteTags = entryTag.getList("palette", Tag.TAG_COMPOUND);
             for (int j = 0; j < paletteTags.size(); j++) {
-                palette.add(AEItemKey.of(ItemStack.parse(registries, paletteTags.getCompound(j))
+                palette.add(AEItemKey.of(com.sorrowmist.useless.compat.forge1201.nbt.NativeStackNbt.parseItem(registries, paletteTags.getCompound(j))
                         .orElse(ItemStack.EMPTY)));
             }
             Library library = new Library();
@@ -257,7 +260,7 @@ public final class MyriadPatternStore extends SavedData {
                     // Pre-palette saves retain their UUID and all groups, without truncation.
                     ListTag stacks = group.getList("patterns", Tag.TAG_COMPOUND);
                     for (int k = 0; k < stacks.size(); k++) {
-                        AEItemKey key = AEItemKey.of(ItemStack.parse(registries, stacks.getCompound(k))
+                        AEItemKey key = AEItemKey.of(com.sorrowmist.useless.compat.forge1201.nbt.NativeStackNbt.parseItem(registries, stacks.getCompound(k))
                                 .orElse(ItemStack.EMPTY));
                         if (key != null) patterns.add(key);
                     }

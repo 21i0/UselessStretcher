@@ -32,7 +32,7 @@ public final class TwoIDollDisplayRenderer implements BlockEntityRenderer<TwoIDo
                 .getValue(TwoIDollDisplayBlock.ROTATION) + doll.rotationAt(now)));
         poseStack.scale(TwoIDollRenderer.RENDER_SCALE, -TwoIDollRenderer.RENDER_SCALE, -TwoIDollRenderer.RENDER_SCALE);
         model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),
-                light, overlay);
+                light, overlay, 1, 1, 1, 1);
         model.renderAccessories(poseStack, buffer, light, overlay);
         poseStack.popPose();
     }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** An unconfigured wildcard is not a mold; do not scan the entire converted catalog for it. */
-@Mixin(AlloyFurnaceRecipeCatalog.class)
+@Mixin(value = AlloyFurnaceRecipeCatalog.class, remap = false)
 public abstract class EmptyMyriadMoldMixin {
     @Inject(method = "isKnownMold(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)Z",
             at = @At("HEAD"), cancellable = true, require = 0)

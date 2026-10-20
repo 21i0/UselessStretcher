@@ -7,10 +7,10 @@ import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,7 +35,8 @@ public final class MoldCatalogService {
     }
 
     @SubscribeEvent
-    public static void tick(ServerTickEvent.Post event) {
+    public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         ServerState state = STATES.get(event.getServer());
         if (state == null) return;
         try {

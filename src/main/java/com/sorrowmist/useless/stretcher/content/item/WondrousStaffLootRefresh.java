@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -35,12 +35,12 @@ public final class WondrousStaffLootRefresh {
     }
 
     /** Called by mixins before vanilla discards the table after the first opening. */
-    public static void remember(BlockEntity blockEntity, ResourceKey<LootTable> lootTable) {
+    public static void remember(BlockEntity blockEntity, ResourceLocation lootTable) {
         if (lootTable != null) remember(blockEntity.getPersistentData(), lootTable);
     }
 
     /** Called by mixins before a container minecart discards its table after the first opening. */
-    public static void remember(Entity entity, ResourceKey<LootTable> lootTable) {
+    public static void remember(Entity entity, ResourceLocation lootTable) {
         if (lootTable != null) remember(entity.getPersistentData(), lootTable);
     }
 
@@ -89,7 +89,7 @@ public final class WondrousStaffLootRefresh {
 
     private static RefreshResult refreshVanillaBlock(Player player,
                                                        RandomizableContainerBlockEntity container) {
-        ResourceKey<LootTable> source = sourceLootTable(container.getPersistentData(), container.getLootTable());
+        ResourceLocation source = sourceLootTable(container.getPersistentData(), ((com.sorrowmist.useless.stretcher.mixin.LootContainerAccessor)container).uselessStretcher$getLootTable());
         if (source == null) return RefreshResult.MISSING_SOURCE;
         try {
             container.clearContent();
@@ -103,7 +103,7 @@ public final class WondrousStaffLootRefresh {
     }
 
     private static RefreshResult refreshVanillaMinecart(Player player, AbstractMinecartContainer container) {
-        ResourceKey<LootTable> source = sourceLootTable(container.getPersistentData(), container.getLootTable());
+        ResourceLocation source = sourceLootTable(container.getPersistentData(), container.getLootTable());
         if (source == null) return RefreshResult.MISSING_SOURCE;
         try {
             container.clearItemStacks();
@@ -149,15 +149,15 @@ public final class WondrousStaffLootRefresh {
         }
     }
 
-    private static void remember(CompoundTag tag, ResourceKey<LootTable> lootTable) {
-        tag.putString(SOURCE_LOOT_TABLE, lootTable.location().toString());
+    private static void remember(CompoundTag tag, ResourceLocation lootTable) {
+        tag.putString(SOURCE_LOOT_TABLE, lootTable.toString());
     }
 
-    private static ResourceKey<LootTable> sourceLootTable(CompoundTag tag,
-                                                           ResourceKey<LootTable> current) {
+    private static ResourceLocation sourceLootTable(CompoundTag tag,
+                                                           ResourceLocation current) {
         if (current != null) remember(tag, current);
         ResourceLocation id = ResourceLocation.tryParse(tag.getString(SOURCE_LOOT_TABLE));
-        return id == null ? null : ResourceKey.create(Registries.LOOT_TABLE, id);
+        return id == null ? null : id;
     }
 
     private static BlockPos connectedChestPos(Level level, BlockPos pos) {

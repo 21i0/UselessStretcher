@@ -5,8 +5,8 @@ import com.sorrowmist.useless.stretcher.content.block.OmniversalMyriadBlock;
 import com.sorrowmist.useless.stretcher.content.block.TwoIDollDisplayBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredBlock;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(UselessStretcherMod.MODID);

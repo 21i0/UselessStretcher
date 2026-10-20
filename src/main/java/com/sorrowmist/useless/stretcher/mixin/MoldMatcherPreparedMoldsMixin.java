@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds")
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
 public abstract class MoldMatcherPreparedMoldsMixin {
     @Shadow @Final private Map<Integer, ItemStack> available;
     @Unique private MyriadMoldMatcher uselessStretcher$matcher;

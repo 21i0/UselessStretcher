@@ -13,16 +13,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.UUID;
 
 /** Persists the server-store reference so repeated moves update one snapshot instead of leaking copies. */
-@Mixin(MePatternAssemblyBlockEntity.class)
+@Mixin(value = MePatternAssemblyBlockEntity.class, remap = false)
 public abstract class MePatternAssemblyBlockEntityMixin implements PatternAssemblyReferenceAccessor {
     @Unique
     private static final String USELESS_STRETCHER$REFERENCE_TAG = "UselessStretcherPatternAssemblyRef";
     @Unique
     private UUID uselessStretcher$patternAssemblyReference;
 
-    @Inject(method = "loadTag(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V",
+    @Inject(method = "loadTag(Lnet/minecraft/nbt/CompoundTag;)V",
             at = @At("TAIL"))
-    private void uselessStretcher$loadReference(CompoundTag tag, HolderLookup.Provider registries,
+    private void uselessStretcher$loadReference(CompoundTag tag,
                                                 CallbackInfo ci) {
         uselessStretcher$patternAssemblyReference = null;
         String value = tag.getString(USELESS_STRETCHER$REFERENCE_TAG);
@@ -34,9 +34,9 @@ public abstract class MePatternAssemblyBlockEntityMixin implements PatternAssemb
         }
     }
 
-    @Inject(method = "saveAdditional(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V",
-            at = @At("TAIL"))
-    private void uselessStretcher$saveReference(CompoundTag tag, HolderLookup.Provider registries,
+    @Inject(method = "saveAdditional(Lnet/minecraft/nbt/CompoundTag;)V",
+            at = @At("TAIL"), remap = true)
+    private void uselessStretcher$saveReference(CompoundTag tag,
                                                 CallbackInfo ci) {
         if (uselessStretcher$patternAssemblyReference != null) {
             tag.putString(USELESS_STRETCHER$REFERENCE_TAG,

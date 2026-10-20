@@ -3,20 +3,20 @@ package com.sorrowmist.useless.stretcher.network;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.capsule.NativeCapsules;
 import com.sorrowmist.useless.stretcher.content.item.DimensionCapsuleItem;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.PayloadRegistrar;
 
 public final class CapsuleNetwork {
     private CapsuleNetwork() { }
     public record Complete(String id, String dimension, int instanceId) implements CustomPacketPayload {
-        static final Type<Complete> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "capsule_complete"));
-        static final StreamCodec<RegistryFriendlyByteBuf, Complete> CODEC = StreamCodec.of((buf, p) -> {
+        static final Type<Complete> TYPE = new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "capsule_complete"));
+        static final StreamCodec<FriendlyByteBuf, Complete> CODEC = StreamCodec.of((buf, p) -> {
             buf.writeUtf(p.id, 256); buf.writeUtf(p.dimension, 256); buf.writeVarInt(p.instanceId);
         }, buf -> new Complete(buf.readUtf(256), buf.readUtf(256), buf.readVarInt()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -25,8 +25,8 @@ public final class CapsuleNetwork {
         public Request(String id, String dimension, int action, int side, boolean offhand) {
             this(id, dimension, action, side, offhand, 0);
         }
-        static final Type<Request> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "native_capsule_request"));
-        static final StreamCodec<RegistryFriendlyByteBuf, Request> CODEC = StreamCodec.of((buf, p) -> {
+        static final Type<Request> TYPE = new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "native_capsule_request"));
+        static final StreamCodec<FriendlyByteBuf, Request> CODEC = StreamCodec.of((buf, p) -> {
             buf.writeUtf(p.id, 256); buf.writeUtf(p.dimension, 256); buf.writeVarInt(p.action); buf.writeVarInt(p.side); buf.writeBoolean(p.offhand); buf.writeVarInt(p.instanceId);
         }, buf -> new Request(buf.readUtf(256), buf.readUtf(256), buf.readVarInt(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -36,8 +36,8 @@ public final class CapsuleNetwork {
         public State(String id, String dimension, String phase, int progress, int[] pixels, int sx, int sy, int sz) {
             this(id, dimension, 0, 0, 0, 0, phase, progress, pixels, sx, sy, sz);
         }
-        static final Type<State> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "native_capsule_state"));
-        static final StreamCodec<RegistryFriendlyByteBuf, State> CODEC = StreamCodec.of((buf, p) -> {
+        static final Type<State> TYPE = new Type<>(new ResourceLocation(UselessStretcherMod.MODID, "native_capsule_state"));
+        static final StreamCodec<FriendlyByteBuf, State> CODEC = StreamCodec.of((buf, p) -> {
             buf.writeUtf(p.id, 256); buf.writeUtf(p.dimension, 256); buf.writeVarInt(p.instanceId);
             buf.writeVarInt(p.instanceCount); buf.writeVarInt(p.originX); buf.writeVarInt(p.originZ);
             buf.writeUtf(p.phase, 32); buf.writeVarInt(p.progress);
@@ -61,9 +61,13 @@ public final class CapsuleNetwork {
             if (!(context.player() instanceof ServerPlayer player) || p.action < 0 || p.action > 3 || p.side < 0 || p.side > 3 || p.instanceId < 0) return;
             if (!DimensionCapsuleItem.is(player.getItemInHand(p.offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND))) return;
             long now = player.getServer().getTickCount();
-            long previous = player.getPersistentData().getLong("capsule_request_tick");
-            if (now >= previous && now - previous < 4) return;
-            player.getPersistentData().putLong("capsule_request_tick", now);
+            // Progress polling must not consume the interaction budget: a query and
+            // a button click can arrive in the same tick, especially on a local server.
+            String throttleKey = p.action == 0 ? "capsule_query_tick" : "capsule_action_tick";
+            var persistent = player.getPersistentData();
+            long previous = persistent.getLong(throttleKey);
+            if (persistent.contains(throttleKey) && now >= previous && now - previous < 4) return;
+            persistent.putLong(throttleKey, now);
             if (ResourceLocation.tryParse(p.id) == null || ResourceLocation.tryParse(p.dimension) == null) return;
             try { NativeCapsules.request(player, p.id, p.dimension, p.action, p.side, p.instanceId); }
             catch (RuntimeException failure) {

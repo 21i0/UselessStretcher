@@ -35,7 +35,7 @@ public final class PermanentAccelerationHistory extends SavedData {
 
     public static PermanentAccelerationHistory get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(PermanentAccelerationHistory::new, PermanentAccelerationHistory::load),
+                tag -> PermanentAccelerationHistory.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), PermanentAccelerationHistory::new,
                 "useless_stretcher_permanent_history");
     }
 
@@ -118,7 +118,11 @@ public final class PermanentAccelerationHistory extends SavedData {
         return result;
     }
 
-    @Override public CompoundTag save(CompoundTag root, HolderLookup.Provider lookup) {
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
+    public CompoundTag save(CompoundTag root, HolderLookup.Provider lookup) {
         ListTag list = new ListTag();
         for (Entry entry : entries.values()) {
             CompoundTag tag = new CompoundTag();

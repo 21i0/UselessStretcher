@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class TwoIDollSectionLifecycleMixin {
     @Shadow @Final private EntityAccess entity;
 
-    @WrapMethod(method = "onMove")
+    @WrapMethod(method = "onMove", require = 1)
     private void vanillaSectionMove(Operation<Void> original) {
         if (entity instanceof TwoIDollEntity doll) {
             try (var scope = TwoILifecycleGuard.allow(doll)) { original.call(); }
         } else original.call();
     }
 
-    @WrapMethod(method = "onRemove")
+    @WrapMethod(method = "onRemove", require = 1)
     private void vanillaRemoval(Entity.RemovalReason reason, Operation<Void> original) {
         if (entity instanceof TwoIDollEntity doll) {
             if (doll.blocksDestructiveRemoval(reason)) return;

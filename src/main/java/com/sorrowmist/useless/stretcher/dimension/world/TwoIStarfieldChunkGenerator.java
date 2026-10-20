@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public final class TwoIStarfieldChunkGenerator extends ChunkGenerator {
     public static final int SURFACE_Y = 64;
     private static final int BEDROCK_Y = SURFACE_Y - 4;
-    public static final MapCodec<TwoIStarfieldChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(
+    public static final Codec<TwoIStarfieldChunkGenerator> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(BiomeSource.CODEC.fieldOf("biome_source").forGetter(g -> g.biomeSource),
                             Codec.BOOL.optionalFieldOf("platform", true).forGetter(g -> g.platform))
                     .apply(instance, TwoIStarfieldChunkGenerator::new));
@@ -50,7 +50,7 @@ public final class TwoIStarfieldChunkGenerator extends ChunkGenerator {
 
     /** Preserve the original white glowing floor without retaining the retired dimension subsystem. */
     public void resolveFloorState() {
-        setFloorState(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(
+        setFloorState(BuiltInRegistries.BLOCK.get(new ResourceLocation(
                 "useless_mod", "white_glow_plastic")).defaultBlockState());
     }
 
@@ -62,7 +62,7 @@ public final class TwoIStarfieldChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    protected MapCodec<? extends ChunkGenerator> codec() {
+    protected Codec<? extends ChunkGenerator> codec() {
         return CODEC;
     }
 
@@ -117,7 +117,7 @@ public final class TwoIStarfieldChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public CompletableFuture<ChunkAccess> fillFromNoise(@NotNull Blender blender, @NotNull RandomState randomState,
+    public CompletableFuture<ChunkAccess> fillFromNoise(java.util.concurrent.Executor executor, @NotNull Blender blender, @NotNull RandomState randomState,
                                                           @NotNull StructureManager structureManager,
                                                           @NotNull ChunkAccess chunk) {
         return CompletableFuture.completedFuture(chunk);

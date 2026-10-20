@@ -8,8 +8,8 @@ import com.sorrowmist.useless.stretcher.content.entity.TwoIDollEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
 import java.util.function.Supplier;
 

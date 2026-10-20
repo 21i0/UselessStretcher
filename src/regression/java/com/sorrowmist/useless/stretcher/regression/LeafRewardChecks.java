@@ -20,10 +20,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.level.BlockDropsEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.level.BlockDropsEvent;
+import net.minecraftforge.event.tick.ServerTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,39 +59,39 @@ final class LeafRewardChecks {
             var cancelled = drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
             cancelled.setCanceled(true);
             WondrousStaffLeafDropHandler.onBlockDrops(cancelled);
-            NeoForge.EVENT_BUS.post(drop(level, null, Blocks.OAK_LEAVES.defaultBlockState()));
-            NeoForge.EVENT_BUS.post(drop(level, player, Blocks.STONE.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, null, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.STONE.defaultBlockState()));
             player.gameMode.changeGameModeForPlayer(GameType.CREATIVE);
-            NeoForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
             player.gameMode.changeGameModeForPlayer(GameType.SPECTATOR);
-            NeoForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
             player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL);
             check(!data.hasRolledStaff(player.getUUID()) && !data.hasRolledDoll(player.getUUID()),
                     "cancelled/non-player/non-leaf/creative/spectator events do not roll");
 
             StretcherConfig.SERVER_STAFF_LEAF_DROP.set(false);
-            NeoForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
             check(data.hasClaimedDoll(player.getUUID()) && !data.hasRolledStaff(player.getUUID()),
                     "doll can roll and deliver while staff is disabled");
             StretcherConfig.SERVER_STAFF_LEAF_DROP.set(true);
-            for (int i = 0; i < 8; i++) NeoForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            for (int i = 0; i < 8; i++) MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
             check(player.getInventory().countItem(ModItems.TWO_I_DOLL.get()) == 1
                             && player.getInventory().countItem(ModItems.WONDROUS_STAFF.get()) == 1,
                     "doll-first order independently awards staff and never repeats either reward");
 
             var staffFirst = new FakePlayer(level, new GameProfile(UUID.randomUUID(), "LeafStaffFirst"));
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(false);
-            NeoForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
             check(data.hasClaimedStaff(staffFirst.getUUID()) && !data.hasRolledDoll(staffFirst.getUUID()),
                     "staff can roll while doll is disabled");
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(true);
-            NeoForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
             check(data.hasClaimedDoll(staffFirst.getUUID()), "claimed staff does not consume doll roll");
 
             var full = new FakePlayer(level, new GameProfile(UUID.randomUUID(), "LeafFullInventory"));
             full.setPos(12, 160, 12);
             fill(full);
-            NeoForge.EVENT_BUS.post(drop(level, full, Blocks.OAK_LEAVES.defaultBlockState()));
+            MinecraftForge.EVENT_BUS.post(drop(level, full, Blocks.OAK_LEAVES.defaultBlockState()));
             UUID id = full.getUUID();
             check(data.hasPendingStaff(id) && data.hasPendingDoll(id), "both rewards remain pending with full inventory");
             check(carriers(level, id).size() == 2, "one visual carrier per pending reward");

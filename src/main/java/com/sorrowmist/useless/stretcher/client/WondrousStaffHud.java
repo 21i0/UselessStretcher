@@ -6,7 +6,6 @@ import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.client.Camera;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,10 +16,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import org.joml.Vector3f;
 
 import java.util.List;
@@ -36,7 +35,7 @@ import java.util.List;
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public final class WondrousStaffHud {
     private static final ResourceLocation LAYER_ID =
-            ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "wondrous_staff_hud");
+            new ResourceLocation(UselessStretcherMod.MODID, "wondrous_staff_hud");
 
     private static final int BAR_WIDTH = 168;
     private static final int BAR_HEIGHT = 8;
@@ -49,11 +48,11 @@ public final class WondrousStaffHud {
     }
 
     @SubscribeEvent
-    public static void registerLayer(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(LAYER_ID, WondrousStaffHud::render);
+    public static void registerLayer(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll(LAYER_ID.getPath(), (gui, graphics, partial, width, height) -> render(graphics, partial));
     }
 
-    private static void render(GuiGraphics g, DeltaTracker deltaTracker) {
+    private static void render(GuiGraphics g, float partialTick) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || mc.level == null) return;

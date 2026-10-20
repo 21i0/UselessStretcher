@@ -96,7 +96,7 @@ public final class AccelerationExecutionBudget {
     }
 
     private static int currentBudget(MinecraftServer server) {
-        long[] samples = server.getTickTimesNanos();
+        long[] samples = server.tickTimes;
         long total = 0L;
         int count = 0;
         for (long sample : samples) {
@@ -111,8 +111,8 @@ public final class AccelerationExecutionBudget {
         }
         if (count == 0) return HEALTHY_BUDGET;
         long average = total == Long.MAX_VALUE ? Long.MAX_VALUE : total / count;
-        long target = Math.max(NANOS_PER_MILLISECOND,
-                (long) (server.tickRateManager().millisecondsPerTick() * NANOS_PER_MILLISECOND));
+        // Vanilla 1.20.1 has a fixed 20 TPS target.
+        long target = MinecraftServer.MS_PER_TICK * NANOS_PER_MILLISECOND;
         return adaptiveBudget(average, target);
     }
 

@@ -1,6 +1,6 @@
 package com.sorrowmist.useless.stretcher.mixin;
 
-import net.neoforged.fml.loading.FMLLoader;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -23,14 +23,11 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.endsWith(".TwoIBeeEncaseMixin") || mixinClassName.endsWith(".TwoIAmberMixin"))
             return isModLoadedEarly("productivebees");
         if (mixinClassName.endsWith(".ApotheosisEnchantingMenuMixin")) {
-            return isModLoadedEarly("apothic_enchanting");
+            return isModLoadedEarly("apotheosis");
         }
         if (mixinClassName.endsWith(".ApotheosisEnchantingStatsMixin")) {
-            // The stats mixin declares both gatherStats descriptors with require = 0, so it
-            // self-adapts to the installed Apothic Enchanting ABI and only needs the mod
-            // itself to be present. Apothic Enchanting is standalone; Apotheosis is not
-            // required for the virtual-bookshelf boost.
-            return isModLoadedEarly("apothic_enchanting");
+            // Apotheosis 1.20.1 contains the enchanting module.
+            return isModLoadedEarly("apotheosis");
         }
         return true;
     }
@@ -45,7 +42,7 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
             // Continue to the normal list when bootstrap has already completed.
         }
         try {
-            var modList = net.neoforged.fml.ModList.get();
+            var modList = net.minecraftforge.fml.ModList.get();
             return modList != null && modList.isLoaded(modId);
         } catch (RuntimeException | LinkageError ignored) {
             return false;

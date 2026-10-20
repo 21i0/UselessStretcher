@@ -15,7 +15,7 @@ public final class CapsuleReadyToast implements Toast {
     private final Component structure;
     private final Object token;
     private CapsuleReadyToast(String id, String dimension, int instanceId) {
-        ResourceLocation key = ResourceLocation.parse(id);
+        ResourceLocation key = new ResourceLocation(id);
         String translation = "structure." + key.getNamespace() + "." + key.getPath().replace('/', '.');
         structure = net.minecraft.locale.Language.getInstance().has(translation) ? Component.translatable(translation)
                 : Component.literal(key.getPath().replace('_', ' ').replace('/', ' '));

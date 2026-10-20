@@ -8,7 +8,7 @@ import java.util.List;
 public final class TwoIStoryGallery {
     public record Picture(String file, int width, int height, int category) {
         public ResourceLocation texture() {
-            return ResourceLocation.fromNamespaceAndPath("useless_stretcher", "textures/dialogue/" + file + ".png");
+            return new ResourceLocation("useless_stretcher", "textures/dialogue/" + file + ".png");
         }
 
         public String titleKey() {

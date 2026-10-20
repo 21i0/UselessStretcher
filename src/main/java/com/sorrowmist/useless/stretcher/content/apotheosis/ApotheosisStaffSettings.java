@@ -6,11 +6,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.EnchantingTableBlock;
-import net.neoforged.fml.ModList;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.world.level.block.EnchantmentTableBlock;
+import net.minecraftforge.fml.ModList;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
 
 /** Optional Apotheosis bridge. Reflection keeps Apotheosis and Apothic Enchanting runtime-optional. */
 public final class ApotheosisStaffSettings {
@@ -19,12 +19,30 @@ public final class ApotheosisStaffSettings {
     private ApotheosisStaffSettings() { }
 
     public static boolean isAvailable() {
-        return isApotheosisLoaded() || isEnchantingAvailable();
+        return isWorldTierAvailable() || isEnchantingAvailable();
     }
 
-    /** The table boost only needs Apothic Enchanting, which is a standalone mod. */
+    /** Apotheosis 7 (MC 1.20.1) contains the enchanting module itself. */
     public static boolean isEnchantingAvailable() {
-        return ModList.get().isLoaded("apothic_enchanting");
+        if (ModList.get().isLoaded("apothic_enchanting")) return true;
+        if (!isApotheosisLoaded()) return false;
+        try {
+            return Class.forName("dev.shadowsoffire.apotheosis.Apotheosis", false,
+                    ApotheosisStaffSettings.class.getClassLoader()).getField("enableEnch").getBoolean(null);
+        } catch (ReflectiveOperationException | LinkageError ignored) {
+            return false;
+        }
+    }
+
+    /** World tiers were introduced after MC 1.20.1. Do not advertise absent APIs. */
+    public static boolean isWorldTierAvailable() {
+        if (!isApotheosisLoaded()) return false;
+        try {
+            Class.forName(WORLD_TIER_CLASS, false, ApotheosisStaffSettings.class.getClassLoader());
+            return true;
+        } catch (ClassNotFoundException | LinkageError ignored) {
+            return false;
+        }
     }
 
     public static boolean isApotheosisLoaded() {
@@ -33,30 +51,30 @@ public final class ApotheosisStaffSettings {
 
     public static ApotheosisTableData.Boost boost(ItemStack stack) {
         return new ApotheosisTableData.Boost(
-                stack.getOrDefault(StretcherComponents.APOTHEOSIS_ETERNA.get(), 0),
-                stack.getOrDefault(StretcherComponents.APOTHEOSIS_QUANTA.get(), 0),
-                stack.getOrDefault(StretcherComponents.APOTHEOSIS_ARCANA.get(), 0),
-                stack.getOrDefault(StretcherComponents.APOTHEOSIS_CLUES.get(), 0)).normalized();
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.APOTHEOSIS_ETERNA.get(), 0),
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.APOTHEOSIS_QUANTA.get(), 0),
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.APOTHEOSIS_ARCANA.get(), 0),
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.APOTHEOSIS_CLUES.get(), 0)).normalized();
     }
 
     public static void setBoost(ItemStack stack, ApotheosisTableData.Boost boost) {
         ApotheosisTableData.Boost value = boost.normalized();
-        stack.set(StretcherComponents.APOTHEOSIS_ETERNA.get(), value.eterna());
-        stack.set(StretcherComponents.APOTHEOSIS_QUANTA.get(), value.quanta());
-        stack.set(StretcherComponents.APOTHEOSIS_ARCANA.get(), value.arcana());
-        stack.set(StretcherComponents.APOTHEOSIS_CLUES.get(), value.clues());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.APOTHEOSIS_ETERNA.get(), value.eterna());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.APOTHEOSIS_QUANTA.get(), value.quanta());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.APOTHEOSIS_ARCANA.get(), value.arcana());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.APOTHEOSIS_CLUES.get(), value.clues());
     }
 
     public static boolean selectionMode(ItemStack stack) {
-        return stack.getOrDefault(StretcherComponents.APOTHEOSIS_TABLE_SELECTION.get(), false);
+        return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.APOTHEOSIS_TABLE_SELECTION.get(), false);
     }
 
     public static void setSelectionMode(ItemStack stack, boolean enabled) {
-        stack.set(StretcherComponents.APOTHEOSIS_TABLE_SELECTION.get(), enabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.APOTHEOSIS_TABLE_SELECTION.get(), enabled);
     }
 
     public static boolean isTable(BlockState state) {
-        return state.getBlock() instanceof EnchantingTableBlock;
+        return state.getBlock() instanceof EnchantmentTableBlock;
     }
 
     public static boolean markTable(ServerPlayer player, net.minecraft.world.InteractionHand hand,
@@ -85,7 +103,7 @@ public final class ApotheosisStaffSettings {
     }
 
     public static boolean setTier(ServerPlayer player, String name) {
-        if (!isApotheosisLoaded()) return false;
+        if (!isWorldTierAvailable()) return false;
         try {
             ClassLoader loader = player.getClass().getClassLoader();
             Class<?> tierClass = Class.forName(WORLD_TIER_CLASS, true, loader);
@@ -96,7 +114,7 @@ public final class ApotheosisStaffSettings {
             for (Object candidate : tierClass.getEnumConstants()) {
                 if (((Enum<?>) candidate).ordinal() > ((Enum<?>) tier).ordinal()) continue;
                 ResourceLocation id = (ResourceLocation) tierClass.getMethod("getUnlockAdvancement").invoke(candidate);
-                var advancement = player.getServer().getAdvancements().get(id);
+                var advancement = player.getServer().getAdvancements().getAdvancement(id);
                 if (advancement == null) continue;
                 var progress = player.getAdvancements().getOrStartProgress(advancement);
                 java.util.List<String> remaining = new java.util.ArrayList<>();
@@ -116,7 +134,7 @@ public final class ApotheosisStaffSettings {
             for (var hand : net.minecraft.world.InteractionHand.values()) {
                 var held = player.getItemInHand(hand);
                 if (held.getItem() instanceof com.sorrowmist.useless.stretcher.content.item.WondrousStaffItem) {
-                    held.set(StretcherComponents.APOTHEOSIS_WORLD_TIER.get(), name.toLowerCase(java.util.Locale.ROOT));
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.APOTHEOSIS_WORLD_TIER.get(), name.toLowerCase(java.util.Locale.ROOT));
                 }
             }
             player.inventoryMenu.broadcastChanges();
@@ -128,7 +146,7 @@ public final class ApotheosisStaffSettings {
     }
 
     public static String currentTier(Player player) {
-        if (!isApotheosisLoaded() || player == null) return "haven";
+        if (!isWorldTierAvailable() || player == null) return "haven";
         try {
             Class<?> tierClass = Class.forName(WORLD_TIER_CLASS, true, player.getClass().getClassLoader());
             Object tier = tierClass.getMethod("getTier", Player.class).invoke(null, player);

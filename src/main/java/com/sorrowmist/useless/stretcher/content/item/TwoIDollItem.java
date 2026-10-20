@@ -21,6 +21,10 @@ import java.util.List;
 
 /** The author's 2i mascot, with relationship and ownership preserved in every form. */
 public final class TwoIDollItem extends BlockItem {
+    @Override public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+        com.sorrowmist.useless.stretcher.client.ClientSetup.registerItemRenderer(consumer);
+    }
+
     public TwoIDollItem() {
         super(com.sorrowmist.useless.stretcher.init.ModBlocks.TWO_I_DOLL_DISPLAY.get(),
                 new Properties().stacksTo(1));
@@ -35,8 +39,8 @@ public final class TwoIDollItem extends BlockItem {
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         // Updates to this doll keep the hand still; exchanging two dolls must still animate.
         return slotChanged || !ItemStack.isSameItem(oldStack, newStack)
-                || !java.util.Objects.equals(oldStack.get(StretcherComponents.TWO_I_DOLL_ID.get()),
-                        newStack.get(StretcherComponents.TWO_I_DOLL_ID.get()));
+                || !java.util.Objects.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(oldStack, StretcherComponents.TWO_I_DOLL_ID.get()),
+                        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(newStack, StretcherComponents.TWO_I_DOLL_ID.get()));
     }
 
     /** Ordinary inventory/shift-click equipment rules retain the complete original stack. */
@@ -45,7 +49,6 @@ public final class TwoIDollItem extends BlockItem {
         return EquipmentSlot.HEAD;
     }
 
-    @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot slot, LivingEntity wearer) {
         return slot == EquipmentSlot.HEAD;
     }
@@ -83,9 +86,9 @@ public final class TwoIDollItem extends BlockItem {
     /** Legacy unowned items bind once on the server; subsequent holders cannot take ownership. */
     public static boolean claimOrCheckOwner(ItemStack stack, Player player) {
         if (!player.level().isClientSide) ensureIdentity(stack);
-        java.util.UUID owner = stack.get(StretcherComponents.TWO_I_OWNER.get());
+        java.util.UUID owner = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_OWNER.get());
         if (owner == null) {
-            if (!player.level().isClientSide) stack.set(StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
+            if (!player.level().isClientSide) com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
             return true;
         }
         if (owner.equals(player.getUUID())) return true;
@@ -95,10 +98,10 @@ public final class TwoIDollItem extends BlockItem {
     }
 
     public static java.util.UUID ensureIdentity(ItemStack stack) {
-        java.util.UUID id = stack.get(StretcherComponents.TWO_I_DOLL_ID.get());
+        java.util.UUID id = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_DOLL_ID.get());
         if (id == null) {
             id = java.util.UUID.randomUUID();
-            stack.set(StretcherComponents.TWO_I_DOLL_ID.get(), id);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_DOLL_ID.get(), id);
         }
         return id;
     }
@@ -115,21 +118,21 @@ public final class TwoIDollItem extends BlockItem {
                               int slot, boolean selected) {
         super.inventoryTick(stack, level, holder, slot, selected);
         if (!level.isClientSide && holder instanceof Player player) {
-            boolean newlyReceived = !stack.has(StretcherComponents.TWO_I_DOLL_ID.get())
-                    || !stack.has(StretcherComponents.TWO_I_OWNER.get());
+            boolean newlyReceived = !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(stack, StretcherComponents.TWO_I_DOLL_ID.get())
+                    || !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(stack, StretcherComponents.TWO_I_OWNER.get());
             ensureIdentity(stack);
-            if (!stack.has(StretcherComponents.TWO_I_OWNER.get()))
-                stack.set(StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
+            if (!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(stack, StretcherComponents.TWO_I_OWNER.get()))
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
             if (newlyReceived && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)
                 TwoIDollAcquisition.notifyAcquired(serverPlayer, stack);
         }
     }
 
     public static int getBond(ItemStack stack) {
-        if (stack.has(StretcherComponents.TWO_I_BOND.get())) {
-            return Math.max(-100, Math.min(100, stack.getOrDefault(StretcherComponents.TWO_I_BOND.get(), 0)));
+        if (com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(stack, StretcherComponents.TWO_I_BOND.get())) {
+            return Math.max(-100, Math.min(100, com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.TWO_I_BOND.get(), 0)));
         }
-        int legacyScore = stack.getOrDefault(StretcherComponents.TWO_I_GIFT_SCORE.get(), 0);
+        int legacyScore = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.TWO_I_GIFT_SCORE.get(), 0);
         return Math.max(0, Math.min(100, legacyScore * 10));
     }
 
@@ -145,7 +148,7 @@ public final class TwoIDollItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip,
+    public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> tooltip,
                                 TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.useless_stretcher.two_i_doll.flavor")
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -153,7 +156,7 @@ public final class TwoIDollItem extends BlockItem {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.two_i_doll.headwear")
                 .withStyle(ChatFormatting.GRAY));
-        if (net.neoforged.fml.ModList.get().isLoaded("curios"))
+        if (net.minecraftforge.fml.ModList.get().isLoaded("curios"))
             tooltip.add(Component.translatable("tooltip.useless_stretcher.two_i_doll.curios")
                     .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.two_i_doll.remote")

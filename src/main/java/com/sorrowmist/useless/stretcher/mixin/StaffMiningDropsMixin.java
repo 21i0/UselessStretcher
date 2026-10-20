@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
-@Mixin(MiningUtils.class)
+@Mixin(value = MiningUtils.class, remap = false)
 public abstract class StaffMiningDropsMixin {
     @Inject(method = "mergeItemStacks(Ljava/util/List;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
     private static void uselessStretcher$merge(List<ItemStack> drops,

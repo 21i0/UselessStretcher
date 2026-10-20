@@ -11,7 +11,7 @@ import java.util.List;
 
 /** A cached eight-panel fabric dome with scalloped piping, underside ribs and little stars. */
 public final class TwoIUmbrellaCanopy {
-    private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation WHITE = new ResourceLocation(
             "useless_stretcher", "textures/entity/two_i_umbrella.png");
     private static final float SECTOR = (float) Math.PI / 4;
     /** Radius in model pixels. 18.5 keeps the full doll under one canopy. */
@@ -92,9 +92,9 @@ public final class TwoIUmbrellaCanopy {
     }
 
     private static void vertex(VertexConsumer vertices, PoseStack.Pose pose, Point p, Quad quad, int light, int overlay) {
-        vertices.addVertex(pose, p.x / 16, p.y / 16, p.z / 16)
-                .setColor(quad.color >> 16 & 255, quad.color >> 8 & 255, quad.color & 255, 255)
-                .setUv(0.5F, 0.5F).setOverlay(overlay).setLight(light)
-                .setNormal(pose, quad.nx, quad.ny, quad.nz);
+        vertices.vertex(pose.pose(), p.x / 16, p.y / 16, p.z / 16)
+                .color(quad.color >> 16 & 255, quad.color >> 8 & 255, quad.color & 255, 255)
+                .uv(0.5F, 0.5F).overlayCoords(overlay).uv2(light)
+                .normal(pose.normal(), quad.nx, quad.ny, quad.nz).endVertex();
     }
 }

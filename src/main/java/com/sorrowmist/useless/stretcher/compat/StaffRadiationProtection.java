@@ -6,10 +6,10 @@ import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 
 /** The switch belongs to the staff, so normal inventory save/sync preserves it. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
@@ -24,22 +24,23 @@ public final class StaffRadiationProtection {
     }
 
     private static boolean enabled(ItemStack stack) {
-        return stack.is(ModItems.WONDROUS_STAFF.get()) && stack.getOrDefault(
+        return stack.is(ModItems.WONDROUS_STAFF.get()) && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack,
                 StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
     }
 
     public static void configure(ServerPlayer player, boolean offhand, boolean enabled) {
         ItemStack stack = offhand ? player.getOffhandItem() : player.getMainHandItem();
         if (!stack.is(ModItems.WONDROUS_STAFF.get())) return;
-        stack.set(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), enabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), enabled);
         if (enabled && ModList.get().isLoaded("mekanism")) MekanismRadiationCompat.clear(player);
     }
 
     @SubscribeEvent
-    public static void tick(PlayerTickEvent.Pre event) {
+    public static void tick(PlayerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.START) return;
         // Existing dose is cleared before player effects, including login and world changes.
         // MEK's own dose synchronization remains responsible for changed-only packets.
-        if (event.getEntity() instanceof ServerPlayer player && player.tickCount % 20 == 0
+        if (event.player instanceof ServerPlayer player && player.tickCount % 20 == 0
                 && ModList.get().isLoaded("mekanism") && enabled(player)) MekanismRadiationCompat.clear(player);
     }
 }

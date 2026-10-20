@@ -19,7 +19,7 @@ public final class TwoIStoryData extends SavedData {
 
     public static TwoIStoryData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(TwoIStoryData::new, TwoIStoryData::load), "useless_stretcher_two_i_story");
+                tag -> TwoIStoryData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), TwoIStoryData::new, "useless_stretcher_two_i_story");
     }
 
     public boolean metBefore(UUID player) { return players.containsKey(player); }
@@ -47,7 +47,10 @@ public final class TwoIStoryData extends SavedData {
         setDirty();
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag savedPlayers = new ListTag();
         for (Map.Entry<UUID, Progress> player : players.entrySet()) {

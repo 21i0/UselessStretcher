@@ -16,8 +16,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 
 import java.util.Optional;
 
@@ -79,7 +79,7 @@ final class StandaloneBlink {
                 end,
                 ClipContext.Block.OUTLINE,
                 ClipContext.Fluid.NONE,
-                CollisionContext.empty());
+                player);
         BlockHitResult hit = level.clip(clipContext);
 
         if (hit.getType() == HitResult.Type.MISS) {
@@ -166,7 +166,7 @@ final class StandaloneBlink {
 
     private static Optional<Vec3> postTeleportEvent(Player player, Vec3 target) {
         EntityTeleportEvent event = new EntityTeleportEvent(player, target.x(), target.y(), target.z());
-        if (NeoForge.EVENT_BUS.post(event).isCanceled()) {
+        if (MinecraftForge.EVENT_BUS.post(event)) {
             return Optional.empty();
         }
         return Optional.of(new Vec3(event.getTargetX(), event.getTargetY(), event.getTargetZ()));

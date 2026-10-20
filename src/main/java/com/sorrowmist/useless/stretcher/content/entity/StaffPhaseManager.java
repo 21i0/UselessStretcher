@@ -165,10 +165,10 @@ public final class StaffPhaseManager {
 
     private static State from(ItemStack stack) {
         if (!stack.is(ModItems.WONDROUS_STAFF.get())
-                || !stack.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false)) {
+                || !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false)) {
             return State.OFF;
         }
-        return new State(true, stack.getOrDefault(
+        return new State(true, com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack,
                 StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true));
     }
 

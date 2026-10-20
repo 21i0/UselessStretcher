@@ -36,7 +36,7 @@ public final class TwoIStarfieldData extends SavedData {
 
     public static TwoIStarfieldData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(TwoIStarfieldData::new, TwoIStarfieldData::load), NAME);
+                tag -> TwoIStarfieldData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), TwoIStarfieldData::new, NAME);
     }
 
     public synchronized int slotFor(UUID player) {
@@ -106,7 +106,10 @@ public final class TwoIStarfieldData extends SavedData {
         endCelebration(player);
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag assignments = new ListTag();
         slots.forEach((player, slot) -> {
@@ -183,7 +186,7 @@ public final class TwoIStarfieldData extends SavedData {
         for (int i = 0; i < rewards.size(); i++) {
             CompoundTag entry = rewards.getCompound(i);
             if (entry.hasUUID("player")) data.rewardDrops.put(entry.getUUID("player"),
-                    Math.clamp(entry.getInt("drops"), 0, MAX_REWARD_DROPS));
+                    com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(entry.getInt("drops"), 0, MAX_REWARD_DROPS));
         }
         ListTag celebrations = tag.getList("celebrations", Tag.TAG_COMPOUND);
         for (int i = 0; i < celebrations.size(); i++) {

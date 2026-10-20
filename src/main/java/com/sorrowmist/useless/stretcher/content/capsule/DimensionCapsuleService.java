@@ -41,7 +41,7 @@ public final class DimensionCapsuleService {
             returnToOwner(player);
             return;
         }
-        String raw = stack.get(StretcherComponents.CAPSULE_STRUCTURE.get());
+        String raw = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.CAPSULE_STRUCTURE.get());
         DimensionCapsuleCatalog.Entry entry = DimensionCapsuleCatalog.find(player, raw);
         if (entry == null) {
             player.displayClientMessage(Component.translatable("msg.useless_stretcher.dimension_capsule.select_first"), true);
@@ -73,7 +73,7 @@ public final class DimensionCapsuleService {
                     MAX_BLOCKS), true);
             return;
         }
-        int facing = stack.getOrDefault(StretcherComponents.CAPSULE_ROTATION.get(), 0) & 3;
+        int facing = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(stack, StretcherComponents.CAPSULE_ROTATION.get(), 0) & 3;
         String roomKey = player.getUUID() + "|" + entry.id() + "|" + entry.dimensionHint() + "|" + facing;
         DimensionCapsuleData data = DimensionCapsuleData.get(player.getServer());
         DimensionCapsuleData.Room room = data.room(roomKey);
@@ -159,7 +159,7 @@ public final class DimensionCapsuleService {
 
     private static ServerLevel targetLevel(ServerPlayer player, String hint) {
         ResourceLocation id;
-        try { id = ResourceLocation.parse(hint); } catch (Exception ignored) { return null; }
+        try { id = new ResourceLocation(hint); } catch (Exception ignored) { return null; }
         ResourceKey<Level> key = ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION, id);
         return player.getServer().getLevel(key);
     }
@@ -177,7 +177,7 @@ public final class DimensionCapsuleService {
         String dim = player.getPersistentData().getString(RETURN_DIM);
         if (dim.isEmpty()) return;
         ResourceLocation id;
-        try { id = ResourceLocation.parse(dim); } catch (Exception ignored) { return; }
+        try { id = new ResourceLocation(dim); } catch (Exception ignored) { return; }
         ResourceKey<Level> key = ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION, id);
         ServerLevel target = player.getServer().getLevel(key);
         if (target == null) {

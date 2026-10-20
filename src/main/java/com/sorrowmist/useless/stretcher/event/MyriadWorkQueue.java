@@ -7,10 +7,10 @@ import com.sorrowmist.useless.stretcher.content.mold.MoldRecipeIndex;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 import java.util.ArrayDeque;
 import java.util.Map;
@@ -32,7 +32,8 @@ public final class MyriadWorkQueue {
     }
 
     @SubscribeEvent
-    public static void tick(ServerTickEvent.Post event) {
+    public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         var queue = QUEUES.get(event.getServer());
         long started = System.nanoTime();
         boolean jobs = queue != null && !queue.isEmpty();
@@ -93,14 +94,7 @@ public final class MyriadWorkQueue {
     }
 
     private static long currentSlice(MinecraftServer server) {
-        double total = 0;
-        int count = 0;
-        for (long sample : server.getTickTimesNanos()) {
-            if (sample > 0) { total += sample; count++; }
-        }
-        long average = count == 0 ? 0 : (long) (total / count);
-        long target = (long) (server.tickRateManager().millisecondsPerTick() * 1_000_000L);
-        return sliceBudget(average, target);
+        return sliceBudget((long) (server.getAverageTickTime() * 1_000_000D), 50_000_000L);
     }
 
     /** Use a quarter of measured headroom, capped globally; never a per-block allowance. */

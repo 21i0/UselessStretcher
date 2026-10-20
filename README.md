@@ -1,7 +1,7 @@
 # 万象担架 · Useless Stretcher
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-3C8527)](https://www.minecraft.net/)
-[![NeoForge](https://img.shields.io/badge/NeoForge-21.1.x-EA6E1E)](https://neoforged.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-3C8527)](https://www.minecraft.net/)
+[![Forge](https://img.shields.io/badge/Forge-47.3.10-EA6E1E)](https://files.minecraftforge.net/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 《无用之物 / Useless Mod》的附属模组：把模具变成万能通配、把样板投送变成远程，
@@ -11,26 +11,13 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## 1.6.1
-
-当前主线版本为 `1.21.1-1.6.1`，包含 Occultism 1.224.4 黄金献祭碗的活动判断与自动休眠修复。制作矿井时保持加速，完成或等待献祭/指定物品时可休眠，原生条件满足后恢复；单体与范围使用同一判断。
-
-构建文件名为 `useless_stretcher-1.21.1-1.6.1.jar`。客户端和服务端同时更新；从 1.6.0 升级不需重置存档，网络协议仍为 21。详见 [1.6.1 更新说明](changelog-1.6.1.txt)、[使用说明](usage-1.6.1.txt) 与 [验证记录](verification/1.6.1-version-and-port-branch-20261020.md)。公开 1.6.0 Release 保留，本轮未创建 1.6.1 Release。
-
-## 开发分支
-
-| 分支 | 用途 |
-| --- | --- |
-| `main` | Minecraft 1.21.1 / NeoForge 主线 |
-| [`1.20.1`](https://github.com/21i0/UselessStretcher/tree/1.20.1) | 接收 Minecraft 1.20.1 移植代码；初始从 1.6.1 主线创建，待移植代码提交后再验证其环境和构建 |
-
-## 1.6.0 主要内容
+## Forge 1.20.1 · 20.1.6.0
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-正式文件名为 `useless_stretcher-1.21.1-1.6.0.jar`，可从 [1.6.0 正式 Release](https://github.com/21i0/UselessStretcher/releases/tag/v1.6.0) 下载。更新内容和使用方法见 [发布说明](release-1.6.0.md)、[使用说明](usage-1.6.0.txt) 及 `verification` 验证记录。
+正式文件名为 `useless_stretcher-20.1.6.0.jar`，需搭配无用之物 `20.2.4.6`。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
@@ -43,19 +30,38 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 
 | 项目 | 要求 |
 |---|---|
-| Minecraft | 1.21.1 |
-| Mod 加载器 | NeoForge 21.1.x（构建于 21.1.249） |
-| Java | **21** |
-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（≥ `1.21.1-2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（≥ `19.2`） |
+| Minecraft | 1.20.1 |
+| Mod 加载器 | Forge 47.3.10+ |
+| Java | **17** |
+| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`） |
 | 安装位置 | 客户端 **与** 服务端都要装 |
 
 > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
 > 无用之物大更新后若无法启动，请更新本模组到对应版本。
 
+## 构建与兼容范围
+
+先将本分支与对应的 UselessMod Forge 1.20.1 分支检出到同级的
+`UselessStretcher`、`UselessMod` 目录，使用 Java 17：
+
+```shell
+cd UselessMod
+./gradlew jar
+cd ../UselessStretcher
+./gradlew build
+```
+
+Windows 使用 `gradlew.bat`。也可通过 `-PuselessModDevJar=/path/to/dev.jar`
+指定主模组的 `build/devlibs/useless_mod-20.2.4.6.jar`，不可使用已重混淆的发布 JAR。
+其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具。
+本分支针对 Create 2 Mekanism: Sky Edition 2；尚未移植的 Occultism 和
+RFToolsBuilder 专用加速桥保留为源码但不打包。原 NeoForge 客户端/服务器
+场景测试也保留为参考源码，未接入本分支的 `check`，不能视为已运行。
+
 ## 主要内容 / Features
 
 ### 游戏内指南（1.4.2）
-安装 GuideME 21.1.17 或更新版后，打开 AE2 原有指南，在左侧导航进入“万象担架附属”。
+打开 AE2 15 的原有指南，在左侧导航进入“万象担架附属”。
 也可在背包中悬停万物之块、担架或手杖，按 GuideME 阅读键直接跳转到对应页面。
 不再额外注册第二本指南书，也没有书加紫色染料配方。
 指南使用现有物品外观配图，按键显示跟随游戏改键设置。

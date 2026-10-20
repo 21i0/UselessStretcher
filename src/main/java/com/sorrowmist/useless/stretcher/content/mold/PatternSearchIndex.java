@@ -1,6 +1,6 @@
 package com.sorrowmist.useless.stretcher.content.mold;
 
-import appeng.api.ids.AEComponents;
+import com.sorrowmist.useless.compat.forge1201.recipe.NativeCraftingPatternData;
 import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
@@ -163,26 +163,17 @@ public final class PatternSearchIndex {
         Terms inputs = new Terms(), outputs = new Terms(), molds = new Terms(), all = new Terms();
         all.key(pattern);
         String source = "";
-        var processing = pattern.get(AEComponents.ENCODED_PROCESSING_PATTERN);
+        var processing = PatternOutputs.processing(pattern);
         if (processing != null) {
-            processing.sparseInputs().forEach(inputs::generic);
-            processing.sparseOutputs().forEach(outputs::generic);
+            processing.inputs().forEach(inputs::generic);
+            processing.outputs().forEach(outputs::generic);
         }
-        var crafting = pattern.get(AEComponents.ENCODED_CRAFTING_PATTERN);
+        var crafting = NativeCraftingPatternData.read(pattern);
         if (crafting != null) {
             crafting.inputs().forEach(inputs::stack);
             outputs.stack(crafting.result()); all.id(crafting.recipeId());
         }
-        var stonecutting = pattern.get(AEComponents.ENCODED_STONECUTTING_PATTERN);
-        if (stonecutting != null) {
-            inputs.stack(stonecutting.input()); outputs.stack(stonecutting.output()); all.id(stonecutting.recipeId());
-        }
-        var smithing = pattern.get(AEComponents.ENCODED_SMITHING_TABLE_PATTERN);
-        if (smithing != null) {
-            inputs.stack(smithing.template()); inputs.stack(smithing.base()); inputs.stack(smithing.addition());
-            outputs.stack(smithing.resultItem()); all.id(smithing.recipeId());
-        }
-        var myriad = pattern.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
+        var myriad = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(pattern, UComponents.OMNIVERSAL_PATTERN_DATA.get());
         if (myriad != null) {
             all.id(myriad.recipeId());
             source = (myriad.sourceId() + " " + myriad.recipeId().getNamespace()).toLowerCase(Locale.ROOT);

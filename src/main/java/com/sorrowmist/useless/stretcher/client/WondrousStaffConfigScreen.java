@@ -65,9 +65,9 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
             accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
             summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
             lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
-            phaseEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
-            radiationEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
-            phaseInteractionEnabled = staff.getOrDefault(
+            phaseEnabled = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+            radiationEnabled = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
+            phaseInteractionEnabled = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff,
                     StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
             settingsLoaded = true;
         }
@@ -200,7 +200,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         selectedSpeed = speed;
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
-        staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
         sendSelection();
     }
 
@@ -216,7 +216,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         accelerationEnabled = !accelerationEnabled;
-        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), accelerationEnabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefTimeAccelerationEnabledComponent.get(), accelerationEnabled);
         sendSelection();
     }
 
@@ -225,7 +225,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !StretcherConfig.enableStaffLootRefresh()) return;
         summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
         lootRefreshEnabled = !WondrousStaffAcceleration.isLootRefreshEnabled(staff);
-        staff.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), lootRefreshEnabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), lootRefreshEnabled);
         Network.sendWondrousStaffFeatures(summonEnabled, lootRefreshEnabled, hand);
         updateSelection();
     }
@@ -264,7 +264,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         }
         if (apotheosisOpenButton != null) {
             boolean configEnabled = StretcherConfig.enableApotheosisCompat();
-            apotheosisOpenButton.active = configEnabled && ApotheosisStaffSettings.isApotheosisLoaded();
+            apotheosisOpenButton.active = configEnabled && ApotheosisStaffSettings.isAvailable();
             apotheosisOpenButton.setMessage(configEnabled
                     ? apotheosisOpenMessage()
                     : Component.translatable("gui.useless_stretcher.staff_apotheosis.disabled"));
@@ -276,7 +276,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                     "help.useless_stretcher.staff_config.phase")));
         }
         if (radiationButton != null) {
-            radiationButton.active = net.neoforged.fml.ModList.get().isLoaded("mekanism");
+            radiationButton.active = net.minecraftforge.fml.ModList.get().isLoaded("mekanism");
             radiationButton.setSelected(radiationEnabled);
             radiationButton.setMessage(radiationMessage());
             radiationButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
@@ -334,7 +334,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         phaseEnabled = !phaseEnabled;
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), phaseEnabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), phaseEnabled);
         Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
         updateSelection();
     }
@@ -343,7 +343,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !phaseEnabled) return;
         phaseInteractionEnabled = !phaseInteractionEnabled;
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), phaseInteractionEnabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), phaseInteractionEnabled);
         Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
         updateSelection();
     }
@@ -360,9 +360,9 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
 
     private void toggleRadiation() {
         ItemStack staff = currentStaff();
-        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !net.neoforged.fml.ModList.get().isLoaded("mekanism")) return;
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !net.minecraftforge.fml.ModList.get().isLoaded("mekanism")) return;
         radiationEnabled = !radiationEnabled;
-        staff.set(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), radiationEnabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), radiationEnabled);
         Network.sendWondrousStaffRadiation(radiationEnabled, hand);
         updateSelection();
     }

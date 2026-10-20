@@ -9,7 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.PacketSendListener;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket;
@@ -27,9 +27,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public final class StandaloneTeleportChecks {
                     event.setCanceled(true);
                 }
             };
-            NeoForge.EVENT_BUS.addListener(cancel);
+            MinecraftForge.EVENT_BUS.addListener(cancel);
             try {
                 StandaloneTeleport.activate(canceled);
                 check(canceledEvents[0] == 1 && canceled.position().equals(START),
@@ -122,7 +122,7 @@ public final class StandaloneTeleportChecks {
                                 && canceled.position().equals(START),
                         "legacy fallback consumes canceled interaction without moving player");
             } finally {
-                NeoForge.EVENT_BUS.unregister(cancel);
+                MinecraftForge.EVENT_BUS.unregister(cancel);
             }
 
             checkNativeParity(level, players, fallback);
@@ -136,7 +136,7 @@ public final class StandaloneTeleportChecks {
     }
 
     private static void checkPacket(ServerLevel level) {
-        var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+        var buffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
         try {
             var packet = new Network.StandaloneTeleportPayload();
             Network.StandaloneTeleportPayload.STREAM_CODEC.encode(buffer, packet);
@@ -151,7 +151,7 @@ public final class StandaloneTeleportChecks {
     private static void checkEnderIoAnchor(ServerLevel level, List<RecordingPlayer> players) throws Exception {
         BlockPos pos = ORIGIN.offset(0, -1, 12);
         var block = net.minecraft.core.registries.BuiltInRegistries.BLOCK
-                .get(net.minecraft.resources.ResourceLocation.parse("enderio:travel_anchor"));
+                .get(net.minecraft.resources.new ResourceLocation("enderio:travel_anchor"));
         check(block != Blocks.AIR, "actual Ender IO travel anchor registered");
         level.setBlock(pos, block.defaultBlockState(), 3);
         Class<?> targetType = Class.forName("com.enderio.enderio.api.travel.TravelTarget");

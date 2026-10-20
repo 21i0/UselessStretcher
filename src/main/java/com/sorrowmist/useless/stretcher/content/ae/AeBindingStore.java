@@ -23,7 +23,7 @@ public final class AeBindingStore extends SavedData {
 
     public static AeBindingStore get(ServerLevel level) {
         return level.getDataStorage().computeIfAbsent(
-                new SavedData.Factory<>(AeBindingStore::new, AeBindingStore::load), NAME);
+                tag -> AeBindingStore.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), AeBindingStore::new, NAME);
     }
 
     public BlockPos get(UUID id) {
@@ -41,7 +41,10 @@ public final class AeBindingStore extends SavedData {
         if (id != null && bindings.remove(id) != null) setDirty();
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         for (Map.Entry<UUID, BlockPos> entry : bindings.entrySet()) {

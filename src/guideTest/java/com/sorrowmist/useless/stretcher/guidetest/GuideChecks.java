@@ -15,10 +15,10 @@ import guideme.scene.LytItemImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.ClientTickEvent;
 
 import java.nio.file.Files;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 /** Loads and renders the actual resource-pack guide, then exits the isolated preview client. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)
 public final class GuideChecks {
-    private static final ResourceLocation GUIDE_ID = ResourceLocation.fromNamespaceAndPath("ae2", "guide");
+    private static final ResourceLocation GUIDE_ID = new ResourceLocation("ae2", "guide");
     private static final List<String> PAGES = List.of(
             "useless_stretcher/index.md", "useless_stretcher/myriad.md",
             "useless_stretcher/stretcher.md", "useless_stretcher/staff.md",
@@ -95,10 +95,10 @@ public final class GuideChecks {
                             "each page has an item image: " + path);
                 }
                 var index = guide.getIndex(ItemIndex.class);
-                check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "omniversal_myriad")) != null, "myriad tooltip entry");
-                check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "useless_stretcher")) != null, "stretcher tooltip entry");
-                check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "wondrous_staff")) != null, "staff tooltip entry");
-                check(index.get(ResourceLocation.fromNamespaceAndPath("useless_stretcher", "dimension_capsule")) != null, "capsule tooltip entry");
+                check(index.get(new ResourceLocation("useless_stretcher", "omniversal_myriad")) != null, "myriad tooltip entry");
+                check(index.get(new ResourceLocation("useless_stretcher", "useless_stretcher")) != null, "stretcher tooltip entry");
+                check(index.get(new ResourceLocation("useless_stretcher", "wondrous_staff")) != null, "staff tooltip entry");
+                check(index.get(new ResourceLocation("useless_stretcher", "dimension_capsule")) != null, "capsule tooltip entry");
                 checked = true;
             }
             if (waitFrames == 0) {
@@ -127,7 +127,7 @@ public final class GuideChecks {
     }
 
     private static ResourceLocation pageId(String path) {
-        return ResourceLocation.fromNamespaceAndPath("ae2", path);
+        return new ResourceLocation("ae2", path);
     }
 
     private static void check(boolean condition, String message) {

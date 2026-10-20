@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
@@ -23,7 +23,7 @@ public final class AllTheModiumCapsuleChecks {
     private static final String ANCIENT_CITY = "minecraft:ancient_city";
     private static final String BASTION = "minecraft:bastion_remnant";
     private static final String DUNGEON = "allthemodium:dungeon";
-    private static final String OTHER = CapsuleDimensions.targetFor(ResourceLocation.parse("allthemodium:the_other"));
+    private static final String OTHER = CapsuleDimensions.targetFor(new ResourceLocation("allthemodium:the_other"));
     private static final String CLAY = "allthemodium:suspicious_clay";
     private static final String SOUL_SAND = "allthemodium:suspicious_soul_sand";
     private static int stage;
@@ -93,13 +93,13 @@ public final class AllTheModiumCapsuleChecks {
 
     private static void begin(ServerLevel fallback, String id, String dimension, String block, String name) {
         var registry = fallback.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        var structure = registry.get(ResourceLocation.parse(id));
+        var structure = registry.get(new ResourceLocation(id));
         check(structure != null, "ATM test structure is registered: " + id);
-        var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dimension)));
+        var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimension)));
         check(level != null, "ATM test dimension is loaded: " + dimension);
         if (id.equals(DUNGEON)) {
             var original = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
-                    Registries.DIMENSION, ResourceLocation.parse("allthemodium:the_other")));
+                    Registries.DIMENSION, new ResourceLocation("allthemodium:the_other")));
             check(original != null && level.dimensionType() == original.dimensionType(), "ATM mirror shares the exact Other dimension type");
             check(level.getMinBuildHeight() == original.getMinBuildHeight() && level.getHeight() == original.getHeight(),
                     "ATM mirror preserves native vertical limits");
@@ -121,7 +121,7 @@ public final class AllTheModiumCapsuleChecks {
         check(room != null, "ATM room allocated");
         if (!room.error.isEmpty()) throw new AssertionError("ATM native generation failed for " + structureId + ": " + room.error);
         if (!room.ready) return false;
-        var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dimensionId)));
+        var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimensionId)));
         var start = StructureStart.loadStaticStart(StructurePieceSerializationContext.fromLevel(level), room.plan, level.getSeed());
         check(start != null && start.isValid(), "ATM native plan restores for " + structureId);
         assertStructureEnvelopeContainsNoTerrain(level, start);
@@ -140,7 +140,7 @@ public final class AllTheModiumCapsuleChecks {
             room = null;
             return true;
         }
-        Block expected = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockId));
+        Block expected = BuiltInRegistries.BLOCK.get(new ResourceLocation(blockId));
         int found = 0;
         for (BlockPos pos : BlockPos.betweenClosed(start.getBoundingBox().minX(), start.getBoundingBox().minY(), start.getBoundingBox().minZ(),
                 start.getBoundingBox().maxX(), start.getBoundingBox().maxY(), start.getBoundingBox().maxZ())) {
@@ -158,7 +158,7 @@ public final class AllTheModiumCapsuleChecks {
             var processors = fallback.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST);
             String processorId = structureId.equals(ANCIENT_CITY)
                     ? "minecraft:ancient_city_generic_degradation" : "minecraft:treasure_rooms";
-            var processor = processors.get(ResourceLocation.parse(processorId));
+            var processor = processors.get(new ResourceLocation(processorId));
             check(processor != null, "native " + structureId + " keeps its active archaeological processor list");
             var ops = net.minecraft.resources.RegistryOps.create(com.mojang.serialization.JsonOps.INSTANCE, fallback.registryAccess());
             String encoded = net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType.DIRECT_CODEC
@@ -197,8 +197,8 @@ public final class AllTheModiumCapsuleChecks {
             Field x = room.getClass().getDeclaredField("originX");
             Field z = room.getClass().getDeclaredField("originZ");
             x.setAccessible(true); z.setAccessible(true);
-            x.setInt(room, pair.getFirst().getX());
-            z.setInt(room, pair.getFirst().getZ());
+            x.setInt(room, pair.get(0).getX());
+            z.setInt(room, pair.get(0).getZ());
         } catch (ReflectiveOperationException failure) {
             throw new AssertionError("Cannot position ATM regression room", failure);
         }

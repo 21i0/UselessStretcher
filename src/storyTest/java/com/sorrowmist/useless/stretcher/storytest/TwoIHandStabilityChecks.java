@@ -6,11 +6,11 @@ import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.client.ClientHooks;
+import net.minecraftforge.client.ClientHooks;
 
 import java.util.UUID;
 
-/** Exercises the real NeoForge hook used by ItemInHandRenderer after inventory synchronization. */
+/** Exercises the real MinecraftForge hook used by ItemInHandRenderer after inventory synchronization. */
 public final class TwoIHandStabilityChecks {
     private TwoIHandStabilityChecks() { }
 
@@ -22,18 +22,18 @@ public final class TwoIHandStabilityChecks {
             selectedSlot.setInt(null, 0);
             for (int slot : new int[]{0, -1}) {
                 ItemStack displayed = new ItemStack(ModItems.TWO_I_DOLL.get());
-                displayed.set(StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, slot == -1 ? 9 : 8));
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(displayed, StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, slot == -1 ? 9 : 8));
                 for (int second = 1; second <= 600; second++) {
                     // Container synchronization replaces the stack object even while the player holds still.
                     ItemStack synced = displayed.copy();
-                    synced.set(StretcherComponents.TWO_I_OWNER.get(), new UUID(0, 7));
-                    synced.set(StretcherComponents.TWO_I_MEMORY.get(), new TwoIDollMemory(
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_OWNER.get(), new UUID(0, 7));
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_MEMORY.get(), new TwoIDollMemory(
                             new TwoIDollMemory.Cooldowns(0, 0, 0, 0, 0, 0, -1, false),
                             new TwoIDollMemory.Interaction(0, 0, 0, 0, Math.min(2, second / 300),
                                     second % 300 * 20, -1, "", 0, 0), second * 20L));
-                    synced.set(StretcherComponents.TWO_I_BOND.get(), Math.min(2, second / 300));
-                    synced.set(StretcherComponents.TWO_I_INVITATION_USED.get(), second > 500);
-                    synced.set(StretcherComponents.TWO_I_ROTATION.get(), second % 16);
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_BOND.get(), Math.min(2, second / 300));
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_INVITATION_USED.get(), second > 500);
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_ROTATION.get(), second % 16);
                     check(!ClientHooks.shouldCauseReequipAnimation(displayed, synced, slot),
                             "stationary carried doll must not reequip after companion/owner/bond updates in slot " + slot);
                     displayed = synced;
@@ -48,9 +48,9 @@ public final class TwoIHandStabilityChecks {
                         "switching to another item still animates");
             }
             ItemStack doll = new ItemStack(ModItems.TWO_I_DOLL.get());
-            doll.set(StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, 8));
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(doll, StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, 8));
             ItemStack otherDoll = doll.copy();
-            otherDoll.set(StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, 9));
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(otherDoll, StretcherComponents.TWO_I_DOLL_ID.get(), new UUID(0, 9));
             // Player action: repeatedly exchange the two otherwise identical dolls between the hands.
             selectedSlot.setInt(null, 0);
             for (int swap = 0; swap < 100; swap++) {

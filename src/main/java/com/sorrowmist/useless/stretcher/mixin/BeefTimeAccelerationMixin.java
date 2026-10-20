@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Fully disables the inherited {@link BeefTimeAcceleration} for the wondrous staff so it can
  * never override our own gear-based acceleration, regardless of interaction-path priority.
  */
-@Mixin(BeefTimeAcceleration.class)
+@Mixin(value = BeefTimeAcceleration.class, remap = false)
 public abstract class BeefTimeAccelerationMixin {
 
     @Inject(
