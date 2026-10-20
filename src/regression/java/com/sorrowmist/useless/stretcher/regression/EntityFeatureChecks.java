@@ -208,7 +208,7 @@ final class EntityFeatureChecks {
         check(restored != null, "2i entity can be restored");
         restored.load(savedDoll);
         check(restored.getGiftScore() == 8 && restored.isInvitationUsed(), "2i gift score including pat reward and invite state persist");
-        doll.discardForReclaim();
+        check(doll.discardForReclaim(), "authorized 2i reclaim removes the live entity");
         check(!TwoIDollEntity.trackedFor(level.getServer(), owner).contains(doll), "removed 2i leaves remote index");
 
         TwoIStarfieldData data = new TwoIStarfieldData();

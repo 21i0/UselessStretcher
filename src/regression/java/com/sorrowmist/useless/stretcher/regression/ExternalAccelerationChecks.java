@@ -3,12 +3,14 @@ package com.sorrowmist.useless.stretcher.regression;
 import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.stretcher.content.acceleration.AccelerationExecutionBudget;
+import com.sorrowmist.useless.stretcher.content.acceleration.ExtraTickClock;
 import com.sorrowmist.useless.stretcher.content.acceleration.MachineActivityProbe;
 import com.sorrowmist.useless.stretcher.content.entity.EntityTimerAcceleration;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
+import com.sorrowmist.useless.core.component.UComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,6 +24,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
@@ -34,6 +38,10 @@ import java.util.UUID;
 final class ExternalAccelerationChecks {
     static void run(ServerLevel level) throws Exception {
         long gameTime = level.getGameTime(), dayTime = level.getDayTime();
+        if (ModList.get().isLoaded("occultism")) {
+            Occultism.waitingRitual(level, false);
+            Occultism.waitingRitual(level, true);
+        }
         for (boolean range : new boolean[]{false, true}) {
             if (ModList.get().isLoaded("occultism")) {
                 Occultism.miner(level, range);
@@ -51,6 +59,62 @@ final class ExternalAccelerationChecks {
     }
 
     private static final class Occultism {
+        @SuppressWarnings("unchecked")
+        static void waitingRitual(ServerLevel level, boolean itemUse) {
+            BlockPos pos = new BlockPos(96, 150, 64);
+            String path = itemUse ? "wild_random_animal_water" : "misc_wild_trim";
+            var recipe = (net.minecraft.world.item.crafting.RecipeHolder<com.klikli_dev.occultism.crafting.recipe.RitualRecipe>)
+                    (net.minecraft.world.item.crafting.RecipeHolder<?>) level.getRecipeManager()
+                            .byKey(ResourceLocation.parse("occultism:ritual/" + path)).orElseThrow();
+            recipe.value().getPentacle().place(level, pos, Rotation.NONE);
+            level.setBlockAndUpdate(pos, com.klikli_dev.occultism.registry.OccultismBlocks.GOLDEN_SACRIFICIAL_BOWL.get().defaultBlockState());
+            var bowl = (com.klikli_dev.occultism.common.blockentity.GoldenSacrificialBowlBlockEntity) level.getBlockEntity(pos);
+            var offerings = new ArrayList<BlockPos>();
+            int n = 0;
+            for (var ingredient : recipe.value().getIngredients()) {
+                BlockPos offering = pos.offset(-7, 0, n++ - 3);
+                offerings.add(offering);
+                level.setBlockAndUpdate(offering, com.klikli_dev.occultism.registry.OccultismBlocks.SACRIFICIAL_BOWL.get().defaultBlockState());
+                ((com.klikli_dev.occultism.common.blockentity.SacrificialBowlBlockEntity) level.getBlockEntity(offering))
+                        .itemStackHandler.setStackInSlot(0, ingredient.getItems()[0].copyWithCount(1));
+            }
+            var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "RitualWaiting"));
+            player.setPos(Vec3.atCenterOf(pos));
+            var activation = recipe.value().getActivationItemStack()[0].copyWithCount(1);
+            bowl.itemStackHandler.setStackInSlot(0, activation);
+            try {
+                check(bowl.startRitual(null, activation, recipe), "native conditional ritual starts");
+                var probe = new MachineActivityProbe();
+                check(probe.isWorking(level, pos, bowl.getBlockState()), "new known target gets one initial observation");
+                for (int i = 0; i < 25; i++) {
+                    bowl.setChanged();
+                    bowl.tick();
+                    check(bowl.currentTime == 0 && !probe.isWorking(level, pos, bowl.getBlockState()),
+                            "native waiting condition is idle despite dirty notifications");
+                }
+                if (itemUse) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, recipe.value().getItemToUse().getItems()[0].copy());
+                    net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(
+                            new net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem(player, InteractionHand.MAIN_HAND));
+                    check(bowl.itemUseFulfilled(), "native item-use event fulfills the ritual condition");
+                } else {
+                    var llama = net.minecraft.world.entity.EntityType.LLAMA.create(level);
+                    check(llama != null, "native sacrifice entity exists");
+                    llama.setPos(Vec3.atCenterOf(pos));
+                    net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(
+                            new net.neoforged.neoforge.event.entity.living.LivingDeathEvent(llama, level.damageSources().playerAttack(player)));
+                    check(bowl.sacrificeFulfilled(), "native player sacrifice event fulfills the ritual condition");
+                }
+                check(probe.isWorking(level, pos, bowl.getBlockState()), "native condition fulfillment wakes the same probe immediately");
+                LogUtils.getLogger().info("OCCULTISM WAITING STATE PASSED: {} native waiting/progress conditions, dirty notifications ignored", path);
+            } finally {
+                if (bowl.getCurrentRitualRecipe() != null) bowl.stopRitual(false);
+                offerings.forEach(p -> level.removeBlock(p, false));
+                level.removeBlock(pos, false);
+                level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(10)).forEach(ItemEntity::discard);
+            }
+        }
+
         static void miner(ServerLevel level, boolean range) {
             BlockPos pos = new BlockPos(64, 150, 64);
             level.setBlockAndUpdate(pos, com.klikli_dev.occultism.registry.OccultismBlocks.DIMENSIONAL_MINESHAFT.get().defaultBlockState());
@@ -84,6 +148,8 @@ final class ExternalAccelerationChecks {
             recipe.value().getPentacle().place(level, pos, Rotation.NONE);
             level.setBlockAndUpdate(pos, com.klikli_dev.occultism.registry.OccultismBlocks.GOLDEN_SACRIFICIAL_BOWL.get().defaultBlockState());
             var bowl = (com.klikli_dev.occultism.common.blockentity.GoldenSacrificialBowlBlockEntity) level.getBlockEntity(pos);
+            check(bowl instanceof ExtraTickClock,
+                    "Occultism golden bowl receives the optional virtual ritual clock mixin");
             var offeringPositions = new ArrayList<BlockPos>();
             int n = 0;
             for (var ingredient : recipe.value().getIngredients()) {
@@ -98,17 +164,15 @@ final class ExternalAccelerationChecks {
             check(recipe.value().getRitual().isValid(level, pos, bowl, null, activation, recipe.value().getIngredients()),
                     "real pentacle and native offerings validate");
             check(bowl.startRitual(null, activation, recipe), "real ritual starts");
-            try (var driver = new Driver(level, pos, range, 20)) {
+            try (var driver = new RitualDriver(level, pos, range, 20)) {
                 long start = level.getGameTime();
                 check(start % 20 != 0, "ritual regression deliberately starts outside the world's work phase");
                 for (int i = 0; i < 40; i++) bowl.tick();
                 check(bowl.currentTime == 0, "repeating an ordinary ticker at a fixed clock phase reproduces the original stall");
                 for (int i = 0; i < 50 && bowl.currentTime < 3; i++) driver.tick();
                 check(bowl.currentTime >= 3, "ritual progresses at a fixed real-world clock phase");
-                if (!range) check(bowl.currentTime == (start + driver.executed) / 20 - start / 20,
-                        "ritual progresses once per twenty actual extra callbacks, including partial batches");
-                LogUtils.getLogger().info("OCCULTISM CLOCK PASSED: {} realTime={} ordinary40=0 acceleratedProgress={} callbacks={}",
-                        driver.route(), start, bowl.currentTime, driver.executed);
+                LogUtils.getLogger().info("OCCULTISM CLOCK PASSED: {} realTime={} ordinary40=0 acceleratedProgress={} staffBatches={}",
+                        driver.route(), start, bowl.currentTime, driver.batches);
                 check(level.getGameTime() == start, "ritual does not mutate world time");
                 for (int i = 0; i < 600 && bowl.getCurrentRitualRecipe() != null; i++) driver.tick();
                 check(bowl.getCurrentRitualRecipe() == null, "real native ritual finishes");
@@ -290,6 +354,70 @@ final class ExternalAccelerationChecks {
         staff.set(StretcherComponents.RANGE_SIZE_Y.get(), size);
         staff.set(StretcherComponents.RANGE_SIZE_Z.get(), size);
         return staff;
+    }
+
+    /** Drives the real staff-created marker (single target) or placed range field. */
+    private static final class RitualDriver implements AutoCloseable {
+        final ServerLevel level;
+        final BlockPos pos;
+        final int speed;
+        final RangeAccelerationSavedData ranges;
+        final UUID owner = UUID.randomUUID();
+        final UUID id;
+        final com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity marker;
+        int batches;
+
+        RitualDriver(ServerLevel level, BlockPos pos, boolean range, int speed) {
+            this.level = level;
+            this.pos = pos;
+            this.speed = speed;
+            if (range) {
+                ranges = RangeAccelerationSavedData.get(level.getServer());
+                var player = FakePlayerFactory.get(level, new GameProfile(owner, "OccultismRangeStaff"));
+                var stack = configuredStaff(speed);
+                id = ranges.place(level, player, pos, stack).id();
+                marker = null;
+            } else {
+                ranges = null;
+                id = null;
+                var player = FakePlayerFactory.get(level, new GameProfile(owner, "OccultismHandStaff"));
+                var stack = configuredStaff(speed);
+                player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+                player.setShiftKeyDown(true);
+                var hit = new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false);
+                var result = WondrousStaffAcceleration.tryUse(new net.minecraft.world.item.context.UseOnContext(
+                        player, InteractionHand.MAIN_HAND, hit));
+                check(result.consumesAction(), "held enabled staff accepts Shift+right-click on golden bowl");
+                marker = level.getEntitiesOfClass(
+                                com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity.class,
+                                new AABB(pos).inflate(1), effect -> pos.equals(effect.getTargetPos()))
+                        .stream().findFirst().orElseThrow(() -> new AssertionError(
+                                "actual staff interaction creates the golden-bowl acceleration marker"));
+                check(marker.getSpeed() == speed, "staff marker uses the selected acceleration speed");
+            }
+        }
+
+        private static ItemStack configuredStaff(int speed) {
+            ItemStack stack = staff(1, speed);
+            stack.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
+            return stack;
+        }
+
+        void tick() {
+            AccelerationExecutionBudget.removeServer(level.getServer());
+            AccelerationExecutionBudget.beginTick(level.getServer());
+            if (ranges == null) marker.tick();
+            else ranges.tick(level.getServer());
+            batches++;
+        }
+
+        String route() { return ranges == null ? "held-staff-marker" : "placed-range-field"; }
+
+        @Override public void close() {
+            if (marker != null) marker.discard();
+            if (ranges != null) ranges.reclaim(level.getServer(), owner, id);
+            AccelerationExecutionBudget.removeServer(level.getServer());
+        }
     }
 
     private static final class Driver implements AutoCloseable {

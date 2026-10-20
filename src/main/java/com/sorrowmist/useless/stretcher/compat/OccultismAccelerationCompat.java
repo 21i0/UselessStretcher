@@ -13,10 +13,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 final class OccultismAccelerationCompat {
     private OccultismAccelerationCompat() { }
 
+    /** Null means unknown; a known idle bowl must not fall back to dirty/inventory heuristics. */
+    static Boolean knownActivity(BlockEntity target) {
+        if (!(target instanceof GoldenSacrificialBowlBlockEntity bowl)) return null;
+        return bowl.getCurrentRitualRecipe() != null && bowl.sacrificeFulfilled() && bowl.itemUseFulfilled();
+    }
+
     static boolean isWorking(BlockEntity target) {
         if (target instanceof DimensionalMineshaftBlockEntity miner) return miner.miningTime > 0;
         if (target instanceof DimensionalBattlefieldBlockEntity battlefield) return battlefield.mobHealth > 0;
-        return target instanceof GoldenSacrificialBowlBlockEntity bowl && bowl.getCurrentRitualRecipe() != null;
+        return Boolean.TRUE.equals(knownActivity(target));
     }
 
     static boolean advanceSpirit(LivingEntity target, int extra) {

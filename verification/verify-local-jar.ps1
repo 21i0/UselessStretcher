@@ -1,7 +1,12 @@
-param([string]$Jar = 'build/libs/useless_stretcher-1.21.1-1.6.0.jar')
+param([string]$Jar)
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $repo = Split-Path $PSScriptRoot -Parent
+$propertiesText = [IO.File]::ReadAllText((Join-Path $repo 'gradle.properties'))
+$versionMatch = [regex]::Match($propertiesText, '(?m)^mod_version=([^\r\n]+)')
+if (!$versionMatch.Success) { throw 'Missing mod_version in gradle.properties' }
+$expectedVersion = $versionMatch.Groups[1].Value.Trim()
+if (!$Jar) { $Jar = "build/libs/useless_stretcher-$expectedVersion.jar" }
 $artifact = if ([IO.Path]::IsPathRooted($Jar)) { $Jar } else { Join-Path $repo $Jar }
 $zip = [IO.Compression.ZipFile]::OpenRead($artifact)
 function Read-Entry($entry) {
@@ -20,7 +25,8 @@ try {
     })
     if ($forbidden.Count) { throw "Unexpected packaged entries: $($forbidden -join ', ')" }
     $metadata = Read-Entry $zip.GetEntry('META-INF/neoforge.mods.toml')
-    if ($metadata -notmatch '(?m)^version="1\.21\.1-1\.6\.0"') { throw 'Wrong package version' }
+    $versionPattern = '(?m)^version="' + [regex]::Escape($expectedVersion) + '"\r?$'
+    if ($metadata -notmatch $versionPattern) { throw "Wrong package version; expected $expectedVersion" }
     if ($metadata -notmatch '(?s)modId="useless_mod"\s+type="required"\s+versionRange="\[1\.21\.1-2\.4\.6,\)"') {
         throw 'Wrong minimum Useless Mod dependency'
     }
@@ -134,7 +140,7 @@ try {
     [ordered]@{
         result = 'JAR CHECKS PASSED'
         jar = $artifact
-        version = '1.21.1-1.6.0'
+        version = $expectedVersion
         network_protocol = 21
         guide_pages_without_hidden_armor = $guidePages.Count
         minimum_useless_mod = '1.21.1-2.4.6'

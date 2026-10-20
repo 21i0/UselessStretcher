@@ -132,6 +132,8 @@ public final class RegressionChecks {
             return;
         }
         if (Boolean.getBoolean("useless_stretcher.acceleration_only")) {
+            // EntityFeatureChecks uses this chunk as well as the distant machine fixtures.
+            event.getServer().overworld().setChunkForced(0, 0, true);
             for (int x = 3; x <= 8; x++) for (int z = 3; z <= 6; z++)
                 event.getServer().overworld().setChunkForced(x, z, true);
             return;
@@ -231,18 +233,23 @@ public final class RegressionChecks {
         if (Boolean.getBoolean("useless_stretcher.acceleration_only")) {
             if (++ticks < 41) return;
             try {
-                ExternalAccelerationChecks.run(event.getServer().overworld());
-                AeAccelerationChecks.run(event.getServer().overworld());
-                RealAeMachineChecks.run(event.getServer().overworld());
-                ActivityProbeChecks.run(event.getServer().overworld());
-                EntityFeatureChecks.run(event.getServer().overworld());
+                if (ticks == 41) {
+                    ExternalAccelerationChecks.run(event.getServer().overworld());
+                    AeAccelerationChecks.run(event.getServer().overworld());
+                    RealAeMachineChecks.run(event.getServer().overworld());
+                    ActivityProbeChecks.run(event.getServer().overworld());
+                    EntityFeatureChecks.run(event.getServer().overworld());
+                }
+                // Do not load the optional-mod test's field types when Occultism is absent.
+                if (net.neoforged.fml.ModList.get().isLoaded("occultism")
+                        && !OccultismLiveRitualChecks.tick(event.getServer().overworld())) return;
                 LogUtils.getLogger().info("EXTERNAL ACCELERATION CHECKS PASSED");
             } catch (Throwable failure) {
                 LogUtils.getLogger().error("EXTERNAL ACCELERATION CHECKS FAILED", failure);
-            } finally {
-                for (int x = 3; x <= 8; x++) for (int z = 3; z <= 6; z++)
-                    event.getServer().overworld().setChunkForced(x, z, false);
             }
+            event.getServer().overworld().setChunkForced(0, 0, false);
+            for (int x = 3; x <= 8; x++) for (int z = 3; z <= 6; z++)
+                event.getServer().overworld().setChunkForced(x, z, false);
             event.getServer().halt(false);
             return;
         }

@@ -1,0 +1,339 @@
+[1910月2026 21:18:38.447] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserverdev, --gameDir, ., --fml.fmlVersion, 4.0.44, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.249, --fml.neoFormVersion, 20240808.144430, --nogui]
+[1910月2026 21:18:38.452] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.12.1+1-LTS
+[1910月2026 21:18:38.455] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.12.1 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[1910月2026 21:18:38.707] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserverdev
+[1910月2026 21:18:38.794] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%2394!/ Service=ModLauncher Env=SERVER
+[1910月2026 21:18:39.574] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 15 dependencies adding them to mods collection
+[1910月2026 21:18:39.576] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Allthemodium 3.0.1 (allthemodium)
+		Applied Energistics 2 19.2.17 (ae2)
+		Ars Nouveau 5.13.3 (ars_nouveau)
+		Athena 4.0.6 (athena)
+		Curios API 9.5.1+1.21.1 (curios)
+		Ender Core 8.2.11-beta (endercore)
+		Ender IO 8.2.11-beta (enderio)
+		Ender IO - Modded Conduits 8.2.11-beta (enderio_modded_conduits)
+		GeckoLib 4 4.9.3 (geckolib)
+		GuideME 21.1.17 (guideme)
+		Infiniverse 2.0.1.0 (infiniverse)
+		Just Enough Items 19.54.0.429 (jei)
+		LambDynamicLights (API) 4.5.1+1.21.1 (lambdynlights_api)
+		ManaitaPlusLegacy 0.1.0 (manaita_plus_legacy)
+		McJtyLib 1.21-9.0.21 (mcjtylib)
+		Minecraft 1.21.1 (minecraft)
+		Modonomicon 1.120.7 (modonomicon)
+		NeoForge 21.1.249 (neoforge)
+		Nuggets 1.1.0.48 (nuggets)
+		Occultism 1.224.4 (occultism)
+		Patchouli 1.21.1-93-NEOFORGE (patchouli)
+		Productive Bees 1.21.1-13.13.0 (productivebees)
+		Productive Lib 1.21.1-0.2.0 (productivelib)
+		RFToolsBase 1.21-6.0.11 (rftoolsbase)
+		RFToolsBuilder 1.21-7.0.7 (rftoolsbuilder)
+		SmartBrainLib 1.16.11 (smartbrainlib)
+		Useless Mod 1.21.1-2.4.6 (useless_mod)
+		Useless Stretcher 1.21.1-1.6.0 (useless_stretcher)
+[1910月2026 21:18:39.846] [main/INFO] [net.neoforged.fml.loading.FMLServiceProvider/CORE]: Loading coremod script-engine for [useless_stretcher]
+[1910月2026 21:18:42.026] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[1910月2026 21:18:42.029] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[1910月2026 21:18:42.052] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserverdev' with arguments [--gameDir, ., --nogui]
+[1910月2026 21:18:42.137] [main/WARN] [mixin/]: Reference map 'geckolib.refmap.json' for geckolib.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.138] [main/WARN] [mixin/]: Reference map 'allthemodium.refmap.json' for allthemodium.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.139] [main/WARN] [mixin/]: Reference map 'productivelib.refmap.json' for productivelib.mixin.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.146] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.147] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.147] [main/WARN] [mixin/]: Reference map 'patchouli.refmap.json' for patchouli_xplat.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.163] [main/WARN] [mixin/]: Reference map 'nuggets.refmap.json' for nuggets.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.165] [main/WARN] [mixin/]: Reference map 'productivebees.refmap.json' for productivebees.mixin.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.288] [main/WARN] [mixin/]: Reference map 'ars_nouveau.refmap.json' for ars_nouveau.mixins.json could not be read. If this is a development environment you can ignore this message
+[1910月2026 21:18:42.702] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[1910月2026 21:18:42.704] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[1910月2026 21:18:42.705] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[1910月2026 21:18:42.706] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/AbstractBotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity)
+[1910月2026 21:18:42.706] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor from mod useless_mod
+[1910月2026 21:18:42.707] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[1910月2026 21:18:42.707] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor from mod useless_mod
+[1910月2026 21:18:42.708] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[1910月2026 21:18:42.709] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin from mod useless_mod
+[1910月2026 21:18:42.710] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[1910月2026 21:18:42.710] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin from mod useless_mod
+[1910月2026 21:18:42.711] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[1910月2026 21:18:42.711] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin from mod useless_mod
+[1910月2026 21:18:42.716] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/network/MenuDataCodecs (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.network.MenuDataCodecs)
+[1910月2026 21:18:42.717] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.network.MenuDataCodecs was not found useless_mod.compact.mixins.json:MenuDataCodecsCompactMixin from mod useless_mod
+[1910月2026 21:18:44.196] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[1910月2026 21:18:50.836] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1910月2026 21:18:50.837] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1910月2026 21:18:50.841] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[1910月2026 21:18:50.842] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[1910月2026 21:18:50.843] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1910月2026 21:18:51.007] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.249, for MC 1.21.1
+[1910月2026 21:18:55.578] [modloading-worker-0/INFO] [com.klikli_dev.occultism.Occultism/]: Common setup complete.
+[1910月2026 21:18:55.663] [modloading-worker-0/INFO] [com.klikli_dev.occultism.Occultism/]: Dedicated server setup complete.
+[1910月2026 21:18:55.955] [main/ERROR] [net.minecraft.server.dedicated.Settings/]: Failed to load properties from file: server.properties
+java.nio.file.NoSuchFileException: server.properties
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103) ~[?:?]
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108) ~[?:?]
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:234) ~[?:?]
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:380) ~[?:?]
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:432) ~[?:?]
+	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420) ~[?:?]
+	at java.base/java.nio.file.Files.newInputStream(Files.java:160) ~[?:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.Settings.loadFromFile(Settings.java:38) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServerProperties.fromFile(DedicatedServerProperties.java:132) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServerSettings.<init>(DedicatedServerSettings.java:12) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.Main.main(Main.java:125) ~[neoforge-21.1.249.jar%23144!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.serverService(CommonLaunchHandler.java:128) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeServerDevLaunchHandler.runService(NeoForgeServerDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%2382!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?]
+[1910月2026 21:18:55.981] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[1910月2026 21:18:56.019] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23144!/assets/.mcassetsroot' uses unexpected schema
+[1910月2026 21:18:56.021] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23144!/data/.mcassetsroot' uses unexpected schema
+[1910月2026 21:18:56.737] [main/INFO] [net.minecraft.server.Main/]: No existing world data, creating new world
+[1910月2026 21:18:56.966] [Worker-Main-3/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_l9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_l9
+[1910月2026 21:18:56.980] [Worker-Main-3/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_f9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_f9
+[1910月2026 21:18:56.986] [Worker-Main-3/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_c9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_c9
+[1910月2026 21:18:57.308] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[1910月2026 21:18:57.311] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpawnExtraGridTestTools for plots
+[1910月2026 21:18:57.311] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[1910月2026 21:18:57.312] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CrystalResonanceGeneratorTestPlots for plots
+[1910月2026 21:18:57.312] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InterfaceTestPlots for plots
+[1910月2026 21:18:57.312] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[1910月2026 21:18:57.312] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[1910月2026 21:18:57.313] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InvalidPatternTestPlot for plots
+[1910月2026 21:18:57.313] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[1910月2026 21:18:57.314] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[1910月2026 21:18:57.314] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[1910月2026 21:18:57.322] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[1910月2026 21:18:57.323] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[1910月2026 21:18:57.323] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[1910月2026 21:18:57.323] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[1910月2026 21:18:57.323] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ExternalEnergyTestPlots for plots
+[1910月2026 21:18:57.324] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[1910月2026 21:18:57.324] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[1910月2026 21:18:57.325] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[1910月2026 21:18:57.550] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag c:tools/shield as it is missing following references: 
+	allthemodium:vibranium_shield (from mod/allthemodium)
+[1910月2026 21:18:57.554] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag minecraft:enchantable/crossbow as it is missing following references: 
+	allthemodium:unobtainium_crossbow (from mod/allthemodium)
+[1910月2026 21:18:57.556] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag c:tools/crossbow as it is missing following references: 
+	allthemodium:unobtainium_crossbow (from mod/allthemodium)
+[1910月2026 21:18:57.559] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag c:tools/bow as it is missing following references: 
+	allthemodium:allthemodium_bow (from mod/allthemodium)
+[1910月2026 21:18:57.559] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag c:tools as it is missing following references: 
+	#c:tools/bow (from mod/neoforge)
+	#c:tools/crossbow (from mod/neoforge)
+	#c:tools/shield (from mod/neoforge)
+[1910月2026 21:18:57.566] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag minecraft:enchantable/bow as it is missing following references: 
+	allthemodium:allthemodium_bow (from mod/allthemodium)
+[1910月2026 21:18:57.569] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag minecraft:enchantable/equippable as it is missing following references: 
+	allthemodium:vibranium_shield (from mod/allthemodium)
+[1910月2026 21:18:57.569] [Worker-Main-5/ERROR] [net.minecraft.tags.TagLoader/]: Couldn't load tag c:enchantables as it is missing following references: 
+	#minecraft:enchantable/equippable (from mod/neoforge)
+	#minecraft:enchantable/bow (from mod/neoforge)
+	#minecraft:enchantable/crossbow (from mod/neoforge)
+[1910月2026 21:18:57.614] [Worker-Main-1/WARN] [net.neoforged.neoforge.registries.DataMapLoader/]: Found data map file for non-existent data map type 'apotheosis:loot_category_overrides' on registry 'minecraft:item'.
+[1910月2026 21:18:58.121] [main/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe productivebees:centrifuge/modularbees/honeycomb_imperial
+com.google.gson.JsonParseException: Failed to parse either. First: Not a json array: {"item":"modularbees:honey_jelly"}; Second: No key tag in MapLike[{"item":"modularbees:honey_jelly"}]; Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: modularbees:honey_jelly
+	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%2379!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.249.jar%23144!/:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.Util.blockUntilDone(Util.java:875) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.Util.blockUntilDone(Util.java:864) ~[neoforge-21.1.249.jar%23144!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.Main.main(Main.java:204) ~[neoforge-21.1.249.jar%23144!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.serverService(CommonLaunchHandler.java:128) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeServerDevLaunchHandler.runService(NeoForgeServerDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23102!/:4.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%2382!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%2382!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?]
+[1910月2026 21:18:58.326] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 5421 recipes
+[1910月2026 21:18:58.579] [main/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 4377 advancements
+[1910月2026 21:18:58.595] [main/INFO] [Curios API/]: Loaded 12 curio slots
+[1910月2026 21:18:58.603] [main/INFO] [Curios API/]: Loaded 1 curio entities
+[1910月2026 21:18:58.667] [main/INFO] [com.enderio.enderio.foundation.souldata.SoulDataReloadListener/]: Data loader for eio_soul/engine loaded 6 jsons
+[1910月2026 21:18:58.668] [main/INFO] [com.enderio.enderio.foundation.souldata.SoulDataReloadListener/]: Data loader for eio_soul/spawner loaded 81 jsons
+[1910月2026 21:18:58.668] [main/INFO] [com.enderio.enderio.foundation.souldata.SoulDataReloadListener/]: Data loader for eio_soul/solar loaded 1 jsons
+[1910月2026 21:18:58.669] [main/INFO] [com.enderio.enderio.foundation.souldata.SoulDataReloadListener/]: Data loader for eio_soul/farm loaded 3 jsons
+[1910月2026 21:18:58.686] [main/WARN] [net.minecraft.core.MappedRegistry/]: Not all defined tags for registry ResourceKey[minecraft:root / minecraft:item] are present in data pack: minecraft:enchantable/bow, minecraft:enchantable/crossbow, minecraft:enchantable/equippable
+[1910月2026 21:18:58.695] [main/WARN] [net.minecraft.core.MappedRegistry/]: Not all defined tags for registry ResourceKey[minecraft:root / minecraft:block] are present in data pack: manaita_plus_legacy:mineable
+[1910月2026 21:18:59.568] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.21.1
+[1910月2026 21:18:59.568] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[1910月2026 21:18:59.568] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[1910月2026 21:18:59.568] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[1910月2026 21:18:59.647] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on *:25565
+[1910月2026 21:18:59.786] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using default channel type
+[1910月2026 21:18:59.815] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[1910月2026 21:18:59.815] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[1910月2026 21:18:59.815] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[1910月2026 21:18:59.815] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[1910月2026 21:19:00.412] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "world"
+[1910月2026 21:19:03.612] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/overworld <- minecraft:overworld type=ResourceKey[minecraft:dimension_type / minecraft:overworld] minY=-64 height=384
+[1910月2026 21:19:03.626] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/mining <- allthemodium:mining type=ResourceKey[minecraft:dimension_type / allthemodium:mining] minY=-64 height=384
+[1910月2026 21:19:03.635] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim2 <- useless_mod:uselessdim2 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim2] minY=-64 height=384
+[1910月2026 21:19:03.638] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_nether <- minecraft:the_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[1910月2026 21:19:03.641] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/the_other <- allthemodium:the_other type=ResourceKey[minecraft:dimension_type / allthemodium:the_other] minY=-64 height=512
+[1910月2026 21:19:03.645] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/the_beyond <- allthemodium:the_beyond type=ResourceKey[minecraft:dimension_type / allthemodium:the_beyond] minY=-64 height=384
+[1910月2026 21:19:03.647] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim <- useless_mod:uselessdim type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim] minY=-64 height=384
+[1910月2026 21:19:03.651] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim3 <- useless_mod:uselessdim3 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim3] minY=-64 height=384
+[1910月2026 21:19:03.655] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield <- useless_stretcher:two_i_starfield type=ResourceKey[minecraft:dimension_type / useless_stretcher:two_i_starfield] minY=-64 height=384
+[1910月2026 21:19:03.658] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_end <- minecraft:the_end type=ResourceKey[minecraft:dimension_type / minecraft:the_end] minY=0 height=256
+[1910月2026 21:19:03.662] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/ae2/spatial_storage <- ae2:spatial_storage type=ResourceKey[minecraft:dimension_type / ae2:spatial_storage] minY=0 height=256
+[1910月2026 21:19:03.663] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[1910月2026 21:19:03.682] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[1910月2026 21:19:04.545] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[1910月2026 21:19:04.747] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[1910月2026 21:19:05.172] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[1910月2026 21:19:05.718] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 18%
+[1910月2026 21:19:06.164] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 18%
+[1910月2026 21:19:06.804] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 51%
+[1910月2026 21:19:07.164] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 51%
+[1910月2026 21:19:07.428] [worldgen/INFO] [net.neoforged.coremod.CoreMod.useless_stretcher/COREMODLOG]: [2i compatibility] Manaita destructive-marker guards = 4
+[1910月2026 21:19:07.596] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 3933 ms
+[1910月2026 21:19:07.597] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (7.765s)! For help, type "help"
+[1910月2026 21:19:07.683] [Server thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[1910月2026 21:19:07.703] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[1910月2026 21:19:07.705] [Server thread/WARN] [net.neoforged.neoforge.common.TagConventionLogWarning/]: 
+   Dev warning - Legacy Tags detected. Please migrate your 'forge' namespace tags to the 'c' namespace! See net.neoforged.neoforge.common.Tags.java for all tags.
+   NOTE: Many tags have been moved around or renamed. Some new ones were added so please review the new tags.
+    And make sure you follow tag conventions for new tags! The convention is `c` with nouns generally being plural and adjectives being singular.
+   You can disable this message in NeoForge's common config by setting `logLegacyTagWarnings` to "SILENCED" or see individual tags with "DEV_VERBOSE".
+
+[1910月2026 21:19:08.290] [Server thread/WARN] [com.sorrowmist.useless.content.recipe.adapters.occultism.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/repair_tools: has no enumerable damageable activation item
+[1910月2026 21:19:08.407] [Server thread/WARN] [com.sorrowmist.useless.content.recipe.adapters.occultism.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/resurrect_familiar: requires source entity or command state
+[1910月2026 21:19:08.439] [Server thread/WARN] [com.sorrowmist.useless.content.recipe.adapters.occultism.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/resurrect_mob: requires source entity or command state
+[1910月2026 21:19:08.657] [Server thread/INFO] [com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=2758, sources=8, elapsed=943 ms
+[1910月2026 21:19:08.813] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearchChecks/]: REGRESSION: full-library pattern search, metadata caching and packet checks passed
+[1910月2026 21:19:08.829] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ApotheosisChecks/]: REGRESSION Apotheosis: optional native integration skipped because Apotheosis is absent
+[1910月2026 21:19:08.829] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ApotheosisChecks/]: REGRESSION Apotheosis: persistent presets, zero bindings, changed-only edits and bounded packets passed
+[1910月2026 21:19:10.806] [Server thread/INFO] [patchouli/]: Sending reload packet to clients
+[1910月2026 21:19:10.842] [Server thread/INFO] [com.sorrowmist.useless.stretcher.content.mold.MoldCatalogCompatibilityChecks/]: REGRESSION: mold catalog compatibility and persistence checks passed
+[1910月2026 21:19:12.948] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM WAITING STATE PASSED: misc_wild_trim native waiting/progress conditions, dirty notifications ignored
+[1910月2026 21:19:12.970] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM WAITING STATE PASSED: wild_random_animal_water native waiting/progress conditions, dirty notifications ignored
+[1910月2026 21:19:12.991] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM MINER PASSED: single-target duration=400 batches=7 output=1 durability=1
+[1910月2026 21:19:13.023] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM CLOCK PASSED: held-staff-marker realTime=41 ordinary40=0 acceleratedProgress=3 staffBatches=3
+[1910月2026 21:19:13.274] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM RITUAL PASSED: held-staff-marker native pentacle, seven offerings, exactly one result, 150 batches
+[1910月2026 21:19:13.286] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=true minecraft:bone -> minecraft:bone_meal x4
+[1910月2026 21:19:13.288] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=true minecraft:raw_iron -> minecraft:iron_ingot x1
+[1910月2026 21:19:13.290] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=true minecraft:quartz_block -> minecraft:quartz x4
+[1910月2026 21:19:13.314] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=false minecraft:bone -> minecraft:bone_meal x4
+[1910月2026 21:19:13.334] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=false minecraft:raw_iron -> minecraft:iron_ingot x1
+[1910月2026 21:19:13.352] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: single-target timers=false minecraft:quartz_block -> minecraft:quartz x4
+[1910月2026 21:19:13.399] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Rftools/]: RFTOOLS BUILDER PASSED: single-target building=false ordinary=8 accelerated=36 blocks=36 FE=42000 batches=1 error=null
+[1910月2026 21:19:13.412] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Rftools/]: RFTOOLS BUILDER PASSED: single-target building=true ordinary=8 accelerated=36 blocks=36 FE=14000 batches=1 error=null
+[1910月2026 21:19:13.439] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM MINER PASSED: range duration=400 batches=7 output=1 durability=1
+[1910月2026 21:19:13.451] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM CLOCK PASSED: placed-range-field realTime=41 ordinary40=0 acceleratedProgress=3 staffBatches=3
+[1910月2026 21:19:13.682] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM RITUAL PASSED: placed-range-field native pentacle, seven offerings, exactly one result, 150 batches
+[1910月2026 21:19:13.685] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=true minecraft:bone -> minecraft:bone_meal x4
+[1910月2026 21:19:13.687] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=true minecraft:raw_iron -> minecraft:iron_ingot x1
+[1910月2026 21:19:13.689] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=true minecraft:quartz_block -> minecraft:quartz x4
+[1910月2026 21:19:13.696] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=false minecraft:bone -> minecraft:bone_meal x4
+[1910月2026 21:19:13.701] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=false minecraft:raw_iron -> minecraft:iron_ingot x1
+[1910月2026 21:19:13.706] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Occultism/]: OCCULTISM SPIRIT PASSED: range timers=false minecraft:quartz_block -> minecraft:quartz x4
+[1910月2026 21:19:13.714] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Rftools/]: RFTOOLS BUILDER PASSED: range building=false ordinary=8 accelerated=36 blocks=36 FE=42000 batches=1 error=null
+[1910月2026 21:19:13.720] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ExternalAccelerationChecks$Rftools/]: RFTOOLS BUILDER PASSED: range building=true ordinary=8 accelerated=36 blocks=36 FE=14000 batches=1 error=null
+[1910月2026 21:19:13.738] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.AeAccelerationChecks/]: REGRESSION AE acceleration: offline FE, deduplication, hybrid tickers, SLEEP, exception isolation and deadline passed
+[1910月2026 21:19:13.788] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.RealAeMachineChecks/]: REGRESSION real AE machine: FE-only inscriber produced logic print via single-target in 7 batches
+[1910月2026 21:19:13.795] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.RealAeMachineChecks/]: REGRESSION real AE machine: FE-only inscriber produced logic print via range placement in 7 batches
+[1910月2026 21:19:13.803] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.ActivityProbeChecks/]: REGRESSION activity: bounded exact snapshots, failing capabilities, bypass and cleanup passed
+[1910月2026 21:19:13.818] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.EntityFeatureChecks/]: REGRESSION 1.6.0 2i: damage immunity, loaded-entity indexing, gift state and private starfield save/load passed
+[1910月2026 21:19:13.834] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.EntityFeatureChecks/]: REGRESSION CARRIED STAFF PHASE PASSED: all 36 inventory slots, offhand, hotbar selection, multiple staffs, interaction priority and immediate removal restoration
+[1910月2026 21:19:13.835] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.EntityFeatureChecks/]: REGRESSION staff phase and Useless Mod player protection/advanced stealth coexistence passed
+[1910月2026 21:19:13.862] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.EntityFeatureChecks/]: REGRESSION 1.5.2 entities: summon, timers, AI, legacy saves, duration, restocking, packets and independent speeds passed
+[1910月2026 21:19:17.847] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM LIVE LOW SPEED PASSED: route=1 realTicks=100 native=5 accelerated=15
+[1910月2026 21:19:17.847] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM LIVE LOW SPEED PASSED: route=2 realTicks=100 native=5 accelerated=15
+[1910月2026 21:19:17.847] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM LIVE LOW SPEED PASSED: route=3 realTicks=100 native=5 accelerated=15
+[1910月2026 21:19:19.212] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM LIVE RITUAL CHECKS PASSED: exactModVersion=1.224.4 lowSpeedTicks=100 highSpeedTicks=27 normal/permanent/range, native outputs
+[1910月2026 21:19:31.706] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM DELAYED ACTIVATION CHECKS PASSED: idleTicks=220 acceleratedTicks=30 normal/permanent/range, native player activation
+[1910月2026 21:19:42.696] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM COMPLETED IDLE CHECKS PASSED: idleTicks=220 normal/permanent/range, repeated dirty notifications
+[1910月2026 21:19:44.201] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.OccultismLiveRitualChecks/]: OCCULTISM RESTART RELOAD CHECKS PASSED: realTicks=30 normal/permanent/range, two rituals two results, native NBT
+[1910月2026 21:19:44.204] [Server thread/INFO] [com.sorrowmist.useless.stretcher.regression.RegressionChecks/]: EXTERNAL ACCELERATION CHECKS PASSED
+[1910月2026 21:19:44.246] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[1910月2026 21:19:44.247] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[1910月2026 21:19:44.247] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[1910月2026 21:19:44.559] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[1910月2026 21:19:45.570] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[1910月2026 21:19:45.597] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/allthemodium:mining
+[1910月2026 21:19:45.625] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[1910月2026 21:19:45.654] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[1910月2026 21:19:45.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/allthemodium:the_other
+[1910月2026 21:19:45.705] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/allthemodium:the_beyond
+[1910月2026 21:19:45.730] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[1910月2026 21:19:45.757] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[1910月2026 21:19:45.789] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[1910月2026 21:19:45.818] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[1910月2026 21:19:45.848] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[1910月2026 21:19:45.872] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[1910月2026 21:19:45.897] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[1910月2026 21:19:45.923] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[1910月2026 21:19:45.950] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/mining
+[1910月2026 21:19:45.981] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[1910月2026 21:19:46.006] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[1910月2026 21:19:46.032] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/the_other
+[1910月2026 21:19:46.058] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/the_beyond
+[1910月2026 21:19:46.082] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[1910月2026 21:19:46.110] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[1910月2026 21:19:46.142] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[1910月2026 21:19:46.171] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[1910月2026 21:19:46.199] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[1910月2026 21:19:46.239] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mining): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_other): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_beyond): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mining): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_other): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_beyond): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[1910月2026 21:19:46.240] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[1910月2026 21:19:46.241] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[1910月2026 21:19:46.241] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[1910月2026 21:19:46.241] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved

@@ -11,6 +11,11 @@ public final class MachineAccelerationCompat {
 
     private MachineAccelerationCompat() { }
 
+    /** A nullable answer separates an authoritative idle state from an unsupported target. */
+    public static Boolean knownActivity(BlockEntity target) {
+        return OCCULTISM ? OccultismAccelerationCompat.knownActivity(target) : null;
+    }
+
     public static boolean isWorking(BlockEntity target) {
         return (OCCULTISM && OccultismAccelerationCompat.isWorking(target))
                 || (RFTOOLS && RftoolsBuilderAccelerationCompat.isWorking(target));

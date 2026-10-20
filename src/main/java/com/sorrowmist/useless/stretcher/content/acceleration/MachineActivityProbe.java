@@ -35,7 +35,8 @@ public final class MachineActivityProbe {
 
     public boolean isWorking(ServerLevel level, BlockPos pos, BlockState state) {
         BlockEntity current = level.getBlockEntity(pos);
-        if (current != target) {
+        boolean newTarget = current != target;
+        if (newTarget) {
             reset();
             target = current;
         }
@@ -43,6 +44,10 @@ public final class MachineActivityProbe {
         long now = level.getGameTime();
         if (now < failureUntil) return true;
         try {
+            Boolean known = com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.knownActivity(current);
+            // Give a new known target one initial observation, then trust its native idle state.
+            // Sync/save notifications and missing public capabilities do not mean ritual progress.
+            if (known != null) return newTarget || known;
             if (com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.isWorking(current)) return true;
             if (current instanceof ChangedTickAccessor accessor) {
                 long changed = accessor.uselessStretcher$getLastChangedTick();

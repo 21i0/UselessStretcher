@@ -11,7 +11,20 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## 1.6.0
+## 1.6.1
+
+当前主线版本为 `1.21.1-1.6.1`，包含 Occultism 1.224.4 黄金献祭碗的活动判断与自动休眠修复。制作矿井时保持加速，完成或等待献祭/指定物品时可休眠，原生条件满足后恢复；单体与范围使用同一判断。
+
+构建文件名为 `useless_stretcher-1.21.1-1.6.1.jar`。客户端和服务端同时更新；从 1.6.0 升级不需重置存档，网络协议仍为 21。详见 [1.6.1 更新说明](changelog-1.6.1.txt)、[使用说明](usage-1.6.1.txt) 与 [验证记录](verification/1.6.1-version-and-port-branch-20261020.md)。公开 1.6.0 Release 保留，本轮未创建 1.6.1 Release。
+
+## 开发分支
+
+| 分支 | 用途 |
+| --- | --- |
+| `main` | Minecraft 1.21.1 / NeoForge 主线 |
+| [`1.20.1`](https://github.com/21i0/UselessStretcher/tree/1.20.1) | 接收 Minecraft 1.20.1 移植代码；初始从 1.6.1 主线创建，待移植代码提交后再验证其环境和构建 |
+
+## 1.6.0 主要内容
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
