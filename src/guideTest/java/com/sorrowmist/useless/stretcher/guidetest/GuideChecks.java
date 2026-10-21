@@ -39,6 +39,7 @@ public final class GuideChecks {
     private static boolean uiChecked;
     private static boolean ui153Checked;
     private static boolean finished;
+    private static boolean fluidChecked;
 
     @SubscribeEvent
     public static void tick(ClientTickEvent.Post event) {
@@ -48,6 +49,10 @@ public final class GuideChecks {
             check(++ticks < 2400, "guide preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;
             if (page >= PAGES.size()) {
+                if (Boolean.getBoolean("useless_stretcher.fluid_ui") && !fluidChecked) {
+                    fluidChecked = FluidUiChecks.tick(client);
+                    return;
+                }
                 if (Boolean.getBoolean("useless_stretcher.guide_pages_only")) {
                     finished = true;
                     client.stop();

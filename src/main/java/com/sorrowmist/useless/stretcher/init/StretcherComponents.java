@@ -78,6 +78,17 @@ public final class StretcherComponents {
             register("wondrous_staff_radiation_protection", builder -> builder.persistent(Codec.BOOL)
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
 
+    /** Opt-in full fluid source collection while held in either hand. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> STAFF_FLUID_COLLECT =
+            register("staff_fluid_collect", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> STAFF_FLUID_RADIUS = integerComponent("staff_fluid_radius");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> STAFF_FLUID_RATE = integerComponent("staff_fluid_rate");
+    /** At most one already-removed source bucket awaiting the bound network's remaining space. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid>> STAFF_FLUID_PENDING =
+            register("staff_fluid_pending", builder -> builder.persistent(com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid.CODEC)
+                    .networkSynchronized(com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid.STREAM_CODEC));
+
     /** Rotation of the 2i mascot while it is held as an item. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_ROTATION =
             integerComponent("two_i_rotation");

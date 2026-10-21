@@ -808,5 +808,18 @@
   "useless_stretcher.configuration.two_i.starfield_invitation": "Starfield courtyard invitations",
   "msg.useless_stretcher.two_i.starfield_disabled": "Starfield courtyard invitations are disabled by the server.",
   "toast.useless_stretcher.capsule_ready": "Structure ready",
-  "toast.useless_stretcher.capsule_enter": "Open your dimension capsule to enter"
+  "toast.useless_stretcher.capsule_enter": "Open your dimension capsule to enter",
+  "gui.useless_stretcher.fluid.title": "Collect Nearby Fluids",
+  "gui.useless_stretcher.fluid.toggle": "Collect nearby fluids: %s",
+  "gui.useless_stretcher.fluid.radius": "Radius (blocks)",
+  "gui.useless_stretcher.fluid.rate": "Rate (buckets/sec)",
+  "gui.useless_stretcher.fluid.radius_help": "Cubic radius around the player, from 1 to 16 blocks. Only loaded chunks are scanned.",
+  "gui.useless_stretcher.fluid.rate_help": "Collect at most 1 to 64 buckets per 20 game ticks. Scanning and ME capacity may reduce the actual rate.",
+  "gui.useless_stretcher.fluid.hint": "Works while held in either hand. One full stationary source = 1000 mB. Skips flowing fluids, waterlogged blocks and tanks. To bind, enable AE Networking Mode in G, then sneak-right-click an ME Wireless Access Point. Enable Prefer AE Storage to collect. Offline networks or less than one bucket of space leave the source intact.",
+  "gui.useless_stretcher.fluid.unbound": "No ME Wireless Access Point bound",
+  "gui.useless_stretcher.fluid.bound": "Bound to: %s / %s",
+  "gui.useless_stretcher.fluid.priority_on": "Prefer AE Storage: enabled",
+  "gui.useless_stretcher.fluid.priority_off": "Enable Prefer AE Storage in the original G menu",
+  "gui.useless_stretcher.fluid.pending": "Pending: %s mB (saved on this staff)",
+  "gui.useless_stretcher.fluid.open_help": "Set source fluid collection radius and rate for the bound ME network. Disabled by default."
 }

@@ -93,6 +93,10 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
+            StaffFluidCollectionChecks.start(event.getServer().overworld());
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.protection_only")) {
             try {
                 TwoIForcedKillChecks.run(event.getServer().overworld());
@@ -206,6 +210,18 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
+            try {
+                if (StaffFluidCollectionChecks.tick(event.getServer().overworld())) {
+                    LogUtils.getLogger().info("STAFF FLUID CHECKS PASSED");
+                    event.getServer().halt(false);
+                }
+            } catch (Throwable failure) {
+                LogUtils.getLogger().error("STAFF FLUID CHECKS FAILED", failure);
+                event.getServer().halt(false);
+            }
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.protection_only")) return;
         if (Boolean.getBoolean("useless_stretcher.surface_only")) {
             try {

@@ -615,6 +615,18 @@ public final class Network {
         }
     }
 
+    public record StaffFluidSettingsPayload(boolean enabled, int radius, int rate, boolean offhand)
+            implements CustomPacketPayload {
+        public static final Type<StaffFluidSettingsPayload> TYPE = new Type<>(
+                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_fluid_settings"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StaffFluidSettingsPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, StaffFluidSettingsPayload::enabled,
+                        ByteBufCodecs.VAR_INT, StaffFluidSettingsPayload::radius,
+                        ByteBufCodecs.VAR_INT, StaffFluidSettingsPayload::rate,
+                        ByteBufCodecs.BOOL, StaffFluidSettingsPayload::offhand, StaffFluidSettingsPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     /** Client request for the staff phase and interaction switches. */
     public record WondrousStaffPhasePayload(boolean phaseEnabled, boolean interactionEnabled,
                                             boolean offhand) implements CustomPacketPayload {
@@ -793,7 +805,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("21");
+        PayloadRegistrar registrar = event.registrar("22");
         CapsuleNetwork.register(registrar);
         registrar.playToServer(WondrousStaffRadiationPayload.TYPE, WondrousStaffRadiationPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
@@ -915,6 +927,16 @@ public final class Network {
                 }));
         registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
+        registrar.playToServer(StaffFluidSettingsPayload.TYPE, StaffFluidSettingsPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (!(context.player() instanceof ServerPlayer player)) return;
+                    InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+                    ItemStack held = player.getItemInHand(hand);
+                    if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+                    com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.configure(
+                            held, payload.enabled(), payload.radius(), payload.rate());
+                    player.inventoryMenu.broadcastChanges();
+                }));
         registrar.playToServer(WondrousStaffPhasePayload.TYPE, WondrousStaffPhasePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffPhase(payload, context)));
         registrar.playToServer(ApotheosisTierPayload.TYPE, ApotheosisTierPayload.STREAM_CODEC,
@@ -1369,6 +1391,10 @@ public final class Network {
                                               InteractionHand hand) {
         PacketDistributor.sendToServer(new WondrousStaffPhasePayload(
                 phaseEnabled, interactionEnabled, hand == InteractionHand.OFF_HAND));
+    }
+
+    public static void sendStaffFluidSettings(boolean enabled, int radius, int rate, InteractionHand hand) {
+        PacketDistributor.sendToServer(new StaffFluidSettingsPayload(enabled, radius, rate, hand == InteractionHand.OFF_HAND));
     }
 
     public static void sendStaffPhaseState(ServerPlayer player, boolean phaseEnabled,

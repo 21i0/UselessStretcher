@@ -1,0 +1,39 @@
+{
+  "old": "D:\\AI\\jar归档\\20261021-before-fluid-1.6.1\\useless_stretcher-1.21.1-1.6.1.jar",
+  "new": "D:\\AI\\useless_stretcher-1.21.1-1.6.1.jar",
+  "added": [
+    "com/sorrowmist/useless/stretcher/client/StaffFluidCollectionScreen.class",
+    "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$DrainPermissionCheck.class",
+    "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$PendingFluid.class",
+    "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$Scan.class",
+    "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector.class",
+    "com/sorrowmist/useless/stretcher/network/Network$StaffFluidSettingsPayload.class"
+  ],
+  "removed": [],
+  "changed": [
+    "assets/ae2/ae2guide/useless_stretcher/index.md",
+    "assets/ae2/ae2guide/useless_stretcher/staff.md",
+    "assets/useless_stretcher/lang/en_us.json",
+    "assets/useless_stretcher/lang/zh_cn.json",
+    "com/sorrowmist/useless/stretcher/client/WondrousStaffConfigScreen$ChoiceButton.class",
+    "com/sorrowmist/useless/stretcher/client/WondrousStaffConfigScreen.class",
+    "com/sorrowmist/useless/stretcher/event/StaffServerTickHandler.class",
+    "com/sorrowmist/useless/stretcher/init/StretcherComponents.class",
+    "com/sorrowmist/useless/stretcher/mixin/StaffMiningDispatcherMixin.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ApotheosisOptionsPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ApotheosisTablePayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ApotheosisTierPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ReclaimerActionPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ReclaimerEntry.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ReclaimerRequestPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$ReclaimerStatePayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$StaffPhaseStatePayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$TimeAccelerationStatePayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffPhasePayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffRadiationPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffRecallPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffSummonPayload.class",
+    "com/sorrowmist/useless/stretcher/network/Network.class"
+  ],
+  "unchanged": 643
+}

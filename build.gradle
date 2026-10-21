@@ -136,6 +136,7 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
             systemProperty 'useless_stretcher.jdte_only', providers.gradleProperty('jdteOnly').getOrElse('false')
             systemProperty 'useless_stretcher.surface_only', providers.gradleProperty('surfaceOnly').getOrElse('false')
             systemProperty 'useless_stretcher.protection_only', providers.gradleProperty('protectionOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.fluid_only', providers.gradleProperty('fluidOnly').getOrElse('false')
         }
     }
 }
@@ -150,6 +151,7 @@ if (providers.gradleProperty('guideTests').isPresent()) {
             programArguments.addAll '--width', '1280', '--height', '800'
             systemProperty 'useless_stretcher.guide_test', 'true'
             systemProperty 'useless_stretcher.guide_pages_only', providers.gradleProperty('guidePagesOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.fluid_ui', providers.gradleProperty('fluidUi').getOrElse('false')
             jvmArguments.addAll '-Xmx3G', '-Xms1G'
         }
     }

@@ -808,5 +808,18 @@
   "useless_stretcher.configuration.two_i.starfield_invitation": "星空庭院邀请",
   "msg.useless_stretcher.two_i.starfield_disabled": "星空庭院邀请已由服务器关闭。",
   "toast.useless_stretcher.capsule_ready": "结构已加载完成",
-  "toast.useless_stretcher.capsule_enter": "打开维度胶囊即可进入"
+  "toast.useless_stretcher.capsule_enter": "打开维度胶囊即可进入",
+  "gui.useless_stretcher.fluid.title": "吸取周围流体",
+  "gui.useless_stretcher.fluid.toggle": "吸取周围流体：%s",
+  "gui.useless_stretcher.fluid.radius": "半径（格）",
+  "gui.useless_stretcher.fluid.rate": "速率（桶/秒）",
+  "gui.useless_stretcher.fluid.radius_help": "以玩家为中心的立方体半径，1～16 格。仅扫描已加载区块。",
+  "gui.useless_stretcher.fluid.rate_help": "每 20 游戏刻最多收取 1～64 桶；实际速度取决于扫描与 AE 容量。",
+  "gui.useless_stretcher.fluid.hint": "主手或副手持杖时工作。一格完整静止源流体 = 1000 mB；不吸取流动、含水方块或储罐。绑定时在 G 开启“AE 联网模式”，潜行右键 AE 无线访问点；吸取需开启“AE 存储优先”。网络离线或不足整桶空间时保留源流体。",
+  "gui.useless_stretcher.fluid.unbound": "尚未绑定 AE 无线访问节点",
+  "gui.useless_stretcher.fluid.bound": "绑定位置：%s / %s",
+  "gui.useless_stretcher.fluid.priority_on": "优先 AE 存储：已开启",
+  "gui.useless_stretcher.fluid.priority_off": "请在本体 G 界面开启“AE 存储优先”",
+  "gui.useless_stretcher.fluid.pending": "待存入流体：%s mB（保存在此手杖）",
+  "gui.useless_stretcher.fluid.open_help": "调节源流体收集范围与速率，存入本体绑定的 AE 网络。默认关闭。"
 }

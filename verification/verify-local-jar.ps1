@@ -31,7 +31,7 @@ try {
         throw 'Wrong minimum Useless Mod dependency'
     }
     $networkSource = [IO.File]::ReadAllText((Join-Path $repo 'src/main/java/com/sorrowmist/useless/stretcher/network/Network.java'))
-    if ($networkSource -notmatch 'event\.registrar\("21"\)') { throw 'Wrong network protocol source' }
+    if ($networkSource -notmatch 'event\.registrar\("22"\)') { throw 'Wrong network protocol source' }
     $mixins = (Read-Entry $zip.GetEntry('useless_stretcher.mixins.json')) | ConvertFrom-Json -AsHashtable
     foreach ($mixin in @('StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
             'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin', 'TwoIDollRemovalGuardMixin',
@@ -141,7 +141,7 @@ try {
         result = 'JAR CHECKS PASSED'
         jar = $artifact
         version = $expectedVersion
-        network_protocol = 21
+        network_protocol = 22
         guide_pages_without_hidden_armor = $guidePages.Count
         minimum_useless_mod = '1.21.1-2.4.6'
         animated_armor_items = $armorPieces.Count

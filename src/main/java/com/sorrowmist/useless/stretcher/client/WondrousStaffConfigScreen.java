@@ -123,7 +123,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         featuresTop = modeTop + modeHeight + 4;
         boolean showApotheosis = StretcherConfig.hasApotheosisConfig();
         int featureWidth = (cardWidth - 13) / 2;
-        featuresHeight = extrasCollapsed ? 42 : 105;
+        featuresHeight = extrasCollapsed ? 42 : 126;
         addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, featureWidth, 17,
                 Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
                 ignored -> minecraft.setScreen(new EntityAccelerationConfigScreen(this, hand))))
@@ -134,6 +134,11 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
                 foldText, ignored -> toggleExtrasFold(), font));
         com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(extrasFoldText, "fold");
         if (!extrasCollapsed) {
+            addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 102, cardWidth - 10, 17,
+                    Component.translatable("gui.useless_stretcher.fluid.title"),
+                    ignored -> minecraft.setScreen(new StaffFluidCollectionScreen(this, hand))))
+                    .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                            "gui.useless_stretcher.fluid.open_help")));
             lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
                     cardLeft + 5, featuresTop + 39, featureWidth, 17,
                     lootRefreshMessage(), ignored -> toggleLootRefresh()));
