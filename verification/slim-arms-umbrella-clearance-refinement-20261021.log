@@ -1,0 +1,430 @@
+[2110月2026 18:32:02.681] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.249, --assetIndex, 17, --assetsDir, C:\\Users\\Lenovo\\.gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.fmlVersion, 4.0.44, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.249, --fml.neoFormVersion, 20240808.144430, --width, 1280, --height, 800]
+[2110月2026 18:32:02.685] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.12.1+1-LTS
+[2110月2026 18:32:02.686] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.12.1 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[2110月2026 18:32:02.965] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[2110月2026 18:32:03.153] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[2110月2026 18:32:03.443] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[2110月2026 18:32:03.533] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23138!/ Service=ModLauncher Env=CLIENT
+[2110月2026 18:32:03.708] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 3050 Ti Laptop GPU/PCIe/SSE2 GL version 4.6.0 NVIDIA 546.30, NVIDIA Corporation
+[2110月2026 18:32:04.404] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ae2wtlib_api. Using Mod File: D:\AI\sources\UselessStretcher\build\story-slim-arms-20261021\mods\ae2wtlib_api-19.2.5.jar
+[2110月2026 18:32:04.404] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 15 dependencies adding them to mods collection
+[2110月2026 18:32:04.407] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		AE2 Lightning Tech 2.1.1 (ae2lt)
+		AE2WTLib API 19.2.5 (ae2wtlib_api)
+		Allthemodium 3.0.1 (allthemodium)
+		Applied Energistics 2 19.2.17 (ae2)
+		Ars Nouveau 5.13.3 (ars_nouveau)
+		Athena 4.0.6 (athena)
+		Curios API 9.5.1+1.21.1 (curios)
+		Dyson Cube Project 1.0.5 (dysoncubeproject)
+		Ender Core 8.2.11-beta (endercore)
+		Ender IO 8.2.11-beta (enderio)
+		Ender IO - Modded Conduits 8.2.11-beta (enderio_modded_conduits)
+		GeckoLib 4 4.9.3 (geckolib)
+		GuideME 21.1.17 (guideme)
+		Infiniverse 2.0.1.0 (infiniverse)
+		JDT Extras 0.6.4.6 (jdte)
+		Just Dire Things 1.5.7 (justdirethings)
+		Just Enough Items 19.54.0.429 (jei)
+		LambDynamicLights (API) 4.5.1+1.21.1 (lambdynlights_api)
+		ManaitaPlusLegacy 0.1.0 (manaita_plus_legacy)
+		McJtyLib 1.21-9.0.21 (mcjtylib)
+		Minecraft 1.21.1 (minecraft)
+		Modonomicon 1.120.7 (modonomicon)
+		NeoForge 21.1.249 (neoforge)
+		Nuggets 1.1.0.48 (nuggets)
+		Occultism 1.224.4 (occultism)
+		Patchouli 1.21.1-93-NEOFORGE (patchouli)
+		Productive Bees 1.21.1-13.13.5 (productivebees)
+		Productive Lib 1.21.1-0.2.0 (productivelib)
+		RFToolsBase 1.21-6.0.11 (rftoolsbase)
+		RFToolsBuilder 1.21-7.0.7 (rftoolsbuilder)
+		SmartBrainLib 1.16.11 (smartbrainlib)
+		Thunderbolt Core 2.0.1 (thunderbolt)
+		Titanium 4.0.45 (titanium)
+		Useless Mod 1.21.1-2.4.6 (useless_mod)
+		Useless Stretcher 1.21.1-1.6.1 (useless_stretcher)
+[2110月2026 18:32:04.717] [main/INFO] [net.neoforged.fml.loading.FMLServiceProvider/CORE]: Loading coremod script-engine for [useless_stretcher]
+[2110月2026 18:32:07.223] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[2110月2026 18:32:07.225] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[2110月2026 18:32:07.257] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.249, --gameDir, ., --assetsDir, C:\Users\Lenovo\.gradle\caches\neoformruntime\assets, --assetIndex, 17, --width, 1280, --height, 800]
+[2110月2026 18:32:07.315] [main/WARN] [mixin/]: Reference map 'geckolib.refmap.json' for geckolib.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.317] [main/WARN] [mixin/]: Reference map 'allthemodium.refmap.json' for allthemodium.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.318] [main/WARN] [mixin/]: Reference map 'productivelib.refmap.json' for productivelib.mixin.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.325] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.326] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.332] [main/WARN] [mixin/]: Reference map 'patchouli.refmap.json' for patchouli_xplat.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.346] [main/WARN] [mixin/]: Reference map 'nuggets.refmap.json' for nuggets.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.348] [main/WARN] [mixin/]: Reference map 'productivebees.refmap.json' for productivebees.mixin.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.548] [main/WARN] [mixin/]: Reference map 'ars_nouveau.refmap.json' for ars_nouveau.mixins.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.549] [main/WARN] [mixin/]: Reference map 'mixins.justdirethings.refmap.json' for mixins.justdirethings.json could not be read. If this is a development environment you can ignore this message
+[2110月2026 18:32:07.776] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/harvest/HarvestToolProvider (java.lang.ClassNotFoundException: snownee.jade.addon.harvest.HarvestToolProvider)
+[2110月2026 18:32:08.153] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[2110月2026 18:32:08.158] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[2110月2026 18:32:08.160] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/api/me/ECOCraftingCPULogic (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.api.me.ECOCraftingCPULogic)
+[2110月2026 18:32:08.326] [main/WARN] [mixin/]: Error loading class: dev/shadowsoffire/apothic_spawners/block/ApothSpawnerTile$SpawnerLogicExt (java.lang.ClassNotFoundException: dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile$SpawnerLogicExt)
+[2110月2026 18:32:08.328] [main/WARN] [mixin/]: Error loading class: com/brandon3055/draconicevolution/blocks/tileentity/StabilizedSpawnerLogic (java.lang.ClassNotFoundException: com.brandon3055.draconicevolution.blocks.tileentity.StabilizedSpawnerLogic)
+[2110月2026 18:32:08.351] [main/WARN] [mixin/]: Error loading class: mekanism/common/content/gear/mekasuit/ModuleMagneticAttractionUnit (java.lang.ClassNotFoundException: mekanism.common.content.gear.mekasuit.ModuleMagneticAttractionUnit)
+[2110月2026 18:32:08.353] [main/WARN] [mixin/]: Error loading class: dev/shadowsoffire/apothic_spawners/block/ApothSpawnerTile$SpawnerLogicExt (java.lang.ClassNotFoundException: dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile$SpawnerLogicExt)
+[2110月2026 18:32:08.354] [main/WARN] [mixin/]: Error loading class: com/brandon3055/draconicevolution/blocks/tileentity/StabilizedSpawnerLogic (java.lang.ClassNotFoundException: com.brandon3055.draconicevolution.blocks.tileentity.StabilizedSpawnerLogic)
+[2110月2026 18:32:08.391] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[2110月2026 18:32:08.392] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[2110月2026 18:32:08.393] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[2110月2026 18:32:08.394] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/AbstractBotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity)
+[2110月2026 18:32:08.394] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor from mod useless_mod
+[2110月2026 18:32:08.395] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[2110月2026 18:32:08.395] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor from mod useless_mod
+[2110月2026 18:32:08.396] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[2110月2026 18:32:08.397] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin from mod useless_mod
+[2110月2026 18:32:08.397] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[2110月2026 18:32:08.398] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin from mod useless_mod
+[2110月2026 18:32:08.399] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[2110月2026 18:32:08.399] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin from mod useless_mod
+[2110月2026 18:32:08.412] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/BotanyPotRenderer (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.BotanyPotRenderer)
+[2110月2026 18:32:08.412] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.BotanyPotRenderer was not found useless_mod.mixins.json:botanypots.BotanyPotRendererMixin from mod useless_mod
+[2110月2026 18:32:08.414] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/data/display/renderer/PhasedDisplayStateRenderer (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.data.display.renderer.PhasedDisplayStateRenderer)
+[2110月2026 18:32:08.414] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.data.display.renderer.PhasedDisplayStateRenderer was not found useless_mod.mixins.json:botanypots.PhasedDisplayStateRendererMixin from mod useless_mod
+[2110月2026 18:32:08.415] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/client/gui/GuiAssemblerMatrix$PatternInfo (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.client.gui.GuiAssemblerMatrix$PatternInfo)
+[2110月2026 18:32:08.416] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.client.gui.GuiAssemblerMatrix$PatternInfo was not found useless_mod.mixins.json:eae.GuiAssemblerMatrixPatternInfoMixin from mod useless_mod
+[2110月2026 18:32:08.418] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/network/MenuDataCodecs (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.network.MenuDataCodecs)
+[2110月2026 18:32:08.418] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.network.MenuDataCodecs was not found useless_mod.compact.mixins.json:MenuDataCodecsCompactMixin from mod useless_mod
+[2110月2026 18:32:08.721] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[2110月2026 18:32:10.938] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 355 milliseconds
+[2110月2026 18:32:16.779] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[2110月2026 18:32:16.781] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[2110月2026 18:32:16.784] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[2110月2026 18:32:16.786] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[2110月2026 18:32:16.788] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[2110月2026 18:32:16.914] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23215!/assets/.mcassetsroot' uses unexpected schema
+[2110月2026 18:32:16.915] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23215!/data/.mcassetsroot' uses unexpected schema
+[2110月2026 18:32:16.971] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[2110月2026 18:32:16.986] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[2110月2026 18:32:17.084] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[2110月2026 18:32:17.381] [modloading-worker-0/INFO] [PluginManager/]: Scanning classes for dysoncubeproject
+[2110月2026 18:32:17.381] [modloading-worker-0/INFO] [PluginManager/]: Scanning classes for titanium
+[2110月2026 18:32:17.498] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.249, for MC 1.21.1
+[2110月2026 18:32:17.509] [modloading-worker-0/WARN] [AE2:C/]: Unable to find class com.simibubi.create.foundation.ponder.PonderWorld. Integration with PonderJS disabled.
+[2110月2026 18:32:17.773] [modloading-worker-0/WARN] [patchouli/]: Could not locate JEI keybindings, lookups in books may not work
+[2110月2026 18:32:18.401] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[2110月2026 18:32:18.414] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 8.642 milliseconds
+[2110月2026 18:32:19.614] [modloading-worker-0/INFO] [com.moakiee.thunderbolt.ThunderboltCore/]: [Thunderbolt Core Reborn] initialized
+[2110月2026 18:32:24.715] [Render thread/INFO] [com.klikli_dev.occultism.Occultism/]: Block color registration complete.
+[2110月2026 18:32:24.724] [Render thread/INFO] [com.klikli_dev.occultism.Occultism/]: Item color registration complete.
+[2110月2026 18:32:24.866] [Render thread/INFO] [com.klikli_dev.occultism.Occultism/]: Registered Particle Factories
+[2110月2026 18:32:24.966] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[2110月2026 18:32:25.563] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/smartbrainlib, mod/titanium, mod/geckolib, mod/allthemodium, mod/productivelib, mod/jei, mod/ae2, mod/thunderbolt, mod/enderio_modded_conduits, mod/enderio, mod/dysoncubeproject, mod/curios, mod/ae2lt, mod/ae2wtlib_api, mod/patchouli, mod/endercore, mod/neoforge, mod/modonomicon, mod/manaita_plus_legacy, mod/lambdynlights_api, mod/mcjtylib, mod/rftoolsbase, mod/rftoolsbuilder, mod/guideme, mod/occultism, mod/nuggets, mod/productivebees, mod/ars_nouveau, mod/justdirethings, mod/jdte, mod/useless_mod, mod/useless_stretcher, mod/infiniverse, mod/athena
+[2110月2026 18:32:25.602] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/agronomic_sourcelink_animation.json'
+[2110月2026 18:32:25.619] [Worker-Main-4/INFO] [com.klikli_dev.occultism.Occultism/]: Common setup complete.
+[2110月2026 18:32:25.680] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/alchemical_sourcelink_animation.json'
+[2110月2026 18:32:25.761] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/alteration_apparatus_animations.json'
+[2110月2026 18:32:25.769] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/amethyst_golem_animations.json'
+[2110月2026 18:32:25.778] [Worker-Main-12/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[2110月2026 18:32:25.845] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/arcane_core_animations.json'
+[2110月2026 18:32:25.845] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/animated_block_animations.json'
+[2110月2026 18:32:25.846] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/arcane_pedestal_animations.json'
+[2110月2026 18:32:25.846] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/basic_spell_turret_animations.json'
+[2110月2026 18:32:25.847] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/book_wyrm_animation.json'
+[2110月2026 18:32:25.848] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/book_wyrm_lectern_animations.json'
+[2110月2026 18:32:25.848] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/decor_blossom_animations.json'
+[2110月2026 18:32:25.849] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/drygmy_animations.json'
+[2110月2026 18:32:25.849] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/empty.json'
+[2110月2026 18:32:25.851] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/enchanting_apparatus_animations.json'
+[2110月2026 18:32:26.004] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/lily_animations.json'
+[2110月2026 18:32:26.004] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/mana_splitter_animation.json'
+[2110月2026 18:32:26.004] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/imbuement_chamber_animations.json'
+[2110月2026 18:32:26.004] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/mana_relay_animation.json'
+[2110月2026 18:32:26.005] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/nook_animation.json'
+[2110月2026 18:32:26.005] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/potion_melder_animation.json'
+[2110月2026 18:32:26.005] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/press_animations.json'
+[2110月2026 18:32:26.005] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/redstone_relay_animations.json'
+[2110月2026 18:32:26.005] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/ritual.json'
+[2110月2026 18:32:26.005] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/rune.json'
+[2110月2026 18:32:26.006] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/scryers_eye_animation.json'
+[2110月2026 18:32:26.006] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/scribes_table_animations.json'
+[2110月2026 18:32:26.007] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_collector_animations.json'
+[2110月2026 18:32:26.007] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_deposit_animations.json'
+[2110月2026 18:32:26.007] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_relay_animations.json'
+[2110月2026 18:32:26.008] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_splitter_animations.json'
+[2110月2026 18:32:26.008] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_warp_animations.json'
+[2110月2026 18:32:26.008] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spell_turret_animations.json'
+[2110月2026 18:32:26.008] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spell_turret_timer_animations.json'
+[2110月2026 18:32:26.009] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spike_animations.json'
+[2110月2026 18:32:26.009] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/starbuncle_animations.json'
+[2110月2026 18:32:26.009] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/vitalic_sourcelink_animation.json'
+[2110月2026 18:32:26.009] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/storage_catalog_animations.json'
+[2110月2026 18:32:26.009] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/volcanic_sourcelink_animations.json'
+[2110月2026 18:32:26.009] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wand_animation.json'
+[2110月2026 18:32:26.010] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/weald_waddler_animations.json'
+[2110月2026 18:32:26.010] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/weald_walker_animations.json'
+[2110月2026 18:32:26.010] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/whirlisprig_animations.json'
+[2110月2026 18:32:26.010] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/whirlisprig_blossom_animations.json'
+[2110月2026 18:32:26.011] [Worker-Main-13/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_chimera_animations.json'
+[2110月2026 18:32:26.011] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_defender_animations.json'
+[2110月2026 18:32:26.011] [Worker-Main-4/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_hunter_animations.json'
+[2110月2026 18:32:26.012] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_stalker_animations.json'
+[2110月2026 18:32:26.012] [Worker-Main-8/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wixie_animations.json'
+[2110月2026 18:32:26.015] [Worker-Main-3/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[2110月2026 18:32:26.038] [Worker-Main-13/ERROR] [GeckoLib/]: Unable to parse animation: swim_charge
+	-> Failed to parse expression 'math.cos(query.anim_time*swimcharge-25)*8'
+		-> Unable to parse compiled symbols from expression: [Left[swimcharge]]
+[2110月2026 18:32:26.069] [Worker-Main-2/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_ii frame 3: 2
+[2110月2026 18:32:26.070] [Worker-Main-2/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_iv frame 3: 2
+[2110月2026 18:32:26.233] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 1: 1
+[2110月2026 18:32:26.233] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 2: 2
+[2110月2026 18:32:26.233] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 3: 3
+[2110月2026 18:32:26.234] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 4: 4
+[2110月2026 18:32:26.234] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 5: 5
+[2110月2026 18:32:26.234] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 6: 6
+[2110月2026 18:32:26.234] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 7: 7
+[2110月2026 18:32:26.234] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 8: 8
+[2110月2026 18:32:26.244] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite enderio:block/alloy_smelter_front_active: [4, 5]
+[2110月2026 18:32:26.418] [Render thread/INFO] [net.neoforged.coremod.CoreMod.useless_stretcher/COREMODLOG]: [2i compatibility] Manaita destructive-marker guards = 4
+[2110月2026 18:32:26.454] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite justdirethings:item/creaturecatcher_side_animation: [8]
+[2110月2026 18:32:26.465] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_v frame 3: 2
+[2110月2026 18:32:26.469] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_i frame 3: 2
+[2110月2026 18:32:26.492] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:block/overload_crystal_block frame 1: 1
+[2110月2026 18:32:26.534] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_iii frame 3: 2
+[2110月2026 18:32:26.565] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite justdirethings:item/creaturecatcher_top_animation: [8]
+[2110月2026 18:32:26.596] [Worker-Main-2/WARN] [net.minecraft.client.renderer.texture.SpriteLoader/]: Texture enderio:block/item_conduit_in with size 24x24 limits mip level from 4 to 3
+[2110月2026 18:32:26.976] [Worker-Main-7/INFO] [com.klikli_dev.occultism.Occultism/]: Client setup complete.
+[2110月2026 18:32:27.465] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'enderio:block/block_detector' referenced from: enderio:block/block_detector: java.io.FileNotFoundException: enderio:models/block/block_detector.json
+[2110月2026 18:32:27.893] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'occultism:item/ritual_dummy_misc' referenced from: occultism:item/jei_dummy/none: java.io.FileNotFoundException: occultism:models/item/ritual_dummy_misc.json
+[2110月2026 18:32:27.900] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'dysoncubeproject:item/multiblock_structure' referenced from: dysoncubeproject:item/multiblock_structure: java.io.FileNotFoundException: dysoncubeproject:models/item/multiblock_structure.json
+[2110月2026 18:32:27.902] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/creative_generator' referenced from: titanium:item/creative_generator: java.io.FileNotFoundException: titanium:models/item/creative_generator.json
+[2110月2026 18:32:27.914] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'minecraft:entity/trident' referenced from: allthemodium:item/alloy_trident: java.io.FileNotFoundException: minecraft:models/entity/trident.json
+[2110月2026 18:32:27.918] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_test' referenced from: titanium:item/block_test: java.io.FileNotFoundException: titanium:models/item/block_test.json
+[2110月2026 18:32:27.920] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_asset_test' referenced from: titanium:item/block_asset_test: java.io.FileNotFoundException: titanium:models/item/block_asset_test.json
+[2110月2026 18:32:27.922] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/machine_test' referenced from: titanium:item/machine_test: java.io.FileNotFoundException: titanium:models/item/machine_test.json
+[2110月2026 18:32:27.925] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_twenty_four_test' referenced from: titanium:item/block_twenty_four_test: java.io.FileNotFoundException: titanium:models/item/block_twenty_four_test.json
+[2110月2026 18:32:27.925] [Worker-Main-13/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'ars_nouveau:item/planarium_projector' referenced from: ars_nouveau:item/planarium_projector: java.io.FileNotFoundException: ars_nouveau:models/item/planarium_projector.json
+[2110月2026 18:32:30.606] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='dysoncubeproject.subtitle.railgun', args=[]} for sound event: dysoncubeproject:railgun
+[2110月2026 18:32:30.607] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='dysoncubeproject.subtitle.ray', args=[]} for sound event: dysoncubeproject:ray
+[2110月2026 18:32:30.608] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[2110月2026 18:32:30.608] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[2110月2026 18:32:31.149] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[2110月2026 18:32:31.151] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[2110月2026 18:32:31.238] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[2110月2026 18:32:31.262] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[2110月2026 18:32:31.263] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[2110月2026 18:32:31.264] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[2110月2026 18:32:31.265] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[2110月2026 18:32:31.267] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[2110月2026 18:32:31.268] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[2110月2026 18:32:31.268] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[2110月2026 18:32:31.269] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[2110月2026 18:32:31.500] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[2110月2026 18:32:31.504] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/paintings.png-atlas
+[2110月2026 18:32:31.505] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[2110月2026 18:32:31.505] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[2110月2026 18:32:31.505] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[2110月2026 18:32:31.534] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[2110月2026 18:32:31.589] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader dysoncubeproject:holo_hex could not find uniform named uValid in the specified shader program.
+[2110月2026 18:32:31.593] [Render thread/INFO] [com.moakiee.ae2lt.client.core.CoreEffectShaders/]: Veil not detected or incompatible; using the native core-effect shader backend
+[2110月2026 18:32:31.604] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader manaita_plus_legacy:cosmic_neo_no_mask could not find uniform named cosmicColor0 in the specified shader program.
+[2110月2026 18:32:31.605] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader manaita_plus_legacy:cosmic_neo_no_mask could not find uniform named screenSize in the specified shader program.
+[2110月2026 18:32:31.607] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader ars_nouveau:rainbow_entity could not find uniform named IViewRotMat in the specified shader program.
+[2110月2026 18:32:31.608] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader ars_nouveau:blamed_entity could not find uniform named IViewRotMat in the specified shader program.
+[2110月2026 18:32:31.625] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[2110月2026 18:32:31.630] [Render thread/INFO] [patchouli/]: BookContentResourceListenerLoader preloaded 919 jsons
+[2110月2026 18:32:31.632] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[2110月2026 18:32:31.632] [Render thread/INFO] [guideme.internal.GuideReloadListener/]: Data driven guides: [jdte:guide]
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_blank_unit is used by pages ae2lt:tianshu/construction.md (from mod/ae2lt) and ae2lt:matrix/cores.md
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_amplifier_unit is used by pages ae2lt:tianshu/construction.md (from mod/ae2lt) and ae2lt:matrix/cores.md
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:railgun_module_core is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t1 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t2 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.634] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t3 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_blank_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:storage_supercomputing_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:parallel_supercomputing_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_amplifier_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:closed_loop_pattern_storage is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.635] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:closed_loop_seed_storage is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_supercomputer_controller is used by pages ae2lt:tianshu/operation.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_supercomputer_port is used by pages ae2lt:tianshu/operation.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.ItemIndex/]: Page ae2lt:overloaded-network/overloaded-power-supply.md references an unknown item ae2lt:overloaded_power_supply in its item_ids frontmatter
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:electromagnetic_railgun is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:electromagnetic-railgun.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_oculus is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_core is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_conduit is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.636] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_stride is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:31.638] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:31.641] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:31.642] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:33.736] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/smartbrainlib, mod/titanium, mod/geckolib, mod/allthemodium, mod/productivelib, mod/jei, mod/ae2, mod/thunderbolt, mod/enderio_modded_conduits, mod/enderio, mod/dysoncubeproject, mod/curios, mod/ae2lt, mod/ae2wtlib_api, mod/patchouli, mod/endercore, mod/neoforge, mod/modonomicon, mod/manaita_plus_legacy, mod/lambdynlights_api, mod/mcjtylib, mod/rftoolsbase, mod/rftoolsbuilder, mod/guideme, mod/occultism, mod/nuggets, mod/productivebees, mod/ars_nouveau, mod/justdirethings, mod/jdte, mod/useless_mod, mod/useless_stretcher, mod/infiniverse, mod/athena
+[2110月2026 18:32:33.740] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/agronomic_sourcelink_animation.json'
+[2110月2026 18:32:33.741] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/alchemical_sourcelink_animation.json'
+[2110月2026 18:32:33.741] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/alteration_apparatus_animations.json'
+[2110月2026 18:32:33.741] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/amethyst_golem_animations.json'
+[2110月2026 18:32:33.742] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/animated_block_animations.json'
+[2110月2026 18:32:33.743] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/arcane_core_animations.json'
+[2110月2026 18:32:33.743] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/arcane_pedestal_animations.json'
+[2110月2026 18:32:33.743] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/basic_spell_turret_animations.json'
+[2110月2026 18:32:33.743] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/book_wyrm_animation.json'
+[2110月2026 18:32:33.744] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/book_wyrm_lectern_animations.json'
+[2110月2026 18:32:33.744] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/decor_blossom_animations.json'
+[2110月2026 18:32:33.745] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/drygmy_animations.json'
+[2110月2026 18:32:33.746] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/empty.json'
+[2110月2026 18:32:33.746] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/enchanting_apparatus_animations.json'
+[2110月2026 18:32:33.752] [Worker-Main-1/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[2110月2026 18:32:33.753] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/mana_relay_animation.json'
+[2110月2026 18:32:33.753] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/mana_splitter_animation.json'
+[2110月2026 18:32:33.752] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/lily_animations.json'
+[2110月2026 18:32:33.754] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/nook_animation.json'
+[2110月2026 18:32:33.752] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/imbuement_chamber_animations.json'
+[2110月2026 18:32:33.755] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/potion_melder_animation.json'
+[2110月2026 18:32:33.756] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/press_animations.json'
+[2110月2026 18:32:33.757] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/redstone_relay_animations.json'
+[2110月2026 18:32:33.757] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/ritual.json'
+[2110月2026 18:32:33.757] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/scribes_table_animations.json'
+[2110月2026 18:32:33.757] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/rune.json'
+[2110月2026 18:32:33.757] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/scryers_eye_animation.json'
+[2110月2026 18:32:33.758] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_collector_animations.json'
+[2110月2026 18:32:33.758] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_relay_animations.json'
+[2110月2026 18:32:33.758] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_splitter_animations.json'
+[2110月2026 18:32:33.758] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_warp_animations.json'
+[2110月2026 18:32:33.758] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/source_deposit_animations.json'
+[2110月2026 18:32:33.758] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spell_turret_animations.json'
+[2110月2026 18:32:33.759] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spell_turret_timer_animations.json'
+[2110月2026 18:32:33.759] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/spike_animations.json'
+[2110月2026 18:32:33.759] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/starbuncle_animations.json'
+[2110月2026 18:32:33.760] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/storage_catalog_animations.json'
+[2110月2026 18:32:33.761] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/vitalic_sourcelink_animation.json'
+[2110月2026 18:32:33.761] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/volcanic_sourcelink_animations.json'
+[2110月2026 18:32:33.762] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wand_animation.json'
+[2110月2026 18:32:33.762] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/weald_waddler_animations.json'
+[2110月2026 18:32:33.762] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/weald_walker_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/whirlisprig_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/whirlisprig_blossom_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-3/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_chimera_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-2/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_defender_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_hunter_animations.json'
+[2110月2026 18:32:33.763] [Worker-Main-6/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wilden_stalker_animations.json'
+[2110月2026 18:32:33.765] [Worker-Main-14/WARN] [GeckoLib/]: Found animation file with improper file name format; animation files should end in .animation.json: 'ars_nouveau:animations/wixie_animations.json'
+[2110月2026 18:32:33.767] [Worker-Main-3/ERROR] [GeckoLib/]: Unable to parse animation: swim_charge
+	-> Failed to parse expression 'math.cos(query.anim_time*swimcharge-25)*8'
+		-> Unable to parse compiled symbols from expression: [Left[swimcharge]]
+[2110月2026 18:32:33.770] [Worker-Main-6/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[2110月2026 18:32:33.931] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_ii frame 3: 2
+[2110月2026 18:32:33.932] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_iv frame 3: 2
+[2110月2026 18:32:34.048] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 1: 1
+[2110月2026 18:32:34.050] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 2: 2
+[2110月2026 18:32:34.050] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 3: 3
+[2110月2026 18:32:34.051] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 4: 4
+[2110月2026 18:32:34.051] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 5: 5
+[2110月2026 18:32:34.051] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 6: 6
+[2110月2026 18:32:34.051] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 7: 7
+[2110月2026 18:32:34.051] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite jdte:item/eclipsealloy_wrench frame 8: 8
+[2110月2026 18:32:34.065] [Worker-Main-5/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite enderio:block/alloy_smelter_front_active: [4, 5]
+[2110月2026 18:32:34.197] [Worker-Main-7/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite justdirethings:item/creaturecatcher_side_animation: [8]
+[2110月2026 18:32:34.200] [Worker-Main-13/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_v frame 3: 2
+[2110月2026 18:32:34.202] [Worker-Main-5/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_i frame 3: 2
+[2110月2026 18:32:34.207] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:block/overload_crystal_block frame 1: 1
+[2110月2026 18:32:34.226] [Worker-Main-4/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Invalid frame index on sprite ae2lt:item/lightning_cell_component_iii frame 3: 2
+[2110月2026 18:32:34.282] [Worker-Main-4/WARN] [net.minecraft.client.renderer.texture.SpriteContents/]: Unused frames in sprite justdirethings:item/creaturecatcher_top_animation: [8]
+[2110月2026 18:32:34.359] [Worker-Main-14/WARN] [net.minecraft.client.renderer.texture.SpriteLoader/]: Texture enderio:block/item_conduit_in with size 24x24 limits mip level from 4 to 3
+[2110月2026 18:32:34.959] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'enderio:block/block_detector' referenced from: enderio:block/block_detector: java.io.FileNotFoundException: enderio:models/block/block_detector.json
+[2110月2026 18:32:35.221] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'occultism:item/ritual_dummy_misc' referenced from: occultism:item/jei_dummy/none: java.io.FileNotFoundException: occultism:models/item/ritual_dummy_misc.json
+[2110月2026 18:32:35.224] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'dysoncubeproject:item/multiblock_structure' referenced from: dysoncubeproject:item/multiblock_structure: java.io.FileNotFoundException: dysoncubeproject:models/item/multiblock_structure.json
+[2110月2026 18:32:35.225] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/creative_generator' referenced from: titanium:item/creative_generator: java.io.FileNotFoundException: titanium:models/item/creative_generator.json
+[2110月2026 18:32:35.233] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'minecraft:entity/trident' referenced from: allthemodium:item/alloy_trident: java.io.FileNotFoundException: minecraft:models/entity/trident.json
+[2110月2026 18:32:35.235] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_test' referenced from: titanium:item/block_test: java.io.FileNotFoundException: titanium:models/item/block_test.json
+[2110月2026 18:32:35.236] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_asset_test' referenced from: titanium:item/block_asset_test: java.io.FileNotFoundException: titanium:models/item/block_asset_test.json
+[2110月2026 18:32:35.237] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/machine_test' referenced from: titanium:item/machine_test: java.io.FileNotFoundException: titanium:models/item/machine_test.json
+[2110月2026 18:32:35.238] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'titanium:item/block_twenty_four_test' referenced from: titanium:item/block_twenty_four_test: java.io.FileNotFoundException: titanium:models/item/block_twenty_four_test.json
+[2110月2026 18:32:35.239] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'ars_nouveau:item/planarium_projector' referenced from: ars_nouveau:item/planarium_projector: java.io.FileNotFoundException: ars_nouveau:models/item/planarium_projector.json
+[2110月2026 18:32:36.231] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='dysoncubeproject.subtitle.railgun', args=[]} for sound event: dysoncubeproject:railgun
+[2110月2026 18:32:36.232] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='dysoncubeproject.subtitle.ray', args=[]} for sound event: dysoncubeproject:ray
+[2110月2026 18:32:36.232] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[2110月2026 18:32:36.233] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[2110月2026 18:32:36.392] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[2110月2026 18:32:36.393] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[2110月2026 18:32:36.440] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[2110月2026 18:32:36.468] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[2110月2026 18:32:36.468] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[2110月2026 18:32:36.470] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[2110月2026 18:32:36.470] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[2110月2026 18:32:36.474] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[2110月2026 18:32:36.475] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[2110月2026 18:32:36.475] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[2110月2026 18:32:36.476] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[2110月2026 18:32:36.490] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[2110月2026 18:32:36.491] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/paintings.png-atlas
+[2110月2026 18:32:36.492] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[2110月2026 18:32:36.492] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[2110月2026 18:32:36.492] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[2110月2026 18:32:36.504] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[2110月2026 18:32:36.533] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader dysoncubeproject:holo_hex could not find uniform named uValid in the specified shader program.
+[2110月2026 18:32:36.535] [Render thread/INFO] [com.moakiee.ae2lt.client.core.CoreEffectShaders/]: Veil not detected or incompatible; using the native core-effect shader backend
+[2110月2026 18:32:36.537] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader manaita_plus_legacy:cosmic_neo_no_mask could not find uniform named cosmicColor0 in the specified shader program.
+[2110月2026 18:32:36.537] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader manaita_plus_legacy:cosmic_neo_no_mask could not find uniform named screenSize in the specified shader program.
+[2110月2026 18:32:36.538] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader ars_nouveau:rainbow_entity could not find uniform named IViewRotMat in the specified shader program.
+[2110月2026 18:32:36.539] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader ars_nouveau:blamed_entity could not find uniform named IViewRotMat in the specified shader program.
+[2110月2026 18:32:36.547] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[2110月2026 18:32:36.549] [Render thread/INFO] [patchouli/]: BookContentResourceListenerLoader preloaded 919 jsons
+[2110月2026 18:32:36.549] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[2110月2026 18:32:36.550] [Render thread/INFO] [guideme.internal.GuideReloadListener/]: Data driven guides: [jdte:guide]
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_blank_unit is used by pages ae2lt:tianshu/construction.md (from mod/ae2lt) and ae2lt:matrix/cores.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_amplifier_unit is used by pages ae2lt:tianshu/construction.md (from mod/ae2lt) and ae2lt:matrix/cores.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:railgun_module_core is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t1 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t2 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:energy_module_t3 is used by pages ae2lt:electromagnetic-railgun.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_blank_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:storage_supercomputing_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:parallel_supercomputing_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_amplifier_unit is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:closed_loop_pattern_storage is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.550] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:closed_loop_seed_storage is used by pages ae2lt:tianshu/computing-units.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_supercomputer_controller is used by pages ae2lt:tianshu/operation.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:tianshu_supercomputer_port is used by pages ae2lt:tianshu/operation.md (from mod/ae2lt) and ae2lt:tianshu/construction.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.ItemIndex/]: Page ae2lt:overloaded-network/overloaded-power-supply.md references an unknown item ae2lt:overloaded_power_supply in its item_ids frontmatter
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:electromagnetic_railgun is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:electromagnetic-railgun.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_oculus is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_core is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_conduit is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.552] [Render thread/WARN] [guideme.indices.UniqueIndex/]: Key conflict in index Item Index: ae2lt:celestweave_stride is used by pages ae2lt:devices-index.md (from mod/ae2lt) and ae2lt:celestweave.md
+[2110月2026 18:32:36.553] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:36.553] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:36.553] [Render thread/ERROR] [guideme.internal.util.NavigationUtil/]: Couldn't find icon ae2lt:overloaded_power_supply for icon of page ae2lt:overloaded-network/overloaded-power-supply.md (from mod/ae2lt)
+[2110月2026 18:32:38.627] [Render thread/INFO] [com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks/]: 2I CLOSED BOW PASSED: 250 mesh edges shared by exactly two faces
+[2110月2026 18:32:38.660] [Render thread/INFO] [com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks/]: 2I LIVELY TAIL PASSED: left/right tip -7.6026411056518555/7.654063701629639, mean 0.031090274826662306, max tick step 0.21893929121863445; jump/fall/turn/settle springs
+[2110月2026 18:32:38.716] [Render thread/INFO] [com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks/]: 2I TAIL POSE TIMING: 8.4816 microseconds/pose (2000 local samples, no server work)
+[2110月2026 18:32:38.716] [Render thread/INFO] [com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks/]: 2I NEW SKIN AND PARTICLE ATLAS PASSED: artist SHA256, reload, all 4096 pixels on item/block sprites, full gold-eye closure; tail gravity/sprint/reset/idle checks passed
+[2110月2026 18:32:38.726] [Render thread/INFO] [com.sorrowmist.useless.stretcher.storytest.TwoIHandStabilityChecks/]: 2I HAND STABILITY PASSED: 1200 real sync hooks without idle reequip; 100 dual-doll hand swaps animate both hands; put-away/take-out/item/slot changes preserved
+[2110月2026 18:32:38.734] [Render thread/ERROR] [com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks/]: 2I SKIN TAIL CHECKS FAILED
+java.lang.AssertionError: 2i umbrella: thin mast stays clear of the animated head including the outer hat layer: mast=-8.285076, headMinX=-0.49836093, armZ=1.08
+	at TRANSFORMER/useless_stretcher@1.21.1-1.6.1/com.sorrowmist.useless.stretcher.storytest.TwoIUmbrellaChecks.check(TwoIUmbrellaChecks.java:82) ~[%23243!/:?]
+	at TRANSFORMER/useless_stretcher@1.21.1-1.6.1/com.sorrowmist.useless.stretcher.storytest.TwoIUmbrellaChecks.run(TwoIUmbrellaChecks.java:53) ~[%23243!/:?]
+	at TRANSFORMER/useless_stretcher@1.21.1-1.6.1/com.sorrowmist.useless.stretcher.storytest.DollRenderChecks.validate(DollRenderChecks.java:40) ~[%23243!/:?]
+	at TRANSFORMER/useless_stretcher@1.21.1-1.6.1/com.sorrowmist.useless.stretcher.storytest.TwoISkinTailChecks.tick(TwoISkinTailChecks.java:55) ~[%23243!/:?]
+	at TRANSFORMER/useless_stretcher@1.21.1-1.6.1/com.sorrowmist.useless.stretcher.storytest.StoryChecks.tick(StoryChecks.java:58) ~[%23243!/:?]
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23150!/:?]
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar%23150!/:?]
+	at TRANSFORMER/neoforge@21.1.249/net.neoforged.neoforge.client.ClientHooks.fireClientTickPost(ClientHooks.java:1077) ~[neoforge-21.1.249.jar%23216!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.tick(Minecraft.java:1927) ~[neoforge-21.1.249.jar%23215!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1167) ~[neoforge-21.1.249.jar%23215!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:813) ~[neoforge-21.1.249.jar%23215!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.249.jar%23215!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23146!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.44.jar%23146!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23146!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23146!/:4.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23128!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23128!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?]
+[2110月2026 18:32:38.737] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

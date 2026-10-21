@@ -1,0 +1,22 @@
+{
+  "result": "SLIM ARM ENTRY DIFF PASSED",
+  "before": {
+    "path": "D:\\AI\\useless_stretcher-1.21.1-1.6.1.jar",
+    "bytes": 12570725,
+    "sha256": "96665FB2F63CE561445192F3EA2D0682EB2BD906C39F538DE5977D06EA42A02D"
+  },
+  "after": {
+    "path": "D:\\AI\\sources\\UselessStretcher\\build\\libs\\useless_stretcher-1.21.1-1.6.1.jar",
+    "bytes": 12570783,
+    "sha256": "E7C6138E9CC743F971C9BE3F6B4B6B6FC7CF0EF722441659A3565D047DBDBE06"
+  },
+  "changed": [
+    "assets/ae2/ae2guide/useless_stretcher/two_i.md",
+    "com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer$Model.class"
+  ],
+  "added": [],
+  "removed": [],
+  "unchanged_entries": 569,
+  "network_protocol_unchanged": 22,
+  "all_other_production_and_resource_entries_byte_identical": true
+}

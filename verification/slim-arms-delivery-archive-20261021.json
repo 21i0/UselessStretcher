@@ -1,0 +1,11 @@
+{
+  "result": "ARCHIVE AND DELIVERY HASHES PASSED",
+  "archive": "D:\\AI\\jar归档\\20261021-before-slim-arms-1.6.1\\useless_stretcher-1.21.1-1.6.1.jar",
+  "archive_sha256": "96665FB2F63CE561445192F3EA2D0682EB2BD906C39F538DE5977D06EA42A02D",
+  "delivery": "D:/AI/useless_stretcher-1.21.1-1.6.1.jar",
+  "delivery_bytes": 12570783,
+  "delivery_sha256": "E7C6138E9CC743F971C9BE3F6B4B6B6FC7CF0EF722441659A3565D047DBDBE06",
+  "root_project_jars": [
+    "useless_stretcher-1.21.1-1.6.1.jar"
+  ]
+}

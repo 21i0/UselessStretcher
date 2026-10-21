@@ -59,6 +59,9 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
     public static final class Model extends PlayerModel<TwoIDollEntity> {
         // Poppet reference: approximately 9.5 px head / 9 px torso / 7 px width.
         // Keep original Steve UVs, with one set of longer plush limbs in every form.
+        // Alex's 3:4 arm width/depth ratio is applied at the bone, preserving the
+        // existing normalized skin and palm UVs instead of cropping a texture face.
+        private static final float ARM_WIDTH = 0.75F * 3.0F / 4.0F;
         private static final float HEAD_SIZE = 1.18F;
         private static final float BODY_HEIGHT = 0.75F;
         private static final float LEG_HEIGHT = 0.50F;
@@ -262,7 +265,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
                 rightArm.yRot = 0;
                 // Keep the grip just outside the head while bringing the canopy
                 // over this doll instead of leaving half of it behind the body.
-                rightArm.zRot = 1.04F;
+                rightArm.zRot = 1.14F;
                 head.yRot += Mth.sin(time * 0.09F) * 0.05F * open;
             }
             if (noseDrop.visible) {
@@ -365,7 +368,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             body.xScale = 0.875F;
             body.yScale = BODY_HEIGHT;
             body.zScale = 1.125F;
-            leftArm.xScale = rightArm.xScale = 0.75F;
+            leftArm.xScale = rightArm.xScale = ARM_WIDTH;
             leftArm.yScale = rightArm.yScale = 0.50F;
             leftArm.zScale = rightArm.zScale = 0.75F;
             leftLeg.xScale = rightLeg.xScale = 0.75F;

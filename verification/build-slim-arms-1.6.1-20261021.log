@@ -1,0 +1,18 @@
+Reusing configuration cache.
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :jarJar NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :compileTestJava NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :jar
+> Task :assemble
+> Task :build
+
+BUILD SUCCESSFUL in 2s
+4 actionable tasks: 2 executed, 2 up-to-date
+Configuration cache entry reused.
