@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 
 /** Common input and clipping; subclasses lay out real widgets without scaling fonts. */
 public abstract class FloatingScreen extends Screen {
-    private final FloatingWindow window;
+    private FloatingWindow window;
     private int contentScroll, contentExtent;
     private boolean scrollbarDragging;
     private double scrollbarGrab;
@@ -19,9 +19,10 @@ public abstract class FloatingScreen extends Screen {
         window = new FloatingWindow(key, defaultWidth, defaultHeight, minWidth, minHeight);
     }
     public final FloatingWindow floatingWindow() { return window; }
-    protected final int contentLeft() { return window.bodyLeft(); }
+    protected final void shareWindow(FloatingWindow shared) { window = shared; }
+    protected final int contentLeft() { return window.bodyLeft() + sidebarWidth(); }
     protected final int contentTop() { return window.bodyTop() - contentScroll; }
-    protected final int contentWidth() { return Math.max(1, window.bodyWidth() - 5); }
+    protected final int contentWidth() { return Math.max(1, window.bodyWidth() - sidebarWidth() - 5); }
     protected final int contentHeight() { return window.bodyHeight(); }
     protected final void setContentExtent(int height) {
         contentExtent = Math.max(0, height);
@@ -30,6 +31,10 @@ public abstract class FloatingScreen extends Screen {
     protected abstract void initContent();
     protected abstract void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick);
     protected void renderContentTooltip(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {}
+    protected int sidebarWidth() { return 0; }
+    protected void initChrome() { }
+    protected void renderChrome(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) { }
+    protected void closeWindow() { onClose(); }
 
     @Override protected final void init() {
         window.init(width, height);
@@ -42,8 +47,9 @@ public abstract class FloatingScreen extends Screen {
         clearWidgets();
         setFocused(null);
         int oldScroll = contentScroll;
+        initChrome();
         initContent();
-        if (oldScroll != contentScroll) { clearWidgets(); initContent(); }
+        if (oldScroll != contentScroll) { clearWidgets(); initChrome(); initContent(); }
         restoreFocus(focused, focusedIndex);
     }
     @Override protected void rebuildWidgets() {
@@ -70,9 +76,10 @@ public abstract class FloatingScreen extends Screen {
     @Override public final void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0x33000000);
         window.renderFrame(graphics, font, title, mouseX, mouseY);
-        boolean inside = window.containsBody(mouseX, mouseY) && !window.capturing();
+        renderChrome(graphics, mouseX, mouseY, partialTick);
+        boolean inside = window.containsBody(mouseX, mouseY) && mouseX >= contentLeft() && !window.capturing();
         int contentMouseX = inside ? mouseX : -10000, contentMouseY = inside ? mouseY : -10000;
-        graphics.enableScissor(window.bodyLeft(), window.bodyTop(), window.bodyLeft() + window.bodyWidth(), window.bodyTop() + window.bodyHeight());
+        graphics.enableScissor(contentLeft(), window.bodyTop(), window.bodyLeft() + window.bodyWidth(), window.bodyTop() + window.bodyHeight());
         try {
             renderContent(graphics, contentMouseX, contentMouseY, partialTick);
             super.render(graphics, contentMouseX, contentMouseY, partialTick);
@@ -90,10 +97,11 @@ public abstract class FloatingScreen extends Screen {
     @Override public final boolean mouseClicked(double x, double y, int button) {
         if (window.mouseClicked(x, y, button)) {
             if (window.consumeLayoutChanged()) { contentScroll = 0; relayoutContent(); }
-            if (window.consumeCloseRequested()) onClose();
+            if (window.consumeCloseRequested()) closeWindow();
             return true;
         }
         if (!window.containsBody(x, y)) return false;
+        if (x < contentLeft()) return super.mouseClicked(x, y, button);
         if (button == 0 && maxScroll() > 0 && x >= window.bodyLeft() + window.bodyWidth() - 5) {
             scrollbarDragging = true;
             scrollbarGrab = y >= thumbTop() && y <= thumbTop() + thumbHeight() ? y - thumbTop() : thumbHeight() / 2.0;
@@ -108,7 +116,7 @@ public abstract class FloatingScreen extends Screen {
     @Override public final boolean mouseDragged(double x, double y, int button, double dx, double dy) {
         if (window.mouseDragged(x, y, button)) { if (window.consumeLayoutChanged()) relayoutContent(); return true; }
         if (scrollbarDragging && button == 0) { dragScrollbar(y); return true; }
-        if (window.containsBody(x, y) && dragContent(x, y, button, dx, dy)) return true;
+        if (window.containsBody(x, y) && x >= contentLeft() && dragContent(x, y, button, dx, dy)) return true;
         return super.mouseDragged(x, y, button, dx, dy);
     }
     @Override public final boolean mouseReleased(double x, double y, int button) {
@@ -118,9 +126,10 @@ public abstract class FloatingScreen extends Screen {
         return super.mouseReleased(x, y, button);
     }
     @Override public final boolean mouseScrolled(double x, double y, double dx, double dy) {
-        return window.containsBody(x, y) && !window.capturing() && scrollContent(x, y, dx, dy);
+        return window.containsBody(x, y) && x >= contentLeft() && !window.capturing() && scrollContent(x, y, dx, dy);
     }
     protected boolean scrollContent(double x, double y, double dx, double dy) {
+        if (x < contentLeft()) return false;
         if (super.mouseScrolled(x, y, dx, dy)) return true;
         int next = Mth.clamp(contentScroll - (int) Math.round(dy * 20), 0, maxScroll());
         if (next != contentScroll) { contentScroll = next; relayoutContent(); return true; }
@@ -128,7 +137,8 @@ public abstract class FloatingScreen extends Screen {
     }
     @Override public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         boolean handled = super.keyPressed(keyCode, scanCode, modifiers);
-        if (handled && minecraft.screen == this && maxScroll() > 0 && getFocused() instanceof AbstractWidget widget) {
+        if (handled && minecraft.screen == this && maxScroll() > 0 && getFocused() instanceof AbstractWidget widget
+                && widget.getX() >= contentLeft()) {
             int delta = widget.getY() < window.bodyTop() ? widget.getY() - window.bodyTop()
                     : Math.max(0, widget.getBottom() - window.bodyTop() - contentHeight());
             int next = Mth.clamp(contentScroll + delta, 0, maxScroll());

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 /** Time-sorted list of the current player's placed ranges with remote enable switches. */
-public final class RangeAccelerationHistoryScreen extends FloatingScreen {
+public final class RangeAccelerationHistoryScreen extends StaffScreen {
     private static final int PANEL_WIDTH = 430;
     private static final int PANEL_HEIGHT = 226;
     private static final DateTimeFormatter TIME_FORMAT =
@@ -44,10 +44,11 @@ public final class RangeAccelerationHistoryScreen extends FloatingScreen {
     private int lastNameIndex = -1;
 
     public RangeAccelerationHistoryScreen(Screen parent) {
-        super(Component.translatable("gui.useless_stretcher.range.history_title"),
-                "range_history", PANEL_WIDTH, PANEL_HEIGHT, 270, 170);
+        super(Component.translatable("gui.useless_stretcher.range.history_title"), Tab.HISTORY, parent, staffHand(parent));
         this.parent = parent;
     }
+
+    @Override protected void refreshStaffSettings() { requested = false; }
 
     @Override
     protected void initContent() {
@@ -105,7 +106,7 @@ public final class RangeAccelerationHistoryScreen extends FloatingScreen {
         addRenderableWidget(new SelectableAE2Button(
                 panelLeft + 101, footerTop, panelWidth - 173, 18,
                 Component.translatable("gui.useless_stretcher.history.machines"),
-                ignored -> Network.requestPersonalReclaimer()));
+                ignored -> navigate(Tab.MACHINES)));
         addRenderableWidget(new SelectableAE2Button(
                 panelLeft + panelWidth - 69, footerTop, 67, 18,
                 Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
@@ -114,7 +115,7 @@ public final class RangeAccelerationHistoryScreen extends FloatingScreen {
             createRenameBox();
         }
 
-        if (!requested) {
+        if (!requested && minecraft.getConnection() != null) {
             requested = true;
             RangeNetwork.requestHistory();
         }
@@ -175,7 +176,7 @@ public final class RangeAccelerationHistoryScreen extends FloatingScreen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        returnToPage(parent);
     }
 
     @Override

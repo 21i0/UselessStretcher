@@ -17,7 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Uses the existing G-menu AE preference and wireless access point binding. */
-public final class StaffFluidCollectionScreen extends FloatingScreen {
+public final class StaffFluidCollectionScreen extends StaffScreen {
     private final Screen parent;
     private final InteractionHand hand;
     private boolean loaded, enabled;
@@ -25,11 +25,12 @@ public final class StaffFluidCollectionScreen extends FloatingScreen {
     private SelectableAE2Button toggle;
 
     public StaffFluidCollectionScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.fluid.title"), "staff_fluids", 330, 260, 260, 150);
+        super(Component.translatable("gui.useless_stretcher.fluid.title"), Tab.FLUIDS, parent, hand);
         this.parent = parent;
         this.hand = hand;
     }
     private ItemStack staff() { return minecraft.player == null ? ItemStack.EMPTY : minecraft.player.getItemInHand(hand); }
+    @Override protected void refreshStaffSettings() { loaded = false; }
     @Override protected void initContent() {
         if (!loaded) {
             enabled = StaffFluidCollector.enabled(staff());
@@ -108,6 +109,6 @@ public final class StaffFluidCollectionScreen extends FloatingScreen {
     @Override public void tick() {
         if (minecraft.player == null || !staff().is(ModItems.WONDROUS_STAFF.get())) onClose();
     }
-    @Override public void onClose() { minecraft.setScreen(parent); }
+    @Override public void onClose() { returnToPage(parent); }
     @Override public boolean isPauseScreen() { return false; }
 }

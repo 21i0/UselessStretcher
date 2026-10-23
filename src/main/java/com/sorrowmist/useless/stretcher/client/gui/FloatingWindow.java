@@ -28,6 +28,22 @@ public final class FloatingWindow {
     private int operation, startLeft, startTop, startWidth, startHeight;
     private double startX, startY;
     private boolean initialized, changed, closeRequested, dirty;
+    private Map<String, String> preferences;
+
+    /** Local UI state shares the same atomic file as this window's geometry. */
+    public String preference(String name, String fallback) {
+        if (preferences == null) {
+            loadLayouts();
+            Saved saved = SAVED.get(key);
+            preferences = new HashMap<>(saved == null ? Map.of() : saved.preferences);
+        }
+        return preferences.getOrDefault(name, fallback);
+    }
+
+    public void setPreference(String name, String value) {
+        preference(name, "");
+        if (!value.equals(preferences.put(name, value))) dirty = true;
+    }
 
     public FloatingWindow(String key, int defaultWidth, int defaultHeight, int minWidth, int minHeight) {
         this.key = key;
@@ -198,7 +214,8 @@ public final class FloatingWindow {
                     double x = value.get("x").getAsDouble(), y = value.get("y").getAsDouble();
                     int width = value.get("width").getAsInt(), height = value.get("height").getAsInt();
                     if (Double.isFinite(x) && Double.isFinite(y) && width > 0 && height > 0)
-                        SAVED.put(entry.getKey(), new Saved(Mth.clamp(x, 0, 1), Mth.clamp(y, 0, 1), width, height));
+                        SAVED.put(entry.getKey(), new Saved(Mth.clamp(x, 0, 1), Mth.clamp(y, 0, 1), width, height,
+                                readPreferences(value)));
                 } catch (RuntimeException ignored) { /* Skip only the malformed entry. */ }
             }
         } catch (Exception exception) { LogUtils.getLogger().warn("Could not read Stretcher window positions", exception); }
@@ -208,7 +225,8 @@ public final class FloatingWindow {
         if (!initialized || !dirty) return;
         loadLayouts();
         SAVED.put(key, new Saved(fraction(left - MARGIN, viewportWidth - width - MARGIN * 2),
-                fraction(top - MARGIN, viewportHeight - height - MARGIN * 2), width, height));
+                fraction(top - MARGIN, viewportHeight - height - MARGIN * 2), width, height,
+                preferences == null ? (SAVED.containsKey(key) ? SAVED.get(key).preferences : Map.of()) : Map.copyOf(preferences)));
         Path temporary = null;
         try {
             Files.createDirectories(loadedPath.getParent());
@@ -220,5 +238,17 @@ public final class FloatingWindow {
         } catch (Exception exception) { LogUtils.getLogger().warn("Could not save Stretcher window positions", exception); }
         finally { if (temporary != null) try { Files.deleteIfExists(temporary); } catch (java.io.IOException ignored) {} }
     }
-    private record Saved(double x, double y, int width, int height) {}
+    private static Map<String, String> readPreferences(JsonObject object) {
+        Map<String, String> result = new HashMap<>();
+        if (object.has("preferences") && object.get("preferences").isJsonObject()) {
+            object.getAsJsonObject("preferences").entrySet().stream().limit(32).forEach(entry -> {
+                if (entry.getValue().isJsonPrimitive() && entry.getKey().length() <= 64) {
+                    String value = entry.getValue().getAsString();
+                    if (value.length() <= 256) result.put(entry.getKey(), value);
+                }
+            });
+        }
+        return result;
+    }
+    private record Saved(double x, double y, int width, int height, Map<String, String> preferences) {}
 }

@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /** Server-authoritative history, grouped once per response rather than per frame. */
-public final class ReclaimerScreen extends FloatingScreen {
+public final class ReclaimerScreen extends StaffScreen {
     private enum Page { PLAYERS, TYPES, TARGETS }
     private static final int PANEL_WIDTH = 430;
     private static final int ROW_HEIGHT = 27;
@@ -34,10 +34,12 @@ public final class ReclaimerScreen extends FloatingScreen {
     private String selectedName = "";
     private boolean range;
     private int left, top, panelWidth, panelHeight, visibleRows, scroll;
+    private boolean requested;
 
     public ReclaimerScreen(Screen parent, List<Network.ReclaimerEntry> entries, boolean personal) {
-        super(Component.translatable(personal ? "gui.useless_stretcher.range.history_title"
-                : "gui.useless_stretcher.reclaimer.title"), "reclaimer", PANEL_WIDTH, 270, 270, 160);
+        super(Component.translatable(personal ? "gui.useless_stretcher.staff_tabs.machines"
+                : "gui.useless_stretcher.reclaimer.title"), personal && parent instanceof StaffScreen ? Tab.MACHINES : null,
+                parent, staffHand(parent), "reclaimer", PANEL_WIDTH, 270, 270, 160);
         this.parent = parent;
         this.personal = personal;
         page = personal ? Page.TYPES : Page.PLAYERS;
@@ -74,7 +76,12 @@ public final class ReclaimerScreen extends FloatingScreen {
     }
     private void navigate(Page next) { page = next; scroll = 0; rebuildWidgets(); }
 
+    @Override protected void refreshStaffSettings() { requested = false; }
     @Override protected void initContent() {
+        if (staffTab() == Tab.MACHINES && !requested && minecraft.getConnection() != null) {
+            requested = true;
+            Network.requestPersonalReclaimer();
+        }
         setContentExtent(contentHeight());
         panelWidth = contentWidth();
         panelHeight = contentHeight();
@@ -193,7 +200,7 @@ public final class ReclaimerScreen extends FloatingScreen {
     @Override public void onClose() {
         if (page == Page.TARGETS) navigate(Page.TYPES);
         else if (page == Page.TYPES && !personal) navigate(Page.PLAYERS);
-        else minecraft.setScreen(parent);
+        else returnToPage(parent);
     }
     @Override public boolean isPauseScreen() { return false; }
 }

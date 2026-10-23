@@ -16,7 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Button-based range setup using the same visual language as the upstream G screen. */
-public final class RangeAccelerationConfigScreen extends FloatingScreen {
+public final class RangeAccelerationConfigScreen extends StaffScreen {
 
     private final Screen parent;
     private final InteractionHand hand;
@@ -45,10 +45,12 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
     private boolean settingsLoaded;
 
     public RangeAccelerationConfigScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.range.title"), "range_settings", 293, 203, 260, 145);
+        super(Component.translatable("gui.useless_stretcher.range.title"), Tab.RANGE, parent, hand);
         this.parent = parent;
         this.hand = hand;
     }
+
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
 
     @Override
     protected void initContent() {
@@ -113,7 +115,7 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
         addRenderableWidget(new SelectableAE2Button(
                 cardLeft + 5, footerY, (cardWidth - 13) / 2, 18,
                 Component.translatable("gui.useless_stretcher.range.history"),
-                ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
+                ignored -> navigate(Tab.HISTORY)));
         addRenderableWidget(new SelectableAE2Button(
                 cardLeft + 8 + (cardWidth - 13) / 2, footerY,
                 cardWidth - 13 - (cardWidth - 13) / 2, 18,
@@ -235,7 +237,7 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        returnToPage(parent);
     }
 
     @Override

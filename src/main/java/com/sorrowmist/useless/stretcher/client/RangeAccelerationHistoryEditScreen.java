@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 /** Edits an existing Time Flow's speed and geometry without replacing its persistent field UUID. */
-public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
+public final class RangeAccelerationHistoryEditScreen extends StaffScreen {
     private static final int[] SPEED_PRESETS = {1, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
 
     private final Screen parent;
@@ -36,8 +36,7 @@ public final class RangeAccelerationHistoryEditScreen extends FloatingScreen {
 
     public RangeAccelerationHistoryEditScreen(Screen parent,
                                               RangeAccelerationSavedData.Summary field) {
-        super(Component.translatable("gui.useless_stretcher.range.edit_title"),
-                "range_edit", 300, 320, 250, 140);
+        super(Component.translatable("gui.useless_stretcher.range.edit_title"), Tab.HISTORY, parent, staffHand(parent));
         this.parent = parent;
         this.field = field;
         speed = RangeAccelerationSavedData.clampSpeed(field.speed());

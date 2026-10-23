@@ -845,7 +845,7 @@ public final class Network {
                     UUID ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
                     if (ref == null) return;
                     com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.deduplicate(player, ref,
-                            MyriadPatternStore.get(player.serverLevel()), payload);
+                            com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held), payload);
                 }));
         registrar.playToClient(MoldCatalogPayload.TYPE, MoldCatalogPayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.acceptMoldCatalog(payload));
@@ -1534,10 +1534,12 @@ public final class Network {
         if (!(context.player() instanceof ServerPlayer player) || payload.patterns().isEmpty()) return;
         UUID ref = null;
         OmniversalMyriadBlockEntity be = null;
+        MyriadPatternStore store = MyriadPatternStore.get(player.serverLevel());
         if (payload.item()) {
             ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.USELESS_STRETCHER.get())) return;
             ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
+            store = com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held);
         } else if (canViewPatterns(player, payload.pos())
                 && player.level().getBlockEntity(payload.pos()) instanceof OmniversalMyriadBlockEntity myriad) {
             be = myriad;
@@ -1545,7 +1547,7 @@ public final class Network {
         }
         if (ref == null) return;
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
-        MyriadPatternStore.get((ServerLevel) player.level()).removeKeys(ref, payload.patterns());
+        store.removeKeys(ref, payload.patterns());
         if (be != null) { be.markPatternsChanged(); replyState(player, be); }
         // The item screen follows deletion with its current tagged search request. An untagged
         // response here could replace that filter or reopen an already closed screen.
@@ -1567,10 +1569,12 @@ public final class Network {
                                         boolean item, boolean offhand, PatternPageRequestPayload request, boolean trim) {
         UUID ref;
         boolean aeBound;
+        MyriadPatternStore store = MyriadPatternStore.get(player.serverLevel());
         if (item) {
             ItemStack held = player.getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.USELESS_STRETCHER.get())) return;
             ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
+            store = com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held);
             UUID aeRef = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readAeRef(held);
             var serverLevel = (ServerLevel) player.level();
             BlockPos nodePos = com.sorrowmist.useless.stretcher.content.ae.AeBindingStore.get(serverLevel).get(aeRef);
@@ -1582,7 +1586,6 @@ public final class Network {
             ref = be.getPatternRef();
             aeBound = isConnectedAeNode((ServerLevel) player.level(), be.getAeNodePos());
         }
-        var store = MyriadPatternStore.get((ServerLevel) player.level());
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
         if ((item || !request.query().isBlank()) && ref != null) {
             com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.request(

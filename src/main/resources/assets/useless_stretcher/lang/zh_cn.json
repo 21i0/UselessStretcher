@@ -1,4 +1,14 @@
 {
+  "gui.useless_stretcher.staff_tabs.machines": "加速记录",
+  "gui.useless_stretcher.staff_tabs.main": "常规设置",
+  "gui.useless_stretcher.staff_tabs.entity": "实体加速",
+  "gui.useless_stretcher.staff_tabs.range": "范围加速",
+  "gui.useless_stretcher.staff_tabs.history": "范围历史",
+  "gui.useless_stretcher.staff_tabs.fluids": "吸取流体",
+  "gui.useless_stretcher.staff_tabs.summon": "实体召唤",
+  "gui.useless_stretcher.staff_tabs.apotheosis": "附魔增幅",
+  "gui.useless_stretcher.staff_tabs.fold": "收起 / 展开标签栏；Ctrl+Tab 切换页面",
+  "tooltip.useless_stretcher.stretcher.hint_install": "可直接放入小合金炉、样板总成或被动仓的样板槽，读取担架绑定的整库样板",
   "gui.useless_stretcher.staff_config.radiation": "辐射防护：%s",
   "help.useless_stretcher.staff_config.radiation": "开启后，只要这把手杖在背包或双手中，就会清除自身 MEK 辐射剂量并持续免疫辐射。默认关闭；需要安装 Mekanism。",
   "gui.useless_stretcher.dimension_capsule.phase.planning": "正在规划结构",
@@ -677,7 +687,7 @@
   ,"gui.useless_stretcher.pattern_repository.next": "下一页"
   ,"gui.useless_stretcher.pattern_repository.delete": "删除选中"
   ,"gui.useless_stretcher.pattern_repository.empty": "没有已获取的样板"
-   ,"tooltip.useless_stretcher.stretcher.hint_repository": "右键空气：打开样板仓库；按住 Shift 查看仓库中的样板产物",
+   ,"tooltip.useless_stretcher.stretcher.hint_repository": "右键空气：打开样板仓库，查看产物并搜索、整理样板",
    "item.useless_stretcher.two_i_doll": "2i玩偶",
    "block.useless_stretcher.two_i_doll_display": "2i玩偶",
    "msg.useless_stretcher.two_i.owner_only": "只有这只 2i 的所有者才能互动。",

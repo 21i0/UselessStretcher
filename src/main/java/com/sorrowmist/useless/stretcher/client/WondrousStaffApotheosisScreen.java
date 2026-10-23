@@ -17,7 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Optional world-tier selector and virtual-bookshelf editor for Apotheosis. */
-public final class WondrousStaffApotheosisScreen extends FloatingScreen {
+public final class WondrousStaffApotheosisScreen extends StaffScreen {
     private static final String[] TIERS = {"haven", "frontier", "ascent", "summit", "pinnacle"};
     private static final String[] TIER_KEYS = {"haven", "frontier", "ascent", "summit", "pinnacle"};
 
@@ -39,10 +39,15 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
     private boolean tierEdited;
 
     public WondrousStaffApotheosisScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_apotheosis.title"),
-                "staff_apotheosis", 306, 217, 270, 190);
+        super(Component.translatable("gui.useless_stretcher.staff_apotheosis.title"), Tab.APOTHEOSIS, parent, hand);
         this.parent = parent;
         this.hand = hand;
+    }
+
+    @Override protected void refreshStaffSettings() {
+        initialized = false;
+        edited = false;
+        tierEdited = false;
     }
 
     @Override
@@ -220,6 +225,6 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
         return held.is(ModItems.WONDROUS_STAFF.get()) ? held : ItemStack.EMPTY;
     }
 
-    @Override public void onClose() { minecraft.setScreen(parent); }
+    @Override public void onClose() { returnToPage(parent); }
     @Override public boolean isPauseScreen() { return false; }
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Button-based acceleration selector styled after Useless Mod's current G configuration screen. */
-public final class WondrousStaffConfigScreen extends FloatingScreen {
+public final class WondrousStaffConfigScreen extends StaffScreen {
     private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
 
     private final InteractionHand hand;
@@ -49,9 +49,16 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
     private int speedTop, speedHeight, modeTop, modeHeight, featuresTop, featuresHeight;
 
     public WondrousStaffConfigScreen(InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_config.title"), "staff", 310, 250, 244, 150);
-        this.hand = hand;
+        this(null, hand);
     }
+
+    public WondrousStaffConfigScreen(StaffScreen parent, InteractionHand hand) {
+        super(Component.translatable("gui.useless_stretcher.staff_config.title"), Tab.MAIN, parent, hand);
+        this.hand = hand;
+        extrasCollapsed = Boolean.parseBoolean(floatingWindow().preference("extrasCollapsed", "true"));
+    }
+
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
 
     @Override
     protected void initContent() {
@@ -126,7 +133,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         featuresHeight = extrasCollapsed ? 42 : 126;
         addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, featureWidth, 17,
                 Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
-                ignored -> minecraft.setScreen(new EntityAccelerationConfigScreen(this, hand))))
+                ignored -> navigate(Tab.ENTITY)))
                 .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
                         "gui.useless_stretcher.entity_acceleration.open_tooltip")));
         extrasFoldText = addRenderableWidget(new PlainTextButton(
@@ -136,7 +143,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         if (!extrasCollapsed) {
             addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 102, cardWidth - 10, 17,
                     Component.translatable("gui.useless_stretcher.fluid.title"),
-                    ignored -> minecraft.setScreen(new StaffFluidCollectionScreen(this, hand))))
+                    ignored -> navigate(Tab.FLUIDS)))
                     .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
                             "gui.useless_stretcher.fluid.open_help")));
             lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
@@ -145,12 +152,11 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
             summonOpenButton = addRenderableWidget(new SelectableAE2Button(
                     cardLeft + 8 + featureWidth, featuresTop + 39, featureWidth, 17,
                     summonOpenMessage(),
-                    ignored -> minecraft.setScreen(new WondrousStaffSummonScreen(this, hand))));
+                    ignored -> navigate(Tab.SUMMON)));
             if (showApotheosis) {
                 apotheosisOpenButton = addRenderableWidget(new SelectableAE2Button(
                         cardLeft + 5, featuresTop + 81, featureWidth, 17,
-                        apotheosisOpenMessage(), ignored -> minecraft.setScreen(
-                                new WondrousStaffApotheosisScreen(this, hand))));
+                        apotheosisOpenMessage(), ignored -> navigate(Tab.APOTHEOSIS)));
             } else {
                 apotheosisOpenButton = null;
             }
@@ -177,11 +183,11 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
         addRenderableWidget(new SelectableAE2Button(
                 cardLeft, footerY, footerWidth, 17,
                 Component.translatable("gui.useless_stretcher.range.open"),
-                ignored -> minecraft.setScreen(new RangeAccelerationConfigScreen(this, hand))));
+                ignored -> navigate(Tab.RANGE)));
         addRenderableWidget(new SelectableAE2Button(
                 cardLeft + footerWidth + 3, footerY, cardWidth - footerWidth - 3, 17,
                 Component.translatable("gui.useless_stretcher.range.history"),
-                ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
+                ignored -> navigate(Tab.HISTORY)));
         updateSelection();
         setContentExtent(footerY - panelTop + 20);
     }
@@ -355,6 +361,7 @@ public final class WondrousStaffConfigScreen extends FloatingScreen {
 
     private void toggleExtrasFold() {
         extrasCollapsed = !extrasCollapsed;
+        floatingWindow().setPreference("extrasCollapsed", Boolean.toString(extrasCollapsed));
         rebuildWidgets();
     }
 

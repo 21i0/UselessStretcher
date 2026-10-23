@@ -93,6 +93,7 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
             StaffFluidCollectionChecks.start(event.getServer().overworld());
             return;
@@ -210,6 +211,7 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
             try {
                 if (StaffFluidCollectionChecks.tick(event.getServer().overworld())) {

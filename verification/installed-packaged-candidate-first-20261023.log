@@ -1,0 +1,424 @@
+WARN StatusConsoleListener Advanced terminal features are not available in this environment
+[09:41:50] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserverdev, --gameDir, ., --fml.fmlVersion, 4.0.44, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.249, --fml.neoFormVersion, 20240808.144430, --nogui]
+[09:41:50] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.12.1+1-LTS
+[09:41:50] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.12.1 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[09:41:51] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserverdev
+[09:41:51] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%2394!/ Service=ModLauncher Env=SERVER
+[09:41:51] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ae2wtlib_api. Using Mod File: D:\AI\sources\UselessStretcher\build\installed-packaged-20261023\mods\ae2wtlib_api-19.2.5.jar
+[09:41:51] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 15 dependencies adding them to mods collection
+[09:41:51] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		AE2 Lightning Tech 2.1.1 (ae2lt)
+		AE2WTLib API 19.2.5 (ae2wtlib_api)
+		Allthemodium 3.0.1 (allthemodium)
+		Applied Energistics 2 19.2.17 (ae2)
+		Ars Nouveau 5.13.3 (ars_nouveau)
+		Athena 4.0.6 (athena)
+		Curios API 9.5.1+1.21.1 (curios)
+		Dyson Cube Project 1.0.5 (dysoncubeproject)
+		Ender Core 8.2.11-beta (endercore)
+		Ender IO 8.2.11-beta (enderio)
+		Ender IO - Modded Conduits 8.2.11-beta (enderio_modded_conduits)
+		GeckoLib 4 4.9.3 (geckolib)
+		GuideME 21.1.17 (guideme)
+		Infiniverse 2.0.1.0 (infiniverse)
+		JDT Extras 0.6.4.6 (jdte)
+		Just Dire Things 1.5.7 (justdirethings)
+		Just Enough Items 19.54.0.429 (jei)
+		LambDynamicLights (API) 4.5.1+1.21.1 (lambdynlights_api)
+		ManaitaPlusLegacy 0.1.0 (manaita_plus_legacy)
+		McJtyLib 1.21-9.0.21 (mcjtylib)
+		Minecraft 1.21.1 (minecraft)
+		Modonomicon 1.120.7 (modonomicon)
+		NeoForge 21.1.249 (neoforge)
+		Nuggets 1.1.0.48 (nuggets)
+		Occultism 1.224.4 (occultism)
+		Patchouli 1.21.1-93-NEOFORGE (patchouli)
+		Productive Bees 1.21.1-13.13.5 (productivebees)
+		Productive Lib 1.21.1-0.2.0 (productivelib)
+		RFToolsBase 1.21-6.0.11 (rftoolsbase)
+		RFToolsBuilder 1.21-7.0.7 (rftoolsbuilder)
+		SmartBrainLib 1.16.11 (smartbrainlib)
+		Thunderbolt Core 2.0.1 (thunderbolt)
+		Titanium 4.0.45 (titanium)
+		Useless Mod 1.21.1-2.4.6 (useless_mod)
+		Useless Stretcher 1.21.1-1.6.1 (useless_stretcher)
+[09:41:52] [main/INFO] [ne.ne.fm.lo.FMLServiceProvider/CORE]: Loading coremod script-engine for [useless_stretcher]
+[09:41:54] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[09:41:54] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[09:41:54] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserverdev' with arguments [--gameDir, ., --nogui]
+[09:41:54] [main/WARN] [mixin/]: Reference map 'geckolib.refmap.json' for geckolib.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'allthemodium.refmap.json' for allthemodium.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'productivelib.refmap.json' for productivelib.mixin.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'patchouli.refmap.json' for patchouli_xplat.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'nuggets.refmap.json' for nuggets.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'productivebees.refmap.json' for productivebees.mixin.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'ars_nouveau.refmap.json' for ars_nouveau.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:41:54] [main/WARN] [mixin/]: Reference map 'mixins.justdirethings.refmap.json' for mixins.justdirethings.json could not be read. If this is a development environment you can ignore this message
+net/minecraft/world/entity/LivingEntity . baseTick()V merged successfully
+net/minecraft/world/entity/LivingEntity . addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V merged successfully
+net/minecraft/world/entity/LivingEntity . canBeSeenByAnyone()Z merged successfully
+net/minecraft/world/entity/LivingEntity . onAttributeUpdated(Lnet/minecraft/core/Holder;)V merged successfully
+net/minecraft/world/entity/LivingEntity . heal(F)V merged successfully
+net/minecraft/world/entity/LivingEntity . isDeadOrDying()Z merged successfully
+net/minecraft/world/entity/LivingEntity . hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z merged successfully
+net/minecraft/world/entity/LivingEntity . isAlive()Z merged successfully
+net/minecraft/world/entity/LivingEntity . actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V merged successfully
+net/minecraft/world/entity/LivingEntity . isImmobile()Z merged successfully
+net/minecraft/world/entity/LivingEntity . aiStep()V merged successfully
+net/minecraft/world/entity/LivingEntity . isPushable()Z merged successfully
+net/minecraft/world/entity/LivingEntity . isAffectedByPotions()Z merged successfully
+net/minecraft/world/entity/player/Player . attack(Lnet/minecraft/world/entity/Entity;)V merged successfully
+net/minecraft/world/entity/player/Player . attack(Lnet/minecraft/world/entity/Entity;)V merged successfully
+net/minecraft/server/level/ServerLevel . lambda$findLightningTargetAround$7(Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+[09:41:54] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[09:41:54] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[09:41:54] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/api/me/ECOCraftingCPULogic (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.api.me.ECOCraftingCPULogic)
+com/hollingsworth/arsnouveau/common/mixin/rewind/RewindEntityMixin . onTick(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V merged successfully
+[09:41:54] [main/WARN] [mixin/]: Error loading class: dev/shadowsoffire/apothic_spawners/block/ApothSpawnerTile$SpawnerLogicExt (java.lang.ClassNotFoundException: dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile$SpawnerLogicExt)
+[09:41:54] [main/WARN] [mixin/]: Error loading class: com/brandon3055/draconicevolution/blocks/tileentity/StabilizedSpawnerLogic (java.lang.ClassNotFoundException: com.brandon3055.draconicevolution.blocks.tileentity.StabilizedSpawnerLogic)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/content/gear/mekasuit/ModuleMagneticAttractionUnit (java.lang.ClassNotFoundException: mekanism.common.content.gear.mekasuit.ModuleMagneticAttractionUnit)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: dev/shadowsoffire/apothic_spawners/block/ApothSpawnerTile$SpawnerLogicExt (java.lang.ClassNotFoundException: dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile$SpawnerLogicExt)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: com/brandon3055/draconicevolution/blocks/tileentity/StabilizedSpawnerLogic (java.lang.ClassNotFoundException: com.brandon3055.draconicevolution.blocks.tileentity.StabilizedSpawnerLogic)
+com/sorrowmist/useless/mixin/LivingEntityMixin . useless_mod$protectBeefPlayerFromHurt(Lnet/minecraft/world/damagesource/DamageSource;FLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V merged successfully
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/AbstractBotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor from mod useless_mod
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor from mod useless_mod
+[09:41:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin from mod useless_mod
+[09:41:55] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin from mod useless_mod
+[09:41:55] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin from mod useless_mod
+[09:41:55] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/network/MenuDataCodecs (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.network.MenuDataCodecs)
+[09:41:55] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.network.MenuDataCodecs was not found useless_mod.compact.mixins.json:MenuDataCodecsCompactMixin from mod useless_mod
+com/sorrowmist/useless/content/items/EndlessBeafItem . damageArea(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/Entity;Z)I merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . forceKillLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/player/Player;)Z merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . shouldStopStandardDamage(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)Z merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . rememberPositiveHealth(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . restoreCanceledDeathHealth(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . executeFallbackDeath(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . getForceKillDamage(Lnet/minecraft/world/entity/LivingEntity;)F merged successfully
+com/hollingsworth/arsnouveau/common/ritual/RitualMobCapture . canJar(Lnet/minecraft/world/entity/Entity;)Z merged successfully
+com/sorrowmist/useless/content/items/BeefTimeAcceleration . tryUseOnEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/InteractionResult; merged successfully
+[09:41:56] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+net/minecraft/world/effect/RegenerationMobEffect . applyEffectTick(Lnet/minecraft/world/entity/LivingEntity;I)Z merged successfully
+net/minecraft/world/effect/PoisonMobEffect . applyEffectTick(Lnet/minecraft/world/entity/LivingEntity;I)Z merged successfully
+com/hollingsworth/arsnouveau/common/spell/rewind/RewindEntityData . onRewind(Lcom/hollingsworth/arsnouveau/common/event/timed/RewindEvent;)V merged successfully
+net/minecraft/world/entity/player/Player . attack(Lnet/minecraft/world/entity/Entity;)V merged successfully
+net/minecraft/world/entity/LivingEntity . baseTick()V merged successfully
+net/minecraft/world/entity/LivingEntity . addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V merged successfully
+net/minecraft/world/entity/LivingEntity . canBeSeenByAnyone()Z merged successfully
+net/minecraft/world/entity/LivingEntity . onAttributeUpdated(Lnet/minecraft/core/Holder;)V merged successfully
+net/minecraft/world/entity/LivingEntity . heal(F)V merged successfully
+net/minecraft/world/entity/LivingEntity . isDeadOrDying()Z merged successfully
+net/minecraft/world/entity/LivingEntity . hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z merged successfully
+net/minecraft/world/entity/LivingEntity . isAlive()Z merged successfully
+net/minecraft/world/entity/LivingEntity . actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V merged successfully
+net/minecraft/world/entity/LivingEntity . isImmobile()Z merged successfully
+net/minecraft/world/entity/LivingEntity . aiStep()V merged successfully
+net/minecraft/world/entity/LivingEntity . isPushable()Z merged successfully
+net/minecraft/world/entity/LivingEntity . isAffectedByPotions()Z merged successfully
+net/minecraft/server/level/ServerLevel . lambda$findLightningTargetAround$7(Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+net/minecraft/world/entity/NeutralMob . updatePersistentAnger(Lnet/minecraft/server/level/ServerLevel;Z)V merged successfully
+net/minecraft/world/level/block/entity/ConduitBlockEntity . updateDestroyTarget(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Ljava/util/List;Lnet/minecraft/world/level/block/entity/ConduitBlockEntity;)V merged successfully
+net/minecraft/world/level/block/entity/BellBlockEntity . updateEntities()V merged successfully
+net/minecraft/world/level/block/entity/BellBlockEntity . areRaidersNearby(Lnet/minecraft/core/BlockPos;Ljava/util/List;)Z merged successfully
+net/minecraft/world/level/block/entity/BellBlockEntity . isRaiderWithinRange(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+net/minecraft/world/entity/animal/Bucketable . bucketMobPickup(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/entity/LivingEntity;)Ljava/util/Optional; merged successfully
+net/minecraft/world/entity/animal/Bucketable . bucketMobPickup(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/entity/LivingEntity;)Ljava/util/Optional; merged successfully
+net/minecraft/world/item/SaddleItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+net/minecraft/world/item/NameTagItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+net/minecraft/world/entity/animal/axolotl/Axolotl . onStopAttacking(Lnet/minecraft/world/entity/animal/axolotl/Axolotl;Lnet/minecraft/world/entity/LivingEntity;)V merged successfully
+net/minecraft/world/entity/NeutralMob . updatePersistentAnger(Lnet/minecraft/server/level/ServerLevel;Z)V merged successfully
+net/minecraft/world/entity/ai/goal/MeleeAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/MeleeAttackGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/monster/Blaze$BlazeAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/OcelotAttackGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/RangedAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/RangedAttackGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/monster/Guardian$GuardianAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/projectile/ThrownEnderpearl . isAllowedToTeleportOwner(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;)Z merged successfully
+net/minecraft/world/entity/monster/SpellcasterIllager$SpellcasterUseSpellGoal . canUse()Z merged successfully
+net/minecraft/world/entity/monster/SpellcasterIllager$SpellcasterUseSpellGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/projectile/EvokerFangs . dealDamageTo(Lnet/minecraft/world/entity/LivingEntity;)V merged successfully
+net/minecraft/world/entity/animal/Fox . aiStep()V merged successfully
+net/minecraft/world/entity/animal/Fox$StalkPreyGoal . canUse()Z merged successfully
+net/minecraft/world/entity/animal/Fox$FoxPounceGoal . canUse()Z merged successfully
+net/minecraft/world/entity/animal/Fox$FoxPounceGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/MoveTowardsTargetGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/monster/Phantom$PhantomSweepAttackGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/ai/goal/RangedCrossbowAttackGoal . isValidTarget()Z merged successfully
+net/minecraft/world/entity/projectile/ThrownPotion . applyWater()V merged successfully
+net/minecraft/world/entity/monster/Shulker$ShulkerAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/monster/Vex$VexChargeAttackGoal . canUse()Z merged successfully
+net/minecraft/world/entity/monster/Vex$VexChargeAttackGoal . canContinueToUse()Z merged successfully
+net/minecraft/world/entity/monster/Witch . performRangedAttack(Lnet/minecraft/world/entity/LivingEntity;F)V merged successfully
+net/minecraft/world/entity/monster/warden/Warden . canTargetEntity(Lnet/minecraft/world/entity/Entity;)Z merged successfully
+net/minecraft/world/entity/ai/sensing/NearestLivingEntitySensor . lambda$doTick$0(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+net/minecraft/world/entity/ai/sensing/HurtBySensor . lambda$doTick$0(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/ai/Brain;Lnet/minecraft/world/entity/LivingEntity;)V merged successfully
+[09:42:02] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[09:42:02] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[09:42:02] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[09:42:02] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[09:42:02] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+net/tslat/smartbrainlib/api/core/sensor/vanilla/NearbyLivingEntitySensor . lambda$new$0(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+[09:42:03] [modloading-worker-0/INFO] [PluginManager/]: Scanning classes for titanium
+[09:42:03] [modloading-worker-0/INFO] [PluginManager/]: Scanning classes for dysoncubeproject
+net/tslat/smartbrainlib/api/core/sensor/vanilla/HurtBySensor . doTick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;)V merged successfully
+net/tslat/smartbrainlib/api/core/sensor/vanilla/HurtBySensor . lambda$doTick$1(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/Brain;Lnet/minecraft/world/entity/LivingEntity;)V merged successfully
+net/tslat/smartbrainlib/api/core/sensor/vanilla/NearbyGolemSensor . lambda$new$1(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+[09:42:03] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.249, for MC 1.21.1
+com/hollingsworth/arsnouveau/common/mob_jar/FrogBehavior . tick(Lcom/hollingsworth/arsnouveau/common/block/tile/MobJarTile;)V merged successfully
+com/hollingsworth/arsnouveau/api/spell/IDamageEffect . canDamage(Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellContext;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;Lnet/minecraft/world/entity/Entity;)Z merged successfully
+com/hollingsworth/arsnouveau/common/spell/effect/EffectHeal . onResolveEntity(Lnet/minecraft/world/phys/EntityHitResult;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellContext;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V merged successfully
+com/hollingsworth/arsnouveau/common/spell/effect/EffectDispel . onResolveEntity(Lnet/minecraft/world/phys/EntityHitResult;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellContext;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V merged successfully
+com/hollingsworth/arsnouveau/common/ritual/RitualHealing . tick()V merged successfully
+com/hollingsworth/arsnouveau/common/ritual/RitualMobCapture . canJar(Lnet/minecraft/world/entity/Entity;)Z merged successfully
+cy/jdkdigital/productivebees/common/item/BeeCage . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+cy/jdkdigital/productivebees/common/item/HoneyTreat . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+com/thevortex/allthemodium/entity/PiglichEntity$PigLichAttackGoal . canUse()Z merged successfully
+com/hollingsworth/arsnouveau/common/entity/EntityEvokerFangs . damage(Lnet/minecraft/world/entity/LivingEntity;)V merged successfully
+com/klikli_dev/occultism/common/item/tool/VitalityCompassItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+com/klikli_dev/occultism/common/item/spirit/SpiritHealingItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+com/jdte/common/blockentities/BioCrusherBE . isValidTarget(Lnet/minecraft/world/entity/Entity;)Z merged successfully
+com/jdte/common/blockentities/BioCrusherBE . lambda$generateSpawnerDrops$6(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Lnet/neoforged/neoforge/common/util/FakePlayer;)Ljava/lang/Boolean; merged successfully
+com/jdte/common/blockentities/BioCrusherBE . lambda$killEntity$2(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Lnet/neoforged/neoforge/common/util/FakePlayer;Z)Ljava/lang/Boolean; merged successfully
+com/klikli_dev/occultism/common/item/tool/SoulGemItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+com/klikli_dev/occultism/common/item/tool/MagicLampItem . interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; merged successfully
+appeng/items/tools/powered/MatterCannonItem . standardAmmo(FLnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDD)V merged successfully
+com/enderio/enderio/content/tools/vials/SoulVialItem . catchEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)Ljava/util/Optional; merged successfully
+com/enderio/enderio/content/armory/DarkSteelSwordItem . hurtEnemy(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+com/direwolf20/justdirethings/common/entities/JustDireArrow . tick()V merged successfully
+com/direwolf20/justdirethings/common/entities/JustDireArrow . handleNormalState(I)V merged successfully
+com/direwolf20/justdirethings/common/entities/JustDireArrow . applyWater()V merged successfully
+com/klikli_dev/occultism/handlers/LootEventHandler . handleCapturing(Lnet/neoforged/neoforge/event/entity/living/LivingDropsEvent;)V merged successfully
+com/hollingsworth/arsnouveau/common/entity/EntityHomingProjectileSpell . tickNextPosition()V merged successfully
+com/hollingsworth/arsnouveau/common/entity/EntityAllyVex$ChargeAttackGoal . canContinueToUse()Z merged successfully
+com/hollingsworth/arsnouveau/common/entity/goal/stalker/DiveAttackGoal . canContinueToUse()Z merged successfully
+com/hollingsworth/arsnouveau/common/entity/goal/drygmy/CollectEssenceGoal . canContinueToUse()Z merged successfully
+[09:42:04] [modloading-worker-0/INFO] [co.mo.th.ThunderboltCore/]: [Thunderbolt Core Reborn] initialized
+com/jdte/common/blockentities/AdvancedEntityAcceleratorBE . isValidTargetEntity(Lnet/minecraft/world/entity/LivingEntity;)Z merged successfully
+com/jdte/common/blockentities/LifeExtractorBE . executeOneExtractCycle(Lnet/minecraft/server/level/ServerLevel;I)I merged successfully
+com/jdte/common/blockentities/BioCrusherBE . isValidTarget(Lnet/minecraft/world/entity/Entity;)Z merged successfully
+com/jdte/common/blockentities/BioCrusherBE . lambda$generateSpawnerDrops$6(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Lnet/neoforged/neoforge/common/util/FakePlayer;)Ljava/lang/Boolean; merged successfully
+com/jdte/common/blockentities/BioCrusherBE . lambda$killEntity$2(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Lnet/neoforged/neoforge/common/util/FakePlayer;Z)Ljava/lang/Boolean; merged successfully
+com/moakiee/ae2lt/logic/railgun/RailgunBeamService . settle(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;Lcom/moakiee/ae2lt/logic/railgun/RailgunBeamService$BeamState;I)Z merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . damageArea(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/Entity;Z)I merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . forceKillLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/player/Player;)Z merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . shouldStopStandardDamage(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)Z merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . rememberPositiveHealth(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . restoreCanceledDeathHealth(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . executeFallbackDeath(Lcom/sorrowmist/useless/content/items/EndlessBeafItem$ForceKillContext;)V merged successfully
+com/sorrowmist/useless/content/items/EndlessBeafItem . getForceKillDamage(Lnet/minecraft/world/entity/LivingEntity;)F merged successfully
+com/klikli_dev/occultism/common/container/spirit/SpiritContainer . stillValid(Lnet/minecraft/world/entity/player/Player;)Z merged successfully
+com/klikli_dev/occultism/common/entity/familiar/ShubNiggurathSpawnEntity$MoveToTargetGoal . canUse()Z merged successfully
+com/sorrowmist/useless/content/entities/BeefTimeAccelerationEntity . tickEntityTarget(Lnet/minecraft/server/level/ServerLevel;)V merged successfully
+com/hollingsworth/arsnouveau/setup/registry/EntitySubPredicatesRegistry$PercentHealthEqualOrLowerPredicate . matches(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;)Z merged successfully
+com/hollingsworth/arsnouveau/common/entity/goal/AnimatedAttackGoal . canUse()Z merged successfully
+com/hollingsworth/arsnouveau/common/entity/goal/AnimatedAttackGoal . canContinueToUse()Z merged successfully
+[09:42:08] [modloading-worker-0/INFO] [co.kl.oc.Occultism/]: Common setup complete.
+[09:42:08] [modloading-worker-0/INFO] [co.kl.oc.Occultism/]: Dedicated server setup complete.
+[09:42:08] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[09:42:08] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23151!/assets/.mcassetsroot' uses unexpected schema
+[09:42:08] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar%23151!/data/.mcassetsroot' uses unexpected schema
+[09:42:09] [main/INFO] [minecraft/Main]: No existing world data, creating new world
+[09:42:09] [Worker-Main-3/ERROR] [minecraft/LootDataType]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_l9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_l9
+[09:42:09] [Worker-Main-3/ERROR] [minecraft/LootDataType]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_f9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_f9
+[09:42:09] [Worker-Main-3/ERROR] [minecraft/LootDataType]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_c9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_c9
+[09:42:09] [Worker-Main-3/ERROR] [minecraft/LootDataType]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:ae2lt:blocks/overloaded_power_supply - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: ae2lt:overloaded_power_supply
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpawnExtraGridTestTools for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CrystalResonanceGeneratorTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InterfaceTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InvalidPatternTestPlot for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ExternalEnergyTestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[09:42:09] [Worker-Main-3/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[09:42:10] [Worker-Main-8/WARN] [ne.ne.ne.re.DataMapLoader/]: Found data map file for non-existent data map type 'apotheosis:loot_category_overrides' on registry 'minecraft:item'.
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag c:tools/shield as it is missing following references: 
+	allthemodium:vibranium_shield (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag minecraft:enchantable/crossbow as it is missing following references: 
+	allthemodium:unobtainium_crossbow (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag c:tools/crossbow as it is missing following references: 
+	allthemodium:unobtainium_crossbow (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag c:tools/bow as it is missing following references: 
+	allthemodium:allthemodium_bow (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag c:tools as it is missing following references: 
+	#c:tools/bow (from mod/neoforge)
+	#c:tools/crossbow (from mod/neoforge)
+	#c:tools/shield (from mod/neoforge)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag minecraft:enchantable/bow as it is missing following references: 
+	allthemodium:allthemodium_bow (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag minecraft:enchantable/equippable as it is missing following references: 
+	allthemodium:vibranium_shield (from mod/allthemodium)
+[09:42:10] [Worker-Main-12/ERROR] [minecraft/TagLoader]: Couldn't load tag c:enchantables as it is missing following references: 
+	#minecraft:enchantable/equippable (from mod/neoforge)
+	#minecraft:enchantable/bow (from mod/neoforge)
+	#minecraft:enchantable/crossbow (from mod/neoforge)
+[09:42:10] [main/INFO] [co.mo.ae.ma.ov.re.InscriberProcessorRecipeLoader/]: Generated 0 missing bulk inscriber recipes before recipe scripts
+[09:42:11] [main/ERROR] [minecraft/RecipeManager]: Parsing error loading recipe ae2lt:assembler/overload_processor
+com.google.gson.JsonParseException: Unknown registry key in ResourceKey[minecraft:root / neoforge:condition_codecs]: extendedae:config
+	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%2379!/:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.249.jar%23151!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.249.jar%23151!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.249.jar%23151!/:?] {re:mixin,re:classloading}
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.249.jar%23151!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.Util.blockUntilDone(Util.java:875) ~[neoforge-21.1.249.jar%23151!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.Util.blockUntilDone(Util.java:864) ~[neoforge-21.1.249.jar%23151!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.Main.main(Main.java:204) ~[neoforge-21.1.249.jar%23151!/:?] {re:classloading}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.serverService(CommonLaunchHandler.java:128) ~[loader-4.0.44.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeServerDevLaunchHandler.runService(NeoForgeServerDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+[09:42:11] [main/INFO] [minecraft/RecipeManager]: Loaded 6383 recipes
+[09:42:11] [main/INFO] [minecraft/AdvancementTree]: Loaded 4894 advancements
+[09:42:11] [main/INFO] [Curios API/]: Loaded 16 curio slots
+[09:42:11] [main/INFO] [Curios API/]: Loaded 1 curio entities
+[09:42:11] [main/INFO] [co.en.en.fo.so.SoulDataReloadListener/]: Data loader for eio_soul/engine loaded 6 jsons
+[09:42:11] [main/INFO] [co.en.en.fo.so.SoulDataReloadListener/]: Data loader for eio_soul/spawner loaded 81 jsons
+[09:42:11] [main/INFO] [co.en.en.fo.so.SoulDataReloadListener/]: Data loader for eio_soul/solar loaded 1 jsons
+[09:42:11] [main/INFO] [co.en.en.fo.so.SoulDataReloadListener/]: Data loader for eio_soul/farm loaded 3 jsons
+[09:42:11] [main/WARN] [minecraft/MappedRegistry]: Not all defined tags for registry ResourceKey[minecraft:root / minecraft:block] are present in data pack: manaita_plus_legacy:mineable
+[09:42:11] [main/WARN] [minecraft/MappedRegistry]: Not all defined tags for registry ResourceKey[minecraft:root / minecraft:item] are present in data pack: minecraft:enchantable/bow, minecraft:enchantable/crossbow, minecraft:enchantable/equippable
+[09:42:12] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.21.1
+[09:42:12] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[09:42:12] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[09:42:12] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[09:42:12] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25577
+[09:42:12] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using default channel type
+[09:42:12] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[09:42:12] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[09:42:12] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[09:42:12] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[09:42:13] [Server thread/WARN] [co.di.ju.se.Config/]: time_wand_max_multiplier is null, creating a default entry in the config.
+[09:42:13] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/overworld <- minecraft:overworld type=ResourceKey[minecraft:dimension_type / minecraft:overworld] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim2 <- useless_mod:uselessdim2 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim2] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/the_other <- allthemodium:the_other type=ResourceKey[minecraft:dimension_type / allthemodium:the_other] minY=-64 height=512
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim <- useless_mod:uselessdim type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/the_beyond <- allthemodium:the_beyond type=ResourceKey[minecraft:dimension_type / allthemodium:the_beyond] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_nether <- minecraft:the_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim3 <- useless_mod:uselessdim3 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim3] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_end <- minecraft:the_end type=ResourceKey[minecraft:dimension_type / minecraft:the_end] minY=0 height=256
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield <- useless_stretcher:two_i_starfield type=ResourceKey[minecraft:dimension_type / useless_stretcher:two_i_starfield] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/allthemodium/mining <- allthemodium:mining type=ResourceKey[minecraft:dimension_type / allthemodium:mining] minY=-64 height=384
+[09:42:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/ae2/spatial_storage <- ae2:spatial_storage type=ResourceKey[minecraft:dimension_type / ae2:spatial_storage] minY=0 height=256
+[09:42:15] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[09:42:15] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[09:42:16] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[09:42:16] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 18%
+[09:42:17] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 18%
+[09:42:18] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 22%
+net/minecraft/world/damagesource/CombatTracker . recordDamage(Lnet/minecraft/world/damagesource/DamageSource;F)V merged successfully
+net/minecraft/world/damagesource/CombatTracker . recheckStatus()V merged successfully
+[09:42:18] [worldgen/INFO] [ne.ne.co.Co.useless_stretcher/COREMODLOG]: [2i compatibility] Manaita destructive-marker guards = 4
+[09:42:18] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[09:42:18] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 51%
+[09:42:19] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 3391 ms
+[09:42:19] [Server thread/INFO] [minecraft/DedicatedServer]: Done (6.640s)! For help, type "help"
+[09:42:19] [Server thread/INFO] [ne.ne.ne.ga.GameTestHooks/]: Enabled Gametest Namespaces: []
+[09:42:19] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[09:42:19] [Server thread/WARN] [ne.ne.ne.co.TagConventionLogWarning/]: 
+   Dev warning - Legacy Tags detected. Please migrate your 'forge' namespace tags to the 'c' namespace! See net.neoforged.neoforge.common.Tags.java for all tags.
+   NOTE: Many tags have been moved around or renamed. Some new ones were added so please review the new tags.
+    And make sure you follow tag conventions for new tags! The convention is `c` with nouns generally being plural and adjectives being singular.
+   You can disable this message in NeoForge's common config by setting `logLegacyTagWarnings` to "SILENCED" or see individual tags with "DEV_VERBOSE".
+
+[09:42:19] [Server thread/WARN] [co.mo.ae.AE2LightningTech/]: [AE2LT recipe conflict scan] 7 matching recipe ids: [ae2lt:lightning_assembly/electromagnetic_railgun, ae2lt:lightning_assembly/railgun_module_core, ae2lt:lightning_assembly/railgun_module_ehv_beam, ae2lt:lightning_assembly/tianshu_amplifier_unit, ae2lt:lightning_simulation/lightning_storage_component_i, ae2lt:lightning_transform/lightning_collector, ae2lt:lightning_transform/lightning_simulation_room]
+net/minecraft/world/entity/ai/behavior/ShowTradesToPlayer . checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/npc/Villager;)Z merged successfully
+[09:42:20] [Server thread/WARN] [co.so.us.co.re.ad.oc.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/repair_tools: has no enumerable damageable activation item
+[09:42:20] [Server thread/WARN] [co.so.us.co.re.ad.pr.CentrifugeRecipeAdapter/]: Skipping unsupported Productive Bees centrifuge recipe: productivebees:centrifuge/honeycomb_frosty
+[09:42:20] [Server thread/WARN] [co.so.us.co.re.ad.oc.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/resurrect_familiar: requires source entity or command state
+[09:42:20] [Server thread/WARN] [co.so.us.co.re.ad.oc.OccultismRitualRecipeAdapter/]: Skipping unsupported Occultism ritual recipe occultism:ritual/resurrect_mob: requires source entity or command state
+[09:42:20] [Server thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=3284, sources=10, elapsed=865 ms
+[09:42:21] [Server thread/INFO] [patchouli/]: Sending reload packet to clients
+[09:42:30] [Server thread/INFO] [co.so.us.st.re.InstalledStretcherChecks/]: INSTALLED STRETCHER NATIVE EXECUTION PASSED: small furnace and assembly returned real outputs to AE
+[09:42:41] [Server thread/INFO] [co.so.us.st.re.InstalledStretcherChecks/]: INSTALLED STRETCHER PASSIVE EXECUTION PASSED: one physical slot autonomously executes both library recipes
+[09:42:41] [Server thread/INFO] [co.so.us.st.re.InstalledStretcherChecks/]: INSTALLED STRETCHER CHECKS PASSED: three real GUIs/handlers, powered AE publication and requests, passive rotation, live deletion, legacy/cross-dimension and NBT
+[09:42:41] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[09:42:41] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[09:42:41] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[09:42:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[09:42:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[09:42:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/allthemodium:the_other
+[09:42:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[09:42:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/allthemodium:the_beyond
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/allthemodium:mining
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/the_other
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/the_beyond
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/allthemodium/mining
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_other): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_beyond): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (mining): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_other): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_beyond): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (mining): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[09:42:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

@@ -16,7 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Separate entity controls never change machine or range multipliers. */
-public final class EntityAccelerationConfigScreen extends FloatingScreen {
+public final class EntityAccelerationConfigScreen extends StaffScreen {
     private final Screen parent;
     private final InteractionHand hand;
     private boolean timers;
@@ -25,14 +25,14 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
     private int hintTop;
 
     public EntityAccelerationConfigScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
-                "entity_settings", 300, 258, 250, 140);
+        super(Component.translatable("gui.useless_stretcher.entity_acceleration.title"), Tab.ENTITY, parent, hand);
         this.parent = parent;
         this.hand = hand;
     }
 
     private ItemStack staff() { return minecraft.player == null ? ItemStack.EMPTY : minecraft.player.getItemInHand(hand); }
 
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
     @Override protected void initContent() {
         if (!settingsLoaded) {
             timers = WondrousStaffAcceleration.usesEntityTimers(staff());
@@ -109,6 +109,6 @@ public final class EntityAccelerationConfigScreen extends FloatingScreen {
             rebuildWidgets();
         }
     }
-    @Override public void onClose() { minecraft.setScreen(parent); }
+    @Override public void onClose() { returnToPage(parent); }
     @Override public boolean isPauseScreen() { return false; }
 }

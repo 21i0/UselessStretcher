@@ -49,6 +49,10 @@ public final class GuideChecks {
             check(++ticks < 2400, "guide preview timed out");
             if (client.getOverlay() != null || client.screen == null) return;
             if (page >= PAGES.size()) {
+                if (Boolean.getBoolean("useless_stretcher.staff_tabs_ui")) {
+                    if (StaffTabsChecks.tick(client)) { finished = true; client.stop(); }
+                    return;
+                }
                 if (Boolean.getBoolean("useless_stretcher.fluid_ui") && !fluidChecked) {
                     fluidChecked = FluidUiChecks.tick(client);
                     return;
