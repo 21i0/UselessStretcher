@@ -83,7 +83,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
             // shifts back over the doll instead of wasting half the fabric.
             umbrella.addOrReplaceChild("canopy", CubeListBuilder.create(), PartPose.offset(2.25F, -20, 0));
             mesh.getRoot().addOrReplaceChild("nose_drop", CubeListBuilder.create().texOffs(48, 0)
-                    .addBox(-0.32F, -1.7F, -4.56F, 0.64F, 1.5F, 0.45F), PartPose.ZERO);
+                    .addBox(-0.32F, 0, -4.56F, 0.64F, 1.5F, 0.45F), PartPose.offset(0, -2.2F, 0));
             return LayerDefinition.create(mesh, 64, 64);
         }
 
@@ -269,6 +269,8 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
                 head.yRot += Mth.sin(time * 0.09F) * 0.05F * open;
             }
             if (noseDrop.visible) {
+                // Positive model Y points toward the chin. Scale from the nostril pivot,
+                // so the drip grows downward without sliding its attachment up the face.
                 noseDrop.yScale = 0.55F + (Mth.sin(time * 0.07F) + 1) * 0.22F;
                 if (weather.sneeze() >= 0) {
                     float sneeze = Mth.sin(weather.sneeze() * Mth.PI);

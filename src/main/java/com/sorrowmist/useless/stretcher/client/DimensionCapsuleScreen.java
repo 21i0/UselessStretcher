@@ -38,6 +38,8 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
     private boolean rotating;
     private CapsuleNetwork.State state;
     private ResourceLocation mapTexture;
+    private DynamicTexture mapImage;
+    private int[] mapPixels;
     private SelectableAE2Button enter, generate, adjacent, dimensionButton, instanceButton;
 
     public DimensionCapsuleScreen(List<String> wire, boolean offhand) {
@@ -121,14 +123,18 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         if (selected < 0 || !payload.id().equals(entry().id) || !payload.dimension().equals(target())) return;
         state = payload;
         instanceId = payload.instanceId();
-        if (payload.pixels().length == 4096) {
-            if (mapTexture != null) minecraft.getTextureManager().release(mapTexture);
-            NativeImage image = new NativeImage(64, 64, false);
+        if (payload.pixels().length == 4096 && !java.util.Arrays.equals(mapPixels, payload.pixels())) {
+            if (mapImage == null) {
+                mapImage = new DynamicTexture(64, 64, false);
+                mapTexture = minecraft.getTextureManager().register("capsule_map", mapImage);
+            }
+            NativeImage image = mapImage.getPixels();
             for (int i = 0; i < 4096; i++) {
                 int argb = payload.pixels()[i];
                 image.setPixelRGBA(i % 64, i / 64, argb & 0xFF00FF00 | (argb >> 16 & 255) | (argb & 255) << 16);
             }
-            mapTexture = minecraft.getTextureManager().register("capsule_map", new DynamicTexture(image));
+            mapImage.upload();
+            mapPixels = payload.pixels().clone();
         }
         updateButtons();
     }
@@ -180,16 +186,22 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         g.fill(mapX, mapY, mapX + mapSize, mapY + mapSize, 0xFF171B20);
         if (mapTexture != null) {
             g.enableScissor(mapX, mapY, mapX + mapSize, mapY + mapSize);
-            var pose = g.pose(); pose.pushPose();
-            pose.translate(mapX + mapSize / 2.0F, mapY + mapSize / 2.0F, 0);
-            pose.mulPose(Axis.ZP.rotationDegrees(angle)); pose.scale(zoom, zoom, 1);
-            g.blit(mapTexture, -mapSize / 2, -mapSize / 2, 0, 0, mapSize, mapSize, mapSize, mapSize);
-            // Entrance marker follows the chosen edge on the actual map.
-            int ex = side == 1 ? mapSize / 2 - 4 : side == 3 ? -mapSize / 2 : -2;
-            int ez = side == 2 ? mapSize / 2 - 4 : side == 0 ? -mapSize / 2 : -2;
-            g.fill(ex, ez, ex + 4, ez + 4, 0xFFFFDE55); pose.popPose(); g.disableScissor();
-            g.enableScissor(floatingWindow().bodyLeft(), floatingWindow().bodyTop(), floatingWindow().bodyLeft() + floatingWindow().bodyWidth(),
-                    floatingWindow().bodyTop() + floatingWindow().bodyHeight());
+            try {
+                var pose = g.pose(); pose.pushPose();
+                try {
+                    pose.translate(mapX + mapSize / 2.0F, mapY + mapSize / 2.0F, 0);
+                    pose.mulPose(Axis.ZP.rotationDegrees(angle)); pose.scale(zoom, zoom, 1);
+                    g.blit(mapTexture, -mapSize / 2, -mapSize / 2, 0, 0, mapSize, mapSize, mapSize, mapSize);
+                    // Entrance marker follows the chosen edge on the actual map.
+                    int ex = side == 1 ? mapSize / 2 - 4 : side == 3 ? -mapSize / 2 : -2;
+                    int ez = side == 2 ? mapSize / 2 - 4 : side == 0 ? -mapSize / 2 : -2;
+                    g.fill(ex, ez, ex + 4, ez + 4, 0xFFFFDE55);
+                } finally { pose.popPose(); }
+            } finally {
+                // GuiGraphics restores the previous clip when popping. Pushing the body
+                // again leaks a clip into the next frame's framebuffer clear (full-screen flicker).
+                g.disableScissor();
+            }
         }
         renderProgress(g);
         if (state != null && state.sx() > 0) g.drawString(font,
@@ -264,6 +276,10 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         if (x < left + listWidth) { scroll = Mth.clamp(scroll - (int)Math.signum(dy) * 3, 0, Math.max(0, rows.size() - visibleRows)); return true; }
         return super.scrollContent(x, y, dx, dy);
     }
-    private void clearMap() { state = null; if (mapTexture != null && minecraft != null) minecraft.getTextureManager().release(mapTexture); mapTexture = null; }
+    private void clearMap() {
+        state = null;
+        if (mapTexture != null && minecraft != null) minecraft.getTextureManager().release(mapTexture);
+        mapTexture = null; mapImage = null; mapPixels = null;
+    }
     @Override public void removed() { clearMap(); super.removed(); }
 }

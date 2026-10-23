@@ -1,0 +1,24 @@
+{
+  "old_sha256": "9AFE6DEDF04BF11A5DB0D3C03BB4AE0C9E6573C49CE4B36C123603AA01ED856D",
+  "new_sha256": "B2668B6F1D817F9B64976C4276D132AB1A03BF3D53FB34265B7EB7331A8FE17F",
+  "added": [
+    "com/sorrowmist/useless/stretcher/content/capsule/CapsulePieceGeometry.class"
+  ],
+  "deleted": [],
+  "changed": [
+    "META-INF/neoforge.mods.toml",
+    "assets/ae2/ae2guide/useless_stretcher/capsule.md",
+    "assets/ae2/ae2guide/useless_stretcher/extras.md",
+    "assets/ae2/ae2guide/useless_stretcher/index.md",
+    "com/sorrowmist/useless/stretcher/client/DimensionCapsuleScreen.class",
+    "com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer$Model.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/CapsuleInstances$Instance.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/CapsuleInstances.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$CapsuleLimitException.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$Job.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$PendingEntry.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$PlanFuture.class",
+    "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.class"
+  ],
+  "unchanged_count": 572
+}

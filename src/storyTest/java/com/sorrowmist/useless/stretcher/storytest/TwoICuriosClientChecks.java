@@ -80,9 +80,15 @@ public final class TwoICuriosClientChecks {
                 });
                 return;
             }
-            var inventory = CuriosApi.getCuriosInventory(client.player).orElseThrow();
+            var syncedInventory = CuriosApi.getCuriosInventory(client.player);
+            if (syncedInventory.isEmpty()) return;
+            var inventory = syncedInventory.orElseThrow();
             if (!displayed) {
-                ItemStack stack = inventory.getStacksHandler("ring").orElseThrow().getStacks().getStackInSlot(0);
+                // Login can expose the capability before the server's slot definitions arrive.
+                // Keep the bounded timeout and identity checks, but await that real sync.
+                var ring = inventory.getStacksHandler("ring");
+                if (ring.isEmpty()) return;
+                ItemStack stack = ring.orElseThrow().getStacks().getStackInSlot(0);
                 if (!DOLL.equals(stack.get(StretcherComponents.TWO_I_DOLL_ID.get()))) return;
                 check(client.player.getUUID().equals(stack.get(StretcherComponents.TWO_I_OWNER.get())), "server-equip identity and owner actually synchronized");
                 validate(client);

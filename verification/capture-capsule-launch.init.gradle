@@ -1,0 +1,14 @@
+// Capture the resolved ModDev runtime so a diagnostic JAR can retain production bytes.
+gradle.projectsEvaluated {
+    ['runRegression': 'server', 'runStoryPreview': 'client'].each { name, kind ->
+        if (rootProject.tasks.findByName(name) != null) rootProject.tasks.named(name).configure {
+            doFirst {
+                def launch = [classpath: classpathProvider.files.collect { it.absolutePath },
+                              jvmArgs: allJvmArgs, args: args, main: mainClass.get()]
+                new File(rootProject.projectDir, "build/capsule-${kind}-launch.json").text =
+                        groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(launch))
+                throw new org.gradle.api.tasks.StopExecutionException('Runtime captured; no source game launched')
+            }
+        }
+    }
+}

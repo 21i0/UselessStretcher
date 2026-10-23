@@ -94,6 +94,7 @@ public final class RegressionChecks {
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
+        if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
             StaffFluidCollectionChecks.start(event.getServer().overworld());
             return;
@@ -112,8 +113,8 @@ public final class RegressionChecks {
         }
         if (Boolean.getBoolean("useless_stretcher.surface_only")) {
             try {
-                EntityFeatureChecks.run(event.getServer().overworld());
-                com.sorrowmist.useless.stretcher.content.entity.TwoIStarfieldServerChecks.run(event.getServer().overworld());
+                // This focused run checks native surface pieces. Entity/starfield suites
+                // retain their own full-regression and protection entry points.
                 com.sorrowmist.useless.stretcher.content.capsule.SurfaceCapsuleChecks.start(event.getServer());
             } catch (Throwable failure) {
                 LogUtils.getLogger().error("SURFACE CAPSULE CHECKS FAILED", failure);
@@ -212,6 +213,7 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
+        if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
             try {
                 if (StaffFluidCollectionChecks.tick(event.getServer().overworld())) {

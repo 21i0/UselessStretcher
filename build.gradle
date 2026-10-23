@@ -138,6 +138,7 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
             systemProperty 'useless_stretcher.protection_only', providers.gradleProperty('protectionOnly').getOrElse('false')
             systemProperty 'useless_stretcher.fluid_only', providers.gradleProperty('fluidOnly').getOrElse('false')
             systemProperty 'useless_stretcher.installed_patterns_only', providers.gradleProperty('installedPatternsOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_repair_only', providers.gradleProperty('capsuleRepairOnly').getOrElse('false')
         }
     }
 }
@@ -182,6 +183,7 @@ if (providers.gradleProperty('storyTests').isPresent()) {
             programArguments.addAll '--width', '1280', '--height', '800'
             systemProperty 'useless_stretcher.story_test', 'true'
             systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_repair_only', providers.gradleProperty('capsuleRepairOnly').getOrElse('false')
             systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
             systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
             systemProperty 'useless_stretcher.forced_kill_client_only', providers.gradleProperty('forcedKillClientOnly').getOrElse('false')
