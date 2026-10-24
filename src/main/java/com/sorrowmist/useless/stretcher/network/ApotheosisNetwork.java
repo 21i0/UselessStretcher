@@ -4,14 +4,14 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisTableData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import com.sorrowmist.useless.compat.forge1201.network.PayloadRegistrar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public final class ApotheosisNetwork {
 
     public record RequestPayload(boolean offhand) implements CustomPacketPayload {
         public static final Type<RequestPayload> TYPE = new Type<>(id("apotheosis_request"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, RequestPayload> CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, RequestPayload> CODEC = StreamCodec.of(
                 (buf, value) -> buf.writeBoolean(value.offhand()), buf -> new RequestPayload(buf.readBoolean()));
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
@@ -31,7 +31,7 @@ public final class ApotheosisNetwork {
     public record SettingsPayload(boolean offhand, boolean selecting, String tier,
                                   ApotheosisTableData.Boost boost) implements CustomPacketPayload {
         public static final Type<SettingsPayload> TYPE = new Type<>(id("apotheosis_state"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, SettingsPayload> CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, SettingsPayload> CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeBoolean(value.offhand());
                     buf.writeBoolean(value.selecting());
@@ -48,7 +48,7 @@ public final class ApotheosisNetwork {
 
     public record MarkersPayload(ResourceLocation dimension, List<BlockPos> tables) implements CustomPacketPayload {
         public static final Type<MarkersPayload> TYPE = new Type<>(id("apotheosis_markers"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, MarkersPayload> CODEC = StreamCodec.of(
+        public static final StreamCodec<FriendlyByteBuf, MarkersPayload> CODEC = StreamCodec.of(
                 (buf, value) -> {
                     buf.writeResourceLocation(value.dimension());
                     int count = Math.min(MAX_MARKERS, value.tables().size());
@@ -98,6 +98,6 @@ public final class ApotheosisNetwork {
     }
 
     private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, path);
+        return new ResourceLocation(UselessStretcherMod.MODID, path);
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -58,7 +58,7 @@ public final class StandaloneTeleport {
         if (anchor != null) return (InteractionResult) anchor.invoke(null, player.level(), player, true);
         // Older base versions have no dedicated anchor helper. Call Ender IO's
         // two anchor operations directly, never its sneak-sensitive dispatcher.
-        Class<?> handler = Class.forName("com.enderio.enderio.content.travel.TravelHandler");
+        Class<?> handler = Class.forName("com.enderio.base.common.handler.TravelHandler");
         boolean success = (boolean) handler.getMethod("blockTeleport", Level.class, Player.class)
                 .invoke(null, player.level(), player);
         if (!success) success = (boolean) handler.getMethod("interact", Level.class, Player.class)

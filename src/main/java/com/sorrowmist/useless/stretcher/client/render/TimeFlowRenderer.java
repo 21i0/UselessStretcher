@@ -18,9 +18,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.model.pipeline.VertexConsumerWrapper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.pipeline.VertexConsumerWrapper;
 
 /** A translucent, full-bright vanilla clock that floats and rotates without occupying a block. */
 @OnlyIn(Dist.CLIENT)
@@ -69,8 +69,8 @@ public final class TimeFlowRenderer extends EntityRenderer<TimeFlowEntity> {
         }
 
         @Override
-        public VertexConsumer setColor(int red, int green, int blue, int sourceAlpha) {
-            parent.setColor(red, green, blue, Math.round(sourceAlpha * alpha));
+        public VertexConsumer color(int red, int green, int blue, int sourceAlpha) {
+            parent.color(red, green, blue, Math.round(sourceAlpha * alpha));
             return this;
         }
     }

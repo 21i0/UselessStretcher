@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 
 /** Reuses the vanilla menu base field accessor to refresh optional Apothic Enchanting menus. */
 @Pseudo
-@Mixin(targets = "dev.shadowsoffire.apothic_enchanting.table.ApothEnchantmentMenu", remap = false)
+@Mixin(targets = "dev.shadowsoffire.apotheosis.ench.table.ApothEnchantmentMenu", remap = false)
 public abstract class ApotheosisEnchantingMenuMixin implements ApotheosisMenuRefresh {
     @Override
     public void uselessStretcher$refreshStats() {

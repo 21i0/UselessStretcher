@@ -11,11 +11,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.InputEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
+import net.minecraftforge.client.event.InputEvent;
 
 /**
  * Client-side controls for the wondrous staff:
@@ -45,12 +45,12 @@ public final class WondrousStaffClient {
         if (hand == null) return;
         ItemStack held = player.getItemInHand(hand);
 
-        double delta = event.getScrollDeltaY();
+        double delta = event.getScrollDelta();
         if (delta == 0) return;
         boolean up = delta > 0;
 
         int speed = cycleGear(WondrousStaffAcceleration.getSpeed(held), up);
-        held.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(held, StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
         Network.sendWondrousStaffSpeed(speed, WondrousStaffAcceleration.getMode(held),
                 WondrousStaffAcceleration.isEnabled(held), hand);
         showGearStatus(speed);
@@ -59,7 +59,8 @@ public final class WondrousStaffClient {
     }
 
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent.Post event) {
+    public static void onClientTick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || mc.screen != null) return;
@@ -85,7 +86,7 @@ public final class WondrousStaffClient {
         }
     }
 
-    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.HIGHEST)
+    @SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.HIGHEST)
     public static void onKeyInput(InputEvent.Key event) {
         Minecraft mc = Minecraft.getInstance();
         if (event.getAction() != org.lwjgl.glfw.GLFW.GLFW_PRESS || mc.screen != null) return;

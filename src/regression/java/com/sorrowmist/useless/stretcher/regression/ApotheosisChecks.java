@@ -17,8 +17,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.PacketSendListener;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
@@ -41,11 +41,11 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public final class ApotheosisChecks {
             var stackCopy = ItemStack.parseOptional(level.registryAccess(), (CompoundTag) staff.save(level.registryAccess()));
             check(ApotheosisStaffSettings.boost(stackCopy).equals(boost)
                     && ApotheosisStaffSettings.selectionMode(stackCopy), "preset and selection survive item roundtrip");
-            var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+            var buf = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
             try {
                 var settings = new ApotheosisNetwork.SettingsPayload(true, true, "pinnacle", boost);
                 ApotheosisNetwork.SettingsPayload.CODEC.encode(buf, settings);
@@ -118,7 +118,7 @@ public final class ApotheosisChecks {
                     player.packets.clear();
                     check(ApotheosisStaffSettings.setTier(player, "haven")
                             && ApotheosisStaffSettings.currentTier(player).equals("haven"), "native world tier downgrade");
-                    check(staff.getOrDefault(StretcherComponents.APOTHEOSIS_WORLD_TIER.get(), "").equals("haven"),
+                    check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, StretcherComponents.APOTHEOSIS_WORLD_TIER.get(), "").equals("haven"),
                             "tier preset saved on staff");
                     checkNativeTierUnlocks(player, "HAVEN");
                     player.packets.clear();

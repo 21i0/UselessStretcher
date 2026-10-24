@@ -55,7 +55,7 @@ public final class TwoIStarfieldDataChecks {
         loaded = TwoIStarfieldData.load(saved, registries);
         check(loaded.returnPoint(first) != null && loaded.returnPoint(first).x() == 12.5D,
                 "valid return point survives reload");
-        check(loaded.returnPoint(first).dimension().equals(ResourceLocation.parse("minecraft:overworld")),
+        check(loaded.returnPoint(first).dimension().equals(new ResourceLocation("minecraft:overworld")),
                 "return dimension survives reload");
         check(loaded.returnPoint(second) == null, "non-finite return coordinates are rejected");
         loaded.clearReturnPoint(first);

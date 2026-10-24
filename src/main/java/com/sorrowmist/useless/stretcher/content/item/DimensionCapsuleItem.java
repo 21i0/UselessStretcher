@@ -37,7 +37,7 @@ public final class DimensionCapsuleItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.useless_stretcher.dimension_capsule.flavor")
                 .withStyle(ChatFormatting.GOLD));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.dimension_capsule.use")

@@ -21,10 +21,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 
 /** Real world/registry/item checks; transport uses a fake-player shim rather than a real network client. */
 public final class TwoIStarfieldServerChecks {
@@ -54,7 +54,7 @@ public final class TwoIStarfieldServerChecks {
         BlockPos center = gardenCenter.offset(0, 0, 6);
         Vec3 landing = Vec3.atBottomCenterOf(center);
         Vec3 outsideGate = Vec3.atBottomCenterOf(TwoIStarfieldCourtyard.entrance(gardenCenter));
-        var floor = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("useless_mod:white_glow_plastic"));
+        var floor = BuiltInRegistries.BLOCK.get(new ResourceLocation("useless_mod:white_glow_plastic"));
         check(stars.getBlockState(gardenCenter.offset(20, -1, 0)).is(floor), "surrounding flat floor reuses the upstream white glow block");
         check(stars.getBlockState(gardenCenter).is(Blocks.SEA_LANTERN), "courtyard has a lighted central star pedestal");
         check(stars.getBlockState(gardenCenter.offset(0, 5, 12)).is(Blocks.SMOOTH_QUARTZ), "courtyard has a built white entrance arch");
@@ -120,7 +120,7 @@ public final class TwoIStarfieldServerChecks {
 
         Method dropReward = TwoIDollService.class.getDeclaredMethod("dropReward", ServerPlayer.class, TwoIStarfieldData.class);
         dropReward.setAccessible(true);
-        var creative = BuiltInRegistries.ITEM.get(ResourceLocation.parse("ae2:creative_storage_cell"));
+        var creative = BuiltInRegistries.ITEM.get(new ResourceLocation("ae2:creative_storage_cell"));
         var drops = new ArrayList<ItemEntity>();
         // No real player watches this distant chunk during ServerStartedEvent. The persistent entity
         // manager accepts spawned items but deliberately excludes HIDDEN sections from spatial queries.
@@ -129,7 +129,7 @@ public final class TwoIStarfieldServerChecks {
             if (event.getLevel() == stars && event.getEntity() instanceof ItemEntity item
                     && item.getItem().is(creative) && id.equals(item.getTarget())) drops.add(item);
         };
-        NeoForge.EVENT_BUS.addListener(capture);
+        MinecraftForge.EVENT_BUS.addListener(capture);
         try {
             for (int i = 0; i < 3; i++) dropReward.invoke(null, player, data);
             TwoIStarfieldData restored = TwoIStarfieldData.load(data.save(new CompoundTag(), stars.registryAccess()), stars.registryAccess());
@@ -147,7 +147,7 @@ public final class TwoIStarfieldServerChecks {
             check(drops.size() == 8 && restored.rewardsRemaining(id) == 0,
                     "revisit cannot create a ninth reward");
         } finally {
-            NeoForge.EVENT_BUS.unregister(capture);
+            MinecraftForge.EVENT_BUS.unregister(capture);
             drops.forEach(ItemEntity::discard);
         }
         for (int i = 0; i < 5; i++) data.recordRewardDrop(id);
@@ -193,19 +193,19 @@ public final class TwoIStarfieldServerChecks {
         Consumer<EntityTravelToDimensionEvent> cancel = event -> {
             if (event.getEntity().getUUID().equals(dollId)) event.setCanceled(true);
         };
-        NeoForge.EVENT_BUS.addListener(cancel);
+        MinecraftForge.EVENT_BUS.addListener(cancel);
         try {
             check(TwoIDollService.sendPlayerToStarfield(player, false, original), "visitor can enter when a mod cancels doll travel");
             check(!original.isRemoved() && original.level() == overworld && !TwoIDollService.hasCompanionVisit(original),
                     "cancelled companion travel retains the exact original without a stale visit marker");
         } finally {
-            NeoForge.EVENT_BUS.unregister(cancel);
+            MinecraftForge.EVENT_BUS.unregister(cancel);
         }
         TwoIDollService.returnFromStarfield(player);
         Consumer<EntityJoinLevelEvent> cancelArrival = event -> {
             if (event.getLevel() == stars && event.getEntity().getUUID().equals(dollId)) event.setCanceled(true);
         };
-        NeoForge.EVENT_BUS.addListener(cancelArrival);
+        MinecraftForge.EVENT_BUS.addListener(cancelArrival);
         try {
             check(TwoIDollService.sendPlayerToStarfield(player, false, original), "visitor can enter when companion arrival is cancelled");
             check(!original.isRemoved() && original.isAddedToLevel() && original.level() == overworld,
@@ -213,7 +213,7 @@ public final class TwoIStarfieldServerChecks {
             check(currentDoll(stars, player.getUUID(), dollId) == null,
                     "cancelled destination join never leaves a duplicate companion");
         } finally {
-            NeoForge.EVENT_BUS.unregister(cancelArrival);
+            MinecraftForge.EVENT_BUS.unregister(cancelArrival);
         }
         TwoIDollService.returnFromStarfield(player);
         original.acceptInvitation(player);

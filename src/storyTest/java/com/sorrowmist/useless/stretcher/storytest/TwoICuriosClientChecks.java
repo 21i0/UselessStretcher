@@ -30,10 +30,10 @@ import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.WorldDataConfiguration;
 import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraft.world.level.levelgen.presets.WorldPresets;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.ClientTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
@@ -52,7 +52,7 @@ public final class TwoICuriosClientChecks {
         check(CuriosRendererRegistry.getRenderer(ModItems.TWO_I_DOLL.get()).orElseThrow() instanceof TwoIDollCurioRenderer,
                 "optional renderer registered with real Curios registry");
         active = true;
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(TwoICuriosClientChecks::tick);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(TwoICuriosClientChecks::tick);
         var settings = new LevelSettings("Curios isolated check", GameType.CREATIVE, false,
                 Difficulty.PEACEFUL, true, new GameRules(), WorldDataConfiguration.DEFAULT);
         client.createWorldOpenFlows().createFreshLevel("curios-preview-" + System.currentTimeMillis(), settings,
@@ -75,7 +75,7 @@ public final class TwoICuriosClientChecks {
                     var inventory = CuriosApi.getCuriosInventory(player).orElseThrow();
                     var stack = new ItemStack(ModItems.TWO_I_DOLL.get());
                     TwoIDollItem.claimOrCheckOwner(stack, player);
-                    stack.set(StretcherComponents.TWO_I_DOLL_ID.get(), DOLL);
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_DOLL_ID.get(), DOLL);
                     inventory.getStacksHandler("ring").orElseThrow().getStacks().insertItem(0, stack, false);
                 });
                 return;
@@ -83,8 +83,8 @@ public final class TwoICuriosClientChecks {
             var inventory = CuriosApi.getCuriosInventory(client.player).orElseThrow();
             if (!displayed) {
                 ItemStack stack = inventory.getStacksHandler("ring").orElseThrow().getStacks().getStackInSlot(0);
-                if (!DOLL.equals(stack.get(StretcherComponents.TWO_I_DOLL_ID.get()))) return;
-                check(client.player.getUUID().equals(stack.get(StretcherComponents.TWO_I_OWNER.get())), "server-equip identity and owner actually synchronized");
+                if (!DOLL.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_DOLL_ID.get()))) return;
+                check(client.player.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_OWNER.get())), "server-equip identity and owner actually synchronized");
                 validate(client);
                 UsefulArmorClientChecks.validate(client);
                 displayed = true; frames = 12;
@@ -114,7 +114,7 @@ public final class TwoICuriosClientChecks {
             for (var entry : inventory.getCurios().entrySet()) {
                 var handler = entry.getValue();
                 ItemStack doll = new ItemStack(ModItems.TWO_I_DOLL.get());
-                doll.set(StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(doll, StretcherComponents.TWO_I_OWNER.get(), player.getUUID());
                 var context = new SlotContext(entry.getKey(), player, 0, false, true);
                 check(handler.getStacks().isItemValid(0, doll), "actual client validation accepts " + entry.getKey());
                 handler.getStacks().setStackInSlot(0, doll);

@@ -236,7 +236,7 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         boolean enabled = !isEnabled();
-        staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), enabled);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), enabled);
         enabledButton.setSelected(enabled);
         enabledButton.setMessage(enabledMessage());
         summonActionButton.active = StretcherConfig.enableStaffSummon();
@@ -269,7 +269,7 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
         ItemStack staff = currentStaff();
         if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
         if (!isEnabled()) {
-            staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), true);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), true);
             enabledButton.setSelected(true);
             enabledButton.setMessage(enabledMessage());
             Network.sendWondrousStaffFeatures(true,

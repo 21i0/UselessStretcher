@@ -17,11 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /** Do not draw the special suit on any player; it remains visible in inventories and item renders. */
 @Mixin(HumanoidArmorLayer.class)
 public abstract class UsefulArmorLayerMixin<T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> {
-    @Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;)V", at = @At("HEAD"), cancellable = true)
     private void uselessStretcher$hideUsefulArmor(PoseStack poseStack, MultiBufferSource buffer, LivingEntity entity,
                                                     EquipmentSlot slot, int packedLight, HumanoidModel<?> model,
-                                                    float limbSwing, float limbSwingAmount, float partialTick,
-                                                    float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+                                                    CallbackInfo ci) {
         ItemStack stack = entity.getItemBySlot(slot);
         if (entity instanceof Player && stack.getItem() instanceof UsefulArmorItem) ci.cancel();
     }

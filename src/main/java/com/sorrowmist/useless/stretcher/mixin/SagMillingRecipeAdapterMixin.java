@@ -15,11 +15,11 @@ import java.util.List;
  * at the adapter level. The base recipe is kept, so JEI, AE2 pattern encoding, our pattern picker
  * and the furnace all stop seeing the near-duplicate ball recipes.
  */
-@Mixin(SagMillingRecipeAdapter.class)
+@Mixin(value = SagMillingRecipeAdapter.class, remap = false)
 public abstract class SagMillingRecipeAdapterMixin {
 
     @Inject(
-            method = "convertAll(Lnet/minecraft/world/item/crafting/RecipeHolder;Lnet/minecraft/world/level/Level;)Ljava/util/List;",
+            method = "convertAll(Lcom/sorrowmist/useless/compat/forge1201/recipe/RecipeHolder;Lnet/minecraft/world/level/Level;)Ljava/util/List;",
             at = @At("RETURN"),
             cancellable = true)
     private void uselessStretcher$hideGrindingBalls(

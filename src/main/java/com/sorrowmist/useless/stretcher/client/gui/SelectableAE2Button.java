@@ -1,6 +1,6 @@
 package com.sorrowmist.useless.stretcher.client.gui;
 
-import appeng.client.gui.widgets.AE2Button;
+import com.sorrowmist.useless.compat.forge1201.client.PortButton;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
 /** AE2-style button with a persistent selected state for mutually exclusive choices. */
-public final class SelectableAE2Button extends AE2Button {
+public final class SelectableAE2Button extends PortButton {
     private boolean selected;
     private net.minecraft.client.gui.components.Tooltip labelTooltip;
 
@@ -33,14 +33,7 @@ public final class SelectableAE2Button extends AE2Button {
 
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.setColor(1.0F, 1.0F, 1.0F, alpha);
-        RenderSystem.enableBlend();
-        RenderSystem.enableDepthTest();
-        graphics.blitSprite(SPRITES.get(active, selected || isHoveredOrFocused()),
-                getX(), getY(), getWidth(), getHeight());
-        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        int alphaChannel = Mth.ceil(alpha * 255.0F) << 24;
-        int color = selected ? 0x517497 | alphaChannel : 0xF2F2F2 | alphaChannel;
-        renderButtonText(graphics, Minecraft.getInstance().font, 2, color, selected ? 0 : 1);
+        renderSurface(graphics,selected || isHoveredOrFocused());
+        renderLabel(graphics,!active?0x888894:selected?0xAED4ED:0xF2F2F2);
     }
 }

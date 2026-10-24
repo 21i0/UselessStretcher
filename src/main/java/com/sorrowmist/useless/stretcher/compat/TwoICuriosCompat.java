@@ -7,12 +7,12 @@ import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.Event;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.event.CurioCanEquipEvent;
+import top.theillusivec4.curios.api.event.CurioEquipEvent;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 /** Loaded only when Curios is present. Validation never claims or modifies a simulated stack. */
@@ -42,12 +42,12 @@ public final class TwoICuriosCompat {
                 bindEquipped(context, stack);
             }
         });
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, TwoICuriosCompat::allowAnySlot);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, TwoICuriosCompat::allowAnySlot);
     }
 
     private static boolean mayWear(SlotContext context, ItemStack stack) {
         if (!(context.entity() instanceof Player player)) return false;
-        var owner = stack.get(StretcherComponents.TWO_I_OWNER.get());
+        var owner = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_OWNER.get());
         return owner == null || owner.equals(player.getUUID());
     }
 
@@ -56,10 +56,10 @@ public final class TwoICuriosCompat {
             TwoIDollItem.claimOrCheckOwner(stack, player);
     }
 
-    private static void allowAnySlot(CurioCanEquipEvent event) {
+    private static void allowAnySlot(CurioEquipEvent event) {
         if (!event.getStack().is(ModItems.TWO_I_DOLL.get())) return;
         // Curios posts this after its slot validators, including custom non-tag validators.
-        event.setEquipResult(mayWear(event.getSlotContext(), event.getStack()) ? TriState.TRUE : TriState.FALSE);
+        event.setResult(mayWear(event.getSlotContext(), event.getStack()) ? Event.Result.ALLOW : Event.Result.DENY);
     }
 
     public static void sampleEquipped(ServerPlayer player, long time) {
@@ -67,7 +67,7 @@ public final class TwoICuriosCompat {
             for (var entry : inventory.getCurios().entrySet()) {
                 var stacks = entry.getValue().getStacks();
                 for (int i = 0; i < stacks.getSlots(); i++) {
-                    if (inventory.isSlotActive(entry.getKey(), i))
+                    if (!inventory.getLockedSlots().contains(entry.getKey()))
                         TwoICarriedCompanionship.sampleCarried(player, stacks.getStackInSlot(i), time);
                 }
             }

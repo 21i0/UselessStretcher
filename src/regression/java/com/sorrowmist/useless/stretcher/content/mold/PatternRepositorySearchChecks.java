@@ -15,13 +15,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStartedEvent;
 
 import java.util.Arrays;
 import java.util.BitSet;
@@ -43,15 +43,15 @@ public final class PatternRepositorySearchChecks {
             var target = PatternDetailsHelper.encodeProcessingPattern(
                     List.of(new GenericStack(AEFluidKey.of(Fluids.WATER), 1000)),
                     List.of(new GenericStack(AEItemKey.of(Items.DIAMOND), 1)));
-            target.set(UComponents.OMNIVERSAL_PATTERN_DATA.get(), new OmniversalPatternData(
-                    OmniversalPatternData.CURRENT_VERSION, ResourceLocation.parse("regression:remote_match"),
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(target, UComponents.OMNIVERSAL_PATTERN_DATA.get(), new OmniversalPatternData(
+                    OmniversalPatternData.CURRENT_VERSION, new ResourceLocation("regression:remote_match"),
                     "search-fixture", "regression", true, Optional.of(AEItemKey.of(Items.BUCKET)),
                     List.of(AEItemKey.of(Items.BUCKET)), List.of(), List.of(), List.of(), List.of(), List.of()));
             AEItemKey targetKey = AEItemKey.of(target);
             keys.add(targetKey);
             var store = new MyriadPatternStore();
             UUID ref = UUID.randomUUID();
-            var mold = ResourceLocation.parse("minecraft:bucket");
+            var mold = new ResourceLocation("minecraft:bucket");
             store.replace(ref, mold, keys);
             var index = store.searchIndex(ref);
             check(index == store.searchIndex(ref), "unchanged libraries share one metadata index");
@@ -92,7 +92,7 @@ public final class PatternRepositorySearchChecks {
             var dedupStore = new MyriadPatternStore();
             UUID dedupId = UUID.randomUUID();
             dedupStore.replace(dedupId, mold, keys);
-            dedupStore.replace(dedupId, ResourceLocation.parse("minecraft:furnace"),
+            dedupStore.replace(dedupId, new ResourceLocation("minecraft:furnace"),
                     new LinkedHashSet<>(List.of(List.copyOf(keys).get(0), List.copyOf(keys).get(130))));
             var dedupIndex = dedupStore.searchIndex(dedupId);
             while (!dedupIndex.ready()) dedupIndex.advance(Long.MAX_VALUE);
@@ -107,7 +107,7 @@ public final class PatternRepositorySearchChecks {
 
             var packet = new Network.PatternPageRequestPayload(BlockPos.ZERO, 2, true, false,
                     42, "\u6876", itemMask.toByteArray(), fluidMask.toByteArray(), 128, PatternSearchIndex.Mode.MOLD);
-            var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), event.getServer().registryAccess());
+            var buffer = new FriendlyByteBuf(Unpooled.buffer(), event.getServer().registryAccess());
             try {
                 Network.PatternPageRequestPayload.STREAM_CODEC.encode(buffer, packet);
                 var decoded = Network.PatternPageRequestPayload.STREAM_CODEC.decode(buffer);
@@ -137,8 +137,8 @@ public final class PatternRepositorySearchChecks {
                     List.of(new GenericStack(AEItemKey.of(Items.COBBLESTONE), i)),
                     List.of(new GenericStack(AEItemKey.of(Items.DIAMOND), i),
                             new GenericStack(AEItemKey.of(Items.STICK), 1)));
-            encoded.set(UComponents.OMNIVERSAL_PATTERN_DATA.get(), new OmniversalPatternData(
-                    OmniversalPatternData.CURRENT_VERSION, ResourceLocation.parse("regression:trim_" + i),
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(encoded, UComponents.OMNIVERSAL_PATTERN_DATA.get(), new OmniversalPatternData(
+                    OmniversalPatternData.CURRENT_VERSION, new ResourceLocation("regression:trim_" + i),
                     "identity-" + i, "regression", true, Optional.of(AEItemKey.of(Items.BUCKET)),
                     List.of(AEItemKey.of(Items.BUCKET)), List.of(), List.of(), List.of(), List.of(0), List.of(0, 1)));
             var actual = new net.minecraft.world.item.ItemStack(com.sorrowmist.useless.init.ModItems.OMNIVERSAL_PATTERN.get());
@@ -147,8 +147,8 @@ public final class PatternRepositorySearchChecks {
         }
         var store = new MyriadPatternStore();
         var id = UUID.randomUUID();
-        var first = ResourceLocation.parse("minecraft:bucket");
-        var second = ResourceLocation.parse("minecraft:furnace");
+        var first = new ResourceLocation("minecraft:bucket");
+        var second = new ResourceLocation("minecraft:furnace");
         store.replace(id, first, originals);
         store.replace(id, second, new LinkedHashSet<>(originals.stream().limit(100).toList()));
         store.replace(id, first, originals);
@@ -164,8 +164,8 @@ public final class PatternRepositorySearchChecks {
                 "trim keeps global order even when mold-group order differs");
         for (int i = 0; i < before.size(); i++) {
             var old = before.get(i); var replacement = after.get(i);
-            var data = old.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
-            var updated = replacement.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
+            var data = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(old, UComponents.OMNIVERSAL_PATTERN_DATA.get());
+            var updated = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(replacement, UComponents.OMNIVERSAL_PATTERN_DATA.get());
             check(replacement.getItem() == com.sorrowmist.useless.init.ModItems.OMNIVERSAL_PATTERN.get(),
                     "trim never converts an omniversal pattern into a processing item");
             check(updated.recipeId().equals(data.recipeId()) && updated.recipeFingerprint().equals(data.recipeFingerprint())
@@ -183,7 +183,7 @@ public final class PatternRepositorySearchChecks {
                 "save/reload preserves UUID, mold memberships, order and rewritten data");
         var cancelled = loaded.stripByproducts(id);
         cancelled.advance(Long.MAX_VALUE);
-        loaded.removeKeys(id, List.of(after.getFirst()));
+        loaded.removeKeys(id, List.of(after.get(0)));
         check(!cancelled.valid(), "concurrent edits invalidate staged rewrite");
         try { cancelled.advance(Long.MAX_VALUE); throw new AssertionError("stale rewrite committed"); }
         catch (IllegalStateException expected) { }

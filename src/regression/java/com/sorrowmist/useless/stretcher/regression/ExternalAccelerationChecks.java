@@ -26,10 +26,10 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.capabilities.Capabilities;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -94,15 +94,15 @@ final class ExternalAccelerationChecks {
                 }
                 if (itemUse) {
                     player.setItemInHand(InteractionHand.MAIN_HAND, recipe.value().getItemToUse().getItems()[0].copy());
-                    net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(
-                            new net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem(player, InteractionHand.MAIN_HAND));
+                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(
+                            new net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem(player, InteractionHand.MAIN_HAND));
                     check(bowl.itemUseFulfilled(), "native item-use event fulfills the ritual condition");
                 } else {
                     var llama = net.minecraft.world.entity.EntityType.LLAMA.create(level);
                     check(llama != null, "native sacrifice entity exists");
                     llama.setPos(Vec3.atCenterOf(pos));
-                    net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(
-                            new net.neoforged.neoforge.event.entity.living.LivingDeathEvent(llama, level.damageSources().playerAttack(player)));
+                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(
+                            new net.minecraftforge.event.entity.living.LivingDeathEvent(llama, level.damageSources().playerAttack(player)));
                     check(bowl.sacrificeFulfilled(), "native player sacrifice event fulfills the ritual condition");
                 }
                 check(probe.isWorking(level, pos, bowl.getBlockState()), "native condition fulfillment wakes the same probe immediately");
@@ -143,8 +143,8 @@ final class ExternalAccelerationChecks {
 
         static void ritual(ServerLevel level, boolean range) {
             BlockPos pos = new BlockPos(96, 150, 64);
-            var recipe = level.getRecipeManager().byKey(ResourceLocation.parse("occultism:ritual/craft_dimensional_mineshaft"))
-                    .map(r -> (net.minecraft.world.item.crafting.RecipeHolder<com.klikli_dev.occultism.crafting.recipe.RitualRecipe>) r).orElseThrow();
+            var recipe = com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), new ResourceLocation("occultism:ritual/craft_dimensional_mineshaft"))
+                    .map(r -> (com.sorrowmist.useless.compat.forge1201.recipe.RecipeHolder<com.klikli_dev.occultism.crafting.recipe.RitualRecipe>) r).orElseThrow();
             recipe.value().getPentacle().place(level, pos, Rotation.NONE);
             level.setBlockAndUpdate(pos, com.klikli_dev.occultism.registry.OccultismBlocks.GOLDEN_SACRIFICIAL_BOWL.get().defaultBlockState());
             var bowl = (com.klikli_dev.occultism.common.blockentity.GoldenSacrificialBowlBlockEntity) level.getBlockEntity(pos);
@@ -227,8 +227,8 @@ final class ExternalAccelerationChecks {
             UUID owner = UUID.randomUUID(), id = null;
             if (range) {
                 var staff = staff(1, 64);
-                staff.set(StretcherComponents.ENTITY_TIMER_MODE.get(), timers);
-                staff.set(StretcherComponents.ENTITY_TIMER_SPEED.get(), 64);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.ENTITY_TIMER_MODE.get(), timers);
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.ENTITY_TIMER_SPEED.get(), 64);
                 id = ranges.place(level, FakePlayerFactory.get(level, new GameProfile(owner, "OccultismTimer")), pos, staff).id();
             }
             var singleMarker = new com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAccelerationEntity(level, spirit, 64);
@@ -271,7 +271,7 @@ final class ExternalAccelerationChecks {
     private static final class Rftools {
         static void quarry(ServerLevel level, boolean range, boolean building) throws Exception {
             BlockPos pos = new BlockPos(64, 150, 96);
-            level.setBlockAndUpdate(pos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("rftoolsbuilder:builder")).defaultBlockState());
+            level.setBlockAndUpdate(pos, BuiltInRegistries.BLOCK.get(new ResourceLocation("rftoolsbuilder:builder")).defaultBlockState());
             level.setBlockAndUpdate(pos.above(), Blocks.CHEST.defaultBlockState());
             var builder = (mcjty.rftoolsbuilder.modules.builder.blocks.BuilderTileEntity) level.getBlockEntity(pos);
             builder.setRSMode(mcjty.lib.varia.RedstoneMode.REDSTONE_IGNORED);
@@ -341,7 +341,7 @@ final class ExternalAccelerationChecks {
         }
     }
 
-    private static int count(net.neoforged.neoforge.items.IItemHandler inventory) {
+    private static int count(net.minecraftforge.items.IItemHandler inventory) {
         int count = 0;
         for (int i = 0; i < inventory.getSlots(); i++) count += inventory.getStackInSlot(i).getCount();
         return count;
@@ -349,10 +349,10 @@ final class ExternalAccelerationChecks {
 
     private static ItemStack staff(int size, int speed) {
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
-        staff.set(StretcherComponents.RANGE_SIZE_X.get(), size);
-        staff.set(StretcherComponents.RANGE_SIZE_Y.get(), size);
-        staff.set(StretcherComponents.RANGE_SIZE_Z.get(), size);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_X.get(), size);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Y.get(), size);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_SIZE_Z.get(), size);
         return staff;
     }
 

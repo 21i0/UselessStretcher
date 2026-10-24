@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
 
 import java.util.Locale;
@@ -122,10 +122,10 @@ public class WondrousStaffAccelerationRenderer
                                 float z,
                                 float r, float g, float b, float a) {
         Matrix4f pose = poseStack.last().pose();
-        vc.addVertex(pose, x0, y0, z).setColor(r, g, b, a);
-        vc.addVertex(pose, x1, y0, z).setColor(r, g, b, a);
-        vc.addVertex(pose, x1, y1, z).setColor(r, g, b, a);
-        vc.addVertex(pose, x0, y1, z).setColor(r, g, b, a);
+        vc.vertex(pose, x0, y0, z).color(r, g, b, a).endVertex();
+        vc.vertex(pose, x1, y0, z).color(r, g, b, a).endVertex();
+        vc.vertex(pose, x1, y1, z).color(r, g, b, a).endVertex();
+        vc.vertex(pose, x0, y1, z).color(r, g, b, a).endVertex();
     }
 
     private static void moveToFace(PoseStack poseStack, Direction face) {

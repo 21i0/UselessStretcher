@@ -61,7 +61,7 @@ final class FeatureClientChecks {
                             player.serverLevel().setBlockAndUpdate(new BlockPos(x,y,z),(z>=2&&z<=6?Blocks.STONE:Blocks.AIR).defaultBlockState());
                         player.serverLevel().setBlockAndUpdate(new BlockPos(1,101,0),Blocks.CHEST.defaultBlockState());
                         var staff=new ItemStack(ModItems.WONDROUS_STAFF.get());
-                        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),true);
+                        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),true);
                         player.getInventory().clearContent();
                         player.getInventory().selected=0;
                         player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.WONDROUS_STAFF.get()));
@@ -76,7 +76,7 @@ final class FeatureClientChecks {
             }
             if(stage==1) {
                 if(serverPhase.get()!=1 || !client.player.getMainHandItem().is(ModItems.WONDROUS_STAFF.get())
-                        || !client.player.getInventory().getItem(17).getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false)
+                        || !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(client.player.getInventory().getItem(17), StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false)
                         || !StaffPhaseManager.noPhysics(client.player) || client.player.getY()<100
                         || !client.level.getBlockState(new BlockPos(1,101,0)).is(Blocks.CHEST))return;
                 client.setScreen(null);
@@ -99,7 +99,7 @@ final class FeatureClientChecks {
                 check(client.player.getZ()>7,"real forward input traverses five-block thick stone wall: "+client.player.position());
                 check(Math.abs(client.player.getY()-start.y)<0.1,"free flight hovers without falling");
                 check(!client.player.isSpectator() && !client.player.isCreative(),"survival mode preserved");
-                check(!client.player.getMainHandItem().getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false),
+                check(!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(client.player.getMainHandItem(), StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false),
                         "wall traversal uses backpack staff while held staff remains disabled");
                 stage=13;age=0;
                 client.getSingleplayerServer().execute(()->{
@@ -114,7 +114,7 @@ final class FeatureClientChecks {
                 });return;
             }
             if(stage==13) {
-                if(serverPhase.get()!=2 || !client.player.getInventory().getItem(8).getOrDefault(
+                if(serverPhase.get()!=2 || !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(client.player.getInventory().getItem(8),
                         StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(),false))return;
                 client.player.getInventory().selected=2;
                 if(++age<15)return;

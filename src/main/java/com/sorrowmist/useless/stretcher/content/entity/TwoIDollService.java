@@ -22,19 +22,18 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /** Server-owned visits; courtyard blocks belong to first-time chunk generation, never revisit scans. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
@@ -207,11 +206,17 @@ public final class TwoIDollService {
     private static TwoIDollEntity moveCompanion(TwoIDollEntity companion, ServerLevel target, Vec3 pos, ServerPlayer owner) {
         ServerLevel source = (ServerLevel) companion.level();
         companion.getNavigation().stop();
-        Entity moved = companion.changeDimension(new DimensionTransition(target, pos, Vec3.ZERO,
-                owner.getYRot(), 0.0F, DimensionTransition.DO_NOTHING));
+        Entity moved = companion.changeDimension(target, new net.minecraftforge.common.util.ITeleporter() {
+            @Override public Entity placeEntity(Entity entity, ServerLevel current, ServerLevel destination,
+                    float yaw, java.util.function.Function<Boolean, Entity> reposition) {
+                Entity result = reposition.apply(false);
+                if (result != null) result.moveTo(pos.x,pos.y,pos.z,owner.getYRot(),0);
+                return result;
+            }
+        });
         // A hidden, non-player-tracked chunk need not emit onTrackingEnd during a native move.
-        if (companion.isRemoved()) companion.onRemovedFromLevel();
-        if (moved instanceof TwoIDollEntity result && result.isAddedToLevel() && !result.isRemoved()) {
+        if (companion.isRemoved()) companion.onRemovedFromWorld();
+        if (moved instanceof TwoIDollEntity result && result.isAddedToWorld() && !result.isRemoved()) {
             result.fallDistance = 0.0F;
             return result;
         }
@@ -222,7 +227,7 @@ public final class TwoIDollService {
             if (!source.addFreshEntity(companion)) {
                 // A rejected destination handle has never joined a world and is intentionally not kept.
                 companion.reclaimRemote(owner);
-                companion.onRemovedFromLevel();
+                companion.onRemovedFromWorld();
             }
         }
         return null;
@@ -275,7 +280,8 @@ public final class TwoIDollService {
     }
 
     @SubscribeEvent
-    public static void tick(ServerTickEvent.Post event) {
+    public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         // Nothing is kept alive for absent players. Safety/rewards touch only actual visitors once a second.
         if (event.getServer().getTickCount() % 20 != 0) return;
         ServerLevel level = event.getServer().getLevel(TwoIStarfieldDimensions.KEY);
@@ -308,7 +314,7 @@ public final class TwoIDollService {
     private static void dropReward(ServerPlayer player, TwoIStarfieldData data) {
         if (!player.level().dimension().equals(TwoIStarfieldDimensions.KEY)
                 || data.rewardsRemaining(player.getUUID()) <= 0 || data.celebrationEnd(player.getUUID()) <= player.level().getGameTime()) return;
-        var item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("ae2", "creative_storage_cell"));
+        var item = BuiltInRegistries.ITEM.get(new ResourceLocation("ae2", "creative_storage_cell"));
         if (item == Items.AIR) return;
         Vec3 pos = player.position().add(player.getRandom().nextDouble() * 4.0D - 2.0D, 7.0D,
                 player.getRandom().nextDouble() * 4.0D - 2.0D);
@@ -350,7 +356,7 @@ public final class TwoIDollService {
     }
 
     @SubscribeEvent
-    public static void preventTravelHazards(LivingIncomingDamageEvent event) {
+    public static void preventTravelHazards(LivingAttackEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)
                 || !player.level().dimension().equals(TwoIStarfieldDimensions.KEY)) return;
         if (event.getSource().is(DamageTypes.FALL) || event.getSource().is(DamageTypes.IN_WALL)

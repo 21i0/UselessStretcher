@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.util.UUID;
 import java.lang.reflect.Method;
@@ -36,10 +36,10 @@ public final class LightningTechCapsuleChecks {
         if (++ticks > 60_000) throw new AssertionError("AE2LT capsule check timed out");
         if (!started) {
             var registry = fallback.registryAccess().registryOrThrow(Registries.STRUCTURE);
-            var structure = registry.get(ResourceLocation.parse(STRUCTURE));
+            var structure = registry.get(new ResourceLocation(STRUCTURE));
             check(structure != null, "AE2LT firmament structure is registered");
             var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
-                    Registries.DIMENSION, ResourceLocation.parse(DIMENSION)));
+                    Registries.DIMENSION, new ResourceLocation(DIMENSION)));
             check(level != null, "AE2LT End dimension is loaded");
             player = newPlayer(level, "AE2LTFirmament");
             check(DimensionCapsuleCatalog.dimensions(player, structure).contains(DIMENSION),
@@ -56,7 +56,7 @@ public final class LightningTechCapsuleChecks {
         if (!room.error.isEmpty()) throw new AssertionError("AE2LT native generation failed: " + room.error);
         if (!room.ready) return false;
         var level = fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
-                Registries.DIMENSION, ResourceLocation.parse(DIMENSION)));
+                Registries.DIMENSION, new ResourceLocation(DIMENSION)));
         var start = StructureStart.loadStaticStart(StructurePieceSerializationContext.fromLevel(level), room.plan,
                 level.getSeed());
         check(start != null && start.isValid(), "AE2LT plan restores after generation");
@@ -106,7 +106,7 @@ public final class LightningTechCapsuleChecks {
         var source = level.getChunkSource().getGenerator().getBiomeSource();
         var sampler = level.getChunkSource().randomState().sampler();
         var structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE)
-                .get(ResourceLocation.parse(STRUCTURE));
+                .get(new ResourceLocation(STRUCTURE));
         var pair = source.findClosestBiome3d(new BlockPos(room.x(), 80, room.z()), 4096, 64, 64,
                 structure.biomes()::contains, sampler, level);
         if (pair == null) throw new AssertionError("No compatible End biome for AE2LT firmament");
@@ -115,8 +115,8 @@ public final class LightningTechCapsuleChecks {
             var z = room.getClass().getDeclaredField("originZ");
             x.setAccessible(true);
             z.setAccessible(true);
-            x.setInt(room, pair.getFirst().getX());
-            z.setInt(room, pair.getFirst().getZ());
+            x.setInt(room, pair.get(0).getX());
+            z.setInt(room, pair.get(0).getZ());
         } catch (ReflectiveOperationException failure) {
             throw new AssertionError("Cannot position AE2LT regression room", failure);
         }

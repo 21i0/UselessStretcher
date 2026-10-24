@@ -21,7 +21,7 @@ public final class ApotheosisTableData extends SavedData {
 
     public static ApotheosisTableData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(ApotheosisTableData::new, ApotheosisTableData::load),
+                tag -> ApotheosisTableData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), ApotheosisTableData::new,
                 "useless_stretcher_apotheosis_tables");
     }
 
@@ -116,7 +116,10 @@ public final class ApotheosisTableData extends SavedData {
         }
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag entries = new ListTag();
         tables.forEach((key, boost) -> {

@@ -42,7 +42,7 @@ public final class NativeCapsuleChecks {
                 @Override public void setListenerForServerboundHandshake(net.minecraft.network.PacketListener listener) { }
             };
             // A ServerPlayer created by the regression harness does not pass through the
-            // Netty bootstrap.  Attach an in-memory channel so NeoForge's dimension-change
+            // Netty bootstrap.  Attach an in-memory channel so MinecraftForge's dimension-change
             // packet negotiation sees the same non-null channel as a real client.
             new io.netty.channel.embedded.EmbeddedChannel(transport);
             player.connection = new net.minecraft.server.network.ServerGamePacketListenerImpl(level.getServer(), transport, player,
@@ -53,7 +53,7 @@ public final class NativeCapsuleChecks {
             assertDimension(player, "minecraft:fortress", DimensionCapsuleCatalog.CAPSULE_NETHER, DIM_OVERWORLD);
             assertDimension(player, "minecraft:bastion_remnant", DimensionCapsuleCatalog.CAPSULE_NETHER, DIM_OVERWORLD);
             assertDimension(player, "minecraft:trail_ruins", DimensionCapsuleCatalog.CAPSULE_OVERWORLD, DIM_NETHER);
-            var structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(ID));
+            var structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(ID));
             check(DimensionCapsuleCatalog.dimensions(player, structure).contains(DIM), "real biome-compatible dimension");
             check(DimensionCapsuleCatalog.scan(player).stream().anyMatch(e -> e.id().toString().equals(ID)), "procedural structure catalogue");
             NativeCapsules.request(player, ID, DIM, 1, 0);
@@ -67,7 +67,7 @@ public final class NativeCapsuleChecks {
         if (stage == 1 && room.plan.isEmpty()) {
             check(!room.sourceDimension.isEmpty(), "instance binds a concrete source dimension");
             var source = DimensionCapsuleCatalog.sourceLevel(player,
-                    level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(ID)), DIM,
+                    level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(ID)), DIM,
                     room.sourceDimension);
             check(source != null, "bound source dimension remains available during planning");
             check(room.sourceSeed == source.getSeed(), "instance stores the source world seed");
@@ -290,7 +290,7 @@ public final class NativeCapsuleChecks {
     private static final String DIM_OVERWORLD = "minecraft:overworld";
     private static final String DIM_NETHER = "minecraft:the_nether";
     private static void assertDimension(ServerPlayer player, String id, String required, String forbidden) {
-        var structure = player.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(id));
+        var structure = player.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(id));
         check(structure != null, "registered structure exists: " + id);
         var dimensions = DimensionCapsuleCatalog.dimensions(player, structure);
         check(dimensions.contains(required), id + " follows active structure-set dimension " + required + ": " + dimensions);
@@ -308,11 +308,11 @@ public final class NativeCapsuleChecks {
     }
     private static ServerLevel roomLevel(ServerLevel fallback, String dimension) {
         return fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
-                Registries.DIMENSION, ResourceLocation.parse(dimension)));
+                Registries.DIMENSION, new ResourceLocation(dimension)));
     }
     private static ServerLevel sourceLevel(ServerLevel fallback, CapsuleInstances.Instance room) {
         return fallback.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
-                Registries.DIMENSION, ResourceLocation.parse(room.sourceDimension)));
+                Registries.DIMENSION, new ResourceLocation(room.sourceDimension)));
     }
     private static void check(boolean passed, String message) { if (!passed) throw new AssertionError(message); }
 }

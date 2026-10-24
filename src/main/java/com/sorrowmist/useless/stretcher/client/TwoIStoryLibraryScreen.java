@@ -97,7 +97,7 @@ public final class TwoIStoryLibraryScreen extends Screen implements TwoIInteract
         }
     }
 
-    @Override public void renderBackground(GuiGraphics g, int x, int y, float partial) { }
+    @Override public void renderBackground(GuiGraphics g) { }
 
     @Override public void render(GuiGraphics g, int mouseX, int mouseY, float partial) {
         g.fill(0, 0, width, height, 0xB8192039);

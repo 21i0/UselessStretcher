@@ -85,7 +85,7 @@ public abstract class FloatingScreen extends Screen {
         if (inside) renderContentTooltip(graphics, mouseX, mouseY, partialTick);
         window.renderTooltip(graphics, font, mouseX, mouseY);
     }
-    @Override public final void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {}
+    @Override public final void renderBackground(GuiGraphics graphics) {}
 
     @Override public final boolean mouseClicked(double x, double y, int button) {
         if (window.mouseClicked(x, y, button)) {
@@ -117,11 +117,11 @@ public abstract class FloatingScreen extends Screen {
         if (releaseContent(x, y, button)) return true;
         return super.mouseReleased(x, y, button);
     }
-    @Override public final boolean mouseScrolled(double x, double y, double dx, double dy) {
-        return window.containsBody(x, y) && !window.capturing() && scrollContent(x, y, dx, dy);
+    @Override public final boolean mouseScrolled(double x, double y, double dy) {
+        return window.containsBody(x, y) && !window.capturing() && scrollContent(x, y, 0, dy);
     }
     protected boolean scrollContent(double x, double y, double dx, double dy) {
-        if (super.mouseScrolled(x, y, dx, dy)) return true;
+        if (super.mouseScrolled(x, y, dy)) return true;
         int next = Mth.clamp(contentScroll - (int) Math.round(dy * 20), 0, maxScroll());
         if (next != contentScroll) { contentScroll = next; relayoutContent(); return true; }
         return false;
@@ -130,7 +130,7 @@ public abstract class FloatingScreen extends Screen {
         boolean handled = super.keyPressed(keyCode, scanCode, modifiers);
         if (handled && minecraft.screen == this && maxScroll() > 0 && getFocused() instanceof AbstractWidget widget) {
             int delta = widget.getY() < window.bodyTop() ? widget.getY() - window.bodyTop()
-                    : Math.max(0, widget.getBottom() - window.bodyTop() - contentHeight());
+                    : Math.max(0, (widget.getY() + widget.getHeight()) - window.bodyTop() - contentHeight());
             int next = Mth.clamp(contentScroll + delta, 0, maxScroll());
             if (next != contentScroll) { contentScroll = next; relayoutContent(); }
         }

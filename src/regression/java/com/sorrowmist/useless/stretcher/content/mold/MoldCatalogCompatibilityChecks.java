@@ -7,10 +7,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStartedEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ public final class MoldCatalogCompatibilityChecks {
                         "repeated live reads reuse the base snapshot");
                 check(MoldCatalog.start(level) == MoldCatalog.start(level), "catalog builders are reused");
             }
-            var id = ResourceLocation.parse("minecraft:furnace");
+            var id = new ResourceLocation("minecraft:furnace");
             var saved = new MoldCatalogSavedData();
             saved.replace("first", Map.of("minecraft", List.of(
                     new MoldCatalog.MoldEntry("minecraft", id, new ItemStack(Items.FURNACE)))));

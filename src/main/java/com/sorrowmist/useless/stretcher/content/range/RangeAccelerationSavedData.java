@@ -67,7 +67,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
 
     public static RangeAccelerationSavedData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(RangeAccelerationSavedData::new, RangeAccelerationSavedData::load), FILE_ID);
+                tag -> RangeAccelerationSavedData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), RangeAccelerationSavedData::new, FILE_ID);
     }
 
     public boolean acquirePlacement(UUID owner, long gameTime) {
@@ -92,7 +92,7 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
                 .filter(field -> field.owner.equals(owner.getUUID()) && field.enabled)
                 .count();
         if (!samePosition.isEmpty()) {
-            Field existing = samePosition.getFirst();
+            Field existing = samePosition.get(0);
             if (!existing.enabled && activeCount >= MAX_ACTIVE_FIELDS_PER_OWNER) {
                 return new PlacementResult(PlacementStatus.LIMIT_REACHED, null);
             }
@@ -528,7 +528,8 @@ public final class RangeAccelerationSavedData extends net.minecraft.world.level.
         return Math.max(MIN_OFFSET, Math.min(MAX_OFFSET, value));
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) { return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()); }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         for (Field field : fields.values()) list.add(field.save());

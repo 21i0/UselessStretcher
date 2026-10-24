@@ -14,7 +14,7 @@ public final class TwoIStoryVoice {
     private long pulses;
 
     private static SoundEvent sound(String name) {
-        return SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("useless_stretcher", name));
+        return SoundEvent.createVariableRangeEvent(new ResourceLocation("useless_stretcher", name));
     }
 
     public void play(TwoIStoryTimeline.Cue cue, boolean enabled) {

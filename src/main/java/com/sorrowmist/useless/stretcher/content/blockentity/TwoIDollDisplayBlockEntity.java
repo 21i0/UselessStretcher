@@ -51,19 +51,21 @@ public final class TwoIDollDisplayBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        if (!doll.isEmpty()) tag.put("Doll", doll.save(registries));
+    protected void saveAdditional(CompoundTag tag) {
+        HolderLookup.Provider registries = level == null ? net.minecraft.core.RegistryAccess.EMPTY : level.registryAccess();
+        super.saveAdditional(tag);
+        if (!doll.isEmpty()) tag.put("Doll", com.sorrowmist.useless.compat.forge1201.nbt.NativeStackNbt.saveItem(doll, registries));
         tag.putBoolean("Spinning", spinning);
         tag.putFloat("SpinAngle", rotationOffset);
         tag.putLong("SpinStart", spinStartedAt);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    public void load(CompoundTag tag) {
+        HolderLookup.Provider registries = level == null ? net.minecraft.core.RegistryAccess.EMPTY : level.registryAccess();
+        super.load(tag);
         ItemStack restored = tag.contains("Doll")
-                ? ItemStack.parseOptional(registries, tag.getCompound("Doll")) : ItemStack.EMPTY;
+                ? com.sorrowmist.useless.compat.forge1201.nbt.NativeStackNbt.readItem(registries, tag.getCompound("Doll")) : ItemStack.EMPTY;
         doll = restored.is(ModItems.TWO_I_DOLL.get()) ? restored.copyWithCount(1) : ItemStack.EMPTY;
         spinning = tag.getBoolean("Spinning");
         float angle = tag.getFloat("SpinAngle");
@@ -72,8 +74,9 @@ public final class TwoIDollDisplayBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return saveWithoutMetadata(registries);
+    public CompoundTag getUpdateTag() {
+        HolderLookup.Provider registries = level == null ? net.minecraft.core.RegistryAccess.EMPTY : level.registryAccess();
+        return saveWithoutMetadata();
     }
 
     @Override

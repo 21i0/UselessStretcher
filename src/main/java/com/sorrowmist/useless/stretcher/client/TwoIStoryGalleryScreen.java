@@ -58,7 +58,7 @@ public final class TwoIStoryGalleryScreen extends Screen implements TwoIInteract
         if (hidden) setFocused(null);
     }
 
-    @Override public void renderBackground(GuiGraphics g, int x, int y, float partial) { }
+    @Override public void renderBackground(GuiGraphics g) { }
 
     @Override public void render(GuiGraphics g, int mouseX, int mouseY, float partial) {
         g.fill(0, 0, width, height, 0xFF182238);
@@ -93,7 +93,7 @@ public final class TwoIStoryGalleryScreen extends Screen implements TwoIInteract
         return super.mouseClicked(x, y, button);
     }
 
-    @Override public boolean mouseScrolled(double x, double y, double horizontal, double vertical) {
+    @Override public boolean mouseScrolled(double x, double y, double vertical) {
         if (vertical != 0) move(vertical > 0 ? -1 : 1);
         return true;
     }

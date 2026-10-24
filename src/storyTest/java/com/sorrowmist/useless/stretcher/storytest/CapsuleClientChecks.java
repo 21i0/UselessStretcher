@@ -14,7 +14,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.client.event.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
 /** Real integrated-server catalogue, map packets, gift bubble and cursor-following preview. */
@@ -31,8 +31,8 @@ public final class CapsuleClientChecks {
     private CapsuleClientChecks() { }
 
     static void start(Minecraft client) {
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(CapsuleClientChecks::tick);
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(CapsuleClientChecks::rendered);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(CapsuleClientChecks::tick);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(CapsuleClientChecks::rendered);
         client.getSingleplayerServer().execute(() -> {
             var player = client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.DIMENSION_CAPSULE.get()));
@@ -176,7 +176,7 @@ public final class CapsuleClientChecks {
             client.stop();
         }
     }
-    private static void rendered(net.neoforged.neoforge.client.event.RenderFrameEvent.Post event) {
+    private static void rendered(net.minecraftforge.client.event.RenderFrameEvent.Post event) {
         if (stage != 2) return;
         var client = Minecraft.getInstance();
         if (client.screen != capsule || client.getOverlay() != null) return;

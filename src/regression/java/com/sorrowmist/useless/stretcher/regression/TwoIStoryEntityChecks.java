@@ -7,7 +7,7 @@ import com.sorrowmist.useless.stretcher.content.entity.TwoIStorySession;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.Map;
 import java.util.UUID;

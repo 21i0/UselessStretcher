@@ -8,11 +8,11 @@ import com.sorrowmist.useless.stretcher.network.RangeNetwork;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 /** Sends range placement and label-gun-style filter-marking gestures from the client. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)

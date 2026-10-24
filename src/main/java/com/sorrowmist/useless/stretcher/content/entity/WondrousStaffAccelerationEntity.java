@@ -510,15 +510,15 @@ public class WondrousStaffAccelerationEntity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(SPEED, 2);
-        builder.define(REMAINING_TIME, WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
-        builder.define(MODE, MODE_BLOCK);
-        builder.define(IDLE_THROTTLE_DISABLED, false);
-        builder.define(IDLE_THROTTLED, false);
-        builder.define(ENTITY_AI_DISABLED, false);
-        builder.define(ENTITY_TIMER_MODE, false);
-        builder.define(TARGET_HEIGHT, 1.0F);
+    protected void defineSynchedData() {
+        this.entityData.define(SPEED, 2);
+        this.entityData.define(REMAINING_TIME, WondrousStaffAcceleration.DEFAULT_DURATION_TICKS);
+        this.entityData.define(MODE, MODE_BLOCK);
+        this.entityData.define(IDLE_THROTTLE_DISABLED, false);
+        this.entityData.define(IDLE_THROTTLED, false);
+        this.entityData.define(ENTITY_AI_DISABLED, false);
+        this.entityData.define(ENTITY_TIMER_MODE, false);
+        this.entityData.define(TARGET_HEIGHT, 1.0F);
     }
 
     @Override
@@ -558,7 +558,7 @@ public class WondrousStaffAccelerationEntity extends Entity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity serverEntity) {
-        return new ClientboundAddEntityPacket(this, serverEntity);
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return net.minecraftforge.network.NetworkHooks.getEntitySpawningPacket(this);
     }
 }

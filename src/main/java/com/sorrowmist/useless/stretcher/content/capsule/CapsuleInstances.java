@@ -24,8 +24,7 @@ public final class CapsuleInstances extends SavedData {
     final Map<String, Instance> rooms = new LinkedHashMap<>();
     private int nextSlot;
     public static CapsuleInstances get(MinecraftServer server) {
-        return server.overworld().getDataStorage().computeIfAbsent(new Factory<>(CapsuleInstances::new,
-                CapsuleInstances::load), "useless_stretcher_native_capsules");
+        return server.overworld().getDataStorage().computeIfAbsent(tag -> CapsuleInstances.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), CapsuleInstances::new, "useless_stretcher_native_capsules");
     }
     static String key(UUID owner, String structure, String dimension) { return key(owner, structure, dimension, 0); }
     static String key(UUID owner, String structure, String dimension, int instanceId) {
@@ -331,7 +330,11 @@ public final class CapsuleInstances extends SavedData {
             tag.putIntArray("bounds", new int[]{minX, minY, minZ, maxX, maxY, maxZ}); return tag;
         }
     }
-    @Override public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
         tag.putInt("next", nextSlot);
         ListTag entries = new ListTag(); rooms.values().forEach(room -> entries.add(room.save()));
         tag.put("rooms", entries); return tag;
@@ -377,13 +380,13 @@ public final class CapsuleInstances extends SavedData {
             room.bedrockCursor = Math.max(0L, e.getLong("bedrock_cursor"));
             room.cleanChunk = Math.max(0, e.getInt("clean_chunk"));
             room.cleanupVersion = Math.max(0, e.getInt("cleanup_version"));
-            room.progress = Math.clamp(e.getInt("progress"), 0, 99);
+            room.progress = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("progress"), 0, 99);
             room.trimChunk = Math.max(0, e.getInt("trim_chunk"));
-            room.trimPass = Math.clamp(e.getInt("trim_pass"), 0, 7);
+            room.trimPass = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("trim_pass"), 0, 7);
             room.bedrockChunk = Math.max(0, e.getInt("bedrock_chunk"));
-            room.mapCursor = Math.clamp(e.getInt("map_cursor"), 0, 4096); room.ready = e.getBoolean("ready");
+            room.mapCursor = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("map_cursor"), 0, 4096); room.ready = e.getBoolean("ready");
             room.completionNotified = e.contains("completion_notified") ? e.getBoolean("completion_notified") : room.ready;
-            room.previewCursor = Math.clamp(e.getInt("preview_cursor"), 0, 4096);
+            room.previewCursor = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("preview_cursor"), 0, 4096);
             room.afterPlaced = e.getBoolean("after_placed");
             room.terrainCleaned = e.getBoolean("terrain_cleaned");
             room.cleanupEntitiesRemoved = e.getBoolean("cleanup_entities_removed");

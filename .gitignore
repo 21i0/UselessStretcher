@@ -19,3 +19,13 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Local builds, verification captures and one-off migration artifacts
+output/
+verification/
+libs/
+__pycache__/
+*.pyc
+*.log
+hs_err_pid*
+*.cleanup-tmp

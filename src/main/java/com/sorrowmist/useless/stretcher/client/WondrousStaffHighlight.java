@@ -18,10 +18,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import org.joml.Matrix4f;
 
 import java.util.List;
@@ -226,9 +226,9 @@ public final class WondrousStaffHighlight {
     private static void addQuad(VertexConsumer vc, Matrix4f pose,
                                 Vec3 a, Vec3 b, Vec3 c, Vec3 d,
                                 float r, float g, float bl, float alpha) {
-        vc.addVertex(pose, (float) a.x, (float) a.y, (float) a.z).setColor(r, g, bl, alpha);
-        vc.addVertex(pose, (float) b.x, (float) b.y, (float) b.z).setColor(r, g, bl, alpha);
-        vc.addVertex(pose, (float) c.x, (float) c.y, (float) c.z).setColor(r, g, bl, alpha);
-        vc.addVertex(pose, (float) d.x, (float) d.y, (float) d.z).setColor(r, g, bl, alpha);
+        vc.vertex(pose, (float) a.x, (float) a.y, (float) a.z).color(r, g, bl, alpha).endVertex();
+        vc.vertex(pose, (float) b.x, (float) b.y, (float) b.z).color(r, g, bl, alpha).endVertex();
+        vc.vertex(pose, (float) c.x, (float) c.y, (float) c.z).color(r, g, bl, alpha).endVertex();
+        vc.vertex(pose, (float) d.x, (float) d.y, (float) d.z).color(r, g, bl, alpha).endVertex();
     }
 }

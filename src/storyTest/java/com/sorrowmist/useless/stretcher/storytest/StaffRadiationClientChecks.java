@@ -9,8 +9,8 @@ import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.client.event.ClientTickEvent;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,7 +21,7 @@ final class StaffRadiationClientChecks {
     private static CompletableFuture<Boolean> serverValue;
 
     static void start(Minecraft client) {
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(StaffRadiationClientChecks::tick);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(StaffRadiationClientChecks::tick);
         client.getSingleplayerServer().execute(() -> {
             var player = client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.WONDROUS_STAFF.get()));
@@ -59,7 +59,7 @@ final class StaffRadiationClientChecks {
             if (stage == 2 || stage == 4) {
                 serverValue = CompletableFuture.supplyAsync(() -> {
                     var player = client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
-                    return player.getMainHandItem().getOrDefault(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
+                    return com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(player.getMainHandItem(), StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
                 }, client.getSingleplayerServer());
                 stage++; return;
             }

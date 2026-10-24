@@ -9,8 +9,8 @@ import com.sorrowmist.useless.stretcher.content.item.DimensionCapsuleItem;
 import com.sorrowmist.useless.stretcher.content.item.UsefulArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredItem;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(UselessStretcherMod.MODID);

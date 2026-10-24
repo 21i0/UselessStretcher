@@ -3,9 +3,9 @@ package com.sorrowmist.useless.stretcher.event;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.TimeStopManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 /** Prevents frozen players from mutating blocks or entities during a time stop. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)

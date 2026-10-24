@@ -25,8 +25,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.Direction;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.tick.PlayerTickEvent;
 import java.util.UUID;
 
 final class TwoIFinalPolishChecks {
@@ -56,7 +56,7 @@ final class TwoIFinalPolishChecks {
         var player = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "TwoIPolish"));
         player.setPos(4,180,4); player.setShiftKeyDown(true);
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefTimeAccelerationEnabledComponent.get(), true);
         player.setItemInHand(InteractionHand.MAIN_HAND,staff);
         TwoIDollEntity doll = ModEntities.TWO_I_DOLL.get().create(level);
         doll.setPos(4,180,4); check(level.addFreshEntity(doll), "normal doll registration works");
@@ -91,12 +91,12 @@ final class TwoIFinalPolishChecks {
         level.setBlockAndUpdate(machine,Blocks.HOPPER.defaultBlockState());
         var ctx = new UseOnContext(player,InteractionHand.MAIN_HAND,
                 new BlockHitResult(Vec3.atCenterOf(machine),Direction.UP,machine,false));
-        staff.set(StretcherComponents.RANGE_PLACEMENT_MODE.get(),true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_PLACEMENT_MODE.get(),true);
         var item = (WondrousStaffItem)staff.getItem();
         check(WondrousStaffAcceleration.tryUse(ctx)==InteractionResult.FAIL
                 && item.onItemUseFirst(staff,ctx)==InteractionResult.FAIL && item.useOn(ctx)==InteractionResult.FAIL,
                 "placement blocks independent acceleration at all item entry points");
-        staff.set(StretcherComponents.RANGE_PLACEMENT_MODE.get(),false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.RANGE_PLACEMENT_MODE.get(),false);
         check(WondrousStaffAcceleration.tryUse(ctx).consumesAction(),"closing placement restores independent acceleration");
         for(Entity e: level.getAllEntities()) if(e instanceof WondrousStaffAccelerationEntity m
                 && machine.equals(m.getTargetPos())) m.discard();
@@ -146,15 +146,15 @@ final class TwoIFinalPolishChecks {
                 ItemStack stack=new ItemStack(ModItems.TWO_I_DOLL.get());
                 var base=TwoIDollMemory.empty();
                 var near=new TwoIDollMemory.Interaction(4,0,0,0,0,5900,-1,"",0);
-                stack.set(StretcherComponents.TWO_I_MEMORY.get(),new TwoIDollMemory(base.cooldowns(),near));
+                com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_MEMORY.get(),new TwoIDollMemory(base.cooldowns(),near));
                 player.setItemSlot(slot,stack);
             }
             TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
             TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
             for(EquipmentSlot slot:new EquipmentSlot[]{EquipmentSlot.MAINHAND,EquipmentSlot.OFFHAND,EquipmentSlot.HEAD}) {
                 ItemStack stack=player.getItemBySlot(slot);
-                var memory=stack.get(StretcherComponents.TWO_I_MEMORY.get());
-                var stored=data.progress(stack.get(StretcherComponents.TWO_I_DOLL_ID.get()),memory);
+                var memory=com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_MEMORY.get());
+                var stored=data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_DOLL_ID.get()),memory);
                 check(TwoIDollItem.getBond(stack)==1 && stored.ticks()==0,
                         "each held/head doll awards once per real sample");
                 ItemStack reloaded=ItemStack.parseOptional(level.registryAccess(),(CompoundTag)stack.save(level.registryAccess()));
@@ -164,11 +164,11 @@ final class TwoIFinalPolishChecks {
             check(TwoIDollItem.getBond(player.getMainHandItem())==1,"encoded relog memory cannot double-award");
             var entity=ModEntities.TWO_I_DOLL.get().create(level);
             var formStack=player.getMainHandItem().copy();
-            var formMemory=formStack.get(StretcherComponents.TWO_I_MEMORY.get());
-            formStack.set(StretcherComponents.TWO_I_BOND.get(),0);
+            var formMemory=com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(formStack, StretcherComponents.TWO_I_MEMORY.get());
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(formStack, StretcherComponents.TWO_I_BOND.get(),0);
             // Separate legacy fixture: first access imports the saved sample without overwriting existing progress.
-            formStack.set(StretcherComponents.TWO_I_DOLL_ID.get(), UUID.randomUUID());
-            formStack.set(StretcherComponents.TWO_I_MEMORY.get(),new TwoIDollMemory(formMemory.cooldowns(),
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(formStack, StretcherComponents.TWO_I_DOLL_ID.get(), UUID.randomUUID());
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(formStack, StretcherComponents.TWO_I_MEMORY.get(),new TwoIDollMemory(formMemory.cooldowns(),
                     new TwoIDollMemory.Interaction(4,0,0,0,0,5900,-1,"",0),96000));
             entity.restoreFromItem(formStack);
             entity.setOwnerId(player.getUUID()); entity.setPos(player.position());
@@ -188,8 +188,8 @@ final class TwoIFinalPolishChecks {
             player.setItemSlot(EquipmentSlot.HEAD,entity.toDollItem());
             TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
             ItemStack head=player.getItemBySlot(EquipmentSlot.HEAD);
-            check(data.progress(head.get(StretcherComponents.TWO_I_DOLL_ID.get()),
-                    head.get(StretcherComponents.TWO_I_MEMORY.get())).ticks()==0,
+            check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(head, StretcherComponents.TWO_I_DOLL_ID.get()),
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(head, StretcherComponents.TWO_I_MEMORY.get())).ticks()==0,
                     "entity to head cannot resample the same timer interval");
             } finally { index.remove(player.getUUID()); entity.discardForReclaim(); }
             for(int i=2;i<=121;i++) {
@@ -199,8 +199,8 @@ final class TwoIFinalPolishChecks {
             check(TwoIDollItem.getBond(player.getMainHandItem())==2,"companionship uses 6000 ticks and caps at two per day");
             level.getServer().getWorldData().overworldData().setGameTime(120000);
             TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
-            check(data.progress(player.getMainHandItem().get(StretcherComponents.TWO_I_DOLL_ID.get()),
-                    player.getMainHandItem().get(StretcherComponents.TWO_I_MEMORY.get())).ticks()==100,
+            check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(player.getMainHandItem(), StretcherComponents.TWO_I_DOLL_ID.get()),
+                    com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(player.getMainHandItem(), StretcherComponents.TWO_I_MEMORY.get())).ticks()==100,
                     "next day starts a new carried companionship cycle");
         } finally {
             level.getServer().getWorldData().overworldData().setGameTime(oldTime);

@@ -18,16 +18,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Method;
 
 /** Loads the actual optional capture classes so optional mixins are exercised, not just compiled. */
 final class TwoIExternalCaptureChecks {
     private static final TagKey<EntityType<?>> ARS_JAR = TagKey.create(Registries.ENTITY_TYPE,
-            ResourceLocation.fromNamespaceAndPath("ars_nouveau", "jar_blacklist"));
+            new ResourceLocation("ars_nouveau", "jar_blacklist"));
     private static final TagKey<EntityType<?>> PB_AMBER = TagKey.create(Registries.ENTITY_TYPE,
-            ResourceLocation.fromNamespaceAndPath("productivebees", "bee_encase_blacklist"));
+            new ResourceLocation("productivebees", "bee_encase_blacklist"));
 
     private TwoIExternalCaptureChecks() { }
 
@@ -42,7 +42,7 @@ final class TwoIExternalCaptureChecks {
             check(doll != null && !(Boolean) canJar.invoke(capture, doll),
                     "Ars Nouveau ritual refuses 2i before jar serialization");
             Class<?> jarType = Class.forName("com.hollingsworth.arsnouveau.common.block.tile.MobJarTile");
-            Block jarBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("ars_nouveau:mob_jar"));
+            Block jarBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation("ars_nouveau:mob_jar"));
             var pos = new BlockPos(8, 180, 8);
             var jar = (BlockEntity) jarType.getConstructor(BlockPos.class, BlockState.class)
                     .newInstance(pos, jarBlock.defaultBlockState());
@@ -80,7 +80,7 @@ final class TwoIExternalCaptureChecks {
                 Method decode = amber.getMethod("createEntity", Level.class, net.minecraft.nbt.CompoundTag.class);
                 check(decode.invoke(null, level, tag) == null,
                         "amber release refuses legacy serialized 2i data");
-                Block amberBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("productivebees:amber"));
+                Block amberBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation("productivebees:amber"));
                 Object container = amber.getConstructor(BlockPos.class, BlockState.class)
                         .newInstance(pos, amberBlock.defaultBlockState());
                 amber.getMethod("setEntity", Mob.class).invoke(container, doll);

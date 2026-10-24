@@ -1,0 +1,28 @@
+name: Forge 1.20.1 build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: UselessStretcher
+      - name: Checkout matching UselessMod port
+        uses: actions/checkout@v4
+        with:
+          repository: AyaYumi/UselessMod
+          ref: 88bded31e1b722f407cbfbaa4686738d14af31e9
+          path: UselessMod
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build UselessMod development jar
+        working-directory: UselessMod
+        run: chmod +x gradlew && ./gradlew jar --console=plain
+      - name: Build and test Stretcher
+        working-directory: UselessStretcher
+        run: chmod +x gradlew && ./gradlew build --console=plain

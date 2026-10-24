@@ -42,7 +42,7 @@ final class ForcedKillClientChecks {
                         // The sword's real area attack also includes the connected test player.
                         // Its own documented inventory exemption keeps that control player alive.
                         var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
-                        var sword=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.ResourceLocation.parse("forever_love_sword:forever_love_sword"));
+                        var sword=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.new ResourceLocation("forever_love_sword:forever_love_sword"));
                         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new net.minecraft.world.item.ItemStack(sword));
                         // Reflection keeps the ordinary story source set independent of regression sources.
                         Class.forName("com.sorrowmist.useless.stretcher.regression.TwoIForcedKillChecks")

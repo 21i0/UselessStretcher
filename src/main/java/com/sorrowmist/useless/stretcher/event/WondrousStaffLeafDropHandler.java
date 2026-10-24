@@ -9,7 +9,7 @@ import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.api.enums.tool.EnchantMode;
 import com.sorrowmist.useless.api.enums.tool.ToolTypeMode;
 import com.sorrowmist.useless.core.component.UComponents;
-import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -17,21 +17,18 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
-import net.neoforged.neoforge.event.level.BlockDropsEvent;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,19 +38,17 @@ import java.util.UUID;
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
 public final class WondrousStaffLeafDropHandler {
     private static final ResourceLocation ADVANCEMENT_ID =
-            ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "staff_leaf_drop");
+            new ResourceLocation(UselessStretcherMod.MODID, "staff_leaf_drop");
     private static final String ADVANCEMENT_CRITERION = "main";
     private static final Map<UUID, Map<Boolean, UUID>> VISIBLE_REWARDS = new HashMap<>();
 
     private WondrousStaffLeafDropHandler() {
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onBlockDrops(BlockDropsEvent event) {
-        if (event.isCanceled()
-                || !(event.getBreaker() instanceof ServerPlayer player)
+    public static void onBlockDestroyed(net.minecraft.world.level.Level level, Entity breaker, BlockState state) {
+        if (!(breaker instanceof ServerPlayer player)
                 || player.isCreative() || player.isSpectator() || !player.isAlive() || player.isRemoved()
-                || !isLeafBlock(event.getState())) return;
+                || !isLeafBlock(state)) return;
 
         boolean staffEnabled = StretcherConfig.enableStaffLeafDrop();
         boolean dollEnabled = StretcherConfig.enableDollLeafDrop();
@@ -63,13 +58,13 @@ public final class WondrousStaffLeafDropHandler {
         UUID playerId = player.getUUID();
         boolean awarded = false;
         if (staffEnabled && !data.hasRolledStaff(playerId)
-                && event.getLevel().getRandom().nextDouble() < StretcherConfig.staffLeafDropProbability()
+                && level.getRandom().nextDouble() < StretcherConfig.staffLeafDropProbability()
                 && data.beginStaffDelivery(playerId)) {
             awardAdvancement(player);
             awarded = true;
         }
         if (dollEnabled && !data.hasRolledDoll(playerId)
-                && event.getLevel().getRandom().nextDouble() < StretcherConfig.dollLeafDropProbability()
+                && level.getRandom().nextDouble() < StretcherConfig.dollLeafDropProbability()
                 && data.beginDollDelivery(playerId)) {
             awarded = true;
         }
@@ -93,7 +88,8 @@ public final class WondrousStaffLeafDropHandler {
     }
 
     @SubscribeEvent
-    public static void onServerTick(ServerTickEvent.Post event) {
+    public static void onServerTick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         MinecraftServer server = event.getServer();
         StaffLeafDropData data = StaffLeafDropData.get(server);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
@@ -158,7 +154,7 @@ public final class WondrousStaffLeafDropHandler {
             changed = true;
         }
         ItemStack doll = new ItemStack(ModItems.TWO_I_DOLL.get());
-        doll.set(com.sorrowmist.useless.stretcher.init.StretcherComponents.TWO_I_OWNER.get(), id);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(doll, com.sorrowmist.useless.stretcher.init.StretcherComponents.TWO_I_OWNER.get(), id);
         com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.ensureIdentity(doll);
         ItemStack acquiredDoll = doll.copy();
         if (data.hasPendingDoll(id) && tryInsert(player, doll)) {
@@ -187,25 +183,20 @@ public final class WondrousStaffLeafDropHandler {
     /** Builds the same fully initialized precise-mode tool as a newly obtained base staff. */
     private static ItemStack createLeafStaff(ServerPlayer player) {
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        staff.set(UComponents.EnchantModeComponent.get(), EnchantMode.SILK_TOUCH);
-        staff.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(1));
-        var registry = player.level().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
-        var silk = registry.getHolderOrThrow(Enchantments.SILK_TOUCH);
-        var fortune = registry.getHolderOrThrow(Enchantments.FORTUNE);
-        EnchantmentHelper.updateEnchantments(staff, enchantments -> {
-            enchantments.set(silk, 1);
-            enchantments.set(fortune, 0);
-        });
-        staff.set(UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
-        staff.set(UComponents.BeefCaptureEnabledComponent.get(), false);
-        staff.set(UComponents.BeefInvulnerabilityEnabledComponent.get(), true);
-        staff.remove(UComponents.EnhancedChainMiningComponent.get());
-        staff.remove(UComponents.ForceMiningComponent.get());
-        staff.remove(UComponents.ForceKillEnabledComponent.get());
-        staff.set(StretcherComponents.WONDROUS_STAFF_MODE.get(), 0);
-        staff.set(StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false);
-        staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
-        staff.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.EnchantModeComponent.get(), EnchantMode.SILK_TOUCH);
+        staff.getOrCreateTag().putInt("CustomModelData", 1);
+        staff.enchant(Enchantments.SILK_TOUCH, 1);
+        staff.enchant(Enchantments.BLOCK_FORTUNE, 10);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.CurrentToolTypeComponent.get(), ToolTypeMode.NONE_MODE);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefCaptureEnabledComponent.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.BeefInvulnerabilityEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.remove(staff, UComponents.EnhancedChainMiningComponent.get());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.remove(staff, UComponents.ForceMiningComponent.get());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.remove(staff, UComponents.ForceKillEnabledComponent.get());
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_MODE.get(), 0);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PERMANENT.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), false);
         return staff;
     }
 
@@ -254,7 +245,7 @@ public final class WondrousStaffLeafDropHandler {
     }
 
     private static void awardAdvancement(ServerPlayer player) {
-        AdvancementHolder advancement = player.getServer().getAdvancements().get(ADVANCEMENT_ID);
+        Advancement advancement = player.getServer().getAdvancements().getAdvancement(ADVANCEMENT_ID);
         if (advancement != null) {
             player.getAdvancements().award(advancement, ADVANCEMENT_CRITERION);
         }

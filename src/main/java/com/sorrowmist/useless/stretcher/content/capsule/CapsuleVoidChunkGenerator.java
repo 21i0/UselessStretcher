@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
 
 /** Empty physical storage; only explicit native capsule callbacks may place blocks. */
 public final class CapsuleVoidChunkGenerator extends ChunkGenerator {
-    public static final MapCodec<CapsuleVoidChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+    public static final Codec<CapsuleVoidChunkGenerator> CODEC = RecordCodecBuilder.create(i -> i.group(
             BiomeSource.CODEC.fieldOf("biome_source").forGetter(g -> g.biomeSource),
             Codec.INT.fieldOf("min_y").forGetter(g -> g.minY),
             Codec.INT.fieldOf("height").forGetter(g -> g.height),
@@ -48,7 +48,7 @@ public final class CapsuleVoidChunkGenerator extends ChunkGenerator {
         this.minY = minY; this.height = height; this.seaLevel = seaLevel;
     }
     void bindSource(ServerLevel source) { this.source = source; }
-    @Override protected MapCodec<? extends ChunkGenerator> codec() { return CODEC; }
+    @Override protected Codec<? extends ChunkGenerator> codec() { return CODEC; }
     @Override public int getGenDepth() { return height; }
     @Override public int getMinY() { return minY; }
     @Override public int getSeaLevel() { return seaLevel; }
@@ -57,11 +57,11 @@ public final class CapsuleVoidChunkGenerator extends ChunkGenerator {
         return source == null ? super.getMobsAt(biome, structures, category, pos)
                 : source.getChunkSource().getGenerator().getMobsAt(biome, structures, category, pos);
     }
-    @Override public CompletableFuture<ChunkAccess> createBiomes(RandomState state, Blender blender,
+    @Override public CompletableFuture<ChunkAccess> createBiomes(java.util.concurrent.Executor executor, RandomState state, Blender blender,
             StructureManager structures, ChunkAccess chunk) {
-        return super.createBiomes(source == null ? state : source.getChunkSource().randomState(), blender, structures, chunk);
+        return super.createBiomes(executor, source == null ? state : source.getChunkSource().randomState(), blender, structures, chunk);
     }
-    @Override public CompletableFuture<ChunkAccess> fillFromNoise(Blender blender, RandomState state,
+    @Override public CompletableFuture<ChunkAccess> fillFromNoise(java.util.concurrent.Executor executor, Blender blender, RandomState state,
             StructureManager structures, ChunkAccess chunk) { return CompletableFuture.completedFuture(chunk); }
     @Override public void createStructures(RegistryAccess access, ChunkGeneratorStructureState state,
             StructureManager structures, ChunkAccess chunk, StructureTemplateManager templates) { }

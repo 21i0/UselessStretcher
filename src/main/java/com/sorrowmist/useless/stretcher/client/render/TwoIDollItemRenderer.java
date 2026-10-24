@@ -78,7 +78,7 @@ public final class TwoIDollItemRenderer extends BlockEntityWithoutLevelRenderer 
         poseStack.scale(TwoIDollRenderer.RENDER_SCALE, -TwoIDollRenderer.RENDER_SCALE, -TwoIDollRenderer.RENDER_SCALE);
         var vertices = ItemRenderer.getFoilBufferDirect(buffer,
                 RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink())), false, stack.hasFoil());
-        model.renderToBuffer(poseStack, vertices, light, overlay);
+        model.renderToBuffer(poseStack, vertices, light, overlay, 1, 1, 1, 1);
         model.renderAccessories(poseStack, buffer, light, overlay);
         poseStack.popPose();
     }

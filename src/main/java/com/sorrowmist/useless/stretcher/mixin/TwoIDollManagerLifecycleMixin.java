@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 /** Visibility changes must still stop tracking/ticking without destructive removal. */
 @Mixin(PersistentEntitySectionManager.class)
 public abstract class TwoIDollManagerLifecycleMixin {
-    @WrapMethod(method = {"stopTicking", "stopTracking"})
+    @WrapMethod(method = {"stopTicking", "stopTracking"}, require = 2)
     private void vanillaVisibilityTransition(EntityAccess entity, Operation<Void> original) {
         if (entity instanceof TwoIDollEntity doll) {
             try (var scope = TwoILifecycleGuard.allow(doll)) { original.call(entity); }

@@ -21,7 +21,7 @@ public final class StaffLeafDropData extends SavedData {
 
     public static StaffLeafDropData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                new Factory<>(StaffLeafDropData::new, StaffLeafDropData::load), NAME);
+                tag -> StaffLeafDropData.load(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess()), StaffLeafDropData::new, NAME);
     }
 
     public boolean hasRolledStaff(UUID playerId) {
@@ -72,7 +72,10 @@ public final class StaffLeafDropData extends SavedData {
         if (dollRolled.contains(playerId) && dollClaimed.add(playerId)) setDirty();
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         tag.put("staff_rolled_players", saveUuidSet(staffRolled));
         tag.put("staff_claimed_players", saveUuidSet(staffClaimed));

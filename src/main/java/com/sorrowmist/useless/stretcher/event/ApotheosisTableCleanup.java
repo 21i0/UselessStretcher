@@ -6,10 +6,10 @@ import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisTableData;
 import com.sorrowmist.useless.stretcher.network.ApotheosisNetwork;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.level.BlockEvent;
 
 /** Clears saved enchanting-table bindings when a player breaks the table. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)

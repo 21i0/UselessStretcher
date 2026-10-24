@@ -18,8 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.entity.EntityTickList;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import java.util.UUID;
 
 /** Real optional weapon entrypoints plus equivalent generic destructive API chains. */
@@ -40,7 +40,7 @@ public final class TwoIForcedKillChecks {
             if(ModList.get().isLoaded("forever_love_sword")) {
                 var util=Class.forName("net.wzz.forever_love_sword.util.ForeverUtil");
                 var kill=util.getMethod("killEntity",Entity.class,boolean.class);
-                var sword=BuiltInRegistries.ITEM.get(ResourceLocation.parse("forever_love_sword:forever_love_sword"));
+                var sword=BuiltInRegistries.ITEM.get(new ResourceLocation("forever_love_sword:forever_love_sword"));
                 check(sword.getClass().getName().equals("net.wzz.forever_love_sword.item.ForeverLoveSwordItem"),"actual registered sword");
                 var stack=new ItemStack(sword);attacker.setItemInHand(InteractionHand.MAIN_HAND,stack);
                 for(boolean direct:new boolean[]{true,false,true}) {

@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +39,7 @@ public final class OmniversalMyriadBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip,
+    public void appendHoverText(ItemStack stack, net.minecraft.world.level.BlockGetter context, List<Component> tooltip,
                                 TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.useless_stretcher.omniversal_myriad.flavor")
                 .withStyle(ChatFormatting.GOLD));
@@ -59,15 +59,15 @@ public final class OmniversalMyriadBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof OmniversalMyriadBlockEntity be) {
             if (!level.isClientSide) {
-                player.openMenu(be, buffer -> buffer.writeBlockPos(pos));
+                net.minecraftforge.network.NetworkHooks.openScreen((net.minecraft.server.level.ServerPlayer) player, be, pos);
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -80,16 +80,16 @@ public final class OmniversalMyriadBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(net.minecraft.world.level.BlockGetter level, BlockPos pos, BlockState state) {
         ItemStack stack = new ItemStack(this);
         if (level.getBlockEntity(pos) instanceof OmniversalMyriadBlockEntity be) {
-            be.saveToItem(stack, level.registryAccess());
+            be.saveToItem(stack, be.getLevel() == null ? net.minecraft.core.RegistryAccess.EMPTY : be.getLevel().registryAccess());
         }
         return stack;
     }
 
     @Override
-    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         ItemStack drop = new ItemStack(this);
         if (builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof OmniversalMyriadBlockEntity block) {
             block.saveToItem(drop, builder.getLevel().registryAccess());

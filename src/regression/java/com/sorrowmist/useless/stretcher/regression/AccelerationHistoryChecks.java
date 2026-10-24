@@ -37,13 +37,13 @@ final class AccelerationHistoryChecks {
         for (int i = 0; i < 50; i++) history.track(level, marker);
         check(broken.nameCalls == 1, "broken addon display name is probed once, not every tick");
         check(history.activeEntries(owner).size() == 1, "broken name does not disable permanent history");
-        check(history.activeEntries(owner).getFirst().label().startsWith(Blocks.HOPPER.getName().getString()),
+        check(history.activeEntries(owner).get(0).label().startsWith(Blocks.HOPPER.getName().getString()),
                 "broken name falls back to the block name");
         var chest = (ChestBlockEntity) level.getBlockEntity(pos.below());
         check(!chest.isEmpty(), "machine still ticks after display-name exception");
         marker.setSpeed(16);
         history.track(level, marker);
-        check(history.activeEntries(owner).getFirst().label().contains("x16"), "history speed remains current");
+        check(history.activeEntries(owner).get(0).label().contains("x16"), "history speed remains current");
 
         // A new target instance must not inherit the old instance's failed name probe.
         var replacement = new NamedHopper(pos);
@@ -51,11 +51,11 @@ final class AccelerationHistoryChecks {
         level.removeBlockEntity(pos);
         level.setBlockEntity(replacement);
         history.track(level, marker);
-        check(history.activeEntries(owner).getFirst().label().startsWith("Renamed machine"),
+        check(history.activeEntries(owner).get(0).label().startsWith("Renamed machine"),
                 "replacement target and custom names stay supported");
         replacement.displayName = Component.literal("Updated name");
         history.track(level, marker);
-        check(history.activeEntries(owner).getFirst().label().startsWith("Updated name"), "custom rename updates");
+        check(history.activeEntries(owner).get(0).label().startsWith("Updated name"), "custom rename updates");
         check(!history.reclaim(level.getServer(), marker.getUUID(), UUID.randomUUID()), "wrong owner rejected");
         check(history.reclaim(level.getServer(), marker.getUUID(), owner), "remote reclaim remains functional");
         check(marker.isRemoved(), "reclaim removes loaded marker");

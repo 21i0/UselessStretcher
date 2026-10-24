@@ -24,9 +24,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ final class ReclaimerInteractionChecks {
             player.setShiftKeyDown(true);
             check(tool.use(level, player, InteractionHand.MAIN_HAND).getResult() == InteractionResult.SUCCESS,
                     "Shift + item-use opens UI when pointing at air");
-            check(packets.size() == 1 && !packets.getFirst().personal(), "air use sends exactly one management screen payload");
+            check(packets.size() == 1 && !packets.get(0).personal(), "air use sends exactly one management screen payload");
             player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             player.setItemInHand(InteractionHand.OFF_HAND, tool);
             tool.use(level, player, InteractionHand.OFF_HAND);
@@ -74,7 +74,7 @@ final class ReclaimerInteractionChecks {
                     new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false));
             blockClick.setCanceled(true);
             blockClick.setCancellationResult(InteractionResult.FAIL);
-            NeoForge.EVENT_BUS.post(blockClick);
+            MinecraftForge.EVENT_BUS.post(blockClick);
             check(blockClick.isCanceled() && blockClick.getCancellationResult() == InteractionResult.SUCCESS
                     && packets.size() == 3, "targeted block click opens same UI and consumes machine use");
 
@@ -85,11 +85,11 @@ final class ReclaimerInteractionChecks {
             var marker = (TimeFlowEntity) level.getEntity(rangeId);
             check(marker != null, "time-flow target exists");
             var specific = new PlayerInteractEvent.EntityInteractSpecific(player, InteractionHand.MAIN_HAND, marker, Vec3.ZERO);
-            NeoForge.EVENT_BUS.post(specific);
+            MinecraftForge.EVENT_BUS.post(specific);
             check(specific.isCanceled() && specific.getCancellationResult() == InteractionResult.SUCCESS
                     && packets.size() == 4, "specific entity click opens UI only once");
             var general = new PlayerInteractEvent.EntityInteract(player, InteractionHand.MAIN_HAND, marker);
-            NeoForge.EVENT_BUS.post(general);
+            MinecraftForge.EVENT_BUS.post(general);
             check(general.isCanceled() && general.getCancellationResult() == InteractionResult.SUCCESS
                     && packets.size() == 5, "general entity interaction also opens UI");
             check(packets.getLast().entries().stream().anyMatch(entry -> entry.id().equals(marker.getUUID())),
@@ -97,7 +97,7 @@ final class ReclaimerInteractionChecks {
             check(!marker.isRemoved() && ranges.getField(rangeId) != null, "opening UI never deletes target range");
             player.setShiftKeyDown(false);
             var plain = new PlayerInteractEvent.EntityInteract(player, InteractionHand.MAIN_HAND, marker);
-            NeoForge.EVENT_BUS.post(plain);
+            MinecraftForge.EVENT_BUS.post(plain);
             check(!plain.isCanceled() && marker.interact(player, InteractionHand.MAIN_HAND) == InteractionResult.PASS
                     && !marker.isRemoved() && packets.size() == 5, "old direct-reclaim interaction is removed");
 
@@ -108,7 +108,7 @@ final class ReclaimerInteractionChecks {
             check(ranges.getField(rangeId) != null, "disabled tool cannot reclaim");
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
             var other = new PlayerInteractEvent.EntityInteract(player, InteractionHand.MAIN_HAND, marker);
-            NeoForge.EVENT_BUS.post(other);
+            MinecraftForge.EVENT_BUS.post(other);
             check(!other.isCanceled() && packets.size() == 5, "unrelated items remain untouched");
             LogUtils.getLogger().info("REGRESSION reclaimer: main/offhand air, block, entity, packet delivery, no direct deletion and disabled-config feedback passed");
         } finally {

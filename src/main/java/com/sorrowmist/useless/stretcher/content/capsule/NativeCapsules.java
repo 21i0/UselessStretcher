@@ -23,10 +23,10 @@ import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStruct
 import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
 import net.minecraft.world.level.levelgen.structure.pieces.PiecesContainer;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -92,9 +92,9 @@ public final class NativeCapsules {
         request(player, id, dimension, action, side, 0);
     }
     public static void request(ServerPlayer player, String id, String dimension, int action, int side, int instanceId) {
-        Structure structure = player.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(id));
+        Structure structure = player.level().registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(id));
         if (structure == null) return;
-        ServerLevel level = player.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dimension)));
+        ServerLevel level = player.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimension)));
         if (level == null) return;
         CapsuleInstances data = CapsuleInstances.get(player.getServer());
         CapsuleInstances.Instance existing = data.rooms.get(CapsuleInstances.key(player.getUUID(), id, dimension, instanceId));
@@ -198,7 +198,8 @@ public final class NativeCapsules {
                 room.x(), room.z(), state, progress, room.pixels, sx, sy, sz);
     }
 
-    @SubscribeEvent public static void tick(ServerTickEvent.Post event) {
+    @SubscribeEvent public static void tick(ServerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         ENTRIES.values().removeIf(PendingEntry::tick);
         resumeNext(event.getServer());
         Job job = JOBS.poll();
@@ -242,7 +243,7 @@ public final class NativeCapsules {
         ENTRIES.values().forEach(PendingEntry::release); ENTRIES.clear();
     }
 
-    @SubscribeEvent public static void started(net.neoforged.neoforge.event.server.ServerStartedEvent event) {
+    @SubscribeEvent public static void started(net.minecraftforge.event.server.ServerStartedEvent event) {
         RESUMING.clear();
         for (var room : CapsuleInstances.get(event.getServer()).rooms.values())
             if (room.generating && !room.ready && room.error.isEmpty()) RESUMING.add(room);
@@ -257,9 +258,9 @@ public final class NativeCapsules {
         if (JOBS.stream().anyMatch(job -> job.room.owner.equals(room.owner))) {
             RESUMING.addLast(room); return;
         }
-        var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.dimension)));
-        var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.sourceDimension)));
-        var structure = server.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(room.structure));
+        var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(room.dimension)));
+        var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(room.sourceDimension)));
+        var structure = server.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(room.structure));
         var data = CapsuleInstances.get(server);
         try {
             if (target == null || source == null || source.getSeed() != room.sourceSeed || structure == null)
@@ -276,7 +277,7 @@ public final class NativeCapsules {
 
     private static void notifyReady(CapsuleInstances data, CapsuleInstances.Instance room) {
         if (room.completionNotified || !room.ready) return;
-        var server = net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer();
+        var server = net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer();
         var player = server == null ? null : server.getPlayerList().getPlayer(room.owner);
         if (player == null) return; // Persist pending notification for the next login.
         notifyReady(data, room, player);
@@ -290,7 +291,7 @@ public final class NativeCapsules {
         sendState(player, room, null);
     }
 
-    @SubscribeEvent public static void login(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+    @SubscribeEvent public static void login(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         var data = CapsuleInstances.get(player.getServer());
         for (var room : data.rooms.values()) if (room.owner.equals(player.getUUID())) notifyReady(data, room, player);
@@ -404,7 +405,7 @@ public final class NativeCapsules {
             return percent(25, 40, room.chunk + pieceFraction, chunkCount);
         }
         private static int percent(int base, int weight, double done, long total) {
-            return base + (int) (weight * Math.clamp(done / Math.max(1L, total), 0D, 1D));
+            return base + (int) (weight * com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(done / Math.max(1L, total), 0D, 1D));
         }
         void describe() {
             bounds = placementEnvelope();
@@ -461,7 +462,7 @@ public final class NativeCapsules {
                 if (offset >= 1024) throw new IllegalStateException("No matching biome/generation point in the reserved region");
                 if (placements == null) {
                     var holder = sourceLevel.registryAccess().registryOrThrow(Registries.STRUCTURE)
-                            .getHolderOrThrow(ResourceKey.create(Registries.STRUCTURE, ResourceLocation.parse(room.structure)));
+                            .getHolderOrThrow(ResourceKey.create(Registries.STRUCTURE, new ResourceLocation(room.structure)));
                     placements = List.copyOf(sourceLevel.getChunkSource().getGeneratorState().getPlacementsForStructure(holder));
                 }
                 if (!PLANNER_BUSY.compareAndSet(false, true)) return false;
@@ -709,7 +710,7 @@ public final class NativeCapsules {
         }
         boolean ready(ChunkPos center, boolean neighbors) {
             int radius = neighbors ? 2 : 0;
-            if (tickets.isEmpty() || !tickets.getFirst().equals(center) || ticketRadius != radius) {
+            if (tickets.isEmpty() || !tickets.get(0).equals(center) || ticketRadius != radius) {
                 releaseCurrent(); tickets.add(center);
                 ticketRadius = radius;
                 level.getChunkSource().addRegionTicket(TICKET, center, radius, center);
@@ -762,7 +763,7 @@ public final class NativeCapsules {
                 while (room.piece < pieces.size() && !pieces.get(room.piece).getBoundingBox().intersects(clip)) room.piece++;
                 RandomSource random = RandomSource.create(generationSeed() ^ chunk.toLong() ^ room.piece);
                 if (room.piece < pieces.size()) {
-                    var first = pieces.getFirst().getBoundingBox();
+                    var first = pieces.get(0).getBoundingBox();
                     long began = System.nanoTime();
                     try (var context = new CapsuleGenerationContext(level, sourceLevel, room,
                             pieces.get(room.piece) instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)) {
@@ -1188,7 +1189,7 @@ public final class NativeCapsules {
             case 3 -> x = room.minX - 3;
         }
         // Use a small separately loaded entrance so arriving cannot collide with a chest or machine.
-        int y = Math.clamp(room.minY + 1, level.getMinBuildHeight() + 2, level.getMaxBuildHeight() - 4);
+        int y = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(room.minY + 1, level.getMinBuildHeight() + 2, level.getMaxBuildHeight() - 4);
             entrance = new BlockPos(x, y, z); chunk = new ChunkPos(entrance);
             level.getChunkSource().addRegionTicket(ENTRY_TICKET, chunk, 2, chunk);
         }

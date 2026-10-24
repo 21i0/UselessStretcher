@@ -6,7 +6,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -121,7 +121,7 @@ public final class DimensionCapsuleChecks {
         check(hint("example:weekend_room").equals(DimensionCapsuleCatalog.CAPSULE_OVERWORLD), "no substring end false positive");
     }
 
-    private static String hint(String id) { return DimensionCapsuleCatalog.dimensionHint(ResourceLocation.parse(id)); }
+    private static String hint(String id) { return DimensionCapsuleCatalog.dimensionHint(new ResourceLocation(id)); }
 
     private static void savedRooms(ServerLevel level) {
         var data = new DimensionCapsuleData();
@@ -152,7 +152,7 @@ public final class DimensionCapsuleChecks {
             List<String> entries = new ArrayList<>();
             for (int i = 0; i < 128; i++) entries.add("example|structure_" + (page * 128 + i) + "|32,3,32|" + DimensionCapsuleCatalog.CAPSULE_OVERWORLD);
             var payload = new Network.DimensionCapsuleCatalogPayload(entries, true, page, 16);
-            var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+            var buf = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
             try {
                 Network.DimensionCapsuleCatalogPayload.STREAM_CODEC.encode(buf, payload);
                 check(buf.readableBytes() < 32_768, "catalogue page stays small");

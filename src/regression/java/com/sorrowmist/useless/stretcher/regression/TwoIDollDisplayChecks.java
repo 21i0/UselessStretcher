@@ -20,15 +20,15 @@ public final class TwoIDollDisplayChecks {
         var state = ModBlocks.TWO_I_DOLL_DISPLAY.get().defaultBlockState();
         var display = new TwoIDollDisplayBlockEntity(BlockPos.ZERO, state);
         ItemStack original = new ItemStack(ModItems.TWO_I_DOLL.get());
-        original.set(StretcherComponents.TWO_I_BOND.get(), -87);
-        original.set(StretcherComponents.TWO_I_INVITATION_USED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), -87);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
         original.set(DataComponents.CUSTOM_NAME, Component.literal("2i regression skin companion"));
         original.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
         display.setDoll(original);
         check(ItemStack.isSameItemSameComponents(original, display.copyDoll()), "stored full stack");
         ItemStack copy = display.copyDoll();
-        copy.set(StretcherComponents.TWO_I_BOND.get(), 100);
-        check(display.copyDoll().getOrDefault(StretcherComponents.TWO_I_BOND.get(), 0) == -87,
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(copy, StretcherComponents.TWO_I_BOND.get(), 100);
+        check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(display.copyDoll(), StretcherComponents.TWO_I_BOND.get(), 0) == -87,
                 "returned copy cannot mutate storage");
         var restored = BlockEntity.loadStatic(BlockPos.ZERO, state,
                 display.saveWithFullMetadata(level.registryAccess()), level.registryAccess());
@@ -57,9 +57,9 @@ public final class TwoIDollDisplayChecks {
     }
 
     private static void checkOwnerInteractions(ServerLevel level, net.minecraft.world.level.block.state.BlockState state) throws Exception {
-        var owner = net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,
+        var owner = net.minecraftforge.common.util.FakePlayerFactory.get(level,
                 new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "TwoIDisplayOwner"));
-        var guest = net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,
+        var guest = net.minecraftforge.common.util.FakePlayerFactory.get(level,
                 new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "TwoIDisplayGuest"));
         BlockPos pos = new BlockPos(54, 180, 54);
         var old = level.getBlockState(pos);
@@ -71,7 +71,7 @@ public final class TwoIDollDisplayChecks {
             ItemStack legacy = new ItemStack(ModItems.TWO_I_DOLL.get());
             block.setPlacedBy(level, pos, state, owner, legacy);
             var display = (TwoIDollDisplayBlockEntity)level.getBlockEntity(pos);
-            check(owner.getUUID().equals(display.copyDoll().get(StretcherComponents.TWO_I_OWNER.get())),
+            check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(display.copyDoll(), StretcherComponents.TWO_I_OWNER.get())),
                     "placing a legacy doll records the placer as owner");
             var use = block.getClass().getDeclaredMethod("useWithoutItem", net.minecraft.world.level.block.state.BlockState.class,
                     net.minecraft.world.level.Level.class, BlockPos.class, net.minecraft.world.entity.player.Player.class,
@@ -87,7 +87,7 @@ public final class TwoIDollDisplayChecks {
             guest.setShiftKeyDown(false);
             use.invoke(block, state, level, pos, owner, hit);
             check(display.isSpinning(), "owner may still rotate their display");
-            check(owner.getUUID().equals(block.getCloneItemStack(level, pos, state).get(StretcherComponents.TWO_I_OWNER.get())),
+            check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(block.getCloneItemStack(level, pos, state), StretcherComponents.TWO_I_OWNER.get())),
                     "display pick keeps ownership");
             com.mojang.logging.LogUtils.getLogger().info("REGRESSION 2i display ownership: real placement, stranger rotate/pickup denial, owner rotation and pick component PASSED");
         } finally {

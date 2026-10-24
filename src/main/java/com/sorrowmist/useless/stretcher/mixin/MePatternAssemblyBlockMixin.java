@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 /** Keeps the assembly's 4096-slot inventory out of ItemEntity synchronization packets. */
-@Mixin(MePatternAssemblyBlock.class)
+@Mixin(value = MePatternAssemblyBlock.class, remap = false)
 public abstract class MePatternAssemblyBlockMixin {
     @Inject(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/storage/loot/LootParams$Builder;)Ljava/util/List;",
             at = @At("RETURN"))

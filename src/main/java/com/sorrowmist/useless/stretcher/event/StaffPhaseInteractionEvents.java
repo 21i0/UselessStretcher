@@ -2,9 +2,9 @@ package com.sorrowmist.useless.stretcher.event;
 
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.entity.StaffPhaseManager;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 /** The second phase switch deliberately controls whether ordinary interaction is suppressed. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)

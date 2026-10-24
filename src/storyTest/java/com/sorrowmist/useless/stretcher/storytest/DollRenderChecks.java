@@ -296,7 +296,7 @@ public final class DollRenderChecks {
                     graphics.fill(x - 30, baseY + 1, x + 30, baseY + 2, 0xFF71899B);
                     graphics.drawCenteredString(font, names[variant], x, baseY + 8, 0xFFFFFFFF);
                 }
-                PlayerSkin fixtureSkin = new PlayerSkin(ResourceLocation.withDefaultNamespace(
+                PlayerSkin fixtureSkin = new PlayerSkin(new ResourceLocation(
                         "textures/entity/player/wide/steve.png"), null, null, null, PlayerSkin.Model.WIDE, true);
                 for (HumanoidArm arm : HumanoidArm.values()) {
                     int x = width * (arm == HumanoidArm.LEFT ? 2 : 5) / 7;
@@ -325,7 +325,7 @@ public final class DollRenderChecks {
                     pose.scale(80, 80, 80);
                     pose.mulPose(Axis.YP.rotationDegrees(170));
                     var buffers = minecraft.renderBuffers().bufferSource();
-                    ResourceLocation skinTexture = slim ? ResourceLocation.withDefaultNamespace(
+                    ResourceLocation skinTexture = slim ? new ResourceLocation(
                             "textures/entity/player/slim/alex.png") : fixtureSkin.texture();
                     var vertices = buffers.getBuffer(RenderType.entityCutoutNoCull(skinTexture));
                     playerModel.head.render(pose, vertices, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
@@ -396,7 +396,7 @@ public final class DollRenderChecks {
                     int x=width*(i+1)/5;
                     pose.translate(x,320,100); pose.scale(90,90,90); pose.mulPose(Axis.YP.rotationDegrees(145));
                     var buffers=minecraft.renderBuffers().bufferSource();
-                    var skin=ResourceLocation.withDefaultNamespace(slim?"textures/entity/player/slim/alex.png":"textures/entity/player/wide/steve.png");
+                    var skin=new ResourceLocation(slim?"textures/entity/player/slim/alex.png":"textures/entity/player/wide/steve.png");
                     player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(skin)),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
                     TwoIDollThirdPerson.render(stack,player,side,slim,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);
                     buffers.endBatch(); pose.popPose();

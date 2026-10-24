@@ -4,24 +4,24 @@ import com.electronwill.nightconfig.toml.TomlParser;
 import com.electronwill.nightconfig.toml.TomlWriter;
 import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.FriendlyByteBuf;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.config.ModConfigs;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.config.ConfigTracker;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import com.sorrowmist.useless.compat.forge1201.network.PacketDistributor;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-/** Login uses NeoForge's SERVER sync; this payload also updates clients already playing. */
+/** Login uses MinecraftForge's SERVER sync; this payload also updates clients already playing. */
 public final class ServerConfigSync {
     public static final String FILE_NAME = UselessStretcherMod.MODID + "-server.toml";
     private static final int MAX_BYTES = 262144;
@@ -29,7 +29,7 @@ public final class ServerConfigSync {
     private ServerConfigSync() {}
 
     public static ModConfig config() {
-        return ModConfigs.getFileMap().get(FILE_NAME);
+        return ConfigTracker.INSTANCE.fileMap().get(FILE_NAME);
     }
 
     /** Preserve legacy common settings without overwriting an existing server config or template. */
@@ -69,8 +69,8 @@ public final class ServerConfigSync {
 
     private static Payload snapshot() {
         ModConfig config = config();
-        if (config == null || config.getLoadedConfig() == null) return null;
-        byte[] contents = new TomlWriter().writeToString(config.getLoadedConfig().config())
+        if (config == null || config.getConfigData() == null) return null;
+        byte[] contents = new TomlWriter().writeToString(config.getConfigData())
                 .getBytes(StandardCharsets.UTF_8);
         if (contents.length > MAX_BYTES) {
             LogUtils.getLogger().warn("Stretcher server config exceeds live sync limit ({} bytes)", contents.length);
@@ -81,8 +81,8 @@ public final class ServerConfigSync {
 
     public record Payload(byte[] contents) implements CustomPacketPayload {
         public static final Type<Payload> TYPE = new Type<>(
-                ResourceLocation.fromNamespaceAndPath(UselessStretcherMod.MODID, "server_config"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> STREAM_CODEC = StreamCodec.of(
+                new ResourceLocation(UselessStretcherMod.MODID, "server_config"));
+        public static final StreamCodec<FriendlyByteBuf, Payload> STREAM_CODEC = StreamCodec.of(
                 (buf, payload) -> buf.writeByteArray(payload.contents()),
                 buf -> new Payload(buf.readByteArray(MAX_BYTES)));
 

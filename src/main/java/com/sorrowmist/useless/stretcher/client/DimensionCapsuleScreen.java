@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -55,7 +55,7 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
             parsed.add(new Entry(id, parts[0], name, dimensions, searchIndex.document(name, id, parts[0])));
         }
         entries = List.copyOf(parsed);
-        if (!entries.isEmpty()) { selected = 0; expanded.add(entries.getFirst().mod()); }
+        if (!entries.isEmpty()) { selected = 0; expanded.add(entries.get(0).mod()); }
         rebuildRows("");
     }
 

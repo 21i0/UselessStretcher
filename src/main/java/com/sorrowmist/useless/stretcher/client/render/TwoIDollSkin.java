@@ -9,20 +9,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 
 /** One client texture for every doll form, rebuilt only when resources reload. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public final class TwoIDollSkin {
-    private static final ResourceLocation NORMALIZED = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation NORMALIZED = new ResourceLocation(
             UselessStretcherMod.MODID, "dynamic/two_i_normalized_skin");
     private static ResourceLocation texture = TwoIDollRenderer.TEXTURE;
-    private static final ResourceLocation HALF = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation HALF = new ResourceLocation(
             UselessStretcherMod.MODID, "dynamic/two_i_half_blink");
-    private static final ResourceLocation CLOSED = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation CLOSED = new ResourceLocation(
             UselessStretcherMod.MODID, "dynamic/two_i_closed_eyes");
     private static boolean blinkReady;
 

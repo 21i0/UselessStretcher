@@ -13,7 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import java.util.UUID;
 
 final class StaffRadiationChecks {
@@ -46,7 +46,7 @@ final class StaffRadiationChecks {
         check(cap.getRadiation() == baseline, "native effect update clears restored dose");
         var encoded = ItemStack.CODEC.encodeStart(level.registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), staff).getOrThrow();
         var restored = ItemStack.CODEC.parse(level.registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), encoded).getOrThrow();
-        check(restored.getOrDefault(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false), "switch survives item serialization");
+        check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(restored, StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false), "switch survives item serialization");
         player.getInventory().setItem(15, ItemStack.EMPTY);
         player.setItemInHand(InteractionHand.OFF_HAND, restored);
         check(StaffRadiationProtection.enabled(player), "offhand restored item protects");

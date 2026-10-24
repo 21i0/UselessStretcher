@@ -16,10 +16,10 @@ import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.client.event.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
 import java.lang.reflect.Field;
@@ -100,7 +100,7 @@ public final class StoryChecks {
                 }
                 finished = true;
                 LogUtils.getLogger().info("STORY CHECKS PASSED: English/Chinese UI with Chinese long-form story; original voice/mute/pitch checks; unbound travel key; animated plush rig, library/gallery and courtyard block-model preview");
-                if (net.neoforged.fml.ModList.get().isLoaded("curios")) TwoICuriosClientChecks.start(client);
+                if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) TwoICuriosClientChecks.start(client);
                 else client.stop();
                 return;
             }
@@ -245,7 +245,7 @@ public final class StoryChecks {
     }
 
     private static void exercise(Minecraft client) throws Exception {
-        if (net.neoforged.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
+        if (net.minecraftforge.fml.ModList.get().isLoaded("manaita_plus_legacy")) {
             Class.forName("sen.manaita_plus_legacy.common.util.ManaitaPlusUtils$Client").getDeclaredMethods();
             LogUtils.getLogger().info("STORY optional Manaita client attack/removal class verified after transformation");
         }
@@ -342,7 +342,7 @@ public final class StoryChecks {
         client.setScreen(resumed);
         check(integer(resumed, "round") == 2 && integer(resumed, "stage") == 0
                         && ((String) field(resumed, "fullText")).equals(TwoIStoryScript.text(
-                        TwoIStoryScript.prompt(0, 2).getFirst()).getString()),
+                        TwoIStoryScript.prompt(0, 2).get(0)).getString()),
                 "reopened session resumes server-selected round without replaying earlier choices");
         resumed.onClose();
 
@@ -365,7 +365,7 @@ public final class StoryChecks {
                 set(target, "waiting", true);
                 target.onChoiceResult(123L, 16);
                 check(integer(target, "stage") == 2 && ((String)field(target, "fullText")).equals(
-                        TwoIStoryScript.text(TwoIStoryScript.branch(chapter, choice).getFirst()).getString()),
+                        TwoIStoryScript.text(TwoIStoryScript.branch(chapter, choice).get(0)).getString()),
                         "all six chapters enter the intended translated branch");
                 completeStory(client, target, choice);
                 check(client.screen == parent, "all eighteen paths complete all three rounds");
@@ -397,17 +397,17 @@ public final class StoryChecks {
         timelineChecks();
         screenVoiceChecks(client);
         exportVoicePreview(client);
-        check(TwoIStoryScript.branch(0, 0).getFirst().player(), "chosen player reply appears as a voiced story line");
+        check(TwoIStoryScript.branch(0, 0).get(0).player(), "chosen player reply appears as a voiced story line");
         check(com.sorrowmist.useless.stretcher.client.StretcherKeyBindings.STANDALONE_TELEPORT
                 .getDefaultKey().getValue() == GLFW.GLFW_KEY_UNKNOWN, "independent travel defaults unbound");
-        check(!net.neoforged.fml.ModList.get().isLoaded("poppet"), "all doll/voice checks run without the reference mod");
+        check(!net.minecraftforge.fml.ModList.get().isLoaded("poppet"), "all doll/voice checks run without the reference mod");
         check(net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.getKey(
                 com.sorrowmist.useless.stretcher.init.ModSounds.TWO_I_PAT.get()).toString().equals("useless_stretcher:two_i_pat"),
                 "server head-pat sound is registered instead of falling back to an allay sound");
         for (String name : List.of("two_i_voice", "two_i_voice_soft", "two_i_voice_bright", "player_voice", "two_i_pat")) {
-            var id = ResourceLocation.parse("useless_stretcher:" + name);
+            var id = new ResourceLocation("useless_stretcher:" + name);
             check(client.getSoundManager().getSoundEvent(id) != null, "voice sound event loaded: " + name);
-            check(client.getResourceManager().getResource(ResourceLocation.parse(
+            check(client.getResourceManager().getResource(new ResourceLocation(
                     "useless_stretcher:sounds/" + (name.equals("two_i_pat") ? "two_i_pat_1" : name) + ".ogg")).isPresent(), "original voice asset exists");
         }
     }
@@ -442,11 +442,11 @@ public final class StoryChecks {
         var shy = new TwoIStoryTimeline(key, "你愿意等我吗？", false, false).cues();
         var happy = new TwoIStoryTimeline("gui.useless_stretcher.two_i.vn.1.opening.1", "你愿意等我吗？", false, false).cues();
         var hurt = new TwoIStoryTimeline("gui.useless_stretcher.two_i.vn.4.branch.1.2", "你愿意等我吗？", false, false).cues();
-        check(shy.getFirst().timbre() == TwoIStoryTimeline.Timbre.SOFT && happy.getFirst().timbre() == TwoIStoryTimeline.Timbre.BRIGHT,
+        check(shy.get(0).timbre() == TwoIStoryTimeline.Timbre.SOFT && happy.get(0).timbre() == TwoIStoryTimeline.Timbre.BRIGHT,
                 "shy and happy differ in actual sound timbre");
-        check(shy.getFirst().cadence() > happy.getFirst().cadence() && hurt.getFirst().volume() < shy.getFirst().volume()
-                && hurt.getFirst().pitch() < shy.getFirst().pitch(), "emotion changes timing, strength and contour");
-        var player = new TwoIStoryTimeline(key, "你好", true, false).cues().getFirst();
+        check(shy.get(0).cadence() > happy.get(0).cadence() && hurt.get(0).volume() < shy.get(0).volume()
+                && hurt.get(0).pitch() < shy.get(0).pitch(), "emotion changes timing, strength and contour");
+        var player = new TwoIStoryTimeline(key, "你好", true, false).cues().get(0);
         check(player.timbre() == TwoIStoryTimeline.Timbre.PLAYER, "player has a separate voice");
         var question = new TwoIStoryTimeline("gui.useless_stretcher.two_i.vn.0.opening.4", "abcdefghij?", false, false).cues();
         check(question.get(6).pitch() < question.get(7).pitch() && question.get(7).pitch() < question.get(8).pitch()
@@ -624,7 +624,7 @@ public final class StoryChecks {
     }
 
     private static void texture(Minecraft client, String name, int width, int height) throws Exception {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("useless_stretcher", "textures/dialogue/" + name + ".png");
+        ResourceLocation id = new ResourceLocation("useless_stretcher", "textures/dialogue/" + name + ".png");
         try (var stream = client.getResourceManager().open(id); NativeImage image = NativeImage.read(stream)) {
             check(image.getWidth() == width && image.getHeight() == height, "actual texture dimensions: " + name);
         }

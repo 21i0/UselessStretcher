@@ -55,7 +55,7 @@ public final class TwoIStoryTimeline {
             if (voicedAfter < 2) cadence *= 1.10;
             double pause = pause(cp) * (mood == TwoIStoryDirection.Mood.SHY || mood == TwoIStoryDirection.Mood.UNEASY ? 1.18 : 1);
             result.add(new Cue(end, cp, !narration && Character.isLetterOrDigit(cp),
-                    Math.clamp(pitch, 0.78F, 1.30F), volume, player ? Timbre.PLAYER : profile.timbre,
+                    com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(pitch, 0.78F, 1.30F), volume, player ? Timbre.PLAYER : profile.timbre,
                     Character.isWhitespace(cp) ? 0.35 : cadence, pause));
             if (isBoundary(cp)) phraseStart = end;
             i = end - 1;

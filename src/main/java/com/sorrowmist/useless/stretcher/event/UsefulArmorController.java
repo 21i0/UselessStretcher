@@ -8,10 +8,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 
 /** Server-authoritative, opt-in full-set creative lock with safe restoration when disabled. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID)
@@ -22,8 +22,9 @@ public final class UsefulArmorController {
     private UsefulArmorController() { }
 
     @SubscribeEvent
-    public static void tick(PlayerTickEvent.Post event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+    public static void tick(PlayerTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
+        if (!(event.player instanceof ServerPlayer player)) return;
         CompoundTag data = player.getPersistentData();
         boolean forced = data.getBoolean(FORCED);
         boolean complete = hasCompleteSet(player);

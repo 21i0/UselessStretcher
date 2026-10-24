@@ -10,7 +10,9 @@ public final class MekanismRadiationCompat {
 
     public static void clear(LivingEntity entity) {
         var radiation = entity.getCapability(Capabilities.RADIATION_ENTITY);
-        if (radiation != null && radiation.getRadiation() > IRadiationManager.INSTANCE.baselineRadiation())
-            radiation.set(IRadiationManager.INSTANCE.baselineRadiation());
+        radiation.ifPresent(value -> {
+            if (value.getRadiation() > mekanism.common.lib.radiation.RadiationManager.BASELINE)
+                value.set(mekanism.common.lib.radiation.RadiationManager.BASELINE);
+        });
     }
 }

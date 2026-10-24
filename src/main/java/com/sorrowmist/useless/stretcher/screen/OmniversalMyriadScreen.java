@@ -399,7 +399,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
             long completed = Long.parseLong(values[0]);
             long total = Long.parseLong(values[1]);
             if (total <= 0) return;
-            int filled = (int) (width * Math.clamp((double) completed / total, 0.0D, 1.0D));
+            int filled = (int) (width * com.sorrowmist.useless.stretcher.compat.NativeMath.clamp((double) completed / total, 0.0D, 1.0D));
             graphics.fill(left, y, left + filled, y + 3, StretcherScreenStyle.ACTIVE_COLOR);
         } catch (NumberFormatException ignored) {
             // Non-numeric statuses have a label but no misleading completion percentage.
@@ -663,9 +663,9 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollY) {
         if (!containsList(mouseX, mouseY) || window.capturing()) {
-            return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            return super.mouseScrolled(mouseX, mouseY, scrollY);
         }
         List<Row> rows = visibleRows();
         int maxScroll = Math.max(0, rows.size() * ROW_HEIGHT - (listBottom - listTop));

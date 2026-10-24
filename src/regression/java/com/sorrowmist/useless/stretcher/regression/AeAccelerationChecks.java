@@ -23,9 +23,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.registries.RegisterEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.RegisterEvent;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -135,7 +135,7 @@ public final class AeAccelerationChecks {
 
     @EventBusSubscriber(modid = UselessStretcherMod.MODID, bus = EventBusSubscriber.Bus.MOD)
     public static final class Fixtures {
-        private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(
+        private static final ResourceLocation ID = new ResourceLocation(
                 UselessStretcherMod.MODID, "regression_ae_hybrid");
         private static HybridBlock block;
         private static BlockEntityType<HybridBlockEntity> type;
@@ -221,7 +221,7 @@ public final class AeAccelerationChecks {
         Method method = WondrousStaffAcceleration.class.getDeclaredMethod("selectOrdinaryTicker",
                 ResourceLocation.class, BlockEntityTicker.class, boolean.class);
         method.setAccessible(true);
-        return (BlockEntityTicker<?>) method.invoke(null, ResourceLocation.parse(id), ticker, hasAeEndpoints);
+        return (BlockEntityTicker<?>) method.invoke(null, new ResourceLocation(id), ticker, hasAeEndpoints);
     }
 
     private static int tick(ServerLevel level, BlockPos pos, BlockEntity blockEntity, BlockState state,

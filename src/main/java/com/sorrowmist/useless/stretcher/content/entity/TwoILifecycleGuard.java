@@ -18,7 +18,7 @@ public final class TwoILifecycleGuard implements AutoCloseable {
 
     public static boolean blocks(Object entity) {
         return entity instanceof TwoIDollEntity doll && !doll.level().isClientSide
-                && doll.isAddedToLevel() && !doll.isRemoved() && CURRENT.get() != doll;
+                && doll.isAddedToWorld() && !doll.isRemoved() && CURRENT.get() != doll;
     }
 
     @Override public void close() {

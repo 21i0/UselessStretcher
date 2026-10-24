@@ -1,7 +1,7 @@
 package com.sorrowmist.useless.stretcher.config;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModList;
 
 
 /**
@@ -10,27 +10,27 @@ import net.neoforged.fml.ModList;
  * and the furnace alike — not just this addon's pattern picker.
  */
 public final class StretcherConfig {
-    public static final ModConfigSpec SERVER_SPEC;
-    public static final ModConfigSpec.BooleanValue HIGHLIGHT_SEE_THROUGH;
-    public static final ModConfigSpec.BooleanValue SERVER_STAFF_ACCELERATION;
-    public static final ModConfigSpec.BooleanValue SERVER_RANGE_ACCELERATION;
-    public static final ModConfigSpec.BooleanValue SERVER_REMOTE_RECLAIMER;
-    public static final ModConfigSpec.BooleanValue SERVER_IDLE_THROTTLE;
-    public static final ModConfigSpec.BooleanValue SERVER_ENTITY_DISABLE_AI;
-    public static final ModConfigSpec.BooleanValue SERVER_STAFF_LEAF_DROP;
-    public static final ModConfigSpec.DoubleValue SERVER_STAFF_LEAF_DROP_PROBABILITY;
-    public static final ModConfigSpec.BooleanValue SERVER_DOLL_LEAF_DROP;
-    public static final ModConfigSpec.DoubleValue SERVER_DOLL_LEAF_DROP_PROBABILITY;
-    public static final ModConfigSpec.BooleanValue SERVER_STAFF_SUMMON;
-    public static final ModConfigSpec.BooleanValue SERVER_STAFF_LOOT_REFRESH;
-    public static final ModConfigSpec.BooleanValue SERVER_TIME_STOP;
-    public static final ModConfigSpec.BooleanValue SERVER_APOTHEOSIS_COMPAT;
-    public static final ModConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
-    public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_ENABLE;
-    public static final ModConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_RECIPES;
-    public static final ModConfigSpec.BooleanValue SERVER_STARFIELD_INVITATION;
+    public static final ForgeConfigSpec SERVER_SPEC;
+    public static final ForgeConfigSpec.BooleanValue HIGHLIGHT_SEE_THROUGH;
+    public static final ForgeConfigSpec.BooleanValue SERVER_STAFF_ACCELERATION;
+    public static final ForgeConfigSpec.BooleanValue SERVER_RANGE_ACCELERATION;
+    public static final ForgeConfigSpec.BooleanValue SERVER_REMOTE_RECLAIMER;
+    public static final ForgeConfigSpec.BooleanValue SERVER_IDLE_THROTTLE;
+    public static final ForgeConfigSpec.BooleanValue SERVER_ENTITY_DISABLE_AI;
+    public static final ForgeConfigSpec.BooleanValue SERVER_STAFF_LEAF_DROP;
+    public static final ForgeConfigSpec.DoubleValue SERVER_STAFF_LEAF_DROP_PROBABILITY;
+    public static final ForgeConfigSpec.BooleanValue SERVER_DOLL_LEAF_DROP;
+    public static final ForgeConfigSpec.DoubleValue SERVER_DOLL_LEAF_DROP_PROBABILITY;
+    public static final ForgeConfigSpec.BooleanValue SERVER_STAFF_SUMMON;
+    public static final ForgeConfigSpec.BooleanValue SERVER_STAFF_LOOT_REFRESH;
+    public static final ForgeConfigSpec.BooleanValue SERVER_TIME_STOP;
+    public static final ForgeConfigSpec.BooleanValue SERVER_APOTHEOSIS_COMPAT;
+    public static final ForgeConfigSpec.BooleanValue SERVER_HIDE_ENDERIO_GRINDING_BALLS;
+    public static final ForgeConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_ENABLE;
+    public static final ForgeConfigSpec.BooleanValue SERVER_USEFUL_ARMOR_RECIPES;
+    public static final ForgeConfigSpec.BooleanValue SERVER_STARFIELD_INVITATION;
 
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     static {
         BUILDER.translation("useless_stretcher.configuration.server_controls").push("server_controls");
@@ -102,7 +102,7 @@ public final class StretcherConfig {
             BUILDER.translation("useless_stretcher.configuration.apotheosis").push("apotheosis");
             SERVER_APOTHEOSIS_COMPAT = BUILDER
                     .comment("是否允许手杖修改 Apotheosis 世界等级并为已标记的附魔台添加属性。默认关闭。",
-                            "附魔台属性需要 Apothic Enchanting（可独立安装）；世界等级需要 Apotheosis。关闭后已保存的附魔台数据保留，但不参与附魔计算。")
+                            "附魔台属性需要 Apotheosis 7 的附魔模块；此 1.20.1 版本不提供世界等级功能。关闭后已保存的附魔台数据保留，但不参与附魔计算。")
                     .translation("useless_stretcher.configuration.apotheosis.enable")
                     .define("enable", false);
             BUILDER.pop();
@@ -169,7 +169,7 @@ public final class StretcherConfig {
     }
 
     // Recipe/client setup can query these before a world or server config has loaded.
-    private static <T> T value(ModConfigSpec.ConfigValue<T> option) {
+    private static <T> T value(ForgeConfigSpec.ConfigValue<T> option) {
         return SERVER_SPEC.isLoaded() ? option.get() : option.getDefault();
     }
 

@@ -11,11 +11,11 @@ import com.sorrowmist.useless.stretcher.network.Network;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.fml.config.ModConfig;
+import net.minecraftforge.fml.config.ModConfig;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -53,7 +53,7 @@ final class ServerConfigChecks {
         check(Files.readString(migration.resolve(ServerConfigSync.FILE_NAME)).equals("# existing server configuration\n"),
                 "migration cannot overwrite existing server config");
 
-        var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+        var buffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
         try {
             byte[] bytes = new TomlWriter().writeToString(values).getBytes(StandardCharsets.UTF_8);
             ServerConfigSync.Payload.STREAM_CODEC.encode(buffer, new ServerConfigSync.Payload(bytes));
@@ -98,7 +98,7 @@ final class ServerConfigChecks {
         for (String id : List.of("goat_horn", "turtle_scute", "enchanted_golden_apple", "wither_rose",
                 "dragon_head", "shulker_shell", "phantom_membrane", "dragon_breath", "elytra", "totem_of_undying",
                 "wither_skeleton_skull", "conduit", "rabbit_foot", "omniversal_myriad", "useless_stretcher", "wondrous_staff")) {
-            check(level.getRecipeManager().byKey(net.minecraft.resources.ResourceLocation.parse("useless_stretcher:" + id)).isPresent(),
+            check(com.sorrowmist.useless.compat.forge1201.recipe.RecipeManagerAccess.byKey(level.getRecipeManager(), net.minecraft.resources.new ResourceLocation("useless_stretcher:" + id)).isPresent(),
                     "GuideME exact recipe exists: " + id);
         }
         LogUtils.getLogger().info("REGRESSION 1.5.1: server config, migration, payload, save, permanent history ownership/unload/reclaim and 16 guide recipes passed");

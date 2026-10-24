@@ -45,7 +45,7 @@ public final class WondrousStaffCloudTime {
             return vanillaTicks;
         }
 
-        float partial = Math.clamp(partialTick, 0.0F, 1.0F);
+        float partial = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(partialTick, 0.0F, 1.0F);
         double vanillaTime = vanillaTicks + (double) partial;
         if (level != renderedLevel || Double.isNaN(lastVanillaTime)
                 || vanillaTime < lastVanillaTime) {

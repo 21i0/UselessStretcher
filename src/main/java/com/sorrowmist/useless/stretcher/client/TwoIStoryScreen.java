@@ -88,7 +88,7 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
     }
 
     private static ResourceLocation texture(String file) {
-        return ResourceLocation.fromNamespaceAndPath("useless_stretcher", "textures/dialogue/" + file + ".png");
+        return new ResourceLocation("useless_stretcher", "textures/dialogue/" + file + ".png");
     }
 
     private static Component ui(String key) {
@@ -186,7 +186,7 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
         for (Button b : controls) b.visible = overlay == 0 && !hidden;
         for (Button b : overlayControls) b.visible = false;
         if (overlay > 0) {
-            overlayControls.getFirst().visible = true;
+            overlayControls.get(0).visible = true;
             if (overlay == 1) {
                 overlayControls.get(1).visible = true;
                 overlayControls.get(2).visible = true;
@@ -224,7 +224,7 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
         expression = texture("expressions/" + line.expression());
         String who = speaker(line).getString();
         history.add(Component.literal(who + "  ·  " + fullText));
-        if (history.size() > 512) history.removeFirst();
+        if (history.size() > 512) history.remove(0);
         if (minecraft != null) minecraft.getNarrator().sayNow(Component.literal(who + ": " + fullText));
     }
 
@@ -378,7 +378,7 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
     private float left() { return (width - CANVAS_W * scale()) / 2; }
     private float top() { return (height - CANVAS_H * scale()) / 2; }
 
-    @Override public void renderBackground(GuiGraphics g, int x, int y, float partial) { }
+    @Override public void renderBackground(GuiGraphics g) { }
 
     @Override public void render(GuiGraphics g, int mouseX, int mouseY, float partial) {
         updatePlayback();
@@ -466,7 +466,7 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
         return super.mouseReleased((x - left()) / scale(), (y - top()) / scale(), button);
     }
 
-    @Override public boolean mouseScrolled(double x, double y, double horizontal, double vertical) {
+    @Override public boolean mouseScrolled(double x, double y, double vertical) {
         if (overlay == 1) scrollHistory((int) -Math.signum(vertical) * 3);
         else if (vertical > 0) openOverlay(1);
         return true;

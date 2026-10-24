@@ -1,4 +1,0 @@
-      Code:
-         0: aload_0
->        1: ldc           #29                 // String 21
-         3: invokevirtual #31                 // Method net/neoforged/neoforge/network/event/RegisterPayloadHandlersEvent.registrar:(Ljava/lang/String;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar;

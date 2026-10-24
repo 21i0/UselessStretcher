@@ -93,7 +93,7 @@ public final class MoldRecipeIndex {
 
     private List<Posting> indexIngredient(Ingredient ingredient) {
         // Custom predicates need not enumerate all accepted items. Never guess their domain.
-        if (ingredient.isCustom()) {
+        if (!ingredient.isVanilla()) {
             Posting posting = new Posting(ingredient);
             custom.add(posting);
             return List.of(posting);

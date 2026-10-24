@@ -13,8 +13,8 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.entity.EntityTickList;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.lang.reflect.Field;
@@ -57,10 +57,10 @@ final class TwoIDollUselessKillChecks {
         attacker.setHealth(20);
         check(!attacker.getUUID().equals(doll.getOwnerId()), "aura fixture is not doll owner");
         ItemStack staff = new ItemStack(com.sorrowmist.useless.init.ModItems.ENDLESS_BEAF_ITEM.get());
-        staff.set(UComponents.ForceKillEnabledComponent.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, UComponents.ForceKillEnabledComponent.get(), true);
         method(upstream, "setProtectModeEnabled", ItemStack.class, boolean.class).invoke(null, staff, false);
         method(upstream, "setKillAuraEnabled", ItemStack.class, boolean.class).invoke(null, staff, true);
-        check(staff.getOrDefault(UComponents.ForceKillEnabledComponent.get(), false), "real force-kill component enabled");
+        check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, UComponents.ForceKillEnabledComponent.get(), false), "real force-kill component enabled");
 
         EntityTickList ticks = (EntityTickList) field(ServerLevel.class, "entityTickList").get(level);
         // ServerStartedEvent can run before chunk entity-ticking tickets. Seed this fixture's real

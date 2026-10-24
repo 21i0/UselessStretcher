@@ -5,7 +5,7 @@ import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBloc
 import com.sorrowmist.useless.stretcher.content.blockentity.TwoIDollDisplayBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 import java.util.function.Supplier;
 

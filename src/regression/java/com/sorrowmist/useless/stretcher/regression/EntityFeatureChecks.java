@@ -16,7 +16,7 @@ import com.sorrowmist.useless.stretcher.mixin.TurtleTimerAccessor;
 import com.sorrowmist.useless.stretcher.network.Network;
 import io.netty.buffer.Unpooled;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,12 +46,12 @@ final class EntityFeatureChecks {
         player.setPos(4.5, 160, 4.5);
         checkTwoIDollPersistence(level);
         ItemStack staff = new ItemStack(ModItems.WONDROUS_STAFF.get());
-        check(!staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false),
+        check(!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false),
                 "phase staff default is off");
-        check(staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true),
+        check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(staff, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true),
                 "phase interaction default is on");
         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, staff);
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
         check(StaffPhaseManager.state(player).phase(), "held phase staff enables player phase state");
         check(!StaffPhaseManager.blocksInteraction(player), "phase interaction remains available by default");
         StaffPhaseManager.setNoPhysics(player, false);
@@ -69,9 +69,9 @@ final class EntityFeatureChecks {
         player.move(net.minecraft.world.entity.MoverType.SELF, new net.minecraft.world.phys.Vec3(5,2,0));
         check(player.position().distanceToSqr(phaseStart.add(5,2,0)) < 0.0001, "actual movement traverses thick wall in all axes");
         StaffPhaseManager.setNoPhysics(player, false); // another mod changes its collision state while phasing
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
         check(StaffPhaseManager.blocksInteraction(player), "phase interaction switch can suppress interaction");
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
         StaffPhaseManager.apply(player);
         StaffPhaseManager.movementTick(player);
         check(!player.getAbilities().flying, "phase shutdown restores prior flight intent while upstream mayfly stays available");
@@ -92,7 +92,7 @@ final class EntityFeatureChecks {
             StretcherConfig.SERVER_STAFF_SUMMON.set(true);
             WondrousStaffSummoning.summon(player, staff, List.of("minecraft:villager"));
             var villagers = level.getEntitiesOfClass(Villager.class, player.getBoundingBox().inflate(5));
-            check(villagers.size() == 1 && villagers.getFirst().isNoAi(), "actual villager summon succeeds with disabled AI");
+            check(villagers.size() == 1 && villagers.get(0).isNoAi(), "actual villager summon succeeds with disabled AI");
             villagers.forEach(Villager::discard);
         } finally { StretcherConfig.SERVER_STAFF_SUMMON.set(summonEnabled); }
 
@@ -168,15 +168,15 @@ final class EntityFeatureChecks {
 
         check(EntityTimerAcceleration.normalizeSpeed(Integer.MAX_VALUE) == 32768
                 && EntityTimerAcceleration.normalizeSpeed(Integer.MIN_VALUE) == 2, "bounded multiplier input");
-        var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
+        var buffer = new FriendlyByteBuf(Unpooled.buffer(), level.registryAccess());
         try {
             var payload = new Network.EntityTimerSettingsPayload(true, 32768, true);
             Network.EntityTimerSettingsPayload.STREAM_CODEC.encode(buffer, payload);
             check(payload.equals(Network.EntityTimerSettingsPayload.STREAM_CODEC.decode(buffer)), "timer settings packet roundtrip");
         } finally { buffer.release(); }
-        staff.set(StretcherComponents.ENTITY_TIMER_MODE.get(), true);
-        staff.set(StretcherComponents.ENTITY_TIMER_SPEED.get(), 32768);
-        staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), 16);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.ENTITY_TIMER_MODE.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.ENTITY_TIMER_SPEED.get(), 32768);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SPEED.get(), 16);
         check(WondrousStaffAcceleration.getSpeed(staff) == 16 && WondrousStaffAcceleration.getEntityTimerSpeed(staff) == 32768,
                 "timer settings never change machine multiplier");
         LogUtils.getLogger().info("REGRESSION 1.5.2 entities: summon, timers, AI, legacy saves, duration, restocking, packets and independent speeds passed");
@@ -243,8 +243,8 @@ final class EntityFeatureChecks {
         var inventory = player.getInventory();
         inventory.clearContent();
         inventory.selected = 0;
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
         for (int slot = 0; slot < inventory.items.size(); slot++) {
             inventory.setItem(slot, staff);
             check(StaffPhaseManager.state(player).phase(), "carried phase staff found in slot " + slot);
@@ -264,7 +264,7 @@ final class EntityFeatureChecks {
         check(StaffPhaseManager.state(player).phase() && !StaffPhaseManager.blocksInteraction(player),
                 "disabled held staffs do not hide an enabled backpack staff");
         var blocked = staff.copy();
-        blocked.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(blocked, StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), false);
         inventory.setItem(8, blocked);
         check(StaffPhaseManager.blocksInteraction(player), "first enabled inventory slot controls interaction");
         player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, staff.copy());
@@ -292,16 +292,16 @@ final class EntityFeatureChecks {
     /** Exercise the optional upstream modes against phase control when that mod is present. */
     private static void checkUselessModPhaseCompatibility(
             net.minecraft.server.level.ServerPlayer player, ItemStack staff) throws Exception {
-        if (!net.neoforged.fml.ModList.get().isLoaded("useless_mod")) return;
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("useless_mod")) return;
         Class<?> components = Class.forName("com.sorrowmist.useless.core.component.UComponents");
         Object protectedHolder = components.getField("BeefInvulnerabilityEnabledComponent").get(null);
         Object stealthHolder = components.getField("BeefAdvancedStealthEnabledComponent").get(null);
         var deferredHolder = protectedHolder.getClass().getMethod("get");
         @SuppressWarnings("unchecked")
-        var protectedMode = (net.minecraft.core.component.DataComponentType<Boolean>) deferredHolder.invoke(protectedHolder);
+        var protectedMode = (com.sorrowmist.useless.compat.forge1201.component.DataComponentType<Boolean>) deferredHolder.invoke(protectedHolder);
         @SuppressWarnings("unchecked")
-        var stealthMode = (net.minecraft.core.component.DataComponentType<Boolean>) deferredHolder.invoke(stealthHolder);
-        var beefItem = BuiltInRegistries.ITEM.get(ResourceLocation.parse("useless_mod:endless_beaf_item"));
+        var stealthMode = (com.sorrowmist.useless.compat.forge1201.component.DataComponentType<Boolean>) deferredHolder.invoke(stealthHolder);
+        var beefItem = BuiltInRegistries.ITEM.get(new ResourceLocation("useless_mod:endless_beaf_item"));
         check(!beefItem.equals(Items.AIR), "upstream endless beef tool is registered for phase compatibility check");
         ItemStack beef = new ItemStack(beefItem);
         beef.set(protectedMode, true);
@@ -314,7 +314,7 @@ final class EntityFeatureChecks {
         check((boolean) protectedQuery.invoke(null, player), "upstream player protection is active before phasing");
         check((boolean) stealthQuery.invoke(null, player), "upstream advanced stealth is active before phasing");
 
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), true);
         StaffPhaseManager.apply(player);
         check(StaffPhaseManager.noPhysics(player), "phase and upstream protections can be active together");
         // The upstream Useless Mod may normalize its inventory copy while its
@@ -324,7 +324,7 @@ final class EntityFeatureChecks {
         check((boolean) protectedQuery.invoke(null, player) && (boolean) stealthQuery.invoke(null, player),
                 "upstream player protection and advanced stealth remain effective while phasing");
 
-        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
         StaffPhaseManager.apply(player);
         check(!StaffPhaseManager.noPhysics(player), "phase release restores collision while upstream modes stay enabled");
         check((boolean) protectedQuery.invoke(null, player) && (boolean) stealthQuery.invoke(null, player),

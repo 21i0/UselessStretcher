@@ -19,7 +19,7 @@ public final class TwoIDollAcquisition {
         UUID dollId = com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.ensureIdentity(stack);
         MinecraftServer server = player.getServer();
         if (server == null || !TwoIDollAcquisitionData.get(server).markIfNew(dollId)) return;
-        UUID ownerId = stack.get(StretcherComponents.TWO_I_OWNER.get());
+        UUID ownerId = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_OWNER.get());
         Component owner = resolveOwner(player.getServer(), ownerId);
         Component message = Component.translatable(
                 "msg.useless_stretcher.two_i.acquired_broadcast",

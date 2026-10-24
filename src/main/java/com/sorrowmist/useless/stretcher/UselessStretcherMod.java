@@ -13,19 +13,23 @@ import com.sorrowmist.useless.stretcher.init.ModMenuTypes;
 import com.sorrowmist.useless.stretcher.init.ModSounds;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.common.MinecraftForge;
+import com.sorrowmist.useless.compat.forge1201.network.RegisterPayloadHandlersEvent;
 
 @Mod(UselessStretcherMod.MODID)
 public final class UselessStretcherMod {
     public static final String MODID = "useless_stretcher";
 
-    public UselessStretcherMod(IEventBus modBus, ModContainer container) {
+    public UselessStretcherMod() {
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+        modBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent event) ->
+                event.enqueueWork(() -> modBus.post(new RegisterPayloadHandlersEvent(MODID))));
         ModBlocks.BLOCKS.register(modBus);
         ModItems.ITEMS.register(modBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modBus);
@@ -38,16 +42,15 @@ public final class UselessStretcherMod {
         TwoIStarfieldDimensions.init(modBus);
         com.sorrowmist.useless.stretcher.content.capsule.CapsuleDimensions.init(modBus);
         modBus.addListener(Network::register);
-        modBus.addListener(ModItemDefaults::modifyDefaultComponents);
-        modBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) -> {
-            if (net.neoforged.fml.ModList.get().isLoaded("curios"))
+        modBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent event) -> {
+            if (net.minecraftforge.fml.ModList.get().isLoaded("curios"))
                 event.enqueueWork(com.sorrowmist.useless.stretcher.compat.TwoICuriosCompat::register);
         });
-        // All gameplay switches live in the server config. NeoForge synchronizes this
+        // All gameplay switches live in the server config. MinecraftForge synchronizes this
         // spec to every client connected to the world, so the host/server setting is authoritative.
         ServerConfigSync.migrateLegacy(FMLPaths.CONFIGDIR.get(), FMLPaths.GAMEDIR.get().resolve("defaultconfigs"));
-        container.registerConfig(ModConfig.Type.SERVER, StretcherConfig.SERVER_SPEC);
+        modContext.registerConfig(ModConfig.Type.SERVER, StretcherConfig.SERVER_SPEC);
         modBus.addListener(ServerConfigSync::onReload);
-        NeoForge.EVENT_BUS.addListener(ServerConfigSync::onLogin);
+        MinecraftForge.EVENT_BUS.addListener(ServerConfigSync::onLogin);
     }
 }

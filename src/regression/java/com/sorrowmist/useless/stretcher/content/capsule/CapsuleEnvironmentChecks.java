@@ -17,7 +17,7 @@ public final class CapsuleEnvironmentChecks {
         int sources = 0;
         for (var source : server.getAllLevels()) {
             if (CapsuleDimensions.isCapsule(source.dimension().location())) continue;
-            var key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(DimensionCapsuleCatalog.targetFor(source)));
+            var key = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(DimensionCapsuleCatalog.targetFor(source)));
             var target = server.getLevel(key);
             check(target != null && target != source, "isolated physical mirror for " + source.dimension().location());
             check(target.dimensionType() == source.dimensionType(), "exact runtime dimension type retained");
@@ -38,8 +38,8 @@ public final class CapsuleEnvironmentChecks {
         verifyArchaeologyProcessors(server);
         for (var room : CapsuleInstances.get(server).rooms.values()) {
             if (!room.ready || !room.sourceCoordinates) continue;
-            var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.dimension)));
-            var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.sourceDimension)));
+            var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(room.dimension)));
+            var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(room.sourceDimension)));
             check(target != null && source != null, "saved physical environment restored before login");
             var plan = StructureStart.loadStaticStart(StructurePieceSerializationContext.fromLevel(source), room.plan, room.sourceSeed);
             check(plan != null && plan.isValid(), "real restart retains native Piece graph");
@@ -59,13 +59,13 @@ public final class CapsuleEnvironmentChecks {
         LogUtils.getLogger().info("CAPSULE ENVIRONMENT CHECKS PASSED: {} source mirrors, {} completed native rooms restored from disk", sources, restored);
     }
     private static void verifyArchaeologyProcessors(MinecraftServer server) {
-        if (!net.neoforged.fml.ModList.get().isLoaded("allthemodium")) return;
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("allthemodium")) return;
         var registry = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST);
         var ops = net.minecraft.resources.RegistryOps.create(com.mojang.serialization.JsonOps.INSTANCE, server.registryAccess());
         String[][] rules = {{"minecraft:ancient_city_generic_degradation", "allthemodium:suspicious_clay", "allthemodium:arch"},
                 {"minecraft:treasure_rooms", "allthemodium:suspicious_soul_sand", "allthemodium:arch2"}};
         for (String[] rule : rules) {
-            var list = registry.get(ResourceLocation.parse(rule[0]));
+            var list = registry.get(new ResourceLocation(rule[0]));
             check(list != null, "active archaeological processor list exists: " + rule[0]);
             String json = net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType.DIRECT_CODEC
                     .encodeStart(ops, list).getOrThrow().toString();
@@ -87,7 +87,7 @@ public final class CapsuleEnvironmentChecks {
                         String entityId = spawner.saveWithoutMetadata(level.registryAccess())
                                 .getCompound("SpawnData").getCompound("entity").getString("id");
                         check(!entityId.isEmpty() && net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE
-                                .containsKey(ResourceLocation.parse(entityId)), "saved native spawner entity is registered: " + entityId);
+                                .containsKey(new ResourceLocation(entityId)), "saved native spawner entity is registered: " + entityId);
                         mobs.add(entityId); spawners++;
                     }
                     if (blockEntity instanceof net.minecraft.world.level.block.entity.BrushableBlockEntity brushable) {

@@ -25,16 +25,16 @@ public final class TwoIBondMemoryChecks {
                 2, 5900, 41, "minecraft:cookie", 4, 1));
         ItemStack original = new ItemStack(ModItems.TWO_I_DOLL.get());
         com.sorrowmist.useless.stretcher.content.item.TwoIDollItem.ensureIdentity(original);
-        original.set(StretcherComponents.TWO_I_BOND.get(), -42);
-        original.set(StretcherComponents.TWO_I_INVITATION_USED.get(), true);
-        original.set(StretcherComponents.TWO_I_MEMORY.get(), memory);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), -42);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_MEMORY.get(), memory);
         original.set(DataComponents.CUSTOM_NAME, Component.literal("A named friend"));
         original.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
         TwoIDollEntity doll = ModEntities.TWO_I_DOLL.get().create(level);
         check(doll != null, "entity creates");
         doll.restoreFromItem(original);
         check(ItemStack.isSameItemSameComponents(original, doll.toDollItem()), "item to entity to item");
-        original.set(StretcherComponents.TWO_I_BOND.get(), 100);
+        com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), 100);
         check(doll.getGiftScore() == -42, "entity owns a copy of its complete stack");
 
         CompoundTag saved = doll.saveWithoutId(new CompoundTag());
@@ -42,7 +42,7 @@ public final class TwoIBondMemoryChecks {
         check(loaded != null, "restored entity creates");
         loaded.load(saved);
         ItemStack returned = loaded.toDollItem();
-        check(memory.equals(returned.get(StretcherComponents.TWO_I_MEMORY.get())), "entity codec keeps cooldowns and daily budgets");
+        check(memory.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(returned, StretcherComponents.TWO_I_MEMORY.get())), "entity codec keeps cooldowns and daily budgets");
         check(returned.getHoverName().getString().equals("A named friend"), "entity keeps custom name");
         check(loaded.canInvite(), "already invited friend can revisit with negative bond");
 

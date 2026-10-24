@@ -16,8 +16,6 @@ public final class TwoICompanionshipData extends SavedData {
     public static final int CHECK_INTERVAL = 100;
     public static final int REWARD_INTERVAL = 6000;
     private static final int DAILY_CAP = 2;
-    private static final Factory<TwoICompanionshipData> FACTORY =
-            new Factory<>(TwoICompanionshipData::new, TwoICompanionshipData::load);
     public record Progress(long day, int earned, int ticks, long lastSample) {
         private Progress forDay(long time) {
             long today = Math.max(0, time / 24000L);
@@ -41,7 +39,7 @@ public final class TwoICompanionshipData extends SavedData {
 
     public static TwoICompanionshipData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
-                FACTORY,
+                tag -> load(tag, server.registryAccess()), TwoICompanionshipData::new,
                 "useless_stretcher_two_i_companionship");
     }
 
@@ -51,7 +49,7 @@ public final class TwoICompanionshipData extends SavedData {
         if (existing != null) return existing;
         var old = legacy.interaction();
         Progress imported = new Progress(old.day(), old.companionship(),
-                Math.clamp(old.companionTicks(), 0, REWARD_INTERVAL - 1), legacy.lastCompanionSample());
+                com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(old.companionTicks(), 0, REWARD_INTERVAL - 1), legacy.lastCompanionSample());
         dolls.put(doll, imported);
         setDirty();
         return imported;
@@ -76,7 +74,10 @@ public final class TwoICompanionshipData extends SavedData {
         return new Sample(next, awarded);
     }
 
-    @Override
+    @Override public CompoundTag save(CompoundTag tag) {
+        return save(tag, net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer().registryAccess());
+    }
+
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
         for (var record : dolls.entrySet()) {
@@ -100,8 +101,8 @@ public final class TwoICompanionshipData extends SavedData {
             CompoundTag entry = list.getCompound(i);
             if (!entry.hasUUID("doll")) continue;
             data.dolls.put(entry.getUUID("doll"), new Progress(Math.max(-1, entry.getLong("day")),
-                    Math.clamp(entry.getInt("earned"), 0, DAILY_CAP),
-                    Math.clamp(entry.getInt("ticks"), 0, REWARD_INTERVAL - 1),
+                    com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(entry.getInt("earned"), 0, DAILY_CAP),
+                    com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(entry.getInt("ticks"), 0, REWARD_INTERVAL - 1),
                     entry.contains("last_sample") ? Math.max(-1, entry.getLong("last_sample")) : -1));
         }
         return data;

@@ -22,7 +22,7 @@ public final class MoldMatch {
         } catch (RuntimeException ignored) {
             displayed = new ItemStack[0];
         }
-        if (!required.isCustom()) {
+        if (!!required.isVanilla()) {
             for (ItemStack stack : displayed) {
                 if (stack == null || stack.isEmpty()) continue;
                 ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());

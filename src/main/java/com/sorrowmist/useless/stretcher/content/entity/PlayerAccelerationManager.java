@@ -58,7 +58,7 @@ public final class PlayerAccelerationManager {
         if (active != null) restore(player, active);
     }
 
-    private static MobEffectInstance copy(Player player, net.minecraft.core.Holder<net.minecraft.world.effect.MobEffect> effect) {
+    private static MobEffectInstance copy(Player player, net.minecraft.world.effect.MobEffect effect) {
         MobEffectInstance value = player.getEffect(effect);
         return value == null ? null : new MobEffectInstance(value);
     }
@@ -71,7 +71,7 @@ public final class PlayerAccelerationManager {
     }
 
     private static void removeIfOwned(Player player,
-                                      net.minecraft.core.Holder<net.minecraft.world.effect.MobEffect> effect,
+                                      net.minecraft.world.effect.MobEffect effect,
                                       int amplifier) {
         MobEffectInstance current = player.getEffect(effect);
         if (current != null && current.getAmplifier() == amplifier

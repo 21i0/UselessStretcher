@@ -51,15 +51,15 @@ final class Ui153Checks {
                 if (stage == 1) screen.resize(client, 320, 240);
                 var visible = patterns.subList(0, Math.min(patterns.size(), number(screen, "pageCapacity")));
                 reply(screen, 2, 5, visible, "");
-                var stack = patterns.getFirst().toStack(1);
-                var metadata = stack.get(UComponents.OMNIVERSAL_PATTERN_DATA.get());
+                var stack = patterns.get(0).toStack(1);
+                var metadata = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, UComponents.OMNIVERSAL_PATTERN_DATA.get());
                 var tooltip = stack.getTooltipLines(Item.TooltipContext.EMPTY, null, TooltipFlag.ADVANCED)
                         .stream().map(net.minecraft.network.chat.Component::getString).toList();
                 check(tooltip.stream().anyMatch(line -> line.contains(metadata.recipeId().toString())), "native tooltip includes actual recipe ID");
                 check(tooltip.stream().anyMatch(line -> line.contains(metadata.displayMold().orElseThrow().getDisplayName().getString())),
                         "native tooltip includes real required mold");
-                var output = (GenericStack) ((List<?>) field(screen, "outputs")).getFirst();
-                check(output.equals(PatternOutputs.primary(patterns.getFirst()))
+                var output = (GenericStack) ((List<?>) field(screen, "outputs")).get(0);
+                check(output.equals(PatternOutputs.primary(patterns.get(0)))
                         && !output.what().wrapForDisplayOrFilter().is(stack.getItem()),
                         "primary output cached immediately without Shift or recipe decoding");
                 LogUtils.getLogger().info("UI actual omniversal tooltip: {}", tooltip);

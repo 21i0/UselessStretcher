@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * already has (or can craft) over Useless Mod's arbitrary representative. The thread-local context
  * is only set during our fetch, so all other Useless Mod code paths are unaffected.
  */
-@Mixin(AdapterUtils.class)
+@Mixin(value = AdapterUtils.class, remap = false)
 public abstract class AdapterUtilsItemRepresentativeMixin {
 
     @Inject(

@@ -15,8 +15,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.tick.PlayerTickEvent;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class TwoICompanionshipChecks {
         var data = TwoICompanionshipData.get(level.getServer());
         try {
             ItemStack left = doll(player), right = doll(player);
-            check(!left.get(StretcherComponents.TWO_I_DOLL_ID.get()).equals(right.get(StretcherComponents.TWO_I_DOLL_ID.get())),
+            check(!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(left, StretcherComponents.TWO_I_DOLL_ID.get()).equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(right, StretcherComponents.TWO_I_DOLL_ID.get())),
                     "two identical new dolls have distinct stable identities");
             player.setItemSlot(EquipmentSlot.MAINHAND, right);
             player.setItemSlot(EquipmentSlot.OFFHAND, left);
@@ -49,21 +49,21 @@ public final class TwoICompanionshipChecks {
             check(ItemStack.isSameItemSameComponents(leftBefore, left)
                             && ItemStack.isSameItemSameComponents(rightBefore, right),
                     "200 companion seconds and hand swaps cause zero per-second item component changes");
-            check(data.progress(left.get(StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000
-                            && data.progress(right.get(StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
+            check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(left, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000
+                            && data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(right, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
                     "world records advance independently and repeated events/swaps do not double-count");
 
             var decoded = TwoICompanionshipData.load(data.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
-            check(decoded.progress(left.get(StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
+            check(decoded.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(left, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
                     "world SavedData encode/load retains progress while the item snapshot remains unchanged");
             for (int second = 200; second < 295; second++) { time(level, 192_000L + second * 20L); tick(player); }
             var entity = ModEntities.TWO_I_DOLL.get().create(level);
             check(entity != null, "entity fixture");
             ItemStack carried = player.getMainHandItem();
-            UUID carriedId = carried.get(StretcherComponents.TWO_I_DOLL_ID.get());
+            UUID carriedId = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(carried, StretcherComponents.TWO_I_DOLL_ID.get());
             player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             entity.setOwnerId(player.getUUID()); entity.setPos(player.position()); entity.restoreFromItem(carried);
-            check(entity.toDollItem().get(StretcherComponents.TWO_I_MEMORY.get()).interaction().companionTicks() == 5900,
+            check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(entity.toDollItem(), StretcherComponents.TWO_I_MEMORY.get()).interaction().companionTicks() == 5900,
                     "deploy reads latest world progress even from a stale encoded item snapshot");
             var tickEntity = TwoIDollEntity.class.getDeclaredMethod("tickCompanionship", ServerLevel.class);
             tickEntity.setAccessible(true);
@@ -79,7 +79,7 @@ public final class TwoICompanionshipChecks {
                 time(level, 197_900); tickEntity.invoke(entity, level);
                 check(entity.getGiftScore() == 1, "entity awards at the exact 6000-tick combined threshold");
                 ItemStack returned = entity.toDollItem();
-                check(carriedId.equals(returned.get(StretcherComponents.TWO_I_DOLL_ID.get())), "recall keeps the hand-swap identity");
+                check(carriedId.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(returned, StretcherComponents.TWO_I_DOLL_ID.get())), "recall keeps the hand-swap identity");
                 player.setItemSlot(EquipmentSlot.HEAD, ItemStack.parseOptional(level.registryAccess(),
                         (CompoundTag)returned.save(level.registryAccess())));
                 tick(player);

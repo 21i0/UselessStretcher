@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AdapterUtils.class)
+@Mixin(value = AdapterUtils.class, remap = false)
 public abstract class AdapterUtilsMoldMixin {
     @Inject(method = "matchesMold(Lnet/minecraft/world/item/crafting/Ingredient;Lnet/minecraft/world/item/ItemStack;)Z",
             at = @At("HEAD"), cancellable = true)

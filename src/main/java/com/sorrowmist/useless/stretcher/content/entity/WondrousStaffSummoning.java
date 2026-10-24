@@ -54,7 +54,7 @@ public final class WondrousStaffSummoning {
         // mirrors this component, but the server applies it authoritatively so
         // packet ordering cannot make the first summon silently do nothing.
         if (!WondrousStaffAcceleration.isSummonEnabled(staff)) {
-            staff.set(StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), true);
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(staff, StretcherComponents.WONDROUS_STAFF_SUMMON_ENABLED.get(), true);
         }
 
         long now = level.getGameTime();

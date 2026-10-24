@@ -18,18 +18,17 @@ public abstract class LevelRendererCloudMixin {
     private float uselessStretcher$cloudPartialTick;
 
     @Inject(
-            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FDDD)V",
+            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FDDD)V",
             at = @At("HEAD"),
             require = 0)
-    private void uselessStretcher$captureCloudPartialTick(PoseStack poseStack, Matrix4f frustumMatrix,
-                                                           Matrix4f projectionMatrix, float partialTick,
+    private void uselessStretcher$captureCloudPartialTick(PoseStack poseStack, Matrix4f projectionMatrix, float partialTick,
                                                            double camX, double camY, double camZ,
                                                            CallbackInfo ci) {
         this.uselessStretcher$cloudPartialTick = partialTick;
     }
 
     @Redirect(
-            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FDDD)V",
+            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FDDD)V",
             at = @At(
                     value = "FIELD",
                     target = "Lnet/minecraft/client/renderer/LevelRenderer;ticks:I",

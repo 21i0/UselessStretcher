@@ -5,8 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredHolder;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 /**
  * Registers a small creative tab so the handheld tools are visible and searchable in JEI,

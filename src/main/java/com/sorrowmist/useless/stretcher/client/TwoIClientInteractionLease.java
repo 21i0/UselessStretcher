@@ -5,10 +5,10 @@ import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 
 /** One heartbeat per second while any 2i interaction page is open, with a single close signal. */
 @EventBusSubscriber(modid = UselessStretcherMod.MODID, value = Dist.CLIENT)
@@ -21,7 +21,8 @@ public final class TwoIClientInteractionLease {
     private TwoIClientInteractionLease() { }
 
     @SubscribeEvent
-    public static void tick(ClientTickEvent.Post event) {
+    public static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         Minecraft client = Minecraft.getInstance();
         if (client.getConnection() != connection || client.level != level) {
             // A new connection/world may reuse an entity id. Never send the old release to it.

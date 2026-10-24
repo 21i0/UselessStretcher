@@ -3,14 +3,14 @@ package com.sorrowmist.useless.stretcher.init;
 import com.mojang.serialization.Codec;
 import com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
-import net.minecraft.core.component.DataComponentType;
+import com.sorrowmist.useless.compat.forge1201.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import com.sorrowmist.useless.compat.forge1201.network.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredHolder;
+import com.sorrowmist.useless.compat.forge1201.registry.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.function.UnaryOperator;
 /** Data components for the wondrous staff's time-acceleration control. */
 public final class StretcherComponents {
     private static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS =
-            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, UselessStretcherMod.MODID);
+            DeferredRegister.createLocal(UselessStretcherMod.MODID);
 
     /** Selected acceleration multiplier. 0 = off; valid presets range from 2 to 1024. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WONDROUS_STAFF_SPEED =
@@ -87,12 +87,12 @@ public final class StretcherComponents {
             integerComponent("two_i_bond");
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_OWNER =
             register("two_i_owner", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
-                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, java.util.UUID>of((buffer, value) -> buffer.writeUUID(value),
                             buffer -> buffer.readUUID())));
     /** Stable physical identity distinguishes two held dolls when the player swaps hands. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_DOLL_ID =
             register("two_i_doll_id", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
-                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, java.util.UUID>of((buffer, value) -> buffer.writeUUID(value),
                             buffer -> buffer.readUUID())));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<TwoIDollMemory>> TWO_I_MEMORY =
             register("two_i_memory", builder -> builder.persistent(TwoIDollMemory.CODEC));
@@ -103,7 +103,7 @@ public final class StretcherComponents {
     /** Server-validated structure selected by a dimension capsule. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> CAPSULE_STRUCTURE =
             register("capsule_structure", builder -> builder.persistent(Codec.STRING)
-                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, String>of(FriendlyByteBuf::writeUtf, buffer -> buffer.readUtf())));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CAPSULE_ROTATION =
             integerComponent("capsule_rotation");
 
@@ -121,7 +121,7 @@ public final class StretcherComponents {
                     .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> APOTHEOSIS_WORLD_TIER =
             register("apotheosis_world_tier", builder -> builder.persistent(Codec.STRING)
-                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, String>of(FriendlyByteBuf::writeUtf, buffer -> buffer.readUtf())));
 
     /** Whether Shift+right-click places an independent range instead of accelerating one target. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_PLACEMENT_MODE =
@@ -176,16 +176,16 @@ public final class StretcherComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceLocation>>> RANGE_FILTERS =
             register("range_filters", builder -> builder
                     .persistent(ResourceLocation.CODEC.listOf().xmap(List::copyOf, List::copyOf))
-                    .networkSynchronized(StreamCodec.of(
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, List<ResourceLocation>>of(
                             (buffer, values) -> {
                                 buffer.writeVarInt(values.size());
-                                for (ResourceLocation value : values) ResourceLocation.STREAM_CODEC.encode(buffer, value);
+                                for (ResourceLocation value : values) com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.encode(buffer, value);
                             },
                             buffer -> {
                                 int size = buffer.readVarInt();
                                 if (size < 0 || size > 128) throw new IllegalArgumentException("Invalid range filter count: " + size);
                                 List<ResourceLocation> values = new ArrayList<>(size);
-                                for (int i = 0; i < size; i++) values.add(ResourceLocation.STREAM_CODEC.decode(buffer));
+                                for (int i = 0; i < size; i++) values.add(com.sorrowmist.useless.compat.forge1201.network.PortCodecs.RESOURCE_LOCATION.decode(buffer));
                                 return List.copyOf(values);
                             })));
 
@@ -193,12 +193,12 @@ public final class StretcherComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> PATTERN_ASSEMBLY_REF =
             register("pattern_assembly_ref", builder -> builder
                     .persistent(Codec.STRING)
-                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, String>of(FriendlyByteBuf::writeUtf, buffer -> buffer.readUtf())));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> MYRIAD_MOLD_REF =
             register("myriad_mold_ref", builder -> builder
                     .persistent(Codec.STRING)
-                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+                    .networkSynchronized(StreamCodec.<FriendlyByteBuf, String>of(FriendlyByteBuf::writeUtf, buffer -> buffer.readUtf())));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MYRIAD_MOLD_COUNT =
             integerComponent("myriad_mold_count");

@@ -56,7 +56,7 @@ public final class SurfaceCapsuleChecks {
             check(restored.rooms.get(room.key()).generating, "accepted job survives SavedData serialization");
             var before = room.plan.copy();
             NativeCapsules.stopped(null);
-            NativeCapsules.started(new net.neoforged.neoforge.event.server.ServerStartedEvent(server));
+            NativeCapsules.started(new net.minecraftforge.event.server.ServerStartedEvent(server));
             check(room.plan.equals(before), "background resume retains exact native plan");
             resumed = true;
         }
@@ -66,7 +66,7 @@ public final class SurfaceCapsuleChecks {
         NativeCapsules.notifyReady(CapsuleInstances.get(server),room,player);
         NativeCapsules.notifyReady(CapsuleInstances.get(server),room,player);
         check(room.completionNotified && readyPackets==beforePackets+1,"login completion sends exactly one ready payload");
-        var target = server.getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.dimension)));
+        var target = server.getLevel(net.minecraft.resources.ResourceKey.create(Registries.DIMENSION, new ResourceLocation(room.dimension)));
         int chests=0, loot=0, archaeology=0, tnt=0, dispensers=0, blocks=0;
         for (int x=room.minX; x<=room.maxX; x++) for (int z=room.minZ; z<=room.maxZ; z++) {
             check(target.getBlockState(new BlockPos(x,room.minY-1,z)).is(Blocks.BEDROCK), "complete foundation below basement");

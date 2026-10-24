@@ -10,22 +10,23 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 /** Occultism's production lives in both block entities and spirit jobs. */
-final class OccultismAccelerationCompat {
+public final class OccultismAccelerationCompat {
     private OccultismAccelerationCompat() { }
 
-    /** Null means unknown; a known idle bowl must not fall back to dirty/inventory heuristics. */
-    static Boolean knownActivity(BlockEntity target) {
-        if (!(target instanceof GoldenSacrificialBowlBlockEntity bowl)) return null;
-        return bowl.getCurrentRitualRecipe() != null && bowl.sacrificeFulfilled() && bowl.itemUseFulfilled();
-    }
-
-    static boolean isWorking(BlockEntity target) {
+    public static boolean isWorking(BlockEntity target) {
         if (target instanceof DimensionalMineshaftBlockEntity miner) return miner.miningTime > 0;
         if (target instanceof DimensionalBattlefieldBlockEntity battlefield) return battlefield.mobHealth > 0;
         return Boolean.TRUE.equals(knownActivity(target));
     }
 
-    static boolean advanceSpirit(LivingEntity target, int extra) {
+    /** Null means unsupported; a known idle bowl must not use dirty/inventory heuristics. */
+    public static Boolean knownActivity(BlockEntity target) {
+        if (!(target instanceof GoldenSacrificialBowlBlockEntity bowl)) return null;
+        return bowl.getCurrentRitualRecipe() != null
+                && bowl.sacrificeFulfilled() && bowl.itemUseFulfilled();
+    }
+
+    public static boolean advanceSpirit(LivingEntity target, int extra) {
         if (!(target instanceof SpiritEntity spirit) || !(spirit.level() instanceof ServerLevel level)) return false;
         if (!spirit.isAlive()) return true;
         if (!spirit.isInitialized()) spirit.init();

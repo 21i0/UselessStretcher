@@ -14,7 +14,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -45,8 +45,8 @@ public final class TwoIInteractionChecks {
             doll.acceptGift(owner);
             check(doll.getGiftScore() == 11 && owner.getMainHandItem().getCount() == 1, "consecutive precious gifts each grant five");
             ItemStack saved = doll.toDollItem();
-            check(saved.get(StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 0
-                    && saved.get(StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 0,
+            check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 0
+                    && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 0,
                     "precious gifts neither spend the ordinary budget nor start its cooldown");
             doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
             doll.acceptGift(owner);
@@ -61,15 +61,15 @@ public final class TwoIInteractionChecks {
                             && doll.getBubbleText().equals("msg.useless_stretcher.two_i.gift_daily_limit"),
                     "ordinary daily cap accepts gift with synchronized no-bond bubble");
             saved = doll.toDollItem();
-            check(saved.get(StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
-                    && saved.get(StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200,
+            check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
+                    && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200,
                     "ordinary budget and cooldown persisted");
             doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
             doll.talkTo(owner);
             int afterChat = doll.getGiftScore();
             doll.acceptGift(owner);
             check(owner.getMainHandItem().isEmpty() && doll.getGiftScore() == afterChat
-                            && doll.toDollItem().get(StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1,
+                            && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(doll.toDollItem(), StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1,
                     "recall or ordinary chat cannot reset gift budget");
 
             int before = doll.getGiftScore();
@@ -78,8 +78,8 @@ public final class TwoIInteractionChecks {
             check(doll.getGiftScore() == before + 10 && owner.getMainHandItem().isEmpty(),
                     "precious gifts bypass both an active ordinary cooldown and spent daily budget");
             saved = doll.toDollItem();
-            check(saved.get(StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
-                    && saved.get(StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200,
+            check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
+                    && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200,
                     "precious gifts do not clear or extend ordinary restrictions");
             CompoundTag entitySave = doll.saveWithoutId(new CompoundTag());
             doll.load(entitySave);
@@ -121,8 +121,8 @@ public final class TwoIInteractionChecks {
             before = doll.getGiftScore(); doll.acceptGift(owner);
             saved = doll.toDollItem();
             check(doll.getGiftScore() == before + 1 && owner.getMainHandItem().getCount() == 2
-                            && saved.get(StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
-                            && saved.get(StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200
+                            && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
+                            && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200
                             && doll.getBubbleMessage().getString().contains("1"),
                     "uncatalogued gift grants one, starts cooldown and synchronizes a parameterized bubble");
             doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
@@ -141,8 +141,8 @@ public final class TwoIInteractionChecks {
             clearCooldown(doll, "giftCooldown");
             // Earlier versions could save repetition history without the later daily budget.
             saved = doll.toDollItem();
-            var previous = saved.get(StretcherComponents.TWO_I_MEMORY.get());
-            saved.set(StretcherComponents.TWO_I_MEMORY.get(), new com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory(
+            var previous = com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get());
+            com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(saved, StretcherComponents.TWO_I_MEMORY.get(), new com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory(
                     previous.cooldowns(), new com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory.Interaction(
                     7, 0, 0, 0, 0, 0, -1, "minecraft:cookie", 2, 0), previous.lastCompanionSample()));
             doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
@@ -201,14 +201,14 @@ public final class TwoIInteractionChecks {
         check(doll.getGiftScore() == bond && guest.getMainHandItem().getCount() == 2
                 && ((java.util.Map<?, ?>)sessions.get(doll)).isEmpty(), "forged stranger gift/chat/story cannot change relationship");
         ItemStack owned = doll.toDollItem();
-        check(owner.getUUID().equals(owned.get(StretcherComponents.TWO_I_OWNER.get())), "recall preserves owner on item");
+        check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(owned, StretcherComponents.TWO_I_OWNER.get())), "recall preserves owner on item");
         owned = ItemStack.parse(level.registryAccess(), owned.save(level.registryAccess())).orElseThrow();
         guest.setItemInHand(InteractionHand.MAIN_HAND, owned);
         var item = (TwoIDollItem)ModItems.TWO_I_DOLL.get();
         check(item.use(level, guest, InteractionHand.MAIN_HAND).getResult() == net.minecraft.world.InteractionResult.FAIL,
                 "foreign item refuses UI on real use path");
         check(!TwoIDollItem.deploy(guest, InteractionHand.MAIN_HAND)
-                && owner.getUUID().equals(owned.get(StretcherComponents.TWO_I_OWNER.get())), "foreign deployment cannot rebind owner");
+                && owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(owned, StretcherComponents.TWO_I_OWNER.get())), "foreign deployment cannot rebind owner");
         ItemStack legacy = new ItemStack(ModItems.TWO_I_DOLL.get());
         check(TwoIDollItem.claimOrCheckOwner(legacy, owner) && !TwoIDollItem.claimOrCheckOwner(legacy, guest),
                 "legacy item binds exactly once to its first holder");
