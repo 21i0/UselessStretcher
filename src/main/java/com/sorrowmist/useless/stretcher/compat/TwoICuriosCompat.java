@@ -67,8 +67,9 @@ public final class TwoICuriosCompat {
             for (var entry : inventory.getCurios().entrySet()) {
                 var stacks = entry.getValue().getStacks();
                 for (int i = 0; i < stacks.getSlots(); i++) {
-                    if (!inventory.getLockedSlots().contains(entry.getKey()))
-                        TwoICarriedCompanionship.sampleCarried(player, stacks.getStackInSlot(i), time);
+                    // Curios 5 exposes only existing functional slots. Its old
+                    // getLockedSlots default allocates an empty set every call.
+                    TwoICarriedCompanionship.sampleCarried(player, stacks.getStackInSlot(i), time);
                 }
             }
         });

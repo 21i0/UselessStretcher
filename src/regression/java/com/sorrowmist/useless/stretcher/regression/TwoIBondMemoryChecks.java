@@ -8,7 +8,6 @@ import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -28,12 +27,12 @@ public final class TwoIBondMemoryChecks {
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), -42);
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_MEMORY.get(), memory);
-        original.set(DataComponents.CUSTOM_NAME, Component.literal("A named friend"));
-        original.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+        original.setHoverName(Component.literal("A named friend"));
+        original.enchant(net.minecraft.world.item.enchantment.Enchantments.UNBREAKING, 1);
         TwoIDollEntity doll = ModEntities.TWO_I_DOLL.get().create(level);
         check(doll != null, "entity creates");
         doll.restoreFromItem(original);
-        check(ItemStack.isSameItemSameComponents(original, doll.toDollItem()), "item to entity to item");
+        check(ItemStack.isSameItemSameTags(original, doll.toDollItem()), "item to entity to item");
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), 100);
         check(doll.getGiftScore() == -42, "entity owns a copy of its complete stack");
 
@@ -50,10 +49,10 @@ public final class TwoIBondMemoryChecks {
         var display = new TwoIDollDisplayBlockEntity(BlockPos.ZERO, state);
         display.setDoll(returned);
         var loadedDisplay = BlockEntity.loadStatic(BlockPos.ZERO, state,
-                display.saveWithFullMetadata(level.registryAccess()), level.registryAccess());
+                display.saveWithFullMetadata());
         check(loadedDisplay instanceof TwoIDollDisplayBlockEntity, "display round trip");
         loaded.restoreFromItem(((TwoIDollDisplayBlockEntity) loadedDisplay).copyDoll());
-        check(ItemStack.isSameItemSameComponents(returned, loaded.toDollItem()),
+        check(ItemStack.isSameItemSameTags(returned, loaded.toDollItem()),
                 "entity to item to display to item to entity keeps all components");
 
         CompoundTag legacy = new CompoundTag();

@@ -16,7 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 
 import java.util.UUID;
 
@@ -46,14 +46,14 @@ public final class TwoICompanionshipChecks {
                 player.setItemInHand(InteractionHand.OFF_HAND, main);
                 tick(player);
             }
-            check(ItemStack.isSameItemSameComponents(leftBefore, left)
-                            && ItemStack.isSameItemSameComponents(rightBefore, right),
+            check(ItemStack.isSameItemSameTags(leftBefore, left)
+                            && ItemStack.isSameItemSameTags(rightBefore, right),
                     "200 companion seconds and hand swaps cause zero per-second item component changes");
             check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(left, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000
                             && data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(right, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
                     "world records advance independently and repeated events/swaps do not double-count");
 
-            var decoded = TwoICompanionshipData.load(data.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
+            var decoded = TwoICompanionshipData.load(data.save(new CompoundTag()), level.registryAccess());
             check(decoded.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(left, StretcherComponents.TWO_I_DOLL_ID.get()), TwoIDollMemory.empty()).ticks() == 4000,
                     "world SavedData encode/load retains progress while the item snapshot remains unchanged");
             for (int second = 200; second < 295; second++) { time(level, 192_000L + second * 20L); tick(player); }
@@ -80,8 +80,7 @@ public final class TwoICompanionshipChecks {
                 check(entity.getGiftScore() == 1, "entity awards at the exact 6000-tick combined threshold");
                 ItemStack returned = entity.toDollItem();
                 check(carriedId.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(returned, StretcherComponents.TWO_I_DOLL_ID.get())), "recall keeps the hand-swap identity");
-                player.setItemSlot(EquipmentSlot.HEAD, ItemStack.parseOptional(level.registryAccess(),
-                        (CompoundTag)returned.save(level.registryAccess())));
+                player.setItemSlot(EquipmentSlot.HEAD, ItemStack.of(returned.save(new CompoundTag())));
                 tick(player);
                 check(TwoIDollItem.getBond(player.getItemBySlot(EquipmentSlot.HEAD)) == 1
                                 && data.progress(carriedId, TwoIDollMemory.empty()).ticks() == 0,
@@ -122,7 +121,7 @@ public final class TwoICompanionshipChecks {
         var award = data.sample(id, legacy, 192_100);
         check(award.awarded() && award.progress().ticks() == 80,
                 "migration keeps the legacy twenty-tick remainder with the five-second clock");
-        var restored = TwoICompanionshipData.load(data.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
+        var restored = TwoICompanionshipData.load(data.save(new CompoundTag()), level.registryAccess());
         check(restored.progress(id, TwoIDollMemory.empty()).ticks() == 80,
                 "non-hundred-tick migration remainder survives serialization");
         var merged = award.progress().merge(legacy).interaction();
@@ -156,6 +155,6 @@ public final class TwoICompanionshipChecks {
     }
 
     private static void time(ServerLevel level, long time) { level.getServer().getWorldData().overworldData().setGameTime(time); }
-    private static void tick(net.minecraft.server.level.ServerPlayer player) { TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player)); }
+    private static void tick(net.minecraft.server.level.ServerPlayer player) { TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player)); }
     private static void check(boolean passed, String message) { if (!passed) throw new AssertionError("2i companion storage: " + message); }
 }

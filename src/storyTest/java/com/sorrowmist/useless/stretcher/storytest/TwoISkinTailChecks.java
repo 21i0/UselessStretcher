@@ -227,8 +227,8 @@ final class TwoISkinTailChecks {
                     pose.mulPose(Axis.YP.rotationDegrees(180));
                     var buffers=minecraft.renderBuffers().bufferSource();
                     TwoIDollHandRenderer.renderOnPalm(new ItemStack(ModItems.TWO_I_DOLL.get()),HumanoidArm.RIGHT,
-                            new net.minecraft.client.resources.PlayerSkin(new ResourceLocation("textures/entity/player/wide/steve.png"),
-                                    null,null,null,net.minecraft.client.resources.PlayerSkin.Model.WIDE,true),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
+                            new com.sorrowmist.useless.stretcher.client.render.NativePlayerSkin(new ResourceLocation("textures/entity/player/wide/steve.png"),
+                                    "default"),true,true,pose,buffers,LightTexture.FULL_BRIGHT,
                             i==5?motion[frame]:TwoIDollCarryMotion.Pose.STILL,TwoIDollWeather.Pose.CLEAR,time);
                     buffers.endBatch();pose.popPose();
                     g.drawCenteredString(font,i==2?"actual palm: tail peeks on both sides":"actual palm: jump / fall / land / turn",x,base+10,0xFF24364C);
@@ -237,7 +237,7 @@ final class TwoISkinTailChecks {
                 var pose=g.pose();pose.pushPose();pose.translate(x,base-24/16F*scale,100);pose.scale(scale,scale,scale);
                 pose.mulPose(Axis.YP.rotationDegrees(i==1||i==4?90:i==2||i==5?180:0));
                 var buffers=minecraft.renderBuffers().bufferSource();
-                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);buffers.endBatch();pose.popPose();
                 g.fill(x-120,base+1,x+120,base+2,0xFF65758A);g.drawCenteredString(font,names[i],x,base+10,0xFF24364C);
             }
@@ -258,7 +258,7 @@ final class TwoISkinTailChecks {
                 var pose=g.pose();pose.pushPose();pose.translate(x,base-24/16F*scale,100);pose.scale(scale,scale,scale);
                 pose.mulPose(Axis.YP.rotationDegrees(i==0||i==3?90:i==1?0:40));
                 var buffers=minecraft.renderBuffers().bufferSource();
-                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);buffers.endBatch();pose.popPose();
                 g.fill(x-100,base+1,x+100,base+2,0xFF65758A);
             }
@@ -288,7 +288,7 @@ final class TwoISkinTailChecks {
                 pose.translate(x,base-24/16F*scale,100);pose.scale(scale,scale,scale);
                 pose.mulPose(Axis.YP.rotationDegrees(i==1||i==3?90:i==2||i==4?0:165));
                 var buffers=minecraft.renderBuffers().bufferSource();
-                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
                 buffers.endBatch();pose.popPose();
                 g.fill(x-42,base+1,x+42,base+2,0xFF65758A);g.drawCenteredString(font,names[i],x,base+8,0xFF24364C);
@@ -301,7 +301,7 @@ final class TwoISkinTailChecks {
                 pose.mulPose(Axis.YP.rotationDegrees(150));
                 TwoIDollThirdPerson.poseArm(player,HumanoidArm.RIGHT,60);
                 TwoIDollThirdPerson.poseArm(player,HumanoidArm.LEFT,60);
-                player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation("textures/entity/player/wide/steve.png"))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation("textures/entity/player/wide/steve.png"))),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 if(i==0)TwoIDollHeadLayer.renderOnHead(item,player.head,pose,buffers,LightTexture.FULL_BRIGHT);
                 else if(i==1||i==2){TwoIDollThirdPerson.render(item,player,HumanoidArm.RIGHT,false,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);TwoIDollThirdPerson.render(item,player,HumanoidArm.LEFT,false,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);}
                 else {pose.scale(.7F,.7F,.7F);TwoIDollItemRenderer.get().renderByItem(item,ItemDisplayContext.GUI,pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);}

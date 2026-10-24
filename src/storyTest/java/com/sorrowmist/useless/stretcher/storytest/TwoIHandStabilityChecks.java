@@ -6,7 +6,7 @@ import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.ClientHooks;
+import net.minecraftforge.client.ForgeHooksClient;
 
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public final class TwoIHandStabilityChecks {
     private TwoIHandStabilityChecks() { }
 
     public static void run() throws Exception {
-        var selectedSlot = ClientHooks.class.getDeclaredField("slotMainHand");
+        var selectedSlot = ForgeHooksClient.class.getDeclaredField("slotMainHand");
         selectedSlot.setAccessible(true);
         int originalSlot = selectedSlot.getInt(null);
         try {
@@ -34,17 +34,17 @@ public final class TwoIHandStabilityChecks {
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_BOND.get(), Math.min(2, second / 300));
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_INVITATION_USED.get(), second > 500);
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(synced, StretcherComponents.TWO_I_ROTATION.get(), second % 16);
-                    check(!ClientHooks.shouldCauseReequipAnimation(displayed, synced, slot),
+                    check(!ForgeHooksClient.shouldCauseReequipAnimation(displayed, synced, slot),
                             "stationary carried doll must not reequip after companion/owner/bond updates in slot " + slot);
                     displayed = synced;
                 }
-                check(!ClientHooks.shouldCauseReequipAnimation(displayed, displayed.copy(), slot),
+                check(!ForgeHooksClient.shouldCauseReequipAnimation(displayed, displayed.copy(), slot),
                         "identical item resync must not move the hand");
-                check(ClientHooks.shouldCauseReequipAnimation(displayed, ItemStack.EMPTY, slot),
+                check(ForgeHooksClient.shouldCauseReequipAnimation(displayed, ItemStack.EMPTY, slot),
                         "putting the doll away still animates");
-                check(ClientHooks.shouldCauseReequipAnimation(ItemStack.EMPTY, displayed, slot),
+                check(ForgeHooksClient.shouldCauseReequipAnimation(ItemStack.EMPTY, displayed, slot),
                         "taking the doll out still animates");
-                check(ClientHooks.shouldCauseReequipAnimation(displayed, new ItemStack(Items.STONE), slot),
+                check(ForgeHooksClient.shouldCauseReequipAnimation(displayed, new ItemStack(Items.STONE), slot),
                         "switching to another item still animates");
             }
             ItemStack doll = new ItemStack(ModItems.TWO_I_DOLL.get());
@@ -54,17 +54,17 @@ public final class TwoIHandStabilityChecks {
             // Player action: repeatedly exchange the two otherwise identical dolls between the hands.
             selectedSlot.setInt(null, 0);
             for (int swap = 0; swap < 100; swap++) {
-                check(ClientHooks.shouldCauseReequipAnimation(doll, otherDoll, 0),
+                check(ForgeHooksClient.shouldCauseReequipAnimation(doll, otherDoll, 0),
                         "dual-doll hand swap must still animate the main hand");
-                check(ClientHooks.shouldCauseReequipAnimation(otherDoll, doll, -1),
+                check(ForgeHooksClient.shouldCauseReequipAnimation(otherDoll, doll, -1),
                         "dual-doll hand swap must still animate the off hand");
                 ItemStack previous = doll; doll = otherDoll; otherDoll = previous;
             }
             selectedSlot.setInt(null, 0);
-            check(ClientHooks.shouldCauseReequipAnimation(doll, doll.copy(), 1),
+            check(ForgeHooksClient.shouldCauseReequipAnimation(doll, doll.copy(), 1),
                     "switching hotbar slots still animates even between dolls");
             ItemStack stone = new ItemStack(Items.STONE);
-            check(ClientHooks.shouldCauseReequipAnimation(stone, stone.copy(), -1),
+            check(ForgeHooksClient.shouldCauseReequipAnimation(stone, stone.copy(), -1),
                     "the ordinary item's hook remains unchanged");
             LogUtils.getLogger().info("2I HAND STABILITY PASSED: 1200 real sync hooks without idle reequip; 100 dual-doll hand swaps animate both hands; put-away/take-out/item/slot changes preserved");
         } finally {

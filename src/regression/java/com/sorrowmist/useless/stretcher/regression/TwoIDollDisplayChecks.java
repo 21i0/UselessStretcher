@@ -5,7 +5,6 @@ import com.sorrowmist.useless.stretcher.init.ModBlocks;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -22,18 +21,18 @@ public final class TwoIDollDisplayChecks {
         ItemStack original = new ItemStack(ModItems.TWO_I_DOLL.get());
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), -87);
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
-        original.set(DataComponents.CUSTOM_NAME, Component.literal("2i regression skin companion"));
-        original.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+        original.setHoverName(Component.literal("2i regression skin companion"));
+        original.enchant(net.minecraft.world.item.enchantment.Enchantments.UNBREAKING, 1);
         display.setDoll(original);
-        check(ItemStack.isSameItemSameComponents(original, display.copyDoll()), "stored full stack");
+        check(ItemStack.isSameItemSameTags(original, display.copyDoll()), "stored full stack");
         ItemStack copy = display.copyDoll();
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(copy, StretcherComponents.TWO_I_BOND.get(), 100);
         check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.getOrDefault(display.copyDoll(), StretcherComponents.TWO_I_BOND.get(), 0) == -87,
                 "returned copy cannot mutate storage");
         var restored = BlockEntity.loadStatic(BlockPos.ZERO, state,
-                display.saveWithFullMetadata(level.registryAccess()), level.registryAccess());
+                display.saveWithFullMetadata());
         check(restored instanceof TwoIDollDisplayBlockEntity, "registered type loads");
-        check(ItemStack.isSameItemSameComponents(original, ((TwoIDollDisplayBlockEntity)restored).copyDoll()),
+        check(ItemStack.isSameItemSameTags(original, ((TwoIDollDisplayBlockEntity)restored).copyDoll()),
                 "save-load preserves signed bond, invitation, custom name and unrelated components");
         var legacy = new TwoIDollDisplayBlockEntity(BlockPos.ZERO, state);
         check(legacy.copyDoll().is(ModItems.TWO_I_DOLL.get()), "old stateless decoration has a safe fallback");
@@ -45,7 +44,7 @@ public final class TwoIDollDisplayChecks {
         check(display.isSpinning() && Math.abs(display.rotationAt(now + 50) - 90) < .001F,
                 "one click starts continuous time-based rotation");
         var rotating = (TwoIDollDisplayBlockEntity) BlockEntity.loadStatic(BlockPos.ZERO, state,
-                display.saveWithFullMetadata(level.registryAccess()), level.registryAccess());
+                display.saveWithFullMetadata());
         check(rotating.isSpinning() && rotating.rotationAt(now + 87.5) == display.rotationAt(now + 87.5),
                 "reload and client update preserve rotation phase");
         rotating.setLevel(level);
@@ -64,7 +63,7 @@ public final class TwoIDollDisplayChecks {
         BlockPos pos = new BlockPos(54, 180, 54);
         var old = level.getBlockState(pos);
         var oldBlockEntity = level.getBlockEntity(pos);
-        var oldTag = oldBlockEntity == null ? null : oldBlockEntity.saveWithFullMetadata(level.registryAccess());
+        var oldTag = oldBlockEntity == null ? null : oldBlockEntity.saveWithFullMetadata();
         var block = ModBlocks.TWO_I_DOLL_DISPLAY.get();
         try {
             level.setBlockAndUpdate(pos, state);
@@ -73,19 +72,15 @@ public final class TwoIDollDisplayChecks {
             var display = (TwoIDollDisplayBlockEntity)level.getBlockEntity(pos);
             check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(display.copyDoll(), StretcherComponents.TWO_I_OWNER.get())),
                     "placing a legacy doll records the placer as owner");
-            var use = block.getClass().getDeclaredMethod("useWithoutItem", net.minecraft.world.level.block.state.BlockState.class,
-                    net.minecraft.world.level.Level.class, BlockPos.class, net.minecraft.world.entity.player.Player.class,
-                    net.minecraft.world.phys.BlockHitResult.class);
-            use.setAccessible(true);
             var hit = new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(pos),
                     net.minecraft.core.Direction.UP, pos, false);
-            check(use.invoke(block, state, level, pos, guest, hit) == net.minecraft.world.InteractionResult.FAIL
+            check(block.use(state, level, pos, guest, net.minecraft.world.InteractionHand.MAIN_HAND, hit) == net.minecraft.world.InteractionResult.FAIL
                     && !display.isSpinning(), "stranger cannot rotate someone else's display");
             guest.setShiftKeyDown(true);
-            check(use.invoke(block, state, level, pos, guest, hit) == net.minecraft.world.InteractionResult.FAIL
+            check(block.use(state, level, pos, guest, net.minecraft.world.InteractionHand.MAIN_HAND, hit) == net.minecraft.world.InteractionResult.FAIL
                     && level.getBlockEntity(pos) == display, "stranger shift pickup refuses without removing the display");
             guest.setShiftKeyDown(false);
-            use.invoke(block, state, level, pos, owner, hit);
+            block.use(state, level, pos, owner, net.minecraft.world.InteractionHand.MAIN_HAND, hit);
             check(display.isSpinning(), "owner may still rotate their display");
             check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(block.getCloneItemStack(level, pos, state), StretcherComponents.TWO_I_OWNER.get())),
                     "display pick keeps ownership");
@@ -93,7 +88,7 @@ public final class TwoIDollDisplayChecks {
         } finally {
             guest.setShiftKeyDown(false);
             level.setBlockAndUpdate(pos, old);
-            if (oldTag != null) level.setBlockEntity(BlockEntity.loadStatic(pos, old, oldTag, level.registryAccess()));
+            if (oldTag != null) level.setBlockEntity(BlockEntity.loadStatic(pos, old, oldTag));
         }
     }
 

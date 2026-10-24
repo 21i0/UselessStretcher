@@ -11,6 +11,21 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 repositories {
     mavenCentral()
     exclusiveContent {
+        forRepository {
+            if (providers.gradleProperty('uselessModRepository').isPresent()) {
+                maven { url = uri(providers.gradleProperty('uselessModRepository').get()) }
+            } else {
+                ivy {
+                    name = 'UselessModReleases'
+                    url = 'https://github.com/SorrowMist/UselessMod/releases/download'
+                    patternLayout { artifact '[revision]/[artifact]-[revision].[ext]' }
+                    metadataSources { artifact() }
+                }
+            }
+        }
+        filter { includeModule 'com.sorrowmist.useless', 'useless_mod' }
+    }
+    exclusiveContent {
         forRepository { maven { url = 'https://api.modrinth.com/maven' } }
         filter { includeGroup 'maven.modrinth' }
     }
@@ -34,15 +49,16 @@ legacyForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
 sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
-// Compile against the deobfuscated development jar, never the reobfuscated release jar.
-// Build the matching UselessMod checkout first, or provide -PuselessModDevJar=/path/to/dev.jar.
+// ModDev remaps the official release for compilation and game checks. A matching
+// development jar remains an explicit override for upstream development only.
+ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.6'
 def uselessModDevJar = providers.gradleProperty('uselessModDevJar')
-        .map { file(it) }.getOrElse(file('../UselessMod/build/devlibs/useless_mod-20.2.4.6.jar'))
+        .map { file(it) }
 configurations.modCompileOnly.transitive = false
 tasks.named('compileJava') {
     doFirst {
-        if (!uselessModDevJar.isFile()) throw new GradleException(
-            'Build UselessMod 20.2.4.6 with gradlew jar first, or set -PuselessModDevJar to its build/devlibs jar.')
+        if (uselessModDevJar.isPresent() && !uselessModDevJar.get().isFile())
+            throw new GradleException('uselessModDevJar must point to a matching build/devlibs development jar.')
     }
 }
 dependencies {
@@ -84,7 +100,8 @@ dependencies {
     modCompileOnly 'maven.modrinth:sk9knFPE:uNALdylI' // rhino-forge-2001.2.3-build.10
     modCompileOnly 'maven.modrinth:19smZ71v:zAGXClGI' // summoningrituals-forge-1.20.1-2.0.8
     modCompileOnly 'maven.modrinth:1Ro7m06l:8krhHkrZ' // titanium-1.20.1-3.8.32
-    compileOnly files(uselessModDevJar)
+    if (uselessModDevJar.isPresent()) compileOnly files(uselessModDevJar.get())
+    else modCompileOnly uselessModRelease
     compileOnly 'io.github.llamalad7:mixinextras-common:0.5.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.5.0'
@@ -123,3 +140,4 @@ tasks.named('processResources', ProcessResources) {
 }
 
 apply from: 'gradle/capsule-checks.gradle'
+apply from: 'gradle/doll-checks.gradle'

@@ -79,7 +79,7 @@ public final class StoryLibraryChecks {
         var gallery = new TwoIStoryGalleryScreen(library);
         check(gallery.interactionEntityId() == 7, "gallery retains original entity interaction");
         client.setScreen(gallery);
-        gallery.mouseScrolled(0, 0, 0, 1);
+        gallery.mouseScrolled(0, 0, 1);
         check((int) get(gallery, "index") == 16, "gallery wraps backwards");
         gallery.resize(client, 320, 240);
         check((int) get(gallery, "index") == 16, "gallery resize keeps selected art");

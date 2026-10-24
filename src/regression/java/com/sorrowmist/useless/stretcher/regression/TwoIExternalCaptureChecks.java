@@ -47,10 +47,10 @@ final class TwoIExternalCaptureChecks {
             var jar = (BlockEntity) jarType.getConstructor(BlockPos.class, BlockState.class)
                     .newInstance(pos, jarBlock.defaultBlockState());
             jar.setLevel(level);
-            CompoundTag before = jar.saveWithFullMetadata(level.registryAccess());
+            CompoundTag before = jar.saveWithFullMetadata();
             check(!(Boolean) jarType.getMethod("setEntityData", Entity.class).invoke(jar, doll), "direct jar capture rejects 2i");
             jarType.getMethod("writeSimple", Entity.class).invoke(jar, doll);
-            check(before.equals(jar.saveWithFullMetadata(level.registryAccess())),
+            check(before.equals(jar.saveWithFullMetadata()),
                     "both direct jar capture paths preserve all container data");
             CompoundTag tag = new CompoundTag();
             tag.putString("id", "useless_stretcher:two_i_doll");
@@ -75,7 +75,7 @@ final class TwoIExternalCaptureChecks {
                 check(!doll.isRemoved() && level.getBlockState(pos).isAir(),
                         "amber encasing leaves 2i untouched and places no clone");
                 var tag = new net.minecraft.nbt.CompoundTag();
-                tag.putString("id", "useless_stretcher:two_i_doll");
+                tag.putString("entityType", "useless_stretcher:two_i_doll");
                 Class<?> amber = Class.forName("cy.jdkdigital.productivebees.common.block.entity.AmberBlockEntity");
                 Method decode = amber.getMethod("createEntity", Level.class, net.minecraft.nbt.CompoundTag.class);
                 check(decode.invoke(null, level, tag) == null,
@@ -86,7 +86,7 @@ final class TwoIExternalCaptureChecks {
                 amber.getMethod("setEntity", Mob.class).invoke(container, doll);
                 check(amber.getField("entityTag").get(container) == null,
                         "direct amber setter refuses to serialize 2i");
-                tag.putString("id", "minecraft:chicken");
+                tag.putString("entityType", "minecraft:chicken");
                 check(decode.invoke(null, level, tag) instanceof net.minecraft.world.entity.animal.Chicken,
                         "ordinary amber thawing still works");
             } finally {

@@ -33,7 +33,7 @@ import net.minecraft.world.level.levelgen.presets.WorldPresets;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.client.event.ClientTickEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
@@ -57,11 +57,12 @@ public final class TwoICuriosClientChecks {
                 Difficulty.PEACEFUL, true, new GameRules(), WorldDataConfiguration.DEFAULT);
         client.createWorldOpenFlows().createFreshLevel("curios-preview-" + System.currentTimeMillis(), settings,
                 new WorldOptions(2L, false, false), access -> access.registryOrThrow(Registries.WORLD_PRESET)
-                        .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions(), client.screen);
+                        .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions());
     }
 
     @SubscribeEvent
-    public static void tick(ClientTickEvent.Post event) {
+    public static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (!active || finished) return;
         Minecraft client = Minecraft.getInstance();
         try {
@@ -72,7 +73,7 @@ public final class TwoICuriosClientChecks {
                 UUID owner = client.player.getUUID();
                 client.getSingleplayerServer().execute(() -> {
                     var player = client.getSingleplayerServer().getPlayerList().getPlayer(owner);
-                    var inventory = CuriosApi.getCuriosInventory(player).orElseThrow();
+                    var inventory = CuriosApi.getCuriosInventory(player).orElseThrow(() -> new AssertionError("missing Curios capability"));
                     var stack = new ItemStack(ModItems.TWO_I_DOLL.get());
                     TwoIDollItem.claimOrCheckOwner(stack, player);
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_DOLL_ID.get(), DOLL);
@@ -80,7 +81,10 @@ public final class TwoICuriosClientChecks {
                 });
                 return;
             }
-            var inventory = CuriosApi.getCuriosInventory(client.player).orElseThrow();
+            var syncedInventory = CuriosApi.getCuriosInventory(client.player);
+            if (!syncedInventory.isPresent()) return;
+            var inventory = syncedInventory.orElseThrow(() -> new AssertionError("missing Curios capability"));
+            if (inventory.getStacksHandler("ring").isEmpty()) return;
             if (!displayed) {
                 ItemStack stack = inventory.getStacksHandler("ring").orElseThrow().getStacks().getStackInSlot(0);
                 if (!DOLL.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_DOLL_ID.get()))) return;
@@ -106,7 +110,7 @@ public final class TwoICuriosClientChecks {
 
     private static void validate(Minecraft client) {
         var player = client.player;
-        var inventory = CuriosApi.getCuriosInventory(player).orElseThrow();
+        var inventory = CuriosApi.getCuriosInventory(player).orElseThrow(() -> new AssertionError("missing Curios capability"));
         var saved = inventory.saveInventory(false);
         ItemStack headBefore = player.getItemBySlot(EquipmentSlot.HEAD);
         try {
@@ -158,7 +162,7 @@ public final class TwoICuriosClientChecks {
                     pose.scale(170, 170, 170);
                     pose.mulPose(Axis.YP.rotationDegrees(i == 1 ? 90 : 165));
                     var buffers = minecraft.renderBuffers().bufferSource();
-                    var vertices = buffers.getBuffer(RenderType.entityCutoutNoCull(player.getSkin().texture()));
+                    var vertices = buffers.getBuffer(RenderType.entityCutoutNoCull(player.getSkinTextureLocation()));
                     model.head.render(pose, vertices, LightTexture.FULL_BRIGHT, 0);
                     model.hat.render(pose, vertices, LightTexture.FULL_BRIGHT, 0);
                     new CuriosLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>(renderer).render(pose, buffers,

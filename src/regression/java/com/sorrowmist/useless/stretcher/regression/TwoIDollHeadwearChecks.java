@@ -3,7 +3,6 @@ package com.sorrowmist.useless.stretcher.regression;
 import com.mojang.authlib.GameProfile;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
@@ -29,10 +27,10 @@ final class TwoIDollHeadwearChecks {
         ItemStack original = new ItemStack(ModItems.TWO_I_DOLL.get());
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_BOND.get(), 47);
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(original, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
-        original.set(DataComponents.CUSTOM_NAME, Component.literal("2i headwear memory"));
+        original.setHoverName(Component.literal("2i headwear memory"));
         CompoundTag future = new CompoundTag();
         future.putString("future_skin", "unchanged-by-equipment");
-        original.set(DataComponents.CUSTOM_DATA, CustomData.of(future));
+        original.getOrCreateTag().merge(future);
         try {
             check(player.getEquipmentSlotForItem(original) == EquipmentSlot.HEAD,
                     "vanilla equipment lookup selects head slot");
@@ -76,7 +74,7 @@ final class TwoIDollHeadwearChecks {
     }
 
     private static void unchanged(ItemStack original, ItemStack current, String message) {
-        check(current.getCount() == 1 && ItemStack.isSameItemSameComponents(original, current), message);
+        check(current.getCount() == 1 && ItemStack.isSameItemSameTags(original, current), message);
     }
 
     private static void check(boolean ok, String message) {

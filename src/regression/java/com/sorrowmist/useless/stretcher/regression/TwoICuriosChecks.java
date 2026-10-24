@@ -15,7 +15,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.common.event.CuriosEventHandler;
@@ -36,7 +36,7 @@ public final class TwoICuriosChecks {
         }
         var player = FakePlayerFactory.get(level, new GameProfile(OWNER, "TwoICurios"));
         player.setPos(59, 180, 59);
-        var inventory = CuriosApi.getCuriosInventory(player).orElseThrow();
+        var inventory = CuriosApi.getCuriosInventory(player).orElseThrow(() -> new AssertionError("missing Curios capability"));
         check(inventory.getCurios().keySet().containsAll(java.util.List.of("back", "belt", "body", "bracelet",
                 "charm", "hands", "head", "necklace", "ring", "two_i_custom")), "standard slots and custom slot registered");
         // Do not assign the generic curio type in entity data: its universal fallback would mask the custom deny validator.
@@ -50,7 +50,7 @@ public final class TwoICuriosChecks {
                 var handler = entry.getValue();
                 for (int i = 0; i < handler.getStacks().getSlots(); i++) {
                     var menuSlot = new CurioSlot(player, handler.getStacks(), i, entry.getKey(), 0, 0,
-                            handler.getRenders(), handler.getActiveStates(), true, true, false);
+                            handler.getRenders(), true, true, false);
                     check(menuSlot.mayPlace(doll) && handler.getStacks().isItemValid(i, doll), "real menu and handler accept " + entry.getKey() + i);
                     check(!com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(doll, StretcherComponents.TWO_I_OWNER.get()) && !com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(doll, StretcherComponents.TWO_I_DOLL_ID.get()),
                             "simulated validation does not bind/mutate an unequipped item");
@@ -61,10 +61,10 @@ public final class TwoICuriosChecks {
             var context = new SlotContext("two_i_custom", player, 0, false, true);
             check(!CuriosApi.isStackValid(context, doll), "restrictive custom validators really reject the raw doll");
             check(!custom.getStacks().isItemValid(0, new ItemStack(Items.DIAMOND)), "ordinary items remain rejected by restrictive custom slot");
-            check(!CuriosApi.getCurio(doll).orElseThrow().canEquipFromUse(context), "right-click remains the doll panel, never Curios auto-equip");
+            check(!CuriosApi.getCurio(doll).orElseThrow(() -> new AssertionError("missing Curios capability")).canEquipFromUse(context), "right-click remains the doll panel, never Curios auto-equip");
             check(custom.getStacks().insertItem(0, doll, false).isEmpty(), "actual insert succeeds in restrictive slot");
             // Curios invokes inventoryTick and onEquip on the living-tick event.
-            new CuriosEventHandler().tick(new net.minecraftforge.event.tick.EntityTickEvent.Post(player));
+            new CuriosEventHandler().tick(new net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent(player));
             ItemStack equipped = custom.getStacks().getStackInSlot(0);
             check(OWNER.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(equipped, StretcherComponents.TWO_I_OWNER.get())) && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.has(equipped, StretcherComponents.TWO_I_DOLL_ID.get()),
                     "real Curios tick claims first equip once");
@@ -72,18 +72,18 @@ public final class TwoICuriosChecks {
             com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(equipped, StretcherComponents.TWO_I_BOND.get(), 37);
             com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(equipped, StretcherComponents.TWO_I_MEMORY.get(), TwoIDollMemory.empty());
             var other = FakePlayerFactory.get(level, new GameProfile(UUID.randomUUID(), "TwoICurioOther"));
-            var otherHandler = CuriosApi.getCuriosInventory(other).orElseThrow().getStacksHandler("two_i_custom").orElseThrow();
+            var otherHandler = CuriosApi.getCuriosInventory(other).orElseThrow(() -> new AssertionError("missing Curios capability")).getStacksHandler("two_i_custom").orElseThrow();
             check(!otherHandler.getStacks().isItemValid(0, equipped) && !otherHandler.getCosmeticStacks().isItemValid(0, equipped),
                     "both actual slot kinds reject another player's doll");
             ItemStack before = equipped.copy();
             custom.getRenders().set(0, false);
             for (int tick = 0; tick < 2000; tick++) { time(level, 240_000L + tick); tick(player); }
-            check(ItemStack.isSameItemSameComponents(equipped, before), "2000 ticks of hidden accessory companionship cause zero item writes");
+            check(ItemStack.isSameItemSameTags(equipped, before), "2000 ticks of hidden accessory companionship cause zero item writes");
             var data = TwoICompanionshipData.get(level.getServer());
             check(data.progress(id, TwoIDollMemory.empty()).ticks() == 2000, "hidden display still earns only five-second samples");
             // Move the complete stack: accessory -> hands -> accessory, preserving UUID, memory and bond.
             equipped = custom.getStacks().extractItem(0, 1, false);
-            check(custom.getStacks().getStackInSlot(0).isEmpty() && ItemStack.isSameItemSameComponents(equipped, before), "unequip preserves one complete doll without duplication");
+            check(custom.getStacks().getStackInSlot(0).isEmpty() && ItemStack.isSameItemSameTags(equipped, before), "unequip preserves one complete doll without duplication");
             player.setItemSlot(EquipmentSlot.OFFHAND, equipped);
             for (int tick = 2000; tick < 4000; tick++) { time(level, 240_000L + tick); tick(player); }
             player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
@@ -91,28 +91,30 @@ public final class TwoICuriosChecks {
             for (int tick = 4000; tick < 6000; tick++) { time(level, 240_000L + tick); tick(player); tick(player); }
             check(TwoIDollItem.getBond(equipped) == 38 && data.progress(id, TwoIDollMemory.empty()).ticks() == 0,
                     "6000 combined ticks award exactly once even with duplicate events");
-            custom.getActiveStates().set(1, false);
+            // Curios 5 has no per-index active toggle. Removing the functional
+            // stack is its native way to stop counting this accessory.
+            ItemStack suspended = custom.getStacks().extractItem(1, 1, false);
             for (int tick = 6000; tick < 7000; tick++) { time(level, 240_000L + tick); tick(player); }
-            check(data.progress(id, TwoIDollMemory.empty()).ticks() == 0, "inactive slots do not earn companionship");
-            custom.getActiveStates().set(1, true);
+            check(data.progress(id, TwoIDollMemory.empty()).ticks() == 0, "unequipped slots do not earn companionship");
+            check(custom.getStacks().insertItem(1, suspended, false).isEmpty(), "restore suspended functional accessory");
             ItemStack cosmetic = new ItemStack(ModItems.TWO_I_DOLL.get());
             TwoIDollItem.claimOrCheckOwner(cosmetic, player);
             custom.getCosmeticStacks().setStackInSlot(0, cosmetic);
             var cosmeticBefore = cosmetic.copy();
             for (int tick = 7000; tick < 7100; tick++) { time(level, 240_000L + tick); tick(player); }
-            check(ItemStack.isSameItemSameComponents(cosmetic, cosmeticBefore), "cosmetic-only slots give visual appearance without functional companion reward");
+            check(ItemStack.isSameItemSameTags(cosmetic, cosmeticBefore), "cosmetic-only slots give visual appearance without functional companion reward");
 
             var saved = inventory.saveInventory(false);
             custom.getStacks().setStackInSlot(1, ItemStack.EMPTY);
             inventory.loadInventory(saved);
             ItemStack restored = inventory.getStacksHandler("two_i_custom").orElseThrow().getStacks().getStackInSlot(1);
-            check(ItemStack.isSameItemSameComponents(restored, equipped), "actual Curios inventory save/load preserves complete doll and identity");
-            var decoded = TwoICompanionshipData.load(data.save(new CompoundTag(), level.registryAccess()), level.registryAccess());
+            check(ItemStack.isSameItemSameTags(restored, equipped), "actual Curios inventory save/load preserves complete doll and identity");
+            var decoded = TwoICompanionshipData.load(data.save(new CompoundTag()), level.registryAccess());
             check(decoded.progress(id, TwoIDollMemory.empty()).equals(data.progress(id, TwoIDollMemory.empty())), "world timer save/load matches Curios companion progress");
 
             java.nio.file.Path restartFile = java.nio.file.Path.of("curios-doll-restart.nbt");
             if (java.nio.file.Files.exists(restartFile)) {
-                var nbt = net.minecraft.nbt.NbtIo.read(restartFile);
+                var nbt = net.minecraft.nbt.NbtIo.read(restartFile.toFile());
                 inventory.loadInventory(nbt.getList("Inventory", 10));
                 ItemStack previous = inventory.getStacksHandler("two_i_custom").orElseThrow().getStacks().getStackInSlot(0);
                 check(RESTART_DOLL.equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(previous, StretcherComponents.TWO_I_DOLL_ID.get()))
@@ -132,8 +134,8 @@ public final class TwoICuriosChecks {
                     new TwoIDollMemory.Interaction(10, 0, 0, 0, 0, 2300, -1, "", 0, 0), 240_000);
             data.progress(RESTART_DOLL, fixture);
             var nbt = new CompoundTag(); nbt.put("Inventory", inventory.saveInventory(false));
-            net.minecraft.nbt.NbtIo.write(nbt, restartFile);
-            LogUtils.getLogger().info("2I CURIOS PASSED: ten native slot types/custom deny-validator/menu validation/cosmetic/owner; actual equip, move/save/load; 2000 ticks zero item changes, 6000 combined ticks +1, hidden/inactive and duplicate samples");
+            net.minecraft.nbt.NbtIo.write(nbt, restartFile.toFile());
+            LogUtils.getLogger().info("2I CURIOS PASSED: ten native slot types/custom deny-validator/menu validation/cosmetic/owner; actual equip, move/save/load; 2000 ticks zero item changes, 6000 combined ticks +1, hidden/unequipped and duplicate samples");
         } finally {
             clear(inventory);
             player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
@@ -150,6 +152,6 @@ public final class TwoICuriosChecks {
         });
     }
     private static void time(ServerLevel level, long time) { level.getServer().getWorldData().overworldData().setGameTime(time); }
-    private static void tick(ServerPlayer player) { TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player)); }
+    private static void tick(ServerPlayer player) { TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player)); }
     private static void check(boolean passed, String message) { if (!passed) throw new AssertionError("2i Curios: " + message); }
 }

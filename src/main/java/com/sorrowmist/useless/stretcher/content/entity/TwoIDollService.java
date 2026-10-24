@@ -314,7 +314,7 @@ public final class TwoIDollService {
     private static void dropReward(ServerPlayer player, TwoIStarfieldData data) {
         if (!player.level().dimension().equals(TwoIStarfieldDimensions.KEY)
                 || data.rewardsRemaining(player.getUUID()) <= 0 || data.celebrationEnd(player.getUUID()) <= player.level().getGameTime()) return;
-        var item = BuiltInRegistries.ITEM.get(new ResourceLocation("ae2", "creative_storage_cell"));
+        var item = BuiltInRegistries.ITEM.get(appeng.api.ids.AEItemIds.ITEM_CELL_CREATIVE);
         if (item == Items.AIR) return;
         Vec3 pos = player.position().add(player.getRandom().nextDouble() * 4.0D - 2.0D, 7.0D,
                 player.getRandom().nextDouble() * 4.0D - 2.0D);

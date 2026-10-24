@@ -87,7 +87,7 @@ public final class TwoIStarfieldServerChecks {
         overworld.setBlockAndUpdate(origin.below(), Blocks.STONE.defaultBlockState());
         overworld.setBlockAndUpdate(origin, Blocks.AIR.defaultBlockState());
         overworld.setBlockAndUpdate(origin.above(), Blocks.AIR.defaultBlockState());
-        player.moveTo(Vec3.atBottomCenterOf(origin), 63.0F, -12.0F);
+        player.moveTo(origin.getX() + .5D, origin.getY(), origin.getZ() + .5D, 63.0F, -12.0F);
         Vec3 originalPosition = player.position();
         player.fallDistance = 80.0F;
         player.setDeltaMovement(1.0D, -8.0D, 1.0D);
@@ -120,26 +120,26 @@ public final class TwoIStarfieldServerChecks {
 
         Method dropReward = TwoIDollService.class.getDeclaredMethod("dropReward", ServerPlayer.class, TwoIStarfieldData.class);
         dropReward.setAccessible(true);
-        var creative = BuiltInRegistries.ITEM.get(new ResourceLocation("ae2:creative_storage_cell"));
+        var creative = appeng.core.definitions.AEItems.ITEM_CELL_CREATIVE.asItem();
         var drops = new ArrayList<ItemEntity>();
         // No real player watches this distant chunk during ServerStartedEvent. The persistent entity
         // manager accepts spawned items but deliberately excludes HIDDEN sections from spatial queries.
         // Capture actual join events, then verify accepted entities, not visibility of a fake player's chunk.
         Consumer<EntityJoinLevelEvent> capture = event -> {
             if (event.getLevel() == stars && event.getEntity() instanceof ItemEntity item
-                    && item.getItem().is(creative) && id.equals(item.getTarget())) drops.add(item);
+                    && item.getItem().is(creative) && ownedBy(item, id)) drops.add(item);
         };
         MinecraftForge.EVENT_BUS.addListener(capture);
         try {
             for (int i = 0; i < 3; i++) dropReward.invoke(null, player, data);
-            TwoIStarfieldData restored = TwoIStarfieldData.load(data.save(new CompoundTag(), stars.registryAccess()), stars.registryAccess());
+            TwoIStarfieldData restored = TwoIStarfieldData.load(data.save(new CompoundTag()), stars.registryAccess());
             check(restored.rewardsRemaining(id) == 5, "server drop progress persists after three real item spawns");
             check(restored.returnPoint(id).equals(point), "server return position survives save/read roundtrip");
             for (int i = 0; i < 20; i++) dropReward.invoke(null, player, restored);
             check(drops.size() == 8 && restored.rewardsRemaining(id) == 0,
                     "real drops cap at eight across saved and restored ledger");
-            check(drops.stream().allMatch(item -> item.isAddedToLevel() && !item.isRemoved()
-                            && id.equals(item.getTarget()) && item.isInvulnerable()),
+            check(drops.stream().allMatch(item -> item.isAddedToWorld() && !item.isRemoved()
+                            && ownedBy(item, id) && item.isInvulnerable()),
                     "eight drops were actually accepted, owner-bound and protected from damage");
             restored.beginVisit(id, stars.getGameTime(), true);
             check(TwoIDollService.tryStartCourtyardShow(player, restored), "revisit can replay the courtyard show");
@@ -177,7 +177,7 @@ public final class TwoIStarfieldServerChecks {
     }
 
     private static void companionVisit(ServerLevel overworld, ServerLevel stars, TravelPlayer player, Vec3 origin) {
-        player.moveTo(origin, 0.0F, 0.0F);
+        player.moveTo(origin.x, origin.y, origin.z, 0.0F, 0.0F);
         TwoIDollEntity original = com.sorrowmist.useless.stretcher.init.ModEntities.TWO_I_DOLL.get().create(overworld);
         original.setOwnerId(player.getUUID());
         original.restoreBond(100, false);
@@ -208,7 +208,7 @@ public final class TwoIStarfieldServerChecks {
         MinecraftForge.EVENT_BUS.addListener(cancelArrival);
         try {
             check(TwoIDollService.sendPlayerToStarfield(player, false, original), "visitor can enter when companion arrival is cancelled");
-            check(!original.isRemoved() && original.isAddedToLevel() && original.level() == overworld,
+            check(!original.isRemoved() && original.isAddedToWorld() && original.level() == overworld,
                     "cancelled destination join revives and restores the exact source doll");
             check(currentDoll(stars, player.getUUID(), dollId) == null,
                     "cancelled destination join never leaves a duplicate companion");
@@ -267,5 +267,9 @@ public final class TwoIStarfieldServerChecks {
 
     private static void check(boolean condition, String message) {
         if (!condition) throw new AssertionError(message);
+    }
+
+    private static boolean ownedBy(ItemEntity item, UUID owner) {
+        return owner.equals(item.saveWithoutId(new CompoundTag()).getUUID("Owner"));
     }
 }

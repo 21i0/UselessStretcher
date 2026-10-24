@@ -5,7 +5,7 @@ license="MIT"
 modId="useless_stretcher"
 version="${mod_version}"
 displayName="Useless Stretcher"
-description="Wildcard molds, remote pattern delivery, dimension capsules and time-acceleration tools for Useless Mod."
+description="Wildcard molds, remote patterns, dimension capsules, time acceleration and the animated 2i companion with a six-chapter visual novel for Useless Mod."
 [[dependencies.useless_stretcher]]
 modId="forge"
 mandatory=true

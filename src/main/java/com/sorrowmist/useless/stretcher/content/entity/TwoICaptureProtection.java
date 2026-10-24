@@ -9,7 +9,8 @@ public final class TwoICaptureProtection {
 
     public static boolean containsDoll(CompoundTag tag) {
         if (tag == null) return false;
-        if ("useless_stretcher:two_i_doll".equals(tag.getString("id"))) return true;
+        if ("useless_stretcher:two_i_doll".equals(tag.getString("id"))
+                || "useless_stretcher:two_i_doll".equals(tag.getString("entityType"))) return true;
         for (Tag passenger : tag.getList("Passengers", Tag.TAG_COMPOUND)) {
             if (containsDoll((CompoundTag) passenger)) return true;
         }

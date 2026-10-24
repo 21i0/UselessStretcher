@@ -117,8 +117,8 @@ public final class TwoIForcedKillChecks {
         var callback=(net.minecraft.world.level.entity.EntityInLevelCallback)callbackField.get(doll);
         ticking.remove(doll);lookup.remove(doll);check(!section.remove(doll),"direct spatial-section purge rejected");
         callback.onRemove(Entity.RemovalReason.KILLED);
-        doll.setLevelCallback(net.minecraft.world.level.entity.EntityInLevelCallback.NULL);doll.onRemovedFromLevel();
-        check(callbackField.get(doll)==callback&&doll.isAddedToLevel(),"direct callback/lifecycle detachment rejected");
+        doll.setLevelCallback(net.minecraft.world.level.entity.EntityInLevelCallback.NULL);doll.onRemovedFromWorld();
+        check(callbackField.get(doll)==callback&&doll.isAddedToWorld(),"direct callback/lifecycle detachment rejected");
         preserved(level,doll,ticking,uuid,id,origin,"direct tick/lookup/section/callback purge");
         var callbacksField=manager.getClass().getDeclaredField("callbacks");callbacksField.setAccessible(true);
         @SuppressWarnings("unchecked") var callbacks=(net.minecraft.world.level.entity.LevelCallback<Entity>)callbacksField.get(manager);

@@ -27,13 +27,13 @@ public final class TwoIStarfieldDataChecks {
         check(!data.beginCelebration(first, 1_020L), "standing inside cannot repeatedly restart the show");
         check(data.celebrationEnd(first) == 1_600L, "celebration lasts thirty seconds");
         for (int i = 0; i < 3; i++) data.recordRewardDrop(first);
-        TwoIStarfieldData loaded = TwoIStarfieldData.load(data.save(new CompoundTag(), registries), registries);
+        TwoIStarfieldData loaded = TwoIStarfieldData.load(data.save(new CompoundTag()), registries);
         check(loaded.slotFor(first) == slot, "area survives world reload");
         check(loaded.rewardsRemaining(first) == 5, "reward progress survives world reload");
         check(loaded.celebrationEnd(first) == 1_600L, "celebration deadline survives world reload");
         loaded.beginVisit(first, 2_000L, false);
         check(loaded.rewardsRemaining(first) == 5, "revisit resumes only unissued rewards");
-        loaded = TwoIStarfieldData.load(loaded.save(new CompoundTag(), registries), registries);
+        loaded = TwoIStarfieldData.load(loaded.save(new CompoundTag()), registries);
         check(loaded.awaitsCourtyardEntry(first) && loaded.celebrationEnd(first) == 0L, "waiting outside survives reload without starting rain");
         for (int i = 0; i < 20; i++) loaded.recordRewardDrop(first);
         check(loaded.rewardsRemaining(first) == 0, "extra attempts never exceed eight drops");
@@ -43,11 +43,11 @@ public final class TwoIStarfieldDataChecks {
         check(loaded.rewardsRemaining(second) == 0, "legacy used invitation cannot pay rewards again");
         loaded.endCelebration(first);
         check(loaded.celebrationEnd(first) == 0L, "completion is persisted without repeated messages");
-        loaded = TwoIStarfieldData.load(loaded.save(new CompoundTag(), registries), registries);
+        loaded = TwoIStarfieldData.load(loaded.save(new CompoundTag()), registries);
         check(loaded.rewardsRemaining(first) == 0, "spent reward remains spent after reload");
         check(loaded.celebrationEnd(first) == 0L, "completed celebration does not restart");
 
-        CompoundTag saved = loaded.save(new CompoundTag(), registries);
+        CompoundTag saved = loaded.save(new CompoundTag());
         ListTag returns = new ListTag();
         returns.add(returnPoint(first, 12.5D));
         returns.add(returnPoint(second, Double.NaN));

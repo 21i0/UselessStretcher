@@ -11,13 +11,13 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## Forge 1.20.1 · 20.1.6.1
+## Forge 1.20.1 · 20.1.6.2
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-文件名为 `useless_stretcher-20.1.6.1.jar`，需搭配无用之物 `20.2.4.6`。
+文件名为 `useless_stretcher-20.1.6.2.jar`，搭配无用之物官方发布的 `20.2.4.6`。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。详细环境、证据和上游限制见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
@@ -41,22 +41,18 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 
 ## 构建与兼容范围
 
-先将本分支与对应的 UselessMod Forge 1.20.1 分支检出到同级的
-`UselessStretcher`、`UselessMod` 目录，使用 Java 17：
+使用 Java 17，构建会直接下载并映射官方无用之物发布包，不再需要相邻的本体源码目录：
 
 ```shell
-cd UselessMod
-./gradlew jar
-cd ../UselessStretcher
 ./gradlew build
 ```
 
-Windows 使用 `gradlew.bat`。也可通过 `-PuselessModDevJar=/path/to/dev.jar`
-指定主模组的 `build/devlibs/useless_mod-20.2.4.6.jar`，不可使用已重混淆的发布 JAR。
+Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDevJar=/path/to/dev.jar`
+显式替换为匹配的 `build/devlibs` 开发包。离线官方包可通过 `-PuselessModRepository=/path/to/maven` 提供，不能把发布包当成未映射的开发包。
 其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具。
 本分支针对 Forge 1.20.1。Occultism 1.158.0 与 RFToolsBuilder 6.0.10
 专用加速桥已补回构建；旧版 Occultism 只有粉碎精灵，不能套用 1.21 的另外两类加工精灵。
-原 NeoForge 场景测试保留为参考源码，未接入本分支的 `check`。
+玩偶与剧情回归已适配 Forge 1.20.1，通过 `-PdollChecks` 启用，运行任务为 `runDollServerCheck`、`runDollClientCheck`；收容防复制另加 `-PdollCaptureChecks`。测试代码和数据永远不进入发行 JAR。
 独立的 Forge 胶囊回归通过 `-PcapsuleChecks` 启用；实际验证范围与日志见
 [移植审计报告](docs/forge-1.20.1-port-audit.md)，不能把源码保留等同于运行验证。
 

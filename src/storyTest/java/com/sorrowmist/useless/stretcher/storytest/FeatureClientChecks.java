@@ -47,7 +47,7 @@ final class FeatureClientChecks {
                 var settings=new LevelSettings("Phase and capsule ready",GameType.SURVIVAL,false,Difficulty.PEACEFUL,true,new GameRules(),WorldDataConfiguration.DEFAULT);
                 client.createWorldOpenFlows().createFreshLevel("phase-ready-"+System.currentTimeMillis(),settings,
                         new WorldOptions(2L,false,false),access->access.registryOrThrow(Registries.WORLD_PRESET)
-                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions(),client.screen);
+                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions());
                 return;
             }
             if(client.player==null||client.level==null||client.getSingleplayerServer()==null)return;

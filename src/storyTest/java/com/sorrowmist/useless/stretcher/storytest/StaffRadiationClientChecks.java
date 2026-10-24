@@ -10,7 +10,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.client.event.ClientTickEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -29,7 +29,8 @@ final class StaffRadiationClientChecks {
         client.setScreen(null);
     }
 
-    private static void tick(ClientTickEvent.Post event) {
+    private static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (stage == 99) return;
         var client = Minecraft.getInstance();
         try {

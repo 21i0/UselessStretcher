@@ -24,7 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.PlayerSkin;
+import com.sorrowmist.useless.stretcher.client.render.NativePlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.network.chat.Component;
@@ -45,7 +45,7 @@ public final class DollRenderChecks {
                 "doll item shares the short localized block name");
         var tooltip = new java.util.ArrayList<Component>();
         ModItems.TWO_I_DOLL.get().appendHoverText(new ItemStack(ModItems.TWO_I_DOLL.get()),
-                net.minecraft.world.item.Item.TooltipContext.EMPTY, tooltip, net.minecraft.world.item.TooltipFlag.NORMAL);
+                null, tooltip, net.minecraft.world.item.TooltipFlag.NORMAL);
         check(tooltip.stream().noneMatch(line -> line.getString().contains("two_i.png")
                         || line.getString().contains("Replaceable skin") || line.getString().contains("可替换皮肤")),
                 "player tooltip retains mascot identity without skin replacement instructions");
@@ -289,15 +289,15 @@ public final class DollRenderChecks {
                     pose.mulPose(Axis.YP.rotationDegrees(165));
                     var buffers = minecraft.renderBuffers().bufferSource();
                     model.renderToBuffer(pose, buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),
-                            LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+                            LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                     model.renderAccessories(pose, buffers, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
                     buffers.endBatch();
                     pose.popPose();
                     graphics.fill(x - 30, baseY + 1, x + 30, baseY + 2, 0xFF71899B);
                     graphics.drawCenteredString(font, names[variant], x, baseY + 8, 0xFFFFFFFF);
                 }
-                PlayerSkin fixtureSkin = new PlayerSkin(new ResourceLocation(
-                        "textures/entity/player/wide/steve.png"), null, null, null, PlayerSkin.Model.WIDE, true);
+                NativePlayerSkin fixtureSkin = new NativePlayerSkin(new ResourceLocation(
+                        "textures/entity/player/wide/steve.png"), "default");
                 for (HumanoidArm arm : HumanoidArm.values()) {
                     int x = width * (arm == HumanoidArm.LEFT ? 2 : 5) / 7;
                     var pose = graphics.pose();
@@ -379,7 +379,7 @@ public final class DollRenderChecks {
                     pose.mulPose(Axis.YP.rotationDegrees(i==1?90:i==2?0:165));
                     var buffers=minecraft.renderBuffers().bufferSource();
                     model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),
-                            LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                            LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                     model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
                     buffers.endBatch(); pose.popPose();
                     g.fill(x-35,base+1,x+35,base+2,0xFF71899B);
@@ -397,7 +397,7 @@ public final class DollRenderChecks {
                     pose.translate(x,320,100); pose.scale(90,90,90); pose.mulPose(Axis.YP.rotationDegrees(145));
                     var buffers=minecraft.renderBuffers().bufferSource();
                     var skin=new ResourceLocation(slim?"textures/entity/player/slim/alex.png":"textures/entity/player/wide/steve.png");
-                    player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(skin)),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                    player.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(skin)),LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                     TwoIDollThirdPerson.render(stack,player,side,slim,pose,buffers,LightTexture.FULL_BRIGHT,TwoIDollCarryMotion.Pose.STILL);
                     buffers.endBatch(); pose.popPose();
                     g.drawCenteredString(font,(slim?"Alex crouch ":"Steve ")+side,x,470,0xFFFFFFFF);
@@ -413,7 +413,7 @@ public final class DollRenderChecks {
                     pose.translate(x,base-24/16F*scale,100); pose.scale(scale,scale,scale); pose.mulPose(Axis.YP.rotationDegrees(170));
                     var buffers=minecraft.renderBuffers().bufferSource();
                     model.renderToBuffer(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(TwoIDollSkin.texture(model.blink()))),
-                            LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+                            LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                     model.renderAccessories(pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
                     buffers.endBatch(); pose.popPose();
                     g.drawCenteredString(font,new String[]{"jump: look around","fall: arms up","eyes open","eyes closed","sitting rain","sitting sneeze"}[i],x,base+12,0xFFFFFFFF);

@@ -9,7 +9,6 @@ import com.sorrowmist.useless.stretcher.event.WondrousStaffLeafDropHandler;
 import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
@@ -22,8 +21,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.event.level.BlockDropsEvent;
-import net.minecraftforge.event.tick.ServerTickEvent;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,42 +55,44 @@ final class LeafRewardChecks {
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(true);
             StretcherConfig.SERVER_STAFF_LEAF_DROP_PROBABILITY.set(1D);
             StretcherConfig.SERVER_DOLL_LEAF_DROP_PROBABILITY.set(1D);
-            var cancelled = drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
-            cancelled.setCanceled(true);
-            WondrousStaffLeafDropHandler.onBlockDrops(cancelled);
-            MinecraftForge.EVENT_BUS.post(drop(level, null, Blocks.OAK_LEAVES.defaultBlockState()));
-            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.STONE.defaultBlockState()));
+            var cancel = new CancelBreak();
+            MinecraftForge.EVENT_BUS.register(cancel);
+            try { drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()); }
+            finally { MinecraftForge.EVENT_BUS.unregister(cancel); }
+            check(level.getBlockState(DROP_POS).is(Blocks.OAK_LEAVES), "cancelled break keeps leaves");
+            drop(level, null, Blocks.OAK_LEAVES.defaultBlockState());
+            drop(level, player, Blocks.STONE.defaultBlockState());
             player.gameMode.changeGameModeForPlayer(GameType.CREATIVE);
-            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
             player.gameMode.changeGameModeForPlayer(GameType.SPECTATOR);
-            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
             player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL);
             check(!data.hasRolledStaff(player.getUUID()) && !data.hasRolledDoll(player.getUUID()),
                     "cancelled/non-player/non-leaf/creative/spectator events do not roll");
 
             StretcherConfig.SERVER_STAFF_LEAF_DROP.set(false);
-            MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
             check(data.hasClaimedDoll(player.getUUID()) && !data.hasRolledStaff(player.getUUID()),
                     "doll can roll and deliver while staff is disabled");
             StretcherConfig.SERVER_STAFF_LEAF_DROP.set(true);
-            for (int i = 0; i < 8; i++) MinecraftForge.EVENT_BUS.post(drop(level, player, Blocks.OAK_LEAVES.defaultBlockState()));
+            for (int i = 0; i < 8; i++) drop(level, player, Blocks.OAK_LEAVES.defaultBlockState());
             check(player.getInventory().countItem(ModItems.TWO_I_DOLL.get()) == 1
                             && player.getInventory().countItem(ModItems.WONDROUS_STAFF.get()) == 1,
                     "doll-first order independently awards staff and never repeats either reward");
 
             var staffFirst = new FakePlayer(level, new GameProfile(UUID.randomUUID(), "LeafStaffFirst"));
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(false);
-            MinecraftForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState());
             check(data.hasClaimedStaff(staffFirst.getUUID()) && !data.hasRolledDoll(staffFirst.getUUID()),
                     "staff can roll while doll is disabled");
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(true);
-            MinecraftForge.EVENT_BUS.post(drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, staffFirst, Blocks.OAK_LEAVES.defaultBlockState());
             check(data.hasClaimedDoll(staffFirst.getUUID()), "claimed staff does not consume doll roll");
 
             var full = new FakePlayer(level, new GameProfile(UUID.randomUUID(), "LeafFullInventory"));
             full.setPos(12, 160, 12);
             fill(full);
-            MinecraftForge.EVENT_BUS.post(drop(level, full, Blocks.OAK_LEAVES.defaultBlockState()));
+            drop(level, full, Blocks.OAK_LEAVES.defaultBlockState());
             UUID id = full.getUUID();
             check(data.hasPendingStaff(id) && data.hasPendingDoll(id), "both rewards remain pending with full inventory");
             check(carriers(level, id).size() == 2, "one visual carrier per pending reward");
@@ -121,22 +122,22 @@ final class LeafRewardChecks {
             StretcherConfig.SERVER_STAFF_LEAF_DROP.set(false);
             StretcherConfig.SERVER_DOLL_LEAF_DROP.set(false);
             try {
-                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent.Post(() -> true, level.getServer()));
+                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, () -> true, level.getServer()));
                 check(data.hasPendingStaff(id) && data.hasPendingDoll(id) && carriers(level, id).size() == 2,
                         "reconnect with full inventory keeps two pending rewards");
                 reconnect.getInventory().setItem(0, ItemStack.EMPTY);
-                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent.Post(() -> true, level.getServer()));
+                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, () -> true, level.getServer()));
                 check(data.hasClaimedStaff(id) && data.hasPendingDoll(id) && carriers(level, id).size() == 1,
                         "one free slot claims only one reward without erasing the other");
                 reconnect.getInventory().setItem(1, ItemStack.EMPTY);
-                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent.Post(() -> true, level.getServer()));
-                for (int i = 0; i < 4; i++) WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent.Post(() -> true, level.getServer()));
+                WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, () -> true, level.getServer()));
+                for (int i = 0; i < 4; i++) WondrousStaffLeafDropHandler.onServerTick(new ServerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, () -> true, level.getServer()));
                 check(data.hasClaimedDoll(id) && !data.isPending(id) && carriers(level, id).isEmpty(),
                         "pending delivery survives disabled rolls and removes visual carriers");
                 check(reconnect.getInventory().countItem(ModItems.WONDROUS_STAFF.get()) == 1
                                 && reconnect.getInventory().countItem(ModItems.TWO_I_DOLL.get()) == 1,
                         "repeated retry ticks deliver exactly one of each");
-                var saved = reload(data.save(new CompoundTag(), level.registryAccess()), level);
+                var saved = reload(data.save(new CompoundTag()), level);
                 check(saved.hasClaimedStaff(id) && saved.hasClaimedDoll(id)
                                 && !saved.beginStaffDelivery(id) && !saved.beginDollDelivery(id),
                         "claimed records survive reload and block new rolls");
@@ -188,7 +189,7 @@ final class LeafRewardChecks {
         loaded = reload(queueOnly, level);
         check(loaded.hasPendingDoll(pending), "interim queue without a claimed record keeps one pending doll");
         loaded.markDollDelivered(pending);
-        loaded = reload(loaded.save(new CompoundTag(), level.registryAccess()), level);
+        loaded = reload(loaded.save(new CompoundTag()), level);
         check(loaded.hasClaimedDoll(pending) && !loaded.hasPendingDoll(pending) && !loaded.beginDollDelivery(pending),
                 "interim count is limited to one lifetime reward");
         check(!new StaffLeafDropData().hasRolledStaff(pending), "another save starts with independent player records");
@@ -210,7 +211,7 @@ final class LeafRewardChecks {
     }
 
     private static StaffLeafDropData reload(CompoundTag tag, ServerLevel level) throws Exception {
-        var method = StaffLeafDropData.class.getDeclaredMethod("load", CompoundTag.class, HolderLookup.Provider.class);
+        var method = StaffLeafDropData.class.getDeclaredMethod("load", CompoundTag.class, net.minecraft.core.HolderLookup.Provider.class);
         method.setAccessible(true);
         return (StaffLeafDropData) method.invoke(null, tag, level.registryAccess());
     }
@@ -221,8 +222,24 @@ final class LeafRewardChecks {
         return list;
     }
 
-    private static BlockDropsEvent drop(ServerLevel level, Entity player, BlockState state) {
-        return new BlockDropsEvent(level, new BlockPos(12, 160, 12), state, null, new ArrayList<>(), player, ItemStack.EMPTY);
+    private static final BlockPos DROP_POS = new BlockPos(12, 160, 12);
+    public static final class CancelBreak {
+        @net.minecraftforge.eventbus.api.SubscribeEvent
+        public void cancel(BlockEvent.BreakEvent event) { event.setCanceled(true); }
+    }
+    private static void drop(ServerLevel level, Entity player, BlockState state) {
+        level.getChunkAt(DROP_POS);
+        level.setBlock(DROP_POS, state, 3);
+        if (player instanceof ServerPlayer serverPlayer) {
+            // Keep punching with an ordinary slot after rewards enter slot zero;
+            // the staff's own bulk-mining handler is a different break path.
+            serverPlayer.getInventory().selected = 8;
+            boolean broken = serverPlayer.gameMode.destroyBlock(DROP_POS);
+            LogUtils.getLogger().info("LEAF BREAK fixture: player={} mode={} broken={} remaining={}",
+                    serverPlayer.getScoreboardName(), serverPlayer.gameMode.getGameModeForPlayer(), broken, level.getBlockState(DROP_POS));
+        } else {
+            net.minecraft.world.level.block.Block.dropResources(state, level, DROP_POS, null, player, ItemStack.EMPTY);
+        }
     }
 
     private static List<StaffLeafRewardEntity> carriers(ServerLevel level, UUID owner) {

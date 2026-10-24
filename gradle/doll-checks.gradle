@@ -1,0 +1,57 @@
+// Real client/server checks for the complete Forge companion and visual novel.
+tasks.named('jar') {
+    exclude '**/regression/**', '**/storytest/**', '**/*Checks*.class', 'data/useless_stretcher_test/**'
+}
+if (providers.gradleProperty('dollChecks').isPresent()) {
+    def serverChecks = file('src/regression/java').toPath().toAbsolutePath()
+    sourceSets.main.java.srcDirs 'src/regression/java', 'src/storyTest/java', 'src/dollCheck/java'
+    sourceSets.main.java.exclude { element ->
+        def path = element.file.toPath().toAbsolutePath()
+        path.startsWith(serverChecks) && element.file.name.endsWith('.java') &&
+                !(element.file.name.startsWith('TwoI') || element.file.name == 'LeafRewardChecks.java')
+    }
+    sourceSets.main.resources.srcDir 'src/regression/resources'
+    if (providers.gradleProperty('dollCaptureRepository').isPresent()) {
+        repositories.maven {
+            url = uri(providers.gradleProperty('dollCaptureRepository').get())
+            content { includeGroup 'verification.capture' }
+        }
+    }
+    dependencies {
+        modRuntimeOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP'
+        modRuntimeOnly 'maven.modrinth:guideme:i7Tp1AHw'
+        modRuntimeOnly 'maven.modrinth:vvuO3ImH:IPQlZkz1'
+        if (!providers.gradleProperty('dollWithoutJei').isPresent())
+            modRuntimeOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ'
+        if (providers.gradleProperty('uselessModDevJar').isPresent())
+            runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        else modRuntimeOnly uselessModRelease
+        if (providers.gradleProperty('dollCaptureChecks').isPresent()) {
+            if (providers.gradleProperty('dollCaptureRepository').isPresent()) {
+                modRuntimeOnly 'verification.capture:ars_nouveau:4.12.7'
+                modRuntimeOnly 'verification.capture:productivebees:12.6.0'
+            } else {
+                modRuntimeOnly 'maven.modrinth:TKB6INcv:Hw2aD01e'
+                modRuntimeOnly 'maven.modrinth:jH6iiqkd:mywVOObd'
+            }
+            modRuntimeOnly 'maven.modrinth:8BmcQJ2H:aVW7Z5da'
+        }
+    }
+    legacyForge.runs {
+        dollServerCheck {
+            server()
+            gameDirectory = file(providers.gradleProperty('dollServerDirectory').getOrElse('run/doll-server-check'))
+            programArgument '--nogui'
+            systemProperty 'stretcher.dollCheck', 'true'
+            systemProperty 'stretcher.dollCaptureOnly', providers.gradleProperty('dollCaptureChecks').isPresent().toString()
+        }
+        dollClientCheck {
+            client()
+            gameDirectory = file(providers.gradleProperty('dollClientDirectory').getOrElse('run/doll-client-check'))
+            programArguments.addAll '--width', '1280', '--height', '800'
+            systemProperty 'useless_stretcher.story_test', 'true'
+            systemProperty 'useless_stretcher.skin_tail_only', providers.gradleProperty('skinTailOnly').getOrElse('false')
+            jvmArguments.addAll '-Xmx3G', '-Xms1G'
+        }
+    }
+}

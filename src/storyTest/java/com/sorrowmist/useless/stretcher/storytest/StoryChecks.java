@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.client.event.ClientTickEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
 import java.lang.reflect.Field;
@@ -48,10 +48,12 @@ public final class StoryChecks {
     private static final String[] LIBRARY_VIEWS = {"library", "library-small", "gallery-cg", "gallery-expression-small"};
     private static long firstDollScreenshotNanos;
     private static int[] firstDollPixels;
+    private static boolean nosePreview;
     private static final java.util.Map<TwoIStoryScreen, java.util.concurrent.atomic.AtomicLong> CLOCKS = new java.util.WeakHashMap<>();
 
     @SubscribeEvent
-    public static void tick(ClientTickEvent.Post event) {
+    public static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (!Boolean.getBoolean("useless_stretcher.story_test") || finished) return;
         Minecraft client = Minecraft.getInstance();
         if (Boolean.getBoolean("useless_stretcher.skin_tail_only")) {
@@ -93,15 +95,21 @@ public final class StoryChecks {
                 TwoICuriosClientChecks.start(client);
                 return;
             }
+            if (nosePreview) {
+                if (!TwoINoseChecks.tick(client)) return;
+                finished = true;
+                LogUtils.getLogger().info("STORY CHECKS PASSED: English/Chinese UI, all six chapters, original voice, library/gallery, animated plush and cold nose geometry");
+                if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) TwoICuriosClientChecks.start(client);
+                else client.stop();
+                return;
+            }
             if (courtyardPreview) {
                 if (frames-- > 0) return;
                 try (NativeImage shot = Screenshot.takeScreenshot(client.getMainRenderTarget())) {
                     shot.writeToFile(client.gameDirectory.toPath().resolve("screenshots/courtyard-blueprint.png"));
                 }
-                finished = true;
-                LogUtils.getLogger().info("STORY CHECKS PASSED: English/Chinese UI with Chinese long-form story; original voice/mute/pitch checks; unbound travel key; animated plush rig, library/gallery and courtyard block-model preview");
-                if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) TwoICuriosClientChecks.start(client);
-                else client.stop();
+                courtyardPreview = false;
+                nosePreview = true;
                 return;
             }
             if (libraryPreview) {
@@ -298,12 +306,12 @@ public final class StoryChecks {
         target.onChoiceResult(123L, -100, 2);
         check(integer(target, "bond") == 8, "wrong-round ACK cannot alter current story bond");
         target.resize(client, client.getWindow().getGuiScaledWidth(), client.getWindow().getGuiScaledHeight());
-        target.mouseScrolled(0, 0, 0, 1);
+        target.mouseScrolled(0, 0, 1);
         check(integer(target, "overlay") == 1, "scroll opens backlog");
         int priorReveal = integer(target, "revealed");
         invoke(target, "advance");
         for (int i = 0; i < 120; i++) step(target);
-        target.mouseScrolled(0, 0, 0, -10);
+        target.mouseScrolled(0, 0, -10);
         target.resize(client, 320, 240);
         check(integer(target, "stage") == 2 && integer(target, "lineIndex") == 0 && integer(target, "revealed") == priorReveal
                 && integer(target, "bond") == 8 && history(target).size() == history, "backlog stays read-only through scroll, advance, tick and resize");

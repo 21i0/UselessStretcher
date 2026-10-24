@@ -9,7 +9,6 @@ import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,12 +24,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.event.EventHooks;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +42,7 @@ final class TwoIDollSpawnEggChecks {
         check(SpawnEggItem.byId(ModEntities.TWO_I_DOLL.get()) == null, "2i has no registered spawn egg");
         for (var item : BuiltInRegistries.ITEM) {
             if (item instanceof SpawnEggItem egg) {
-                check(egg.getType(new ItemStack(item)) != ModEntities.TWO_I_DOLL.get(),
+                check(egg.getType(null) != ModEntities.TWO_I_DOLL.get(),
                         "no item registry egg defaults to 2i");
             }
         }
@@ -63,10 +61,10 @@ final class TwoIDollSpawnEggChecks {
         ItemStack mascot = new ItemStack(ModItems.TWO_I_DOLL.get());
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(mascot, StretcherComponents.TWO_I_BOND.get(), -23);
         com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(mascot, StretcherComponents.TWO_I_INVITATION_USED.get(), true);
-        mascot.set(DataComponents.CUSTOM_NAME, Component.literal("Pick keeps my custom skin"));
+        mascot.setHoverName(Component.literal("Pick keeps my custom skin"));
         CompoundTag future = new CompoundTag();
         future.putString("future_skin", "2i-custom.png");
-        mascot.set(DataComponents.CUSTOM_DATA, CustomData.of(future));
+        mascot.getOrCreateTag().merge(future);
         TwoIDollEntity doll = ModEntities.TWO_I_DOLL.get().create(level);
         check(doll != null, "normal direct factory remains available");
         doll.setPos(player.position());
@@ -105,19 +103,19 @@ final class TwoIDollSpawnEggChecks {
             ItemStack forged = new ItemStack(Items.PIG_SPAWN_EGG);
             CompoundTag data = new CompoundTag();
             data.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(ModEntities.TWO_I_DOLL.get()).toString());
-            forged.set(DataComponents.ENTITY_DATA, CustomData.of(data));
-            EntityType<?> decoded = ((SpawnEggItem) forged.getItem()).getType(forged);
+            forged.getOrCreateTag().put("EntityTag", data);
+            EntityType<?> decoded = ((SpawnEggItem) forged.getItem()).getType(forged.getTag());
             check(decoded == ModEntities.TWO_I_DOLL.get(), "forged pig-carrier fixture resolves actual 2i type");
             BlockPos spawnPos = player.blockPosition().offset(3, 0, 0);
             Set<UUID> dollsBefore = dollIds(level, area);
             Entity eggResult = decoded.spawn(level, forged, player, spawnPos, MobSpawnType.SPAWN_EGG, false, false);
-            if (eggResult instanceof TwoIDollEntity unexpected) unexpected.discardForReclaim();
-            check(eggResult == null && dollIds(level, area).equals(dollsBefore),
+            check(rejected(eggResult, level) && dollIds(level, area).equals(dollsBefore),
                     "actual EntityType.spawn cancels forged carrier spawn before world insertion");
+            if (eggResult instanceof TwoIDollEntity unexpected) unexpected.discardForReclaim();
             Entity spawnerResult = ModEntities.TWO_I_DOLL.get().spawn(level, spawnPos, MobSpawnType.SPAWNER);
-            if (spawnerResult instanceof TwoIDollEntity unexpected) unexpected.discardForReclaim();
-            check(spawnerResult == null && dollIds(level, area).equals(dollsBefore),
+            check(rejected(spawnerResult, level) && dollIds(level, area).equals(dollsBefore),
                     "ordinary spawner finalize cannot introduce another doll");
+            if (spawnerResult instanceof TwoIDollEntity unexpected) unexpected.discardForReclaim();
 
             var nbtSpawner = ModEntities.TWO_I_DOLL.get().create(level);
             check(nbtSpawner != null, "NBT-spawner candidate factory");
@@ -125,12 +123,12 @@ final class TwoIDollSpawnEggChecks {
             BaseSpawner source = new BaseSpawner() {
                 @Override public void broadcastEvent(Level ignored, BlockPos pos, int eventId) { }
             };
-            EventHooks.finalizeMobSpawnSpawner(nbtSpawner, level, level.getCurrentDifficultyAt(spawnPos),
-                    MobSpawnType.SPAWNER, null, source, false);
+            ForgeEventFactory.onFinalizeSpawnSpawner(nbtSpawner, level, level.getCurrentDifficultyAt(spawnPos),
+                    null, null, source);
             try {
                 check(nbtSpawner.isSpawnCancelled(), "NBT spawner is cancelled even when its finalizeSpawn is skipped");
                 level.tryAddFreshEntityWithPassengers(nbtSpawner);
-                check(!nbtSpawner.isAddedToLevel() && level.getEntity(nbtSpawner.getUUID()) == null
+                check(!nbtSpawner.isAddedToWorld() && level.getEntity(nbtSpawner.getUUID()) == null
                                 && dollIds(level, area).equals(dollsBefore),
                         "MinecraftForge world insertion also rejects the cancelled NBT-spawner candidate");
             } finally {
@@ -174,6 +172,14 @@ final class TwoIDollSpawnEggChecks {
         return count;
     }
 
+    private static boolean rejected(Entity candidate, ServerLevel level) {
+        // Forge 1.20 returns its cancelled candidate even when world insertion was
+        // refused. Assert cancellation and both indexes before any fixture cleanup.
+        return candidate == null || candidate instanceof TwoIDollEntity doll
+                && doll.isSpawnCancelled() && !doll.isAddedToWorld()
+                && level.getEntity(doll.getUUID()) == null && level.getEntity(doll.getId()) == null;
+    }
+
     private static Set<UUID> itemIds(ServerLevel level, AABB area) {
         Set<UUID> result = new HashSet<>();
         level.getEntitiesOfClass(ItemEntity.class, area).forEach(entity -> result.add(entity.getUUID()));
@@ -187,7 +193,7 @@ final class TwoIDollSpawnEggChecks {
     }
 
     private static void unchanged(ItemStack expected, ItemStack actual, String message) {
-        check(actual.getCount() == 1 && ItemStack.isSameItemSameComponents(expected, actual), message);
+        check(actual.getCount() == 1 && ItemStack.isSameItemSameTags(expected, actual), message);
     }
 
     private static void check(boolean ok, String message) {

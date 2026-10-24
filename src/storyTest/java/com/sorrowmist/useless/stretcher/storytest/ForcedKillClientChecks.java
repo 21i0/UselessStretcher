@@ -30,7 +30,7 @@ final class ForcedKillClientChecks {
                 var settings=new LevelSettings("2i forced kill",GameType.CREATIVE,false,Difficulty.PEACEFUL,true,new GameRules(),WorldDataConfiguration.DEFAULT);
                 client.createWorldOpenFlows().createFreshLevel("forced-kill-"+System.currentTimeMillis(),settings,
                         new WorldOptions(2L,false,false),access->access.registryOrThrow(Registries.WORLD_PRESET)
-                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions(),client.screen);
+                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions());
                 return;
             }
             if(client.player==null||client.level==null||client.getSingleplayerServer()==null)return;
@@ -42,7 +42,7 @@ final class ForcedKillClientChecks {
                         // The sword's real area attack also includes the connected test player.
                         // Its own documented inventory exemption keeps that control player alive.
                         var player=client.getSingleplayerServer().getPlayerList().getPlayer(client.player.getUUID());
-                        var sword=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.new ResourceLocation("forever_love_sword:forever_love_sword"));
+                        var sword=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("forever_love_sword:forever_love_sword"));
                         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new net.minecraft.world.item.ItemStack(sword));
                         // Reflection keeps the ordinary story source set independent of regression sources.
                         Class.forName("com.sorrowmist.useless.stretcher.regression.TwoIForcedKillChecks")

@@ -26,7 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.Direction;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.event.tick.PlayerTickEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import java.util.UUID;
 
 final class TwoIFinalPolishChecks {
@@ -149,18 +149,18 @@ final class TwoIFinalPolishChecks {
                 com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(stack, StretcherComponents.TWO_I_MEMORY.get(),new TwoIDollMemory(base.cooldowns(),near));
                 player.setItemSlot(slot,stack);
             }
-            TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
-            TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
+            TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
+            TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
             for(EquipmentSlot slot:new EquipmentSlot[]{EquipmentSlot.MAINHAND,EquipmentSlot.OFFHAND,EquipmentSlot.HEAD}) {
                 ItemStack stack=player.getItemBySlot(slot);
                 var memory=com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_MEMORY.get());
                 var stored=data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(stack, StretcherComponents.TWO_I_DOLL_ID.get()),memory);
                 check(TwoIDollItem.getBond(stack)==1 && stored.ticks()==0,
                         "each held/head doll awards once per real sample");
-                ItemStack reloaded=ItemStack.parseOptional(level.registryAccess(),(CompoundTag)stack.save(level.registryAccess()));
+                ItemStack reloaded=ItemStack.of(stack.save(new CompoundTag()));
                 player.setItemSlot(slot,reloaded);
             }
-            TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
+            TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
             check(TwoIDollItem.getBond(player.getMainHandItem())==1,"encoded relog memory cannot double-award");
             var entity=ModEntities.TWO_I_DOLL.get().create(level);
             var formStack=player.getMainHandItem().copy();
@@ -186,7 +186,7 @@ final class TwoIFinalPolishChecks {
             tick.invoke(entity,level);
             check(entity.getGiftScore()==1,"entity advances the carried progress on the next five-second check");
             player.setItemSlot(EquipmentSlot.HEAD,entity.toDollItem());
-            TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
+            TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
             ItemStack head=player.getItemBySlot(EquipmentSlot.HEAD);
             check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(head, StretcherComponents.TWO_I_DOLL_ID.get()),
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(head, StretcherComponents.TWO_I_MEMORY.get())).ticks()==0,
@@ -194,11 +194,11 @@ final class TwoIFinalPolishChecks {
             } finally { index.remove(player.getUUID()); entity.discardForReclaim(); }
             for(int i=2;i<=121;i++) {
                 level.getServer().getWorldData().overworldData().setGameTime(96000+i*100);
-                TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
+                TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
             }
             check(TwoIDollItem.getBond(player.getMainHandItem())==2,"companionship uses 6000 ticks and caps at two per day");
             level.getServer().getWorldData().overworldData().setGameTime(120000);
-            TwoICarriedCompanionship.tick(new PlayerTickEvent.Post(player));
+            TwoICarriedCompanionship.tick(new PlayerTickEvent(net.minecraftforge.event.TickEvent.Phase.END, player));
             check(data.progress(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(player.getMainHandItem(), StretcherComponents.TWO_I_DOLL_ID.get()),
                     com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(player.getMainHandItem(), StretcherComponents.TWO_I_MEMORY.get())).ticks()==100,
                     "next day starts a new carried companionship cycle");

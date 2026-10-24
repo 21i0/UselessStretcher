@@ -23,7 +23,9 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
             else
                 modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('9iboPfea')}"
         }
-        runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        if (providers.gradleProperty('uselessModDevJar').isPresent())
+            runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        else modRuntimeOnly uselessModRelease
         if (providers.gradleProperty('accelerationChecks').isPresent()) {
             modRuntimeOnly 'maven.modrinth:sbJh4AZw:hs5pHmiU'
             modRuntimeOnly 'maven.modrinth:smartbrainlib:YkeJNm33'

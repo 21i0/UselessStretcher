@@ -40,7 +40,7 @@ final class UsefulArmorJeiChecks {
                         Difficulty.PEACEFUL, true, new GameRules(), WorldDataConfiguration.DEFAULT);
                 client.createWorldOpenFlows().createFreshLevel("armor-jei-" + System.currentTimeMillis(), settings,
                         new WorldOptions(2L, false, false), access -> access.registryOrThrow(Registries.WORLD_PRESET)
-                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions(), client.screen);
+                                .getHolderOrThrow(WorldPresets.FLAT).value().createWorldDimensions());
                 return;
             }
             if (client.player == null || client.level == null || client.getSingleplayerServer() == null) return;

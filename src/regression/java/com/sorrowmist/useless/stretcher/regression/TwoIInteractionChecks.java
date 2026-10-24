@@ -48,7 +48,7 @@ public final class TwoIInteractionChecks {
             check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 0
                     && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 0,
                     "precious gifts neither spend the ordinary budget nor start its cooldown");
-            doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
+            doll.restoreFromItem(ItemStack.of(saved.save(new CompoundTag())));
             doll.acceptGift(owner);
             check(doll.getGiftScore() == 16 && owner.getMainHandItem().isEmpty(), "encoded item restoration preserves unlimited precious gifts");
 
@@ -64,7 +64,7 @@ public final class TwoIInteractionChecks {
             check(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).interaction().gifts() == 1
                     && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200,
                     "ordinary budget and cooldown persisted");
-            doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
+            doll.restoreFromItem(ItemStack.of(saved.save(new CompoundTag())));
             doll.talkTo(owner);
             int afterChat = doll.getGiftScore();
             doll.acceptGift(owner);
@@ -125,7 +125,7 @@ public final class TwoIInteractionChecks {
                             && com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(saved, StretcherComponents.TWO_I_MEMORY.get()).cooldowns().gift() == 1200
                             && doll.getBubbleMessage().getString().contains("1"),
                     "uncatalogued gift grants one, starts cooldown and synchronizes a parameterized bubble");
-            doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
+            doll.restoreFromItem(ItemStack.of(saved.save(new CompoundTag())));
             doll.acceptGift(owner);
             check(doll.getGiftScore() == before + 1 && owner.getMainHandItem().getCount() == 1
                             && doll.getBubbleText().equals("msg.useless_stretcher.two_i.gift_daily_limit"),
@@ -145,7 +145,7 @@ public final class TwoIInteractionChecks {
             com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.set(saved, StretcherComponents.TWO_I_MEMORY.get(), new com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory(
                     previous.cooldowns(), new com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory.Interaction(
                     7, 0, 0, 0, 0, 0, -1, "minecraft:cookie", 2, 0), previous.lastCompanionSample()));
-            doll.restoreFromItem(ItemStack.parse(level.registryAccess(), saved.save(level.registryAccess())).orElseThrow());
+            doll.restoreFromItem(ItemStack.of(saved.save(new CompoundTag())));
             owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.COOKIE, 2));
             before = doll.getGiftScore(); doll.acceptGift(owner);
             check(doll.getGiftScore() == before && owner.getMainHandItem().getCount() == 1
@@ -202,7 +202,7 @@ public final class TwoIInteractionChecks {
                 && ((java.util.Map<?, ?>)sessions.get(doll)).isEmpty(), "forged stranger gift/chat/story cannot change relationship");
         ItemStack owned = doll.toDollItem();
         check(owner.getUUID().equals(com.sorrowmist.useless.compat.forge1201.component.ComponentAccess.get(owned, StretcherComponents.TWO_I_OWNER.get())), "recall preserves owner on item");
-        owned = ItemStack.parse(level.registryAccess(), owned.save(level.registryAccess())).orElseThrow();
+        owned = ItemStack.of(owned.save(new CompoundTag()));
         guest.setItemInHand(InteractionHand.MAIN_HAND, owned);
         var item = (TwoIDollItem)ModItems.TWO_I_DOLL.get();
         check(item.use(level, guest, InteractionHand.MAIN_HAND).getResult() == net.minecraft.world.InteractionResult.FAIL,

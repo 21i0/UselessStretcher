@@ -14,7 +14,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.event.ClientTickEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
 /** Real integrated-server catalogue, map packets, gift bubble and cursor-following preview. */
@@ -40,7 +40,8 @@ public final class CapsuleClientChecks {
         });
     }
 
-    private static void tick(ClientTickEvent.Post event) {
+    private static void tick(ClientTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (stage == 9) return;
         Minecraft client = Minecraft.getInstance();
         try {
@@ -176,7 +177,8 @@ public final class CapsuleClientChecks {
             client.stop();
         }
     }
-    private static void rendered(net.minecraftforge.client.event.RenderFrameEvent.Post event) {
+    private static void rendered(net.minecraftforge.event.TickEvent.RenderTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (stage != 2) return;
         var client = Minecraft.getInstance();
         if (client.screen != capsule || client.getOverlay() != null) return;

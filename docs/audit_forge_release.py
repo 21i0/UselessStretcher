@@ -18,8 +18,10 @@ def audit(root, artifact):
         assert 'modId="forge"' in metadata and 'versionRange="[1.20.1,1.20.2)"' in metadata
         assert "${" not in metadata and "META-INF/neoforge.mods.toml" not in names
         forbidden = ("/capsulecheck/", "ForgeCapsule", "stretcher_capsule_check", "/regression/",
-                     "/storytest/", "/clientprobe/", "/guidetest/", "org/junit/", "org/mockito/")
-        leaked = [name for name in names if any(token in name for token in forbidden)]
+                     "/storytest/", "/clientprobe/", "/guidetest/", "org/junit/", "org/mockito/",
+                     "data/useless_stretcher_test/")
+        leaked = [name for name in names if any(token in name for token in forbidden)
+                  or (name.endswith(".class") and "Checks" in name)]
         assert not leaked, leaked
         sources = sorted((root / "src/main/java").rglob("*.java"))
         missing = [str(source.relative_to(root)) for source in sources
@@ -44,6 +46,12 @@ def audit(root, artifact):
         assert "m_46467_" in clock, "Golden-bowl vanilla game-time call was not remapped"
         for name in ("OccultismAccelerationCompat", "RftoolsBuilderAccelerationCompat"):
             assert f"com/sorrowmist/useless/stretcher/compat/{name}.class" in names
+        snapshot = refmap["mappings"].get(
+            "com/sorrowmist/useless/stretcher/mixin/CapsuleChunkSaveSnapshotMixin", {})
+        assert "m_140258_" in json.dumps(snapshot), "Capsule chunk save snapshot was not remapped"
+        assert "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryScript.class" in names
+        assert sum(name.startswith("assets/useless_stretcher/dialogue/long_stories/chapter_")
+                   and name.endswith(".json") for name in names) == 6
         embedded = json.loads(jar.read("META-INF/jarjar/metadata.json"))["jars"]
         assert len(embedded) == 1 and embedded[0]["identifier"]["artifact"] == "mixinextras-forge"
         assert embedded[0]["version"]["artifactVersion"] == "0.5.0"
