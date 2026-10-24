@@ -5,12 +5,24 @@ tasks.named('jar') {
 if (providers.gradleProperty('capsuleChecks').isPresent()) {
     sourceSets.main.java.srcDir 'src/capsuleCheck/java'
     sourceSets.main.resources.srcDir 'src/capsuleCheck/resources'
+    if (providers.gradleProperty('mekanismCheckRepository').isPresent()) {
+        repositories.maven {
+            url = uri(providers.gradleProperty('mekanismCheckRepository').get())
+            content { includeModule 'mekanism', 'Mekanism' }
+        }
+    }
     dependencies {
         modCompileOnly 'maven.modrinth:692GClaE:J0YtwRxM'
         modRuntimeOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP'
         modRuntimeOnly 'maven.modrinth:guideme:i7Tp1AHw'
         if (!providers.gradleProperty('capsuleWithoutJei').isPresent())
             modRuntimeOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ'
+        if (providers.gradleProperty('staffCompatChecks').isPresent()) {
+            if (providers.gradleProperty('mekanismCheckRepository').isPresent())
+                modRuntimeOnly "mekanism:Mekanism:${providers.gradleProperty('mekanismMavenVersion').getOrElse('1.20.1-10.4.16.80')}"
+            else
+                modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('9iboPfea')}"
+        }
         runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
         if (providers.gradleProperty('accelerationChecks').isPresent()) {
             modRuntimeOnly 'maven.modrinth:sbJh4AZw:hs5pHmiU'
@@ -40,6 +52,12 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
             gameDirectory = file('run/acceleration-check')
             programArgument '--nogui'
             systemProperty 'stretcher.acceleration.check', 'true'
+        }
+        staffCompatCheck {
+            server()
+            gameDirectory = file(providers.gradleProperty('staffCompatDirectory').getOrElse('run/staff-compat-check'))
+            programArgument '--nogui'
+            systemProperty 'stretcher.staff.compatCheck', 'true'
         }
     }
 }

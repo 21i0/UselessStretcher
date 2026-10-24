@@ -19,11 +19,12 @@ public abstract class ItemStackToolTagsMixin {
         if (!(self.getItem() instanceof WondrousStaffItem)) return;
         String namespace = tag.location().getNamespace();
         String path = tag.location().getPath();
-        // Mekanism's configurator tag currently inherits c:tools/wrench.  It also
+        // Forge wrench aliases and Mekanism's configurator tag must follow the switch. It also
         // uses that tag as a fallback when an item does not expose its custom
         // wrench abilities, so it must follow the same G-menu switch directly.
-        if ((namespace.equals("c") && (path.equals("tools/wrench") || path.equals("wrenches")))
-                || (namespace.equals("gtceu") && path.equals("crafting_tools/wrench"))
+        if (((namespace.equals("c") || namespace.equals("forge"))
+                && (path.equals("tools/wrench") || path.equals("tools/wrenches") || path.equals("wrenches")))
+                || (namespace.equals("gtceu") && (path.equals("crafting_tools/wrench") || path.equals("tools/crafting_wrenches")))
                 || (namespace.equals("mekanism") && path.equals("configurators"))) {
             cir.setReturnValue(BeefToolVariants.isWrenchTagEnabled(self));
         }

@@ -1,5 +1,7 @@
 # Forge 1.20.1 移植审计与胶囊回归
 
+本报告的胶囊和加速运行记录来自 2026-10-20。2026-10-24 的后续修复见 [Issue #3 报告](forge-1.20.1-issue-3.md)：采用辐射防护与扳手标签补丁，并在两版 Mekanism 上独立验证。PR #2 及原修复分支已合入 `1.20.1`，下面的对比基线继续保留用于追溯。
+
 对比基线：主线 `ad0a63e945f04286dab58a5991998082c73e401d` 与 PR #2
 `2d2e00611b7dee86d86e709cb729b695e1317802`。本报告区分代码保留、API 移植和实际运行验证。
 
@@ -74,10 +76,10 @@ gradlew runCapsuleCheck -PcapsuleChecks -PcapsuleCheckMode=verify -PuselessModDe
 
 原始日志保存在 `D:/AI/archive/`；通过日志、JUnit XML、JAR 审计和两套客户端截图已复制至本工作树 `verification/forge1201-20261020/`。失败证据也保留：`forge1201-capsule-resume-v1.log` 是旧末地选址 1024 次失败，`forge1201-capsule-resume-v2.log` 是旧邻居/铺底问题，`forge1201-capsule-client-v1.log` 是配套本体未装 JEI 的崩溃。一次测试进程并发重编译导致的类文件缺失记录在 `forge1201-capsule-floor-checkpoint-v1.log`，不计为产品回归结果。
 
-交付文件 `D:/AI/useless_stretcher-20.1.6.1.jar`，13,205,433 字节，SHA256：
-`8B52CF729EBD7A25115FC72ABEC1A4DC0E3A3D2B083C0BDF48A69C7A95143CDC`。
+当前交付文件（含 2026-10-24 Issue #3 修复）`D:/AI/useless_stretcher-20.1.6.1.jar`，13,205,359 字节，SHA256：
+`828602DFD03E73849E310F8C9F46A37D834487F32054A1729F475AB370817F85`。
 包内版本为 `20.1.6.1`，Minecraft 范围 `[1.20.1,1.20.2)`，Forge 范围 `[47.3.10,48)`。
-配套本体为 PR #45 指定提交的源码构建包，不是新建官方 Release；本轮不合并 PR、不创建 Release 或移动标签。
+配套本体为 PR #45 指定提交的源码构建包，不是新建官方 Release。原移植修复最初在独立修复分支交付，现已与 PR #2 一起合入 `1.20.1`；本次 Issue 修复不创建 Release 或移动标签。
 
 ## 验证边界
 
