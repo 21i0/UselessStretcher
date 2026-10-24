@@ -223,7 +223,7 @@ public final class NativeCapsules {
             job.maxStep = Math.max(job.maxStep, elapsed);
             if (!job.room.phase.equals(job.loggedPhase) || job.ticks % 200 == 0) {
                 job.loggedPhase = job.room.phase;
-                LogUtils.getLogger().info("CAPSULE PROGRESS {} target={} phase={} progress={}% chunks={}/{} attempt={}",
+                LogUtils.getLogger().debug("CAPSULE PROGRESS {} target={} phase={} progress={}% chunks={}/{} attempt={}",
                         job.room.structure, job.room.dimension, job.room.phase, job.room.progress,
                         job.room.chunk, job.chunkCount, job.room.attempt);
             }
@@ -278,7 +278,7 @@ public final class NativeCapsules {
             if (target == null || source == null || source.getSeed() != room.sourceSeed || structure == null)
                 throw new CapsuleLimitException("source_environment_unavailable");
             JOBS.addLast(new Job(data, room, target, source, structure));
-            LogUtils.getLogger().info("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
+            LogUtils.getLogger().debug("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
         } catch (RuntimeException failure) {
             room.generating = false;
             room.error = failure instanceof CapsuleLimitException limit ? limit.code : "failed";
@@ -802,7 +802,7 @@ public final class NativeCapsules {
                     }
                     long elapsed = System.nanoTime() - began;
                     if (elapsed > CALLBACK_WARN_NANOS) {
-                        LogUtils.getLogger().warn("Native capsule callback took {} ms for {} chunk {} piece {}",
+                        LogUtils.getLogger().debug("Native capsule callback took {} ms for {} chunk {} piece {}",
                                 elapsed / 1_000_000.0, room.structure, chunk, room.piece);
                     }
                     checkpointPiece(room.piece++); return false;
@@ -815,7 +815,7 @@ public final class NativeCapsules {
                     }
                     long elapsed = System.nanoTime() - began;
                     if (elapsed > CALLBACK_WARN_NANOS) {
-                        LogUtils.getLogger().warn("Native capsule afterPlace took {} ms for {} chunk {}",
+                        LogUtils.getLogger().debug("Native capsule afterPlace took {} ms for {} chunk {}",
                                 elapsed / 1_000_000.0, room.structure, chunk);
                     }
                     room.afterPlaced = true; checkpoint(); return false;

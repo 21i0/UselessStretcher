@@ -19,6 +19,10 @@ Thumbs.db
 # Logs
 logs/
 *.log
+*.cache
+*.bak.png
+*.orig
+*.rej
 
 # Local builds, verification captures and one-off migration artifacts
 output/

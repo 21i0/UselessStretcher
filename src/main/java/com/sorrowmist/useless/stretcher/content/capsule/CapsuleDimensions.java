@@ -68,7 +68,7 @@ public final class CapsuleDimensions {
                 server.forgeGetWorldMap().put(target, mirror);
                 server.markWorldsDirty();
                 MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
-                LogUtils.getLogger().info("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
+                LogUtils.getLogger().debug("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
                         source.dimension().location(), source.dimensionTypeRegistration().unwrapKey().orElse(null),
                         mirror.getMinBuildHeight(), mirror.getHeight());
             }
