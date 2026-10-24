@@ -46,6 +46,11 @@ tasks.named('compileJava') {
     }
 }
 dependencies {
+    modCompileOnly 'maven.modrinth:sbJh4AZw:hs5pHmiU' // occultism-1.20.1-1.158.0
+    modCompileOnly 'maven.modrinth:smartbrainlib:YkeJNm33' // SpiritEntity superclass
+    modCompileOnly 'maven.modrinth:e0IclJLr:DrVfKfKP' // rftoolsbuilder-1.20-6.0.10
+    modCompileOnly 'maven.modrinth:1Zu0uTEE:GIASnLXz' // mcjtylib-1.20-8.0.8
+    modCompileOnly 'maven.modrinth:hIO8IsD8:dYvtIH7M' // rftoolsbase-1.20-5.0.7
     modCompileOnly 'maven.modrinth:rxYaglEe:orFPvySe' // advancedae-1.2.7-1.20.1
     modCompileOnly 'maven.modrinth:rqFWfVlz:tT3CLYvK' // apotheosis-1.20.1-7.4.8
     modCompileOnly 'maven.modrinth:IiATswDj:d9GM663Q' // applied-mekanistics-1.4.2
@@ -83,10 +88,17 @@ dependencies {
     compileOnly 'io.github.llamalad7:mixinextras-common:0.5.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.5.0'
+    // Forge 47 does not ship MixinExtras. Keep WrapMethod and the shared base
+    // mod's injectors available even in a minimal AE2 + Useless Mod installation.
+    implementation 'io.github.llamalad7:mixinextras-forge:0.5.0'
+    jarJar('io.github.llamalad7:mixinextras-forge:0.5.0') {
+        version { strictly '[0.5.0,0.6)'; prefer '0.5.0' }
+    }
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-core:5.15.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.slf4j:slf4j-api:2.0.1'
 }
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
@@ -110,7 +122,4 @@ tasks.named('processResources', ProcessResources) {
     }
 }
 
-sourceSets.main.java {
-    exclude 'com/sorrowmist/useless/stretcher/compat/OccultismAccelerationCompat.java'
-    exclude 'com/sorrowmist/useless/stretcher/compat/RftoolsBuilderAccelerationCompat.java'
-}
+apply from: 'gradle/capsule-checks.gradle'

@@ -29,12 +29,17 @@ class ForgePortContractTest {
             assertTrue(metadata.contains("version=\"" + version + "\""));
             assertNull(jar.getEntry("META-INF/neoforge.mods.toml"));
             assertNotNull(jar.getEntry("data/useless_stretcher/recipes/useless_stretcher.json"));
+            assertNotNull(jar.getEntry("com/sorrowmist/useless/stretcher/compat/OccultismAccelerationCompat.class"));
+            assertNotNull(jar.getEntry("com/sorrowmist/useless/stretcher/compat/RftoolsBuilderAccelerationCompat.class"));
+            assertNotNull(jar.getEntry("META-INF/jarjar/metadata.json"));
             assertFalse(jar.stream().anyMatch(e -> e.getName().contains("/regression/")
-                    || e.getName().contains("/storytest/") || e.getName().contains("/clientprobe/")));
+                    || e.getName().contains("/storytest/") || e.getName().contains("/clientprobe/")
+                    || e.getName().contains("/capsulecheck/")
+                    || e.getName().contains("ForgeCapsule") || e.getName().contains("stretcher_capsule_check")));
         }
     }
 
-    @Test void upstreamKnownIdleBowlContractIsPreservedInDormantBridge() throws Exception {
+    @Test void upstreamKnownIdleBowlContractIsPreservedInOptionalBridge() throws Exception {
         Path root = Path.of("src/main/java/com/sorrowmist/useless/stretcher");
         String bridge = Files.readString(root.resolve("compat/OccultismAccelerationCompat.java"));
         assertTrue(bridge.contains("public static Boolean knownActivity(BlockEntity target)"));

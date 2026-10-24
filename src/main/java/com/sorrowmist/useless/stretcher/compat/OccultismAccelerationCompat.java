@@ -1,6 +1,5 @@
 package com.sorrowmist.useless.stretcher.compat;
 
-import com.klikli_dev.occultism.common.blockentity.DimensionalBattlefieldBlockEntity;
 import com.klikli_dev.occultism.common.blockentity.DimensionalMineshaftBlockEntity;
 import com.klikli_dev.occultism.common.blockentity.GoldenSacrificialBowlBlockEntity;
 import com.klikli_dev.occultism.common.entity.spirit.SpiritEntity;
@@ -15,7 +14,6 @@ public final class OccultismAccelerationCompat {
 
     public static boolean isWorking(BlockEntity target) {
         if (target instanceof DimensionalMineshaftBlockEntity miner) return miner.miningTime > 0;
-        if (target instanceof DimensionalBattlefieldBlockEntity battlefield) return battlefield.mobHealth > 0;
         return Boolean.TRUE.equals(knownActivity(target));
     }
 
@@ -34,9 +32,9 @@ public final class OccultismAccelerationCompat {
         if (job == null) return true;
         // Other jobs can change world time/weather or depend on movement/brain sensors. Timer
         // mode only repeats inventory processing; their normal AI remains on the real clock.
-        boolean processor = job instanceof com.klikli_dev.occultism.common.entity.job.CrusherJob
-                || job instanceof com.klikli_dev.occultism.common.entity.job.SmelterJob
-                || job instanceof com.klikli_dev.occultism.common.entity.job.CrystallizerJob;
+        // Forge 1.20.1 has the crusher job; the newer smelter/crystallizer and
+        // dimensional battlefield classes do not exist in this Occultism line.
+        boolean processor = job instanceof com.klikli_dev.occultism.common.entity.job.CrusherJob;
         if (!processor || spirit.getMainHandItem().isEmpty()) return true;
         // Timer mode advances the real job without replaying movement, AI or lifetime. Bound
         // expensive jobs by the same shared count/time allowance used for machine acceleration.

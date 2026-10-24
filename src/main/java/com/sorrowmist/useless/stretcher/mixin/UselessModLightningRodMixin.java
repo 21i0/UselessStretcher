@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Prevents Useless Mod's highest-priority event listener from consuming a wondrous-staff rod
@@ -20,6 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(value = UselessMod.class, remap = false)
 public abstract class UselessModLightningRodMixin {
+
+    // The paired Forge base port omits its optional spirit-egg adapter. Its
+    // unconditional dispatch otherwise crashes even an ordinary staff/bowl click.
+    // Keep the native adapter's cheap item gate before loading optional classes.
+    @Inject(method = "trySpawnMarkedOccultismSpirit", at = @At("HEAD"), cancellable = true)
+    private static void stretcher$skipSpiritEggDispatchForOtherItems(PlayerInteractEvent.RightClickBlock event,
+            CallbackInfoReturnable<InteractionResult> cir) {
+        if (!(event.getItemStack().getItem() instanceof net.minecraft.world.item.SpawnEggItem))
+            cir.setReturnValue(InteractionResult.PASS);
+    }
 
     @Inject(
             method = "onRightClickBlock(Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickBlock;)V",

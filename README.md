@@ -11,13 +11,13 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## Forge 1.20.1 · 20.1.6.0
+## Forge 1.20.1 · 20.1.6.1
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-正式文件名为 `useless_stretcher-20.1.6.0.jar`，需搭配无用之物 `20.2.4.6`。
+文件名为 `useless_stretcher-20.1.6.1.jar`，需搭配无用之物 `20.2.4.6`。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
@@ -33,7 +33,7 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 | Minecraft | 1.20.1 |
 | Mod 加载器 | Forge 47.3.10+ |
 | Java | **17** |
-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`） |
+| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
 | 安装位置 | 客户端 **与** 服务端都要装 |
 
 > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
@@ -54,9 +54,11 @@ cd ../UselessStretcher
 Windows 使用 `gradlew.bat`。也可通过 `-PuselessModDevJar=/path/to/dev.jar`
 指定主模组的 `build/devlibs/useless_mod-20.2.4.6.jar`，不可使用已重混淆的发布 JAR。
 其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具。
-本分支针对 Create 2 Mekanism: Sky Edition 2；尚未移植的 Occultism 和
-RFToolsBuilder 专用加速桥保留为源码但不打包。原 NeoForge 客户端/服务器
-场景测试也保留为参考源码，未接入本分支的 `check`，不能视为已运行。
+本分支针对 Forge 1.20.1。Occultism 1.158.0 与 RFToolsBuilder 6.0.10
+专用加速桥已补回构建；旧版 Occultism 只有粉碎精灵，不能套用 1.21 的另外两类加工精灵。
+原 NeoForge 场景测试保留为参考源码，未接入本分支的 `check`。
+独立的 Forge 胶囊回归通过 `-PcapsuleChecks` 启用；实际验证范围与日志见
+[移植审计报告](docs/forge-1.20.1-port-audit.md)，不能把源码保留等同于运行验证。
 
 ## 主要内容 / Features
 
@@ -139,14 +141,12 @@ RFToolsBuilder 专用加速桥保留为源码但不打包。原 NeoForge 客户�
 ## 从源码构建 / Building
 
 ```bash
-# 需要 JDK 21
-./gradlew build          # 产物在 build/libs/
+# 需要 JDK 17；先构建上文指定版本的 UselessMod
+./gradlew build -PuselessModDevJar=/path/to/useless_mod-20.2.4.6-dev.jar
 ```
 
-编译需要把下面两个 jar 放进 `libs/compile/`（它们不在 Maven 上，且只能各放一份）：
-
-- `useless_mod-<版本>.jar`（无用之物本体）
-- `appliedenergistics2-<版本>.jar`（AE2）
+产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
+本体使用 `build/devlibs/` 的开发包，不将依赖模组捆绑进附属 JAR。
 
 ## 许可 / License
 

@@ -31,6 +31,7 @@ public final class DimensionCapsuleCatalog {
     private DimensionCapsuleCatalog() { }
 
     public static List<Entry> scan(ServerPlayer player) {
+        CapsuleDimensions.ensure(player.getServer());
         List<Entry> entries = new ArrayList<>();
         var registry = player.level().registryAccess().registryOrThrow(Registries.STRUCTURE);
         for (ResourceLocation id : registry.keySet().stream().sorted().toList()) {

@@ -12,22 +12,20 @@ public final class MachineAccelerationCompat {
     private MachineAccelerationCompat() { }
 
     public static boolean isWorking(BlockEntity target) {
-        return (OCCULTISM && com.sorrowmist.useless.compat.forge1201.OptionalIntegration.call("occultism", "com.sorrowmist.useless.stretcher.compat.OccultismAccelerationCompat", "isWorking", Boolean.class, false, new Class<?>[]{BlockEntity.class}, target))
-                || (RFTOOLS && com.sorrowmist.useless.compat.forge1201.OptionalIntegration.call("rftoolsbuilder", "com.sorrowmist.useless.stretcher.compat.RftoolsBuilderAccelerationCompat", "isWorking", Boolean.class, false, new Class<?>[]{BlockEntity.class}, target));
+        return (OCCULTISM && OccultismAccelerationCompat.isWorking(target))
+                || (RFTOOLS && RftoolsBuilderAccelerationCompat.isWorking(target));
     }
 
     /** A nullable answer separates authoritative idle from an unsupported target. */
     public static Boolean knownActivity(BlockEntity target) {
-        return OCCULTISM ? com.sorrowmist.useless.compat.forge1201.OptionalIntegration.call(
-                "occultism", "com.sorrowmist.useless.stretcher.compat.OccultismAccelerationCompat",
-                "knownActivity", Boolean.class, null, new Class<?>[]{BlockEntity.class}, target) : null;
+        return OCCULTISM ? OccultismAccelerationCompat.knownActivity(target) : null;
     }
 
     public static BlockEntityTicker<BlockEntity> ticker(BlockEntity target) {
-        return RFTOOLS ? com.sorrowmist.useless.compat.forge1201.OptionalIntegration.call("rftoolsbuilder", "com.sorrowmist.useless.stretcher.compat.RftoolsBuilderAccelerationCompat", "ticker", BlockEntityTicker.class, null, new Class<?>[]{BlockEntity.class}, target) : null;
+        return RFTOOLS ? RftoolsBuilderAccelerationCompat.ticker(target) : null;
     }
 
     public static boolean advanceSpirit(net.minecraft.world.entity.LivingEntity target, int extra) {
-        return OCCULTISM && com.sorrowmist.useless.compat.forge1201.OptionalIntegration.call("occultism", "com.sorrowmist.useless.stretcher.compat.OccultismAccelerationCompat", "advanceSpirit", Boolean.class, false, new Class<?>[]{net.minecraft.world.entity.LivingEntity.class,int.class}, target,extra);
+        return OCCULTISM && OccultismAccelerationCompat.advanceSpirit(target, extra);
     }
 }
