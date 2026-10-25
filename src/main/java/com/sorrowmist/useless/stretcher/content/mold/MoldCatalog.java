@@ -72,6 +72,7 @@ public final class MoldCatalog {
         private final Map<String, Set<Ingredient>> inspected = new HashMap<>();
         private Map<String, List<MoldEntry>> result;
         private int cursor;
+        private int moldWarnings;
 
         private Builder(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
             this(null, recipes, true);
@@ -104,8 +105,10 @@ public final class MoldCatalog {
                         try {
                             displayed = ingredient.getItems();
                         } catch (RuntimeException exception) {
-                            com.mojang.logging.LogUtils.getLogger().warn(
-                                    "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
+                            if (moldWarnings++ < 5) {
+                                com.mojang.logging.LogUtils.getLogger().warn(
+                                        "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
+                            }
                             continue;
                         }
                         for (ItemStack stack : displayed) {

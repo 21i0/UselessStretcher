@@ -69,7 +69,7 @@ dependencies {
     modCompileOnly 'maven.modrinth:hIO8IsD8:dYvtIH7M' // rftoolsbase-1.20-5.0.7
     modCompileOnly 'maven.modrinth:rxYaglEe:orFPvySe' // advancedae-1.2.7-1.20.1
     modCompileOnly 'maven.modrinth:rqFWfVlz:tT3CLYvK' // apotheosis-1.20.1-7.4.8
-    modCompileOnly 'maven.modrinth:IiATswDj:d9GM663Q' // applied-mekanistics-1.4.2
+    modCompileOnly 'maven.modrinth:IiATswDj:9n9p68Qq' // applied-mekanistics-1.4.3
     modCompileOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP' // appliedenergistics2-forge-15.4.8
     modCompileOnly 'curse.maven:applied-flux-965012:6755986' // appliedflux-1.20-1.3.2-forge
     modCompileOnly 'maven.modrinth:lhGA9TYQ:1MKTLiiG' // architectury-9.2.14-forge
@@ -93,8 +93,8 @@ dependencies {
     modCompileOnly 'maven.modrinth:nvQzSEkH:LecuGude' // jade-1.20.1-forge-11.13.2
     modCompileOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ' // jei-1.20.1-forge-15.20.0.116
     modCompileOnly 'maven.modrinth:umyGl7zF:g5igndAv' // kubejs-forge-2001.6.5-build.16
-    modCompileOnly 'maven.modrinth:Ce6I4WUE:9iboPfea' // mekanism-1.20.1-10.4.15.75
-    modCompileOnly 'maven.modrinth:OFVYKsAk:x9re7wt4' // mekanismgenerators-1.20.1-10.4.15.75
+    modCompileOnly 'maven.modrinth:Ce6I4WUE:uxe1WQp4' // mekanism-1.20.1-10.4.16.80
+    modCompileOnly 'maven.modrinth:OFVYKsAk:Th4Czz4N' // mekanismgenerators-1.20.1-10.4.16.80
     modCompileOnly 'maven.modrinth:tCkE8p2N:6SkuAGoz' // placebo-1.20.1-8.6.3
     modCompileOnly 'maven.modrinth:KZO4S4DO:xDOvxyqP' // powah-5.0.11
     modCompileOnly 'maven.modrinth:sk9knFPE:uNALdylI' // rhino-forge-2001.2.3-build.10
