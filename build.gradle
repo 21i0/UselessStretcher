@@ -51,7 +51,7 @@ sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
 sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
 // ModDev remaps the official release for compilation and game checks. A matching
 // development jar remains an explicit override for upstream development only.
-ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.6'
+ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.7'
 def uselessModDevJar = providers.gradleProperty('uselessModDevJar')
         .map { file(it) }
 configurations.modCompileOnly.transitive = false

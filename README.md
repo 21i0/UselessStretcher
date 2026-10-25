@@ -11,13 +11,13 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## Forge 1.20.1 · 20.1.6.2
+## Forge 1.20.1 · 20.1.6.3
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-文件名为 `useless_stretcher-20.1.6.2.jar`，搭配无用之物 `20.2.4.7`（最低 `20.2.4.6`）。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。详细环境、证据和上游限制见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)。
+文件名为 `useless_stretcher-20.1.6.3.jar`，搭配无用之物 `20.2.4.7`（最低 `20.2.4.6`）。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。此前完整移植证据见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)，本次见 [PR #4 与新版前置验证](docs/forge-1.20.1-pr-4.md)。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
@@ -114,7 +114,7 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 
 ## 配置文件 / Config
 
-服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `world/serverconfig/`（没有世界级文件时才回退到 `config/`）。游戏内从“模组 → 万象担架 → 配置 → 服务端配置”即可直接修改，点页面底部“完成/保存”后写入文件并同步在线玩家；
+服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `<level-name>/serverconfig/`（默认 `world/serverconfig/`）。新世界的配置模板可放在 `defaultconfigs/`，不会覆盖已有世界的设置。单机／局域网宿主从“模组 → 万象担架 → 配置 → 服务端配置”修改，点页面底部“完成/保存”后写入文件并同步在线玩家；专用服务器由服主修改世界级配置。
 除配方目录过滤和有用锭装甲配方需要重载世界/重启外，其余运行时读取的选项立即生效，界面说明均为中文。
 
 ```toml
@@ -137,12 +137,12 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 ## 从源码构建 / Building
 
 ```bash
-# 需要 JDK 17；先构建上文指定版本的 UselessMod
-./gradlew build -PuselessModDevJar=/path/to/useless_mod-20.2.4.7-dev.jar
+# 需要 JDK 17；自动下载并映射官方本体发布包
+./gradlew build
 ```
 
 产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
-本体使用 `build/devlibs/` 的开发包，不将依赖模组捆绑进附属 JAR。
+本体默认使用官方 20.2.4.7 发布包；仅在开发本体时通过 `-PuselessModDevJar=/path/to/dev.jar` 显式替换，不将依赖模组捆绑进附属 JAR。
 
 ## 许可 / License
 
