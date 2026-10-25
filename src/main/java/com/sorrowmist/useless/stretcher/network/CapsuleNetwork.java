@@ -71,7 +71,8 @@ public final class CapsuleNetwork {
             if (ResourceLocation.tryParse(p.id) == null || ResourceLocation.tryParse(p.dimension) == null) return;
             try { NativeCapsules.request(player, p.id, p.dimension, p.action, p.side, p.instanceId); }
             catch (RuntimeException failure) {
-                com.mojang.logging.LogUtils.getLogger().error("Capsule request failed for {}", p.id, failure);
+                com.sorrowmist.useless.stretcher.util.RateLimitedLogger.error(
+                        com.mojang.logging.LogUtils.getLogger(), "Capsule request failed for {}", p.id, failure);
                 state(player, p.id, p.dimension, p.instanceId, "failed", 0, new int[0], 0, 0, 0);
             }
         }));

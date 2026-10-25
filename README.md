@@ -11,13 +11,13 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## Forge 1.20.1 · 20.1.6.2
+## Forge 1.20.1 · 20.1.6.3
 
 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-文件名为 `useless_stretcher-20.1.6.2.jar`，搭配无用之物 `20.2.4.7`（最低 `20.2.4.6`）。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。详细环境、证据和上游限制见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)。
+文件名为 `useless_stretcher-20.1.6.3.jar`，搭配无用之物 `20.2.4.9`（最低 `20.2.4.6`）。
 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
@@ -33,7 +33,7 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 | Minecraft | 1.20.1 |
 | Mod 加载器 | Forge 47.3.10+ |
 | Java | **17** |
-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.7`，最低 `20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
+| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.9`，最低 `20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
 | 安装位置 | 客户端 **与** 服务端都要装 |
 
 > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
@@ -53,8 +53,7 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 本分支针对 Forge 1.20.1。Occultism 1.158.0 与 RFToolsBuilder 6.0.10
 专用加速桥已补回构建；旧版 Occultism 只有粉碎精灵，不能套用 1.21 的另外两类加工精灵。
 玩偶与剧情回归已适配 Forge 1.20.1，通过 `-PdollChecks` 启用，运行任务为 `runDollServerCheck`、`runDollClientCheck`；收容防复制另加 `-PdollCaptureChecks`。测试代码和数据永远不进入发行 JAR。
-独立的 Forge 胶囊回归通过 `-PcapsuleChecks` 启用；实际验证范围与日志见
-[移植审计报告](docs/forge-1.20.1-port-audit.md)，不能把源码保留等同于运行验证。
+独立的 Forge 胶囊回归通过 `-PcapsuleChecks` 启用，测试代码与数据不进入发行 JAR。
 
 ## 主要内容 / Features
 
@@ -138,7 +137,7 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 
 ```bash
 # 需要 JDK 17；先构建上文指定版本的 UselessMod
-./gradlew build -PuselessModDevJar=/path/to/useless_mod-20.2.4.7-dev.jar
+./gradlew build -PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar
 ```
 
 产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，

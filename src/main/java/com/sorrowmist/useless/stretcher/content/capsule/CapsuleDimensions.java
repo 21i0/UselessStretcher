@@ -1,6 +1,5 @@
 package com.sorrowmist.useless.stretcher.content.capsule;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import net.minecraft.core.registries.Registries;
@@ -68,9 +67,6 @@ public final class CapsuleDimensions {
                 server.forgeGetWorldMap().put(target, mirror);
                 server.markWorldsDirty();
                 MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
-                LogUtils.getLogger().debug("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
-                        source.dimension().location(), source.dimensionTypeRegistration().unwrapKey().orElse(null),
-                        mirror.getMinBuildHeight(), mirror.getHeight());
             }
             if (mirror.getChunkSource().getGenerator() instanceof CapsuleVoidChunkGenerator generator) generator.bindSource(source);
         }

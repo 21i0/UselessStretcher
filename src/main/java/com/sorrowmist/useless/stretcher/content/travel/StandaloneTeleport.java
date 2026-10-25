@@ -39,7 +39,8 @@ public final class StandaloneTeleport {
             // Do not retry after an uncertain native action: it may have already teleported.
             if (!reportedFailure) {
                 reportedFailure = true;
-                LogUtils.getLogger().warn("Standalone travel could not invoke the installed travel integration", failure);
+                com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(LogUtils.getLogger(),
+                        "Standalone travel could not invoke the installed travel integration", failure);
             }
             player.displayClientMessage(Component.translatable("msg.useless_stretcher.teleport.unavailable"), true);
         }

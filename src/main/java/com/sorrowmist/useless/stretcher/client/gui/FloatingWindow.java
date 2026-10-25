@@ -201,7 +201,10 @@ public final class FloatingWindow {
                         SAVED.put(entry.getKey(), new Saved(Mth.clamp(x, 0, 1), Mth.clamp(y, 0, 1), width, height));
                 } catch (RuntimeException ignored) { /* Skip only the malformed entry. */ }
             }
-        } catch (Exception exception) { LogUtils.getLogger().warn("Could not read Stretcher window positions", exception); }
+        } catch (Exception exception) {
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(
+                    LogUtils.getLogger(), "Could not read Stretcher window positions", exception);
+        }
     }
 
     public void save() {
@@ -217,7 +220,10 @@ public final class FloatingWindow {
             try { Files.move(temporary, loadedPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE); }
             catch (java.nio.file.AtomicMoveNotSupportedException ignored) { Files.move(temporary, loadedPath, StandardCopyOption.REPLACE_EXISTING); }
             dirty = false;
-        } catch (Exception exception) { LogUtils.getLogger().warn("Could not save Stretcher window positions", exception); }
+        } catch (Exception exception) {
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(
+                    LogUtils.getLogger(), "Could not save Stretcher window positions", exception);
+        }
         finally { if (temporary != null) try { Files.deleteIfExists(temporary); } catch (java.io.IOException ignored) {} }
     }
     private record Saved(double x, double y, int width, int height) {}

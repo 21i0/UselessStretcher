@@ -140,7 +140,8 @@ public final class ApotheosisStaffSettings {
             player.inventoryMenu.broadcastChanges();
             return true;
         } catch (ReflectiveOperationException | LinkageError | IllegalArgumentException exception) {
-            LogUtils.getLogger().warn("Could not set Apotheosis world tier {} for {}", name, player.getGameProfile().getName(), exception);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(LogUtils.getLogger(),
+                    "Could not set Apotheosis world tier {} for {}", name, player.getGameProfile().getName(), exception);
             return false;
         }
     }

@@ -23,9 +23,26 @@ import java.util.HexFormat;
 
 /** Incremental UI catalog; repeated EIO/JDTE molds are inspected once per recipe snapshot/source. */
 public final class MoldCatalog {
+    /**
+     * Persisted-cache invalidation version. Bump this whenever the directory grouping or its
+     * serialized shape changes, even if the recipe catalog itself is unchanged.
+     */
+    public static final String FINGERPRINT_VERSION = "mold-directory-v2";
     private static final Map<Object, Builder> CACHE = new WeakHashMap<>();
     private MoldCatalog() { }
 
+    /**
+     * UI grouping is based on the registered mold item's namespace, never on the recipe adapter's
+     * source id. This keeps e.g. AppMek-converted Mekanism machines beside native Mekanism molds.
+     */
+    public static String groupFor(ResourceLocation id) {
+        return id == null ? "compatibility" : id.getNamespace();
+    }
+
+    /**
+     * {@code sourceId} is the UI directory group (the mold item's namespace). The actual recipe
+     * source remains untouched in the shared recipe catalog and pattern metadata.
+     */
     public record MoldEntry(String sourceId, ResourceLocation id, ItemStack mold) {
         public String displayName() { return mold.getHoverName().getString(); }
     }
@@ -53,7 +70,7 @@ public final class MoldCatalog {
                 update(digest, entry.identity().recipeId().toString());
                 update(digest, entry.identity().fingerprint());
             }
-            return HexFormat.of().formatHex(digest.digest());
+            return FINGERPRINT_VERSION + ":" + HexFormat.of().formatHex(digest.digest());
         } catch (NoSuchAlgorithmException exception) {
             throw new IllegalStateException("SHA-256 is unavailable", exception);
         }
@@ -72,7 +89,6 @@ public final class MoldCatalog {
         private final Map<String, Set<Ingredient>> inspected = new HashMap<>();
         private Map<String, List<MoldEntry>> result;
         private int cursor;
-        private int moldWarnings;
 
         private Builder(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
             this(null, recipes, true);
@@ -98,26 +114,26 @@ public final class MoldCatalog {
                 var entry = recipes.get(cursor++);
                 if (entry.recipe() != null) {
                     var seen = inspected.computeIfAbsent(entry.sourceId(), ignored -> new HashSet<>());
-                    var molds = byMod.computeIfAbsent(entry.sourceId(), ignored -> new LinkedHashMap<>());
                     for (Ingredient ingredient : entry.recipe().molds()) {
                         if (ingredient == null || !seen.add(ingredient)) continue;
                         ItemStack[] displayed;
                         try {
                             displayed = ingredient.getItems();
                         } catch (RuntimeException exception) {
-                            if (moldWarnings++ < 5) {
-                                com.mojang.logging.LogUtils.getLogger().warn(
-                                        "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
-                            }
+                            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(
+                                    com.mojang.logging.LogUtils.getLogger(),
+                                    "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
                             continue;
                         }
                         for (ItemStack stack : displayed) {
                             if (stack == null || stack.isEmpty()) continue;
                             ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                            String group = groupFor(id);
+                            var molds = byMod.computeIfAbsent(group, ignored -> new LinkedHashMap<>());
                             if (molds.containsKey(id)) continue;
                             ItemStack display = stack.getItem() instanceof SpawnEggItem
                                     ? new ItemStack(stack.getItem()) : stack.copyWithCount(1);
-                            molds.put(id, new MoldEntry(entry.sourceId(), id, display));
+                            molds.put(id, new MoldEntry(group, id, display));
                         }
                     }
                 }
@@ -125,8 +141,8 @@ public final class MoldCatalog {
             }
             if (cursor < recipes.size()) return false;
             Map<String, List<MoldEntry>> completed = new TreeMap<>();
-            byMod.forEach((source, entries) -> {
-                if (!entries.isEmpty()) completed.put(source, List.copyOf(entries.values()));
+            byMod.forEach((group, entries) -> {
+                if (!entries.isEmpty()) completed.put(group, List.copyOf(entries.values()));
             });
             result = java.util.Collections.unmodifiableMap(completed);
             inspected.clear();

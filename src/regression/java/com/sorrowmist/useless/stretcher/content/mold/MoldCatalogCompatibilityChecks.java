@@ -49,6 +49,18 @@ public final class MoldCatalogCompatibilityChecks {
                 check(RecipeCatalogAccess.read(level).entries() == snapshot.entries(),
                         "repeated live reads reuse the base snapshot");
                 check(MoldCatalog.start(level) == MoldCatalog.start(level), "catalog builders are reused");
+                var builder = MoldCatalog.start(level);
+                while (!builder.advance()) { }
+                var seenIds = new java.util.HashSet<ResourceLocation>();
+                builder.result().forEach((group, entries) -> {
+                    check(!entries.isEmpty() && group.equals(entries.get(0).id().getNamespace()),
+                            "mold groups follow the item registry namespace");
+                    for (var mold : entries) {
+                        check(group.equals(MoldCatalog.groupFor(mold.id())), "mold group is stable");
+                        check(group.equals(mold.sourceId()), "wire and persisted group key matches the directory");
+                        check(seenIds.add(mold.id()), "one mold id appears in exactly one directory group");
+                    }
+                });
             }
             var id = new ResourceLocation("minecraft:furnace");
             var saved = new MoldCatalogSavedData();

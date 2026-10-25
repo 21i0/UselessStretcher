@@ -59,6 +59,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
     private String catalogStatus = "checking";
     private boolean catalogLoading = true;
     private final Map<String, List<MoldCatalog.MoldEntry>> receivedCatalog = new TreeMap<>();
+    private final Set<ResourceLocation> receivedCatalogIds = new LinkedHashSet<>();
     private int expectedCatalogPart;
     private final List<String> receivedEnabled = new ArrayList<>();
     private final List<String> receivedPatterns = new ArrayList<>();
@@ -120,6 +121,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         }
         if (payload.part() == 0) {
             receivedCatalog.clear();
+            receivedCatalogIds.clear();
             expectedCatalogPart = 0;
         }
         if (payload.part() != expectedCatalogPart || payload.parts() <= 0) return;
@@ -128,16 +130,20 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
             ResourceLocation id = ResourceLocation.tryParse(payload.itemIds().get(i));
             if (id == null || !BuiltInRegistries.ITEM.containsKey(id)) continue;
             var item = BuiltInRegistries.ITEM.get(id);
-            String source = payload.sourceIds().get(i);
+            // Group by the mold item's registry namespace, not the recipe adapter source.
+            // This also repairs a catalog cached by an older server version.
+            String group = MoldCatalog.groupFor(id);
+            if (!receivedCatalogIds.add(id)) continue;
             var stack = new net.minecraft.world.item.ItemStack(item);
-            receivedCatalog.computeIfAbsent(source, ignored -> new ArrayList<>())
-                    .add(new MoldCatalog.MoldEntry(source, id, stack));
+            receivedCatalog.computeIfAbsent(group, ignored -> new ArrayList<>())
+                    .add(new MoldCatalog.MoldEntry(group, id, stack));
         }
         if (payload.part() + 1 < payload.parts()) return;
         Map<String, List<MoldCatalog.MoldEntry>> completed = new TreeMap<>();
-        receivedCatalog.forEach((source, entries) -> completed.put(source, List.copyOf(entries)));
+        receivedCatalog.forEach((group, entries) -> completed.put(group, List.copyOf(entries)));
         catalog = java.util.Collections.unmodifiableMap(completed);
         receivedCatalog.clear();
+        receivedCatalogIds.clear();
         rebuildSearchDocuments();
         catalogLoading = false;
         catalogProgress = "";

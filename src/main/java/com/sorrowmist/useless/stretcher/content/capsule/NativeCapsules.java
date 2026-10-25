@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.content.capsule;
 import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.network.CapsuleNetwork;
+import com.sorrowmist.useless.stretcher.util.RateLimitedLogger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -66,7 +67,6 @@ public final class NativeCapsules {
     private static final long PLAN_TIMEOUT_NANOS = 300_000_000_000L;
     private static final long STEP_BUDGET_NANOS = 4_000_000L;
     private static final long PREVIEW_BUDGET_NANOS = 1_500_000L;
-    private static final long CALLBACK_WARN_NANOS = 50_000_000L;
     /** V5 repairs foundations skipped by the older restart/finalization migration. */
     private static final int FINALIZATION_VERSION = 5;
     /** Capsule room cleanup changed from chunk-aligned spill into neighboring instances. */
@@ -100,7 +100,7 @@ public final class NativeCapsules {
         }
         ServerLevel level = player.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimension)));
         if (level == null) {
-            LogUtils.getLogger().warn("Capsule target environment missing: structure={} dimension={}", id, dimension);
+            RateLimitedLogger.warn(LogUtils.getLogger(), "Capsule target environment missing: structure={} dimension={}", id, dimension);
             CapsuleNetwork.state(player, id, dimension, instanceId, "source_environment_unavailable", 0, new int[0], 0, 0, 0);
             return;
         }
@@ -216,17 +216,8 @@ public final class NativeCapsules {
         Job job = JOBS.poll();
         if (job == null) return;
         try {
-            long began = System.nanoTime();
             boolean done = job.step();
             job.room.progress = Math.max(job.room.progress, job.progress());
-            long elapsed = System.nanoTime() - began;
-            job.maxStep = Math.max(job.maxStep, elapsed);
-            if (!job.room.phase.equals(job.loggedPhase) || job.ticks % 200 == 0) {
-                job.loggedPhase = job.room.phase;
-                LogUtils.getLogger().debug("CAPSULE PROGRESS {} target={} phase={} progress={}% chunks={}/{} attempt={}",
-                        job.room.structure, job.room.dimension, job.room.phase, job.room.progress,
-                        job.room.chunk, job.chunkCount, job.room.attempt);
-            }
             if (!done) JOBS.add(job);
             else {
                 job.release();
@@ -234,18 +225,16 @@ public final class NativeCapsules {
                 job.room.generating = false;
                 job.data.setDirty();
                 if (job.room.ready) notifyReady(job.data, job.room);
-                if (!job.room.ready) LogUtils.getLogger().error(
+                if (!job.room.ready) RateLimitedLogger.error(LogUtils.getLogger(),
                         "Native capsule job ended before finalization completed: structure={} phase={} trim={}/{} bedrock={}/{}",
                         job.room.structure, job.room.phase, job.room.trimChunk, job.chunkCount,
                         job.room.bedrockChunk, job.chunkCount);
-                LogUtils.getLogger().info("CAPSULE NATIVE COMPLETE {}: {} chunks, {} pieces, max callback {} ms",
-                        job.room.structure, job.chunkCount, job.start.getPieces().size(), job.maxStep / 1_000_000.0);
             }
         } catch (Exception failure) {
             job.release(); job.room.error = "failed"; job.data.setDirty();
             job.room.generating = false;
             if (failure instanceof CapsuleLimitException limit) job.room.error = limit.code;
-            LogUtils.getLogger().error("Native capsule {} failed; partial instance retained", job.room.key(), failure);
+            RateLimitedLogger.error(LogUtils.getLogger(), "Native capsule {} failed; partial instance retained", job.room.key(), failure);
         }
     }
     @SubscribeEvent public static void stopped(ServerStoppedEvent event) {
@@ -278,12 +267,11 @@ public final class NativeCapsules {
             if (target == null || source == null || source.getSeed() != room.sourceSeed || structure == null)
                 throw new CapsuleLimitException("source_environment_unavailable");
             JOBS.addLast(new Job(data, room, target, source, structure));
-            LogUtils.getLogger().debug("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
         } catch (RuntimeException failure) {
             room.generating = false;
             room.error = failure instanceof CapsuleLimitException limit ? limit.code : "failed";
             data.setDirty();
-            LogUtils.getLogger().error("Cannot resume capsule {}", room.key(), failure);
+            RateLimitedLogger.error(LogUtils.getLogger(), "Cannot resume capsule {}", room.key(), failure);
         }
     }
 
@@ -329,8 +317,6 @@ public final class NativeCapsules {
         boolean registered;
         boolean startTicket;
         int ticks;
-        String loggedPhase = "";
-        long maxStep;
         PlanFuture planning;
         long planningStarted;
         long planningMemoryBaseline;
@@ -526,14 +512,14 @@ public final class NativeCapsules {
                 long memoryGrowth = Math.max(0L, usedMemory() - planningMemoryBaseline);
                 long memoryLimit = planningMemoryGrowthLimit();
                 if (memoryGrowth > memoryLimit) {
-                    LogUtils.getLogger().error("Native capsule planning grew heap usage by {} MiB for {}; request rejected",
+                    RateLimitedLogger.error(LogUtils.getLogger(), "Native capsule planning grew heap usage by {} MiB for {}; request rejected",
                             memoryGrowth / (1024L * 1024L), room.structure);
                     planning.cancel(true);
                     planning = null;
                     throw new CapsuleLimitException("planning_memory");
                 }
                 if (elapsed > PLAN_TIMEOUT_NANOS) {
-                    LogUtils.getLogger().error("Native capsule planning exceeded {} seconds for {}; request rejected without blocking the server",
+                    RateLimitedLogger.error(LogUtils.getLogger(), "Native capsule planning exceeded {} seconds for {}; request rejected without blocking the server",
                             PLAN_TIMEOUT_NANOS / 1_000_000_000L, room.structure);
                     planning.cancel(true);
                     planning = null;
@@ -654,8 +640,8 @@ public final class NativeCapsules {
                     BlockPos point = nearest.getFirst();
                     return new ChunkPos(point.getX() >> 4, point.getZ() >> 4);
                 }
-            } catch (RuntimeException failure) {
-                LogUtils.getLogger().debug("Source biome lookup failed for {}; using bounded native spiral", room.structure, failure);
+            } catch (RuntimeException ignored) {
+                // Providers without a biome lookup use the bounded native spiral below.
             }
             return new ChunkPos(fallbackX >> 4, fallbackZ >> 4);
         }
@@ -794,29 +780,17 @@ public final class NativeCapsules {
                 RandomSource random = RandomSource.create(generationSeed() ^ chunk.toLong() ^ room.piece);
                 if (room.piece < pieces.size()) {
                     var first = pieces.get(0).getBoundingBox();
-                    long began = System.nanoTime();
                     try (var context = new CapsuleGenerationContext(level, sourceLevel, room,
                             pieces.get(room.piece) instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)) {
                         pieces.get(room.piece).postProcess(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(),
                                 random, clip, chunk, new BlockPos(first.getCenter().getX(), first.minY(), first.getCenter().getZ()));
                     }
-                    long elapsed = System.nanoTime() - began;
-                    if (elapsed > CALLBACK_WARN_NANOS) {
-                        LogUtils.getLogger().debug("Native capsule callback took {} ms for {} chunk {} piece {}",
-                                elapsed / 1_000_000.0, room.structure, chunk, room.piece);
-                    }
                     checkpointPiece(room.piece++); return false;
                 }
                 if (!room.afterPlaced) {
-                    long began = System.nanoTime();
                     try (var context = new CapsuleGenerationContext(level, sourceLevel, room)) {
                         structure.afterPlace(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(), random,
                                 clip, chunk, new PiecesContainer(pieces));
-                    }
-                    long elapsed = System.nanoTime() - began;
-                    if (elapsed > CALLBACK_WARN_NANOS) {
-                        LogUtils.getLogger().debug("Native capsule afterPlace took {} ms for {} chunk {}",
-                                elapsed / 1_000_000.0, room.structure, chunk);
                     }
                     room.afterPlaced = true; checkpoint(); return false;
                 }
@@ -1241,9 +1215,11 @@ public final class NativeCapsules {
         }
         boolean tick() {
             if (++ticks > 1200 || player.isRemoved() || !player.isAlive() || DimensionCapsuleService.hasReturnPoint(player)) {
-                LogUtils.getLogger().warn("Capsule entry cancelled: player={} target={} ticks={} removed={} alive={} return={}",
-                        player.getGameProfile().getName(), level.dimension().location(), ticks,
-                        player.isRemoved(), player.isAlive(), DimensionCapsuleService.hasReturnPoint(player));
+                if (ticks > 1200 && !player.isRemoved() && player.isAlive()
+                        && !DimensionCapsuleService.hasReturnPoint(player)) {
+                    RateLimitedLogger.warn(LogUtils.getLogger(), "Capsule entry timed out: player={} target={}",
+                            player.getGameProfile().getName(), level.dimension().location());
+                }
                 release(); return true;
             }
             for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++)

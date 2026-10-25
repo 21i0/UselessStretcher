@@ -105,7 +105,8 @@ public final class PatternRepositorySearch {
                             job.index.ready() ? job.search.progress() : job.index.progress(), null);
                 }
             } catch (RuntimeException exception) {
-                LogUtils.getLogger().warn("Could not search a stretcher pattern library", exception);
+                com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(
+                        LogUtils.getLogger(), "Could not search a stretcher pattern library", exception);
                 reply(player, job.request, job.aeBound, List.of(), "failed", null);
                 iterator.remove();
             }
