@@ -21,7 +21,11 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
             if (providers.gradleProperty('mekanismCheckRepository').isPresent())
                 modRuntimeOnly "mekanism:Mekanism:${providers.gradleProperty('mekanismMavenVersion').getOrElse('1.20.1-10.4.16.80')}"
             else
-                modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('9iboPfea')}"
+                modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('uxe1WQp4')}"
+            if (providers.gradleProperty('staffPackChecks').isPresent()) {
+                modRuntimeOnly 'maven.modrinth:OFVYKsAk:Th4Czz4N'
+                modRuntimeOnly 'maven.modrinth:IiATswDj:9n9p68Qq'
+            }
         }
         if (providers.gradleProperty('uselessModDevJar').isPresent())
             runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
@@ -60,6 +64,7 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
             gameDirectory = file(providers.gradleProperty('staffCompatDirectory').getOrElse('run/staff-compat-check'))
             programArgument '--nogui'
             systemProperty 'stretcher.staff.compatCheck', 'true'
+            systemProperty 'stretcher.staff.packCheck', providers.gradleProperty('staffPackChecks').isPresent().toString()
         }
     }
 }

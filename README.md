@@ -113,7 +113,7 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 
 ## 配置文件 / Config
 
-服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `world/serverconfig/`（没有世界级文件时才回退到 `config/`）。游戏内从“模组 → 万象担架 → 配置 → 服务端配置”即可直接修改，点页面底部“完成/保存”后写入文件并同步在线玩家；
+服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `<level-name>/serverconfig/`（默认 `world/serverconfig/`）。新世界的配置模板可放在 `defaultconfigs/`，不会覆盖已有世界的设置。单机／局域网宿主从“模组 → 万象担架 → 配置 → 服务端配置”修改，点页面底部“完成/保存”后写入文件并同步在线玩家；专用服务器由服主修改世界级配置。
 除配方目录过滤和有用锭装甲配方需要重载世界/重启外，其余运行时读取的选项立即生效，界面说明均为中文。
 
 ```toml
@@ -136,12 +136,12 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
 ## 从源码构建 / Building
 
 ```bash
-# 需要 JDK 17；先构建上文指定版本的 UselessMod
-./gradlew build -PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar
+# 需要 JDK 17；自动下载并映射官方本体发布包
+./gradlew build
 ```
 
 产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
-本体使用 `build/devlibs/` 的开发包，不将依赖模组捆绑进附属 JAR。
+本体默认使用官方 20.2.4.7 发布包；联合开发本体时通过 `-PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar` 显式替换，不将依赖模组捆绑进附属 JAR。
 
 ## 许可 / License
 

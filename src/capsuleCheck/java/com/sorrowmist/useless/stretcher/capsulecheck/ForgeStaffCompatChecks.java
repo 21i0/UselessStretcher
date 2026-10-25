@@ -38,9 +38,13 @@ public final class ForgeStaffCompatChecks {
     @SubscribeEvent public static void tick(TickEvent.ServerTickEvent event) {
         if (!Boolean.getBoolean("stretcher.staff.compatCheck") || done
                 || event.phase != TickEvent.Phase.END || ++ticks < 40) return;
-        done = true;
         var server = event.getServer();
         try {
+            if (Boolean.getBoolean("stretcher.staff.packCheck") && !checkPackCatalog(server.overworld())) {
+                check(ticks < 640, "native pack mold catalog completes without blocking the server");
+                return;
+            }
+            done = true;
             check(ModList.get().isLoaded("mekanism"), "Mekanism is actually loaded");
             ServerPlayer player = new ServerPlayer(server, server.overworld(),
                     new GameProfile(UUID.randomUUID(), "StaffCompat"));
@@ -60,9 +64,33 @@ public final class ForgeStaffCompatChecks {
                     ModList.get().getModContainerById("mekanism").orElseThrow().getModInfo().getVersion(),
                     ModList.get().getModContainerById("useless_mod").orElseThrow().getModInfo().getVersion());
         } catch (Throwable failure) {
+            done = true;
             LogUtils.getLogger().error("FORGE STAFF COMPAT CHECKS FAILED", failure);
         }
         server.halt(false);
+    }
+
+    private static boolean checkPackCatalog(net.minecraft.server.level.ServerLevel level) {
+        for (String id : new String[]{"mekanism", "mekanismgenerators", "appmek"})
+            check(ModList.get().isLoaded(id), "actual pack dependency loaded: " + id);
+        var catalog = com.sorrowmist.useless.stretcher.content.mold.MoldCatalog.start(level);
+        if (!catalog.advance()) return false;
+        var counts = new java.util.TreeMap<String, Integer>();
+        // AppMek recipe sources still use Mekanism machine items as molds.
+        // Directory groups follow the item namespace, not the adapter source.
+        for (String id : new String[]{"mekanism", "mekanismgenerators"}) {
+            var entries = catalog.result().get(id);
+            check(entries != null && !entries.isEmpty(), "native pack recipe molds available: " + id);
+            counts.put(id, entries.size());
+        }
+        for (var group : catalog.result().entrySet()) {
+            for (var entry : group.getValue()) {
+                check(group.getKey().equals(entry.id().getNamespace()),
+                        "mold grouped by registered item namespace: " + entry.id());
+            }
+        }
+        LogUtils.getLogger().info("FORGE STAFF PACK CATALOG PASSED: three actual dependencies, native recipe adapters and incremental mold enumeration {}", counts);
+        return true;
     }
 
     private static void checkRadiation(ServerPlayer player) throws Exception {
