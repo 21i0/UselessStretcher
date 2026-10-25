@@ -39,17 +39,18 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
 > 无用之物大更新后若无法启动，请更新本模组到对应版本。
 
-## 构建与兼容范围
+## 构建与兼容范围 / Building and compatibility
 
-使用 Java 17，构建会直接下载并映射官方无用之物发布包，不再需要相邻的本体源码目录：
+使用 Java 17，构建默认下载并映射官方无用之物 `20.2.4.7` 发布包，无需相邻的本体源码目录：
 
 ```shell
 ./gradlew build
 ```
 
-Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDevJar=/path/to/dev.jar`
-显式替换为匹配的 `build/devlibs` 开发包。离线官方包可通过 `-PuselessModRepository=/path/to/maven` 提供，不能把发布包当成未映射的开发包。
-其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具。
+Windows 使用 `gradlew.bat`，产物位于 `build/libs/`。联合开发本体时，可通过
+`-PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar` 显式替换为匹配的开发包。
+离线官方包可通过 `-PuselessModRepository=/path/to/maven` 提供，不能把发布包当成未映射的开发包。
+其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具，也不将依赖模组捆绑进附属 JAR。
 本分支针对 Forge 1.20.1。Occultism 1.158.0 与 RFToolsBuilder 6.0.10
 专用加速桥已补回构建；旧版 Occultism 只有粉碎精灵，不能套用 1.21 的另外两类加工精灵。
 玩偶与剧情回归已适配 Forge 1.20.1，通过 `-PdollChecks` 启用，运行任务为 `runDollServerCheck`、`runDollClientCheck`；收容防复制另加 `-PdollCaptureChecks`。测试代码和数据永远不进入发行 JAR。
@@ -132,16 +133,6 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
     highlight_see_through = false        # 机器高亮框是否透视
 
 ```
-
-## 从源码构建 / Building
-
-```bash
-# 需要 JDK 17；自动下载并映射官方本体发布包
-./gradlew build
-```
-
-产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
-本体默认使用官方 20.2.4.7 发布包；联合开发本体时通过 `-PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar` 显式替换，不将依赖模组捆绑进附属 JAR。
 
 ## 许可 / License
 
