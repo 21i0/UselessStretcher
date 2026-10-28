@@ -1,15 +1,6 @@
 // Real client/server checks for the complete Forge companion and visual novel.
-tasks.named('jar') {
-    exclude '**/regression/**', '**/storytest/**', '**/*Checks*.class', 'data/useless_stretcher_test/**'
-}
 if (providers.gradleProperty('dollChecks').isPresent()) {
-    def serverChecks = file('src/regression/java').toPath().toAbsolutePath()
     sourceSets.main.java.srcDirs 'src/regression/java', 'src/storyTest/java', 'src/dollCheck/java'
-    sourceSets.main.java.exclude { element ->
-        def path = element.file.toPath().toAbsolutePath()
-        path.startsWith(serverChecks) && element.file.name.endsWith('.java') &&
-                !(element.file.name.startsWith('TwoI') || element.file.name == 'LeafRewardChecks.java')
-    }
     sourceSets.main.resources.srcDir 'src/regression/resources'
     if (providers.gradleProperty('dollCaptureRepository').isPresent()) {
         repositories.maven {
@@ -23,8 +14,7 @@ if (providers.gradleProperty('dollChecks').isPresent()) {
         modRuntimeOnly 'maven.modrinth:vvuO3ImH:IPQlZkz1'
         if (!providers.gradleProperty('dollWithoutJei').isPresent())
             modRuntimeOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ'
-        if (providers.gradleProperty('uselessModDevJar').isPresent())
-            runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        if (uselessModDevJar.isPresent()) runtimeOnly files(uselessModDevJar.get())
         else modRuntimeOnly uselessModRelease
         if (providers.gradleProperty('dollCaptureChecks').isPresent()) {
             if (providers.gradleProperty('dollCaptureRepository').isPresent()) {

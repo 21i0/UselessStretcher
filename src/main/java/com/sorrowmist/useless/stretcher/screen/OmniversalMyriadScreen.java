@@ -9,6 +9,7 @@ import com.sorrowmist.useless.stretcher.content.mold.MoldCatalog;
 import com.sorrowmist.useless.stretcher.menu.OmniversalMyriadMenu;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
+import com.sorrowmist.useless.client.gui.AppleEditBox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -166,7 +167,7 @@ public final class OmniversalMyriadScreen extends AbstractContainerScreen<Omnive
         window.init(width, height);
         if (!initialized) {
             this.rowCache = null;
-            this.search = new EditBox(this.font, 0, 0, 192, 18, Component.empty());
+            this.search = new AppleEditBox(this.font, 0, 0, 192, 18, Component.empty());
             this.search.setMaxLength(64);
             this.search.setResponder(value -> { rowCache = null; scroll = 0; });
             this.search.setHint(Component.translatable("gui.useless_stretcher.search_hint"));

@@ -38,6 +38,7 @@ class CapsuleInstancesTest {
         room.chunk = 3;
         room.piece = 2;
         room.progress = 42;
+        room.geometryVersion = CapsulePieceGeometry.VERSION;
         var saved = data.save(new CompoundTag());
         var restored = reload(saved);
         var copy = restored.rooms.get(room.key());
@@ -47,6 +48,7 @@ class CapsuleInstancesTest {
         assertEquals(3, copy.chunk);
         assertEquals(2, copy.piece);
         assertEquals(42, copy.progress);
+        assertEquals(CapsulePieceGeometry.VERSION, copy.geometryVersion);
         assertEquals(room.sourceDimension, copy.sourceDimension);
         assertEquals(room.sourceSeed, copy.sourceSeed);
         assertSame(copy, restored.getOrCreate(owner, room.structure, room.dimension));
@@ -72,6 +74,22 @@ class CapsuleInstancesTest {
         var reloaded = reload(migrated.save(new CompoundTag()));
         assertEquals(migrated.rooms.keySet(), reloaded.rooms.keySet());
         assertEquals(2, reloaded.instanceCount(owner, room.structure, original.dimension));
+    }
+
+    @Test void oldGeometryDefaultsToZeroWithoutLosingCompletedPlans() throws Exception {
+        var data = new CapsuleInstances();
+        var room = data.getOrCreate(UUID.randomUUID(), "ae2:meteorite", DimensionCapsuleCatalog.CAPSULE_OVERWORLD);
+        room.ready = true;
+        room.plan.putString("test_plan", "completed player-owned room");
+        var tag = data.save(new CompoundTag());
+        tag.getList("rooms", 10).getCompound(0).remove("geometry_version");
+        var copy = reload(tag).rooms.get(room.key());
+        assertNotNull(copy);
+        assertEquals(0, copy.geometryVersion);
+        assertTrue(copy.ready);
+        assertEquals(room.plan, copy.plan);
+        tag.getList("rooms", 10).getCompound(0).putInt("geometry_version", -10);
+        assertEquals(0, reload(tag).rooms.get(room.key()).geometryVersion);
     }
 
     private static CapsuleInstances reload(CompoundTag saved) throws Exception {

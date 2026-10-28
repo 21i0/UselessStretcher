@@ -1,15 +1,15 @@
 package com.sorrowmist.useless.stretcher.client.gui;
 
+import com.sorrowmist.useless.client.gui.AppleUi;
+import com.sorrowmist.useless.client.gui.apple.AppleTextLayout;
 import com.sorrowmist.useless.compat.forge1201.client.PortButton;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 
-/** AE2-style button with a persistent selected state for mutually exclusive choices. */
+/** Native keyboard/tooltip adapter for Useless Mod's shared Apple button API. */
 public final class SelectableAE2Button extends PortButton {
-    private boolean selected;
+    private boolean selected, pressed;
     private net.minecraft.client.gui.components.Tooltip labelTooltip;
 
     public SelectableAE2Button(int x, int y, int width, int height, Component message, OnPress onPress) {
@@ -31,9 +31,24 @@ public final class SelectableAE2Button extends PortButton {
         this.selected = selected;
     }
 
+    @Override public boolean mouseClicked(double x, double y, int button) {
+        boolean handled = super.mouseClicked(x, y, button);
+        if (handled) pressed = true;
+        return handled;
+    }
+
+    @Override public boolean mouseReleased(double x, double y, int button) {
+        pressed = false;
+        return super.mouseReleased(x, y, button);
+    }
+
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderSurface(graphics,selected || isHoveredOrFocused());
-        renderLabel(graphics,!active?0x888894:selected?0xAED4ED:0xF2F2F2);
+        var style = selected ? AppleUi.ButtonStyle.TINTED : AppleUi.ButtonStyle.GRAY;
+        AppleUi.buttonSurface(graphics, getX(), getY(), getWidth(), getHeight(), style,
+                isHoveredOrFocused(), pressed && isHovered(), active);
+        AppleTextLayout.drawCentered(graphics, Minecraft.getInstance().font, getMessage(),
+                getX(), getY(), getWidth(), getHeight(), Math.min(7, Math.max(3, getWidth() / 8)), 3,
+                null, AppleUi.buttonTextColor(style, active));
     }
 }

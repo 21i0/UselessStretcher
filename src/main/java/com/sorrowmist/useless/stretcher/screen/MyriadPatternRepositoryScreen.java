@@ -12,6 +12,7 @@ import com.sorrowmist.useless.stretcher.client.search.RegistrySearchCatalog;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Tooltip;
+import com.sorrowmist.useless.client.gui.AppleEditBox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -133,7 +134,7 @@ public final class MyriadPatternRepositoryScreen extends FloatingScreen {
         gridLeft = left + (width - columns * SLOT - 6) / 2;
         gridTop = top + (duplicateMenuOpen ? 92 : 70);
         if (search == null) {
-            search = new EditBox(font, left, top + 26, width, 18,
+            search = new AppleEditBox(font, left, top + 26, width, 18,
                     Component.translatable("gui.useless_stretcher.search_hint"));
             search.setMaxLength(128);
             search.setResponder(value -> {

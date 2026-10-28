@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.client;
 
 import com.sorrowmist.useless.stretcher.client.dialogue.TwoIStoryScript;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -43,20 +44,19 @@ public final class TwoIStoryLibraryScreen extends Screen implements TwoIInteract
         int rowsY = panelY + 70;
         for (int i = 0; i < chapters.length; i++) {
             final int chapter = i;
-            chapters[i] = addRenderableWidget(Button.builder(TwoIStoryScript.title(i), b -> {
-                if (loaded && (completedMask & (1 << chapter)) != 0) {
-                    minecraft.setScreen(TwoIStoryScreen.replay(this, chapter, bond));
-                }
-            }).bounds(panelX + 12 + i % 2 * (half + 10), rowsY + i / 2 * 31, half, 25).build());
+            chapters[i] = addRenderableWidget(new SelectableAE2Button(
+                    panelX + 12 + i % 2 * (half + 10), rowsY + i / 2 * 31, half, 25, TwoIStoryScript.title(i), b -> {
+                        if (loaded && (completedMask & (1 << chapter)) != 0) {
+                            minecraft.setScreen(TwoIStoryScreen.replay(this, chapter, bond));
+                        }
+                    }));
         }
         int bottom = panelY + panelHeight - 34;
-        addRenderableWidget(Button.builder(ui("gallery"), b ->
-                minecraft.setScreen(new TwoIStoryGalleryScreen(this)))
-                .bounds(panelX + 12, bottom, half, 22).build());
-        addRenderableWidget(Button.builder(ui("return"), b -> onClose())
-                .bounds(panelX + 22 + half, bottom, half, 22).build());
-        retry = addRenderableWidget(Button.builder(ui("library_retry"), b -> requestLibrary())
-                .bounds(panelX + panelWidth - 92, panelY + 12, 80, 20).build());
+        addRenderableWidget(new SelectableAE2Button(panelX + 12, bottom, half, 22, ui("gallery"),
+                b -> minecraft.setScreen(new TwoIStoryGalleryScreen(this))));
+        addRenderableWidget(new SelectableAE2Button(panelX + 22 + half, bottom, half, 22, ui("return"), b -> onClose()));
+        retry = addRenderableWidget(new SelectableAE2Button(panelX + panelWidth - 92, panelY + 12, 80, 20,
+                ui("library_retry"), b -> requestLibrary()));
         updateButtons();
         if (!requested) requestLibrary();
     }

@@ -3,6 +3,7 @@ package com.sorrowmist.useless.stretcher.client.render;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.stretcher.UselessStretcherMod;
+import com.sorrowmist.useless.stretcher.util.RateLimitedLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -45,7 +46,7 @@ public final class TwoIDollSkin {
                      NativeImage source = NativeImage.read(input)) {
                     return normalizedCopy(source);
                 } catch (Exception failure) {
-                    LogUtils.getLogger().warn("Could not prepare the 2i skin; using the resource directly", failure);
+                    RateLimitedLogger.warn(LogUtils.getLogger(), "Could not prepare the 2i skin; using the resource directly", failure);
                     return null;
                 }
             }

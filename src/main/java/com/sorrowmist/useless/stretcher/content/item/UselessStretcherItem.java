@@ -5,6 +5,7 @@ import com.sorrowmist.useless.content.blockentities.RecoverableItemStackHandler;
 import com.sorrowmist.useless.content.blockentities.multiblock.MePatternAssemblyBlockEntity;
 import com.sorrowmist.useless.content.blockentities.multiblock.PassiveCraftingHatchBlockEntity;
 import com.sorrowmist.useless.stretcher.content.ae.AeBindingStore;
+import com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData;
 import com.sorrowmist.useless.stretcher.content.mold.MyriadPatternStore;
@@ -55,6 +56,8 @@ public final class UselessStretcherItem extends Item {
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_repository")
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.useless_stretcher.stretcher.hint_install")
+                .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, flag);
     }
 
@@ -92,6 +95,7 @@ public final class UselessStretcherItem extends Item {
                 if (!level.isClientSide) {
                     UUID ref = myriad.getPatternRef();
                     MyriadMoldData.writePatternRef(stretcher, ref);
+                    InstalledStretcherPatterns.bindDimension(stretcher, (ServerLevel) level);
                     UUID aeRef = MyriadMoldData.readAeRef(stretcher);
                     if (aeRef != null) myriad.setAeRef(aeRef);
                     int count = ref == null ? 0 : myriad.getPatternCount();
@@ -119,7 +123,7 @@ public final class UselessStretcherItem extends Item {
         if (!validTarget) return InteractionResult.PASS;
 
         if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
-            MyriadPatternStore store = MyriadPatternStore.get(serverLevel);
+            MyriadPatternStore store = InstalledStretcherPatterns.store(serverLevel, stretcher);
             UUID ref = MyriadMoldData.readPatternRef(stretcher);
             Collection<AEItemKey> patterns = ref == null ? List.of() : store.keys(ref);
             if (patterns.isEmpty()) {

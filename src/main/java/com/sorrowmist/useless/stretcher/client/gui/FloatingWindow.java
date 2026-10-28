@@ -4,6 +4,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.logging.LogUtils;
+import com.sorrowmist.useless.client.gui.AppleUi;
+import com.sorrowmist.useless.client.gui.apple.AppleHost;
+import com.sorrowmist.useless.client.gui.apple.AppleStyle;
+import com.sorrowmist.useless.client.gui.apple.AppleWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,7 +22,7 @@ import java.util.Map;
 
 /** Client-only bounds; dragging never writes gameplay settings or sends packets. */
 public final class FloatingWindow {
-    private static final int MARGIN = 4, EDGE = 4, TITLE_HEIGHT = 23;
+    private static final int MARGIN = 4, EDGE = 4, TITLE_HEIGHT = AppleStyle.TITLE_BAR + 6;
     private static final int LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8, MOVE = 16;
     private static final Map<String, Saved> SAVED = new HashMap<>();
     private static Path loadedPath;
@@ -28,6 +32,25 @@ public final class FloatingWindow {
     private int operation, startLeft, startTop, startWidth, startHeight;
     private double startX, startY;
     private boolean initialized, changed, closeRequested, dirty;
+    private Map<String, String> preferences;
+    private AppleHost frame;
+    private int frameWidth, frameHeight;
+    private Component frameTitle = Component.empty();
+
+    /** Local UI state shares the same atomic file as this window's geometry. */
+    public String preference(String name, String fallback) {
+        if (preferences == null) {
+            loadLayouts();
+            Saved saved = SAVED.get(key);
+            preferences = new HashMap<>(saved == null ? Map.of() : saved.preferences);
+        }
+        return preferences.getOrDefault(name, fallback);
+    }
+
+    public void setPreference(String name, String value) {
+        preference(name, "");
+        if (!value.equals(preferences.put(name, value))) dirty = true;
+    }
 
     public FloatingWindow(String key, int defaultWidth, int defaultHeight, int minWidth, int minHeight) {
         this.key = key;
@@ -63,10 +86,10 @@ public final class FloatingWindow {
     public int top() { return top; }
     public int width() { return width; }
     public int height() { return height; }
-    public int bodyLeft() { return left + 6; }
+    public int bodyLeft() { return left + 10; }
     public int bodyTop() { return top + TITLE_HEIGHT; }
-    public int bodyWidth() { return Math.max(1, width - 12); }
-    public int bodyHeight() { return Math.max(1, height - TITLE_HEIGHT - 6); }
+    public int bodyWidth() { return Math.max(1, width - 20); }
+    public int bodyHeight() { return Math.max(1, height - TITLE_HEIGHT - 10); }
     public boolean containsBody(double x, double y) {
         return x >= bodyLeft() && x < bodyLeft() + bodyWidth() && y >= bodyTop() && y < bodyTop() + bodyHeight();
     }
@@ -127,10 +150,14 @@ public final class FloatingWindow {
     }
 
     public void renderFrame(GuiGraphics graphics, Font font, Component title, int mouseX, int mouseY) {
-        StretcherScreenStyle.drawPanel(graphics, left, top, width, height);
-        graphics.fill(left + 5, top + 4, left + width - 5, top + TITLE_HEIGHT - 2, StretcherScreenStyle.SLOT_COLOR);
-        graphics.drawString(font, font.plainSubstrByWidth(title.getString(), Math.max(1, width - 53)),
-                left + 9, top + 9, StretcherScreenStyle.TEXT_COLOR, false);
+        frameTitle = Component.literal(font.plainSubstrByWidth(title.getString(), Math.max(1, width - 60)));
+        if (frame == null || frameWidth != width || frameHeight != height) {
+            frameWidth = width; frameHeight = height;
+            frame = new AppleHost(width, height);
+            frame.add(new AppleWindow(width, height, () -> frameTitle));
+        }
+        frame.layout(viewportWidth, viewportHeight, left, top);
+        frame.render(graphics, mouseX, mouseY, 0);
         drawControl(graphics, left + width - 38, top + 5, true, mouseX, mouseY);
         drawControl(graphics, left + width - 21, top + 5, false, mouseX, mouseY);
         int edge = edgeAt(mouseX, mouseY);
@@ -155,16 +182,9 @@ public final class FloatingWindow {
     }
 
     private static void drawControl(GuiGraphics graphics, int x, int y, boolean restore, int mx, int my) {
-        if (inside(mx, my, x, y, 14, 14)) graphics.fill(x, y, x + 14, y + 14, StretcherScreenStyle.HIGHLIGHT_COLOR);
-        int color = StretcherScreenStyle.TEXT_COLOR;
-        if (restore) {
-            graphics.renderOutline(x + 5, y + 3, 6, 6, color);
-            graphics.fill(x + 3, y + 5, x + 9, y + 11, StretcherScreenStyle.SLOT_COLOR);
-            graphics.renderOutline(x + 3, y + 5, 6, 6, color);
-        } else for (int i = 0; i < 7; i++) {
-            graphics.fill(x + 4 + i, y + 4 + i, x + 5 + i, y + 5 + i, color);
-            graphics.fill(x + 10 - i, y + 4 + i, x + 11 - i, y + 5 + i, color);
-        }
+        boolean hover = inside(mx, my, x, y, 14, 14);
+        AppleUi.buttonSurface(graphics, x, y, 14, 14, AppleUi.ButtonStyle.GRAY, hover, false, true);
+        AppleUi.icon(graphics, restore ? AppleUi.Icon.ROTATE : AppleUi.Icon.XMARK, x + 3, y + 3, 8, AppleStyle.SECONDARY);
     }
     private int edgeAt(double x, double y) {
         if (!inside(x, y, left - 1, top - 1, width + 2, height + 2)) return 0;
@@ -198,7 +218,8 @@ public final class FloatingWindow {
                     double x = value.get("x").getAsDouble(), y = value.get("y").getAsDouble();
                     int width = value.get("width").getAsInt(), height = value.get("height").getAsInt();
                     if (Double.isFinite(x) && Double.isFinite(y) && width > 0 && height > 0)
-                        SAVED.put(entry.getKey(), new Saved(Mth.clamp(x, 0, 1), Mth.clamp(y, 0, 1), width, height));
+                        SAVED.put(entry.getKey(), new Saved(Mth.clamp(x, 0, 1), Mth.clamp(y, 0, 1), width, height,
+                                readPreferences(value)));
                 } catch (RuntimeException ignored) { /* Skip only the malformed entry. */ }
             }
         } catch (Exception exception) {
@@ -211,7 +232,8 @@ public final class FloatingWindow {
         if (!initialized || !dirty) return;
         loadLayouts();
         SAVED.put(key, new Saved(fraction(left - MARGIN, viewportWidth - width - MARGIN * 2),
-                fraction(top - MARGIN, viewportHeight - height - MARGIN * 2), width, height));
+                fraction(top - MARGIN, viewportHeight - height - MARGIN * 2), width, height,
+                preferences == null ? (SAVED.containsKey(key) ? SAVED.get(key).preferences : Map.of()) : Map.copyOf(preferences)));
         Path temporary = null;
         try {
             Files.createDirectories(loadedPath.getParent());
@@ -226,5 +248,17 @@ public final class FloatingWindow {
         }
         finally { if (temporary != null) try { Files.deleteIfExists(temporary); } catch (java.io.IOException ignored) {} }
     }
-    private record Saved(double x, double y, int width, int height) {}
+    private static Map<String, String> readPreferences(JsonObject object) {
+        Map<String, String> result = new HashMap<>();
+        if (object.has("preferences") && object.get("preferences").isJsonObject()) {
+            object.getAsJsonObject("preferences").entrySet().stream().limit(32).forEach(entry -> {
+                if (entry.getValue().isJsonPrimitive() && entry.getKey().length() <= 64) {
+                    String value = entry.getValue().getAsString();
+                    if (value.length() <= 256) result.put(entry.getKey(), value);
+                }
+            });
+        }
+        return result;
+    }
+    private record Saved(double x, double y, int width, int height, Map<String, String> preferences) {}
 }

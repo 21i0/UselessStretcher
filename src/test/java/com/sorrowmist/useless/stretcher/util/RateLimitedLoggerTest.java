@@ -58,7 +58,7 @@ class RateLimitedLoggerTest {
     }
 
     @Test
-    void changingRecipeArgumentsDoesNotBypassTheLimitAndTheCauseIsRetained() {
+    void changingArgumentsDoesNotBypassTheLimitAndTheCauseIsRetained() {
         Logger logger = mock(Logger.class);
         when(logger.getName()).thenReturn("StretcherRateLimitedLoggerTest.arguments");
         when(logger.isWarnEnabled()).thenReturn(true);
@@ -66,5 +66,27 @@ class RateLimitedLoggerTest {
         RateLimitedLogger.warn(logger, "Failed recipe {}", "one", cause);
         RateLimitedLogger.warn(logger, "Failed recipe {}", "two", cause);
         verify(logger).warn(eq("Failed recipe {}"), aryEq(new Object[]{"one", cause}));
+    }
+
+    @Test
+    void integrationErrorsAcrossPlayersAreThrottledAndKeepTheFirstCause() {
+        Logger logger = mock(Logger.class);
+        when(logger.getName()).thenReturn("StretcherRateLimitedLoggerTest.integrationErrors");
+        when(logger.isErrorEnabled()).thenReturn(true);
+        RuntimeException cause = new RuntimeException("external storage failure");
+        for (int player = 0; player < 100; player++)
+            RateLimitedLogger.error(logger, "Integration failed for {}", player, cause);
+        verify(logger).error(eq("Integration failed for {}"), aryEq(new Object[]{0, cause}));
+    }
+
+    @Test
+    void disabledLogLevelDoesNotConsumeTheFirstDiagnostic() {
+        Logger logger = mock(Logger.class);
+        when(logger.getName()).thenReturn("StretcherRateLimitedLoggerTest.disabled");
+        RateLimitedLogger.warn(logger, "Storage unavailable");
+        verify(logger, never()).warn(eq("Storage unavailable"), any(Object[].class));
+        when(logger.isWarnEnabled()).thenReturn(true);
+        RateLimitedLogger.warn(logger, "Storage unavailable");
+        verify(logger).warn(eq("Storage unavailable"), aryEq(new Object[0]));
     }
 }

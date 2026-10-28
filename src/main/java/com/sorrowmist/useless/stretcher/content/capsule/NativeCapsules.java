@@ -330,6 +330,34 @@ public final class NativeCapsules {
             if (!room.plan.isEmpty()) {
                 start = StructureStart.loadStaticStart(serializationContext(), room.plan, generationSeed());
                 if (start == null || !start.isValid()) throw new IllegalStateException("Saved structure plan cannot be restored");
+                // Legacy foundation repairs temporarily clear ready, and old checkpoints
+                // cannot distinguish those published rooms from first-time finalization.
+                // Preserve either case before demoting ready or resuming bedrock/trimming.
+                boolean preserveGeometry = room.ready || room.completionNotified
+                        || java.util.Set.of("ready", "bedrock", "trimming").contains(room.phase);
+                if (preserveGeometry && room.geometryVersion < CapsulePieceGeometry.VERSION) {
+                    room.geometryVersion = CapsulePieceGeometry.VERSION;
+                    data.setDirty();
+                }
+                if (!preserveGeometry && room.geometryVersion < CapsulePieceGeometry.VERSION
+                        && start.getPieces().stream().anyMatch(piece -> piece instanceof appeng.worldgen.meteorite.MeteoriteStructurePiece)) {
+                    // Only unpublished work may be replayed. Keep the exact AE2 settings,
+                    // repair its absolute center, then remove the old partial projection.
+                    // Completed rooms can contain player builds/claimed loot and are left intact.
+                    var pieces = start.getPieces().stream().map(piece ->
+                            CapsulePieceGeometry.migrate(piece, room, serializationContext())).toList();
+                    start = new StructureStart(structure, start.getChunkPos(), start.getReferences(), new PiecesContainer(pieces));
+                    ensureBedrockSpace();
+                    room.geometryVersion = CapsulePieceGeometry.VERSION;
+                    room.phase = "cleaning"; room.terrainCleaned = false; room.cleanupEntitiesRemoved = false;
+                    room.cleanChunk = 0; room.cleanCursor = 0;
+                    room.chunk = 0; room.piece = 0; room.afterPlaced = false;
+                    room.mapCursor = 0; room.previewCursor = 0;
+                    room.bedrockChunk = 0; room.bedrockCursor = 0; room.bedrockVersion = 0;
+                    room.trimChunk = 0; room.trimCursor = 0; room.trimPass = 0;
+                    java.util.Arrays.fill(room.pixels, 0);
+                    checkpoint();
+                }
                 // Migrate the previous in-progress format, which encoded afterPlace in the piece index.
                 if (room.piece > start.getPieces().size()) room.afterPlaced = true;
                 // Old plans may have been serialized at the world's minimum Y before the
@@ -555,6 +583,7 @@ public final class NativeCapsules {
                     plannedAnchor.getMiddleBlockZ() >> 2, sourceLevel.getChunkSource().randomState().sampler())
                     .unwrapKey().map(key -> key.location().toString()).orElse("");
             movePlan(dxToRoom, 0, dzToRoom);
+            room.geometryVersion = CapsulePieceGeometry.VERSION;
             ensureBedrockSpace();
             describe();
             if (bounds.minX() < room.x() - MAX_STRUCTURE_AXIS || bounds.maxX() >= room.x() + MAX_STRUCTURE_AXIS
@@ -648,10 +677,11 @@ public final class NativeCapsules {
 
         private void movePlan(int dx, int dy, int dz) {
             ChunkPos original = start.getChunkPos();
-            for (var piece : start.getPieces()) piece.move(dx, dy, dz);
+            var pieces = start.getPieces().stream().map(piece ->
+                    CapsulePieceGeometry.move(piece, dx, dy, dz, serializationContext())).toList();
             start = new StructureStart(structure,
                     new ChunkPos((original.getMinBlockX() + dx) >> 4, (original.getMinBlockZ() + dz) >> 4),
-                    start.getReferences(), new PiecesContainer(start.getPieces()));
+                    start.getReferences(), new PiecesContainer(pieces));
         }
 
         /** Ground-dependent pieces must resolve against their source before entering void storage. */
@@ -715,9 +745,7 @@ public final class NativeCapsules {
                 throw new CapsuleLimitException("too_large");
             if (lift == 0) return false;
             int delta = (int) lift;
-            for (var piece : start.getPieces()) piece.move(0, delta, 0);
-            start = new StructureStart(start.getStructure(), start.getChunkPos(), start.getReferences(),
-                    new PiecesContainer(start.getPieces()));
+            movePlan(0, delta, 0);
             if (room.sourceCoordinates) room.sourceOffsetY -= delta;
             return true;
         }
@@ -1174,7 +1202,7 @@ public final class NativeCapsules {
     /**
      * Large native templates and jigsaw graphs can legitimately need more than 512 MiB.
      * The old fixed threshold also counted normal JVM heap expansion as a failure. Keep a
-     * bounded per-plan budget while scaling it with the configured heap of the test/server.
+     * bounded per-plan budget while scaling it with the server's configured heap.
      */
     private static long planningMemoryGrowthLimit() {
         long max = Runtime.getRuntime().maxMemory();

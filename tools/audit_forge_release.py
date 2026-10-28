@@ -17,7 +17,7 @@ def audit(root, artifact):
         assert f'version="{properties["mod_version"]}"' in metadata
         assert 'modId="forge"' in metadata and 'versionRange="[1.20.1,1.20.2)"' in metadata
         assert "${" not in metadata and "META-INF/neoforge.mods.toml" not in names
-        forbidden = ("/capsulecheck/", "ForgeCapsule", "stretcher_capsule_check", "/regression/",
+        forbidden = ("/upstreamcheck/", "/capsulecheck/", "ForgeCapsule", "stretcher_capsule_check", "/regression/",
                      "/storytest/", "/clientprobe/", "/guidetest/", "org/junit/", "org/mockito/",
                      "data/useless_stretcher_test/")
         leaked = [name for name in names if any(token in name for token in forbidden)
@@ -44,6 +44,9 @@ def audit(root, artifact):
         clock = json.dumps(refmap["mappings"].get(
             "com/sorrowmist/useless/stretcher/mixin/OccultismRitualClockMixin", {}))
         assert "m_46467_" in clock, "Golden-bowl vanilla game-time call was not remapped"
+        slot = refmap["mappings"].get(
+            "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin", {})
+        assert "m_5857_" in json.dumps(slot), "Installed stretcher Slot.mayPlace was not remapped"
         for name in ("OccultismAccelerationCompat", "RftoolsBuilderAccelerationCompat"):
             assert f"com/sorrowmist/useless/stretcher/compat/{name}.class" in names
         snapshot = refmap["mappings"].get(

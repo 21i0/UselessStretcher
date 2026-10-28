@@ -1,8 +1,10 @@
 package com.sorrowmist.useless.stretcher.client;
 
+import com.sorrowmist.useless.client.gui.ldl.api.Flex;
+import com.sorrowmist.useless.client.gui.ldl.api.Ui;
+import com.sorrowmist.useless.client.gui.ldl.api.UiNode;
 import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
 import com.sorrowmist.useless.stretcher.client.gui.ButtonHelp;
-import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
@@ -17,14 +19,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 /** Optional world-tier selector and virtual-bookshelf editor for Apotheosis. */
-public final class WondrousStaffApotheosisScreen extends FloatingScreen {
+public final class WondrousStaffApotheosisScreen extends StaffScreen {
     private static final String[] TIERS = {"haven", "frontier", "ascent", "summit", "pinnacle"};
     private static final String[] TIER_KEYS = {"haven", "frontier", "ascent", "summit", "pinnacle"};
 
     private final Screen parent;
     private final InteractionHand hand;
-    private int panelLeft;
-    private int panelTop;
     private int eterna;
     private int quanta;
     private int arcana;
@@ -39,10 +39,15 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
     private boolean tierEdited;
 
     public WondrousStaffApotheosisScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_apotheosis.title"),
-                "staff_apotheosis", 306, 217, 270, 190);
+        super(Component.translatable("gui.useless_stretcher.staff_apotheosis.title"), Tab.APOTHEOSIS, parent, hand);
         this.parent = parent;
         this.hand = hand;
+    }
+
+    @Override protected void refreshStaffSettings() {
+        initialized = false;
+        edited = false;
+        tierEdited = false;
     }
 
     @Override
@@ -56,98 +61,80 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
             selectedTier = ApotheosisStaffSettings.currentTier(minecraft.player);
             if (minecraft.getConnection() != null) ApotheosisNetwork.requestState(hand);
         }
-        panelLeft = contentLeft();
-        panelTop = contentTop();
-        int panelWidth = contentWidth();
-
-        // World tiers live in the Apotheosis adventure module; only Apothic Enchanting is
-        // standalone. Skip the selector when it is absent so the buttons cannot no-op.
-        boolean tierSupported = ApotheosisStaffSettings.isWorldTierAvailable();
-        int tierGap = 3;
-        int tierWidth = (panelWidth - 8 - tierGap * 4) / 5;
-        for (int i = 0; tierSupported && i < TIERS.length; i++) {
-            String tier = TIERS[i];
-            SelectableAE2Button button = addRenderableWidget(new SelectableAE2Button(
-                    panelLeft + 4 + i * (tierWidth + tierGap), panelTop + 20, tierWidth, 18,
-                    Component.translatable("gui.useless_stretcher.staff_apotheosis.tier." + TIER_KEYS[i]),
-                    ignored -> {
-                        selectedTier = tier;
-                        tierEdited = true;
-                        Network.setApotheosisTier(tier);
-                        updateTierSelection();
-                    }));
-            ButtonHelp.set(button, "apotheosis_tier", Component.translatable(
-                    "gui.useless_stretcher.staff_apotheosis.tier." + TIER_KEYS[i]));
-            button.setSelected(tier.equals(selectedTier));
+        var tiers = Ui.column().gap(3);
+        if (ApotheosisStaffSettings.isWorldTierAvailable()) {
+            int columns = contentWidth() < 260 ? 3 : 5;
+            for (int start = 0; start < TIERS.length; start += columns) {
+                Flex row = Ui.row().gap(3);
+                row.height(20);
+                for (int offset = 0; offset < columns; offset++) {
+                    int index = start + offset;
+                    if (index >= TIERS.length) { row.add(Ui.spacer().width(0).grow()); continue; }
+                    String tier = TIERS[index];
+                    var button = new SelectableAE2Button(0, 0, 60, 20,
+                            Component.translatable("gui.useless_stretcher.staff_apotheosis.tier." + TIER_KEYS[index]),
+                            ignored -> {
+                                selectedTier = tier;
+                                tierEdited = true;
+                                Network.setApotheosisTier(tier);
+                                updateTierSelection();
+                            });
+                    ButtonHelp.set(button, "apotheosis_tier", button.getMessage());
+                    button.setSelected(tier.equals(selectedTier));
+                    row.add(widgetNode(button).width(0).grow());
+                }
+                tiers.add(row);
+            }
+        } else {
+            tiers.add(wrappedText(() -> Component.translatable("gui.useless_stretcher.staff_apotheosis.tier_unavailable"),
+                    StretcherScreenStyle.SUBTLE_TEXT_COLOR));
         }
-
-        int rowsTop = panelTop + 63;
-        int rowWidth = panelWidth - 8;
-        addValueSlider(rowsTop, rowWidth, "eterna", 0, 100, eterna, value -> eterna = value);
-        addValueSlider(rowsTop + 22, rowWidth, "quanta", 0, 100, quanta, value -> quanta = value);
-        addValueSlider(rowsTop + 44, rowWidth, "arcana", 0, 100, arcana, value -> arcana = value);
-        addValueSlider(rowsTop + 66, rowWidth, "clues", 0, 15, clues, value -> clues = value);
-
-        int footerY = rowsTop + 92;
-        int gap = 3;
-        int buttonWidth = (panelWidth - gap * 2) / 3;
-        SelectableAE2Button select = addRenderableWidget(new SelectableAE2Button(
-                panelLeft, footerY, buttonWidth, 18,
+        var select = new SelectableAE2Button(0, 0, 100, 20,
                 Component.translatable("gui.useless_stretcher.staff_apotheosis.select_table"), ignored -> {
                     selectionMode = !selectionMode;
                     edited = true;
                     save(true);
                     if (selectionMode) minecraft.setScreen(null);
                     else rebuildWidgets();
-                }));
+                });
         select.setSelected(selectionMode);
         ButtonHelp.set(select, "apotheosis_select_table");
-        SelectableAE2Button save = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + buttonWidth + gap, footerY, buttonWidth, 18,
-                Component.translatable("gui.useless_stretcher.staff_apotheosis.save"), ignored ->
-                save(false)));
+        var save = new SelectableAE2Button(0, 0, 100, 20,
+                Component.translatable("gui.useless_stretcher.staff_apotheosis.save"), ignored -> save(false));
         ButtonHelp.set(save, "apotheosis_save");
-        addRenderableWidget(new SelectableAE2Button(
-                panelLeft + (buttonWidth + gap) * 2, footerY, panelWidth - (buttonWidth + gap) * 2, 18,
-                Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
-        setContentExtent(footerY - panelTop + 21);
+        var back = new SelectableAE2Button(0, 0, 100, 20,
+                Component.translatable("gui.useless_stretcher.back"), ignored -> onClose());
+        layoutBody(Ui.column(
+                Ui.section(Ui.tr("gui.useless_stretcher.staff_apotheosis.world_tier"), tiers),
+                Ui.section(Ui.tr("gui.useless_stretcher.staff_apotheosis.stats"),
+                        valueRow("eterna", 100, eterna, value -> eterna = value),
+                        valueRow("quanta", 100, quanta, value -> quanta = value),
+                        valueRow("arcana", 100, arcana, value -> arcana = value),
+                        valueRow("clues", 15, clues, value -> clues = value)).gap(4),
+                Ui.row(widgetNode(select).width(0).grow(), widgetNode(save).width(0).grow(),
+                        widgetNode(back).width(0).grow()).gap(3).height(20)
+        ).gap(6));
     }
 
-    private void addValueSlider(int y, int rowWidth, String key, int min, int max, int initial,
-                                java.util.function.IntConsumer changed) {
-        int x = panelLeft + 4;
-        int sliderWidth = rowWidth - 48;
-        AE2RangeSlider slider = addRenderableWidget(new AE2RangeSlider(x + 20, y, sliderWidth, 18,
+    private UiNode valueRow(String key, int max, int initial, java.util.function.IntConsumer changed) {
+        var slider = new AE2RangeSlider(0, 0, 60, 22,
                 Component.translatable("gui.useless_stretcher.staff_apotheosis.stat." + key).getString(),
-                min, max, initial, value -> {
+                0, max, initial, value -> {
                     changed.accept(value);
                     edited = true;
                     if (!dirty) saveDelay = 4;
                     dirty = true;
-                }));
-        SelectableAE2Button decrease = addRenderableWidget(new SelectableAE2Button(x, y, 18, 18,
-                Component.literal("-"), ignored -> slider.step(-1)));
-        SelectableAE2Button increase = addRenderableWidget(new SelectableAE2Button(
-                x + rowWidth - 22, y, 18, 18, Component.literal("+"), ignored -> slider.step(1)));
+                });
+        var decrease = new SelectableAE2Button(0, 0, 20, 22, Component.literal("-"), ignored -> slider.step(-1));
+        var increase = new SelectableAE2Button(0, 0, 20, 22, Component.literal("+"), ignored -> slider.step(1));
         ButtonHelp.set(decrease, "decrease");
         ButtonHelp.set(increase, "increase");
-        ButtonHelp.set(slider, "apotheosis_stat", Component.translatable(
-                "gui.useless_stretcher.staff_apotheosis.stat." + key));
+        ButtonHelp.set(slider, "apotheosis_stat", Component.translatable("gui.useless_stretcher.staff_apotheosis.stat." + key));
+        return Ui.row(widgetNode(decrease), widgetNode(slider).width(0).grow(), widgetNode(increase)).gap(3).height(22);
     }
 
     @Override
-    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 2,
-                panelLeft + contentWidth(), panelTop + 43);
-        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.world_tier"),
-                panelLeft + 5, panelTop + 7, StretcherScreenStyle.TEXT_COLOR, false);
-        if (!ApotheosisStaffSettings.isWorldTierAvailable()) {
-            graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.tier_unavailable"),
-                    panelLeft + 5, panelTop + 26, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        }
-        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_apotheosis.stats"),
-                panelLeft + 4, panelTop + 48, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-    }
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) { }
 
     private void updateTierSelection() {
         for (var child : children()) {
@@ -220,6 +207,6 @@ public final class WondrousStaffApotheosisScreen extends FloatingScreen {
         return held.is(ModItems.WONDROUS_STAFF.get()) ? held : ItemStack.EMPTY;
     }
 
-    @Override public void onClose() { minecraft.setScreen(parent); }
+    @Override public void onClose() { returnToPage(parent); }
     @Override public boolean isPauseScreen() { return false; }
 }

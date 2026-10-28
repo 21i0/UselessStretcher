@@ -615,6 +615,18 @@ public final class Network {
         }
     }
 
+    public record StaffFluidSettingsPayload(boolean enabled, int radius, int rate, boolean offhand)
+            implements CustomPacketPayload {
+        public static final Type<StaffFluidSettingsPayload> TYPE = new Type<>(
+                new ResourceLocation(UselessStretcherMod.MODID, "staff_fluid_settings"));
+        public static final StreamCodec<FriendlyByteBuf, StaffFluidSettingsPayload> STREAM_CODEC =
+                StreamCodec.composite(ByteBufCodecs.BOOL, StaffFluidSettingsPayload::enabled,
+                        ByteBufCodecs.VAR_INT, StaffFluidSettingsPayload::radius,
+                        ByteBufCodecs.VAR_INT, StaffFluidSettingsPayload::rate,
+                        ByteBufCodecs.BOOL, StaffFluidSettingsPayload::offhand, StaffFluidSettingsPayload::new);
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
     /** Client request for the staff phase and interaction switches. */
     public record WondrousStaffPhasePayload(boolean phaseEnabled, boolean interactionEnabled,
                                             boolean offhand) implements CustomPacketPayload {
@@ -793,7 +805,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("21");
+        PayloadRegistrar registrar = event.registrar("22");
         CapsuleNetwork.register(registrar);
         registrar.playToServer(WondrousStaffRadiationPayload.TYPE, WondrousStaffRadiationPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
@@ -833,7 +845,7 @@ public final class Network {
                     UUID ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
                     if (ref == null) return;
                     com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.deduplicate(player, ref,
-                            MyriadPatternStore.get(player.serverLevel()), payload);
+                            com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held), payload);
                 }));
         registrar.playToClient(MoldCatalogPayload.TYPE, MoldCatalogPayload.STREAM_CODEC,
                 (payload, context) -> ClientStateReceiver.acceptMoldCatalog(payload));
@@ -915,6 +927,16 @@ public final class Network {
                 }));
         registrar.playToServer(WondrousStaffFeaturesPayload.TYPE, WondrousStaffFeaturesPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffFeatures(payload, context)));
+        registrar.playToServer(StaffFluidSettingsPayload.TYPE, StaffFluidSettingsPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (!(context.player() instanceof ServerPlayer player)) return;
+                    InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+                    ItemStack held = player.getItemInHand(hand);
+                    if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.WONDROUS_STAFF.get())) return;
+                    com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.configure(
+                            held, payload.enabled(), payload.radius(), payload.rate());
+                    player.inventoryMenu.broadcastChanges();
+                }));
         registrar.playToServer(WondrousStaffPhasePayload.TYPE, WondrousStaffPhasePayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> handleWondrousStaffPhase(payload, context)));
         registrar.playToServer(ApotheosisTierPayload.TYPE, ApotheosisTierPayload.STREAM_CODEC,
@@ -1371,6 +1393,10 @@ public final class Network {
                 phaseEnabled, interactionEnabled, hand == InteractionHand.OFF_HAND));
     }
 
+    public static void sendStaffFluidSettings(boolean enabled, int radius, int rate, InteractionHand hand) {
+        PacketDistributor.sendToServer(new StaffFluidSettingsPayload(enabled, radius, rate, hand == InteractionHand.OFF_HAND));
+    }
+
     public static void sendStaffPhaseState(ServerPlayer player, boolean phaseEnabled,
                                            boolean interactionEnabled) {
         PacketDistributor.sendToPlayer(player, new StaffPhaseStatePayload(phaseEnabled, interactionEnabled));
@@ -1508,10 +1534,12 @@ public final class Network {
         if (!(context.player() instanceof ServerPlayer player) || payload.patterns().isEmpty()) return;
         UUID ref = null;
         OmniversalMyriadBlockEntity be = null;
+        MyriadPatternStore store = MyriadPatternStore.get(player.serverLevel());
         if (payload.item()) {
             ItemStack held = player.getItemInHand(payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.USELESS_STRETCHER.get())) return;
             ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
+            store = com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held);
         } else if (canViewPatterns(player, payload.pos())
                 && player.level().getBlockEntity(payload.pos()) instanceof OmniversalMyriadBlockEntity myriad) {
             be = myriad;
@@ -1519,7 +1547,7 @@ public final class Network {
         }
         if (ref == null) return;
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
-        MyriadPatternStore.get((ServerLevel) player.level()).removeKeys(ref, payload.patterns());
+        store.removeKeys(ref, payload.patterns());
         if (be != null) { be.markPatternsChanged(); replyState(player, be); }
         // The item screen follows deletion with its current tagged search request. An untagged
         // response here could replace that filter or reopen an already closed screen.
@@ -1541,10 +1569,12 @@ public final class Network {
                                         boolean item, boolean offhand, PatternPageRequestPayload request, boolean trim) {
         UUID ref;
         boolean aeBound;
+        MyriadPatternStore store = MyriadPatternStore.get(player.serverLevel());
         if (item) {
             ItemStack held = player.getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (!held.is(com.sorrowmist.useless.stretcher.init.ModItems.USELESS_STRETCHER.get())) return;
             ref = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readPatternRef(held);
+            store = com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.store(player.serverLevel(), held);
             UUID aeRef = com.sorrowmist.useless.stretcher.content.mold.MyriadMoldData.readAeRef(held);
             var serverLevel = (ServerLevel) player.level();
             BlockPos nodePos = com.sorrowmist.useless.stretcher.content.ae.AeBindingStore.get(serverLevel).get(aeRef);
@@ -1556,7 +1586,6 @@ public final class Network {
             ref = be.getPatternRef();
             aeBound = isConnectedAeNode((ServerLevel) player.level(), be.getAeNodePos());
         }
-        var store = MyriadPatternStore.get((ServerLevel) player.level());
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
         if ((item || !request.query().isBlank()) && ref != null) {
             com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.request(
