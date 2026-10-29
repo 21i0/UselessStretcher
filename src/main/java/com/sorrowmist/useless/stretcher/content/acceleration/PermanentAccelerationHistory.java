@@ -69,7 +69,8 @@ public final class PermanentAccelerationHistory extends SavedData {
                 if (!name.isBlank()) return name;
             } catch (RuntimeException | LinkageError failure) {
                 failedNames.put(target, Boolean.TRUE);
-                LogUtils.getLogger().warn("Cannot read acceleration target name for {} at {}; using block name",
+                com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(LogUtils.getLogger(),
+                        "Cannot read acceleration target name for {} at {}; using block name",
                         BuiltInRegistries.BLOCK.getKey(block), target.getBlockPos(), failure);
             }
         }

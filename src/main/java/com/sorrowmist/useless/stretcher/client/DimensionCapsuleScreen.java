@@ -2,12 +2,14 @@ package com.sorrowmist.useless.stretcher.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.math.Axis;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
 import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
 import com.sorrowmist.useless.stretcher.client.search.LocalizedSearchIndex;
 import com.sorrowmist.useless.stretcher.network.CapsuleNetwork;
 import net.minecraft.client.gui.GuiGraphics;
+import com.sorrowmist.useless.client.gui.AppleEditBox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -35,9 +37,11 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
     private int selected = -1, dimension, side, scroll, ticks, instanceId;
     private int left, top, listWidth, listBottom, visibleRows, mapX, mapY, mapSize;
     private float angle, zoom = 1;
-    private boolean rotating;
+    private boolean rotating, hasMapPixels;
     private CapsuleNetwork.State state;
     private ResourceLocation mapTexture;
+    private DynamicTexture mapImage;
+    private int[] mapPixels;
     private SelectableAE2Button enter, generate, adjacent, dimensionButton, instanceButton;
 
     public DimensionCapsuleScreen(List<String> wire, boolean offhand) {
@@ -66,11 +70,14 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         int footer = top + contentHeight() - 64;
         visibleRows = Math.max(1, (footer - top - 28) / 18);
         listBottom = top + 28 + visibleRows * 18;
-        mapX = left + listWidth + 12;
-        mapSize = Math.max(24, Math.min(contentWidth() - listWidth - 20, contentHeight() - 142));
-        mapY = top + 22;
+        int previewLeft = left + listWidth + 12;
+        int previewWidth = Math.max(24, contentWidth() - listWidth - 12);
+        mapY = top + 28;
+        // Keep progress, size and origin entirely above the footer, including at GUI scale 2+.
+        mapSize = Math.max(24, Math.min(previewWidth, footer - mapY - 52));
+        mapX = previewLeft + (previewWidth - mapSize) / 2;
         if (search == null) {
-            search = new EditBox(font, left, top, contentWidth(), 18, label("search"));
+            search = new AppleEditBox(font, left, top, contentWidth(), 18, label("search"));
             search.setHint(label("search"));
             search.setMaxLength(128);
             search.setResponder(value -> { rebuildRows(value); scroll = 0; });
@@ -121,14 +128,23 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         if (selected < 0 || !payload.id().equals(entry().id) || !payload.dimension().equals(target())) return;
         state = payload;
         instanceId = payload.instanceId();
-        if (payload.pixels().length == 4096) {
-            if (mapTexture != null) minecraft.getTextureManager().release(mapTexture);
-            NativeImage image = new NativeImage(64, 64, false);
-            for (int i = 0; i < 4096; i++) {
-                int argb = payload.pixels()[i];
-                image.setPixelRGBA(i % 64, i / 64, argb & 0xFF00FF00 | (argb >> 16 & 255) | (argb & 255) << 16);
+        if (payload.pixels().length == 4096 && !java.util.Arrays.equals(mapPixels, payload.pixels())) {
+            mapPixels = payload.pixels().clone();
+            hasMapPixels = java.util.Arrays.stream(mapPixels).anyMatch(color -> (color >>> 24) != 0);
+            // Planning packets contain an all-transparent buffer, not a structure preview.
+            // Do not allocate/upload a blank texture or enter its GL render path for those.
+            if (hasMapPixels) {
+                if (mapImage == null) {
+                    mapImage = new DynamicTexture(64, 64, false);
+                    mapTexture = minecraft.getTextureManager().register("capsule_map", mapImage);
+                }
+                NativeImage image = mapImage.getPixels();
+                for (int i = 0; i < 4096; i++) {
+                    int argb = mapPixels[i];
+                    image.setPixelRGBA(i % 64, i / 64, argb & 0xFF00FF00 | (argb >> 16 & 255) | (argb & 255) << 16);
+                }
+                mapImage.upload();
             }
-            mapTexture = minecraft.getTextureManager().register("capsule_map", new DynamicTexture(image));
         }
         updateButtons();
     }
@@ -178,29 +194,59 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
             g.fill(left + listWidth - 4, y, left + listWidth - 2, y + thumb, StretcherScreenStyle.ACTIVE_COLOR);
         }
         g.fill(mapX, mapY, mapX + mapSize, mapY + mapSize, 0xFF171B20);
-        if (mapTexture != null) {
-            g.enableScissor(mapX, mapY, mapX + mapSize, mapY + mapSize);
-            var pose = g.pose(); pose.pushPose();
+        if (mapTexture != null && hasMapPixels) renderMap(g);
+        else renderMapPlaceholder(g);
+        renderProgress(g);
+        if (state != null && state.sx() > 0) drawMapInfo(g,
+                Component.translatable("gui.useless_stretcher.dimension_capsule.size", state.sx(), state.sy(), state.sz()), 24);
+        if (state != null && state.instanceCount() > 0) drawMapInfo(g,
+                Component.translatable("gui.useless_stretcher.dimension_capsule.origin", state.originX(), state.originZ()), 36);
+        // The full dimension ID remains on the dimension button tooltip. Drawing it here
+        // overlapped the footer (and neighboring controls) in compact/high-scale windows.
+    }
+    private void renderMap(GuiGraphics g) {
+        // Apple surfaces, vanilla text/fills and batching mods do not share one immediate
+        // buffer. Finish the background before the blit and the marker before popping its clip.
+        g.flush();
+        g.enableScissor(mapX, mapY, mapX + mapSize, mapY + mapSize);
+        float[] color = RenderSystem.getShaderColor().clone();
+        boolean depth = org.lwjgl.opengl.GL11.glIsEnabled(org.lwjgl.opengl.GL11.GL_DEPTH_TEST);
+        var pose = g.pose();
+        pose.pushPose();
+        try {
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            // This is a 2-D overlay, not world geometry. Equal-depth Apple panels must
+            // never occlude the preview, nor may the preview write their depth buffer.
+            RenderSystem.disableDepthTest();
             pose.translate(mapX + mapSize / 2.0F, mapY + mapSize / 2.0F, 0);
             pose.mulPose(Axis.ZP.rotationDegrees(angle)); pose.scale(zoom, zoom, 1);
             g.blit(mapTexture, -mapSize / 2, -mapSize / 2, 0, 0, mapSize, mapSize, mapSize, mapSize);
-            // Entrance marker follows the chosen edge on the actual map.
             int ex = side == 1 ? mapSize / 2 - 4 : side == 3 ? -mapSize / 2 : -2;
             int ez = side == 2 ? mapSize / 2 - 4 : side == 0 ? -mapSize / 2 : -2;
-            g.fill(ex, ez, ex + 4, ez + 4, 0xFFFFDE55); pose.popPose(); g.disableScissor();
-            g.enableScissor(floatingWindow().bodyLeft(), floatingWindow().bodyTop(), floatingWindow().bodyLeft() + floatingWindow().bodyWidth(),
-                    floatingWindow().bodyTop() + floatingWindow().bodyHeight());
+            g.fill(ex, ez, ex + 4, ez + 4, 0xFFFFDE55);
+            g.flush();
+        } finally {
+            pose.popPose();
+            // Pop exactly one nested map clip; GuiGraphics restores the body clip itself.
+            g.disableScissor();
+            RenderSystem.setShaderColor(color[0], color[1], color[2], color[3]);
+            if (depth) RenderSystem.enableDepthTest(); else RenderSystem.disableDepthTest();
         }
-        renderProgress(g);
-        if (state != null && state.sx() > 0) g.drawString(font,
-                Component.translatable("gui.useless_stretcher.dimension_capsule.size", state.sx(), state.sy(), state.sz()),
-                mapX, mapY + mapSize + 24, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        if (state != null && state.instanceCount() > 0) g.drawString(font,
-                Component.translatable("gui.useless_stretcher.dimension_capsule.origin", state.originX(), state.originZ()),
-                mapX, mapY + mapSize + 36, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-        String dim = target();
-        g.drawString(font, font.plainSubstrByWidth(dim, Math.max(1, contentWidth() - listWidth - 15)), mapX,
-                mapY + mapSize + 48, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+    }
+    private void renderMapPlaceholder(GuiGraphics g) {
+        String phase = state == null ? "empty" : state.phase();
+        Component message = label(phase.equals("empty") ? "map_generate_first" : "map_waiting");
+        var lines = font.split(message, Math.max(1, mapSize - 8));
+        int count = Math.min(lines.size(), Math.max(1, (mapSize - 6) / font.lineHeight));
+        int y = mapY + (mapSize - count * font.lineHeight) / 2;
+        for (int i = 0; i < count; i++) {
+            var line = lines.get(i);
+            g.drawString(font, line, mapX + (mapSize - font.width(line)) / 2, y + i * font.lineHeight, 0xFFCED3DC, false);
+        }
+    }
+    private void drawMapInfo(GuiGraphics g, Component message, int offset) {
+        g.drawString(font, font.plainSubstrByWidth(message.getString(), mapSize), mapX,
+                mapY + mapSize + offset, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
     }
     private void renderProgress(GuiGraphics g) {
         String phase = state == null ? "empty" : state.phase();
@@ -240,8 +286,16 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
             if (i < rows.size() && !rows.get(i).header())
                 g.renderTooltip(font, Component.literal(entries.get(rows.get(i).index).id), x, y);
         }
-        if (x >= mapX && x < mapX + mapSize && y >= mapY && y < mapY + mapSize)
-            g.renderTooltip(font, font.split(label("map_help"), 180), x, y);
+        if (x >= mapX && x < mapX + mapSize && y >= mapY && y < mapY + mapSize + 48) {
+            List<Component> tooltip = new ArrayList<>();
+            tooltip.add(label("map_help"));
+            if (state != null && state.sx() > 0) tooltip.add(Component.translatable(
+                    "gui.useless_stretcher.dimension_capsule.size", state.sx(), state.sy(), state.sz()));
+            if (state != null && state.instanceCount() > 0) tooltip.add(Component.translatable(
+                    "gui.useless_stretcher.dimension_capsule.origin", state.originX(), state.originZ()));
+            tooltip.add(Component.literal(target()));
+            g.renderTooltip(font, tooltip.stream().flatMap(line -> font.split(line, 230).stream()).toList(), x, y);
+        }
     }
     @Override protected boolean clickContent(double x, double y, int button) {
         if (super.clickContent(x, y, button)) return true;
@@ -264,6 +318,10 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         if (x < left + listWidth) { scroll = Mth.clamp(scroll - (int)Math.signum(dy) * 3, 0, Math.max(0, rows.size() - visibleRows)); return true; }
         return super.scrollContent(x, y, dx, dy);
     }
-    private void clearMap() { state = null; if (mapTexture != null && minecraft != null) minecraft.getTextureManager().release(mapTexture); mapTexture = null; }
+    private void clearMap() {
+        state = null;
+        if (mapTexture != null && minecraft != null) minecraft.getTextureManager().release(mapTexture);
+        mapTexture = null; mapImage = null; mapPixels = null; hasMapPixels = false;
+    }
     @Override public void removed() { clearMap(); super.removed(); }
 }

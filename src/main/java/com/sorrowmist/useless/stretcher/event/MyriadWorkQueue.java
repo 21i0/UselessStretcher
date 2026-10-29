@@ -5,6 +5,7 @@ import com.sorrowmist.useless.stretcher.UselessStretcherMod;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
 import com.sorrowmist.useless.stretcher.content.mold.MoldRecipeIndex;
 import com.sorrowmist.useless.stretcher.network.Network;
+import com.sorrowmist.useless.stretcher.util.RateLimitedLogger;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,9 +42,7 @@ public final class MyriadWorkQueue {
         try {
             index = MoldRecipeIndex.get(event.getServer().overworld());
         } catch (RuntimeException exception) {
-            if (jobs || event.getServer().getTickCount() % 100 == 0) {
-                LogUtils.getLogger().warn("Cannot read recipe catalog for myriad fetch", exception);
-            }
+            RateLimitedLogger.warn(LogUtils.getLogger(), "Cannot read recipe catalog for myriad fetch", exception);
             if (jobs) {
                 for (var block : queue) {
                     block.cancelFetch();
@@ -64,7 +63,7 @@ public final class MyriadWorkQueue {
         try {
             while (!index.ready() && !index.failed() && System.nanoTime() < warmDeadline) index.advance();
         } catch (RuntimeException exception) {
-            LogUtils.getLogger().warn("Cannot prepare myriad recipe index; fetches will report an error", exception);
+            RateLimitedLogger.warn(LogUtils.getLogger(), "Cannot prepare myriad recipe index; fetches will report an error", exception);
         }
         if (!jobs || System.nanoTime() >= deadline) return;
         var notify = new java.util.LinkedHashSet<OmniversalMyriadBlockEntity>();
@@ -81,7 +80,7 @@ public final class MyriadWorkQueue {
             try {
                 finished = block.stepFetch();
             } catch (RuntimeException exception) {
-                LogUtils.getLogger().warn("Myriad fetch failed at {}", block.getBlockPos(), exception);
+                RateLimitedLogger.warn(LogUtils.getLogger(), "Myriad fetch failed at {}", block.getBlockPos(), exception);
                 block.cancelFetch();
                 block.setFetchFailed();
                 finished = true;

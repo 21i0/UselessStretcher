@@ -45,7 +45,8 @@ public final class ServerConfigSync {
                     StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
             LogUtils.getLogger().info("Migrated legacy Stretcher config to {}; original retained", target);
         } catch (Exception exception) {
-            LogUtils.getLogger().warn("Could not migrate legacy Stretcher config {}; original retained", legacy, exception);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(LogUtils.getLogger(),
+                    "Could not migrate legacy Stretcher config {}; original retained", legacy, exception);
         }
     }
 
@@ -73,7 +74,8 @@ public final class ServerConfigSync {
         byte[] contents = new TomlWriter().writeToString(config.getConfigData())
                 .getBytes(StandardCharsets.UTF_8);
         if (contents.length > MAX_BYTES) {
-            LogUtils.getLogger().warn("Stretcher server config exceeds live sync limit ({} bytes)", contents.length);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(LogUtils.getLogger(),
+                    "Stretcher server config exceeds live sync limit ({} bytes)", contents.length);
             return null;
         }
         return new Payload(contents);

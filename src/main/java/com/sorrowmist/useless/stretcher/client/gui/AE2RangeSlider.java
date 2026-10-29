@@ -1,12 +1,17 @@
 package com.sorrowmist.useless.stretcher.client.gui;
 
+import com.sorrowmist.useless.client.gui.AppleUi;
+import com.sorrowmist.useless.client.gui.apple.AppleStyle;
+import com.sorrowmist.useless.client.gui.apple.AppleTextLayout;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
 import java.util.function.IntConsumer;
 
-/** Native compact slider paired with the screen's existing AE2-style step buttons. */
+/** Native slider input and narration, drawn with Useless Mod's shared controls. */
 public final class AE2RangeSlider extends AbstractSliderButton {
     private final String axis;
     private final int min;
@@ -24,6 +29,20 @@ public final class AE2RangeSlider extends AbstractSliderButton {
         this.lastValue = currentValue();
         updateMessage();
         ButtonHelp.set(this, min < 0 ? "offset_axis" : "size_axis", axis);
+    }
+
+    @Override
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int x = getX(), y = getY(), trackWidth = Math.max(1, getWidth() - 12);
+        AppleUi.buttonSurface(graphics, x, y, getWidth(), getHeight(), AppleUi.ButtonStyle.GRAY,
+                isHoveredOrFocused(), false, active);
+        AppleUi.progress(graphics, x + 6, y + getHeight() - 5, trackWidth, 2, (float) value, AppleStyle.BLUE);
+        int knobX = x + 4 + (int) Math.round(value * trackWidth);
+        AppleUi.fillRound(graphics, knobX, y + getHeight() - 7, 4, 6, 2,
+                active ? AppleStyle.BLUE : AppleStyle.QUATERNARY);
+        AppleTextLayout.drawCentered(graphics, Minecraft.getInstance().font, getMessage(),
+                x, y, getWidth(), getHeight() - 5, 6, 1, null,
+                active ? AppleStyle.LABEL : AppleStyle.QUATERNARY);
     }
 
     @Override

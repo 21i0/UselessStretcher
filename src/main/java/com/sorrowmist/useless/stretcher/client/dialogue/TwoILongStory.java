@@ -94,7 +94,8 @@ public final class TwoILongStory {
             return new Chapter(lines(chapter, "opening", root.getAsJsonArray("opening")), List.copyOf(rounds),
                     lines(chapter, "ending", root.getAsJsonArray("ending")));
         } catch (Exception failure) {
-            LogUtils.getLogger().warn("Unable to read 2i long story chapter {}", chapter, failure);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.warn(
+                    LogUtils.getLogger(), "Unable to read 2i long story chapter {}", chapter, failure);
             return EMPTY;
         }
     }

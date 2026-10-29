@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.client.search;
 
 import com.ibm.icu.text.Transliterator;
 import com.mojang.logging.LogUtils;
+import com.sorrowmist.useless.stretcher.util.RateLimitedLogger;
 import net.minecraft.locale.Language;
 
 import java.text.Normalizer;
@@ -51,7 +52,7 @@ public final class LocalizedSearchIndex {
                     try {
                         result.value = romanize(text);
                     } catch (RuntimeException exception) {
-                        LogUtils.getLogger().warn("Could not index a translated search name", exception);
+                        RateLimitedLogger.warn(LogUtils.getLogger(), "Could not index a translated search name", exception);
                     } finally {
                         revision.incrementAndGet();
                         pending.decrementAndGet();

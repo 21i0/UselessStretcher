@@ -1,30 +1,29 @@
 package com.sorrowmist.useless.stretcher.client.gui;
 
-import appeng.client.gui.style.BackgroundGenerator;
+import com.sorrowmist.useless.client.gui.AppleUi;
+import com.sorrowmist.useless.client.gui.apple.AppleStyle;
 import net.minecraft.client.gui.GuiGraphics;
 
-/** Shared palette and panels matching Useless Mod's current button-based G screen. */
+/** Shared surfaces supplied by the required Useless Mod UI API. */
 public final class StretcherScreenStyle {
-    public static final int PANEL_COLOR = 0xFFCBCCD4;
-    public static final int HIGHLIGHT_COLOR = 0xFFF2F2F2;
-    public static final int SLOT_COLOR = 0xFFADB0C4;
-    public static final int SLOT_SHADOW_COLOR = 0xFF9A9FB4;
-    public static final int TEXT_COLOR = 0xFF413F54;
-    public static final int MUTED_TEXT_COLOR = 0xFF878FA5;
-    public static final int SUBTLE_TEXT_COLOR = 0xFF6D7287;
-    public static final int ACTIVE_COLOR = 0xFF517497;
-    public static final int SUCCESS_COLOR = 0xFF3B7652;
-    public static final int WARNING_COLOR = 0xFF9A6B18;
+    public static final int PANEL_COLOR = AppleUi.PANEL_BODY;
+    public static final int HIGHLIGHT_COLOR = AppleStyle.SELECTED_ROW;
+    public static final int SLOT_COLOR = AppleStyle.FILL;
+    public static final int SLOT_SHADOW_COLOR = AppleUi.SLOT_EDGE;
+    public static final int TEXT_COLOR = AppleStyle.LABEL;
+    public static final int MUTED_TEXT_COLOR = AppleStyle.SECONDARY;
+    public static final int SUBTLE_TEXT_COLOR = AppleStyle.TERTIARY;
+    public static final int ACTIVE_COLOR = AppleStyle.BLUE;
+    public static final int SUCCESS_COLOR = AppleStyle.GREEN_TEXT;
+    public static final int WARNING_COLOR = AppleStyle.ORANGE_TEXT;
 
-    private StretcherScreenStyle() {
-    }
+    private StretcherScreenStyle() { }
 
     public static void drawPanel(GuiGraphics graphics, int left, int top, int width, int height) {
-        BackgroundGenerator.draw(width, height, graphics, left, top);
+        AppleUi.glassPanel(graphics, left, top, width, height);
     }
 
     public static void drawInset(GuiGraphics graphics, int left, int top, int right, int bottom) {
-        graphics.fill(left, top, right, bottom, HIGHLIGHT_COLOR);
-        graphics.fill(left + 1, top + 1, right - 1, bottom - 1, PANEL_COLOR);
+        AppleUi.card(graphics, left, top, right, bottom);
     }
 }

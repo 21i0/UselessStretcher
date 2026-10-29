@@ -4,153 +4,71 @@
 [![Forge](https://img.shields.io/badge/Forge-47.3.10-EA6E1E)](https://files.minecraftforge.net/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-《无用之物 / Useless Mod》的附属模组：把模具变成万能通配、把样板投送变成远程，
-使用无用之物 2.4.6+ 原生 **4096 槽**容量，
-以及一根能完整加速机器、AE、实体、昼夜、天气与云层，并可放置独立范围的 **荒辰移晷之杖**。
+《无用之物 / Useless Mod》的 Forge 1.20.1 附属模组，提供通配模具、远程样板工具、荒辰移晷之杖、维度胶囊和 2i 玩偶与剧情。
 
-An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
-native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
-
-## Forge 1.20.1 · 20.1.6.3
-
-加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
-维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
-新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
-有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
-文件名为 `useless_stretcher-20.1.6.3.jar`，搭配无用之物 `20.2.4.7`（最低 `20.2.4.6`）。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。此前完整移植证据见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)，本次见 [PR #4 与新版前置验证](docs/forge-1.20.1-pr-4.md)。
-新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
-样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
-大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
-
-此清理版仅支持新存档：旧四种多联维度及旧版扩容补丁已删除。保留旧 JAR 和完整世界备份，客户端与服务端需同时更新。
-
----
+A Forge 1.20.1 addon for **Useless Mod**, with wildcard molds, remote pattern libraries, a time-acceleration staff, dimension capsules, and the 2i doll and story.
 
 ## 环境要求 / Requirements
 
 | 项目 | 要求 |
 |---|---|
 | Minecraft | 1.20.1 |
-| Mod 加载器 | Forge 47.3.10+ |
+| 加载器 | Forge 47.3.10+ |
 | Java | **17** |
-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.7`，最低 `20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
-| 安装位置 | 客户端 **与** 服务端都要装 |
+| 必需前置 | [Useless Mod](https://github.com/SorrowMist/UselessMod) `20.2.4.9` 或兼容的 `20.x` 构建（必须包含 Apple 界面 API）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2) `15.4.8` 及其 GuideME `20.x` 前置 |
+| 安装位置 | 客户端与服务端均需安装 |
+| 网络协议 | **22**，两端必须使用相同版本 |
 
-> ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
-> 无用之物大更新后若无法启动，请更新本模组到对应版本。
+本模组通过 Mixin 接入本体内部实现，两者版本需要配套。更新前备份世界与原 JAR；当前 `20.1.6.x` 更新不需要重置存档。已移除的旧四联／九联维度不提供旧世界兼容。
 
-## 构建与兼容范围
+## 主要功能 / Features
 
-使用 Java 17，构建会直接下载并映射官方无用之物发布包，不再需要相邻的本体源码目录：
+- **万象万物之块**：同时匹配选中的多个模具，按模具物品命名空间分类；可绑定 AE 网络。大量选择保存在世界数据中，物品仅携带引用。
+- **万象担架**：远程读写与批量投送样板，按机器检索、去重并共享配方缓存。可装入小合金炉、样板总成和被动仓的样板槽，整库随库变更同步；沿用本体原生 4096 槽容量。
+- **荒辰移晷之杖**：加速机器、AE 节点、非玩家实体及昼夜天气；支持范围、名单、放置历史和空闲降频。Shift + 滚轮切换倍率，X 打开八标签共享设置窗口，Ctrl + Tab／Ctrl + Shift + Tab 切换标签。可选流体采集仅抽取完整静止源并遵守领地权限，默认关闭；接收量不明的异常提交会保留记录并停止自动重放。
+- **维度胶囊**：按模组分类与搜索结构，显示生成进度、可旋转地图并支持往返。地图来自实际已放置的方块，不是生成前模板缩略图。结构计划与实例随世界保存。
+- **2i 玩偶与剧情**：动态 3D 玩偶、六章有声分支对话、好感互动与独立星空庭院；支持摆件、手持、头戴与 Curios。
+- **其它**：树叶掉手杖彩蛋、独立传送按键，以及 Occultism／RFToolsBuilder 等可选加速兼容。有用锭装甲功能与配方默认关闭。
+
+详细用法见游戏内 AE2 指南的“万象担架附属”。悬停万物之块、担架或手杖并按 GuideME 阅读键可跳转到对应页面；按键显示跟随游戏改键设置。
+
+界面直接复用前置本体的 Apple UI API，保留原生输入、容器槽位、JEI、地图和剧情绘制，不另行捆绑一套 UI 资源。
+
+## 配置 / Configuration
+
+服务端配置为 `useless_stretcher-server.toml`：
+
+- 单机：`saves/<世界>/serverconfig/`。
+- 专用服务器：`<level-name>/serverconfig/`，默认 `world/serverconfig/`。
+- 新世界模板：`defaultconfigs/`，不会覆盖已有世界的设置。
+
+单机／局域网宿主可从“模组 → 万象担架 → 配置 → 服务端配置”修改，点击“保存本页”写入并同步在线玩家；“完成”关闭界面。专用服务器由服主编辑世界级配置。
+
+配置界面支持简体中文、繁体中文与英文。布尔输入保留 `true`／`false`，悬停说明提供含义与原始配置路径。需要重载世界或重启的设置会在说明中标明，其余运行时选项即时读取。
+
+## 构建与测试 / Building and testing
+
+使用 Java 17，默认从本体 GitHub Release 获取并映射 `20.2.4.9`：
 
 ```shell
 ./gradlew build
 ```
 
-Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDevJar=/path/to/dev.jar`
-显式替换为匹配的 `build/devlibs` 开发包。离线官方包可通过 `-PuselessModRepository=/path/to/maven` 提供，不能把发布包当成未映射的开发包。
-其他编译依赖均从公开 Maven 解析，不需要本地整合包或迁移工具。
-本分支针对 Forge 1.20.1。Occultism 1.158.0 与 RFToolsBuilder 6.0.10
-专用加速桥已补回构建；旧版 Occultism 只有粉碎精灵，不能套用 1.21 的另外两类加工精灵。
-玩偶与剧情回归已适配 Forge 1.20.1，通过 `-PdollChecks` 启用，运行任务为 `runDollServerCheck`、`runDollClientCheck`；收容防复制另加 `-PdollCaptureChecks`。测试代码和数据永远不进入发行 JAR。
-独立的 Forge 胶囊回归通过 `-PcapsuleChecks` 启用；实际验证范围与日志见
-[移植审计报告](docs/forge-1.20.1-port-audit.md)，不能把源码保留等同于运行验证。
+Windows 使用 `gradlew.bat`，产物位于 `build/libs/`。开发时可显式传入 `-PuselessModDevJar=/path/to/build/devlibs/useless_mod-20.2.4.9.jar`；发布包不能当作未映射的开发包。离线 Maven 仓库可通过 `-PuselessModRepository=/path/to/maven` 指定。构建不会自动使用相邻工作区或本地整合包。
 
-## 主要内容 / Features
+JUnit 与发行包检查随 `build` 执行。真实 Forge 回归需显式启用，使用 `run/` 下的独立测试目录：
 
-### 游戏内指南（1.4.2）
-打开 AE2 15 的原有指南，在左侧导航进入“万象担架附属”。
-也可在背包中悬停万物之块、担架或手杖，按 GuideME 阅读键直接跳转到对应页面。
-不再额外注册第二本指南书，也没有书加紫色染料配方。
-指南使用现有物品外观配图，按键显示跟随游戏改键设置。
+| 开关 | 任务 |
+|---|---|
+| `-PupstreamChecks` | `runUpstreamServerCheck`、`runUpstreamClientCheck`（流体、整库装槽、陨石、UI 与配置翻译） |
+| `-PcapsuleChecks` | `runCapsuleCheck`、`runCapsuleClientCheck`（胶囊生成、保存恢复、地图与往返） |
+| `-PdollChecks` | `runDollServerCheck`、`runDollClientCheck`（玩偶与剧情）；收容检查另加 `-PdollCaptureChecks` |
 
-### 万象万物之块（Omniversal Myriad Block）— 通配模具
-一个能"携带"任意多个模具的方块：勾选后，对合金炉而言它同时满足这些模具的任意需求。
-可绑定指定 AE 网络（只记录 UUID），不绑定时自动使用附近 8 格内的网络。
-方块内框由无用之物“有用锭”的两帧材质放大铺满，并保留本模组原有的紫色边框；
-放置、手持、掉落及容器物品栏中均使用同一套动画资源。
+运行服务端检查前需在对应隔离目录确认 Minecraft EULA。检查类与测试数据始终排除出发行 JAR。可用 `python tools/audit_forge_release.py build/libs/useless_stretcher-<版本>.jar` 独立审计发行包。
 
-### 万象担架（Useless Stretcher）— 远程样板工具
-远程写入 / 读取方块里的样板；按模组一键拉取该模组所有机器的样板；
-开启模具和获取样板分别支持按锚点 Shift 区间选择；重复样板自动去重；
-标签材料优先选用 AE 里已有或可合成的。
-按机器查索引，批量选择通过有序归并只处理相关配方；哈希索引按完整物品组件去重，共享样板保留各模具归属。
-配方缓存由服务器共享，获取完成、取消、清空或拆除方块都不清除；停服释放，配方重载时重建。
-获取任务按服务器余量分批执行，样板编码仍使用当前 AE 网络选材，不冻结材料优选结果。
+## 许可与链接 / License and links
 
-### 原生容量与样板存储
-无用之物 2.3.7 及更新版本原生提供 4096 容量及分页界面，本附属不再保留旧版扩容代码。
-样板总成被挖掉时，完整库存保存在服务端，掉落物仅携带 UUID 引用；
-旧版物品会自动迁移，避免大容量样板 NBT 超过原版实体同步包上限。
+[MIT](LICENSE)。第三方代码与素材声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-### 维度清理
-多联维度请使用无用之物本体功能。本附属旧四联 / 九联及奇数中心变体的注册、生成器、方块和资源已删除；不再提供旧世界兼容。
-2i 星空庭院使用独立的永夜超平坦维度，不依赖旧维度代码。
-
-### 荒辰移晷之杖（Chronoshift Staff）
-由「万象担架」+「造化垂青之杖」合成，完整继承造化垂青之杖的功能，并新增：
-
-- **Shift + 右键方块/实体**：加速机器、AE 节点或非玩家实体的完整 tick；Mob 加速期间可关闭 AI
-- **瞄准日月 Shift + 右键**：同步加速昼夜、天气状态与原版云层；对避雷针可加速引来真实闪电
-- **Shift + 滚轮**：切换倍率 关 / x2 / x4 / x16 / x32 / x64 / x128 / x256 / x512 / x1024
-- **G 按钮配置页**：加速总开关（关掉后手杖完全不参与加速）
-- **X 键**：打开文字清晰的紧凑按钮式加速配置，可直接选择倍率及普通 / 永久 / 永久（无休眠降频）模式；右上角“时间加速”开关与 G 配置页同步
-- 拿起手杖可看到正在被加速的机器高亮框（满速工作时流光溢彩，动态降频时固定金色）
-- **范围加速**：X/Y/Z 沿用减号/加号调节并在中间加入原版滑块，范围为 1~15 格；透明旋转钟可与机器同格；每范围独立倍率、缓存、加速名单及休眠名单
-- **名单标记模式**与范围放置互斥，只能修改玩家本人已开启范围内的机器：右键切换单格，Ctrl + 右键切换范围内全部同类型机器；再次操作即可取消
-- 加速黑/白名单决定机器是否参与范围加速，休眠黑/白名单独立决定机器是否允许空闲降频；两个名单按钮兼作当前编辑目标，右侧分别显示已标记数量
-- 标记期间在动作栏上方的独立位置持续显示当前名单，机器表面显示对应红/绿名单文字和流彩框；退出标记模式后才恢复普通右键和加速
-- 放置历史按时间记录维度和坐标，可远程启停或确认回收；“关”只暂停并保留配置，“回收”才永久移除范围和时间流逝标记
-- 时间流逝放置位置显示绿色方框，范围显示流彩边框；所有范围共享服务器级执行预算，极端负载时工作顺延，单次第三方调用无法中途抢占
-- 实体加速会在目标头顶显示随实体移动的世界内小进度条；普通模式显示剩余时间，永久模式显示满条与无限标记；机器表面进度条已外移以避免贴图闪烁
-- 每名玩家在每个存档首次持杖时显示加速 UI 按键标题；若尚未打开配置页，首次直接加速与换挡时各再提示一次，最多三次，打开配置页后停止提示
-- 时运与精准采集模式共用虾比制作的手杖模型和材质
-
-### 其它
-- 内置 11 个原版物品工作台配方（龙息、鞘翅、幻翼膜、海龟鳞片、附魔金苹果、凋零玫瑰、潜影壳等）
-- 每玩家每存档有一次默认十万分之一的树叶掉手杖彩蛋，支持原版及模组树叶（含未正确加入树叶标签的常见实现），满包时奖励会安全跟随，并有紫色隐藏挑战
-- 配置项：实体加速关闭 AI、树叶掉落概率、EIO 磨珠配方屏蔽、高亮框透视、空闲降频
-- x512/x1024 保留选定档位；实际执行受全服 MSPT/时间预算保护，昂贵目标吞吐可能低于设定倍率，建议配合名单及休眠降频
-
-## 配置文件 / Config
-
-服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `<level-name>/serverconfig/`（默认 `world/serverconfig/`）。新世界的配置模板可放在 `defaultconfigs/`，不会覆盖已有世界的设置。单机／局域网宿主从“模组 → 万象担架 → 配置 → 服务端配置”修改，点页面底部“完成/保存”后写入文件并同步在线玩家；专用服务器由服主修改世界级配置。
-除配方目录过滤和有用锭装甲配方需要重载世界/重启外，其余运行时读取的选项立即生效，界面说明均为中文。
-
-```toml
-[acceleration]
-    idle_throttle = true      # 空闲机器自动降频省性能（有活动立刻回满速）；永久（无休眠降频）模式会忽略此项
-    entity_disable_ai = true  # 实体完整加速时关闭 Mob AI，效果结束后恢复
-
-[staff_leaf_drop]
-    enable = true             # 每玩家每存档一次的树叶掉手杖彩蛋
-    probability = 0.00001     # 默认十万分之一，范围 0~1
-
-[recipe_compat]
-    hide_enderio_grinding_balls = true   # 屏蔽 EIO 半自磨机磨珠的重复配方
-
-[highlight]
-    highlight_see_through = false        # 机器高亮框是否透视
-
-```
-
-## 从源码构建 / Building
-
-```bash
-# 需要 JDK 17；自动下载并映射官方本体发布包
-./gradlew build
-```
-
-产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
-本体默认使用官方 20.2.4.7 发布包；仅在开发本体时通过 `-PuselessModDevJar=/path/to/dev.jar` 显式替换，不将依赖模组捆绑进附属 JAR。
-
-## 许可 / License
-
-[MIT](LICENSE)。第三方代码与素材的来源声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-
-## 相关链接 / Links
-
-- 源码：https://github.com/21i0/UselessStretcher
-- 问题反馈：https://github.com/21i0/UselessStretcher/issues
-- 下载：https://github.com/21i0/UselessStretcher/releases
-- 父模组：无用之物 / Useless Mod — https://github.com/SorrowMist/UselessMod
+- [源码](https://github.com/21i0/UselessStretcher) · [问题反馈](https://github.com/21i0/UselessStretcher/issues) · [下载](https://github.com/21i0/UselessStretcher/releases)
+- [Useless Mod](https://github.com/SorrowMist/UselessMod)

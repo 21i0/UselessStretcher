@@ -73,7 +73,8 @@ public final class DimensionCapsulePlacement {
             if (!job.step()) JOBS.add(job);
             else job.finish(true);
         } catch (Exception failure) {
-            com.mojang.logging.LogUtils.getLogger().error("Capsule placement failed: {}", job.key, failure);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.error(
+                    com.mojang.logging.LogUtils.getLogger(), "Capsule placement failed: {}", job.key, failure);
             job.finish(false);
         }
     }

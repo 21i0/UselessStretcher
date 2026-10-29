@@ -5,6 +5,7 @@ import com.sorrowmist.useless.stretcher.init.ModEntities;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.network.Network;
 import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -81,10 +82,11 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
                 .setHeight(18);
 
         if (itemMode) {
-            addRenderableWidget(Button.builder(Component.translatable("gui.useless_stretcher.two_i.deploy"), button -> {
-                Network.sendTwoIDollDeploy(itemHand);
-                onClose();
-            }).bounds(actionX, firstY, Math.min(actionWidth, 132), 20).build());
+            addRenderableWidget(new SelectableAE2Button(actionX, firstY, Math.min(actionWidth, 132), 20,
+                    Component.translatable("gui.useless_stretcher.two_i.deploy"), button -> {
+                        Network.sendTwoIDollDeploy(itemHand);
+                        onClose();
+                    }));
             return;
         }
 
@@ -111,9 +113,8 @@ public final class TwoIDialogueScreen extends Screen implements TwoIInteractionS
 
     private Button addAction(int x, int y, int buttonWidth, String action,
                              Button.OnPress onPress) {
-        return addRenderableWidget(Button.builder(Component.translatable(
-                        "gui.useless_stretcher.two_i." + action), onPress)
-                .bounds(x, y, buttonWidth, 22).build());
+        return addRenderableWidget(new SelectableAE2Button(x, y, buttonWidth, 22,
+                Component.translatable("gui.useless_stretcher.two_i." + action), onPress));
     }
 
     private void startStory() {

@@ -1,7 +1,4 @@
 // Real Forge worlds, opt-in and separate from the distributed artifact.
-tasks.named('jar') {
-    exclude '**/*ForgeCapsule*Checks*.class', '**/capsulecheck/**', 'data/stretcher_capsule_check/**'
-}
 if (providers.gradleProperty('capsuleChecks').isPresent()) {
     sourceSets.main.java.srcDir 'src/capsuleCheck/java'
     sourceSets.main.resources.srcDir 'src/capsuleCheck/resources'
@@ -27,8 +24,7 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
                 modRuntimeOnly 'maven.modrinth:IiATswDj:9n9p68Qq'
             }
         }
-        if (providers.gradleProperty('uselessModDevJar').isPresent())
-            runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+        if (uselessModDevJar.isPresent()) runtimeOnly files(uselessModDevJar.get())
         else modRuntimeOnly uselessModRelease
         if (providers.gradleProperty('accelerationChecks').isPresent()) {
             modRuntimeOnly 'maven.modrinth:sbJh4AZw:hs5pHmiU'
@@ -50,8 +46,10 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
         }
         capsuleClientCheck {
             client()
-            gameDirectory = file('run/capsule-client-check')
+            gameDirectory = file(providers.gradleProperty('capsuleClientCheckDirectory').getOrElse('run/capsule-client-check'))
             systemProperty 'stretcher.capsule.clientCheck', 'true'
+            systemProperty 'stretcher.capsule.clientStructure', providers.gradleProperty('capsuleClientStructure').getOrElse('minecraft:pillager_outpost')
+            systemProperty 'stretcher.capsule.normalWorld', providers.gradleProperty('capsuleNormalWorld').isPresent().toString()
         }
         accelerationCheck {
             server()

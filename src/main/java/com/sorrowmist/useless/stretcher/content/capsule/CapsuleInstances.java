@@ -275,6 +275,7 @@ public final class CapsuleInstances extends SavedData {
         CompoundTag plan = new CompoundTag();
         int chunk, piece, mapCursor, previewCursor, attempt, cleanChunk, trimChunk, trimPass, bedrockChunk;
         int cleanupVersion;
+        int geometryVersion;
         int progress;
         long cleanCursor, trimCursor, bedrockCursor;
         int minX, minY, minZ, maxX, maxY, maxZ;
@@ -318,6 +319,7 @@ public final class CapsuleInstances extends SavedData {
             tag.putInt("clean_chunk", cleanChunk); tag.putInt("trim_chunk", trimChunk); tag.putInt("trim_pass", trimPass);
             tag.putInt("bedrock_chunk", bedrockChunk);
             tag.putInt("cleanup_version", cleanupVersion);
+            tag.putInt("geometry_version", geometryVersion);
             tag.putInt("progress", progress);
             tag.putBoolean("after_placed", afterPlaced);
             tag.putBoolean("completion_notified", completionNotified);
@@ -381,6 +383,7 @@ public final class CapsuleInstances extends SavedData {
             room.bedrockCursor = Math.max(0L, e.getLong("bedrock_cursor"));
             room.cleanChunk = Math.max(0, e.getInt("clean_chunk"));
             room.cleanupVersion = Math.max(0, e.getInt("cleanup_version"));
+            room.geometryVersion = Math.max(0, e.getInt("geometry_version"));
             room.progress = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("progress"), 0, 99);
             room.trimChunk = Math.max(0, e.getInt("trim_chunk"));
             room.trimPass = com.sorrowmist.useless.stretcher.compat.NativeMath.clamp(e.getInt("trim_pass"), 0, 7);

@@ -21,11 +21,43 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.WeakHashMap;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import com.sorrowmist.useless.stretcher.content.ae.InstalledPatternHost;
 
 /** World-owned pattern libraries. Items keep their existing UUID, never the library contents. */
 public final class MyriadPatternStore extends SavedData {
     private static final String NAME = "useless_stretcher_patterns";
     private final Map<UUID, Library> entries = new HashMap<>();
+    private final Map<UUID, Set<BlockEntity>> readers = new HashMap<>();
+
+    public boolean contains(UUID id) {
+        return entries.containsKey(id);
+    }
+
+    /** Immutable, shared per revision; no per-machine copies of a large library. */
+    public List<AEItemKey> snapshot(UUID id) {
+        Library library = entries.get(id);
+        if (library == null) return List.of();
+        if (library.snapshot == null) library.snapshot = List.copyOf(library.references.keySet());
+        return library.snapshot;
+    }
+
+    public void watch(UUID id, BlockEntity reader) {
+        if (id == null || !(reader instanceof InstalledPatternHost)) return;
+        readers.computeIfAbsent(id, ignored -> Collections.newSetFromMap(new WeakHashMap<>())).add(reader);
+    }
+
+    private void changed(UUID id) {
+        setDirty();
+        Set<BlockEntity> subscribed = readers.get(id);
+        if (subscribed == null) return;
+        subscribed.removeIf(BlockEntity::isRemoved);
+        for (BlockEntity reader : List.copyOf(subscribed)) {
+            ((InstalledPatternHost) reader).uselessStretcher$refreshInstalledPatterns();
+        }
+        if (subscribed.isEmpty()) readers.remove(id);
+    }
 
     public static MyriadPatternStore get(ServerLevel level) {
         return level.getDataStorage().computeIfAbsent(
@@ -65,7 +97,7 @@ public final class MyriadPatternStore extends SavedData {
         if (library == null || keys == null || keys.isEmpty()) return 0;
         int removed = library.removeKeys(keys);
         if (library.groups.isEmpty()) entries.remove(id);
-        if (removed > 0) setDirty();
+        if (removed > 0) changed(id);
         return removed;
     }
 
@@ -74,11 +106,11 @@ public final class MyriadPatternStore extends SavedData {
         Library library = entries.computeIfAbsent(id, ignored -> new Library());
         library.replace(mold, patterns);
         if (library.groups.isEmpty()) entries.remove(id);
-        setDirty();
+        changed(id);
     }
 
     public void clear(UUID id) {
-        if (id != null && entries.remove(id) != null) setDirty();
+        if (id != null && entries.remove(id) != null) changed(id);
     }
 
     public Rewrite stripByproducts(UUID id) {
@@ -133,7 +165,7 @@ public final class MyriadPatternStore extends SavedData {
                 if (!current.hasNext()) {
                     if (target != null && target.isEmpty()) replacement.groups.remove(currentMold);
                     if (!groups.hasNext()) {
-                        if (changed > 0) { entries.put(id, replacement); setDirty(); }
+                        if (changed > 0) { entries.put(id, replacement); MyriadPatternStore.this.changed(id); }
                         return true;
                     }
                     var group = groups.next();
@@ -156,11 +188,13 @@ public final class MyriadPatternStore extends SavedData {
         private final Map<ResourceLocation, Set<AEItemKey>> groups = new LinkedHashMap<>();
         private final Map<AEItemKey, Integer> references = new LinkedHashMap<>();
         private PatternSearchIndex searchIndex;
+        private List<AEItemKey> snapshot;
         private long revision;
 
         public void replace(ResourceLocation mold, Set<AEItemKey> patterns) {
             revision++;
             searchIndex = null;
+            snapshot = null;
             Set<AEItemKey> replacement = new LinkedHashSet<>(patterns);
             Set<AEItemKey> old = groups.remove(mold);
             if (old != null) {
@@ -189,7 +223,7 @@ public final class MyriadPatternStore extends SavedData {
                 }
                 if (group.isEmpty()) groups.remove(mold);
             }
-            if (removed > 0) { searchIndex = null; revision++; }
+            if (removed > 0) { searchIndex = null; snapshot = null; revision++; }
             return removed;
         }
     }

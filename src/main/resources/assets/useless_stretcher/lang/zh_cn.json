@@ -1,4 +1,14 @@
 {
+  "gui.useless_stretcher.staff_tabs.machines": "加速记录",
+  "gui.useless_stretcher.staff_tabs.main": "常规设置",
+  "gui.useless_stretcher.staff_tabs.entity": "实体加速",
+  "gui.useless_stretcher.staff_tabs.range": "范围加速",
+  "gui.useless_stretcher.staff_tabs.history": "范围历史",
+  "gui.useless_stretcher.staff_tabs.fluids": "吸取流体",
+  "gui.useless_stretcher.staff_tabs.summon": "实体召唤",
+  "gui.useless_stretcher.staff_tabs.apotheosis": "附魔增幅",
+  "gui.useless_stretcher.staff_tabs.fold": "收起 / 展开标签栏；Ctrl+Tab 切换页面",
+  "tooltip.useless_stretcher.stretcher.hint_install": "可直接放入小合金炉、样板总成或被动仓的样板槽，读取担架绑定的整库样板",
   "gui.useless_stretcher.staff_config.radiation": "辐射防护：%s",
   "help.useless_stretcher.staff_config.radiation": "开启后，只要这把手杖在背包或双手中，就会清除自身 MEK 辐射剂量并持续免疫辐射。默认关闭；需要安装 Mekanism。",
   "gui.useless_stretcher.dimension_capsule.phase.planning": "正在规划结构",
@@ -20,6 +30,8 @@
   "gui.useless_stretcher.dimension_capsule.instance.none": "尚无实例",
   "gui.useless_stretcher.dimension_capsule.origin": "坐标：%s, %s",
   "gui.useless_stretcher.dimension_capsule.dimension": "切换维度",
+  "gui.useless_stretcher.dimension_capsule.map_generate_first": "点击“生成”后显示实际结构地图",
+  "gui.useless_stretcher.dimension_capsule.map_waiting": "等待结构地图数据…",
   "gui.useless_stretcher.dimension_capsule.map_help": "拖动旋转地图并选择入口，滚轮缩放。黄色标记为进入侧。",
   "gui.useless_stretcher.dimension_capsule.phase.empty": "尚未生成",
   "gui.useless_stretcher.dimension_capsule.phase.ready": "可以进入",
@@ -628,6 +640,17 @@
   "msg.useless_stretcher.apotheosis.table_set": "虚拟书架属性已应用到附魔台",
   "advancements.useless_stretcher.staff_leaf_drop.title": "怎么打树叶也掉啊？",
   "advancements.useless_stretcher.staff_leaf_drop.description": "从树叶里打出了一把荒辰移晷之杖。",
+  "useless_stretcher.configuration.editor.previous": "上一页",
+  "useless_stretcher.configuration.editor.next": "下一页",
+  "useless_stretcher.configuration.editor.save_page": "保存本页",
+  "useless_stretcher.configuration.editor.unloaded": "该配置尚未加载，请进入单人或局域网存档后编辑。",
+  "useless_stretcher.configuration.editor.saved": "本页已保存。需要重启的配置将在重启后生效。",
+  "useless_stretcher.configuration.editor.not_saved": "未保存：%s",
+  "useless_stretcher.configuration.editor.invalid_boolean": "请输入 true（开启）或 false（关闭）。",
+  "useless_stretcher.configuration.editor.invalid_value": "配置值无效，请检查输入格式。",
+  "useless_stretcher.configuration.editor.invalid_option": "“%s”的值无效或超出允许范围。",
+  "useless_stretcher.configuration.editor.boolean_hint": "开关取值：true = 开启，false = 关闭。",
+  "useless_stretcher.configuration.editor.path": "配置键：%s",
   "useless_stretcher.configuration.title": "万象担架配置",
   "useless_stretcher.configuration.section.useless_stretcher.common": "通用设置",
   "useless_stretcher.configuration.section.useless_stretcher.server": "服务端配置",
@@ -635,11 +658,17 @@
   "useless_stretcher.configuration.acceleration": "手杖：加速",
   "useless_stretcher.configuration.server": "服务端配置",
   "useless_stretcher.configuration.server.staff_acceleration": "允许手杖加速",
+  "useless_stretcher.configuration.server.staff_acceleration.tooltip": "控制全服是否允许手杖加速；关闭后拒绝所有手杖加速请求。",
   "useless_stretcher.configuration.server.range_acceleration": "允许范围加速",
+  "useless_stretcher.configuration.server.range_acceleration.tooltip": "关闭后暂停已有加速范围，并禁止放置或启用新范围；仍可回收已有范围。",
   "useless_stretcher.configuration.server.remote_reclaimer": "允许远程回收",
+  "useless_stretcher.configuration.server.remote_reclaimer.tooltip": "允许使用时间流逝回收器远程管理和回收加速。",
   "useless_stretcher.configuration.server.time_stop": "允许手杖时间暂停",
+  "useless_stretcher.configuration.server.time_stop.tooltip": "允许使用手杖的一次性时间暂停。每次持续 12 秒，结束后自动恢复。",
   "useless_stretcher.configuration.server.useful_armor_recipes": "启用有用锭装甲合成配方",
+  "useless_stretcher.configuration.server.useful_armor_recipes.tooltip": "默认关闭，同时需要开启装甲功能总开关。修改后重启服务器或执行 /reload；四件装甲始终在 JEI 隐藏。",
   "useless_stretcher.configuration.server.useful_armor_enable": "启用有用锭装甲功能",
+  "useless_stretcher.configuration.server.useful_armor_enable.tooltip": "默认关闭。穿齐套装后锁定创造模式；关闭此功能会恢复被套装切换的玩家原本的游戏模式。四件装甲始终在 JEI 隐藏。",
   "useless_stretcher.configuration.useful_armor": "有用锭装甲",
   "useless_stretcher.configuration.acceleration.idle_throttle": "永久加速动态降频",
   "useless_stretcher.configuration.acceleration.idle_throttle.tooltip": "永久模式下是否对空闲机器自动降频以节省性能。普通模式始终满速。",
@@ -647,7 +676,7 @@
   "useless_stretcher.configuration.acceleration.entity_disable_ai.tooltip": "实体加速时是否关闭目标生物的 AI；加速结束后恢复原状态。",
   "useless_stretcher.configuration.recipe_compat": "配方兼容",
   "useless_stretcher.configuration.recipe_compat.hide_enderio_grinding_balls": "隐藏 Ender IO 磨珠配方变体",
-  "useless_stretcher.configuration.recipe_compat.hide_enderio_grinding_balls.tooltip": "是否隐藏 Ender IO 半自磨机的磨珠配方变体。",
+  "useless_stretcher.configuration.recipe_compat.hide_enderio_grinding_balls.tooltip": "隐藏 Ender IO 半自磨机中由不同磨珠产生的重复配方变体，避免配方目录刷屏。重启游戏后生效。",
   "useless_stretcher.configuration.highlight": "高亮",
   "useless_stretcher.configuration.highlight.highlight_see_through": "高亮框透视",
   "useless_stretcher.configuration.highlight.highlight_see_through.tooltip": "高亮框是否穿墙显示。",
@@ -669,7 +698,7 @@
   "useless_stretcher.configuration.loot_refresh.enable.tooltip": "默认关闭。开启后玩家才能在手杖 X 界面启用原版和 Lootr 战利品箱刷新。"
   ,"useless_stretcher.configuration.apotheosis": "手杖：神话兼容"
   ,"useless_stretcher.configuration.apotheosis.enable": "启用 Apotheosis 兼容"
-  ,"useless_stretcher.configuration.apotheosis.enable.tooltip": "默认关闭。需要 Apotheosis 与 Apothic Enchanting；开启后可设置世界等级和附魔台虚拟书架属性。"
+  ,"useless_stretcher.configuration.apotheosis.enable.tooltip": "默认关闭。需要 Apotheosis 7 的附魔模块；允许为已绑定的附魔台添加虚拟书架属性。此 1.20.1 版本不支持世界等级。关闭后保留已保存的附魔台数据，但不参与附魔计算。"
   ,"gui.useless_stretcher.pattern_repository.open": "样板仓库"
   ,"gui.useless_stretcher.pattern_repository.title": "万象担架 · 样板仓库"
   ,"gui.useless_stretcher.pattern_repository.count": "样板：%s  第 %s / %s 页"
@@ -677,7 +706,7 @@
   ,"gui.useless_stretcher.pattern_repository.next": "下一页"
   ,"gui.useless_stretcher.pattern_repository.delete": "删除选中"
   ,"gui.useless_stretcher.pattern_repository.empty": "没有已获取的样板"
-   ,"tooltip.useless_stretcher.stretcher.hint_repository": "右键空气：打开样板仓库；按住 Shift 查看仓库中的样板产物",
+   ,"tooltip.useless_stretcher.stretcher.hint_repository": "右键空气：打开样板仓库，查看产物并搜索、整理样板",
    "item.useless_stretcher.two_i_doll": "2i玩偶",
    "block.useless_stretcher.two_i_doll_display": "2i玩偶",
    "msg.useless_stretcher.two_i.owner_only": "只有这只 2i 的所有者才能互动。",
@@ -806,7 +835,22 @@
    "subtitles.useless_stretcher.two_i_pat": "2i 发出可爱的声音",
   "useless_stretcher.configuration.two_i": "2i 玩偶",
   "useless_stretcher.configuration.two_i.starfield_invitation": "星空庭院邀请",
+  "useless_stretcher.configuration.two_i.starfield_invitation.tooltip": "允许 2i 邀请玩家进入或重游星空庭院，默认开启。关闭只阻止新的进入，不删除好感、邀请或奖励记录；庭院内的玩家仍可安全返回。",
   "msg.useless_stretcher.two_i.starfield_disabled": "星空庭院邀请已由服务器关闭。",
   "toast.useless_stretcher.capsule_ready": "结构已加载完成",
-  "toast.useless_stretcher.capsule_enter": "打开维度胶囊即可进入"
+  "toast.useless_stretcher.capsule_enter": "打开维度胶囊即可进入",
+  "gui.useless_stretcher.fluid.title": "吸取周围流体",
+  "gui.useless_stretcher.fluid.toggle": "吸取周围流体：%s",
+  "gui.useless_stretcher.fluid.radius": "半径（格）",
+  "gui.useless_stretcher.fluid.rate": "速率（桶/秒）",
+  "gui.useless_stretcher.fluid.radius_help": "以玩家为中心的立方体半径，1～16 格。仅扫描已加载区块。",
+  "gui.useless_stretcher.fluid.rate_help": "每 20 游戏刻最多收取 1～64 桶；实际速度取决于扫描与 AE 容量。",
+  "gui.useless_stretcher.fluid.hint": "主手或副手持杖时工作。一格完整静止源流体 = 1000 mB；不吸取流动、含水方块或储罐。绑定时在 G 开启“AE 联网模式”，潜行右键 AE 无线访问点；吸取需开启“AE 存储优先”。网络离线或不足整桶空间时保留源流体。",
+  "gui.useless_stretcher.fluid.unbound": "尚未绑定 AE 无线访问节点",
+  "gui.useless_stretcher.fluid.bound": "绑定位置：%s / %s",
+  "gui.useless_stretcher.fluid.priority_on": "优先 AE 存储：已开启",
+  "gui.useless_stretcher.fluid.priority_off": "请在本体 G 界面开启“AE 存储优先”",
+  "gui.useless_stretcher.fluid.pending": "待存入流体：%s mB（保存在此手杖）",
+  "gui.useless_stretcher.fluid.uncertain": "存储提交结果不明（尝试存入 %s mB）。为避免复制，已停用自动重试，请联系管理员核对此手杖。",
+  "gui.useless_stretcher.fluid.open_help": "调节源流体收集范围与速率，存入本体绑定的 AE 网络。默认关闭。"
 }

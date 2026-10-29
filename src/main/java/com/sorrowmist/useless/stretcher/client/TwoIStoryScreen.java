@@ -1,6 +1,8 @@
 package com.sorrowmist.useless.stretcher.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.sorrowmist.useless.client.gui.AppleUi;
+import com.sorrowmist.useless.client.gui.apple.AppleTextLayout;
 import com.sorrowmist.useless.stretcher.client.dialogue.TwoIStoryScript;
 import com.sorrowmist.useless.stretcher.client.dialogue.TwoIStoryTimeline;
 import com.sorrowmist.useless.stretcher.network.Network;
@@ -497,12 +499,11 @@ public final class TwoIStoryScreen extends Screen implements TwoIInteractionScre
         }
 
         @Override protected void renderWidget(GuiGraphics g, int mouseX, int mouseY, float partial) {
-            drawFrame(g, getX(), getY(), getWidth(), getHeight());
-            boolean selected = isHoveredOrFocused() && active;
-            if (selected) g.renderOutline(getX() + 3, getY() + 2, getWidth() - 6, getHeight() - 4, 0xFF6A92E0);
-            String label = font.plainSubstrByWidth(getMessage().getString(), getWidth() - 16);
-            g.drawString(font, label, getX() + (getWidth() - font.width(label)) / 2,
-                    getY() + (getHeight() - 8) / 2, active ? 0xFF304675 : 0xFF8994AD, false);
+            var style = isFocused() ? AppleUi.ButtonStyle.TINTED : AppleUi.ButtonStyle.GRAY;
+            AppleUi.buttonSurface(g, getX(), getY(), getWidth(), getHeight(), style,
+                    isHoveredOrFocused(), false, active);
+            AppleTextLayout.drawCentered(g, font, getMessage(), getX(), getY(),
+                    getWidth(), getHeight(), 6, 2, null, AppleUi.buttonTextColor(style, active));
         }
     }
 }

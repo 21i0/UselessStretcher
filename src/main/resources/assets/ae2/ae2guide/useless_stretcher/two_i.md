@@ -10,7 +10,7 @@ item_ids:
 
 # 2i 玩偶
 
-Forge 1.20.1 版完整提供六章剧情、章节回顾、图片欣赏及独立星空庭院。请搭配无用之物官方 20.2.4.7（最低 20.2.4.6）、AE2 15.4.8 与 GuideME 20.x；Curios 5.x 为可选佩戴扩展。
+Forge 1.20.1 版完整提供六章剧情、章节回顾、图片欣赏及独立星空庭院。请搭配包含 Apple 界面 API 的无用之物 20.2.4.9 或更新配套构建、AE2 15.4.8 与 GuideME 20.x；Curios 5.x 为可选佩戴扩展。
 
 <ItemImage id="useless_stretcher:two_i_doll" scale="5" />
 

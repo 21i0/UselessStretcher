@@ -2,6 +2,7 @@ package com.sorrowmist.useless.stretcher.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sorrowmist.useless.stretcher.client.dialogue.TwoIStoryGallery;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -33,20 +34,20 @@ public final class TwoIStoryGalleryScreen extends Screen implements TwoIInteract
         int buttonWidth = Math.max(40, Math.min(112, (width - 24 - 4 * gap) / 5));
         int x = (width - 5 * buttonWidth - 4 * gap) / 2;
         int y = height - 29;
-        addRenderableWidget(Button.builder(ui("previous"), b -> move(-1))
-                .bounds(x, y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(ui("gallery_category." + category), b -> {
-            category = (category + 1) % 4;
-            pictures = TwoIStoryGallery.pictures(category);
-            index = 0;
-            rebuildWidgets();
-        }).bounds(x + buttonWidth + gap, y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(ui("next_page"), b -> move(1))
-                .bounds(x + 2 * (buttonWidth + gap), y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(ui("gallery_hide"), b -> setHidden(true))
-                .bounds(x + 3 * (buttonWidth + gap), y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(ui("return"), b -> onClose())
-                .bounds(x + 4 * (buttonWidth + gap), y, buttonWidth, 20).build());
+        addRenderableWidget(new SelectableAE2Button(x, y, buttonWidth, 20, ui("previous"), b -> move(-1)));
+        addRenderableWidget(new SelectableAE2Button(x + buttonWidth + gap, y, buttonWidth, 20,
+                ui("gallery_category." + category), b -> {
+                    category = (category + 1) % 4;
+                    pictures = TwoIStoryGallery.pictures(category);
+                    index = 0;
+                    rebuildWidgets();
+                }));
+        addRenderableWidget(new SelectableAE2Button(x + 2 * (buttonWidth + gap), y, buttonWidth, 20,
+                ui("next_page"), b -> move(1)));
+        addRenderableWidget(new SelectableAE2Button(x + 3 * (buttonWidth + gap), y, buttonWidth, 20,
+                ui("gallery_hide"), b -> setHidden(true)));
+        addRenderableWidget(new SelectableAE2Button(x + 4 * (buttonWidth + gap), y, buttonWidth, 20,
+                ui("return"), b -> onClose()));
         setHidden(hidden);
     }
 

@@ -15,6 +15,7 @@ public abstract class StaffMiningDispatcherMixin {
     @WrapMethod(method = "dispatchBreak(Lnet/minecraftforge/event/level/BlockEvent$BreakEvent;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)V", remap = false, require = 1)
     private static void uselessStretcher$mine(BlockEvent.BreakEvent event, ItemStack stack, Player player,
                                               Operation<Void> original) {
+        if (event instanceof com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.DrainPermissionCheck) return;
         if (stack.is(ModItems.WONDROUS_STAFF.get())) {
             StaffMiningContext.run(() -> original.call(event, stack, player));
         } else original.call(event, stack, player);

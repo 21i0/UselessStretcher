@@ -1,27 +1,47 @@
 package com.sorrowmist.useless.stretcher.client;
 
-import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
+import com.sorrowmist.useless.client.gui.ldl.api.Ui;
+import com.sorrowmist.useless.client.gui.ldl.api.UiNode;
 import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
-import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
-import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
+import com.sorrowmist.useless.stretcher.client.gui.ButtonHelp;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
 import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
 import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
 import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.network.RangeNetwork;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
-/** Button-based range setup using the same visual language as the upstream G screen. */
-public final class RangeAccelerationConfigScreen extends FloatingScreen {
+/**
+ * Button-based range setup using the same visual language as the upstream G screen.
+ *
+ * <p>Rebuilt on Useless Mod's Apple UI API: the live new-range speed caption, the placement and
+ * marking switches, the three size/offset steppers, the acceleration/sleep list switches and the
+ * footer are declared with {@code Ui.column/section/row} and laid out by
+ * {@code FloatingScreen.layoutBody}, so no card rectangle or row coordinate is measured by hand.
+ * Switches, sliders and step buttons stay native {@link SelectableAE2Button}/{@link AE2RangeSlider}
+ * instances embedded with {@code FloatingScreen.widgetNode}: their callbacks, keyboard focus,
+ * narration, axis/list hover help and the {@link #updateButtons()} refresh from the staff
+ * components are unchanged.</p>
+ */
+public final class RangeAccelerationConfigScreen extends StaffScreen {
+    /** Mode switches keep the compact 17px AE2 height; the remaining controls are 18px. */
+    private static final int MODE_HEIGHT = 17;
+    private static final int BUTTON_HEIGHT = 18;
+    /** Step buttons are square; the offset readout is a disabled three-digit button. */
+    private static final int STEP_WIDTH = 18;
+    private static final int OFFSET_VALUE_WIDTH = 34;
+    private static final int ROW_GAP = 2;
+    private static final int AXIS_MIN = 1;
+    private static final int AXIS_MAX = 15;
 
     private final Screen parent;
     private final InteractionHand hand;
-    private int panelLeft;
-    private int panelTop;
     private boolean placementMode;
     private boolean filterMarkingMode;
     private boolean markSleepList;
@@ -45,16 +65,15 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
     private boolean settingsLoaded;
 
     public RangeAccelerationConfigScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.range.title"), "range_settings", 293, 203, 260, 145);
+        super(Component.translatable("gui.useless_stretcher.range.title"), Tab.RANGE, parent, hand);
         this.parent = parent;
         this.hand = hand;
     }
 
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
+
     @Override
     protected void initContent() {
-        int panelWidth = contentWidth();
-        panelLeft = contentLeft();
-        panelTop = contentTop();
         if (!settingsLoaded) {
             ItemStack staff = currentStaff();
             placementMode = RangeAccelerationSettings.placementMode(staff);
@@ -72,89 +91,132 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
             sleepMarkCount = RangeAccelerationSettings.sleepMarkCount(staff);
             settingsLoaded = true;
         }
+        // Widget instances are rebuilt on every relayout (resize / scroll), exactly like before.
+        placementButton = null;
+        markingButton = null;
+        accelerationListButton = null;
+        sleepListButton = null;
+        offsetXButton = null;
+        offsetYButton = null;
+        offsetZButton = null;
+        layoutBody(buildPage());
+        updateButtons();
+    }
 
-        placementButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 103, panelTop, 103, 17,
-                placementMessage(), ignored -> {
-                    placementMode = !placementMode;
-                    if (placementMode) filterMarkingMode = false;
-                    apply();
-                }));
-        markingButton = addRenderableWidget(new SelectableAE2Button(
-                panelLeft + panelWidth - 103, panelTop + 20, 103, 17,
-                markingMessage(), ignored -> {
-                    filterMarkingMode = !filterMarkingMode;
-                    if (filterMarkingMode) placementMode = false;
-                    apply();
-                }));
+    // ------------------------------------------------------------------ 声明式页面
+    private UiNode buildPage() {
+        return Ui.column(
+                Ui.section(this::speedCaption, modeRow()),
+                Ui.card(axisRow('X', sizeX, offsetX), axisRow('Y', sizeY, offsetY),
+                        axisRow('Z', sizeZ, offsetZ)).gap(ROW_GAP),
+                Ui.card(listRow()),
+                footerRow()
+        ).gap(4);
+    }
 
-        int cardLeft = panelLeft;
-        int cardWidth = panelWidth;
-        addAxisSlider(cardLeft + 5, panelTop + 44, cardWidth - 10, 'X', sizeX, offsetX);
-        addAxisSlider(cardLeft + 5, panelTop + 64, cardWidth - 10, 'Y', sizeY, offsetY);
-        addAxisSlider(cardLeft + 5, panelTop + 84, cardWidth - 10, 'Z', sizeZ, offsetZ);
+    /** The live new-range multiplier replaces the hand drawn speed line. */
+    private Component speedCaption() {
+        return Component.translatable("gui.useless_stretcher.range.speed",
+                WondrousStaffAcceleration.getSpeed(currentStaff()));
+    }
 
-        int half = (cardWidth - 13) / 2;
-        accelerationListButton = addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 5, panelTop + 112, half, 18,
+    /** Placement and list marking share the width evenly as two parallel mode switches. */
+    private UiNode modeRow() {
+        placementButton = new SelectableAE2Button(0, 0, 100, MODE_HEIGHT, placementMessage(), ignored -> {
+            placementMode = !placementMode;
+            if (placementMode) filterMarkingMode = false;
+            apply();
+        });
+        markingButton = new SelectableAE2Button(0, 0, 100, MODE_HEIGHT, markingMessage(), ignored -> {
+            filterMarkingMode = !filterMarkingMode;
+            if (filterMarkingMode) placementMode = false;
+            apply();
+        });
+        return Ui.row(flexible(placementButton, MODE_HEIGHT), flexible(markingButton, MODE_HEIGHT))
+                .gap(ROW_GAP).height(MODE_HEIGHT);
+    }
+
+    /**
+     * One axis per row: size stepper, then the offset stepper group. The slider grows into the free
+     * space, so the same row works in the compact and the widest window without a measured width.
+     */
+    private UiNode axisRow(char axis, int initialSize, int initialOffset) {
+        AE2RangeSlider slider = new AE2RangeSlider(0, 0, 60, BUTTON_HEIGHT, String.valueOf(axis),
+                AXIS_MIN, AXIS_MAX, initialSize, value -> setAxis(axis, value));
+        SelectableAE2Button sizeDecrease = new SelectableAE2Button(0, 0, STEP_WIDTH, BUTTON_HEIGHT,
+                Component.literal("-"), ignored -> slider.step(-1));
+        sizeDecrease.setTooltip(slider.getTooltip());
+        SelectableAE2Button sizeIncrease = new SelectableAE2Button(0, 0, STEP_WIDTH, BUTTON_HEIGHT,
+                Component.literal("+"), ignored -> slider.step(1));
+        sizeIncrease.setTooltip(slider.getTooltip());
+
+        SelectableAE2Button offsetDecrease = new SelectableAE2Button(0, 0, STEP_WIDTH, BUTTON_HEIGHT,
+                Component.literal("-"), ignored -> stepOffset(axis, -1));
+        ButtonHelp.set(offsetDecrease, "offset_decrease", String.valueOf(axis));
+        SelectableAE2Button offsetValue = new SelectableAE2Button(0, 0, OFFSET_VALUE_WIDTH, BUTTON_HEIGHT,
+                offsetMessage(initialOffset), ignored -> { });
+        offsetValue.active = false;
+        ButtonHelp.set(offsetValue, "offset_axis", String.valueOf(axis));
+        SelectableAE2Button offsetIncrease = new SelectableAE2Button(0, 0, STEP_WIDTH, BUTTON_HEIGHT,
+                Component.literal("+"), ignored -> stepOffset(axis, 1));
+        ButtonHelp.set(offsetIncrease, "offset_increase", String.valueOf(axis));
+        switch (axis) {
+            case 'X' -> offsetXButton = offsetValue;
+            case 'Y' -> offsetYButton = offsetValue;
+            default -> offsetZButton = offsetValue;
+        }
+        return Ui.row(
+                fixed(sizeDecrease, STEP_WIDTH),
+                widgetNode(slider).width(0).grow(),
+                fixed(sizeIncrease, STEP_WIDTH),
+                fixed(offsetDecrease, STEP_WIDTH),
+                fixed(offsetValue, OFFSET_VALUE_WIDTH),
+                fixed(offsetIncrease, STEP_WIDTH)
+        ).gap(ROW_GAP).height(BUTTON_HEIGHT);
+    }
+
+    /** Acceleration and sleep lists stay one tap apart; the count is part of their message. */
+    private UiNode listRow() {
+        accelerationListButton = new SelectableAE2Button(0, 0, 100, BUTTON_HEIGHT,
                 accelerationListMessage(), ignored -> {
                     if (markSleepList) markSleepList = false;
                     else accelerationWhitelistMode = !accelerationWhitelistMode;
                     apply();
-                }));
-        sleepListButton = addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 8 + half, panelTop + 112, cardWidth - 13 - half, 18,
+                });
+        sleepListButton = new SelectableAE2Button(0, 0, 100, BUTTON_HEIGHT,
                 sleepListMessage(), ignored -> {
                     if (!markSleepList) markSleepList = true;
                     else sleepWhitelistMode = !sleepWhitelistMode;
                     apply();
-                }));
-        int footerY = panelTop + Math.max(143, contentHeight() - 21);
-        addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 5, footerY, (cardWidth - 13) / 2, 18,
+                });
+        ButtonHelp.set(accelerationListButton, "acceleration_list");
+        ButtonHelp.set(sleepListButton, "sleep_list");
+        return Ui.row(flexible(accelerationListButton, BUTTON_HEIGHT),
+                flexible(sleepListButton, BUTTON_HEIGHT)).gap(ROW_GAP).height(BUTTON_HEIGHT);
+    }
+
+    private UiNode footerRow() {
+        SelectableAE2Button history = new SelectableAE2Button(0, 0, 100, BUTTON_HEIGHT,
                 Component.translatable("gui.useless_stretcher.range.history"),
-                ignored -> minecraft.setScreen(new RangeAccelerationHistoryScreen(this))));
-        addRenderableWidget(new SelectableAE2Button(
-                cardLeft + 8 + (cardWidth - 13) / 2, footerY,
-                cardWidth - 13 - (cardWidth - 13) / 2, 18,
-                Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
-        updateButtons();
-        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(accelerationListButton, "acceleration_list");
-        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(sleepListButton, "sleep_list");
-        setContentExtent(footerY - panelTop + 21);
+                ignored -> navigate(Tab.HISTORY));
+        SelectableAE2Button back = new SelectableAE2Button(0, 0, 100, BUTTON_HEIGHT,
+                Component.translatable("gui.useless_stretcher.back"), ignored -> onClose());
+        return Ui.row(flexible(history, BUTTON_HEIGHT), flexible(back, BUTTON_HEIGHT))
+                .gap(ROW_GAP).height(BUTTON_HEIGHT);
     }
 
-    private void addAxisSlider(int left, int y, int rowWidth, char axis, int initialValue, int initialOffset) {
-        int offsetLeft = left + rowWidth - 74;
-        int plusLeft = offsetLeft - 22;
-        AE2RangeSlider slider = addRenderableWidget(new AE2RangeSlider(
-                left + 21, y, Math.max(20, plusLeft - left - 24), 18, String.valueOf(axis),
-                1, 15, initialValue, value -> setAxis(axis, value)));
-        addRenderableWidget(new SelectableAE2Button(left, y, 18, 18,
-                Component.literal("-"), ignored -> slider.step(-1))).setTooltip(slider.getTooltip());
-        addRenderableWidget(new SelectableAE2Button(plusLeft, y, 18, 18,
-                Component.literal("+"), ignored -> slider.step(1))).setTooltip(slider.getTooltip());
-
-        SelectableAE2Button decrement = new SelectableAE2Button(offsetLeft, y, 18, 18,
-                Component.literal("-"), ignored -> stepOffset(axis, -1));
-        SelectableAE2Button value = new SelectableAE2Button(offsetLeft + 20, y, 34, 18,
-                offsetMessage(initialOffset), ignored -> { });
-        value.active = false;
-        SelectableAE2Button increment = new SelectableAE2Button(offsetLeft + 56, y, 18, 18,
-                Component.literal("+"), ignored -> stepOffset(axis, 1));
-        addRenderableWidget(decrement);
-        addRenderableWidget(value);
-        addRenderableWidget(increment);
-        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(decrement, "offset_decrease", String.valueOf(axis));
-        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(value, "offset_axis", String.valueOf(axis));
-        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(increment, "offset_increase", String.valueOf(axis));
-        switch (axis) {
-            case 'X' -> offsetXButton = value;
-            case 'Y' -> offsetYButton = value;
-            default -> offsetZButton = value;
-        }
+    // ------------------------------------------------------------------ 控件工厂
+    /** Native widget embedded by the shared layout: no width of its own, the row spreads it evenly. */
+    private UiNode flexible(AbstractWidget widget, int height) {
+        return widgetNode(widget).width(0).grow().height(height);
     }
 
+    /** Fixed-width native control; its height stays the real widget height. */
+    private UiNode fixed(AbstractWidget widget, int width) {
+        return widgetNode(widget).width(width);
+    }
+
+    // ------------------------------------------------------------------ 状态
     private void setAxis(char axis, int value) {
         switch (axis) {
             case 'X' -> sizeX = value;
@@ -220,22 +282,13 @@ public final class RangeAccelerationConfigScreen extends FloatingScreen {
         }
     }
 
+    /** Cards, captions and help come from the shared Apple host; nothing is drawn by hand here. */
     @Override
-    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        int panelWidth = contentWidth();
-        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 40,
-                panelLeft + panelWidth, panelTop + 108);
-        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 109,
-                panelLeft + panelWidth, panelTop + 138);
-        graphics.drawString(font,
-                Component.translatable("gui.useless_stretcher.range.speed",
-                        WondrousStaffAcceleration.getSpeed(currentStaff())),
-                panelLeft + 5, panelTop + 6, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
-    }
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) { }
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        returnToPage(parent);
     }
 
     @Override

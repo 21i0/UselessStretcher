@@ -11,6 +11,7 @@ import com.sorrowmist.useless.stretcher.init.ModItems;
 import com.sorrowmist.useless.stretcher.init.StretcherComponents;
 import com.sorrowmist.useless.stretcher.network.Network;
 import net.minecraft.client.gui.GuiGraphics;
+import com.sorrowmist.useless.client.gui.AppleEditBox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 
 /** Searchable, mod-grouped entity selector for the staff summon action. */
-public final class WondrousStaffSummonScreen extends FloatingScreen {
+public final class WondrousStaffSummonScreen extends StaffScreen {
     private static final int PANEL_WIDTH = 390;
     private static final int PANEL_HEIGHT = 252;
     private static final int LIST_TOP = 45;
@@ -56,8 +57,7 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
     private int scroll;
 
     public WondrousStaffSummonScreen(Screen parent, InteractionHand hand) {
-        super(Component.translatable("gui.useless_stretcher.staff_summon.title"),
-                "summon", PANEL_WIDTH, PANEL_HEIGHT + 22, 270, 190);
+        super(Component.translatable("gui.useless_stretcher.staff_summon.title"), Tab.SUMMON, parent, hand);
         this.parent = parent;
         this.hand = hand;
         this.entries = SummonCatalog.entries();
@@ -79,7 +79,7 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
         listBottom = panelTop + LIST_TOP + visibleRows * ROW_HEIGHT;
         scroll = Math.min(scroll, Math.max(0, rows.size() - visibleRows));
         if (searchBox == null) {
-            searchBox = new EditBox(font, panelLeft + 2, panelTop + 22,
+            searchBox = new AppleEditBox(font, panelLeft + 2, panelTop + 22,
                     panelWidth - 4, 18, Component.translatable("gui.useless_stretcher.staff_summon.search"));
             searchBox.setResponder(value -> {
                 rebuildRows(value);
@@ -223,7 +223,7 @@ public final class WondrousStaffSummonScreen extends FloatingScreen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        returnToPage(parent);
     }
 
     @Override

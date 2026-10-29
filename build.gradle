@@ -49,16 +49,20 @@ legacyForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
 sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
-// ModDev remaps the official release for compilation and game checks. A matching
-// development jar remains an explicit override for upstream development only.
-ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.7'
-def uselessModDevJar = providers.gradleProperty('uselessModDevJar')
-        .map { file(it) }
+// ModDev remaps the published Apple UI build. Local development jars are opt-in.
+ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.9'
+ext.uselessModDevJar = providers.gradleProperty('uselessModDevJar').map { file(it) }
 configurations.modCompileOnly.transitive = false
 tasks.named('compileJava') {
     doFirst {
-        if (uselessModDevJar.isPresent() && !uselessModDevJar.get().isFile())
-            throw new GradleException('uselessModDevJar must point to a matching build/devlibs development jar.')
+        if (uselessModDevJar.isPresent()) {
+            if (!uselessModDevJar.get().isFile())
+                throw new GradleException('uselessModDevJar must point to a matching build/devlibs development jar.')
+            new java.util.zip.ZipFile(uselessModDevJar.get()).withCloseable { api ->
+                if (api.getEntry('com/sorrowmist/useless/client/gui/ldl/api/ApplePanelScreen.class') == null)
+                    throw new GradleException('Useless Mod must include the Apple UI API (20.2.4.9 UI build or newer).')
+            }
+        }
     }
 }
 dependencies {
@@ -123,6 +127,10 @@ mixin {
 }
 tasks.named('jar') {
     manifest.attributes('MixinConfigs': "${mod_id}.mixins.json")
+    // Opt-in game checks may compile alongside the mod, but never ship in any jar.
+    exclude '**/*Checks*.class', '**/capsulecheck/**', '**/upstreamcheck/**',
+            '**/regression/**', '**/storytest/**',
+            'data/stretcher_capsule_check/**', 'data/useless_stretcher_test/**'
 }
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
@@ -141,3 +149,4 @@ tasks.named('processResources', ProcessResources) {
 
 apply from: 'gradle/capsule-checks.gradle'
 apply from: 'gradle/doll-checks.gradle'
+apply from: 'gradle/upstream-checks.gradle'

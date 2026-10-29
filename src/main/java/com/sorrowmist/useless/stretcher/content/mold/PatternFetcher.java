@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import com.sorrowmist.useless.content.machines.advanced_alloy_furnace.ae.OmniversalPatternEncoding;
 import com.sorrowmist.useless.stretcher.content.ae.AeMaterialContext;
 import com.sorrowmist.useless.stretcher.content.blockentity.OmniversalMyriadBlockEntity;
+import com.sorrowmist.useless.stretcher.util.RateLimitedLogger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -92,7 +93,7 @@ public final class PatternFetcher {
         } catch (RuntimeException exception) {
             failures++;
             failedMolds.addAll(matched);
-            if (failures <= 5) LogUtils.getLogger().warn("Cannot encode myriad recipe {}", recipe.id(), exception);
+            RateLimitedLogger.warn(LogUtils.getLogger(), "Cannot encode myriad recipe {}", recipe.id(), exception);
         } finally {
             AeMaterialContext.pop();
         }

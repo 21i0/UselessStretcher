@@ -1,0 +1,24 @@
+// Opt-in real Forge checks for the 1.21.1 -> 1.20.1 upstream backport.
+if (providers.gradleProperty('upstreamChecks').isPresent()) {
+    sourceSets.main.java.srcDir 'src/upstreamCheck/java'
+    dependencies {
+        modRuntimeOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP'
+        modRuntimeOnly 'maven.modrinth:guideme:i7Tp1AHw'
+        if (uselessModDevJar.isPresent()) runtimeOnly files(uselessModDevJar.get())
+        else modRuntimeOnly uselessModRelease
+    }
+    legacyForge.runs {
+        upstreamClientCheck {
+            client()
+            gameDirectory = file(providers.gradleProperty('upstreamClientDirectory').getOrElse('run/upstream-client-check'))
+            programArguments.addAll '--width', '1280', '--height', '800'
+            systemProperty 'stretcher.upstreamClientCheck', 'true'
+        }
+        upstreamServerCheck {
+            server()
+            gameDirectory = file(providers.gradleProperty('upstreamCheckDirectory').getOrElse('run/upstream-check'))
+            programArgument '--nogui'
+            systemProperty 'stretcher.upstreamCheck', 'true'
+        }
+    }
+}

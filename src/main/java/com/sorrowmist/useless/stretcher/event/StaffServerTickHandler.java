@@ -19,10 +19,12 @@ public final class StaffServerTickHandler {
         TimeStopManager.tick(event.getServer());
         PlayerAccelerationManager.tick(event.getServer(), TimeStopManager.remaining(event.getServer()) > 0);
         StaffPhaseManager.tick(event.getServer());
+        com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.tick(event.getServer());
     }
 
     @SubscribeEvent
     public static void stop(ServerStoppedEvent event) {
         StaffPhaseManager.clear();
+        com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.clear();
     }
 }

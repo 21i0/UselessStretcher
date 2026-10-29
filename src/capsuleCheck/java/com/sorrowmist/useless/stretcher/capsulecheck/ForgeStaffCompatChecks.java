@@ -76,10 +76,18 @@ public final class ForgeStaffCompatChecks {
         var catalog = com.sorrowmist.useless.stretcher.content.mold.MoldCatalog.start(level);
         if (!catalog.advance()) return false;
         var counts = new java.util.TreeMap<String, Integer>();
-        for (String id : new String[]{"mekanism", "mekanismgenerators", "appmek"}) {
+        // AppMek recipe sources still use Mekanism machine items as molds.
+        // Directory groups follow the item namespace, not the adapter source.
+        for (String id : new String[]{"mekanism", "mekanismgenerators"}) {
             var entries = catalog.result().get(id);
             check(entries != null && !entries.isEmpty(), "native pack recipe molds available: " + id);
             counts.put(id, entries.size());
+        }
+        for (var group : catalog.result().entrySet()) {
+            for (var entry : group.getValue()) {
+                check(group.getKey().equals(entry.id().getNamespace()),
+                        "mold grouped by registered item namespace: " + entry.id());
+            }
         }
         LogUtils.getLogger().info("FORGE STAFF PACK CATALOG PASSED: three actual dependencies, native recipe adapters and incremental mold enumeration {}", counts);
         return true;

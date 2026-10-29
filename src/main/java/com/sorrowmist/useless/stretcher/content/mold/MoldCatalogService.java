@@ -52,7 +52,8 @@ public final class MoldCatalogService {
             state.builder = null;
             state.publish(event.getServer(), true);
         } catch (RuntimeException exception) {
-            LogUtils.getLogger().error("Could not prepare the Omniversal Myriad mold catalog", exception);
+            com.sorrowmist.useless.stretcher.util.RateLimitedLogger.error(
+                    LogUtils.getLogger(), "Could not prepare the Omniversal Myriad mold catalog", exception);
             state.builder = null;
             state.fingerprint = "";
             state.fail(event.getServer());

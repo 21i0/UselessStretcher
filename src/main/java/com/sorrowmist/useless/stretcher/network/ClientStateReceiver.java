@@ -190,6 +190,12 @@ public final class ClientStateReceiver {
 
     public static void handleReclaimer(Network.ReclaimerStatePayload payload) {
         Minecraft minecraft = Minecraft.getInstance();
+        if (payload.personal()) {
+            if (minecraft.screen instanceof com.sorrowmist.useless.stretcher.client.StaffScreen staff
+                    && staff.cachedTab(com.sorrowmist.useless.stretcher.client.StaffScreen.Tab.MACHINES) instanceof ReclaimerScreen history)
+                history.update(payload.entries());
+            return;
+        }
         if (minecraft.screen instanceof ReclaimerScreen screen && screen.personal() == payload.personal()) {
             screen.update(payload.entries());
         } else {

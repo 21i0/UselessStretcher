@@ -27,6 +27,6 @@ side="BOTH"
 [[dependencies.useless_stretcher]]
 modId="useless_mod"
 mandatory=true
-versionRange="[20.2.4.6,21)"
+versionRange="[20.2.4.9,21)"
 ordering="AFTER"
 side="BOTH"
