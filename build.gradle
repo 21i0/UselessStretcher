@@ -139,6 +139,7 @@ if (providers.gradleProperty('regressionTests').isPresent()) {
             systemProperty 'useless_stretcher.fluid_only', providers.gradleProperty('fluidOnly').getOrElse('false')
             systemProperty 'useless_stretcher.installed_patterns_only', providers.gradleProperty('installedPatternsOnly').getOrElse('false')
             systemProperty 'useless_stretcher.capsule_repair_only', providers.gradleProperty('capsuleRepairOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_variants_only', providers.gradleProperty('capsuleVariantsOnly').getOrElse('false')
         }
     }
 }

@@ -40,7 +40,7 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
     private ResourceLocation mapTexture;
     private DynamicTexture mapImage;
     private int[] mapPixels;
-    private SelectableAE2Button enter, generate, adjacent, dimensionButton, instanceButton;
+    private SelectableAE2Button enter, generate, adjacent, variants, dimensionButton, instanceButton;
 
     public DimensionCapsuleScreen(List<String> wire, boolean offhand) {
         super(Component.translatable("gui.useless_stretcher.dimension_capsule.title"), "dimension_capsule", 640, 355, 310, 255);
@@ -81,7 +81,13 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         int gap = 4, third = (contentWidth() - gap * 2) / 3;
         int col2 = left + third + gap, col3 = col2 + third + gap;
         int lastWidth = contentWidth() - (third + gap) * 2;
-        adjacent = addRenderableWidget(new SelectableAE2Button(left, footer, contentWidth(), 18, label("adjacent"), b -> request(3)));
+        int half = (contentWidth() - gap) / 2;
+        adjacent = addRenderableWidget(new SelectableAE2Button(left, footer, half, 18, label("adjacent"), b -> request(3)));
+        variants = addRenderableWidget(new SelectableAE2Button(left + half + gap, footer, contentWidth() - half - gap,
+                18, label("variants.open"), b -> {
+            if (selected >= 0 && !target().isEmpty()) minecraft.setScreen(new CapsuleVariantsScreen(
+                    this, entry().id, target(), offhand, instanceId, side));
+        }));
         dimensionButton = addRenderableWidget(new SelectableAE2Button(left, footer + 22, third, 18, label("dimension"), b -> {
             if (selected < 0 || entry().dimensions.isEmpty()) return;
             dimension = (dimension + 1) % entry().dimensions.size(); instanceId = 0; clearMap(); request(0); updateButtons();
@@ -113,6 +119,16 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
         if (state == null || state.instanceCount() < 2) return;
         instanceId = (instanceId + 1) % state.instanceCount();
         clearMap(); request(0); updateButtons();
+    }
+    public void showVariantInstance(int id) {
+        instanceId = Math.max(0, id);
+        clearMap();
+        minecraft.setScreen(this);
+        request(0);
+    }
+    void returnFromVariants() {
+        minecraft.setScreen(this);
+        request(0);
     }
     @Override public void tick() {
         super.tick();
@@ -146,6 +162,7 @@ public final class DimensionCapsuleScreen extends FloatingScreen {
                         "allocation_conflict", "timeout", "source_environment_unavailable", "source_dimension_missing").contains(state.phase()));
         enter.active = state != null && state.phase().equals("ready");
         adjacent.active = state != null && state.phase().equals("ready");
+        variants.active = selected >= 0 && !target().isEmpty();
         dimensionButton.active = selected >= 0 && entry().dimensions.size() > 1;
         instanceButton.active = state != null && state.instanceCount() > 1;
         instanceButton.setMessage(instanceLabel());

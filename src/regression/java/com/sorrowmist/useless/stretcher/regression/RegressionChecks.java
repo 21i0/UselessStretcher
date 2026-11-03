@@ -93,6 +93,7 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.capsule_variants_only")) return;
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {
@@ -212,6 +213,7 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.capsule_variants_only")) return;
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;
         if (Boolean.getBoolean("useless_stretcher.fluid_only")) {

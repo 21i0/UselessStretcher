@@ -31,7 +31,7 @@ try {
         throw 'Wrong minimum Useless Mod dependency'
     }
     $networkSource = [IO.File]::ReadAllText((Join-Path $repo 'src/main/java/com/sorrowmist/useless/stretcher/network/Network.java'))
-    if ($networkSource -notmatch 'event\.registrar\("22"\)') { throw 'Wrong network protocol source' }
+    if ($networkSource -notmatch 'event\.registrar\("23"\)') { throw 'Wrong network protocol source' }
     $mixins = (Read-Entry $zip.GetEntry('useless_stretcher.mixins.json')) | ConvertFrom-Json -AsHashtable
     foreach ($mixin in @('StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
             'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin', 'TwoIDollRemovalGuardMixin',
@@ -120,6 +120,7 @@ try {
     $resourceCount = 0
     foreach ($root in @('src/main/resources', 'src/generated/resources')) {
         $base = Join-Path $repo $root
+        if (!(Test-Path -LiteralPath $base) -and $root -eq 'src/generated/resources') { continue }
         foreach ($resource in Get-ChildItem -LiteralPath $base -Recurse -File) {
             if ($resource.FullName -match '[\\/]\.cache[\\/]') { continue }
             $relative = [IO.Path]::GetRelativePath($base, $resource.FullName).Replace('\', '/')
@@ -141,7 +142,7 @@ try {
         result = 'JAR CHECKS PASSED'
         jar = $artifact
         version = $expectedVersion
-        network_protocol = 22
+        network_protocol = 23
         guide_pages_without_hidden_armor = $guidePages.Count
         minimum_useless_mod = '1.21.1-2.4.6'
         animated_armor_items = $armorPieces.Count

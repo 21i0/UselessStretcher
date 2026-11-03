@@ -88,6 +88,98 @@ public final class NativeCapsules {
     private static final Map<UUID, PendingEntry> ENTRIES = new LinkedHashMap<>();
     private NativeCapsules() { }
 
+    /** Discovery shares the native planner: optional callbacks never run concurrently. */
+    static <T> FutureTask<T> submitPlanning(Callable<T> work) {
+        if (!PLANNER_BUSY.compareAndSet(false, true)) return null;
+        var future = new PlanFuture<T>(work);
+        try { PLANNER.execute(future); }
+        catch (RuntimeException failure) { PLANNER_BUSY.set(false); throw failure; }
+        return future;
+    }
+
+    /** Scratch planning state has no room allocation and never calls a placement callback. */
+    static final class VariantProbe {
+        private final Job scratch;
+        VariantProbe(net.minecraft.server.MinecraftServer server, UUID owner, String id, String target, ServerLevel source) {
+            var room = new CapsuleInstances.Instance(owner, id, target, 0, 0, false);
+            room.sourceDimension = source.dimension().location().toString();
+            room.sourceSeed = source.getSeed();
+            var structure = source.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(id));
+            var level = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(target)));
+            if (structure == null || level == null) throw new IllegalStateException("Variant environment unavailable");
+            scratch = new Job(CapsuleInstances.get(server), room, level, source, structure);
+            var holder = source.registryAccess().registryOrThrow(Registries.STRUCTURE)
+                    .getHolderOrThrow(ResourceKey.create(Registries.STRUCTURE, ResourceLocation.parse(id)));
+            scratch.placements = List.copyOf(source.getChunkSource().getGeneratorState().getPlacementsForStructure(holder));
+        }
+        VariantPlan plan(int cursor) {
+            ChunkPos anchor = scratch.sourceAnchor(cursor);
+            if (anchor == null) return null;
+            var source = scratch.sourceLevel;
+            var generator = source.getChunkSource().getGenerator();
+            var start = scratch.structure.generate(source.registryAccess(), generator, generator.getBiomeSource(),
+                    source.getChunkSource().randomState(), source.getStructureManager(), scratch.generationSeed(),
+                    anchor, 0, source, scratch.structure.biomes()::contains);
+            if (start == null || !start.isValid()) return null;
+            start = scratch.anchorScatteredPieces(start);
+            if (start.getPieces().size() > 8_192) throw new CapsuleLimitException("too_large");
+            var tag = start.createTag(scratch.serializationContext(), start.getChunkPos());
+            int bytes = CapsuleVariantsData.planBytes(tag);
+            var layout = CapsuleVariantLayout.inspect(start, scratch.serializationContext());
+            return new VariantPlan(tag, layout, bytes);
+        }
+    }
+    record VariantPlan(CompoundTag plan, CapsuleVariantLayout.Layout layout, int bytes) { }
+
+    /** Install a selected exact source plan only in a new, untouched room. */
+    static int installVariant(ServerPlayer player, String id, String target, String sourceId, long sourceSeed,
+                              CompoundTag rawPlan, String fingerprint, String resourceSignature) {
+        if (JOBS.size() >= 4 || JOBS.stream().anyMatch(job -> job.room.owner.equals(player.getUUID()))) return -1;
+        var registry = player.registryAccess().registryOrThrow(Registries.STRUCTURE);
+        var structure = registry.get(ResourceLocation.parse(id));
+        if (structure == null) throw new IllegalStateException("Candidate structure missing");
+        var source = DimensionCapsuleCatalog.sourceLevel(player, structure, target, sourceId);
+        if (source == null || source.getSeed() != sourceSeed) throw new IllegalStateException("Candidate source changed");
+        var level = player.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(target)));
+        if (level == null || !CapsuleDimensions.isCapsule(level.dimension().location())) throw new IllegalStateException("Candidate target missing");
+        var context = StructurePieceSerializationContext.fromLevel(source);
+        var start = StructureStart.loadStaticStart(context, rawPlan.copy(), sourceSeed);
+        if (start == null || !start.isValid()) throw new IllegalStateException("Candidate no longer decodes");
+        var data = CapsuleInstances.get(player.getServer());
+        int count = data.instanceCount(player.getUUID(), id, target);
+        var room = count == 0 ? data.getOrCreate(player.getUUID(), id, target)
+                : data.getOrCreateAdjacent(player.getUUID(), id, target, count - 1);
+        if (!room.plan.isEmpty() || room.ready || room.generating) throw new IllegalStateException("Candidate cannot replace an existing room");
+        try {
+        data.bindSource(room, source);
+        int dx = (room.x() >> 4 << 4) - start.getChunkPos().getMinBlockX();
+        int dz = (room.z() >> 4 << 4) - start.getChunkPos().getMinBlockZ();
+        var pieces = start.getPieces().stream().map(piece -> CapsulePieceGeometry.move(piece, dx, 0, dz, context)).toList();
+        start = new StructureStart(structure, new ChunkPos((start.getChunkPos().getMinBlockX() + dx) >> 4,
+                (start.getChunkPos().getMinBlockZ() + dz) >> 4), start.getReferences(), new PiecesContainer(pieces));
+        room.sourceCoordinates = true; room.sourceOffsetX = -dx; room.sourceOffsetZ = -dz;
+        room.geometryVersion = CapsulePieceGeometry.VERSION;
+        room.plan = start.createTag(context, start.getChunkPos());
+        room.phase = "planning";
+        var job = new Job(data, room, level, source, structure);
+        // Use the normal allocator clearance before any physical write; keep the selected plan.
+        int[] shift = data.snapBesideExisting(room);
+        if (shift[0] != 0 || shift[1] != 0) {
+            job.movePlan(shift[0], 0, shift[1]);
+            room.sourceOffsetX -= shift[0]; room.sourceOffsetZ -= shift[1];
+            job.describe(); job.checkpoint();
+        }
+        room.variantFingerprint = fingerprint; room.variantSignature = resourceSignature;
+        room.generating = true; room.completionNotified = false;
+        data.setDirty(); JOBS.addLast(job);
+        sendState(player, room, job);
+        return room.instanceId;
+        } catch (RuntimeException failure) {
+            if (!room.generating) data.discardUnusedAllocation(room);
+            throw failure;
+        }
+    }
+
     public static void request(ServerPlayer player, String id, String dimension, int action, int side) {
         request(player, id, dimension, action, side, 0);
     }
@@ -313,11 +405,14 @@ public final class NativeCapsules {
         final List<ChunkPos> tickets = new ArrayList<>();
         int ticketRadius = 2;
         boolean registered;
+        boolean clearanceValidated;
+        long observedGeometry = -1;
+        List<CapsuleInstances.Instance> protectedRooms = List.of();
         boolean startTicket;
         int ticks;
         String loggedPhase = "";
         long maxStep;
-        PlanFuture planning;
+        PlanFuture<StructureStart> planning;
         long planningStarted;
         long planningMemoryBaseline;
         List<StructurePlacement> placements;
@@ -428,6 +523,7 @@ public final class NativeCapsules {
         }
         void describe() {
             bounds = placementEnvelope();
+            clearanceValidated = false;
             long xSpan = bounds.getXSpan();
             long ySpan = bounds.getYSpan();
             long zSpan = bounds.getZSpan();
@@ -442,6 +538,8 @@ public final class NativeCapsules {
             long volume = xSpan * ySpan * zSpan;
             if (volume <= 0 || volume > MAX_STRUCTURE_VOLUME) throw new CapsuleLimitException("too_large");
             if (bounds.minY() < level.getMinBuildHeight()) throw new CapsuleLimitException("below_world");
+            if (!room.boundsKnown || room.minX != bounds.minX() || room.maxX != bounds.maxX()
+                    || room.minZ != bounds.minZ() || room.maxZ != bounds.maxZ()) data.geometryChanged();
             room.minX = bounds.minX(); room.minY = bounds.minY(); room.minZ = bounds.minZ();
             room.maxX = bounds.maxX(); room.maxY = bounds.maxY(); room.maxZ = bounds.maxZ();
             minChunkX = bounds.minX() >> 4;
@@ -459,6 +557,7 @@ public final class NativeCapsules {
             trimMinChunkZ = (bounds.minZ() - CapsuleInstances.reservedMargin()) >> 4;
             trimMaxChunkZ = (bounds.maxZ() + CapsuleInstances.reservedMargin()) >> 4;
             room.boundsKnown = true;
+            refreshProtection();
             long width = (long) maxChunkX - minChunkX + 1L;
             long depth = (long) maxChunkZ - minChunkZ + 1L;
             chunkCount = width * depth;
@@ -488,9 +587,8 @@ public final class NativeCapsules {
                 planningStarted = System.nanoTime();
                 planningMemoryBaseline = usedMemory();
                 try {
-                    planning = new PlanFuture(() -> {
+                    planning = new PlanFuture<>(() -> {
                         room.planningOffThread = true;
-                        try {
                             // Follow the live source placement and biome predicates without
                             // generating ordinary source-world chunks just to search for a site.
                             ChunkPos anchor = sourceAnchor(offset);
@@ -500,9 +598,6 @@ public final class NativeCapsules {
                                     sourceLevel.getChunkSource().randomState(), sourceLevel.getStructureManager(), generationSeed(), anchor,
                                     0, sourceLevel, structure.biomes()::contains);
                             return candidate != null && candidate.isValid() ? anchorScatteredPieces(candidate) : candidate;
-                        } finally {
-                            PLANNER_BUSY.set(false);
-                        }
                     });
                     PLANNER.execute(planning);
                 } catch (RuntimeException failure) {
@@ -744,6 +839,11 @@ public final class NativeCapsules {
             if (++ticks > MAX_GENERATION_TICKS) throw new CapsuleLimitException("timeout");
             long deadline = System.nanoTime() + STEP_BUDGET_NANOS;
             if (start == null) return plan();
+            if (observedGeometry != data.geometryRevision) { refreshProtection(); clearanceValidated = false; }
+            if (!clearanceValidated) {
+                if (!data.hasClearance(room)) throw new CapsuleLimitException("allocation_conflict");
+                clearanceValidated = true;
+            }
             if (room.phase.equals("cleaning")) return clean(deadline);
             if (room.phase.equals("trimming")) return trim(deadline);
             if (room.phase.equals("bedrock")) return bedrock(deadline);
@@ -849,7 +949,7 @@ public final class NativeCapsules {
             // before the foundation was sealed. Drop those delayed updates before the
             // last projection pass, so isolated fluid cannot reappear after completion.
             if (room.trimChunk == 0 && room.trimCursor == 0 && room.trimPass == 0) {
-                level.getFluidTicks().clearArea(projection);
+                clearUnprotectedTicks(projection, false);
             }
             if (room.trimChunk >= trimChunks) {
                 if (room.trimPass + 1 < trimPasses()) {
@@ -859,7 +959,7 @@ public final class NativeCapsules {
                     room.trimPass++;
                     room.trimChunk = 0;
                     room.trimCursor = 0;
-                    level.getFluidTicks().clearArea(projection);
+                    clearUnprotectedTicks(projection, false);
                     data.setDirty();
                     return false;
                 }
@@ -882,7 +982,7 @@ public final class NativeCapsules {
             // clearArea only touches registered chunk tick containers. Clear each clip
             // when that chunk is loaded, because distant structure chunks join the tick
             // scheduler progressively while this bounded job walks the footprint.
-            level.getFluidTicks().clearArea(clip);
+            clearUnprotectedTicks(clip, false);
             while (room.trimCursor < volume && System.nanoTime() < deadline) {
                 long index = room.trimCursor;
                 int x = minX + (int) (index % width);
@@ -894,6 +994,7 @@ public final class NativeCapsules {
                     continue;
                 }
                 BlockPos pos = new BlockPos(x, y, z);
+                if (protectedColumn(x, z)) { room.trimCursor++; continue; }
                 // The foundation is intentionally one block below the native
                 // structure envelope. It lies inside the wider fluid-settle scan,
                 // but must remain as the room's sealed bottom layer.
@@ -981,7 +1082,8 @@ public final class NativeCapsules {
                 var area = new net.minecraft.world.phys.AABB(minX, minY, minZ,
                         maxX + 1.0, maxY, maxZ + 1.0);
                 for (var entity : level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class, area,
-                        entity -> !(entity instanceof net.minecraft.world.entity.player.Player))) entity.discard();
+                        entity -> !(entity instanceof net.minecraft.world.entity.player.Player)
+                                && !protectedEntity(entity))) entity.discard();
                 room.cleanupEntitiesRemoved = true;
                 data.setDirty();
             }
@@ -1007,8 +1109,7 @@ public final class NativeCapsules {
             long height = (long) cleanMaxY - cleanMinY + 1L;
             long volume = width * depth * height;
             BoundingBox cleanClip = new BoundingBox(minX, cleanMinY, minZ, maxX, cleanMaxY, maxZ);
-            level.getFluidTicks().clearArea(cleanClip);
-            level.getBlockTicks().clearArea(cleanClip);
+            clearUnprotectedTicks(cleanClip, true);
             while (room.cleanCursor < volume && System.nanoTime() < deadline) {
                 long index = room.cleanCursor;
                 int x = minX + (int) (index % width);
@@ -1020,6 +1121,7 @@ public final class NativeCapsules {
                     continue;
                 }
                 BlockPos pos = new BlockPos(x, y, z);
+                if (protectedColumn(x, z)) { room.cleanCursor++; continue; }
                 var state = level.getBlockState(pos);
                 if (!state.isAir() || !state.getFluidState().isEmpty()) {
                     level.removeBlockEntity(pos);
@@ -1041,6 +1143,57 @@ public final class NativeCapsules {
             long width = (long) cleanMaxChunkX - cleanMinChunkX + 1L;
             long depth = (long) cleanMaxChunkZ - cleanMinChunkZ + 1L;
             return width * depth;
+        }
+
+        private boolean protectedColumn(int x, int z) {
+            int margin = CapsuleInstances.reservedMargin();
+            for (var other : protectedRooms)
+                if (x >= other.minX - margin && x <= other.maxX + margin
+                        && z >= other.minZ - margin && z <= other.maxZ + margin) return true;
+            return false;
+        }
+
+        private void refreshProtection() {
+            // Rebuild only when room geometry changes, including another player's new room.
+            // Per-cell work then examines just intersecting neighbors rather than the world catalogue.
+            protectedRooms = data.rooms.values().stream().filter(other -> other != room
+                    && other.dimension.equals(room.dimension) && other.boundsKnown
+                    && other.minX - CapsuleInstances.reservedMargin() <= bounds.maxX() + CapsuleInstances.reservedMargin()
+                    && other.maxX + CapsuleInstances.reservedMargin() >= bounds.minX() - CapsuleInstances.reservedMargin()
+                    && other.minZ - CapsuleInstances.reservedMargin() <= bounds.maxZ() + CapsuleInstances.reservedMargin()
+                    && other.maxZ + CapsuleInstances.reservedMargin() >= bounds.minZ() - CapsuleInstances.reservedMargin()).toList();
+            observedGeometry = data.geometryRevision;
+        }
+
+        private boolean protectedEntity(net.minecraft.world.entity.Entity entity) {
+            var box = entity.getBoundingBox(); int margin = CapsuleInstances.reservedMargin();
+            for (var other : protectedRooms)
+                if (box.maxX >= other.minX - margin && box.minX < other.maxX + margin + 1.0
+                        && box.maxZ >= other.minZ - margin && box.minZ < other.maxZ + margin + 1.0) return true;
+            return false;
+        }
+
+        /** Subtract protected columns before touching scheduled updates as well as blocks. */
+        private void clearUnprotectedTicks(BoundingBox clip, boolean blocks) {
+            List<BoundingBox> remaining = List.of(clip); int margin = CapsuleInstances.reservedMargin();
+            for (var other : protectedRooms) {
+                List<BoundingBox> next = new ArrayList<>();
+                for (var box : remaining) {
+                    int x0 = Math.max(box.minX(), other.minX - margin), x1 = Math.min(box.maxX(), other.maxX + margin);
+                    int z0 = Math.max(box.minZ(), other.minZ - margin), z1 = Math.min(box.maxZ(), other.maxZ + margin);
+                    if (x0 > x1 || z0 > z1) { next.add(box); continue; }
+                    if (box.minX() < x0) next.add(new BoundingBox(box.minX(), box.minY(), box.minZ(), x0 - 1, box.maxY(), box.maxZ()));
+                    if (x1 < box.maxX()) next.add(new BoundingBox(x1 + 1, box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ()));
+                    if (box.minZ() < z0) next.add(new BoundingBox(x0, box.minY(), box.minZ(), x1, box.maxY(), z0 - 1));
+                    if (z1 < box.maxZ()) next.add(new BoundingBox(x0, box.minY(), z1 + 1, x1, box.maxY(), box.maxZ()));
+                }
+                remaining = next;
+                if (remaining.isEmpty()) return;
+            }
+            for (var box : remaining) {
+                level.getFluidTicks().clearArea(box);
+                if (blocks) level.getBlockTicks().clearArea(box);
+            }
         }
 
         private ChunkPos cleanChunkAt(int index) {
@@ -1075,6 +1228,7 @@ public final class NativeCapsules {
                 long index = room.bedrockCursor;
                 int x = minX + (int) (index % width);
                 int z = minZ + (int) (index / width);
+                if (protectedColumn(x, z)) { room.bedrockCursor++; continue; }
                 BlockPos floor = new BlockPos(x, floorY, z);
                 // The projection is deliberately unconditional: natural terrain is removed
                 // and every cell under the structure receives the same sealed foundation.
@@ -1154,14 +1308,19 @@ public final class NativeCapsules {
     }
 
     /** FutureTask keeps the planner gate closed until an interrupted worker has really returned. */
-    private static final class PlanFuture extends FutureTask<StructureStart> {
+    private static final class PlanFuture<T> extends FutureTask<T> {
         private final AtomicBoolean entered = new AtomicBoolean();
-        PlanFuture(Callable<StructureStart> callable) {
+        private final AtomicBoolean released = new AtomicBoolean();
+        PlanFuture(Callable<T> callable) {
             super(callable);
         }
-        @Override public void run() { entered.set(true); super.run(); }
+        @Override public void run() {
+            entered.set(true);
+            try { super.run(); } finally { release(); }
+        }
+        private void release() { if (released.compareAndSet(false, true)) PLANNER_BUSY.set(false); }
         @Override protected void done() {
-            if (!entered.get()) PLANNER_BUSY.set(false);
+            if (!entered.get()) release();
         }
     }
 

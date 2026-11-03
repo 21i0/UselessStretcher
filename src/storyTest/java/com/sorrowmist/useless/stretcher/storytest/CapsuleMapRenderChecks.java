@@ -27,6 +27,7 @@ final class CapsuleMapRenderChecks {
             check(++ticks < 1200, "render test timeout");
             if (client.getOverlay() != null || client.screen == null) return;
             if (frames >= 360) {
+                if (!CapsuleVariantUiChecks.tick(client)) return;
                 if (TwoINoseChecks.tick(client)) { finished = true; client.stop(); }
                 return;
             }
@@ -65,7 +66,7 @@ final class CapsuleMapRenderChecks {
             screen.removed();
             check(field(screen, "mapTexture") == null, "map is released when closing");
             LogUtils.getLogger().info("CAPSULE MAP RENDER CHECKS PASSED: 360 texture updates, 720 balanced renders, nested parent clips and GL scissor disabled after every frame");
-            TwoINoseChecks.tick(client);
+            CapsuleVariantUiChecks.tick(client);
         } catch (Throwable failure) {
             finished = true;
             RenderSystem.disableScissor();

@@ -23,6 +23,8 @@ public final class CapsuleInstances extends SavedData {
     private static final int PROVISIONAL_HALF_EXTENT = 16;
     final Map<String, Instance> rooms = new LinkedHashMap<>();
     private int nextSlot;
+    long geometryRevision;
+    void geometryChanged() { geometryRevision++; }
     public static CapsuleInstances get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(new Factory<>(CapsuleInstances::new,
                 CapsuleInstances::load), "useless_stretcher_native_capsules");
@@ -83,11 +85,21 @@ public final class CapsuleInstances extends SavedData {
             throw new IllegalStateException("Capsule instance id is already allocated");
         Instance room = new Instance(owner, structure, dimension, instanceId, nextSlot++, false);
         allocateAdjacent(room);
-        rooms.put(room.key(), room); setDirty(); return room;
+        rooms.put(room.key(), room); geometryChanged(); setDirty(); return room;
     }
     int instanceCount(UUID owner, String structure, String dimension) {
         return (int) rooms.values().stream().filter(room -> room.owner.equals(owner)
                 && room.structure.equals(structure) && room.dimension.equals(dimension)).count();
+    }
+    /** Roll back a new allocation before its job is queued or any world writes are possible. */
+    void discardUnusedAllocation(Instance room) {
+        if (room.ready || room.generating || room.chunk != 0 || room.piece != 0 || room.cleanChunk != 0 || room.cleanCursor != 0)
+            throw new IllegalStateException("Cannot discard a started capsule room");
+        if (rooms.remove(room.key(), room)) {
+            geometryChanged();
+            if (nextSlot == room.slot + 1) nextSlot--;
+            setDirty();
+        }
     }
 
     private void allocateAdjacent(Instance room) {
@@ -121,6 +133,7 @@ public final class CapsuleInstances extends SavedData {
     }
 
     private void moveTo(Instance room, Box destination) {
+        geometryChanged();
         int dx = destination.centerX() - (room.boundsKnown ? (room.minX + room.maxX) / 2 : room.originX);
         int dz = destination.centerZ() - (room.boundsKnown ? (room.minZ + room.maxZ) / 2 : room.originZ);
         room.originX += dx;
@@ -161,13 +174,14 @@ public final class CapsuleInstances extends SavedData {
         return rooms.values().stream().anyMatch(existing -> existing != room
                 && existing.dimension.equals(room.dimension) && overlaps(bounds, boxFor(existing)));
     }
+    boolean hasClearance(Instance room) { return !room.boundsKnown || isFree(room.dimension, boxFor(room), room); }
 
     /** Move a newly planned structure beside an existing room when biome search placed it far away. */
     int[] snapBesideExisting(Instance room) {
         if (!room.boundsKnown) return new int[]{0, 0};
         boolean hasNeighbor = rooms.values().stream()
                 .anyMatch(existing -> existing != room && existing.dimension.equals(room.dimension));
-        if (!hasNeighbor || isAdjacentToExisting(room) && !overlapsAnother(room)) return new int[]{0, 0};
+        if (!hasNeighbor || isAdjacentToExisting(room) && isFree(room.dimension, boxFor(room), room)) return new int[]{0, 0};
         int oldMinX = room.minX;
         int oldMinZ = room.minZ;
         allocateAdjacent(room);
@@ -267,6 +281,8 @@ public final class CapsuleInstances extends SavedData {
         long sourceSeed;
         String sourceBiome = "";
         String sourceEffects = "";
+        String variantFingerprint = "";
+        String variantSignature = "";
         int sourceMinY;
         int sourceHeight;
         boolean sourceCoordinates;
@@ -307,6 +323,8 @@ public final class CapsuleInstances extends SavedData {
             tag.putLong("source_seed", sourceSeed);
             tag.putString("source_biome", sourceBiome);
             tag.putString("source_effects", sourceEffects);
+            tag.putString("variant_fingerprint", variantFingerprint);
+            tag.putString("variant_signature", variantSignature);
             tag.putInt("source_min_y", sourceMinY);
             tag.putInt("source_height", sourceHeight);
             tag.putBoolean("source_coordinates", sourceCoordinates);
@@ -361,6 +379,8 @@ public final class CapsuleInstances extends SavedData {
             room.sourceSeed = e.getLong("source_seed");
             room.sourceBiome = e.getString("source_biome");
             room.sourceEffects = e.getString("source_effects");
+            room.variantFingerprint = e.getString("variant_fingerprint");
+            room.variantSignature = e.getString("variant_signature");
             room.sourceMinY = e.getInt("source_min_y");
             room.sourceHeight = e.getInt("source_height");
             int[] sourceOffset = e.getIntArray("source_offset");

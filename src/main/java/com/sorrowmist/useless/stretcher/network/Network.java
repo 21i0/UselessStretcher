@@ -805,7 +805,7 @@ public final class Network {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("22");
+        PayloadRegistrar registrar = event.registrar("23");
         CapsuleNetwork.register(registrar);
         registrar.playToServer(WondrousStaffRadiationPayload.TYPE, WondrousStaffRadiationPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {

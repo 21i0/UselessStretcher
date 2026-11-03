@@ -55,6 +55,7 @@ public final class CapsuleNetwork {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
     public static void register(PayloadRegistrar registrar) {
+        CapsuleVariantNetwork.register(registrar);
         registrar.playToClient(Complete.TYPE, Complete.CODEC, (p, context) -> context.enqueueWork(() ->
                 ClientStateReceiver.handleCapsuleReady(p)));
         registrar.playToServer(Request.TYPE, Request.CODEC, (p, context) -> context.enqueueWork(() -> {

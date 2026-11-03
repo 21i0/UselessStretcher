@@ -155,6 +155,11 @@ public final class ClientStateReceiver {
             screen.accept(payload);
     }
 
+    public static void handleCapsuleVariants(CapsuleVariantNetwork.State payload) {
+        if (Minecraft.getInstance().screen instanceof com.sorrowmist.useless.stretcher.client.CapsuleVariantsScreen screen)
+            screen.accept(payload);
+    }
+
     public static void handleRangeHistory(RangeNetwork.HistoryStatePayload payload) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof RangeAccelerationHistoryScreen screen) {
