@@ -4,7 +4,7 @@
 
 An addon for **Useless Mod** and **Applied Energistics 2**, featuring a wildcard mold block, remote pattern tools, time acceleration, an animated 2i companion, and structure capsules.
 
-## 安装要求 / Requirements
+## 1.21.1 安装要求 / Requirements for 1.21.1
 
 | 项目 / Component | 要求 / Requirement |
 | --- | --- |
@@ -19,7 +19,17 @@ An addon for **Useless Mod** and **Applied Energistics 2**, featuring a wildcard
 
 This page describes the **1.21.1-1.6.2** mainline. The **1.20.1 port is maintained and built separately**; its files are not interchangeable with the 1.21.1 build.
 
-## 中文介绍
+**升级注意：本次 1.21.1-1.6.2 胶囊变体包使用网络协议 23，客户端与服务端必须同时替换，包括同为 1.6.2 的旧包。已有 1.6.x 存档无需重置。**
+
+**Upgrade note: this 1.21.1-1.6.2 capsule-layout build uses network protocol 23. Update both client and server, including older builds also labeled 1.6.2. Existing 1.6.x worlds do not need a reset.**
+
+## 1.20.1 移植版 / 1.20.1 Port
+
+**20.1.6.5**：Minecraft **1.20.1**、**Forge 47.3.10–47.x**、**Java 17**。需要无用之物 **20.2.4.9 或兼容 20.x 构建**（须包含 Apple UI API）、**AE2 15.4.8–15.x** 及其匹配的 **GuideME 20.x**。客户端与服务端均安装相同的 1.20.1 包，不能混用 1.21.1 / NeoForge 构建。请按文件页与更新记录选择版本；本次胶囊变体更新属于 1.21.1 包，移植版单独维护。
+
+**20.1.6.5:** Minecraft **1.20.1**, **Forge 47.3.10–47.x**, **Java 17**, **Useless Mod 20.2.4.9 or a compatible 20.x build containing the Apple UI API**, **AE2 15.4.8–15.x** and its matching **GuideME 20.x** dependency. Install the same 1.20.1 build on both client and server. Do not mix it with 1.21.1 / NeoForge files. Check the file page and changelog for your build; the capsule-layout update below is for 1.21.1.
+
+## 1.21.1 中文介绍
 
 ### 万象万物之块：一个方块管理模具与样板
 
@@ -57,7 +67,7 @@ This page describes the **1.21.1-1.6.2** mainline. The **1.20.1 port is maintain
 
 安装 GuideME 后，从 AE2 指南左侧进入 **“万象担架附属”**；也可悬停对应物品按指南阅读键查看。Curios 和 GuideME 均为可选前置。
 
-## English Overview
+## 1.21.1 English Overview
 
 ### Omniversal Myriad Block
 
@@ -101,4 +111,8 @@ With GuideME installed, open AE2's guide and select **Useless Stretcher** in the
 - [问题反馈 / Issue tracker](https://github.com/21i0/UselessStretcher/issues)
 - [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)
 
-MIT License. Third-party attribution is recorded in the repository's `THIRD_PARTY_NOTICES.md`.
+## 鸣谢与许可 / Credits and Licenses
+
+代码使用 MIT License。美术由虾比等创作者提供，素材许可单独说明。2i 尾巴几何改编自 Touhou Little Maid 的 Winefox（酒狐），原作者 tartaric_acid 及贡献者；改编几何使用 **CC BY-NC-SA 4.0**，并在 JAR 中附有 `TWO_I_TAIL_CREDITS.txt` 和 `TWO_I_TAIL_LICENSE.txt`。
+
+Code is licensed under MIT. Artwork credits and asset-specific terms apply separately. The adapted 2i tail geometry comes from Winefox in [Touhou Little Maid](https://github.com/TartaricAcid/TouhouLittleMaid), by tartaric_acid and contributors, under **CC BY-NC-SA 4.0**. The JAR includes the full tail attribution and license. See the repository's `THIRD_PARTY_NOTICES.md` for additional credits.
