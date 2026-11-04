@@ -1,0 +1,205 @@
+- button "Skip to content": Skip to content
+- banner:
+  - button "Open menu":
+  - link "Authors Discord":
+    - /url: https://discord.gg/GdMcDgvKHX
+  - separator
+  - button "Help":
+  - link "Private Messages":
+    - /url: https://legacy.curseforge.com/private-messages
+  - button "Refresh":
+  - separator
+  - generic "Notifications":
+    - button:
+  - button "Profile":
+    - img "2ixuexi"
+- main:
+  - menu:
+    - menuitem "Dashboard":
+      - text: Dashboard
+    - menuitem "Statistics":
+      - paragraph: Statistics
+    - menuitem "Reward store":
+      - paragraph: Reward store
+    - menuitem "Projects":
+      - text: Projects
+    - menuitem "Issues":
+      - text: Issues
+    - menuitem "Builds":
+      - paragraph: Builds
+  - heading "Back to files Upload New File" [level=1]:
+    - button "Back to files":
+    - text: Upload New File
+    - navigation:
+      - list:
+        - listitem: Useless Stretcher
+        - paragraph: Upload file
+  - paragraph: Upload File
+  - generic "useless_stretcher-1.21.1-1.6.2.jar"
+  - generic "Remove file":
+  - paragraph: .jar format only
+  - generic: or drop file here
+  - generic: Display name
+  - textbox: useless_stretcher-1.21.1-1.6.2.jar
+  - paragraph: 34/256
+  - separator
+  - generic: Release Options
+  - paragraph: Choose your preferred release option before submitting your file
+  - radiogroup:
+    - radio "Publish this file automatically once approved" [checked]
+    - generic: Publish this file automatically once approved
+    - radio "I would like to publish this file manually once approved"
+    - generic: I would like to publish this file manually once approved
+  - separator
+  - generic: Environment
+  - paragraph: "*"
+  - button "Client":
+    - generic: Client
+  - button "Server":
+    - generic: Server
+  - combobox
+  - button "Open":
+  - paragraph
+  - generic: Modloader
+  - paragraph: "*"
+  - button "NeoForge":
+    - generic: NeoForge
+  - combobox
+  - button "Open":
+  - paragraph
+  - generic: Java
+  - button "Java 21":
+    - generic: Java 21
+  - combobox
+  - button "Open":
+  - paragraph
+  - generic: Minecraft
+  - paragraph: "*"
+  - button "1.21.1":
+    - generic: 1.21.1
+  - combobox
+  - button "Open":
+  - paragraph
+  - button "These values were copied from the file \"useless_stretcher-1.21.1-1.6.2.jar\"":
+    - text: These values were copied from the file "useless_stretcher-1.21.1-1.6.2.jar"
+  - separator
+  - generic: Release Type
+  - paragraph: Set your project's visibility on CurseForge based on its release stage
+  - combobox: Release
+  - textbox: "1"
+  - generic: Release Type
+  - separator
+  - generic: Changelog
+  - button "Snippets":
+  - separator
+  - combobox: Markdown
+  - textbox: "5"
+  - list:
+    - button:
+      - generic "Header":
+    - button:
+      - generic "Bold":
+    - button:
+      - generic "Italic":
+    - button:
+      - generic "Underline":
+    - button:
+      - generic "Strikethrough":
+  - list:
+    - button:
+      - generic "Link":
+    - button:
+      - generic "Code":
+    - button:
+      - generic "Image":
+  - list:
+    - button:
+      - generic "Numbered List":
+    - button:
+      - generic "Bullet List":
+  - list:
+    - button:
+      - generic "Spoiler":
+    - button:
+      - generic "Color":
+  - textbox: "# 1.21.1-1.6.2 — Capsule Variants / 胶囊变体 **Network protocol 23: update BOTH client and server, including older files also labeled 1.6.2. Minecraft 1.21.1 / NeoForge / Java 21 only. Requires Useless Mod 1.21.1-2.4.6+ and AE2 19.2+.** - Added background layout discovery for structures with one registry name and multiple layouts. Filter candidates, pause/resume searching, and inspect piece-footprint previews. - Vanilla bastions are identified as treasure, bridge, hoglin-stable or housing. Generation uses the selected saved native plan, with candidates and progress persisted in the world. Selecting it again returns the same instance. - Fixed adjacent generation potentially clearing existing rooms. Existing buildings, chests, entities and scheduled ticks are protected. - Verified native treasure loot and magma-cube spawner, recovery across two process restarts, neighbor preservation and two stable round trips. Client UI and GuideME checks passed. Discovery uses bounded sampling and does not exhaust every variation or guarantee every modpack. - Preserves the earlier 1.6.2 map-flicker, AE2 meteorite geometry and 2i cold-animation fixes. Existing worlds do not need to be reset. ## 中文 **协议升级为 23，客户端与服务端必须同时替换，即使旧包也叫 1.6.2。只适用于 Minecraft 1.21.1 / NeoForge / Java 21，需要无用之物 1.21.1-2.4.6+、AE2 19.2+。** - 胶囊新增同名结构变体后台发现与选择，支持筛选、暂停继续和片段示意图。 - 原版堡垒识别宝藏室、桥梁、疣猪兽棚和居住区，选中后使用保存的原生计划。候选和搜索进度随存档保存，重复选择回到同一实例。 - 修复相邻结构生成时可能清理旧建筑的问题，保护已有建筑、箱子、实体和计划刻。 - 实测宝藏室原生战利品、岩浆怪刷怪笼、两次进程重启恢复、邻室保护及两次稳定往返；客户端界面和 GuideME 检查通过。采用有限采样，未穷尽全部变体和整合包兼容。 - 保留此前 1.6.2 的地图闪烁、AE2 陨石完整高度和 2i 鼻涕方向修复；无需重置旧存档。 Source commit: [27d55ce](https://github.com/21i0/UselessStretcher/commit/27d55ce41a3e7d053abf1265125bd38b8fc835ee) SHA256: `D6F5E4F8CCA14A1127EE00D23883E52C1A7D6F06BCC8F7F9BE77D5AA18B94D83`"
+  - text: Preview text
+  - separator
+  - paragraph:
+    - paragraph: Related Projects (Dependencies)
+  - button "Add related project" [active]:
+    - text: Add related project
+  - checkbox
+  - paragraph:
+    - text: Include default project relations in this file. View and edit your default relations
+    - link "here.":
+      - /url: "#/projects/1690885/default-relations"
+  - paragraph: Files listed as dependencies will automatically download alongside your project for gamers
+  - table:
+    - rowgroup:
+      - row "Project Name Dependency Type Project Last Updated":
+        - columnheader "Project Name"
+        - columnheader "Dependency Type"
+        - columnheader "Project Last Updated"
+        - columnheader
+    - rowgroup:
+      - row "Some-Useless-Things Some-Useless-Things 2026年11月3日":
+        - cell "Some-Useless-Things Some-Useless-Things":
+          - link "Some-Useless-Things":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/some-useless-things/preview
+            - img "Some-Useless-Things"
+          - link "Some-Useless-Things":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/some-useless-things/preview
+        - cell:
+          - combobox:
+            - paragraph: Required Dependency
+          - textbox: "3"
+        - cell "2026年11月3日":
+          - paragraph: 1 days ago
+        - cell
+      - row "Applied Energistics 2 Applied Energistics 2 2026年10月29日":
+        - cell "Applied Energistics 2 Applied Energistics 2":
+          - link "Applied Energistics 2":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/preview
+            - img "Applied Energistics 2"
+          - link "Applied Energistics 2":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/preview
+        - cell:
+          - combobox:
+            - paragraph: Required Dependency
+          - textbox: "3"
+        - cell "2026年10月29日":
+          - paragraph: 6 days ago
+        - cell
+      - row "Curios API Curios API 2026年10月30日":
+        - cell "Curios API Curios API":
+          - link "Curios API":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/curios/preview
+            - img "Curios API"
+          - link "Curios API":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/curios/preview
+        - cell:
+          - combobox:
+            - paragraph: Optional Dependency
+          - textbox: "2"
+        - cell "2026年10月30日":
+          - paragraph: 5 days ago
+        - cell
+      - row "GuideME GuideME 2026年11月2日":
+        - cell "GuideME GuideME":
+          - link "GuideME":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/guideme/preview
+            - img "GuideME"
+          - link "GuideME":
+            - /url: https://www.curseforge.com/minecraft/mc-mods/guideme/preview
+        - cell:
+          - combobox:
+            - paragraph: Optional Dependency
+          - textbox: "2"
+        - cell "2026年11月2日":
+          - paragraph: 2 days ago
+        - cell
+  - button "Cancel": Cancel
+  - button "Add File": Add File
+- iframe [id="launcher-frame"]:
+  - img "Help"

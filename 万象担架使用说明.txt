@@ -1,11 +1,11 @@
-2026-11-04 CurseForge 发布状态（本段为当前状态）
-项目说明与摘要已更新生效；新文件已上传，作者后台状态为 Under Review，待审核通过后公开。
-项目：https://www.curseforge.com/minecraft/mc-mods/useless-stretcher （项目 ID 1690885）
-文件：https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430416 （文件 ID 9430416）
-显示名：useless_stretcher-1.21.1-1.6.2.jar - Capsule Variants (Protocol 23)。Release；Minecraft 1.21.1 / NeoForge / Java 21；客户端与服务端同时更新到协议 23。
-已重新打开编辑页确认：Some-Useless-Things 与 AE2 为必需前置，Curios 与 GuideME 为可选前置。1.20.1 文件保留，公共说明已补充其独立安装要求及尾巴素材 CC BY-NC-SA 归属。
-尚未取得远端文件哈希，不能声称下载回验完成。线上回执与原说明备份：D:/AI/万象担架-CurseForge发布资料/20261104/。
-以下旧文中的“CurseForge 未上传、线上说明未修改”仅为 2026-11-03 的历史状态，已由本段取代；旧记录原文保留。
+2026-11-04 CurseForge 重传状态（本段为当前状态）
+当前文件：https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430671 （文件 ID 9430671）
+文件名与显示名均为：useless_stretcher-1.21.1-1.6.2.jar
+作者后台 Files 页当前状态为 Processing，尚不能视为已通过审核或已公开；Release / Minecraft 1.21.1 / NeoForge / Java 21 / Client + Server。
+已重新打开编辑页确认 Some-Useless-Things 与 AE2 必需、GuideME 与 Curios 可选；公共说明保持生效，已有 1.20.1 文件保留。
+旧文件 9430416 因我们错误添加显示名后缀，已由用户删除，不再是当前发布；旧回执与截图作为历史证据保留。
+尚未取得新文件的远端哈希，下载回验尚未完成。当前证据：D:/AI/万象担架-CurseForge发布资料/20261104-correct-name/；新回执：verification/curseforge-20261104-correct-name.md。
+以下 2026-11-03 的“未上传、线上说明未修改”为历史状态；功能与升级提醒见 changelog-1.6.2.txt。
 
 万象担架 1.6.2 使用说明
 

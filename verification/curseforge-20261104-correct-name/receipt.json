@@ -1,0 +1,35 @@
+{
+  "projectId": 1690885,
+  "fileId": 9430671,
+  "recordedAtShanghai": "2026-11-04 13:02:34",
+  "projectUrl": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher",
+  "fileUrl": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430671",
+  "displayName": "useless_stretcher-1.21.1-1.6.2.jar",
+  "filename": "useless_stretcher-1.21.1-1.6.2.jar",
+  "status": "Processing",
+  "automaticPublishAfterApproval": true,
+  "sha256": "D6F5E4F8CCA14A1127EE00D23883E52C1A7D6F06BCC8F7F9BE77D5AA18B94D83",
+  "bytes": 12666911,
+  "labels": [
+    "1.21.1",
+    "NeoForge",
+    "Java 21",
+    "Client",
+    "Server"
+  ],
+  "required": [
+    "Some-Useless-Things",
+    "Applied Energistics 2"
+  ],
+  "optional": [
+    "Curios API",
+    "GuideME"
+  ],
+  "supersedesDeletedFileId": 9430416,
+  "previousFileDeletedByUser": true,
+  "correction": "Display name now exactly matches the established JAR filename. Feature and protocol details remain in the changelog.",
+  "downloadVerification": "New file not downloaded; remote hash unverified.",
+  "localUploadSourceSha256": "D6F5E4F8CCA14A1127EE00D23883E52C1A7D6F06BCC8F7F9BE77D5AA18B94D83",
+  "lastStatusRecheckUtc": "2026-11-04T05:11:00Z",
+  "statusRecheckResult": "Normal HTTPS navigation to the original author Files tab failed with ERR_NETWORK_CHANGED; no newer status observed. Last successfully observed status remains Processing."
+}

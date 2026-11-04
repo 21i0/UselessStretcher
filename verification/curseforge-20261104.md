@@ -1,3 +1,11 @@
+# 历史回执：文件 9430416 已删除
+
+**当前发布已改为 [9430671](https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430671)，正确文件名与显示名均为 `useless_stretcher-1.21.1-1.6.2.jar`。**
+
+旧文件 9430416 因我们给显示名错误添加后缀，已由用户删除；本文件以下的 Under Review、旧显示名及“未删除旧文件”均仅为删除前的历史记录，不能作为现行发布状态。原文与截图继续保留。新回执见 [正确命名重传记录](curseforge-20261104-correct-name.md)。
+
+---
+
 # CurseForge 上传与说明更新回执 — 2026-11-04
 
 ## 已完成
