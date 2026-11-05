@@ -15,6 +15,18 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".Mbd2AsyncSyncMixin")) {
+            if (!(isModLoadedEarly("ldlib2") && isModLoadedEarly("mbd2")
+                    && isModLoadedEarly("ae2") && isModLoadedEarly("ae2lt"))) return false;
+            String version = modVersionEarly("ldlib2");
+            if (!"2.2.44".equals(version)) {
+                com.mojang.logging.LogUtils.getLogger().warn(
+                        "MBD2/AE2LT sync bridge is verified for LDLib2 2.2.44; installed {} is not patched",
+                        version == null ? "unknown version" : version);
+                return false;
+            }
+            return true;
+        }
         if (mixinClassName.endsWith(".OccultismRitualClockMixin")) return isModLoadedEarly("occultism");
         if (mixinClassName.endsWith(".StaffRadiationShieldingMixin") || mixinClassName.endsWith(".StaffRadiationEntityMixin"))
             return isModLoadedEarly("mekanism");
@@ -49,6 +61,23 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
             return modList != null && modList.isLoaded(modId);
         } catch (RuntimeException | LinkageError ignored) {
             return false;
+        }
+    }
+
+    private static String modVersionEarly(String modId) {
+        try {
+            var loadingList = FMLLoader.getLoadingModList();
+            if (loadingList != null) {
+                return loadingList.getMods().stream().filter(mod -> modId.equals(mod.getModId()))
+                        .findFirst().map(mod -> mod.getVersion().toString()).orElse(null);
+            }
+        } catch (RuntimeException | LinkageError ignored) { }
+        try {
+            var modList = net.neoforged.fml.ModList.get();
+            return modList == null ? null : modList.getModContainerById(modId)
+                    .map(container -> container.getModInfo().getVersion().toString()).orElse(null);
+        } catch (RuntimeException | LinkageError ignored) {
+            return null;
         }
     }
 

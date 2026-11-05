@@ -503,6 +503,12 @@ public final class WondrousStaffAcceleration {
             return executed;
         }
 
+        // Batching machines own their production and IO pipeline. Replaying their complete
+        // ticker (and then an AE service) bypasses the intended coalesced acceleration route.
+        Integer accepted = com.sorrowmist.useless.stretcher.compat.CoalescedMachineAccelerationCompat
+                .accumulate(blockEntity, speed);
+        if (accepted != null) return accepted;
+
         var ticker = state.getTicker(level, blockEntity.getType());
         var compatibilityTicker = com.sorrowmist.useless.stretcher.compat.MachineAccelerationCompat.ticker(blockEntity);
         if (compatibilityTicker != null) ticker = compatibilityTicker;

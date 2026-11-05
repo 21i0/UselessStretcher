@@ -93,6 +93,10 @@ public final class RegressionChecks {
     @SubscribeEvent
     public static void start(ServerStartedEvent event) {
         if (!Boolean.getBoolean("useless_stretcher.regression")) return;
+        if (Boolean.getBoolean("useless_stretcher.watchdog_only")) {
+            event.getServer().overworld().setChunkForced(1, 0, true);
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.capsule_variants_only")) return;
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;
@@ -213,6 +217,24 @@ public final class RegressionChecks {
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
+        if (Boolean.getBoolean("useless_stretcher.watchdog_only")) {
+            if (++ticks < 41) return;
+            try {
+                if (!CoalescedAccelerationChecks.tick(event.getServer().overworld())) return;
+                if (Boolean.getBoolean("useless_stretcher.watchdog_live")
+                        && !PbgCentrifugeLiveChecks.tick(event.getServer().overworld())) return;
+                if (Boolean.getBoolean("useless_stretcher.watchdog_restart")
+                        && !PbgCentrifugeLiveChecks.tickRestart(event.getServer().overworld())) return;
+                if (Boolean.getBoolean("useless_stretcher.watchdog_mbd2")
+                        && !com.sorrowmist.useless.stretcher.compat.Mbd2LiveSyncChecks.tick(event.getServer().overworld())) return;
+                LogUtils.getLogger().info("WATCHDOG COMPATIBILITY CHECKS PASSED");
+            } catch (Throwable failure) {
+                LogUtils.getLogger().error("WATCHDOG COMPATIBILITY CHECKS FAILED", failure);
+            }
+            event.getServer().overworld().setChunkForced(1, 0, false);
+            event.getServer().halt(false);
+            return;
+        }
         if (Boolean.getBoolean("useless_stretcher.capsule_variants_only")) return;
         if (Boolean.getBoolean("useless_stretcher.installed_patterns_only")) return;
         if (Boolean.getBoolean("useless_stretcher.capsule_repair_only")) return;

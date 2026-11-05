@@ -1,0 +1,12 @@
+{
+  "result": "VERSION BUMP CONTENT CHECKS PASSED",
+  "version": "1.21.1-1.6.3",
+  "unchanged": 615,
+  "unchangedProductionClasses": 480,
+  "changed": [
+    "assets/ae2/ae2guide/useless_stretcher/extras.md",
+    "assets/ae2/ae2guide/useless_stretcher/index.md",
+    "META-INF/neoforge.mods.toml"
+  ],
+  "note": "All 480 production classes are byte-identical to the fully regression-tested compatibility fix."
+}

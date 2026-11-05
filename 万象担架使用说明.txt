@@ -1,3 +1,19 @@
+[2026-11-05-watchdog-compat]
+万象担架 1.6.3 兼容修复使用补充（2026-11-05，当前本地包）
+
+文件：D:/AI/useless_stretcher-1.21.1-1.6.3.jar
+大小：12691712 字节
+SHA256：00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC
+客户端和服务端同步替换，网络协议保持 23，无需重置存档；旧包已归档。
+
+手杖单体和范围加速现在自动接入 Productive Bees Genesis Extra 离心机的原生批处理。PBG 1.0.9、JDTE 0.6.4.3 组合以及不装 JDTE 的路径已验证，无需新增操作；机器自身的正常 tick 继续执行。遇到第三方批处理回调异常时，该机器实例的额外加速暂停并记录一次告警，不自动重放未知提交。
+MBD2 21.1.2、LDLib2 2.2.44、AE2 19.2.18、AE2LT 2.1.3 组合的同步已改为主线程处理，保留节点与余额；桥接仅对已验证的 LDLib2 2.2.44 自动启用。
+真实配方、联网满储、部分/零接收、原生 NBT 重载及同存档进程重启已验证。其它玩偶、胶囊、手杖和 GuideME 用法沿用下文。
+
+完整更新与验证：D:/AI/changelog-1.6.3.txt；D:/AI/sources/UselessStretcher-capsule-variants/verification/1.6.3-watchdog-compat-20261105.md。
+旧包/旧文档：D:/AI/archive/1.6.2-watchdog-before-1.6.3-20261105/。按用户授权更新 GitHub 后再更新 CurseForge；发布回执另行记录。
+以下保留历史使用说明，其中旧“当前”状态、旧文件哈希以本段为准。
+[/2026-11-05-watchdog-compat]
 2026-11-04 CurseForge 重传状态（本段为当前状态）
 当前文件：https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430671 （文件 ID 9430671）
 文件名与显示名均为：useless_stretcher-1.21.1-1.6.2.jar

@@ -10,6 +10,7 @@
     "CapsuleScatteredHeightMixin",
     "DesertPyramidCheckpointMixin",
     "OccultismRitualClockMixin",
+    "Mbd2AsyncSyncMixin",
     "StaffRadiationShieldingMixin",
     "StaffRadiationEntityMixin",
     "UsefulArmorGameModeMixin",

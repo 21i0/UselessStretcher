@@ -11,6 +11,12 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
+## 1.6.3
+
+修复手杖单体和范围加速 Productive Bees Genesis Extra 离心机的调用方式，接入机器原生批处理并合并多来源工作；兼容 MBD2、LDLib2 2.2.44 与闪电科技的节点同步，保留 AE2LT 的线程保护及保存数据。真实配方、联网满储、部分接收、NBT 重载和同存档进程重启已验证。
+
+当前主线版本为 `1.21.1-1.6.3`，构建文件 `useless_stretcher-1.21.1-1.6.3.jar`，网络协议保持 23。客户端和服务端同时更新，从 1.6.x 升级无需重置存档。详见 [1.6.3 更新说明](changelog-1.6.3.txt)、[使用说明](usage-1.6.3.txt) 和 [兼容验证记录](verification/1.6.3-watchdog-compat-20261105.md)。
+
 ## 1.6.2
 
 维度胶囊新增通用“查找变体”：后台规划、候选搜索与片段示意图，选择后生成保存的原生计划。原版堡垒可识别宝藏室、桥梁、疣猪兽棚和居住区，同类多个布局分别展示。候选和搜索游标写入存档，重复选择回到同一实例，已有建筑不被覆盖。搜索采用有限采样和缓存预算，不保证穷尽所有模组的随机结果。
@@ -19,7 +25,7 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
 AE2 陨石搬移时同步内部中心坐标，并按完整陨石高度清理和铺基岩，保留上下两半及原生内部内容。旧版未完成任务保留生成计划后修复；已经完成的半截实例请用“生成相邻实例”获取完整的新陨石，原实例保留。
 2i 感冒时，鼻涕从鼻部固定点向下伸长；实体、摆件、手持与头戴共用修复。
 
-当前主线为 `1.21.1-1.6.2`，构建文件 `useless_stretcher-1.21.1-1.6.2.jar`，变体更新使用协议 23。客户端和服务端同时更新，同版本旧协议 22 包也须替换；从 1.6.0/1.6.1 升级无需重置存档。详见 [1.6.2 更新说明](changelog-1.6.2.txt)、[使用说明](usage-1.6.2.txt) 和 [变体验证记录](verification/1.6.2-capsule-variants-20261103.md)。
+1.6.2 构建文件为 `useless_stretcher-1.21.1-1.6.2.jar`，变体更新使用协议 23。客户端和服务端同时更新，同版本旧协议 22 包也须替换；从 1.6.0/1.6.1 升级无需重置存档。详见 [1.6.2 更新说明](changelog-1.6.2.txt)、[使用说明](usage-1.6.2.txt) 和 [变体验证记录](verification/1.6.2-capsule-variants-20261103.md)。
 
 ## 1.6.1
 

@@ -21,7 +21,7 @@ function Entry-Hash($entry) {
 try {
     $names = @($zip.Entries.FullName)
     $forbidden = @($names | Where-Object {
-        $_ -match '/(regression|storytest|guidetest)/|Checks[^/]*\.class$|^net/|^mekanism/|^mcjty/|^com/klikli_dev/|^software/bernie/|^top/theillusivec4/curios/|^data/useless_stretcher_test/|QuadChunk|NineChunk|quad_chunk|nine_chunk'
+        $_ -match '/(regression|storytest|guidetest)/|Checks[^/]*\.class$|^net/|^appeng/|^mekanism/|^mcjty/|^com/(ayoshiko|jdte|lowdragmc|klikli_dev)/|^software/bernie/|^top/theillusivec4/curios/|^data/useless_stretcher_test/|QuadChunk|NineChunk|quad_chunk|nine_chunk'
     })
     if ($forbidden.Count) { throw "Unexpected packaged entries: $($forbidden -join ', ')" }
     $metadata = Read-Entry $zip.GetEntry('META-INF/neoforge.mods.toml')
@@ -33,7 +33,7 @@ try {
     $networkSource = [IO.File]::ReadAllText((Join-Path $repo 'src/main/java/com/sorrowmist/useless/stretcher/network/Network.java'))
     if ($networkSource -notmatch 'event\.registrar\("23"\)') { throw 'Wrong network protocol source' }
     $mixins = (Read-Entry $zip.GetEntry('useless_stretcher.mixins.json')) | ConvertFrom-Json -AsHashtable
-    foreach ($mixin in @('StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
+    foreach ($mixin in @('Mbd2AsyncSyncMixin', 'StaffPhaseMovementMixin', 'StaffPhasePacketMovementMixin', 'CapsuleGenerationHeightMixin',
             'CapsuleScatteredHeightMixin', 'DesertPyramidCheckpointMixin', 'TwoIDollRemovalGuardMixin',
             'TwoIDollLookupGuardMixin', 'TwoIDollTickListGuardMixin', 'TwoIDollSectionGuardMixin',
             'TwoIDollManagerLifecycleMixin', 'TwoIDollSectionLifecycleMixin', 'TwoIDollLevelCallbackGuardMixin')) {

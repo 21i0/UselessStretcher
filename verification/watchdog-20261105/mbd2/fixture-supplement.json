@@ -1,0 +1,64 @@
+{
+  "createdUtc": "2026-11-05T07:47:45.8791869Z",
+  "purpose": "Supplemental real MBD2/LDLib2/AE2LT server regression fixture; no original pack files changed",
+  "fixture": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\build\\fixture-watchdog-20261105",
+  "productionNeoForge": "21.1.264",
+  "regressionNeoForge": "21.1.249",
+  "byteIdentityCaveat": "Official published versions match the production report. The report does not contain original jar hashes, so exact byte identity with production cannot be confirmed.",
+  "mbd2Sources": {
+    "sha1": "20508dc57f3e45e0054d1aa81e8cac47b92a6794",
+    "file": "Multiblocked2-1.21-1.21.1-21.1.2-sources.jar",
+    "verified": true,
+    "officialUrl": "https://cdn.modrinth.com/data/R2gjKEpa/versions/XlQ10omv/Multiblocked2-1.21-1.21.1-21.1.2-sources.jar"
+  },
+  "files": [
+    {
+      "file": "Multiblocked2-1.21-1.21.1-21.1.2-all.jar",
+      "mod": "mbd2",
+      "version": "21.1.2",
+      "bytes": 4735218,
+      "sha256": "DCE8D86F208533C0B756063FB5DB02A5DD87754CEC021064EA70E060435804D1",
+      "officialUrl": "https://cdn.modrinth.com/data/R2gjKEpa/versions/XlQ10omv/Multiblocked2-1.21-1.21.1-21.1.2-all.jar",
+      "officialHashAlgorithm": "SHA1",
+      "officialHash": "3bf0de0e2a6529b0a889c724bf167c82010473b8",
+      "officialHashVerified": true,
+      "localSource": null
+    },
+    {
+      "file": "ae2lt-2.1.3.jar",
+      "mod": "ae2lt",
+      "version": "2.1.3",
+      "bytes": 6963071,
+      "sha256": "4241F5757F4BE2ABD41EFDB9AD15AAEFEEB23960CCF5D9C4F4A1C92E481DFE3F",
+      "officialUrl": "https://github.com/AE2-Lightning-Tech-Reborn/AE2-Lightning-Tech-Reborn/releases/download/2.1.3/ae2lt-2.1.3.jar",
+      "officialHashAlgorithm": "SHA256",
+      "officialHash": "4241f5757f4be2abd41efdb9ad15aaefeeb23960ccf5d9c4f4a1c92e481dfe3f",
+      "officialHashVerified": true,
+      "localSource": null
+    },
+    {
+      "file": "thunderbolt-2.0.3.jar",
+      "mod": "thunderbolt",
+      "version": "2.0.3",
+      "bytes": 5203013,
+      "sha256": "FE3BE9A409F4D90DA41E95EC1D6C8545D8C2004434DC23420442913C07A9F79F",
+      "officialUrl": "https://github.com/AE2-Lightning-Tech-Reborn/Thunderbolt-Core-Reborn/releases/download/2.0.3/thunderbolt-2.0.3.jar",
+      "officialHashAlgorithm": "SHA256",
+      "officialHash": "fe3be9a409f4d90da41e95ec1d6c8545d8c2004434dc23420442913c07a9f79f",
+      "officialHashVerified": true,
+      "localSource": null
+    },
+    {
+      "file": "ldlib2-neoforge-1.21.1-2.2.44-all.jar",
+      "mod": "ldlib2",
+      "version": "2.2.44",
+      "bytes": 7702551,
+      "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC",
+      "officialUrl": null,
+      "officialHashAlgorithm": null,
+      "officialHash": null,
+      "officialHashVerified": false,
+      "localSource": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-030-final-j\\mods\\ldlib2-neoforge-1.21.1-2.2.44-all.jar"
+    }
+  ]
+}

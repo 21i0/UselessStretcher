@@ -1,0 +1,31 @@
+{
+  "result": "PRODUCTION JAR DIFF CHECKS PASSED",
+  "baseline": "D:\\AI\\archive\\1.6.2-before-watchdog-compat-20261105\\useless_stretcher-1.21.1-1.6.2.jar",
+  "baseline_sha256": "D6F5E4F8CCA14A1127EE00D23883E52C1A7D6F06BCC8F7F9BE77D5AA18B94D83",
+  "candidate": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\build\\libs\\useless_stretcher-1.21.1-1.6.2.jar",
+  "candidate_sha256": "4D77BE9751901D076B972C7AE00A7FECC95625FC226D86887AF472B1926F3E20",
+  "unchanged_count": 600,
+  "added": [
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$1.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Contract.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$IdentityReference.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Pending.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Queue.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$WeakIdentitySet.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue$IdentityKey.class",
+    "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue$Task.class",
+    "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat.class",
+    "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat$1.class",
+    "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat$SyncContract.class",
+    "com/sorrowmist/useless/stretcher/mixin/Mbd2AsyncSyncMixin.class"
+  ],
+  "changed": [
+    "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAcceleration.class",
+    "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAcceleration$AeEndpoint.class",
+    "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+    "useless_stretcher.mixins.json"
+  ],
+  "removed": []
+}
