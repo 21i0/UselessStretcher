@@ -1,0 +1,478 @@
+- link "promotional banner":
+  - /url: https://links.curseforge.com/wow_forever_launch_top
+  - img "promotional banner"
+- button "dismiss banner":
+- banner:
+  - navigation:
+    - link "Goto home page":
+      - /url: /
+    - list:
+      - link "Browse":
+        - /url: https://www.curseforge.com/games
+        - text: Browse
+      - link "Browse all (130)":
+        - /url: /games
+        - text: Browse all (130)
+      - list:
+        - link "icon Minecraft":
+          - /url: /minecraft
+          - img "icon"
+          - text: Minecraft
+        - link "icon The Sims 4":
+          - /url: /sims4
+          - img "icon"
+          - text: The Sims 4
+        - link "icon World of Warcraft":
+          - /url: /wow
+          - img "icon"
+          - text: World of Warcraft
+        - link "icon Minecraft Bedrock":
+          - /url: /minecraft-bedrock
+          - img "icon"
+          - text: Minecraft Bedrock
+        - link "icon Ark Survival Ascended":
+          - /url: /ark-survival-ascended
+          - img "icon"
+          - text: Ark Survival Ascended
+        - link "icon Hytale":
+          - /url: /hytale
+          - img "icon"
+          - text: Hytale
+        - link "icon inZOI":
+          - /url: /inzoi
+          - img "icon"
+          - text: inZOI
+        - link "icon StarCraft II":
+          - /url: /sc2
+          - img "icon"
+          - text: StarCraft II
+        - link "icon Kerbal Space Program":
+          - /url: /kerbal
+          - img "icon"
+          - text: Kerbal Space Program
+        - link "icon Stardew Valley":
+          - /url: /stardewvalley
+          - img "icon"
+          - text: Stardew Valley
+        - link "icon American Truck Simulator":
+          - /url: /american-truck-simulator
+          - img "icon"
+          - text: American Truck Simulator
+        - link "icon Hogwarts Legacy":
+          - /url: /hogwarts-legacy
+          - img "icon"
+          - text: Hogwarts Legacy
+        - link "icon Terraria":
+          - /url: /terraria
+          - img "icon"
+          - text: Terraria
+        - link "icon WildStar":
+          - /url: /wildstar
+          - img "icon"
+          - text: WildStar
+        - link "icon Palworld":
+          - /url: /palworld
+          - img "icon"
+          - text: Palworld
+        - link "icon World of Tanks":
+          - /url: /worldoftanks
+          - img "icon"
+          - text: World of Tanks
+        - 'link "icon PUBG: BATTLEGROUNDS"':
+          - /url: /pubg-battlegrounds
+          - img "icon"
+          - text: "PUBG: BATTLEGROUNDS"
+        - link "icon Runes of Magic":
+          - /url: /rom
+          - img "icon"
+          - text: Runes of Magic
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+      - link "Create":
+        - /url: https://authors.curseforge.com/welcome
+        - text: Create
+      - generic: MOD AUTHORS
+      - list:
+        - link "Become an Author":
+          - /url: https://authors.curseforge.com/welcome
+        - link "Start a Project":
+          - /url: https://authors.curseforge.com/#/projects/create/choose-game
+        - link "Project Submission Guide":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000199552-project-submission-guide-and-tips
+      - generic: MODDING TOOL DEVELOPERS
+      - list:
+        - link "Apply for an API Key":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key
+        - link "Documentation":
+          - /url: https://docs.curseforge.com/rest-api/#getting-started
+        - link "Terms & Conditions":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000207405-curse-forge-3rd-party-api-terms-and-conditions
+      - generic: SOCIAL
+      - list:
+        - link "Join Our Discord!":
+          - /url: https://www.discord.com/invite/curseforge
+        - link "Authors Discord":
+          - /url: https://discord.gg/S3EaZArYz2
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+      - link "Studios":
+        - /url: https://studios.curseforge.com/
+        - text: Studios
+      - generic: GAME DEVELOPERS
+      - list:
+        - link "Unlock Modding for Your Game":
+          - /url: https://studios.curseforge.com
+        - link "Documentation":
+          - /url: https://docs.curseforge.com/
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+    - list:
+      - link "Go Premium":
+        - /url: /premium?source=7
+        - generic: Go Premium
+      - link "Get CurseForge App":
+        - /url: /download/app
+        - generic: Get CurseForge App
+    - link "Go to your messages page":
+      - /url: https://legacy.curseforge.com/private-messages
+    - generic: "15"
+    - img "user avatar"
+    - list:
+      - img "user avatar"
+      - text: 2ixuexi
+      - link "Go Premium":
+        - /url: /premium?source=3
+        - text: Go Premium
+      - link "My profile":
+        - /url: /members/2ixuexi
+        - generic: My profile
+      - link "Following":
+        - /url: https://legacy.curseforge.com/account/subscriptions
+        - generic: Following
+      - link "Dashboard":
+        - /url: https://authors.curseforge.com
+        - generic: Dashboard
+      - link "Reward store":
+        - /url: https://authors.curseforge.com/#/reward-store
+        - generic: Reward store
+      - link "Settings":
+        - /url: /settings
+        - generic: Settings
+      - link "Log out":
+        - /url: https://www.curseforge.com/api/v1/auth/logout-oidc?returnUrl=https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9451528
+        - generic: Log out
+    - button "More options":
+- navigation "Game navigation":
+  - link "Minecraft":
+    - /url: /minecraft
+  - link "Discover":
+    - /url: /minecraft
+  - link "Browse All":
+    - /url: /minecraft/search?page=1&pageSize=20&sortBy=relevancy
+  - searchbox "Search for a project"
+  - button "Search":
+- main:
+  - navigation "Breadcrumb":
+    - list:
+      - link "Minecraft":
+        - /url: /minecraft
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+  - button "Back To Top":
+  - link "Enlarge Useless Stretcher logo":
+    - /url: "#project-logo"
+    - img "Useless Stretcher logo"
+  - heading "Useless Stretcher" [level=1]
+  - list:
+    - generic: By
+    - link "2ixuexi 2ixuexi":
+      - /url: /members/2ixuexi
+      - img "2ixuexi"
+      - generic: 2ixuexi
+  - generic: "An addon for Useless Mod and AE2: wildcard molds, remote pattern tools, configurable time acceleration, an animated 2i companion, and persistent structure capsules with layout discovery."
+  - complementary:
+    - separator
+    - generic: Useless Stretcher
+    - button "Manage Project":
+      - generic: Manage Project
+    - button "Download":
+      - generic: Download
+    - 'button "Add Project to Favorites. Favorites: 7"':
+      - text: Favorite (7)
+      - generic: "7"
+    - link "Follow Project":
+      - /url: "#follow"
+      - button "Follow Project":
+        - text: Follow
+    - separator
+    - heading "Details" [level=3]
+    - term: "Downloads:"
+    - definition: 7,794
+    - term: "Created:"
+    - definition:
+      - generic: 1 month ago
+    - term: "Updated:"
+    - definition:
+      - generic: 5 minutes ago
+    - term: "Project ID:"
+    - definition:
+      - generic: "1690885"
+      - button "Copy to clipboard":
+    - term: "License:"
+    - definition:
+      - link "All Rights Reserved":
+        - /url: /minecraft/mc-mods/useless-stretcher/license
+    - term: "Environment:"
+    - definition:
+      - generic: Client & Server
+    - separator
+    - heading "Game Versions" [level=3]
+    - list:
+      - link "1.21.1":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&version=1.21.1&showAlphaFiles=hide
+      - link "1.20.1":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&version=1.20.1&showAlphaFiles=hide
+    - separator
+    - heading "Mod Loaders" [level=3]:
+      - generic: Mod Loaders
+    - list:
+      - link "NeoForge":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&gameVersionTypeId=6&showAlphaFiles=hide
+      - link "Forge":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&gameVersionTypeId=1&showAlphaFiles=hide
+    - separator
+    - img "informative placeholder"
+    - iframe
+    - separator
+    - heading "Class & Categories" [level=3]
+    - list:
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+      - link "Applied Energistics 2":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy&categories=applied-energistics-2
+    - separator
+    - heading "Main File" [level=3]
+    - heading "1.21.1" [level=4]
+    - link "useless_stretcher-1.21.1-1.6.3.jar R 1.21.1 NeoForge Nov 5, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528
+      - generic "useless_stretcher-1.21.1-1.6.3.jar"
+      - list:
+        - generic: R
+        - listitem: 1.21.1
+        - listitem: NeoForge
+        - time: Nov 5, 2026
+    - separator
+    - heading "Recent Files View all" [level=3]:
+      - text: Recent Files
+      - link "View all":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&showAlphaFiles=hide&sortBy=dateCreated&sortOrder=desc
+        - text: View all
+    - heading "Minecraft 1.21" [level=4]
+    - link "useless_stretcher-1.21.1-1.6.3.jar R 1.21.1 NeoForge Nov 5, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528
+      - generic "useless_stretcher-1.21.1-1.6.3.jar"
+      - list:
+        - generic: R
+        - listitem: 1.21.1
+        - listitem: NeoForge
+        - time: Nov 5, 2026
+    - heading "Minecraft 1.20" [level=4]
+    - link "useless_stretcher-20.1.6.5.jar R 1.20.1 Forge Nov 2, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9404126
+      - generic "useless_stretcher-20.1.6.5.jar"
+      - list:
+        - generic: R
+        - listitem: 1.20.1
+        - listitem: Forge
+        - time: Nov 2, 2026
+    - separator
+    - link "Report":
+      - /url: "#report"
+      - button "Report":
+        - text: Report
+  - text: Favorite (7) Follow
+  - list:
+    - link "Description":
+      - /url: /minecraft/mc-mods/useless-stretcher
+    - link "Files":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&showAlphaFiles=hide
+    - link "Gallery":
+      - /url: /minecraft/mc-mods/useless-stretcher/gallery
+    - link "Relations":
+      - /url: /minecraft/mc-mods/useless-stretcher/relations/dependencies
+  - link "Back to Files":
+    - /url: /minecraft/mc-mods/useless-stretcher/files
+    - text: Back to Files
+  - heading "useless_stretcher-1.21.1-1.6.3.jar" [level=2]
+  - generic: File name
+  - generic "useless_stretcher-1.21.1-1.6.3.jar"
+  - term: Uploader
+  - definition:
+    - link "2ixuexi 2ixuexi":
+      - /url: /members/2ixuexi
+      - img "2ixuexi"
+      - generic: 2ixuexi
+  - term: Uploaded
+  - definition:
+    - generic: Nov 5, 2026
+  - term: Downloads
+  - definition: "0"
+  - term: Size
+  - definition: 12.1 MB
+  - term: Mod Loaders
+  - definition:
+    - text: NeoForge
+  - term: File ID
+  - definition:
+    - text: "9451528"
+    - button "Copy to clipboard":
+  - term: Type
+  - definition:
+    - generic: R
+    - generic: Release
+  - generic: Supported game versions
+  - list:
+    - listitem: 1.21.1
+  - button "Manage file":
+    - text: Manage file
+  - link "Download":
+    - /url: /minecraft/mc-mods/useless-stretcher/download/9451528
+    - generic: Download
+  - link "Install Via App":
+    - /url: /minecraft/mc-mods/useless-stretcher/install/9451528
+    - generic: Install Via App
+  - heading "Curse Maven Snippet Show Maven Guidelines" [level=3]:
+    - text: Curse Maven Snippet
+    - button "Show Maven Guidelines":
+  - heading "NeoForge" [level=3]
+  - code: implementation "curse.maven:useless-stretcher-1690885:9451528"
+  - button "Copy to clipboard":
+  - paragraph:
+    - text: Learn more about
+    - link "Curse Maven":
+      - /url: https://www.cursemaven.com
+  - heading "What's new" [level=3]
+  - heading "万象担架 1.6.3" [level=1]
+  - paragraph: Minecraft 1.21.1 / NeoForge / Java 21。需要无用之物 1.21.1-2.4.6+、AE2 19.2+；GuideME、Curios 可选。
+  - list:
+    - listitem: 修复手杖单体、范围加速 Productive Bees Genesis Extra 离心机，接入原生批处理并合并多来源额外工作，避免重复完整机器 ticker 和 AE 输出；未安装 JDTE 时使用 PBG 自有接口。
+    - listitem: 修复 MBD2 / LDLib2 2.2.44 / AE2LT 的异步节点同步冲突。同步合并后交主线程处理，保留线程保护、节点和余额；失败完整重试并退避，卸载/停服不复活旧任务。桥接仅对已核对的 LDLib2 版本启用。
+    - listitem: 旧批次优先；第三方回调提交后异常不自动回退重放，避免重复产出。
+    - listitem: 保留胶囊变体、邻室保护、地图与陨石修复、2i 玩偶、剧情及原有手杖/担架功能；GuideME 同步说明。
+  - paragraph:
+    - strong: 升级：客户端和服务端同步替换；网络协议保持 23，已有 1.6.x 存档无需重置。
+  - paragraph: 实际验证包含官方 PBG 1.0.9 真实配方、单体/范围/叠加、联网满储、部分/零接收、NBT 重载和独立进程同存档重启；MBD2 5000 次派发合并与节点/余额重启保留。成品不含测试类或第三方接口。 测试在隔离兼容环境完成，并非报错服务器完整整包；不能中断单次第三方同步回调，不承诺任意网络零停顿。独立登录超时尚无对应运行日志定因。
+  - heading "English" [level=2]
+  - list:
+    - listitem: Fix staff acceleration for Productive Bees Genesis Extra centrifuges with native coalesced work instead of replaying complete machine/AE tick paths. Single-target and range contributions share bounded scheduling; uncertain commits are never automatically replayed.
+    - listitem: Fix managed-node sync conflicts with MBD2 / LDLib2 2.2.44 / AE2LT by handing the standard callback to the server thread. Node identity, balances and thread guards remain intact, with retries and unload/shutdown protection.
+    - listitem: Keeps capsule layout discovery, neighbor preservation and earlier fixes. Update both client and server; protocol remains 23 and existing 1.6.x worlds can be retained.
+  - paragraph:
+    - text: "Source:"
+    - link "https://github.com/21i0/UselessStretcher/releases/tag/v1.6.3":
+      - /url: https://github.com/21i0/UselessStretcher/releases/tag/v1.6.3
+  - paragraph: "SHA256: 00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC"
+  - list:
+    - link "Additional Files":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528/additional-files
+    - link "Related Projects":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528/dependencies
+  - paragraph: This mod has no additional files
+- contentinfo:
+  - link "Goto home page":
+    - /url: /
+  - text: CurseForge - a world of endless gaming possibilities for modders and gamers alike.
+  - text: Download the best mods and addons!
+  - navigation:
+    - list:
+      - generic: Games
+      - list:
+        - link "All games":
+          - /url: /games
+        - link "Minecraft":
+          - /url: /minecraft
+        - link "World of Warcraft":
+          - /url: /wow
+        - link "The Sims 4":
+          - /url: /sims4
+        - link "Starcraft II":
+          - /url: /sc2
+        - link "Kerbal Space Program":
+          - /url: /kerbal
+        - link "Minecraft Dungeons":
+          - /url: /minecraft-dungeons
+        - link "World of Tanks":
+          - /url: /worldoftanks
+      - generic: Create
+      - list:
+        - link "Start a project":
+          - /url: https://authors.curseforge.com/#/projects/create/choose-game
+        - link "Project submission guide":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000199552-project-submission-guide-and-tips
+        - link "Author Rewards Program":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000197898-rewards-program-terms-of-service
+        - link "Apply for an API Key":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key
+        - link "3rd Party API T&C":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000207405-curse-forge-3rd-party-api-terms-and-conditions
+      - generic: Community
+      - list:
+        - link "Join Our Discord!":
+          - /url: https://discord.gg/curseforge
+        - link "Ideas Portal":
+          - /url: //curseforge-ideas.overwolf.com/
+        - link "CF blog":
+          - /url: //blog.curseforge.com/
+        - link "Newsletter":
+          - /url: //blog.curseforge.com/tag/newsletter/
+        - link "Roadmap":
+          - /url: //trello.com/b/Slaz6xBq/curseforge-roadmap
+        - link "Bukkit forums":
+          - /url: //bukkit.org/forums/
+        - link "CurseForge Servers":
+          - /url: //www.curseforge.com/servers/minecraft
+      - generic: Support
+      - list:
+        - link "Knowledge base":
+          - /url: //support.curseforge.com/
+        - link "Troubleshooting":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000194900-curseforge-troubleshooting
+        - link "Contact us":
+          - /url: //support.curseforge.com/en/support/tickets/new
+      - generic: Companions
+      - list:
+        - link "Overwolf":
+          - /url: //overwolf.com
+        - link "CurseForge for Studios":
+          - /url: //studios.curseforge.com
+        - link "Tebex":
+          - /url: //tebex.io
+        - link "Nitro":
+          - /url: //nitropay.com/
+  - list:
+    - link "Instagram link":
+      - /url: https://www.instagram.com/curseforgeofficial
+    - link "Tiktok link":
+      - /url: https://www.tiktok.com/@curseforge
+    - link "Youtube link":
+      - /url: https://www.youtube.com/@CurseForge
+    - link "Discord link":
+      - /url: https://discord.gg/curseforge
+    - link "X link":
+      - /url: https://x.com/CurseForge
+    - link "Reddit link":
+      - /url: https://www.reddit.com/r/CurseForge
+  - list:
+    - link "Terms of Service":
+      - /url: https://legal.overwolf.com/docs/overwolf/platform/platform-terms-of-use
+    - link "Privacy Policy":
+      - /url: https://legal.overwolf.com/docs/overwolf/platform/platform-privacy-policy
+    - link "Licenses":
+      - /url: //support.overwolf.com/en/support/solutions/articles/9000203492-licenses-we-use
+    - link "Mod Author Terms":
+      - /url: https://legal.overwolf.com/docs/curseforge/mod-authors-terms
+  - generic: © 2026 Overwolf. All rights reserved.
+- alert
