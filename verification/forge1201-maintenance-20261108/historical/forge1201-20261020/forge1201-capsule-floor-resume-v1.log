@@ -1,0 +1,269 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\compat\TwoICuriosCompat.java:70: ����: [removal] ICuriosItemHandler �е� getLockedSlots() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+                    if (!inventory.getLockedSlots().contains(entry.getKey()))
+                                  ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+8 ������
+
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :downloadAssets UP-TO-DATE
+> Task :writeCapsuleCheckLegacyClasspath UP-TO-DATE
+> Task :prepareCapsuleCheckRun
+
+> Task :runCapsuleCheck
+2026-10-20 13:43:54,182 main WARN Advanced terminal features are not available in this environment
+[13:43:54] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, useless_stretcher.mixins.json, --nogui]
+[13:43:54] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[13:43:54] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[13:43:54] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/<USER_HOME>/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23141!/ Service=ModLauncher Env=SERVER
+[13:43:54] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.10\523aa0cd9a773b2b56268d8689b2fb5c1f072941\fmlcore-1.20.1-47.3.10.jar is missing mods.toml file
+[13:43:54] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.10\7a15037366722893d76a3d0b2e9d1fd13a63a22d\javafmllanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:43:54] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.10\e67d9b3451d64ccc812cbbd33c066bd3ebbf2167\lowcodelanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:43:54] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.10\2023f9726a509c5ba5a925cac934944066093de8\mclanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:43:55] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[13:43:58] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[13:43:58] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[13:43:58] [main/WARN] [mixin/]: Reference map 'useless_stretcher.refmap.json' for useless_stretcher.mixins.json could not be read. If this is a development environment you can ignore this message
+[13:43:58] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:43:58] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:43:58] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:43:58] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:43:58] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor
+[13:43:59] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: com/enderio/base/common/handler/TravelHandler (java.lang.ClassNotFoundException: com.enderio.base.common.handler.TravelHandler)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target com.enderio.base.common.handler.TravelHandler was not found useless_mod.mixins.json:enderio.EnderIOTravelHandlerMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/base/KineticBlockEntity (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.base.KineticBlockEntity)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.base.KineticBlockEntity was not found useless_mod.create.mixins.json:KineticBlockEntityMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/KineticNetwork (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.KineticNetwork)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.KineticNetwork was not found useless_mod.create.mixins.json:KineticNetworkMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/api/recipes/cache/CachedRecipe (java.lang.ClassNotFoundException: mekanism.api.recipes.cache.CachedRecipe)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.api.recipes.cache.CachedRecipe was not found useless_mod.mekanism.mixins.json:CachedRecipeMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:DigitalMinerMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityElectricPump (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityElectricPump)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityElectricPump was not found useless_mod.mekanism.mixins.json:ElectricPumpMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFluidicPlenisher (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFluidicPlenisher)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFluidicPlenisher was not found useless_mod.mekanism.mixins.json:FluidicPlenisherMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFormulaicAssemblicator (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFormulaicAssemblicator)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFormulaicAssemblicator was not found useless_mod.mekanism.mixins.json:FormulaicAssemblicatorMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/MekanismUtils (java.lang.ClassNotFoundException: mekanism.common.util.MekanismUtils)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.MekanismUtils was not found useless_mod.mekanism.mixins.json:MekanismUtilsMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/component/TileComponentEjector (java.lang.ClassNotFoundException: mekanism.common.tile.component.TileComponentEjector)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.component.TileComponentEjector was not found useless_mod.mekanism.mixins.json:TileComponentEjectorMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:TileEntityDigitalMinerMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/api/Upgrade (java.lang.ClassNotFoundException: mekanism.api.Upgrade)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.api.Upgrade was not found useless_mod.mekanism.mixins.json:UpgradeMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/UpgradeUtils (java.lang.ClassNotFoundException: mekanism.common.util.UpgradeUtils)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.UpgradeUtils was not found useless_mod.mekanism.mixins.json:UpgradeUtilsMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageProviderMixin
+[13:43:59] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[13:43:59] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageExtensionMixin
+2026-10-20 13:43:59,446 main WARN Error parsing URI <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\capsuleCheckLog4j2.xml
+[13:43:59] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[13:44:06] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.10, for MC 1.20.1 with MCP 20230612.114412
+[13:44:06] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.10 Initialized
+[13:44:07] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[13:44:08] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13:44:08] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.4.10
+[13:44:09] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/assets/.mcassetsroot' uses unexpected schema
+[13:44:09] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/data/.mcassetsroot' uses unexpected schema
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[13:44:10] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[13:44:10] [main/INFO] [minecraft/RecipeManager]: Loaded 13 recipes
+[13:44:10] [main/INFO] [minecraft/AdvancementList]: Loaded 1784 advancements
+[13:44:11] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[13:44:11] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[13:44:11] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[13:44:11] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[13:44:11] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25591
+[13:44:11] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using default channel type
+[13:44:11] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[13:44:11] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[13:44:11] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[13:44:11] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[13:44:11] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/overworld <- minecraft:overworld type=ResourceKey[minecraft:dimension_type / minecraft:overworld] minY=-64 height=384
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim <- useless_mod:uselessdim type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim] minY=-64 height=384
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_end <- minecraft:the_end type=ResourceKey[minecraft:dimension_type / minecraft:the_end] minY=0 height=256
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/stretcher_capsule_check/custom_nether <- stretcher_capsule_check:custom_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim2 <- useless_mod:uselessdim2 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim2] minY=-64 height=384
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield <- useless_stretcher:two_i_starfield type=ResourceKey[minecraft:dimension_type / useless_stretcher:two_i_starfield] minY=-64 height=384
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_nether <- minecraft:the_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[13:44:12] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim3 <- useless_mod:uselessdim3 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim3] minY=-64 height=384
+[13:44:12] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[13:44:14] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:44:14] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:44:14] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:44:14] [Worker-Main-9/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:44:14] [Worker-Main-13/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:44:15] [Worker-Main-11/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 11%
+[13:44:15] [Worker-Main-9/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 97%
+[13:44:15] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 3015 ms
+[13:44:15] [Server thread/INFO] [minecraft/DedicatedServer]: Done (4.149s)! For help, type "help"
+[13:44:15] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[13:44:15] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[13:44:15] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/ae2/spatial_storage <- ae2:spatial_storage type=ResourceKey[minecraft:dimension_type / ae2:spatial_storage] minY=0 height=256
+[13:44:15] [Server thread/INFO] [co.so.us.st.co.ca.ForgeCapsuleChecks/]: FORGE CAPSULE RESTART LOADED phase=bedrock chunk=4 piece=0 ready=false
+[13:44:16] [Server thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=791, sources=3, elapsed=379 ms
+[13:44:16] [Server thread/INFO] [co.so.us.st.co.ca.NativeCapsules/]: CAPSULE PROGRESS minecraft:desert_pyramid target=useless_stretcher:capsule_mirror/minecraft/overworld phase=bedrock progress=67% chunks=4/4 attempt=4
+[13:44:17] [Server thread/INFO] [co.so.us.st.co.ca.NativeCapsules/]: CAPSULE PROGRESS minecraft:desert_pyramid target=useless_stretcher:capsule_mirror/minecraft/overworld phase=trimming progress=70% chunks=4/4 attempt=4
+[13:44:24] [Server thread/INFO] [co.so.us.st.co.ca.NativeCapsules/]: CAPSULE PROGRESS minecraft:desert_pyramid target=useless_stretcher:capsule_mirror/minecraft/overworld phase=ready progress=99% chunks=4/4 attempt=4
+[13:44:24] [Server thread/INFO] [co.so.us.st.co.ca.NativeCapsules/]: CAPSULE NATIVE COMPLETE minecraft:desert_pyramid: 4 chunks, 1 pieces, max callback 6.3967 ms
+[13:44:24] [Server thread/INFO] [co.so.us.st.co.ca.ForgeCapsuleChecks/]: FORGE CAPSULE CONTENT PASSED minecraft:desert_pyramid blocks=8429 pieces=1 loot=4 archaeology=7 spawners=0
+[13:44:26] [Server thread/INFO] [co.so.us.st.co.ca.ForgeCapsuleChecks/]: FORGE CAPSULE HARNESS minecraft:desert_pyramid phase=ready chunk=4 piece=0 progress=99
+[13:44:26] [Server thread/INFO] [co.so.us.st.co.ca.ForgeCapsuleChecks/]: FORGE CAPSULE ROUND TRIPS PASSED minecraft:desert_pyramid
+[13:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/stretcher_capsule_check:custom_nether
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/stretcher_capsule_check/custom_nether
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[13:44:29] [Server thread/INFO] [co.so.us.st.co.ca.ForgeCapsuleChecks/]: FORGE CAPSULE floorresume CHECKS PASSED: 1 native structures, loot, archaeology, environment, maps and twice-per-room round trips; 202 ticks
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[13:44:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/stretcher_capsule_check:custom_nether
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/stretcher_capsule_check/custom_nether
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:44:30] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 48s
+7 actionable tasks: 3 executed, 4 up-to-date

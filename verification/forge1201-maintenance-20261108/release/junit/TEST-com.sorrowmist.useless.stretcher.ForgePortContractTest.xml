@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.ForgePortContractTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-02T08:05:28.522Z" hostname="LAPTOP-D3HPHSTM" time="3.479">
+  <properties/>
+  <testcase name="productionHasNoTemporaryConsoleOrUnthrottledFailureLogging()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="3.252"/>
+  <testcase name="localModelTexturesResolveAfterResourceCleanup()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.097"/>
+  <testcase name="configurationTranslationShipsProductionScreenMappings()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.062"/>
+  <testcase name="upstreamKnownIdleBowlContractIsPreservedInOptionalBridge()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.002"/>
+  <testcase name="releaseUsesForgeMetadataAndDoesNotContainVerificationCode()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.028"/>
+  <testcase name="numericBridgesClampWithoutNarrowingOverflow()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.008"/>
+  <testcase name="upstreamBackportShipsForgeSlotMappingsAndCompleteTranslations()" classname="com.sorrowmist.useless.stretcher.ForgePortContractTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

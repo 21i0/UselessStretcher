@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-24T05:00:33.858Z" hostname="LAPTOP-D3HPHSTM" time="0.171">
+  <properties/>
+  <testcase name="actualPlanMustRetainCleanupClearanceEvenWhenItsBoxesDoNotOverlap()" classname="com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest" time="0.107"/>
+  <testcase name="legacyRoomAndAdjacentRequestsRemainStableAfterReload()" classname="com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest" time="0.062"/>
+  <testcase name="checkpointDoesNotRequireGlobalRunningServer()" classname="com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+]]></system-err>
+</testsuite>

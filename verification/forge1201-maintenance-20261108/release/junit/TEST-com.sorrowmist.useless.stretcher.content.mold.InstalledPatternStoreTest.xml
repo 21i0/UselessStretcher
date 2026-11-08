@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-02T08:05:33.931Z" hostname="LAPTOP-D3HPHSTM" time="9.671">
+  <properties/>
+  <testcase name="liveProvidersRefreshButRemovedAndUnrelatedReadersDoNot()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest" time="9.641"/>
+  <testcase name="snapshotsAreSharedImmutableAndInvalidatedOnEveryChange()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest" time="0.02"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

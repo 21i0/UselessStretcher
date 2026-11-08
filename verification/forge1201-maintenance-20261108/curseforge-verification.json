@@ -1,0 +1,25 @@
+{
+  "project_id": 1690885,
+  "file_id": 9404126,
+  "url": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9404126",
+  "sha256": "DA0E0FB4E83C766C15E333D59DFD18F10B8729F66724C0CCDF980D1EA9C1C8FA",
+  "size": 13281710,
+  "download_source": "https://cursemaven.com/curse/maven/useless-stretcher-1690885/9404126/useless-stretcher-1690885-9404126.jar",
+  "download_verified": true,
+  "release_type": "Release",
+  "minecraft": "1.20.1",
+  "loader": "Forge",
+  "verified_date": "2026-11-08",
+  "binary_reuploaded": false,
+  "changelog_added": true,
+  "required_relations": [
+    "Some-Useless-Things",
+    "Applied Energistics 2",
+    "GuideME"
+  ],
+  "environments": [
+    "Client",
+    "Server"
+  ],
+  "metadata_publicly_verified": true
+}

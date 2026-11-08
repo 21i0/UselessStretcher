@@ -1,0 +1,542 @@
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+index ca46a19..4ef8726 100644
+--- a/.github/workflows/build.yml
++++ b/.github/workflows/build.yml
+@@ -12,5 +12,5 @@ jobs:
+           java-version: '17'
+           distribution: temurin
+       - uses: gradle/actions/setup-gradle@v4
+-      - name: Build and test against official Useless Mod 20.2.4.6
++      - name: Build and test against official Useless Mod 20.2.4.7
+         run: chmod +x gradlew && ./gradlew build --console=plain
+diff --git a/.gitignore b/.gitignore
+index 3173e27..67f818e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -19,6 +19,10 @@ Thumbs.db
+ # Logs
+ logs/
+ *.log
++*.cache
++*.bak.png
++*.orig
++*.rej
+ 
+ # Local builds, verification captures and one-off migration artifacts
+ output/
+diff --git a/README.md b/README.md
+index d455102..5a8293f 100644
+--- a/README.md
++++ b/README.md
+@@ -11,13 +11,13 @@
+ An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
+ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
+ 
+-## Forge 1.20.1 · 20.1.6.2
++## Forge 1.20.1 · 20.1.6.3
+ 
+ 加入动态 3D 玩偶 2i、六章有声分支对话与好感互动、带入场演出的独立星空庭院。实体与摆件共用骨架，支持手持、头戴、Curios、天气动作和贴贴共伞。
+ 维度胶囊提供模组分类、搜索、可旋转地图、阶段进度及稳定往返；各源维度对应自有空白环境，同环境结构相邻放置，保留原生结构与运行时数据包处理器，计划和实例随存档保存。
+ 新增手杖穿墙、MEK 辐射防护、有用锭隐形装备，以及 Occultism/RFToolsBuilder 加速兼容；JDT/JDTE 加速载体自动排除，避免范围推进其寿命。
+ 有用锭装备功能和合成配方均默认关闭，四件装备始终在 JEI 隐藏；启用套装功能后才会锁定创造模式，关闭功能或脱下一件后恢复原模式。
+-文件名为 `useless_stretcher-20.1.6.2.jar`，搭配无用之物官方发布的 `20.2.4.6`。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。详细环境、证据和上游限制见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)。
++文件名为 `useless_stretcher-20.1.6.3.jar`，搭配无用之物 `20.2.4.7`（最低 `20.2.4.6`）。玩偶全场景、六章剧情、章节回顾与图鉴已接入真实 Forge 客户端／服务端回归；补齐细臂、握伞和鼻涕修复，并修复 Forge 树叶掉落入口、旧琥珀数据防复制及星空奖励物品 ID。此前完整移植证据见 [玩偶全量移植报告](docs/forge-1.20.1-doll-fullport.md)，本次见 [PR #4 与新版前置验证](docs/forge-1.20.1-pr-4.md)。
+ 新增不依赖手杖的传送按键，默认未绑定；直接按键瞬移，潜行按键使用 Ender IO 旅行锚。
+ 样板获取改为机器倒排索引和会话共享缓存，不再重复扫描全目录，也不再限制获取/存储为 4096 个；接收机器的槽位容量不变。
+ 大量模具勾选保存在世界数据中，物品只携带引用，避免全选后挖掉产生超大同步数据；空模具由万象炉安全跳过。
+@@ -33,7 +33,7 @@ native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration sta
+ | Minecraft | 1.20.1 |
+ | Mod 加载器 | Forge 47.3.10+ |
+ | Java | **17** |
+-| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
++| 必需前置 | [无用之物 / Useless Mod](https://github.com/SorrowMist/UselessMod)（`20.2.4.7`，最低 `20.2.4.6`）、[AE2](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2)（`15.4.8`）及其 GuideME `20.x` 前置 |
+ | 安装位置 | 客户端 **与** 服务端都要装 |
+ 
+ > ⚠️ 本模组通过 Mixin 修改了无用之物的内部实现，**两者版本需要配套**。
+@@ -114,8 +114,8 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
+ 
+ ## 配置文件 / Config
+ 
+-`config/useless_stretcher-common.toml`。游戏内从“模组 → 万象担架 → 配置”即可直接修改，点页面底部“完成/保存”后写入文件；
+-除配方目录过滤需要重载世界/重启外，其余运行时读取的选项立即生效，界面说明均为中文。
++服务端配置文件为 `useless_stretcher-server.toml`：单机在 `saves/<世界>/serverconfig/`，专用服务器在 `<level-name>/serverconfig/`（默认 `world/serverconfig/`）。新世界的配置模板可放在 `defaultconfigs/`，不会覆盖已有世界的设置。单机／局域网宿主从“模组 → 万象担架 → 配置 → 服务端配置”修改，点页面底部“完成/保存”后写入文件并同步在线玩家；专用服务器由服主修改世界级配置。
++除配方目录过滤和有用锭装甲配方需要重载世界/重启外，其余运行时读取的选项立即生效，界面说明均为中文。
+ 
+ ```toml
+ [acceleration]
+@@ -137,12 +137,12 @@ Windows 使用 `gradlew.bat`。仅在开发本体时，可通过 `-PuselessModDe
+ ## 从源码构建 / Building
+ 
+ ```bash
+-# 需要 JDK 17；先构建上文指定版本的 UselessMod
+-./gradlew build -PuselessModDevJar=/path/to/useless_mod-20.2.4.6-dev.jar
++# 需要 JDK 17；自动下载并映射官方本体发布包
++./gradlew build
+ ```
+ 
+ 产物位于 `build/libs/`。AE2 及其他可选模组的编译接口从 Maven 获取，
+-本体使用 `build/devlibs/` 的开发包，不将依赖模组捆绑进附属 JAR。
++本体默认使用官方 20.2.4.7 发布包；仅在开发本体时通过 `-PuselessModDevJar=/path/to/dev.jar` 显式替换，不将依赖模组捆绑进附属 JAR。
+ 
+ ## 许可 / License
+ 
+diff --git a/build.gradle b/build.gradle
+index f9878db..ce33b55 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -51,7 +51,7 @@ sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+ sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+ // ModDev remaps the official release for compilation and game checks. A matching
+ // development jar remains an explicit override for upstream development only.
+-ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.6'
++ext.uselessModRelease = 'com.sorrowmist.useless:useless_mod:20.2.4.7'
+ def uselessModDevJar = providers.gradleProperty('uselessModDevJar')
+         .map { file(it) }
+ configurations.modCompileOnly.transitive = false
+@@ -69,7 +69,7 @@ dependencies {
+     modCompileOnly 'maven.modrinth:hIO8IsD8:dYvtIH7M' // rftoolsbase-1.20-5.0.7
+     modCompileOnly 'maven.modrinth:rxYaglEe:orFPvySe' // advancedae-1.2.7-1.20.1
+     modCompileOnly 'maven.modrinth:rqFWfVlz:tT3CLYvK' // apotheosis-1.20.1-7.4.8
+-    modCompileOnly 'maven.modrinth:IiATswDj:d9GM663Q' // applied-mekanistics-1.4.2
++    modCompileOnly 'maven.modrinth:IiATswDj:9n9p68Qq' // applied-mekanistics-1.4.3
+     modCompileOnly 'maven.modrinth:XxWD5pD3:Zfyso1sP' // appliedenergistics2-forge-15.4.8
+     modCompileOnly 'curse.maven:applied-flux-965012:6755986' // appliedflux-1.20-1.3.2-forge
+     modCompileOnly 'maven.modrinth:lhGA9TYQ:1MKTLiiG' // architectury-9.2.14-forge
+@@ -93,8 +93,8 @@ dependencies {
+     modCompileOnly 'maven.modrinth:nvQzSEkH:LecuGude' // jade-1.20.1-forge-11.13.2
+     modCompileOnly 'maven.modrinth:u6dRKJwZ:zzpNSbJZ' // jei-1.20.1-forge-15.20.0.116
+     modCompileOnly 'maven.modrinth:umyGl7zF:g5igndAv' // kubejs-forge-2001.6.5-build.16
+-    modCompileOnly 'maven.modrinth:Ce6I4WUE:9iboPfea' // mekanism-1.20.1-10.4.15.75
+-    modCompileOnly 'maven.modrinth:OFVYKsAk:x9re7wt4' // mekanismgenerators-1.20.1-10.4.15.75
++    modCompileOnly 'maven.modrinth:Ce6I4WUE:uxe1WQp4' // mekanism-1.20.1-10.4.16.80
++    modCompileOnly 'maven.modrinth:OFVYKsAk:Th4Czz4N' // mekanismgenerators-1.20.1-10.4.16.80
+     modCompileOnly 'maven.modrinth:tCkE8p2N:6SkuAGoz' // placebo-1.20.1-8.6.3
+     modCompileOnly 'maven.modrinth:KZO4S4DO:xDOvxyqP' // powah-5.0.11
+     modCompileOnly 'maven.modrinth:sk9knFPE:uNALdylI' // rhino-forge-2001.2.3-build.10
+diff --git a/docs/2i-asset-sources.md b/docs/2i-asset-sources.md
+index 7857381..ed380aa 100644
+--- a/docs/2i-asset-sources.md
++++ b/docs/2i-asset-sources.md
+@@ -1,6 +1,6 @@
+ # 2i 素材与参考记录
+ 
+-- 皮肤：用户提供 `<WORKSPACE>/玩偶/皮肤.png`，统一接口见 `2i-skin.md`。
++- 皮肤：用户提供 `<WORKSPACE>/玩偶/皮肤.png`，实体统一使用 `assets/useless_stretcher/textures/entity/two_i.png`。
+ - 剧情立绘/CG：用户提供 `<WORKSPACE>/玩偶/图片 压缩后`，使用压缩原图，没有扩图。
+ - 互动体验参考：用户提供 Poppet Daily 0.9.0d（Breezeth，元数据声明 All Rights Reserved）。仅以“动态小玩偶、摸头反馈、手持也活动”等体验为参考；当前模型由 Minecraft PlayerModel 的标准 Steve UV 和本项目自行编写的大头短肢变换构成。走路支撑脚、十二种坐姿待机、皮肤外层、摸头压扁回弹均为 Java 程序动画，不使用 Poppet 的模型、骨骼/动画 JSON、私有运行库、代码包或嘴巴资源；不把它或 GeckoLib 列为依赖。
+ - 三段摸头音效：`two_i_pat_1/2/3.ogg` 已完全替换为本项目原创的双音/三音短旋律。仅由正弦谐波、包络、轻微滑音与固定种子的低通噪声数学合成，不读取、截取、变调或混入任何参考模组音频。历史本地测试包曾使用 Poppet 的三个音效，不能把历史包当作已清理的当前构建发布。
+diff --git a/docs/2i-skin.md b/docs/2i-skin.md
+deleted file mode 100644
+index 75258be..0000000
+--- a/docs/2i-skin.md
++++ /dev/null
+@@ -1,35 +0,0 @@
+-# 2i 换皮肤接口
+-
+-2i 的实体、物品栏图标、主副手、掉落物、展示框和已放置摆件，共用：
+-
+-`assets/useless_stretcher/textures/entity/two_i.png`
+-
+-替换这一个 PNG 即可统一换肤，不需要重新画物品图标或为各形态分别贴图。
+-
+-- 皮肤使用标准 **64×64 Steve（四像素手臂）或 Alex（三像素手臂）** 布局，也支持相同比例的整数倍高清皮肤。按 Alex 标准保留手臂末尾透明列即可自动识别；客户端在重载时只适配手臂 UV，原 PNG 不会被改写。
+-- 帽子、上衣、袖子、裤子的第二层正常保留，跟随对应骨骼运动。
+-- 不添加额外嘴巴贴图，也没有嘴巴动画；原始 PNG 不改写，眨眼通过重载时生成的眼部纹理实现。
+-- 立绘和 Galgame CG 是独立美术资源，不会由 Minecraft 皮肤自动生成。
+-
+-## 用资源包替换
+-
+-资源包根目录放 `pack.mcmeta`，再按上面的完整目录结构放新皮肤：
+-
+-```json
+-{
+-  "pack": {
+-    "pack_format": 34,
+-    "description": "2i 自定义皮肤（Minecraft 1.21.1）"
+-  }
+-}
+-```
+-
+-把资源包放进客户端的 `resourcepacks`，在资源包界面启用。更新图片后按 F3+T 重载即可，不必更换世界中的玩偶。多人游戏中每位客户端需要使用同一资源包，或由服务器分发资源包。
+-
+-## 维护说明
+-
+-源路径固定为 `TwoIDollRenderer.TEXTURE`，实际渲染统一取 `TwoIDollSkin.texture(model.blink())`。加载资源时处理一次 Alex 手臂到 Steve UV 的适配及眼部纹理生成，保证手掌底面完整，袖子外层的透明区域保留；每帧不读 PNG。所有形态共用大头、短手短脚骨架，整体尺度为 0.62。实体只是同一只坐姿玩偶站起身；坐姿双脚自然向外分开。
+-
+-第一人称使用玩家自己的手臂和袖子托住玩偶底面，支持左右惯用手与副手，保留装备/挥手动画；仅持有 2i 时接管该手渲染。第三人称也把支点改到玩偶底部。待机和惯性动画仅在客户端计算，没有假生物或逐帧数据包；陪伴好感由服务端每秒采样，在需要时更新关系组件。摆件保存完整 ItemStack，放置、破坏掉落、Shift 回收均保留组件。
+-
+-2026-10-12：所有形态共用较长躯干和四肢比例。眨眼保持头部形状，只改脸部 UV 的两只眼睛：当前皮肤布局 x=9..10 / 13..14，y=14（HD 皮肤按整数比例放大）；闭眼颜色采自相邻皮肤和眉毛。替换皮肤若眼睛位置不同，应对应调整眨眼区域；透明头发外层保持透明。天气配件使用独立原创纹理，不会给衣服染上伞的颜色。
+diff --git a/docs/forge-1.20.1-pr-4.md b/docs/forge-1.20.1-pr-4.md
+new file mode 100644
+index 0000000..c7aab91
+--- /dev/null
++++ b/docs/forge-1.20.1-pr-4.md
+@@ -0,0 +1,54 @@
++# Forge 1.20.1 · PR #4 与无用之物 20.2.4.7 兼容验证
++
++2026-10-25 审查 [PR #4](https://github.com/21i0/UselessStretcher/pull/4)，作者 AyaYumi，精确提交 `318ba12dc7b5acd13b6da9d83a9b35c4ff6272d7`，基线 `fc0dda8`。代码审查与下列本机回归未发现阻止合并的问题。保留作者提交，用合并提交接入 `1.20.1`。
++
++## 采用与补充
++
++- 采用 MEK／Generators 10.4.16.80、Applied Mekanistics 1.4.3 编译依赖；胶囊环境、后台恢复、进度与慢回调改为 debug，真正生成失败的警告仍保留。模具枚举异常在每个目录构建最多打印五条，跳过问题条目继续构建的行为保留。
++- 采用清理过时换肤说明与忽略本地迁移残留的修改，不改动玩偶、剧情、存档、网络协议或获取概率。
++- 补充将默认本体坐标、CI 说明改为官方 20.2.4.7，手杖回归的默认运行 MEK 版本也对齐 10.4.16.80，避免仅修改编译接口而运行旧版。
++- 修正 README 与 GuideME：Forge SERVER 配置属于当前世界的 `serverconfig/useless_stretcher-server.toml`；专用服务器世界目录遵从 `level-name`。`defaultconfigs/` 是新世界模板，不应让玩家误改全局 `config/` 后以为已覆盖现有世界。
++- 版本递增至 **20.1.6.3 待发布版**，已发布的 20.1.6.2 和旧标签不修改。本轮用户自行发布，不创建或更新 Release。
++
++## 真实前置
++
++Minecraft 1.20.1、Forge 47.3.10、Java 17.0.20；AE2 15.4.8、GuideME 20.1.15、JEI 15.20.0.116、Curios 5.14.1。使用[官方无用之物 20.2.4.7](https://github.com/SorrowMist/UselessMod/releases/tag/20.2.4.7)原始发布 JAR，无第三方源码自建包或二进制修改。
++
++本体标签对象 `fb97fca76eef485a352bd98f9f2ac9c487372b80` 解引用至 `e25d17a8f8722e7e73619fd6b9c581f8b0bbdfa2`；JAR 4,209,822 字节，SHA256 `8FDAE841D6736B81E1D30B23811B470CF6014F94C8168CBAB239B10841A80B55`。新增的三份 MEK／AppMek 依赖与 Modrinth 官方元数据 SHA512 一致，见本轮 `dependency-manifest.json`。
++
++## 本机结果
++
++| 检查 | 实测结果及原始日志 |
++| --- | --- |
++| 玩偶服务端 | `doll-server-first-v1.log`、`doll-server-restart-v1.log`：两个独立进程各 13/13，均明确 `FORGE 2I SERVER CHECKS PASSED`；包括真实树叶掉落、独立一次性和满包待领取、旧数据迁移、所有权、礼物、跟随、共伞、防召唤／加速、46 类伤害与强删、星空往返／八份奖励。 |
++| 真实重启 | 第二进程明确 `LEAF RESTART PASSED`、`2I COMPANIONSHIP RESTART PASSED`、`2I CURIOS RESTART PASSED`。实际读取前一进程世界与饰品数据。 |
++| 三种新依赖运行 | `staff-pack-v1.log` 实装 MEK／Generators 10.4.16.80、AppMek 1.4.3；`FORGE STAFF PACK CATALOG PASSED`，通过本体原生配方适配和附属增量目录读到 AppMek 20、MEK 7、Generators 1 个不同模具条目。这是模具数，不是全部配方数或所有机器验证。 |
++| 辐射／扳手 | 同一真实服务端明确三项手杖 PASSED；生存模式剂量暴露对照、128 次原生更新前清除、背包／副手／NBT 和九类标签开关通过。 |
++| 防收容 | `capture-client-v1.log`：实装 Ars Nouveau 4.12.7、Productive Bees 12.6.0、GeckoLib 4.8.2；`FORGE 2I CAPTURE CHECKS PASSED`，包含旧容器数据防复制和普通容器对照。 |
++| 完整剧情客户端 | 同一日志明确 `STORY CHECKS PASSED`，中英文六章各八种视图（96 张章节截图），逐字、自动／快进选项暂停、ACK/token、历史／设置、回顾／图库和声音检查；双持／握伞／鼻涕检查通过。 |
++| 饰品／胶囊客户端 | 同一日志明确 `2I CURIOS CLIENT PASSED`、`CAPSULE CLIENT CHECKS PASSED`、`CAPSULE CLIENT ROUND TRIPS PASSED`；原生饰品同步、气泡／光标预览、搜索／旋转地图／阶段进度／就绪、同一实例两次进入及两次返回通过。未出现此前的异步保存并发异常。 |
++| 普通发行构建 | `build-final-v1.log`：不带场景开关重新构建，六项 JUnit 均通过，failures/errors/skipped 为零。 |
++| 双份 JAR 审计 | 构建与交付包 SHA256 相同；生产源码和资源齐全，六章故事、版本、refmap、内嵌 MixinExtras 均通过；测试条目和外部 class 均为零。 |
++
++## 交付与复现
++
++文件：`<WORKSPACE>/useless_stretcher-20.1.6.3.jar`，13,206,826 字节。SHA256 `FC09162716BE42B2BE7563AFE5DE495A764429AA09470B80BE441D6B0EB196A0`。两 TXT、交接和 GuideME 已更新；本次没有发布 Release。GitHub 对合并后提交的构建结果单独保存在本轮交付记录。
++
++```text
++gradlew build
++gradlew runDollServerCheck -PdollChecks -PdollServerDirectory=run/pr4-doll-server
++gradlew runDollServerCheck -PdollChecks -PdollServerDirectory=run/pr4-doll-server
++gradlew runStaffCompatCheck -PcapsuleChecks -PstaffCompatChecks -PstaffPackChecks -PstaffCompatDirectory=run/pr4-staff-check
++gradlew runDollServerCheck runDollClientCheck -PdollChecks -PdollCaptureChecks -PdollServerDirectory=run/pr4-capture-server -PdollClientDirectory=run/pr4-client-check
++python docs/audit_forge_release.py build/libs/useless_stretcher-20.1.6.3.jar
++```
++
++游戏回归使用接受 EULA 的隔离目录，不运行正式存档。须核对具体 PASSED 和失败标记，不能仅凭 Gradle 退出码。完整原始记录在 `<WORKSPACE>/archive/forge1201-pr-review-20261025/`，精选证据及哈希在 `verification/forge1201-20261025-pr4/`。
++
++## 范围与上游边界
++
++20.2.4.7 对缺失的可选适配增加探测、跳过和回退，不等于补齐所有被排除的适配功能；Ars 配方及 PB 普通生物捕获等上游边界不能因日志安静就宣称已解决。本轮 2i 防收容路径已独立通过。
++
++隔离开发运行仍有未安装可选模组的目标类警告、开发 refmap／Windows Log4j URI 提示，以及首建超平坦测试世界的 `No key layers` 提示；没有将这些写成“日志零警告”。本次排除了场景失败、Mixin 应用／注入失败和保存并发异常。
++
++没有运行完整整合包、全部第三方结构、所有机器加速或全部扳手交互；此前黄金碗／建造机和胶囊多进程压力证据保留，不能冒充本轮重测。20.2.4.6 兼容范围保持原声明，本次实际运行的是 20.2.4.7。
+diff --git a/gradle.properties b/gradle.properties
+index 4774548..d774a0b 100644
+--- a/gradle.properties
++++ b/gradle.properties
+@@ -9,6 +9,6 @@ forge_version=47.3.10
+ loader_version_range=[47,)
+ mod_id=useless_stretcher
+ mod_name=Useless Stretcher
+-mod_version=20.1.6.2
++mod_version=20.1.6.3
+ mod_group_id=com.sorrowmist.useless
+ mod_license=MIT
+diff --git a/gradle/capsule-checks.gradle b/gradle/capsule-checks.gradle
+index 51ec738..4ab31e2 100644
+--- a/gradle/capsule-checks.gradle
++++ b/gradle/capsule-checks.gradle
+@@ -21,7 +21,11 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
+             if (providers.gradleProperty('mekanismCheckRepository').isPresent())
+                 modRuntimeOnly "mekanism:Mekanism:${providers.gradleProperty('mekanismMavenVersion').getOrElse('1.20.1-10.4.16.80')}"
+             else
+-                modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('9iboPfea')}"
++                modRuntimeOnly "maven.modrinth:Ce6I4WUE:${providers.gradleProperty('mekanismCheckVersion').getOrElse('uxe1WQp4')}"
++            if (providers.gradleProperty('staffPackChecks').isPresent()) {
++                modRuntimeOnly 'maven.modrinth:OFVYKsAk:Th4Czz4N'
++                modRuntimeOnly 'maven.modrinth:IiATswDj:9n9p68Qq'
++            }
+         }
+         if (providers.gradleProperty('uselessModDevJar').isPresent())
+             runtimeOnly files(providers.gradleProperty('uselessModDevJar').get())
+@@ -60,6 +64,7 @@ if (providers.gradleProperty('capsuleChecks').isPresent()) {
+             gameDirectory = file(providers.gradleProperty('staffCompatDirectory').getOrElse('run/staff-compat-check'))
+             programArgument '--nogui'
+             systemProperty 'stretcher.staff.compatCheck', 'true'
++            systemProperty 'stretcher.staff.packCheck', providers.gradleProperty('staffPackChecks').isPresent().toString()
+         }
+     }
+ }
+diff --git a/src/capsuleCheck/java/com/sorrowmist/useless/stretcher/capsulecheck/ForgeStaffCompatChecks.java b/src/capsuleCheck/java/com/sorrowmist/useless/stretcher/capsulecheck/ForgeStaffCompatChecks.java
+index df8d288..2119492 100644
+--- a/src/capsuleCheck/java/com/sorrowmist/useless/stretcher/capsulecheck/ForgeStaffCompatChecks.java
++++ b/src/capsuleCheck/java/com/sorrowmist/useless/stretcher/capsulecheck/ForgeStaffCompatChecks.java
+@@ -38,9 +38,13 @@ public final class ForgeStaffCompatChecks {
+     @SubscribeEvent public static void tick(TickEvent.ServerTickEvent event) {
+         if (!Boolean.getBoolean("stretcher.staff.compatCheck") || done
+                 || event.phase != TickEvent.Phase.END || ++ticks < 40) return;
+-        done = true;
+         var server = event.getServer();
+         try {
++            if (Boolean.getBoolean("stretcher.staff.packCheck") && !checkPackCatalog(server.overworld())) {
++                check(ticks < 640, "native pack mold catalog completes without blocking the server");
++                return;
++            }
++            done = true;
+             check(ModList.get().isLoaded("mekanism"), "Mekanism is actually loaded");
+             ServerPlayer player = new ServerPlayer(server, server.overworld(),
+                     new GameProfile(UUID.randomUUID(), "StaffCompat"));
+@@ -60,11 +64,27 @@ public final class ForgeStaffCompatChecks {
+                     ModList.get().getModContainerById("mekanism").orElseThrow().getModInfo().getVersion(),
+                     ModList.get().getModContainerById("useless_mod").orElseThrow().getModInfo().getVersion());
+         } catch (Throwable failure) {
++            done = true;
+             LogUtils.getLogger().error("FORGE STAFF COMPAT CHECKS FAILED", failure);
+         }
+         server.halt(false);
+     }
+ 
++    private static boolean checkPackCatalog(net.minecraft.server.level.ServerLevel level) {
++        for (String id : new String[]{"mekanism", "mekanismgenerators", "appmek"})
++            check(ModList.get().isLoaded(id), "actual pack dependency loaded: " + id);
++        var catalog = com.sorrowmist.useless.stretcher.content.mold.MoldCatalog.start(level);
++        if (!catalog.advance()) return false;
++        var counts = new java.util.TreeMap<String, Integer>();
++        for (String id : new String[]{"mekanism", "mekanismgenerators", "appmek"}) {
++            var entries = catalog.result().get(id);
++            check(entries != null && !entries.isEmpty(), "native pack recipe molds available: " + id);
++            counts.put(id, entries.size());
++        }
++        LogUtils.getLogger().info("FORGE STAFF PACK CATALOG PASSED: three actual dependencies, native recipe adapters and incremental mold enumeration {}", counts);
++        return true;
++    }
++
+     private static void checkRadiation(ServerPlayer player) throws Exception {
+         IRadiationEntity dose = player.getCapability(Capabilities.RADIATION_ENTITY).orElseThrow(
+                 () -> new AssertionError("Native Mekanism player radiation capability"));
+diff --git a/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleDimensions.java b/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleDimensions.java
+index d9901ae..22c2aaf 100644
+--- a/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleDimensions.java
++++ b/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleDimensions.java
+@@ -68,7 +68,7 @@ public final class CapsuleDimensions {
+                 server.forgeGetWorldMap().put(target, mirror);
+                 server.markWorldsDirty();
+                 MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(mirror));
+-                LogUtils.getLogger().info("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
++                LogUtils.getLogger().debug("CAPSULE ENVIRONMENT {} <- {} type={} minY={} height={}", target.location(),
+                         source.dimension().location(), source.dimensionTypeRegistration().unwrapKey().orElse(null),
+                         mirror.getMinBuildHeight(), mirror.getHeight());
+             }
+diff --git a/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.java b/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.java
+index aed7e07..1131cb7 100644
+--- a/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.java
++++ b/src/main/java/com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.java
+@@ -223,7 +223,7 @@ public final class NativeCapsules {
+             job.maxStep = Math.max(job.maxStep, elapsed);
+             if (!job.room.phase.equals(job.loggedPhase) || job.ticks % 200 == 0) {
+                 job.loggedPhase = job.room.phase;
+-                LogUtils.getLogger().info("CAPSULE PROGRESS {} target={} phase={} progress={}% chunks={}/{} attempt={}",
++                LogUtils.getLogger().debug("CAPSULE PROGRESS {} target={} phase={} progress={}% chunks={}/{} attempt={}",
+                         job.room.structure, job.room.dimension, job.room.phase, job.room.progress,
+                         job.room.chunk, job.chunkCount, job.room.attempt);
+             }
+@@ -278,7 +278,7 @@ public final class NativeCapsules {
+             if (target == null || source == null || source.getSeed() != room.sourceSeed || structure == null)
+                 throw new CapsuleLimitException("source_environment_unavailable");
+             JOBS.addLast(new Job(data, room, target, source, structure));
+-            LogUtils.getLogger().info("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
++            LogUtils.getLogger().debug("CAPSULE BACKGROUND RESUMED {} phase={} chunk={} piece={}", room.key(), room.phase, room.chunk, room.piece);
+         } catch (RuntimeException failure) {
+             room.generating = false;
+             room.error = failure instanceof CapsuleLimitException limit ? limit.code : "failed";
+@@ -802,7 +802,7 @@ public final class NativeCapsules {
+                     }
+                     long elapsed = System.nanoTime() - began;
+                     if (elapsed > CALLBACK_WARN_NANOS) {
+-                        LogUtils.getLogger().warn("Native capsule callback took {} ms for {} chunk {} piece {}",
++                        LogUtils.getLogger().debug("Native capsule callback took {} ms for {} chunk {} piece {}",
+                                 elapsed / 1_000_000.0, room.structure, chunk, room.piece);
+                     }
+                     checkpointPiece(room.piece++); return false;
+@@ -815,7 +815,7 @@ public final class NativeCapsules {
+                     }
+                     long elapsed = System.nanoTime() - began;
+                     if (elapsed > CALLBACK_WARN_NANOS) {
+-                        LogUtils.getLogger().warn("Native capsule afterPlace took {} ms for {} chunk {}",
++                        LogUtils.getLogger().debug("Native capsule afterPlace took {} ms for {} chunk {}",
+                                 elapsed / 1_000_000.0, room.structure, chunk);
+                     }
+                     room.afterPlaced = true; checkpoint(); return false;
+diff --git a/src/main/java/com/sorrowmist/useless/stretcher/content/mold/MoldCatalog.java b/src/main/java/com/sorrowmist/useless/stretcher/content/mold/MoldCatalog.java
+index a268e95..f275285 100644
+--- a/src/main/java/com/sorrowmist/useless/stretcher/content/mold/MoldCatalog.java
++++ b/src/main/java/com/sorrowmist/useless/stretcher/content/mold/MoldCatalog.java
+@@ -72,6 +72,7 @@ public final class MoldCatalog {
+         private final Map<String, Set<Ingredient>> inspected = new HashMap<>();
+         private Map<String, List<MoldEntry>> result;
+         private int cursor;
++        private int moldWarnings;
+ 
+         private Builder(List<AlloyFurnaceRecipeCatalog.Entry> recipes) {
+             this(null, recipes, true);
+@@ -104,8 +105,10 @@ public final class MoldCatalog {
+                         try {
+                             displayed = ingredient.getItems();
+                         } catch (RuntimeException exception) {
+-                            com.mojang.logging.LogUtils.getLogger().warn(
+-                                    "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
++                            if (moldWarnings++ < 5) {
++                                com.mojang.logging.LogUtils.getLogger().warn(
++                                        "Cannot enumerate myriad mold for {}", entry.recipe().id(), exception);
++                            }
+                             continue;
+                         }
+                         for (ItemStack stack : displayed) {
+diff --git a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/extras.md b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/extras.md
+index 4f47364..75c7d01 100644
+--- a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/extras.md
++++ b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/extras.md
+@@ -30,7 +30,7 @@ navigation:
+ 
+ 所有配置（包括高亮显示）统一收纳在模组配置页的“服务端配置”分类。单机或局域网主机进入世界后，在“模组 → 万象担架 → 配置 → 服务端配置”中修改，返回最外层配置页时保存并同步给在线玩家。联机玩家不能用自己的配置覆盖服务端。
+ 
+-专用服务器由服主编辑 `config/useless_stretcher-server.toml`；如果世界的 `serverconfig` 目录已有同名文件，则以世界内文件为准（单机通常为 `saves/世界名/serverconfig/`，服务器通常为 `world/serverconfig/`）。配置按钮悬停可查看当前实际文件路径。首次升级会在没有服务端配置及默认模板时导入旧 `useless_stretcher-common.toml`，旧文件保留备份，以后修改服务端文件即可。
++专用服务器由服主编辑 `<level-name>/serverconfig/useless_stretcher-server.toml`（默认世界名为 `world`；单机为 `saves/世界名/serverconfig/`）。配置按钮悬停可查看当前实际文件路径。新世界可用 `defaultconfigs/useless_stretcher-server.toml` 作为模板，已有世界以自己的文件为准。首次升级会尝试导入旧 `useless_stretcher-common.toml` 并保留原文件，以后修改当前世界的服务端文件即可。
+ 
+ 主要选项：
+ 
+@@ -52,7 +52,7 @@ navigation:
+ 
+ ## 升级提醒
+ 
+-客户端和服务端应同时更新。20.1.6.0 需要无用之物 20.2.4.6，旧版扩容补丁已经删除。样板索引、去重缓存与大容量模具服务端存储仍然保留。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。详细操作见[维度胶囊](capsule.md)。
++客户端和服务端应同时更新。20.1.6.3 配套无用之物 20.2.4.7（最低 20.2.4.6），旧版扩容补丁已经删除。样板索引、去重缓存与大容量模具服务端存储仍然保留。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。详细操作见[维度胶囊](capsule.md)。
+ 
+ ## 鸣谢
+ 
+diff --git a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/index.md b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/index.md
+index b1769c0..db56d8e 100644
+--- a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/index.md
++++ b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/index.md
+@@ -37,6 +37,6 @@ navigation:
+ 
+ 需要安装 Minecraft 1.20.1、无用之物、AE2，以及 Forge 47.3.10+。本分支使用 AE2 15 自带的指南界面。
+ 
+-20.1.6.0 需要无用之物 20.2.4.6，直接使用本体原生提供的 4096 样板槽位。旧版扩容补丁已删除。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。
++20.1.6.3 配套无用之物 20.2.4.7（最低 20.2.4.6），直接使用本体原生提供的 4096 样板槽位。旧版扩容补丁已删除。由 1.5.x 升级时请使用新存档；此前 1.6.0 测试存档中的胶囊实例保留原位置和入口。
+ 
+ 材质与游戏内鸣谢署名：虾比。
+diff --git a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
+index 19f179f..49c3d9a 100644
+--- a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
++++ b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
+@@ -10,7 +10,7 @@ item_ids:
+ 
+ # 2i 玩偶
+ 
+-Forge 1.20.1 版完整提供六章剧情、章节回顾、图片欣赏及独立星空庭院。请搭配无用之物官方 20.2.4.6、AE2 15.4.8 与 GuideME 20.x；Curios 5.x 为可选佩戴扩展。
++Forge 1.20.1 版完整提供六章剧情、章节回顾、图片欣赏及独立星空庭院。请搭配无用之物官方 20.2.4.7（最低 20.2.4.6）、AE2 15.4.8 与 GuideME 20.x；Curios 5.x 为可选佩戴扩展。
+ 
+ <ItemImage id="useless_stretcher:two_i_doll" scale="5" />
+ 
+diff --git "a/\344\270\207\350\261\241\346\213\205\346\236\266-\351\241\271\347\233\256\344\272\244\346\216\245\346\226\207\346\241\243.md" "b/\344\270\207\350\261\241\346\213\205\346\236\266-\351\241\271\347\233\256\344\272\244\346\216\245\346\226\207\346\241\243.md"
+index 1b2832e..ead25dd 100644
+--- "a/\344\270\207\350\261\241\346\213\205\346\236\266-\351\241\271\347\233\256\344\272\244\346\216\245\346\226\207\346\241\243.md"
++++ "b/\344\270\207\350\261\241\346\213\205\346\236\266-\351\241\271\347\233\256\344\272\244\346\216\245\346\226\207\346\241\243.md"
+@@ -1,3 +1,17 @@
++# Forge 1.20.1 · 20.1.6.3 · PR #4 最新交接（2026-10-25）
++
++本节优先于以下历史授权。用户本轮要求审查、测试最新本体并在无问题后合并；**由用户发布，本轮不得创建 Release 或改动旧版附件／标签**。
++
++PR #4 作者 AyaYumi，精确提交 318ba12dc7b5acd13b6da9d83a9b35c4ff6272d7；保留作者提交合入 1.20.1。补充默认本体／CI 改为官方 20.2.4.7、运行 MEK 版本与编译一致、实际三依赖模具回归，修正配置路径。无用之物官方 JAR SHA256 8FDAE841D6736B81E1D30B23811B470CF6014F94C8168CBAB239B10841A80B55，未改造或自建第三方包。
++
++交付 <WORKSPACE>/useless_stretcher-20.1.6.3.jar，13,206,826 字节，SHA256 FC09162716BE42B2BE7563AFE5DE495A764429AA09470B80BE441D6B0EB196A0。与旧发布 20.1.6.2 分开，不复用旧标签。两 TXT 和本交接同步到 <WORKSPACE> 的 Forge-1.20.1 专用文件，主线不改动。
++
++两个服务端进程各 13/13、真实重启记录、新 MEK／Generators／AppMek 原生模具目录、辐射与九类扳手、真实 Ars／PB 防收容、完整六章中英文客户端、Curios 同步、气泡／光标预览、胶囊同实例两次往返、普通最终 build／六 JUnit、双份 JAR 审计通过。目录检查所得 appmek=20、mekanism=7、mekanismgenerators=1 是不同模具条目数，不是穷举配方或所有机器数。
++
++详情 docs/forge-1.20.1-pr-4.md。原始证据 <WORKSPACE>/archive/forge1201-pr-review-20261025/，精选 verification/forge1201-20261025-pr4/；GitHub 合并状态与当前提交 CI 单独保存 merge-ci-status.json。保持可选适配缺失和整合包／结构穷举边界，不因降日志级别就写成问题修复。
++
++## 历史交接
++
+ # Forge 1.20.1 · 20.1.6.2 最新交接
+ 
+ 本节优先于后面的历史记录。用户已明确要求完成玩偶全量移植并更新发布，本次授权提交、推送 `1.20.1` 和创建独立 `v20.1.6.2` Release；不移动旧版标签或 1.21.1 分支。
+diff --git "a/\344\270\207\350\261\241\346\213\205\346\236\266\344\275\277\347\224\250\350\257\264\346\230\216.txt" "b/\344\270\207\350\261\241\346\213\205\346\236\266\344\275\277\347\224\250\350\257\264\346\230\216.txt"
+index 272a7bb..3ce0971 100644
+--- "a/\344\270\207\350\261\241\346\213\205\346\236\266\344\275\277\347\224\250\350\257\264\346\230\216.txt"
++++ "b/\344\270\207\350\261\241\346\213\205\346\236\266\344\275\277\347\224\250\350\257\264\346\230\216.txt"
+@@ -1,9 +1,9 @@
+-万象担架 Forge 1.20.1 · 20.1.6.2 使用说明
++万象担架 Forge 1.20.1 · 20.1.6.3 使用说明
+ 
+-文件：<WORKSPACE>/useless_stretcher-20.1.6.2.jar
+-大小：13,206,731 字节；SHA256：3414E5897EEFE20E5B90CA1AA4A8E1C05DE1130B0A6E19A78697F7879D251C73
++文件：<WORKSPACE>/useless_stretcher-20.1.6.3.jar
++大小：13,206,826 字节；SHA256：FC09162716BE42B2BE7563AFE5DE495A764429AA09470B80BE441D6B0EB196A0
+ 
+-安装：Minecraft 1.20.1、Forge 47.3.10+、Java 17；客户端和服务端都安装本模组、官方无用之物 20.2.4.6、AE2 15.4.8 及 GuideME 20.x。Curios 5.x 可选。不要混装 NeoForge／Minecraft 1.21.1 的本体或附属。
++安装：Minecraft 1.20.1、Forge 47.3.10+、Java 17；客户端和服务端都安装本模组、官方无用之物 20.2.4.7、AE2 15.4.8 及 GuideME 20.x。Curios 5.x 可选。不要混装 NeoForge／Minecraft 1.21.1 的本体或附属。
+ 本次直接使用官方本体发布包；<WORKSPACE>/Forge-1.20.1-配套依赖/ 中的同名旧开发构建包仅属历史归档，安装时应换成官方发布包。
+ 
+ 2i 获取与所有权：
+@@ -32,7 +32,10 @@
+ 维度胶囊右键打开分类与搜索、旋转预览、后台生成进度，加载完成后有就绪通知；重复进入同一实例，另建实例需主动选择。缓存和计划写入存档。第三方要求固定维度的私有逻辑仍有兼容边界。
+ 有用锭装备功能和合成配方默认关闭，JEI 隐藏；GuideME 不展示此装备。游戏内说明请用 AE2 原指南的“万象担架附属”页面或物品悬停阅读键。
+ 
+-已知上游：官方本体的 Ars 魔法配方适配和 PB 普通生物捕获适配类缺失可能报错。此包不会补造本体的这些功能，2i 防收容已实测通过。未运行 ATM10 整包或穷举第三方结构。
++已知上游：官方本体仍未提供的 Ars 魔法配方和 PB 普通生物捕获适配会跳过或回退，不能视为这些功能已经补齐。此包不会补造本体的这些功能，2i 防收容已实测通过。未运行 ATM10 整包或穷举第三方结构。
+ 升级前保留旧 JAR 与世界备份。此 Forge 分支与 1.21.1 的世界格式不同，不提供跨 Minecraft 版本存档迁移。
+-详细证据：docs/forge-1.20.1-doll-fullport.md
++本轮证据：docs/forge-1.20.1-pr-4.md；此前全量移植：docs/forge-1.20.1-doll-fullport.md
+ 本轮已完成真实 Forge 服务端 13 阶段、完整中英文六章客户端、跨进程存档、真实 Ars／PB 防收容、同一胶囊两次往返、官方本体与 MEK 辐射／九种扳手回归，以及 6 项 JUnit 和发行包双审计；测试类不随包发布。
++
++本次为 20.1.6.3 待发布包，PR #4 已审查接入，未创建新 Release。
++服务端配置在当前世界的 serverconfig/useless_stretcher-server.toml；新世界模板放 defaultconfigs/。专用服务器世界目录由 level-name 决定，默认是 world/。
+diff --git "a/\346\233\264\346\226\260.txt" "b/\346\233\264\346\226\260.txt"
+index e8a7c4a..0485530 100644
+--- "a/\346\233\264\346\226\260.txt"
++++ "b/\346\233\264\346\226\260.txt"
+@@ -1,32 +1,19 @@
+-万象担架 Forge 1.20.1 · 20.1.6.2（2i 玩偶与六章剧情全量移植）
++万象担架 Forge 1.20.1 · 20.1.6.3（待用户发布）
+ 
+-环境：Minecraft 1.20.1、Forge 47.3.10+、Java 17。
+-前置：无用之物官方 20.2.4.6、AE2 15.4.8、GuideME 20.x；Curios 5.x 可选。
+-客户端与服务端同时更新。此包不能装入 1.21.1。
++环境：Minecraft 1.20.1、Forge 47.3.10+、Java 17；配套无用之物官方 20.2.4.7、AE2 15.4.8、GuideME 20.x；Curios 5.x 可选。客户端与服务端同时更新。
+ 
+-1. 完整提供 2i 六章长篇分支剧情、声音字效果、章节回顾、17 张图片欣赏、星空庭院及邀请开关。
+-2. 实体、手持、头戴、摆件、Curios 共用新皮肤与尾巴、眨眼、重力／奔跑动作、天气反应和贴贴共伞；补齐 Alex 细臂、握伞及鼻涕向下生长修复。待机不抖手，双持换手动作保留。
+-3. 修复 Forge 真实挖树叶未进入旧掉落重载的问题。玩偶默认万分之一、手杖十万分之一；每位玩家每存档各一次，两种抽中、领取与满包待领取记录独立，旧记录安全迁移，重登／重启不重复。
+-4. 旧版琥珀的 entityType 数据也会识别 2i，收容罐、蜜蜂封装、容器直接写入及旧容器释放均禁止复制玩偶。
+-5. 修复星空奖励使用的 AE2 15 物品 ID，八份奖励按玩家存档保存，不因重进庭院重发。
+-6. 适配 Forge Curios 5 的实际功能槽计时；同一玩偶换形态不重置进度，陪伴每五分钟 +1、每天最多 +2，计时不持续写入物品。
+-7. 胶囊区块在原生 Forge 保存事件后对 NBT 建立快照，避免异步保存与后续生成共享数据导致并发异常。
+-8. 保留此前胶囊、黄金碗／建造机加速、MEK 辐射、扳手别名修复；有用锭装备及配方默认关闭，JEI 隐藏，GuideME 不提供该装备说明。
+-9. 构建直接使用官方本体发布包，无须再构建第三方移植源码。
++1. 审查并接入 AyaYumi 的 PR #4：MEK／Generators 编译版本对齐 10.4.16.80，AppMek 对齐 1.4.3。
++2. 胶囊进度、环境和慢回调诊断改用 debug，减少正常游戏日志刷屏；错误生成仍保留警告，界面进度与就绪通知保留。
++3. 同一目录构建的模具枚举异常最多打印五条，问题条目仍跳过，不妨碍其他模具。
++4. 默认构建直接使用官方本体 20.2.4.7；手杖运行回归也对齐新版 MEK，增加实装 Generators／AppMek 与原生模具目录验证。
++5. 修正 README、GuideME 的世界级服务端配置路径和新世界模板说明，移除过时换肤文档。
++6. 保留 20.1.6.2 的完整 2i、六章 Galgame、回顾／图库／庭院、一次性掉落与保护，以及现有胶囊和手杖功能。
+ 
+-本轮实际验证：
+-- 真实 Forge 服务端全部 13 阶段通过，含礼物、所有权、跟随、共伞、禁止加速／召唤、本体光环、46 类伤害与强删、庭院往返和奖励。
+-- 真正跨进程检查树叶待领取／已领取、陪伴计时和 Curios 物品记录恢复。
+-- 六章中英文 UI、剧情控制／回顾／图鉴、原生 Curios 同步、光标预览与气泡、胶囊同一实例两次进入／返回通过。
+-- 新皮肤与两种粒子逐像素、眨眼、尾巴弹簧和闭合蝴蝶结、144 个握伞姿势及 240 个鼻涕姿势通过；截图已检查。
+-- 实装 Ars Nouveau 4.12.7、Productive Bees 12.6.0 的 2i 防收容与旧容器防复制检查通过。
+-- 普通 build、6 项 JUnit、包内版本、全部生产资源与测试类排除审计通过。
+-- 最终客户端复测无区块保存并发异常；官方本体搭配 MEK 10.4.15.75 的辐射防护（含 128 次预效果恢复）和九种扳手标签开关复测通过。
++本轮验证：两个进程各 13 项玩偶回归、跨进程保存、实际 Ars／PB 防收容、中英文六章客户端、饰品同步、光标预览、胶囊两次往返、新 MEK／Generators／AppMek 模具目录、辐射／九类扳手、六项 JUnit 和构建／交付包双审计通过。
++测试代码与数据不进入交付 JAR。不是完整整合包或全部第三方机器／结构的穷举验证。上游缺失可选适配仍可能跳过，本次不宣称其功能已全部补齐。
+ 
+-已知上游：官方本体尚缺 Ars 魔法配方及普通生物 PB 捕获适配类，装对应模组时这些本体功能可能报错；2i 已在进入捕获路径前阻止。未测试 ATM10 整包或所有第三方结构，不能由本次结果推断为全部兼容。
+-
+-文件：<WORKSPACE>/useless_stretcher-20.1.6.2.jar
+-大小：13,206,731 字节
+-SHA256：3414E5897EEFE20E5B90CA1AA4A8E1C05DE1130B0A6E19A78697F7879D251C73
+-发布： https://github.com/21i0/UselessStretcher/releases/tag/v20.1.6.2
+-详细说明与证据：docs/forge-1.20.1-doll-fullport.md
++文件：<WORKSPACE>/useless_stretcher-20.1.6.3.jar
++大小：13,206,826 字节
++SHA256：FC09162716BE42B2BE7563AFE5DE495A764429AA09470B80BE441D6B0EB196A0
++详情：docs/forge-1.20.1-pr-4.md
++本轮不创建 Release，不覆盖已发布 20.1.6.2；由用户测试后发布。

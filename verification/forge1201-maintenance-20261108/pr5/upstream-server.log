@@ -1,0 +1,718 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\archive\pr-5-review-20261029\source\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\InstalledStretcherPassiveMixin.java:26: ����: Cannot find target method "lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z" for @Inject.method="lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z" in com.sorrowmist.useless.content.blockentities.multiblock.PassiveCraftingHatchBlockEntity
+    @Inject(method = "lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z",
+    ^
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+8 ������
+
+> Task :processResources
+> Task :classes
+
+> Task :downloadAssets
+Loaded 133 artifacts from <WORKSPACE>\archive\pr-5-review-20261029\source\build\tmp\downloadAssets\nfrt_artifact_manifest.properties
+  WARNING: de.oceanlabs.mcp:mcp_config:1.20.1-20230612.114412@zip is not present in the artifact manifest
+Downloading asset index 5
+Using Minecraft asset root: <USER_HOME>\.gradle\caches\neoformruntime\assets
+  DL    https://piston-meta.mojang.com/v1/packages/50ce48459eb9e29836662862273d7b15d41c2c33/5.json
+
+> Task :writeUpstreamServerCheckLegacyClasspath
+> Task :prepareUpstreamServerCheckRun
+
+> Task :runUpstreamServerCheck
+2026-10-29 18:03:37,013 main WARN Advanced terminal features are not available in this environment
+[18:03:37] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, useless_stretcher.mixins.json, --nogui]
+[18:03:37] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[18:03:37] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-server\config\fml.toml is not correct. Correcting
+[18:03:37] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[18:03:37] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[18:03:37] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[18:03:37] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[18:03:37] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[18:03:37] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/<USER_HOME>/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23141!/ Service=ModLauncher Env=SERVER
+[18:03:37] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.10\523aa0cd9a773b2b56268d8689b2fb5c1f072941\fmlcore-1.20.1-47.3.10.jar is missing mods.toml file
+[18:03:37] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.10\7a15037366722893d76a3d0b2e9d1fd13a63a22d\javafmllanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:03:37] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.10\e67d9b3451d64ccc812cbbd33c066bd3ebbf2167\lowcodelanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:03:37] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.10\2023f9726a509c5ba5a925cac934944066093de8\mclanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:03:38] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras-forge-0.5.0.jar. Using Mod File: <USER_HOME>\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-forge\0.5.0\cebe4d98a42a4a32ebf0ddec7b93d5bdbdad009\mixinextras-forge-0.5.0.jar
+[18:03:38] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[18:03:41] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[18:03:41] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[18:03:42] [main/WARN] [mixin/]: Reference map 'useless_stretcher.refmap.json' for useless_stretcher.mixins.json could not be read. If this is a development environment you can ignore this message
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:42] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor
+[18:03:43] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: com/enderio/base/common/handler/TravelHandler (java.lang.ClassNotFoundException: com.enderio.base.common.handler.TravelHandler)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target com.enderio.base.common.handler.TravelHandler was not found useless_mod.mixins.json:enderio.EnderIOTravelHandlerMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/base/KineticBlockEntity (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.base.KineticBlockEntity)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.base.KineticBlockEntity was not found useless_mod.create.mixins.json:KineticBlockEntityMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/KineticNetwork (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.KineticNetwork)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.KineticNetwork was not found useless_mod.create.mixins.json:KineticNetworkMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/api/recipes/cache/CachedRecipe (java.lang.ClassNotFoundException: mekanism.api.recipes.cache.CachedRecipe)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.api.recipes.cache.CachedRecipe was not found useless_mod.mekanism.mixins.json:CachedRecipeMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:DigitalMinerMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityElectricPump (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityElectricPump)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityElectricPump was not found useless_mod.mekanism.mixins.json:ElectricPumpMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFluidicPlenisher (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFluidicPlenisher)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFluidicPlenisher was not found useless_mod.mekanism.mixins.json:FluidicPlenisherMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFormulaicAssemblicator (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFormulaicAssemblicator)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFormulaicAssemblicator was not found useless_mod.mekanism.mixins.json:FormulaicAssemblicatorMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/MekanismUtils (java.lang.ClassNotFoundException: mekanism.common.util.MekanismUtils)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.MekanismUtils was not found useless_mod.mekanism.mixins.json:MekanismUtilsMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/component/TileComponentEjector (java.lang.ClassNotFoundException: mekanism.common.tile.component.TileComponentEjector)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.component.TileComponentEjector was not found useless_mod.mekanism.mixins.json:TileComponentEjectorMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:TileEntityDigitalMinerMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/api/Upgrade (java.lang.ClassNotFoundException: mekanism.api.Upgrade)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.api.Upgrade was not found useless_mod.mekanism.mixins.json:UpgradeMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/UpgradeUtils (java.lang.ClassNotFoundException: mekanism.common.util.UpgradeUtils)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.UpgradeUtils was not found useless_mod.mekanism.mixins.json:UpgradeUtilsMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageProviderMixin
+[18:03:43] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[18:03:43] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageExtensionMixin
+2026-10-29 18:03:43,980 main WARN Error parsing URI <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\upstreamServerCheckLog4j2.xml
+[18:03:44] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[18:03:56] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.10, for MC 1.20.1 with MCP 20230612.114412
+[18:03:56] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.10 Initialized
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-server\config\useless_mod-common.toml is not correct. Correcting
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_advanced_ae_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2cs_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2lt_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_data_energistics_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_extendedae_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_neo_eco_ae_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_barbequesdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_brewinandchewin_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_casualnessdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_crabbersdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_expandeddelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_extradelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_farmersdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_nomadsdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_ubesdelight_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_youkaishomecoming_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_jdte_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_justdirethings_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_cookery_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_grilling_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_tavern_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_appmek_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_generators_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_legacy_metallurgic_item_recipe_conversion was corrected from null to its default, false.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_brewing_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_crafting_recipe_conversion was corrected from null to its default, false.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_fishing_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_smelting_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_villager_trade_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_actually_additions_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apothic_flux_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_fluxnetworks_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apotheosis_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_lychee_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_astralsorcery_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ars_nouveau_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_botany_pots_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_exdeorum_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_avaritia_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_bigreactors_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_create_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_tconstruct_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_draconic_evolution_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ender_io_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_extended_crafting_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_forbidden_arcanus_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_hostilenetworks_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_immersiveengineering_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_thermal_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_blood_magic_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_embers_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_industrial_foregoing_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_irons_spellbooks_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_malum_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_modern_industrialization_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_mystical_agriculture_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_natures_aura_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_neovitae_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_occultism_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_oritech_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_pneumaticcraft_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_powah_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_productive_bees_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_summoningrituals_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ufo_recipe_conversion was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_capacity was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_capacity was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_capacity was corrected from null to its default, false.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_transfer was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_transfer was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_transfer was corrected from null to its default, true.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_consumption was corrected from null to its default, false.
+[18:03:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.base_mod_affect_parallel was corrected from null to its default, false.
+[18:03:58] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[18:04:00] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[18:04:00] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/archive/pr-5-review-20261029/source/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/assets/.mcassetsroot' uses unexpected schema
+[18:04:00] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/archive/pr-5-review-20261029/source/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/data/.mcassetsroot' uses unexpected schema
+[18:04:00] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.4.28
+[18:04:01] [main/ERROR] [minecraft/DedicatedServerProperties]: No key layers in MapLike[{}]
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[18:04:01] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[18:04:02] [Worker-Main-1/ERROR] [ne.mi.co.ForgeHooks/]: Couldn't parse element loot_tables:useless_mod:blocks/useless_compact_l9
+com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown string 'useless_mod:useless_compact_l9'
+	at net.minecraft.util.GsonHelper.lambda$convertToItem$0(GsonHelper.java:116) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.Optional.orElseThrow(Optional.java:403) ~[?:?] {re:mixin}
+	at net.minecraft.util.GsonHelper.convertToItem(GsonHelper.java:115) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsItem(GsonHelper.java:125) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:51) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:39) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:138) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:118) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:83) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:72) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.GsonAdapterFactory$JsonAdapter.deserialize(GsonAdapterFactory.java:96) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:391) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:192) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:189) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:400) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:294) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:291) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1261) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraftforge.common.ForgeHooks.loadLootTable(ForgeHooks.java:873) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraftforge.common.ForgeHooks.lambda$getLootTableDeserializer$3(ForgeHooks.java:850) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataType.deserialize(LootDataType.java:45) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$4(LootDataManager.java:56) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.HashMap.forEach(HashMap.java:1421) ~[?:?] {re:mixin}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$5(LootDataManager.java:55) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?] {}
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?] {}
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?] {}
+[18:04:02] [Worker-Main-1/ERROR] [ne.mi.co.ForgeHooks/]: Couldn't parse element loot_tables:useless_mod:blocks/useless_compact_f9
+com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown string 'useless_mod:useless_compact_f9'
+	at net.minecraft.util.GsonHelper.lambda$convertToItem$0(GsonHelper.java:116) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.Optional.orElseThrow(Optional.java:403) ~[?:?] {re:mixin}
+	at net.minecraft.util.GsonHelper.convertToItem(GsonHelper.java:115) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsItem(GsonHelper.java:125) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:51) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:39) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:138) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:118) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:83) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:72) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.GsonAdapterFactory$JsonAdapter.deserialize(GsonAdapterFactory.java:96) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:391) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:192) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:189) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:400) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:294) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:291) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1261) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraftforge.common.ForgeHooks.loadLootTable(ForgeHooks.java:873) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraftforge.common.ForgeHooks.lambda$getLootTableDeserializer$3(ForgeHooks.java:850) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataType.deserialize(LootDataType.java:45) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$4(LootDataManager.java:56) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.HashMap.forEach(HashMap.java:1421) ~[?:?] {re:mixin}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$5(LootDataManager.java:55) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?] {}
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?] {}
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?] {}
+[18:04:02] [Worker-Main-1/ERROR] [ne.mi.co.ForgeHooks/]: Couldn't parse element loot_tables:useless_mod:blocks/useless_compact_c9
+com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown string 'useless_mod:useless_compact_c9'
+	at net.minecraft.util.GsonHelper.lambda$convertToItem$0(GsonHelper.java:116) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.Optional.orElseThrow(Optional.java:403) ~[?:?] {re:mixin}
+	at net.minecraft.util.GsonHelper.convertToItem(GsonHelper.java:115) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsItem(GsonHelper.java:125) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:51) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.deserialize(LootItem.java:39) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:138) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.deserializeCustom(LootPoolSingletonContainer.java:118) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:83) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.deserialize(LootPoolEntryContainer.java:72) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.GsonAdapterFactory$JsonAdapter.deserialize(GsonAdapterFactory.java:96) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:391) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:192) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:189) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraft.util.GsonHelper.convertToObject(GsonHelper.java:383) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.util.GsonHelper.getAsObject(GsonHelper.java:400) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:294) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:291) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2375!/:?] {}
+	at com.google.gson.Gson.fromJson(Gson.java:1261) ~[gson-2.10.jar%2375!/:?] {}
+	at net.minecraftforge.common.ForgeHooks.loadLootTable(ForgeHooks.java:873) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraftforge.common.ForgeHooks.lambda$getLootTableDeserializer$3(ForgeHooks.java:850) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataType.deserialize(LootDataType.java:45) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$4(LootDataManager.java:56) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.HashMap.forEach(HashMap.java:1421) ~[?:?] {re:mixin}
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$5(LootDataManager.java:55) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:classloading}
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?] {}
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?] {}
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?] {}
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/accumulation_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lumium_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/enderium_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/signalum_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/signalum_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/multidimensional_expansion_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lumium_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/tin_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/invar_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lead_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/netherite_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/complex_link_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/iron_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/constantan_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/nickel_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/electrum_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infusion_source as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/enderium_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/sapphire_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/redstone_crystal as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/ruby_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/nickel_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/shattered_singularity as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/sky_steel_ingot as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/gold_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/copper_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/energy_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/quartz_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/bronze_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/constantan_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/netherite_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infused_dust as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/emerald_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lapis_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/electrum_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/diamond_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/tin_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/invar_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/iron_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/omni_link_processor as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/bronze_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/silver_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/gold_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lead_gear as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/copper_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/ender_ingot as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/silver_plate as it's serializer returned null
+[18:04:02] [main/INFO] [minecraft/RecipeManager]: Loaded 13 recipes
+[18:04:02] [main/INFO] [minecraft/AdvancementList]: Loaded 1784 advancements
+[18:04:03] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[18:04:03] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[18:04:03] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[18:04:03] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[18:04:03] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on <LOOPBACK>:0
+[18:04:03] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using default channel type
+[18:04:03] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[18:04:03] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[18:04:03] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[18:04:03] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\pr5-upstream-check\serverconfig\useless_stretcher-server.toml is not correct. Correcting
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.staff_acceleration was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.range_acceleration was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.remote_reclaimer was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.time_stop was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key highlight was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key highlight.highlight_see_through was corrected from null to its default, false.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration.idle_throttle was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration.entity_disable_ai was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key summoning was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key summoning.enable was corrected from null to its default, false.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot_refresh was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot_refresh.enable was corrected from null to its default, false.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop.enable was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop.probability was corrected from null to its default, 1.0E-5.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop.enable was corrected from null to its default, true.
+[18:04:03] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop.probability was corrected from null to its default, 1.0E-4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key two_i was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key two_i.starfield_invitation was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key recipe_compat was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key recipe_compat.hide_enderio_grinding_balls was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor.enable was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor.enable_recipes was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\pr5-upstream-check\serverconfig\forge-server.toml is not correct. Correcting
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\pr5-upstream-check\serverconfig\useless_mod-server.toml is not correct. Correcting
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics.botany_pot_growth_multiplier was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics.matrix_pattern_count was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.pattern_slots was corrected from null to its default, 108.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.mold_slots was corrected from null to its default, 108.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.passive_pattern_slots was corrected from null to its default, 30.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.decode_cache_capacity was corrected from null to its default, 2048.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_threads was corrected from null to its default, 2.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_single_task_parallel was corrected from null to its default, 4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_energy_divisor was corrected from null to its default, 2.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_time_multiplier was corrected from null to its default, 0.5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_threads was corrected from null to its default, 3.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_single_task_parallel was corrected from null to its default, 16.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_energy_divisor was corrected from null to its default, 4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_time_multiplier was corrected from null to its default, 0.25.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_threads was corrected from null to its default, 4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_single_task_parallel was corrected from null to its default, 64.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_energy_divisor was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_time_multiplier was corrected from null to its default, 0.125.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_threads was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_single_task_parallel was corrected from null to its default, 256.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_energy_divisor was corrected from null to its default, 16.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_time_multiplier was corrected from null to its default, 0.0625.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_threads was corrected from null to its default, 6.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_single_task_parallel was corrected from null to its default, 1024.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_energy_divisor was corrected from null to its default, 32.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_time_multiplier was corrected from null to its default, 0.03125.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_threads was corrected from null to its default, 7.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_single_task_parallel was corrected from null to its default, 4096.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_energy_divisor was corrected from null to its default, 64.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_time_multiplier was corrected from null to its default, 0.015625.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_threads was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_single_task_parallel was corrected from null to its default, 16384.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_energy_divisor was corrected from null to its default, 128.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_time_multiplier was corrected from null to its default, 0.0078125.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_threads was corrected from null to its default, 9.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_single_task_parallel was corrected from null to its default, 65536.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_energy_divisor was corrected from null to its default, 256.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_time_multiplier was corrected from null to its default, 0.00390625.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_threads was corrected from null to its default, 10.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_single_task_parallel was corrected from null to its default, 262144.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_energy_divisor was corrected from null to its default, 512.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_time_multiplier was corrected from null to its default, 0.001953125.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.useful_tier_threads was corrected from null to its default, 11.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_pattern_upload was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_pattern_upload.omniversal_pattern_auto_upload was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ore_generator was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ore_generator.ore_generator_slots was corrected from null to its default, 9.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ae2_gift_package was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ae2_gift_package.items was corrected from null to its default, [ae2:creative_energy_cell,1, ae2:fluix_covered_cable,64, ae2:wireless_access_point,1, ae2:wireless_booster,64, ae2:wireless_crafting_terminal,1, ae2:crafting_terminal,1, ae2:item_storage_cell_256k,8, ae2:drive,1].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.custom_potion_effects was corrected from null to its default, [minecraft:saturation,1, minecraft:regeneration,6, minecraft:night_vision,1, minecraft:fire_resistance,1, minecraft:water_breathing,1, minecraft:resistance,6].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_potion_effects was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_flight_effect was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_flight_speed was corrected from null to its default, 0.05.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_x was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_y was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_z was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_x was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_y was corrected from null to its default, 3.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_z was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_max_targets was corrected from null to its default, 64.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_kill_aura_interval was corrected from null to its default, 20.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_x was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_y was corrected from null to its default, 3.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_z was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_max_blocks was corrected from null to its default, 1000.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.fortune_level was corrected from null to its default, 10.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.looting_level was corrected from null to its default, 10.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.festive_drop_chance was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_grass_wand_drop was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.grass_wand_drop_probability was corrected from null to its default, 1.0E-5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_mining_speed was corrected from null to its default, 10.0.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_ignores_tool_tier was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_pseudo_hardness was corrected from null to its default, 15.0.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_entity_interaction_range was corrected from null to its default, 8.0.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_block_interaction_range was corrected from null to its default, 8.0.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_short_teleport_range was corrected from null to its default, 24.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_build_limit was corrected from null to its default, 1024.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_angel_limit was corrected from null to its default, 16.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_destruction_limit was corrected from null to its default, 81.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_mining_blacklist was corrected from null to its default, [].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_kill_blacklist was corrected from null to its default, .
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_kill_non_living_whitelist was corrected from null to its default, draconicevolution:guardian_crystal.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_capture_strip_keys was corrected from null to its default, [NeoForgeData.Temperature, NeoForgeData.naturesaura:time_alive, NeoForgeData.BalmData, KubeJSPersistentData.senescence, KubeJSPersistentData.isSenescent, KubeJSPersistentData.original_max_health].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_capture_strip_attachment_namespaces was corrected from null to its default, [cold_sweat, malum, blueflame].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension.floor_block_blacklist was corrected from null to its default, [].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension.floor_block_whitelist was corrected from null to its default, [].
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink.stafflink_idle_backoff_enabled was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink.stafflink_idle_backoff_cap was corrected from null to its default, 32.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.time_multiplier was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.electricity_multiplier was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.capacity_multiplier was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.max_upgrade was corrected from null to its default, 16.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.draw_appflux_energy was corrected from null to its default, true.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.draw_ae_energy was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_batch_ripe_ticks was corrected from null to its default, 10.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_unlimited_bigint_parallelism was corrected from null to its default, false.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_output_return_budget_millis was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_0_threads was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_1_threads was corrected from null to its default, 2.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_2_threads was corrected from null to its default, 3.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_3_threads was corrected from null to its default, 4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_4_threads was corrected from null to its default, 5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_5_threads was corrected from null to its default, 6.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_6_threads was corrected from null to its default, 7.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_7_threads was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_8_threads was corrected from null to its default, 9.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_9_threads was corrected from null to its default, 10.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_10_threads was corrected from null to its default, 11.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_parallel was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_time_multiplier was corrected from null to its default, 1.0.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_parallel was corrected from null to its default, 2.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_time_multiplier was corrected from null to its default, 0.9.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_parallel was corrected from null to its default, 4.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_time_multiplier was corrected from null to its default, 0.8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_parallel was corrected from null to its default, 8.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_time_multiplier was corrected from null to its default, 0.7.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_parallel was corrected from null to its default, 16.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_time_multiplier was corrected from null to its default, 0.6.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_parallel was corrected from null to its default, 32.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_time_multiplier was corrected from null to its default, 0.5.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_parallel was corrected from null to its default, 64.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_time_multiplier was corrected from null to its default, 0.3999999999999999.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_parallel was corrected from null to its default, 128.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_time_multiplier was corrected from null to its default, 0.29999999999999993.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_parallel was corrected from null to its default, 256.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_time_multiplier was corrected from null to its default, 0.19999999999999996.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_parallel was corrected from null to its default, 512.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_energy_divisor was corrected from null to its default, 1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_time_multiplier was corrected from null to its default, 0.1.
+[18:04:04] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_tier_rules was corrected from null to its default, [].
+[18:04:04] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "pr5-upstream-check"
+[18:04:05] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[18:04:06] [Worker-Main-15/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:04:06] [Worker-Main-5/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:04:06] [Worker-Main-13/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:04:06] [Worker-Main-13/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 28%
+[18:04:07] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 82%
+[18:04:07] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 2263 ms
+[18:04:07] [Server thread/INFO] [minecraft/DedicatedServer]: Done (3.484s)! For help, type "help"
+[18:04:07] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[18:04:07] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[18:04:08] [Server thread/INFO] [co.so.us.st.co.ca.ForgeMeteoriteUpstreamChecks/]: FORGE METEORITE GEOMETRY PASSED: AE2 15.x relocation, negative coordinates, full bounds, legacy center/native NBT, unfinished replay and completed/finalizing restart preservation
+[18:04:11] [Server thread/WARN] [co.so.us.st.co.it.StaffFluidCollector/]: Staff fluid collection disabled for <UUID>: 1000 mB commit result unknown; inspect staff before recovery
+java.lang.IllegalStateException: Intentional check: external storage threw after committing 400 mB
+	at com.sorrowmist.useless.stretcher.upstreamcheck.ForgeFluidUpstreamChecks$FluidStore.insert(ForgeFluidUpstreamChecks.java:238) ~[%23148!/:?] {re:classloading}
+	at appeng.me.storage.NetworkStorage.insert(NetworkStorage.java:136) ~[XxWD5pD3-Zfyso1sP.jar%23150!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.insertPending(StaffFluidCollector.java:198) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.collect(StaffFluidCollector.java:181) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.tickPlayer(StaffFluidCollector.java:88) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.upstreamcheck.ForgeFluidUpstreamChecks.collect(ForgeFluidUpstreamChecks.java:213) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.upstreamcheck.ForgeFluidUpstreamChecks.fluidChecks(ForgeFluidUpstreamChecks.java:155) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.upstreamcheck.ForgeFluidUpstreamChecks.tick(ForgeFluidUpstreamChecks.java:86) ~[%23148!/:?] {re:classloading}
+	at com.sorrowmist.useless.stretcher.upstreamcheck.__ForgeFluidUpstreamChecks_tick_ServerTickEvent.invoke(.dynamic) ~[%23148!/:?] {re:classloading,pl:eventbus:B}
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:73) ~[eventbus-6.0.5.jar%23107!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:315) ~[eventbus-6.0.5.jar%23107!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar%23107!/:?] {}
+	at net.minecraftforge.event.ForgeEventFactory.onPostServerTick(ForgeEventFactory.java:950) ~[forge-1.20.1-47.3.10.jar%23142%23149!/:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:835) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:661) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:251) ~[forge-1.20.1-47.3.10.jar%23143!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at java.lang.Thread.run(Thread.java:840) ~[?:?] {}
+[18:04:11] [Server thread/INFO] [co.so.us.st.up.ForgeFluidUpstreamChecks/]: FORGE FLUID COLLECTION PASSED: real AE grid, sources, offline/full, Forge claims, partial journal, unknown-commit quarantine on initial/retry insert, item NBT/packet, rate, offhand and bounded scanning
+[18:04:31] [Server thread/INFO] [co.so.us.st.up.ForgeInstalledUpstreamChecks/]: FORGE INSTALLED PATTERNS PASSED: three native menus/handlers, shift-click, terminal, real AE publication/execution, passive rotation, live deletion, cross-dimension and NBT
+[18:04:31] [Server thread/INFO] [co.so.us.st.up.ForgeFluidUpstreamChecks/]: FORGE UPSTREAM CHECKS PASSED
+[18:04:31] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[18:04:31] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[18:04:31] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[18:04:32] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/minecraft:overworld
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_overworld
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_nether
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_mod:uselessdim3
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:two_i_starfield
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_mod:uselessdim2
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_mod:uselessdim
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_end
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/minecraft:the_nether
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/minecraft:the_end
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/ae2:spatial_storage
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[pr5-upstream-check]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (pr5-upstream-check): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[18:04:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/archive/pr-5-review-20261029/source/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 33s
+7 actionable tasks: 6 executed, 1 up-to-date

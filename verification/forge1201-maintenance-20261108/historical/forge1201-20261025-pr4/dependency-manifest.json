@@ -1,0 +1,29 @@
+{
+  "base_sha256": "8fdae841d6736b81e1d30b23811b470cf6014f94c8168cbab239b10841a80b55",
+  "dependencies": [
+    {
+      "module": "Ce6I4WUE",
+      "version_id": "uxe1WQp4",
+      "version": "10.4.16.80",
+      "path": "<WORKSPACE>\\archive\\forge1201-pr-review-20261025\\Mekanism-1.20.1-10.4.16.80.jar",
+      "bytes": 12558456,
+      "sha256": "3b0d191fa4a45e662f9725991d76a30192f30186abb2ba694b873b5f7b9358d2"
+    },
+    {
+      "module": "OFVYKsAk",
+      "version_id": "Th4Czz4N",
+      "version": "10.4.16.80",
+      "path": "<WORKSPACE>\\archive\\forge1201-pr-review-20261025\\MekanismGenerators-1.20.1-10.4.16.80.jar",
+      "bytes": 1054586,
+      "sha256": "be2d5b8553f8638cfabf491002f95cef6acef210f627addb391f5af713502512"
+    },
+    {
+      "module": "IiATswDj",
+      "version_id": "9n9p68Qq",
+      "version": "1.4.3",
+      "path": "<WORKSPACE>\\archive\\forge1201-pr-review-20261025\\Applied-Mekanistics-1.4.3.jar",
+      "bytes": 185707,
+      "sha256": "e1aafd9c2ae1cab7bb6905ec61718aed41b9f07c05148c9a033e4bb886173d2c"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+diff --git a/src/main/java/com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.java b/src/main/java/com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.java
+index 2461aa7..19c151e 100644
+--- a/src/main/java/com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.java
++++ b/src/main/java/com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.java
+@@ -59,6 +59,9 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
+     public static final class Model extends PlayerModel<TwoIDollEntity> {
+         // Poppet reference: approximately 9.5 px head / 9 px torso / 7 px width.
+         // Keep original Steve UVs, with one set of longer plush limbs in every form.
++        // Alex's 3:4 arm width/depth ratio is applied at the bone, preserving the
++        // existing normalized skin and palm UVs instead of cropping a texture face.
++        private static final float ARM_WIDTH = 0.75F * 3.0F / 4.0F;
+         private static final float HEAD_SIZE = 1.18F;
+         private static final float BODY_HEIGHT = 0.75F;
+         private static final float LEG_HEIGHT = 0.50F;
+@@ -80,7 +83,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
+             // shifts back over the doll instead of wasting half the fabric.
+             umbrella.addOrReplaceChild("canopy", CubeListBuilder.create(), PartPose.offset(2.25F, -20, 0));
+             mesh.getRoot().addOrReplaceChild("nose_drop", CubeListBuilder.create().texOffs(48, 0)
+-                    .addBox(-0.32F, -1.7F, -4.56F, 0.64F, 1.5F, 0.45F), PartPose.ZERO);
++                    .addBox(-0.32F, 0, -4.56F, 0.64F, 1.5F, 0.45F), PartPose.offset(0, -2.2F, 0));
+             return LayerDefinition.create(mesh, 64, 64);
+         }
+ 
+@@ -262,10 +265,12 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
+                 rightArm.yRot = 0;
+                 // Keep the grip just outside the head while bringing the canopy
+                 // over this doll instead of leaving half of it behind the body.
+-                rightArm.zRot = 1.04F;
++                rightArm.zRot = 1.14F;
+                 head.yRot += Mth.sin(time * 0.09F) * 0.05F * open;
+             }
+             if (noseDrop.visible) {
++                // Positive model Y points toward the chin. Scale from the nostril pivot,
++                // so the drip grows downward without sliding its attachment up the face.
+                 noseDrop.yScale = 0.55F + (Mth.sin(time * 0.07F) + 1) * 0.22F;
+                 if (weather.sneeze() >= 0) {
+                     float sneeze = Mth.sin(weather.sneeze() * Mth.PI);
+@@ -365,7 +370,7 @@ public final class TwoIDollRenderer extends MobRenderer<TwoIDollEntity, TwoIDoll
+             body.xScale = 0.875F;
+             body.yScale = BODY_HEIGHT;
+             body.zScale = 1.125F;
+-            leftArm.xScale = rightArm.xScale = 0.75F;
++            leftArm.xScale = rightArm.xScale = ARM_WIDTH;
+             leftArm.yScale = rightArm.yScale = 0.50F;
+             leftArm.zScale = rightArm.zScale = 0.75F;
+             leftLeg.xScale = rightLeg.xScale = 0.75F;
+diff --git a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
+index cd6617a..f2d8f83 100644
+--- a/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
++++ b/src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
+@@ -36,7 +36,7 @@ item_ids:
+ 
+ ## 动作、天气与陪伴
+ 
+-主手、副手和头戴玩偶都能积累陪伴好感，与身边的实体一样每 6000 游戏刻 +1、每游戏日最多 +2；部署、收回和重登保留进度。实体与玩偶使用相同的头身和四肢比例，坐姿落在支撑面上，第三人称也会坐在玩家掌心、头朝上。
++主手、副手和头戴玩偶都能积累陪伴好感，与身边的实体一样每 6000 游戏刻 +1、每游戏日最多 +2；部署、收回和重登保留进度。实体与玩偶使用相同的头身和四肢比例，手臂和袖子采用 Alex 式细臂比例，坐姿落在支撑面上，第三人称也会坐在玩家掌心、头朝上。
+ 
+ 玩偶会眨眼、张望、挥手、伸懒腰；跳跃时稍微浮起，长距离下落会举臂，落地后恢复。雨中会撑伞，冰雪群系会流鼻涕和打喷嚏，雷声会让它发抖。实体、手持、头戴和摆件都会响应天气；雷雨时可同时撑伞与发抖，进入遮雨处收伞。
+ 

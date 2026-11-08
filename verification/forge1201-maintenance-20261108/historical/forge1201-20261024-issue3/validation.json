@@ -1,0 +1,35 @@
+{
+  "issue": "https://github.com/21i0/UselessStretcher/issues/3",
+  "contributor": "ICEty66",
+  "branch": "1.20.1",
+  "commit": "8d256c94ac92cb3fd6f0c71c556b3a833242f706",
+  "delivery": {
+    "artifact": "<WORKSPACE>\\useless_stretcher-20.1.6.1.jar",
+    "version": "20.1.6.1",
+    "bytes": 13205359,
+    "sha256": "828602DFD03E73849E310F8C9F46A37D834487F32054A1729F475AB370817F85",
+    "production_java": 253,
+    "production_resources": 137,
+    "classes": 438,
+    "verification_entries": 0,
+    "foreign_classes": 0,
+    "embedded_runtime": "MixinExtras Forge 0.5.0",
+    "status": "PASSED"
+  },
+  "dedicated_server_runs": [
+    "staff-compat-mek101575-v1.log",
+    "staff-compat-mek101680-v2.log"
+  ],
+  "mekanism_original_sha1": [
+    "a969ed0007ddee5bd9c93c66eb735849cf8e5224",
+    "b7f12ae710888b01746507a0aa8cb375f5897158"
+  ],
+  "junit_passed": 6,
+  "document_copies_verified": 5,
+  "release_created": false,
+  "upstream_twenty_gametests_rerun": false,
+  "previous_capsule_suite_rerun": false,
+  "github_actions": "https://github.com/21i0/UselessStretcher/actions/runs/40049917739",
+  "local_validation": "PASSED",
+  "github_actions_conclusion": "success"
+}

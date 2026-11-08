@@ -1,0 +1,62 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\archive\pr-5-review-20261029\source\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\mixin\InstalledStretcherPassiveMixin.java:26: ����: Cannot find target method "lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z" for @Inject.method="lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z" in com.sorrowmist.useless.content.blockentities.multiblock.PassiveCraftingHatchBlockEntity
+    @Inject(method = "lambda$new$0(Lnet/minecraft/world/item/ItemStack;)Z",
+    ^
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\archive\pr-5-review-20261029\source\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\archive\pr-5-review-20261029\source\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+ע: <WORKSPACE>\archive\pr-5-review-20261029\source\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoINoseChecks.javaʹ����δ�����򲻰�ȫ�Ĳ�����
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:unchecked ���±��롣
+8 ������
+
+> Task :processResources
+> Task :classes
+> Task :jarJar UP-TO-DATE
+> Task :jar UP-TO-DATE
+> Task :reobfJar
+> Task :assemble
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+> Task :test
+> Task :check
+> Task :build
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/archive/pr-5-review-20261029/source/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 39s
+8 actionable tasks: 4 executed, 4 up-to-date

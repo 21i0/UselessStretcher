@@ -1,0 +1,119 @@
+{
+  "junit": [
+    {
+      "suite": "com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest",
+      "tests": 3
+    },
+    {
+      "suite": "com.sorrowmist.useless.stretcher.ForgePortContractTest",
+      "tests": 3
+    }
+  ],
+  "files": [
+    {
+      "path": "doll-client-final.log",
+      "bytes": 169498,
+      "sha256": "D3BA13B5896F06AF5350442800ECFC491DB7882F7CC717A3E033DFA3108C451F"
+    },
+    {
+      "path": "doll-server-capture-v3.log",
+      "bytes": 293966,
+      "sha256": "D5B299821F0C0E001E49C217B7FA551C8D3A607F732A0C73E1569B24AC229AFC"
+    },
+    {
+      "path": "doll-server-v9.log",
+      "bytes": 140374,
+      "sha256": "0DA75E8E01EC9159E7F526481FAF8A54268867396DD67573B7A3A550F9D8BDDC"
+    },
+    {
+      "path": "doll-skin-tail-v1.log",
+      "bytes": 49721,
+      "sha256": "61DF9F8359121ED35D6E7DAE964BB5C7A8761AF58EF303140242537C556709AA"
+    },
+    {
+      "path": "github-ci.json",
+      "bytes": 232,
+      "sha256": "D31330E8148973B20FD93CFCDB13B3F6E67E8A1C7216F5B4E4809486FFE3C266"
+    },
+    {
+      "path": "github-jobs.json",
+      "bytes": 3592,
+      "sha256": "2759073B6FB9764C0FE7E5D9E6C12F487EA3068187BA217D66EBAD3F5ACBCB29"
+    },
+    {
+      "path": "jar-audit-build.json",
+      "bytes": 451,
+      "sha256": "09C4332CAC324C86EDF1126C7F2DF148D278EE92BFDDF2F1EB3EBCC0344EE0AA"
+    },
+    {
+      "path": "jar-audit-delivery.json",
+      "bytes": 397,
+      "sha256": "D07DE23F883F73748B0C9ABBABC4CDE72901A2A7E2A91D968681E3E00E11616E"
+    },
+    {
+      "path": "release-build-v1.log",
+      "bytes": 4356,
+      "sha256": "8C4EBC90211E638491894DCD9C3A6D6AA009424BD4A75C5243F19FBC5DD0A0E1"
+    },
+    {
+      "path": "release-verified.json",
+      "bytes": 1355,
+      "sha256": "E221F2C6EB62904B992EB407DED1CEC46FD5D569BB78052EB545A0AC482CDEB0"
+    },
+    {
+      "path": "screenshots/capsule-generated-map.png",
+      "bytes": 348074,
+      "sha256": "4191729B2F056C143A4940F4CBEF5757C844676799101F7786A78344162D2D9B"
+    },
+    {
+      "path": "screenshots/capsule-mirror-client-entry-1.png",
+      "bytes": 158793,
+      "sha256": "91BA844ACBFF0D81CE08F0D4A4A04D2FF909EE39665F66E589F957CDCEEFB84B"
+    },
+    {
+      "path": "screenshots/curios-native-layer.png",
+      "bytes": 59865,
+      "sha256": "B313E1888867BC3CED7FA8C76DD19F5AA74DCA21A05B185DB6466030A35DF56A"
+    },
+    {
+      "path": "screenshots/skin-tail-0.png",
+      "bytes": 99380,
+      "sha256": "05CE6E0DA4C47641B3EF5354EA77E45036694C45DA874F1ACAABCA4E91CD205F"
+    },
+    {
+      "path": "screenshots/story-zh_cn-chapter1-choice.png",
+      "bytes": 1863274,
+      "sha256": "3289D55CE85F1C5AD663F0E4EC098C9A875FAE14D95B8D298377E033E920A21E"
+    },
+    {
+      "path": "screenshots/story-zh_cn-chapter6-cg.png",
+      "bytes": 2053570,
+      "sha256": "ACCFC026828BCCDB204704537D19BE89FEA70C46BBCAB3223B81DB47474D7389"
+    },
+    {
+      "path": "screenshots/two-i-bubble-cursor-left.png",
+      "bytes": 126623,
+      "sha256": "86E26677943CC4AF8D010D085BCF53DD57C01DB825FB4B00E0D54EE18706F25E"
+    },
+    {
+      "path": "screenshots/two-i-nose-down.png",
+      "bytes": 79130,
+      "sha256": "DD756A356E4568F34B265109B429F4CA499B3ABBDBFAF51B10F0BF94624AD790"
+    },
+    {
+      "path": "staff-official-base.log",
+      "bytes": 174302,
+      "sha256": "F6947EA8CDEC6E032FCD73E5313BAB1C6581DEE6FC3A072399629DD1E79DF8DF"
+    },
+    {
+      "path": "TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "bytes": 1035,
+      "sha256": "6EAE8420C99563F41EEA4016A40D606B4CD8E69B0E48E366A21C190570B8AA4D"
+    },
+    {
+      "path": "TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "bytes": 822,
+      "sha256": "6DEC6B86574FBC76D3E6866530D98A9720E1CA020359614CAA2F57149E5BACAB"
+    }
+  ]
+}

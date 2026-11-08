@@ -1,0 +1,13 @@
+{
+  "artifact": "<WORKSPACE>\\useless_stretcher-20.1.6.5.jar",
+  "version": "20.1.6.5",
+  "bytes": 13281710,
+  "sha256": "DA0E0FB4E83C766C15E333D59DFD18F10B8729F66724C0CCDF980D1EA9C1C8FA",
+  "production_java": 269,
+  "production_resources": 136,
+  "classes": 469,
+  "verification_entries": 0,
+  "foreign_classes": 0,
+  "embedded_runtime": "MixinExtras Forge 0.5.0",
+  "status": "PASSED"
+}

@@ -1,0 +1,18 @@
+{
+  "head": "e48a35df8c32334e8b3167d85be88be6f9f7ce6d",
+  "pr": {
+    "number": 4,
+    "state": "closed",
+    "merged": true,
+    "merge_commit_sha": "853c69ea27bba1022076c50e8a4b1127eae643af",
+    "html_url": "https://github.com/21i0/UselessStretcher/pull/4"
+  },
+  "runs": [
+    {
+      "id": 40161611058,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/21i0/UselessStretcher/actions/runs/40161611058"
+    }
+  ]
+}

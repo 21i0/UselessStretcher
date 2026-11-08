@@ -1,0 +1,45 @@
+{
+  "prepared_date": "2026-11-02",
+  "version": "20.1.6.5",
+  "source_commit": "d344267a4036b6dcb01a43f4d96d4c5d664798fe",
+  "release_status": "prepared_locally_not_published",
+  "artifact": "<WORKSPACE>\\useless_stretcher-20.1.6.5.jar",
+  "bytes": 13281710,
+  "sha256": "DA0E0FB4E83C766C15E333D59DFD18F10B8729F66724C0CCDF980D1EA9C1C8FA",
+  "dependencies": {
+    "forge": "[47.3.10,48)",
+    "minecraft": "[1.20.1,1.20.2)",
+    "ae2": "[15.4.8,16)",
+    "useless_mod": "[20.2.4.9,21)"
+  },
+  "tests": {
+    "count": 27,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "fresh_execution": true
+  },
+  "previous_game_regression_evidence": "<WORKSPACE>\\archive\\pr-5-review-20261029",
+  "same_uncompressed_content_as_reviewed_jar": true,
+  "dependency_files": [
+    {
+      "file": "<WORKSPACE>\\Forge-1.20.1-配套依赖\\useless_mod-20.2.4.9.jar",
+      "sha256": "F1142CE009D572F5A4E7B8BF4FFB5C7A02E04BFC25E222DDBC2AA0C982668F7F"
+    },
+    {
+      "file": "<WORKSPACE>\\Forge-1.20.1-配套依赖\\appliedenergistics2-forge-15.4.8.jar",
+      "sha256": "046B37C9893F6429FE6FD55ED4EB22803707CA5AA21EF8A647B634F78566D927"
+    },
+    {
+      "file": "<WORKSPACE>\\Forge-1.20.1-配套依赖\\guideme-20.1.15.jar",
+      "sha256": "CF8052AB3DA121012EFC59A20E731C24BFE7488DFA556C9B88809F42DEA3B24A"
+    }
+  ],
+  "upload_files": [
+    "changelog-forge-1.20.1.txt",
+    "release-forge-20.1.6.5.md",
+    "usage-forge-1.20.1.txt",
+    "useless_stretcher-20.1.6.5.jar",
+    "useless_stretcher-20.1.6.5.sha256"
+  ]
+}

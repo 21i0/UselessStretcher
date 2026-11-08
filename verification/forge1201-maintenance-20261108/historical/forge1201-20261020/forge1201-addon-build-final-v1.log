@@ -1,0 +1,57 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\compat\TwoICuriosCompat.java:70: ����: [removal] ICuriosItemHandler �е� getLockedSlots() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+                    if (!inventory.getLockedSlots().contains(entry.getKey()))
+                                  ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+8 ������
+
+> Task :processResources
+> Task :classes
+> Task :jarJar UP-TO-DATE
+> Task :jar
+> Task :reobfJar
+> Task :assemble
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :test
+> Task :check
+> Task :build
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 17s
+8 actionable tasks: 6 executed, 2 up-to-date

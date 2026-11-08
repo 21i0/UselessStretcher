@@ -1,0 +1,114 @@
+{
+  "junit": [
+    {
+      "suite": "com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest",
+      "tests": 3
+    },
+    {
+      "suite": "com.sorrowmist.useless.stretcher.ForgePortContractTest",
+      "tests": 3
+    }
+  ],
+  "files": [
+    {
+      "path": "build-final-v1.log",
+      "bytes": 500,
+      "sha256": "CD7EC2DD91DD7B4267FE0F204CB7B938CAAA2E7A45EF3B4447CC304ACECCC672"
+    },
+    {
+      "path": "capture-client-v1.log",
+      "bytes": 680467,
+      "sha256": "2B32F0889B1DB5B09F0DD824883E916B02977A6CEBF8685C17D41508F91A5EDB"
+    },
+    {
+      "path": "dependency-manifest.json",
+      "bytes": 1063,
+      "sha256": "B59A140C9C6B5767AADF8DA1ADDCEBC870B3A28D321980B11CFC976F480FE173"
+    },
+    {
+      "path": "doll-server-first-v1.log",
+      "bytes": 98791,
+      "sha256": "9FDE9021B893823F5AB629DEACF22DDC4305A90F9F8DD4FA40217DD15A99D313"
+    },
+    {
+      "path": "doll-server-restart-v1.log",
+      "bytes": 43003,
+      "sha256": "A8AC75DD2F44C734EB467772BCCA3A7763D44B4EEBDEB0CC7893772A6BA76703"
+    },
+    {
+      "path": "jar-audit-build.json",
+      "bytes": 451,
+      "sha256": "366F7FAFCD1A9678328D8E46FFC1B1FDAE3B137E95B5F6CC0B0F31DD5BB689A6"
+    },
+    {
+      "path": "jar-audit-delivery.json",
+      "bytes": 397,
+      "sha256": "EEB264C8B26E2D0EE5180CFEE1FFB2696D5D9BDE534A78392ACBD7EE9029E8F4"
+    },
+    {
+      "path": "merge-ci-status.json",
+      "bytes": 479,
+      "sha256": "A4339AB1B30F5E403350B2CC6451D1F0638AF15AC7A78565E472631ABD0CEAA7"
+    },
+    {
+      "path": "pr-4-files.json",
+      "bytes": 23709,
+      "sha256": "D38469C66FCD836BEB270AA70CF4923122F19F40E2A8531AE2FB50A1BBD01041"
+    },
+    {
+      "path": "pr-4.json",
+      "bytes": 20450,
+      "sha256": "BDD84027A01AEFACC484685C10F1052F8EBFBFEEB646D139D549E28211905A56"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1013,
+      "sha256": "6B051F244633DF5B34A534DE2924BD9F451F2EC52D337BEA427B8F9DC8F4B110"
+    },
+    {
+      "path": "screenshots/capsule-generated-map.png",
+      "bytes": 351964,
+      "sha256": "1492FEE45360A1CB310E0DDA17AD325BBF4CFBC5C23EBDBAC3AE120E09802090"
+    },
+    {
+      "path": "screenshots/capsule-mirror-client-entry-1.png",
+      "bytes": 148735,
+      "sha256": "2F1B5DAAA4A927A6860496F5589FC0E518B306E696427B67548401F29B072012"
+    },
+    {
+      "path": "screenshots/story-zh_cn-chapter1-choice.png",
+      "bytes": 1863274,
+      "sha256": "3289D55CE85F1C5AD663F0E4EC098C9A875FAE14D95B8D298377E033E920A21E"
+    },
+    {
+      "path": "screenshots/story-zh_cn-chapter6-cg.png",
+      "bytes": 2053570,
+      "sha256": "ACCFC026828BCCDB204704537D19BE89FEA70C46BBCAB3223B81DB47474D7389"
+    },
+    {
+      "path": "screenshots/two-i-bubble-cursor-left.png",
+      "bytes": 128375,
+      "sha256": "D5C348360AF7EE268252C1E590E92E031094326826DF92E0D2EEC28D87A2AE5E"
+    },
+    {
+      "path": "staff-pack-v1.log",
+      "bytes": 184029,
+      "sha256": "2E615CD0CB8571C22D3617D7C4B86DD81238CDB0541D8AC43FC297E65AE63D89"
+    },
+    {
+      "path": "TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "bytes": 1036,
+      "sha256": "0DCF8CD893BCF4D94B633F0FF97F857D2518202687EA43249E82331356C8607C"
+    },
+    {
+      "path": "TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "bytes": 822,
+      "sha256": "589CE5F77747C62D071F1087B3EB0CC1D9B7516CD3350A0BAE174A6D5B2F85B7"
+    },
+    {
+      "path": "upstream-source-diff.json",
+      "bytes": 2025,
+      "sha256": "08FDD434C6B31A87BF17DC410EBAA33642FAF3DA9C6FC42503B4490E447FF154"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :downloadAssets UP-TO-DATE
+> Task :writeUpstreamClientCheckLegacyClasspath
+> Task :prepareUpstreamClientCheckRun
+
+> Task :runUpstreamClientCheck
+2026-10-29 18:06:48,702 main WARN Advanced terminal features are not available in this environment
+[18:06:48] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 5, --assetsDir, <USER_HOME>\\.gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, useless_stretcher.mixins.json, --width, 1280, --height, 800]
+[18:06:48] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[18:06:49] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-client\config\fml.toml is not correct. Correcting
+[18:06:49] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[18:06:49] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[18:06:49] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[18:06:49] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[18:06:49] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[18:06:49] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[18:06:49] [main/INFO] [EARLYDISPLAY/]: If this message is the only thing at the bottom of your log before a crash, you probably have a driver issue.
+
+Possible solutions:
+A) Make sure Minecraft is set to prefer high performance graphics in the OS and/or driver control panel
+B) Check for driver updates on the graphics brand's website
+C) Try reinstalling your graphics drivers
+D) If still not working after trying all of the above, ask for further help on the Forge forums or Discord
+
+You can safely ignore this message if the game starts up successfully.
+[18:06:49] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[18:06:49] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/<USER_HOME>/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23185!/ Service=ModLauncher Env=CLIENT
+[18:06:49] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 3050 Ti Laptop GPU/PCIe/SSE2 GL version 4.6.0 NVIDIA 546.30, NVIDIA Corporation
+[18:06:50] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.10\523aa0cd9a773b2b56268d8689b2fb5c1f072941\fmlcore-1.20.1-47.3.10.jar is missing mods.toml file
+[18:06:50] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.10\7a15037366722893d76a3d0b2e9d1fd13a63a22d\javafmllanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:06:50] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.10\e67d9b3451d64ccc812cbbd33c066bd3ebbf2167\lowcodelanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:06:50] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.10\2023f9726a509c5ba5a925cac934944066093de8\mclanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[18:06:50] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras-forge-0.5.0.jar. Using Mod File: <USER_HOME>\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-forge\0.5.0\cebe4d98a42a4a32ebf0ddec7b93d5bdbdad009\mixinextras-forge-0.5.0.jar
+[18:06:50] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[18:06:53] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[18:06:53] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, <USER_HOME>\.gradle\caches\neoformruntime\assets, --assetIndex, 5, --width, 1280, --height, 800]
+[18:06:53] [main/WARN] [mixin/]: Reference map 'useless_stretcher.refmap.json' for useless_stretcher.mixins.json could not be read. If this is a development environment you can ignore this message
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:53] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/enderio/base/common/handler/TravelHandler (java.lang.ClassNotFoundException: com.enderio.base.common.handler.TravelHandler)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.enderio.base.common.handler.TravelHandler was not found useless_mod.mixins.json:enderio.EnderIOTravelHandlerMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/permutated/exmachinis/compat/jei/category/CompactingCategory (java.lang.ClassNotFoundException: net.permutated.exmachinis.compat.jei.category.CompactingCategory)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BotanyPotRenderer (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BotanyPotRenderer)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BotanyPotRenderer was not found useless_mod.mixins.json:botanypots.BotanyPotRendererMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/data/displaystate/render/TransitionalDisplayStateRenderer (java.lang.ClassNotFoundException: net.darkhax.botanypots.data.displaystate.render.TransitionalDisplayStateRenderer)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.data.displaystate.render.TransitionalDisplayStateRenderer was not found useless_mod.mixins.json:botanypots.PhasedDisplayStateRendererMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/client/gui/GuiAssemblerMatrix$PatternInfo (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.client.gui.GuiAssemblerMatrix$PatternInfo)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.client.gui.GuiAssemblerMatrix$PatternInfo was not found useless_mod.mixins.json:eae.GuiAssemblerMatrixPatternInfoMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: appeng/integration/modules/emi/EmiEncodePatternHandler (java.lang.ClassNotFoundException: appeng.integration.modules.emi.EmiEncodePatternHandler)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: dev/emi/emi/jemi/JemiUtil (java.lang.ClassNotFoundException: dev.emi.emi.jemi.JemiUtil)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: dev/emi/emi/jemi/JemiPlugin (java.lang.ClassNotFoundException: dev.emi.emi.jemi.JemiPlugin)
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/base/KineticBlockEntity (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.base.KineticBlockEntity)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.base.KineticBlockEntity was not found useless_mod.create.mixins.json:KineticBlockEntityMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/KineticNetwork (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.KineticNetwork)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.KineticNetwork was not found useless_mod.create.mixins.json:KineticNetworkMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/api/recipes/cache/CachedRecipe (java.lang.ClassNotFoundException: mekanism.api.recipes.cache.CachedRecipe)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.api.recipes.cache.CachedRecipe was not found useless_mod.mekanism.mixins.json:CachedRecipeMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:DigitalMinerMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityElectricPump (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityElectricPump)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityElectricPump was not found useless_mod.mekanism.mixins.json:ElectricPumpMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFluidicPlenisher (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFluidicPlenisher)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFluidicPlenisher was not found useless_mod.mekanism.mixins.json:FluidicPlenisherMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFormulaicAssemblicator (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFormulaicAssemblicator)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFormulaicAssemblicator was not found useless_mod.mekanism.mixins.json:FormulaicAssemblicatorMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/MekanismUtils (java.lang.ClassNotFoundException: mekanism.common.util.MekanismUtils)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.MekanismUtils was not found useless_mod.mekanism.mixins.json:MekanismUtilsMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/component/TileComponentEjector (java.lang.ClassNotFoundException: mekanism.common.tile.component.TileComponentEjector)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.component.TileComponentEjector was not found useless_mod.mekanism.mixins.json:TileComponentEjectorMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:TileEntityDigitalMinerMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/api/Upgrade (java.lang.ClassNotFoundException: mekanism.api.Upgrade)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.api.Upgrade was not found useless_mod.mekanism.mixins.json:UpgradeMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/UpgradeUtils (java.lang.ClassNotFoundException: mekanism.common.util.UpgradeUtils)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.UpgradeUtils was not found useless_mod.mekanism.mixins.json:UpgradeUtilsMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageProviderMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[18:06:55] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageExtensionMixin
+[18:06:55] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/network/MenuDataCodecs (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.network.MenuDataCodecs)
+[18:06:55] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+2026-10-29 18:06:55,568 main WARN Error parsing URI <WORKSPACE>\\archive\\pr-5-review-20261029\\source\\build\\moddev\\upstreamClientCheckLog4j2.xml
+[18:07:00] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 188 Datafixer optimizations took 151 milliseconds
+[18:07:01] [pool-4-thread-1/WARN] [AE2:C/]: Unable to find class com.simibubi.create.foundation.ponder.PonderWorld. Integration with PonderJS disabled.
+[18:07:02] [Render thread/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/archive/pr-5-review-20261029/source/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23187!/assets/.mcassetsroot' uses unexpected schema
+[18:07:02] [Render thread/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/archive/pr-5-review-20261029/source/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23187!/data/.mcassetsroot' uses unexpected schema
+[18:07:02] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[18:07:02] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[18:07:02] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.1 build 7
+[18:07:02] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.10, for MC 1.20.1 with MCP 20230612.114412
+[18:07:02] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.10 Initialized
+[18:07:04] [Render thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[18:07:04] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-client\config\forge-client.toml is not correct. Correcting
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.alwaysSetupTerrainOffThread was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.experimentalForgeLightPipelineEnabled was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.showLoadWarnings was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.useCombinedDepthStencilAttachment was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.compressLanIPv6Addresses was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.calculateAllNormals was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key client.stabilizeDirectionGetNearest was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-client\config\useless_mod-client.toml is not correct. Correcting
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics.enable_botany_pot_rendering was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_autoclick_clicks_per_tick was corrected from null to its default, 4.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-client\config\guideme.toml is not correct. Correcting
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key guides was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key guides.ignoreTranslatedGuides was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key guides.hideMissingRecipeErrors was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gui was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gui.adaptiveScaling was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gui.fullWidthLayout was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key debug was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key debug.showDebugGuiOverlays was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\archive\pr-5-review-20261029\source\run\upstream-review-client\config\useless_mod-common.toml is not correct. Correcting
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_advanced_ae_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2cs_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2lt_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_data_energistics_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_extendedae_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_neo_eco_ae_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_barbequesdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_brewinandchewin_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_casualnessdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_crabbersdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_expandeddelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_extradelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_farmersdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_nomadsdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_ubesdelight_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_youkaishomecoming_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_jdte_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_justdirethings_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_cookery_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_grilling_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_tavern_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_appmek_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_generators_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_legacy_metallurgic_item_recipe_conversion was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_brewing_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_crafting_recipe_conversion was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_fishing_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_smelting_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_villager_trade_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_actually_additions_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apothic_flux_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_fluxnetworks_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apotheosis_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_lychee_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_astralsorcery_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ars_nouveau_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_botany_pots_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_exdeorum_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_avaritia_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_bigreactors_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_create_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_tconstruct_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_draconic_evolution_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ender_io_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_extended_crafting_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_forbidden_arcanus_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_hostilenetworks_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_immersiveengineering_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_thermal_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_blood_magic_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_embers_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_industrial_foregoing_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_irons_spellbooks_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_malum_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_modern_industrialization_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_mystical_agriculture_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_natures_aura_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_neovitae_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_occultism_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_oritech_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_pneumaticcraft_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_powah_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_productive_bees_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_summoningrituals_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ufo_recipe_conversion was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel was corrected from null to its default, SimpleCommentedConfig:{}.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_capacity was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_capacity was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_capacity was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_transfer was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_transfer was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_transfer was corrected from null to its default, true.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_consumption was corrected from null to its default, false.
+[18:07:04] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.base_mod_affect_parallel was corrected from null to its default, false.
+[18:07:04] [Worker-Main-7/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-15.0.06.hex, loading
+[18:07:04] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[18:07:05] [Worker-Main-2/WARN] [minecraft/SpriteLoader]: Texture useless_mod:item/endless_beaf_item with size 24x24 limits mip level from 4 to 3
+[18:07:06] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.4.28
+[18:07:08] [Render thread/WARN] [minecraft/SoundEngine]: Missing sound for event: minecraft:item.goat_horn.play
+[18:07:08] [Render thread/WARN] [minecraft/SoundEngine]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[18:07:09] [Render thread/INFO] [mojang/Library]: OpenAL initialized on device OpenAL Soft on ������ (Realtek(R) Audio)
+[18:07:09] [Render thread/INFO] [minecraft/SoundEngine]: Sound engine started
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[18:07:09] [Render thread/WARN] [minecraft/ShaderInstance]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[18:07:09] [Render thread/INFO] [gu.in.GuideReloadListener/]: Data driven guides: []
+[18:07:09] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 guideme:textures/atlas/gui.png-atlas
+[18:07:22] [Render thread/INFO] [co.so.us.st.up.ForgeConfigTranslationChecks/]: FORGE CONFIG TRANSLATION CHECKS PASSED [en_us]: all editor pages, labels, narration, help, controls, validation and in-memory save
+[18:07:23] [Render thread/INFO] [co.so.us.st.up.ForgeConfigTranslationChecks/]: FORGE CONFIG TRANSLATION CHECKS PASSED [zh_cn]: all editor pages, labels, narration, help, controls, validation and in-memory save
+[18:07:23] [Render thread/INFO] [co.so.us.st.up.ForgeConfigTranslationChecks/]: FORGE CONFIG TRANSLATION CHECKS PASSED [zh_tw]: all editor pages, labels, narration, help, controls, validation and in-memory save
+[18:07:23] [Render thread/INFO] [co.so.us.st.up.ForgeAppleUiChecks/]: FORGE APPLE UI CHECKS PASSED: all eight narrow staff tabs, native search focus/typing, range edit, config, owner/category/target rows, confirmation keyboard/idempotence/narration, window move/resize/reset, pattern drag/erase/stale response and balanced clips
+[18:07:23] [Render thread/INFO] [co.so.us.st.up.ForgeClientUpstreamChecks/]: FORGE CLIENT UPSTREAM CHECKS PASSED: eight real staff pages, sliders, search retention, persisted tabs/sidebar/extras, Ctrl Tab, narrow viewport and 240 balanced capsule renders
+[18:07:23] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+
+BUILD SUCCESSFUL in 54s
+7 actionable tasks: 3 executed, 4 up-to-date

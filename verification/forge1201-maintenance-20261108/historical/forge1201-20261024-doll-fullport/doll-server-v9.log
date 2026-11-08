@@ -1,0 +1,2632 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+ע: <WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\storyTest\java\com\sorrowmist\useless\stretcher\storytest\TwoINoseChecks.javaʹ����δ�����򲻰�ȫ�Ĳ�����
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:unchecked ���±��롣
+7 ������
+
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :downloadAssets UP-TO-DATE
+> Task :writeDollServerCheckLegacyClasspath UP-TO-DATE
+> Task :prepareDollServerCheckRun
+
+> Task :runDollServerCheck
+2026-10-24 12:56:42,304 main WARN Advanced terminal features are not available in this environment
+[12:56:42] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, useless_stretcher.mixins.json, --nogui]
+[12:56:42] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[12:56:42] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[12:56:42] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/<USER_HOME>/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23141!/ Service=ModLauncher Env=SERVER
+[12:56:42] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.10\523aa0cd9a773b2b56268d8689b2fb5c1f072941\fmlcore-1.20.1-47.3.10.jar is missing mods.toml file
+[12:56:42] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.10\7a15037366722893d76a3d0b2e9d1fd13a63a22d\javafmllanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[12:56:42] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.10\e67d9b3451d64ccc812cbbd33c066bd3ebbf2167\lowcodelanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[12:56:42] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.10\2023f9726a509c5ba5a925cac934944066093de8\mclanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[12:56:43] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras-forge-0.5.0.jar. Using Mod File: <USER_HOME>\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-forge\0.5.0\cebe4d98a42a4a32ebf0ddec7b93d5bdbdad009\mixinextras-forge-0.5.0.jar
+[12:56:43] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[12:56:46] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[12:56:46] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[12:56:46] [main/WARN] [mixin/]: Reference map 'useless_stretcher.refmap.json' for useless_stretcher.mixins.json could not be read. If this is a development environment you can ignore this message
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor
+[12:56:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: com/enderio/base/common/handler/TravelHandler (java.lang.ClassNotFoundException: com.enderio.base.common.handler.TravelHandler)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target com.enderio.base.common.handler.TravelHandler was not found useless_mod.mixins.json:enderio.EnderIOTravelHandlerMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/base/KineticBlockEntity (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.base.KineticBlockEntity)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.base.KineticBlockEntity was not found useless_mod.create.mixins.json:KineticBlockEntityMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/KineticNetwork (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.KineticNetwork)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.KineticNetwork was not found useless_mod.create.mixins.json:KineticNetworkMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/api/recipes/cache/CachedRecipe (java.lang.ClassNotFoundException: mekanism.api.recipes.cache.CachedRecipe)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.api.recipes.cache.CachedRecipe was not found useless_mod.mekanism.mixins.json:CachedRecipeMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:DigitalMinerMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityElectricPump (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityElectricPump)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityElectricPump was not found useless_mod.mekanism.mixins.json:ElectricPumpMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFluidicPlenisher (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFluidicPlenisher)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFluidicPlenisher was not found useless_mod.mekanism.mixins.json:FluidicPlenisherMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityFormulaicAssemblicator (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityFormulaicAssemblicator)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityFormulaicAssemblicator was not found useless_mod.mekanism.mixins.json:FormulaicAssemblicatorMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/MekanismUtils (java.lang.ClassNotFoundException: mekanism.common.util.MekanismUtils)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.MekanismUtils was not found useless_mod.mekanism.mixins.json:MekanismUtilsMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/component/TileComponentEjector (java.lang.ClassNotFoundException: mekanism.common.tile.component.TileComponentEjector)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.component.TileComponentEjector was not found useless_mod.mekanism.mixins.json:TileComponentEjectorMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/tile/machine/TileEntityDigitalMiner (java.lang.ClassNotFoundException: mekanism.common.tile.machine.TileEntityDigitalMiner)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.tile.machine.TileEntityDigitalMiner was not found useless_mod.mekanism.mixins.json:TileEntityDigitalMinerMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/api/Upgrade (java.lang.ClassNotFoundException: mekanism.api.Upgrade)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.api.Upgrade was not found useless_mod.mekanism.mixins.json:UpgradeMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: mekanism/common/util/UpgradeUtils (java.lang.ClassNotFoundException: mekanism.common.util.UpgradeUtils)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target mekanism.common.util.UpgradeUtils was not found useless_mod.mekanism.mixins.json:UpgradeUtilsMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageProviderMixin
+[12:56:47] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[12:56:47] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageExtensionMixin
+2026-10-24 12:56:47,651 main WARN Error parsing URI <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\dollServerCheckLog4j2.xml
+[12:56:47] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[12:56:54] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.10, for MC 1.20.1 with MCP 20230612.114412
+[12:56:54] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.10 Initialized
+[12:56:55] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[12:56:56] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[12:56:56] [main/WARN] [ne.mi.co.ForgeHooks/WP]: The following mods have version differences that were not resolved:
+ars_nouveau (version 4.12.7 -> MISSING)
+geckolib (version 4.8.2 -> MISSING)
+productivebees (version 1.20.1-12.6.0 -> MISSING)
+productivelib (version 1.20.1-0.0.4 -> MISSING)
+Things may not work well.
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:block
+	ars_nouveau:agronomic_sourcelink: 1444
+	ars_nouveau:alchemical_sourcelink: 1503
+	ars_nouveau:alteration_table: 1527
+	ars_nouveau:arcane_core: 1454
+	ars_nouveau:arcane_pedestal: 1540
+	ars_nouveau:arcane_platform: 1536
+	ars_nouveau:archwood_button: 1478
+	ars_nouveau:archwood_chest: 1510
+	ars_nouveau:archwood_door: 1485
+	ars_nouveau:archwood_fence: 1484
+	ars_nouveau:archwood_fence_gate: 1481
+	ars_nouveau:archwood_planks: 1477
+	ars_nouveau:archwood_pressure_plate: 1483
+	ars_nouveau:archwood_sconce: 1500
+	ars_nouveau:archwood_slab: 1480
+	ars_nouveau:archwood_stairs: 1479
+	ars_nouveau:archwood_trapdoor: 1482
+	ars_nouveau:basic_spell_turret: 1508
+	ars_nouveau:bastion_pod: 1523
+	ars_nouveau:blue_archwood_leaves: 1462
+	ars_nouveau:blue_archwood_log: 1461
+	ars_nouveau:blue_archwood_sapling: 1463
+	ars_nouveau:blue_archwood_wood: 1464
+	ars_nouveau:blue_sbed: 1515
+	ars_nouveau:bombegranate_pod: 1525
+	ars_nouveau:brazier_relay: 1538
+	ars_nouveau:creative_source_jar: 1460
+	ars_nouveau:drygmy_stone: 1502
+	ars_nouveau:enchanting_apparatus: 1445
+	ars_nouveau:falseweave: 1531
+	ars_nouveau:frostaya_pod: 1524
+	ars_nouveau:ghostweave: 1533
+	ars_nouveau:gilded_sourcestone_alternating: 1384
+	ars_nouveau:gilded_sourcestone_alternating_slab: 1406
+	ars_nouveau:gilded_sourcestone_alternating_stairs: 1428
+	ars_nouveau:gilded_sourcestone_basketweave: 1383
+	ars_nouveau:gilded_sourcestone_basketweave_slab: 1405
+	ars_nouveau:gilded_sourcestone_basketweave_stairs: 1427
+	ars_nouveau:gilded_sourcestone_large_bricks: 1385
+	ars_nouveau:gilded_sourcestone_large_bricks_slab: 1407
+	ars_nouveau:gilded_sourcestone_large_bricks_stairs: 1429
+	ars_nouveau:gilded_sourcestone_mosaic: 1382
+	ars_nouveau:gilded_sourcestone_mosaic_slab: 1404
+	ars_nouveau:gilded_sourcestone_mosaic_stairs: 1426
+	ars_nouveau:gilded_sourcestone_small_bricks: 1386
+	ars_nouveau:gilded_sourcestone_small_bricks_slab: 1408
+	ars_nouveau:gilded_sourcestone_small_bricks_stairs: 1430
+	ars_nouveau:green_archwood_leaves: 1474
+	ars_nouveau:green_archwood_log: 1473
+	ars_nouveau:green_archwood_sapling: 1475
+	ars_nouveau:green_archwood_wood: 1476
+	ars_nouveau:green_sbed: 1516
+	ars_nouveau:imbuement_chamber: 1452
+	ars_nouveau:intangible_air: 1456
+	ars_nouveau:item_detector: 1544
+	ars_nouveau:light_block: 1442
+	ars_nouveau:mage_block: 1441
+	ars_nouveau:magebloom_block: 1534
+	ars_nouveau:magebloom_crop: 1448
+	ars_nouveau:magelight_torch: 1537
+	ars_nouveau:magic_fire: 1501
+	ars_nouveau:mendosteen_pod: 1522
+	ars_nouveau:mirrorweave: 1532
+	ars_nouveau:mob_jar: 1528
+	ars_nouveau:mycelial_sourcelink: 1505
+	ars_nouveau:orange_sbed: 1517
+	ars_nouveau:polished_sconce: 1499
+	ars_nouveau:portal: 1451
+	ars_nouveau:potion_diffuser: 1526
+	ars_nouveau:potion_jar: 1495
+	ars_nouveau:potion_melder: 1496
+	ars_nouveau:potted_blue_archwood_sapling: 1438
+	ars_nouveau:potted_green_archwood_sapling: 1439
+	ars_nouveau:potted_magebloom_crop: 1436
+	ars_nouveau:potted_purple_archwood_sapling: 1440
+	ars_nouveau:potted_red_archwood_sapling: 1437
+	ars_nouveau:purple_archwood_leaves: 1470
+	ars_nouveau:purple_archwood_log: 1469
+	ars_nouveau:purple_archwood_sapling: 1471
+	ars_nouveau:purple_archwood_wood: 1472
+	ars_nouveau:purple_sbed: 1519
+	ars_nouveau:red_archwood_leaves: 1466
+	ars_nouveau:red_archwood_log: 1465
+	ars_nouveau:red_archwood_sapling: 1467
+	ars_nouveau:red_archwood_wood: 1468
+	ars_nouveau:red_sbed: 1514
+	ars_nouveau:redstone_relay: 1546
+	ars_nouveau:relay: 1447
+	ars_nouveau:relay_collector: 1513
+	ars_nouveau:relay_deposit: 1506
+	ars_nouveau:relay_splitter: 1453
+	ars_nouveau:relay_warp: 1507
+	ars_nouveau:repository: 1530
+	ars_nouveau:ritual_brazier: 1541
+	ars_nouveau:rotating_spell_turret: 1535
+	ars_nouveau:rune: 1450
+	ars_nouveau:sconce: 1497
+	ars_nouveau:scribes_table: 1449
+	ars_nouveau:scryers_crystal: 1521
+	ars_nouveau:scryers_oculus: 1520
+	ars_nouveau:sky_block: 1542
+	ars_nouveau:smooth_gilded_sourcestone_alternating: 1389
+	ars_nouveau:smooth_gilded_sourcestone_alternating_slab: 1411
+	ars_nouveau:smooth_gilded_sourcestone_alternating_stairs: 1433
+	ars_nouveau:smooth_gilded_sourcestone_basketweave: 1388
+	ars_nouveau:smooth_gilded_sourcestone_basketweave_slab: 1410
+	ars_nouveau:smooth_gilded_sourcestone_basketweave_stairs: 1432
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks: 1390
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks_slab: 1412
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks_stairs: 1434
+	ars_nouveau:smooth_gilded_sourcestone_mosaic: 1387
+	ars_nouveau:smooth_gilded_sourcestone_mosaic_slab: 1409
+	ars_nouveau:smooth_gilded_sourcestone_mosaic_stairs: 1431
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks: 1391
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks_slab: 1413
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks_stairs: 1435
+	ars_nouveau:smooth_sourcestone: 1380
+	ars_nouveau:smooth_sourcestone_alternating: 1378
+	ars_nouveau:smooth_sourcestone_alternating_slab: 1400
+	ars_nouveau:smooth_sourcestone_alternating_stairs: 1422
+	ars_nouveau:smooth_sourcestone_basketweave: 1376
+	ars_nouveau:smooth_sourcestone_basketweave_slab: 1398
+	ars_nouveau:smooth_sourcestone_basketweave_stairs: 1420
+	ars_nouveau:smooth_sourcestone_large_bricks: 1379
+	ars_nouveau:smooth_sourcestone_large_bricks_slab: 1401
+	ars_nouveau:smooth_sourcestone_large_bricks_stairs: 1423
+	ars_nouveau:smooth_sourcestone_mosaic: 1377
+	ars_nouveau:smooth_sourcestone_mosaic_slab: 1399
+	ars_nouveau:smooth_sourcestone_mosaic_stairs: 1421
+	ars_nouveau:smooth_sourcestone_slab: 1402
+	ars_nouveau:smooth_sourcestone_small_bricks: 1381
+	ars_nouveau:smooth_sourcestone_small_bricks_slab: 1403
+	ars_nouveau:smooth_sourcestone_small_bricks_stairs: 1425
+	ars_nouveau:smooth_sourcestone_stairs: 1424
+	ars_nouveau:source_gem_block: 1494
+	ars_nouveau:source_jar: 1446
+	ars_nouveau:sourceberry_bush: 1458
+	ars_nouveau:sourceberry_sack: 1547
+	ars_nouveau:sourcestone: 1370
+	ars_nouveau:sourcestone_alternating: 1373
+	ars_nouveau:sourcestone_alternating_slab: 1395
+	ars_nouveau:sourcestone_alternating_stairs: 1417
+	ars_nouveau:sourcestone_basketweave: 1372
+	ars_nouveau:sourcestone_basketweave_slab: 1394
+	ars_nouveau:sourcestone_basketweave_stairs: 1416
+	ars_nouveau:sourcestone_large_bricks: 1374
+	ars_nouveau:sourcestone_large_bricks_slab: 1396
+	ars_nouveau:sourcestone_large_bricks_stairs: 1418
+	ars_nouveau:sourcestone_mosaic: 1371
+	ars_nouveau:sourcestone_mosaic_slab: 1393
+	ars_nouveau:sourcestone_mosaic_stairs: 1415
+	ars_nouveau:sourcestone_sconce: 1498
+	ars_nouveau:sourcestone_slab: 1392
+	ars_nouveau:sourcestone_small_bricks: 1375
+	ars_nouveau:sourcestone_small_bricks_slab: 1397
+	ars_nouveau:sourcestone_small_bricks_stairs: 1419
+	ars_nouveau:sourcestone_stairs: 1414
+	ars_nouveau:spell_prism: 1511
+	ars_nouveau:spell_sensor: 1545
+	ars_nouveau:spell_turret: 1455
+	ars_nouveau:storage_lectern: 1539
+	ars_nouveau:stripped_blue_archwood_log: 1486
+	ars_nouveau:stripped_blue_archwood_wood: 1487
+	ars_nouveau:stripped_green_archwood_log: 1488
+	ars_nouveau:stripped_green_archwood_wood: 1489
+	ars_nouveau:stripped_purple_archwood_log: 1492
+	ars_nouveau:stripped_purple_archwood_wood: 1493
+	ars_nouveau:stripped_red_archwood_log: 1490
+	ars_nouveau:stripped_red_archwood_wood: 1491
+	ars_nouveau:temporary_block: 1543
+	ars_nouveau:temporary_light_block: 1443
+	ars_nouveau:timer_spell_turret: 1509
+	ars_nouveau:vitalic_sourcelink: 1504
+	ars_nouveau:void_prism: 1529
+	ars_nouveau:volcanic_sourcelink: 1457
+	ars_nouveau:whirlisprig_flower: 1512
+	ars_nouveau:wixie_cauldron: 1459
+	ars_nouveau:yellow_sbed: 1518
+	geckolib:fertilizer: 1212
+	geckolib:gecko_habitat: 1211
+	productivebees:acacia_wood_nest: 1234
+	productivebees:advanced_acacia_beehive: 1290
+	productivebees:advanced_acacia_canvas_beehive: 1304
+	productivebees:advanced_aspen_canvas_beehive: 1306
+	productivebees:advanced_bamboo_beehive: 1280
+	productivebees:advanced_bamboo_canvas_beehive: 1308
+	productivebees:advanced_birch_beehive: 1286
+	productivebees:advanced_birch_canvas_beehive: 1310
+	productivebees:advanced_cherry_beehive: 1282
+	productivebees:advanced_cherry_canvas_beehive: 1312
+	productivebees:advanced_comb_canvas_beehive: 1316
+	productivebees:advanced_concrete_canvas_beehive: 1314
+	productivebees:advanced_crimson_beehive: 1284
+	productivebees:advanced_crimson_canvas_beehive: 1318
+	productivebees:advanced_dark_oak_beehive: 1296
+	productivebees:advanced_dark_oak_canvas_beehive: 1320
+	productivebees:advanced_dead_canvas_beehive: 1322
+	productivebees:advanced_driftwood_canvas_beehive: 1324
+	productivebees:advanced_fir_canvas_beehive: 1326
+	productivebees:advanced_grimwood_canvas_beehive: 1328
+	productivebees:advanced_hellbark_canvas_beehive: 1330
+	productivebees:advanced_jacaranda_canvas_beehive: 1332
+	productivebees:advanced_jungle_beehive: 1294
+	productivebees:advanced_jungle_canvas_beehive: 1334
+	productivebees:advanced_kousa_canvas_beehive: 1336
+	productivebees:advanced_magic_canvas_beehive: 1338
+	productivebees:advanced_mahogany_canvas_beehive: 1340
+	productivebees:advanced_mangrove_beehive: 1298
+	productivebees:advanced_mangrove_canvas_beehive: 1342
+	productivebees:advanced_maple_canvas_beehive: 1344
+	productivebees:advanced_oak_beehive: 1288
+	productivebees:advanced_oak_canvas_beehive: 1346
+	productivebees:advanced_palm_canvas_beehive: 1348
+	productivebees:advanced_redwood_canvas_beehive: 1350
+	productivebees:advanced_river_canvas_beehive: 1352
+	productivebees:advanced_rosewood_canvas_beehive: 1354
+	productivebees:advanced_snake_block_beehive: 1300
+	productivebees:advanced_snake_block_canvas_beehive: 1356
+	productivebees:advanced_spruce_beehive: 1302
+	productivebees:advanced_spruce_canvas_beehive: 1358
+	productivebees:advanced_umbran_canvas_beehive: 1360
+	productivebees:advanced_warped_beehive: 1292
+	productivebees:advanced_warped_canvas_beehive: 1362
+	productivebees:advanced_willow_canvas_beehive: 1364
+	productivebees:advanced_wisteria_canvas_beehive: 1366
+	productivebees:advanced_yucca_canvas_beehive: 1368
+	productivebees:amber: 1262
+	productivebees:bamboo_hive: 1237
+	productivebees:birch_wood_nest: 1232
+	productivebees:black_petrified_honey: 1279
+	productivebees:blue_petrified_honey: 1275
+	productivebees:bottler: 1213
+	productivebees:breeding_chamber: 1227
+	productivebees:brown_petrified_honey: 1276
+	productivebees:bumble_bee_nest: 1258
+	productivebees:catcher: 1218
+	productivebees:centrifuge: 1214
+	productivebees:cherry_wood_nest: 1235
+	productivebees:coarse_dirt_nest: 1240
+	productivebees:comb_ghostly: 1255
+	productivebees:comb_milky: 1256
+	productivebees:comb_powdery: 1257
+	productivebees:configurable_comb: 1254
+	productivebees:crimson_bee_nest: 1261
+	productivebees:cryo_stasis: 1228
+	productivebees:cyan_petrified_honey: 1273
+	productivebees:dark_oak_wood_nest: 1231
+	productivebees:dragon_egg_hive: 1238
+	productivebees:end_stone_nest: 1251
+	productivebees:expansion_box_acacia: 1291
+	productivebees:expansion_box_acacia_canvas: 1305
+	productivebees:expansion_box_aspen_canvas: 1307
+	productivebees:expansion_box_bamboo: 1281
+	productivebees:expansion_box_bamboo_canvas: 1309
+	productivebees:expansion_box_birch: 1287
+	productivebees:expansion_box_birch_canvas: 1311
+	productivebees:expansion_box_cherry: 1283
+	productivebees:expansion_box_cherry_canvas: 1313
+	productivebees:expansion_box_comb_canvas: 1317
+	productivebees:expansion_box_concrete_canvas: 1315
+	productivebees:expansion_box_crimson: 1285
+	productivebees:expansion_box_crimson_canvas: 1319
+	productivebees:expansion_box_dark_oak: 1297
+	productivebees:expansion_box_dark_oak_canvas: 1321
+	productivebees:expansion_box_dead_canvas: 1323
+	productivebees:expansion_box_driftwood_canvas: 1325
+	productivebees:expansion_box_fir_canvas: 1327
+	productivebees:expansion_box_grimwood_canvas: 1329
+	productivebees:expansion_box_hellbark_canvas: 1331
+	productivebees:expansion_box_jacaranda_canvas: 1333
+	productivebees:expansion_box_jungle: 1295
+	productivebees:expansion_box_jungle_canvas: 1335
+	productivebees:expansion_box_kousa_canvas: 1337
+	productivebees:expansion_box_magic_canvas: 1339
+	productivebees:expansion_box_mahogany_canvas: 1341
+	productivebees:expansion_box_mangrove: 1299
+	productivebees:expansion_box_mangrove_canvas: 1343
+	productivebees:expansion_box_maple_canvas: 1345
+	productivebees:expansion_box_oak: 1289
+	productivebees:expansion_box_oak_canvas: 1347
+	productivebees:expansion_box_palm_canvas: 1349
+	productivebees:expansion_box_redwood_canvas: 1351
+	productivebees:expansion_box_river_canvas: 1353
+	productivebees:expansion_box_rosewood_canvas: 1355
+	productivebees:expansion_box_snake_block: 1301
+	productivebees:expansion_box_snake_block_canvas: 1357
+	productivebees:expansion_box_spruce: 1303
+	productivebees:expansion_box_spruce_canvas: 1359
+	productivebees:expansion_box_umbran_canvas: 1361
+	productivebees:expansion_box_warped: 1293
+	productivebees:expansion_box_warped_canvas: 1363
+	productivebees:expansion_box_willow_canvas: 1365
+	productivebees:expansion_box_wisteria_canvas: 1367
+	productivebees:expansion_box_yucca_canvas: 1369
+	productivebees:feeder: 1222
+	productivebees:gene_indexer: 1226
+	productivebees:glowstone_nest: 1246
+	productivebees:gravel_nest: 1243
+	productivebees:gray_petrified_honey: 1271
+	productivebees:green_petrified_honey: 1277
+	productivebees:heated_centrifuge: 1216
+	productivebees:honey: 1253
+	productivebees:honey_generator: 1217
+	productivebees:inactive_dragon_egg: 1220
+	productivebees:incubator: 1219
+	productivebees:invisible_redstone_block: 1221
+	productivebees:jar_oak: 1223
+	productivebees:jungle_wood_nest: 1233
+	productivebees:light_blue_petrified_honey: 1267
+	productivebees:light_gray_petrified_honey: 1272
+	productivebees:lime_petrified_honey: 1269
+	productivebees:magenta_petrified_honey: 1266
+	productivebees:mangrove_wood_nest: 1236
+	productivebees:nether_brick_nest: 1250
+	productivebees:nether_gold_nest: 1249
+	productivebees:nether_quartz_nest: 1248
+	productivebees:oak_wood_nest: 1229
+	productivebees:obsidian_nest: 1252
+	productivebees:orange_petrified_honey: 1265
+	productivebees:petrified_honey: 1263
+	productivebees:pink_petrified_honey: 1270
+	productivebees:powered_centrifuge: 1215
+	productivebees:purple_petrified_honey: 1274
+	productivebees:quartz_netherrack: 1224
+	productivebees:red_petrified_honey: 1278
+	productivebees:sand_nest: 1241
+	productivebees:slimy_nest: 1245
+	productivebees:snow_nest: 1242
+	productivebees:soul_sand_nest: 1247
+	productivebees:spruce_wood_nest: 1230
+	productivebees:stone_nest: 1239
+	productivebees:sugar_cane_nest: 1244
+	productivebees:sugarbag_nest: 1259
+	productivebees:warped_bee_nest: 1260
+	productivebees:wax_block: 1225
+	productivebees:white_petrified_honey: 1264
+	productivebees:yellow_petrified_honey: 1268
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:enchantment
+	ars_nouveau:mana_boost: 40
+	ars_nouveau:mana_regen: 39
+	ars_nouveau:reactive: 41
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:entity_type
+	ars_nouveau:ally_vex: 166
+	ars_nouveau:amethyst_golem: 201
+	ars_nouveau:an_lightning: 184
+	ars_nouveau:animated_block: 208
+	ars_nouveau:animated_head: 209
+	ars_nouveau:arcing_spell_proj: 164
+	ars_nouveau:blazing_weald_walker: 199
+	ars_nouveau:bookwyrm: 168
+	ars_nouveau:cascading_weald_walker: 197
+	ars_nouveau:cinder: 177
+	ars_nouveau:drygmy: 186
+	ars_nouveau:dummy: 185
+	ars_nouveau:enchanted_falling_block: 203
+	ars_nouveau:enchanted_head_block: 206
+	ars_nouveau:enchanted_mage_block: 205
+	ars_nouveau:familiar_amethyst_golem: 194
+	ars_nouveau:familiar_bookwyrm: 191
+	ars_nouveau:familiar_drygmy: 192
+	ars_nouveau:familiar_starbuncle: 189
+	ars_nouveau:familiar_whirlisprig: 193
+	ars_nouveau:familiar_wixie: 190
+	ars_nouveau:fangs: 167
+	ars_nouveau:flourishing_weald_walker: 198
+	ars_nouveau:flying_item: 173
+	ars_nouveau:follow_proj: 170
+	ars_nouveau:gift_starby: 207
+	ars_nouveau:homing_spell_proj: 165
+	ars_nouveau:ice_shard: 204
+	ars_nouveau:lily: 210
+	ars_nouveau:linger: 195
+	ars_nouveau:orbit: 187
+	ars_nouveau:ritual: 174
+	ars_nouveau:scryer_camera: 202
+	ars_nouveau:spell_arrow: 176
+	ars_nouveau:spell_proj: 163
+	ars_nouveau:spike: 188
+	ars_nouveau:starbuncle: 169
+	ars_nouveau:summon_horse: 180
+	ars_nouveau:summon_skeleton: 181
+	ars_nouveau:summon_wolf: 178
+	ars_nouveau:vexing_weald_walker: 200
+	ars_nouveau:wall: 196
+	ars_nouveau:whirlisprig: 171
+	ars_nouveau:wilden_boss: 183
+	ars_nouveau:wilden_guardian: 182
+	ars_nouveau:wilden_hunter: 175
+	ars_nouveau:wilden_stalker: 179
+	ars_nouveau:wixie: 172
+	geckolib:bat: 130
+	geckolib:bike: 131
+	geckolib:cool_kid: 136
+	geckolib:fake_glass: 135
+	geckolib:gremlin: 137
+	geckolib:mutant_zombie: 134
+	geckolib:parasite: 133
+	geckolib:race_car: 132
+	productivebees:ashy_mining_bee: 148
+	productivebees:bee_bomb: 162
+	productivebees:blue_banded_bee: 149
+	productivebees:bumble_bee: 161
+	productivebees:chocolate_mining_bee: 152
+	productivebees:collector_bee: 142
+	productivebees:configurable_bee: 147
+	productivebees:creeper_bee: 145
+	productivebees:cupid_bee: 146
+	productivebees:digger_bee: 153
+	productivebees:dye_bee: 138
+	productivebees:farmer_bee: 144
+	productivebees:green_carpenter_bee: 150
+	productivebees:hoarder_bee: 143
+	productivebees:leafcutter_bee: 154
+	productivebees:lumber_bee: 139
+	productivebees:mason_bee: 155
+	productivebees:neon_cuckoo_bee: 156
+	productivebees:nomad_bee: 157
+	productivebees:quarry_bee: 140
+	productivebees:rancher_bee: 141
+	productivebees:reed_bee: 158
+	productivebees:resin_bee: 159
+	productivebees:sweat_bee: 160
+	productivebees:yellow_black_carpenter_bee: 151
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:fluid
+	minecraft:flowing_milk: 8
+	minecraft:milk: 7
+	productivebees:flowing_honey: 6
+	productivebees:honey: 5
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:item
+	ars_nouveau:abjuration_essence: 2209
+	ars_nouveau:agronomic_sourcelink: 2232
+	ars_nouveau:air_essence: 2211
+	ars_nouveau:alchemical_sourcelink: 2290
+	ars_nouveau:alchemists_crown: 2220
+	ars_nouveau:allow_scroll: 2165
+	ars_nouveau:alteration_table: 2314
+	ars_nouveau:amethyst_golem_charm: 2216
+	ars_nouveau:amplify_arrow: 2174
+	ars_nouveau:amulet_of_mana_boost: 2155
+	ars_nouveau:amulet_of_mana_regen: 2156
+	ars_nouveau:annotated_codex: 2217
+	ars_nouveau:apprentice_spell_book: 2137
+	ars_nouveau:arcane_core: 2242
+	ars_nouveau:arcane_pedestal: 2327
+	ars_nouveau:arcane_platform: 2323
+	ars_nouveau:arcanist_boots: 2200
+	ars_nouveau:arcanist_hood: 2203
+	ars_nouveau:arcanist_leggings: 2201
+	ars_nouveau:arcanist_robes: 2202
+	ars_nouveau:archmage_spell_book: 2138
+	ars_nouveau:archwood_button: 2265
+	ars_nouveau:archwood_chest: 2297
+	ars_nouveau:archwood_door: 2272
+	ars_nouveau:archwood_fence: 2271
+	ars_nouveau:archwood_fence_gate: 2268
+	ars_nouveau:archwood_planks: 2264
+	ars_nouveau:archwood_pressure_plate: 2270
+	ars_nouveau:archwood_sconce: 2287
+	ars_nouveau:archwood_slab: 2267
+	ars_nouveau:archwood_stairs: 2266
+	ars_nouveau:archwood_trapdoor: 2269
+	ars_nouveau:basic_spell_turret: 2295
+	ars_nouveau:bastion_pod: 2310
+	ars_nouveau:battlemage_boots: 2204
+	ars_nouveau:battlemage_hood: 2207
+	ars_nouveau:battlemage_leggings: 2205
+	ars_nouveau:battlemage_robes: 2206
+	ars_nouveau:belt_of_levitation: 2145
+	ars_nouveau:belt_of_unstable_gifts: 2150
+	ars_nouveau:blank_glyph: 2140
+	ars_nouveau:blank_parchment: 2168
+	ars_nouveau:blank_thread: 2115
+	ars_nouveau:blue_archwood_leaves: 2249
+	ars_nouveau:blue_archwood_log: 2248
+	ars_nouveau:blue_archwood_sapling: 2250
+	ars_nouveau:blue_archwood_wood: 2251
+	ars_nouveau:blue_sbed: 2302
+	ars_nouveau:bombegranate_pod: 2312
+	ars_nouveau:bookwyrm_charm: 2153
+	ars_nouveau:brazier_relay: 2325
+	ars_nouveau:burst: 2057
+	ars_nouveau:caster_tome: 2187
+	ars_nouveau:conjuration_essence: 2210
+	ars_nouveau:creative_source_jar: 2247
+	ars_nouveau:creative_spell_book: 2139
+	ars_nouveau:debug: 2159
+	ars_nouveau:deny_scroll: 2166
+	ars_nouveau:dominion_wand: 2154
+	ars_nouveau:dowsing_rod: 2208
+	ars_nouveau:drygmy_charm: 2188
+	ars_nouveau:drygmy_se: 2400
+	ars_nouveau:drygmy_shard: 2189
+	ars_nouveau:drygmy_stone: 2289
+	ars_nouveau:dull_trinket: 2157
+	ars_nouveau:earth_essence: 2212
+	ars_nouveau:enchanters_eye: 2229
+	ars_nouveau:enchanters_mirror: 2195
+	ars_nouveau:enchanters_shield: 2186
+	ars_nouveau:enchanters_sword: 2185
+	ars_nouveau:enchanting_apparatus: 2233
+	ars_nouveau:experience_gem: 2183
+	ars_nouveau:falseweave: 2318
+	ars_nouveau:familiar_amethyst_golem: 2109
+	ars_nouveau:familiar_bookwyrm: 2114
+	ars_nouveau:familiar_drygmy: 2113
+	ars_nouveau:familiar_starbuncle: 2110
+	ars_nouveau:familiar_whirlisprig: 2112
+	ars_nouveau:familiar_wixie: 2111
+	ars_nouveau:fire_essence: 2213
+	ars_nouveau:frostaya_pod: 2311
+	ars_nouveau:ghostweave: 2320
+	ars_nouveau:gilded_sourcestone_alternating: 2348
+	ars_nouveau:gilded_sourcestone_alternating_slab: 2392
+	ars_nouveau:gilded_sourcestone_alternating_stairs: 2370
+	ars_nouveau:gilded_sourcestone_basketweave: 2347
+	ars_nouveau:gilded_sourcestone_basketweave_slab: 2391
+	ars_nouveau:gilded_sourcestone_basketweave_stairs: 2369
+	ars_nouveau:gilded_sourcestone_large_bricks: 2349
+	ars_nouveau:gilded_sourcestone_large_bricks_slab: 2393
+	ars_nouveau:gilded_sourcestone_large_bricks_stairs: 2371
+	ars_nouveau:gilded_sourcestone_mosaic: 2346
+	ars_nouveau:gilded_sourcestone_mosaic_slab: 2390
+	ars_nouveau:gilded_sourcestone_mosaic_stairs: 2368
+	ars_nouveau:gilded_sourcestone_small_bricks: 2350
+	ars_nouveau:gilded_sourcestone_small_bricks_slab: 2394
+	ars_nouveau:gilded_sourcestone_small_bricks_stairs: 2372
+	ars_nouveau:glyph_accelerate: 2062
+	ars_nouveau:glyph_amplify: 2034
+	ars_nouveau:glyph_animate_block: 2031
+	ars_nouveau:glyph_aoe: 2058
+	ars_nouveau:glyph_blink: 2030
+	ars_nouveau:glyph_bounce: 2035
+	ars_nouveau:glyph_break: 2063
+	ars_nouveau:glyph_cold_snap: 2076
+	ars_nouveau:glyph_conjure_water: 2022
+	ars_nouveau:glyph_craft: 2068
+	ars_nouveau:glyph_crush: 2019
+	ars_nouveau:glyph_cut: 2009
+	ars_nouveau:glyph_dampen: 2013
+	ars_nouveau:glyph_decelerate: 2059
+	ars_nouveau:glyph_delay: 2075
+	ars_nouveau:glyph_dispel: 2084
+	ars_nouveau:glyph_duration_down: 2044
+	ars_nouveau:glyph_ender_inventory: 2046
+	ars_nouveau:glyph_evaporate: 2020
+	ars_nouveau:glyph_exchange: 2040
+	ars_nouveau:glyph_explosion: 2067
+	ars_nouveau:glyph_extend_time: 2060
+	ars_nouveau:glyph_extract: 2074
+	ars_nouveau:glyph_fangs: 2039
+	ars_nouveau:glyph_fell: 2041
+	ars_nouveau:glyph_firework: 2015
+	ars_nouveau:glyph_flare: 2066
+	ars_nouveau:glyph_fortune: 2006
+	ars_nouveau:glyph_freeze: 2051
+	ars_nouveau:glyph_glide: 2037
+	ars_nouveau:glyph_gravity: 2014
+	ars_nouveau:glyph_grow: 2010
+	ars_nouveau:glyph_gust: 2050
+	ars_nouveau:glyph_harm: 2033
+	ars_nouveau:glyph_harvest: 2049
+	ars_nouveau:glyph_heal: 2036
+	ars_nouveau:glyph_hex: 2080
+	ars_nouveau:glyph_ignite: 2032
+	ars_nouveau:glyph_infuse: 2079
+	ars_nouveau:glyph_intangible: 2045
+	ars_nouveau:glyph_interact: 2047
+	ars_nouveau:glyph_invisibility: 2004
+	ars_nouveau:glyph_launch: 2026
+	ars_nouveau:glyph_leap: 2038
+	ars_nouveau:glyph_light: 2083
+	ars_nouveau:glyph_lightning: 2023
+	ars_nouveau:glyph_linger: 2082
+	ars_nouveau:glyph_name: 2012
+	ars_nouveau:glyph_orbit: 2061
+	ars_nouveau:glyph_phantom_block: 2005
+	ars_nouveau:glyph_pickup: 2024
+	ars_nouveau:glyph_pierce: 2072
+	ars_nouveau:glyph_place_block: 2048
+	ars_nouveau:glyph_projectile: 2078
+	ars_nouveau:glyph_pull: 2071
+	ars_nouveau:glyph_randomize: 2052
+	ars_nouveau:glyph_redstone_signal: 2043
+	ars_nouveau:glyph_rotate: 2028
+	ars_nouveau:glyph_rune: 2065
+	ars_nouveau:glyph_self: 2056
+	ars_nouveau:glyph_sense_magic: 2070
+	ars_nouveau:glyph_sensitive: 2042
+	ars_nouveau:glyph_slowfall: 2073
+	ars_nouveau:glyph_smelt: 2025
+	ars_nouveau:glyph_snare: 2017
+	ars_nouveau:glyph_split: 2016
+	ars_nouveau:glyph_summon_decoy: 2077
+	ars_nouveau:glyph_summon_steed: 2054
+	ars_nouveau:glyph_summon_undead: 2064
+	ars_nouveau:glyph_summon_vex: 2055
+	ars_nouveau:glyph_summon_wolves: 2011
+	ars_nouveau:glyph_toss: 2008
+	ars_nouveau:glyph_touch: 2021
+	ars_nouveau:glyph_underfoot: 2081
+	ars_nouveau:glyph_wall: 2053
+	ars_nouveau:glyph_wind_shear: 2069
+	ars_nouveau:glyph_wither: 2007
+	ars_nouveau:greater_experience_gem: 2184
+	ars_nouveau:green_archwood_leaves: 2261
+	ars_nouveau:green_archwood_log: 2260
+	ars_nouveau:green_archwood_sapling: 2262
+	ars_nouveau:green_archwood_wood: 2263
+	ars_nouveau:green_sbed: 2303
+	ars_nouveau:imbuement_chamber: 2240
+	ars_nouveau:item_detector: 2330
+	ars_nouveau:jar_of_light: 2144
+	ars_nouveau:jump_ring: 2230
+	ars_nouveau:lingering_flask_cannon: 2222
+	ars_nouveau:mage_block: 2231
+	ars_nouveau:magebloom: 2141
+	ars_nouveau:magebloom_block: 2321
+	ars_nouveau:magebloom_crop: 2236
+	ars_nouveau:magebloom_fiber: 2142
+	ars_nouveau:magelight_torch: 2324
+	ars_nouveau:magic_fire: 2288
+	ars_nouveau:manipulation_essence: 2214
+	ars_nouveau:mendosteen_pod: 2309
+	ars_nouveau:mimic_scroll: 2167
+	ars_nouveau:mirrorweave: 2319
+	ars_nouveau:mob_jar: 2315
+	ars_nouveau:mundane_belt: 2143
+	ars_nouveau:music_disc_aria_biblio: 2223
+	ars_nouveau:music_disc_firel_the_wild_hunt: 2225
+	ars_nouveau:music_disc_thistle_the_sound_of_glass: 2224
+	ars_nouveau:mycelial_sourcelink: 2292
+	ars_nouveau:novice_spell_book: 2136
+	ars_nouveau:orange_sbed: 2304
+	ars_nouveau:pierce_arrow: 2176
+	ars_nouveau:polished_sconce: 2286
+	ars_nouveau:portal: 2239
+	ars_nouveau:potion_diffuser: 2313
+	ars_nouveau:potion_flask: 2180
+	ars_nouveau:potion_flask_amplify: 2181
+	ars_nouveau:potion_flask_extend_time: 2182
+	ars_nouveau:potion_jar: 2282
+	ars_nouveau:potion_melder: 2283
+	ars_nouveau:purple_archwood_leaves: 2257
+	ars_nouveau:purple_archwood_log: 2256
+	ars_nouveau:purple_archwood_sapling: 2258
+	ars_nouveau:purple_archwood_wood: 2259
+	ars_nouveau:purple_sbed: 2306
+	ars_nouveau:red_archwood_leaves: 2253
+	ars_nouveau:red_archwood_log: 2252
+	ars_nouveau:red_archwood_sapling: 2254
+	ars_nouveau:red_archwood_wood: 2255
+	ars_nouveau:red_sbed: 2301
+	ars_nouveau:redstone_relay: 2332
+	ars_nouveau:relay: 2235
+	ars_nouveau:relay_collector: 2300
+	ars_nouveau:relay_deposit: 2293
+	ars_nouveau:relay_splitter: 2241
+	ars_nouveau:relay_warp: 2294
+	ars_nouveau:repository: 2317
+	ars_nouveau:reset: 2027
+	ars_nouveau:rewind: 2029
+	ars_nouveau:ring_of_greater_discount: 2149
+	ars_nouveau:ring_of_lesser_discount: 2148
+	ars_nouveau:ring_of_potential: 2147
+	ars_nouveau:ritual_animal_summon: 2095
+	ars_nouveau:ritual_awakening: 2088
+	ars_nouveau:ritual_binding: 2087
+	ars_nouveau:ritual_brazier: 2328
+	ars_nouveau:ritual_burrowing: 2085
+	ars_nouveau:ritual_challenge: 2086
+	ars_nouveau:ritual_cloudshaping: 2093
+	ars_nouveau:ritual_conjure_island_desert: 2106
+	ars_nouveau:ritual_conjure_island_plains: 2091
+	ars_nouveau:ritual_containment: 2099
+	ars_nouveau:ritual_disintegration: 2089
+	ars_nouveau:ritual_fertility: 2104
+	ars_nouveau:ritual_flight: 2092
+	ars_nouveau:ritual_flowering: 2102
+	ars_nouveau:ritual_forestation: 2096
+	ars_nouveau:ritual_gravity: 2101
+	ars_nouveau:ritual_harvest: 2107
+	ars_nouveau:ritual_moonfall: 2098
+	ars_nouveau:ritual_overgrowth: 2105
+	ars_nouveau:ritual_restoration: 2094
+	ars_nouveau:ritual_sanctuary: 2103
+	ars_nouveau:ritual_scrying: 2100
+	ars_nouveau:ritual_sunrise: 2090
+	ars_nouveau:ritual_warping: 2097
+	ars_nouveau:ritual_wilden_summon: 2108
+	ars_nouveau:rotating_spell_turret: 2322
+	ars_nouveau:rune: 2238
+	ars_nouveau:runic_chalk: 2135
+	ars_nouveau:sconce: 2284
+	ars_nouveau:scribes_table: 2237
+	ars_nouveau:scryer_scroll: 2218
+	ars_nouveau:scryers_crystal: 2308
+	ars_nouveau:scryers_oculus: 2307
+	ars_nouveau:shapers_focus: 2192
+	ars_nouveau:sky_block: 2329
+	ars_nouveau:smooth_gilded_sourcestone_alternating: 2353
+	ars_nouveau:smooth_gilded_sourcestone_alternating_slab: 2397
+	ars_nouveau:smooth_gilded_sourcestone_alternating_stairs: 2375
+	ars_nouveau:smooth_gilded_sourcestone_basketweave: 2352
+	ars_nouveau:smooth_gilded_sourcestone_basketweave_slab: 2396
+	ars_nouveau:smooth_gilded_sourcestone_basketweave_stairs: 2374
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks: 2354
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks_slab: 2398
+	ars_nouveau:smooth_gilded_sourcestone_large_bricks_stairs: 2376
+	ars_nouveau:smooth_gilded_sourcestone_mosaic: 2351
+	ars_nouveau:smooth_gilded_sourcestone_mosaic_slab: 2395
+	ars_nouveau:smooth_gilded_sourcestone_mosaic_stairs: 2373
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks: 2355
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks_slab: 2399
+	ars_nouveau:smooth_gilded_sourcestone_small_bricks_stairs: 2377
+	ars_nouveau:smooth_sourcestone: 2344
+	ars_nouveau:smooth_sourcestone_alternating: 2342
+	ars_nouveau:smooth_sourcestone_alternating_slab: 2386
+	ars_nouveau:smooth_sourcestone_alternating_stairs: 2364
+	ars_nouveau:smooth_sourcestone_basketweave: 2340
+	ars_nouveau:smooth_sourcestone_basketweave_slab: 2384
+	ars_nouveau:smooth_sourcestone_basketweave_stairs: 2362
+	ars_nouveau:smooth_sourcestone_large_bricks: 2343
+	ars_nouveau:smooth_sourcestone_large_bricks_slab: 2387
+	ars_nouveau:smooth_sourcestone_large_bricks_stairs: 2365
+	ars_nouveau:smooth_sourcestone_mosaic: 2341
+	ars_nouveau:smooth_sourcestone_mosaic_slab: 2385
+	ars_nouveau:smooth_sourcestone_mosaic_stairs: 2363
+	ars_nouveau:smooth_sourcestone_slab: 2388
+	ars_nouveau:smooth_sourcestone_small_bricks: 2345
+	ars_nouveau:smooth_sourcestone_small_bricks_slab: 2389
+	ars_nouveau:smooth_sourcestone_small_bricks_stairs: 2367
+	ars_nouveau:smooth_sourcestone_stairs: 2366
+	ars_nouveau:sorcerer_boots: 2196
+	ars_nouveau:sorcerer_hood: 2199
+	ars_nouveau:sorcerer_leggings: 2197
+	ars_nouveau:sorcerer_robes: 2198
+	ars_nouveau:source_berry_pie: 2193
+	ars_nouveau:source_berry_roll: 2194
+	ars_nouveau:source_gem: 2164
+	ars_nouveau:source_gem_block: 2281
+	ars_nouveau:source_jar: 2234
+	ars_nouveau:sourceberry_bush: 2245
+	ars_nouveau:sourceberry_sack: 2333
+	ars_nouveau:sourcestone: 2334
+	ars_nouveau:sourcestone_alternating: 2337
+	ars_nouveau:sourcestone_alternating_slab: 2381
+	ars_nouveau:sourcestone_alternating_stairs: 2359
+	ars_nouveau:sourcestone_basketweave: 2336
+	ars_nouveau:sourcestone_basketweave_slab: 2380
+	ars_nouveau:sourcestone_basketweave_stairs: 2358
+	ars_nouveau:sourcestone_large_bricks: 2338
+	ars_nouveau:sourcestone_large_bricks_slab: 2382
+	ars_nouveau:sourcestone_large_bricks_stairs: 2360
+	ars_nouveau:sourcestone_mosaic: 2335
+	ars_nouveau:sourcestone_mosaic_slab: 2379
+	ars_nouveau:sourcestone_mosaic_stairs: 2357
+	ars_nouveau:sourcestone_sconce: 2285
+	ars_nouveau:sourcestone_slab: 2378
+	ars_nouveau:sourcestone_small_bricks: 2339
+	ars_nouveau:sourcestone_small_bricks_slab: 2383
+	ars_nouveau:sourcestone_small_bricks_stairs: 2361
+	ars_nouveau:sourcestone_stairs: 2356
+	ars_nouveau:spell_bow: 2173
+	ars_nouveau:spell_crossbow: 2227
+	ars_nouveau:spell_parchment: 2152
+	ars_nouveau:spell_prism: 2298
+	ars_nouveau:spell_sensor: 2331
+	ars_nouveau:spell_turret: 2243
+	ars_nouveau:splash_flask_cannon: 2221
+	ars_nouveau:split_arrow: 2175
+	ars_nouveau:stable_warp_scroll: 2228
+	ars_nouveau:starbuncle_charm: 2158
+	ars_nouveau:starbuncle_se: 2401
+	ars_nouveau:starbuncle_shades: 2161
+	ars_nouveau:starbuncle_shards: 2160
+	ars_nouveau:starby_gift: 2226
+	ars_nouveau:storage_lectern: 2326
+	ars_nouveau:stripped_blue_archwood_log: 2273
+	ars_nouveau:stripped_blue_archwood_wood: 2274
+	ars_nouveau:stripped_green_archwood_log: 2275
+	ars_nouveau:stripped_green_archwood_wood: 2276
+	ars_nouveau:stripped_purple_archwood_log: 2279
+	ars_nouveau:stripped_purple_archwood_wood: 2280
+	ars_nouveau:stripped_red_archwood_log: 2277
+	ars_nouveau:stripped_red_archwood_wood: 2278
+	ars_nouveau:summon_focus: 2191
+	ars_nouveau:thread_amethyst_golem: 2130
+	ars_nouveau:thread_chilling: 2124
+	ars_nouveau:thread_depths: 2116
+	ars_nouveau:thread_drygmy: 2119
+	ars_nouveau:thread_feather: 2126
+	ars_nouveau:thread_gliding: 2128
+	ars_nouveau:thread_heights: 2117
+	ars_nouveau:thread_high_step: 2120
+	ars_nouveau:thread_immolation: 2129
+	ars_nouveau:thread_kindling: 2132
+	ars_nouveau:thread_life_drain: 2122
+	ars_nouveau:thread_magic_capacity: 2131
+	ars_nouveau:thread_repairing: 2134
+	ars_nouveau:thread_spellpower: 2121
+	ars_nouveau:thread_starbuncle: 2123
+	ars_nouveau:thread_undying: 2125
+	ars_nouveau:thread_warding: 2127
+	ars_nouveau:thread_whirlisprig: 2118
+	ars_nouveau:thread_wixie: 2133
+	ars_nouveau:timer_spell_turret: 2296
+	ars_nouveau:vitalic_sourcelink: 2291
+	ars_nouveau:void_jar: 2170
+	ars_nouveau:void_prism: 2316
+	ars_nouveau:volcanic_sourcelink: 2244
+	ars_nouveau:wand: 2169
+	ars_nouveau:warp_scroll: 2151
+	ars_nouveau:water_essence: 2215
+	ars_nouveau:whirlisprig_charm: 2162
+	ars_nouveau:whirlisprig_flower: 2299
+	ars_nouveau:whirlisprig_se: 2402
+	ars_nouveau:whirlisprig_shards: 2163
+	ars_nouveau:wilden_guardian_se: 2404
+	ars_nouveau:wilden_horn: 2177
+	ars_nouveau:wilden_hunter_se: 2403
+	ars_nouveau:wilden_spike: 2178
+	ars_nouveau:wilden_stalker_se: 2405
+	ars_nouveau:wilden_tribute: 2190
+	ars_nouveau:wilden_wing: 2179
+	ars_nouveau:wixie_cauldron: 2246
+	ars_nouveau:wixie_charm: 2171
+	ars_nouveau:wixie_hat: 2219
+	ars_nouveau:wixie_shards: 2172
+	ars_nouveau:wololo: 2018
+	ars_nouveau:worn_notebook: 2146
+	ars_nouveau:yellow_sbed: 2305
+	geckolib:bat_spawn_egg: 1780
+	geckolib:bike_spawn_egg: 1781
+	geckolib:cool_kid_spawn_egg: 1786
+	geckolib:fake_glass_spawn_egg: 1785
+	geckolib:fertilizer: 1770
+	geckolib:gecko_armor_boots: 1779
+	geckolib:gecko_armor_chestplate: 1777
+	geckolib:gecko_armor_helmet: 1776
+	geckolib:gecko_armor_leggings: 1778
+	geckolib:gecko_habitat: 1769
+	geckolib:gremlin_spawn_egg: 1787
+	geckolib:jack_in_the_box: 1771
+	geckolib:mutant_zombie_spawn_egg: 1784
+	geckolib:parasite_spawn_egg: 1783
+	geckolib:race_car_spawn_egg: 1782
+	geckolib:wolf_armor_boots: 1775
+	geckolib:wolf_armor_chestplate: 1773
+	geckolib:wolf_armor_helmet: 1772
+	geckolib:wolf_armor_leggings: 1774
+	productivebees:acacia_wood_nest: 1845
+	productivebees:adv_breed_all_bees: 1824
+	productivebees:adv_breed_bee: 1823
+	productivebees:advanced_acacia_beehive: 1900
+	productivebees:advanced_acacia_canvas_beehive: 1914
+	productivebees:advanced_aspen_canvas_beehive: 1916
+	productivebees:advanced_bamboo_beehive: 1890
+	productivebees:advanced_bamboo_canvas_beehive: 1918
+	productivebees:advanced_birch_beehive: 1896
+	productivebees:advanced_birch_canvas_beehive: 1920
+	productivebees:advanced_cherry_beehive: 1892
+	productivebees:advanced_cherry_canvas_beehive: 1922
+	productivebees:advanced_comb_canvas_beehive: 1926
+	productivebees:advanced_concrete_canvas_beehive: 1924
+	productivebees:advanced_crimson_beehive: 1894
+	productivebees:advanced_crimson_canvas_beehive: 1928
+	productivebees:advanced_dark_oak_beehive: 1906
+	productivebees:advanced_dark_oak_canvas_beehive: 1930
+	productivebees:advanced_dead_canvas_beehive: 1932
+	productivebees:advanced_driftwood_canvas_beehive: 1934
+	productivebees:advanced_fir_canvas_beehive: 1936
+	productivebees:advanced_grimwood_canvas_beehive: 1938
+	productivebees:advanced_hellbark_canvas_beehive: 1940
+	productivebees:advanced_jacaranda_canvas_beehive: 1942
+	productivebees:advanced_jungle_beehive: 1904
+	productivebees:advanced_jungle_canvas_beehive: 1944
+	productivebees:advanced_kousa_canvas_beehive: 1946
+	productivebees:advanced_magic_canvas_beehive: 1948
+	productivebees:advanced_mahogany_canvas_beehive: 1950
+	productivebees:advanced_mangrove_beehive: 1908
+	productivebees:advanced_mangrove_canvas_beehive: 1952
+	productivebees:advanced_maple_canvas_beehive: 1954
+	productivebees:advanced_oak_beehive: 1898
+	productivebees:advanced_oak_canvas_beehive: 1956
+	productivebees:advanced_palm_canvas_beehive: 1958
+	productivebees:advanced_redwood_canvas_beehive: 1960
+	productivebees:advanced_river_canvas_beehive: 1962
+	productivebees:advanced_rosewood_canvas_beehive: 1964
+	productivebees:advanced_snake_block_beehive: 1910
+	productivebees:advanced_snake_block_canvas_beehive: 1966
+	productivebees:advanced_spruce_beehive: 1912
+	productivebees:advanced_spruce_canvas_beehive: 1968
+	productivebees:advanced_umbran_canvas_beehive: 1970
+	productivebees:advanced_warped_beehive: 1902
+	productivebees:advanced_warped_canvas_beehive: 1972
+	productivebees:advanced_willow_canvas_beehive: 1974
+	productivebees:advanced_wisteria_canvas_beehive: 1976
+	productivebees:advanced_yucca_canvas_beehive: 1978
+	productivebees:amber: 1872
+	productivebees:bamboo_hive: 1848
+	productivebees:bee_bomb: 1795
+	productivebees:bee_bomb_angry: 1796
+	productivebees:bee_cage: 1789
+	productivebees:bee_nest_diamond_helmet: 1801
+	productivebees:birch_wood_nest: 1843
+	productivebees:black_petrified_honey: 1889
+	productivebees:blue_petrified_honey: 1885
+	productivebees:bottler: 1825
+	productivebees:breeding_chamber: 1839
+	productivebees:brown_petrified_honey: 1886
+	productivebees:bumble_bee_nest: 1868
+	productivebees:catcher: 1830
+	productivebees:centrifuge: 1826
+	productivebees:cherry_wood_nest: 1846
+	productivebees:coarse_dirt_nest: 1851
+	productivebees:comb_ghostly: 1865
+	productivebees:comb_milky: 1866
+	productivebees:comb_powdery: 1867
+	productivebees:configurable_comb: 1864
+	productivebees:configurable_honeycomb: 1802
+	productivebees:crimson_bee_nest: 1871
+	productivebees:cyan_petrified_honey: 1883
+	productivebees:dark_oak_wood_nest: 1842
+	productivebees:draconic_chunk: 1807
+	productivebees:draconic_dust: 1806
+	productivebees:dragon_egg_hive: 1849
+	productivebees:end_stone_nest: 1862
+	productivebees:expansion_box_acacia: 1901
+	productivebees:expansion_box_acacia_canvas: 1915
+	productivebees:expansion_box_aspen_canvas: 1917
+	productivebees:expansion_box_bamboo: 1891
+	productivebees:expansion_box_bamboo_canvas: 1919
+	productivebees:expansion_box_birch: 1897
+	productivebees:expansion_box_birch_canvas: 1921
+	productivebees:expansion_box_cherry: 1893
+	productivebees:expansion_box_cherry_canvas: 1923
+	productivebees:expansion_box_comb_canvas: 1927
+	productivebees:expansion_box_concrete_canvas: 1925
+	productivebees:expansion_box_crimson: 1895
+	productivebees:expansion_box_crimson_canvas: 1929
+	productivebees:expansion_box_dark_oak: 1907
+	productivebees:expansion_box_dark_oak_canvas: 1931
+	productivebees:expansion_box_dead_canvas: 1933
+	productivebees:expansion_box_driftwood_canvas: 1935
+	productivebees:expansion_box_fir_canvas: 1937
+	productivebees:expansion_box_grimwood_canvas: 1939
+	productivebees:expansion_box_hellbark_canvas: 1941
+	productivebees:expansion_box_jacaranda_canvas: 1943
+	productivebees:expansion_box_jungle: 1905
+	productivebees:expansion_box_jungle_canvas: 1945
+	productivebees:expansion_box_kousa_canvas: 1947
+	productivebees:expansion_box_magic_canvas: 1949
+	productivebees:expansion_box_mahogany_canvas: 1951
+	productivebees:expansion_box_mangrove: 1909
+	productivebees:expansion_box_mangrove_canvas: 1953
+	productivebees:expansion_box_maple_canvas: 1955
+	productivebees:expansion_box_oak: 1899
+	productivebees:expansion_box_oak_canvas: 1957
+	productivebees:expansion_box_palm_canvas: 1959
+	productivebees:expansion_box_redwood_canvas: 1961
+	productivebees:expansion_box_river_canvas: 1963
+	productivebees:expansion_box_rosewood_canvas: 1965
+	productivebees:expansion_box_snake_block: 1911
+	productivebees:expansion_box_snake_block_canvas: 1967
+	productivebees:expansion_box_spruce: 1913
+	productivebees:expansion_box_spruce_canvas: 1969
+	productivebees:expansion_box_umbran_canvas: 1971
+	productivebees:expansion_box_warped: 1903
+	productivebees:expansion_box_warped_canvas: 1973
+	productivebees:expansion_box_willow_canvas: 1975
+	productivebees:expansion_box_wisteria_canvas: 1977
+	productivebees:expansion_box_yucca_canvas: 1979
+	productivebees:feeder: 1834
+	productivebees:gene: 1793
+	productivebees:gene_bottle: 1792
+	productivebees:gene_indexer: 1838
+	productivebees:glowstone_nest: 1857
+	productivebees:gravel_nest: 1854
+	productivebees:gray_petrified_honey: 1881
+	productivebees:green_petrified_honey: 1887
+	productivebees:heated_centrifuge: 1828
+	productivebees:honey_bucket: 1788
+	productivebees:honey_generator: 1829
+	productivebees:honey_treat: 1791
+	productivebees:honeycomb_ghostly: 1803
+	productivebees:honeycomb_milky: 1804
+	productivebees:honeycomb_powdery: 1805
+	productivebees:inactive_dragon_egg: 1832
+	productivebees:incubator: 1831
+	productivebees:invisible_redstone_block: 1833
+	productivebees:jar_oak: 1835
+	productivebees:jungle_wood_nest: 1844
+	productivebees:light_blue_petrified_honey: 1877
+	productivebees:light_gray_petrified_honey: 1882
+	productivebees:lime_petrified_honey: 1879
+	productivebees:magenta_petrified_honey: 1876
+	productivebees:mangrove_wood_nest: 1847
+	productivebees:milk_bottle: 1794
+	productivebees:nest_locator: 1797
+	productivebees:nether_brick_nest: 1861
+	productivebees:nether_gold_nest: 1860
+	productivebees:nether_quartz_nest: 1859
+	productivebees:oak_wood_nest: 1840
+	productivebees:obsidian_nest: 1863
+	productivebees:orange_petrified_honey: 1875
+	productivebees:petrified_honey: 1873
+	productivebees:pink_petrified_honey: 1880
+	productivebees:powered_centrifuge: 1827
+	productivebees:purple_petrified_honey: 1884
+	productivebees:quartz_netherrack: 1836
+	productivebees:red_petrified_honey: 1888
+	productivebees:sand_nest: 1852
+	productivebees:slimy_nest: 1856
+	productivebees:snow_nest: 1853
+	productivebees:soul_sand_nest: 1858
+	productivebees:spawn_egg_ashy_mining_bee: 1989
+	productivebees:spawn_egg_blue_banded_bee: 1990
+	productivebees:spawn_egg_bumble_bee: 2002
+	productivebees:spawn_egg_chocolate_mining_bee: 1993
+	productivebees:spawn_egg_collector_bee: 1984
+	productivebees:spawn_egg_configurable_bee: 2003
+	productivebees:spawn_egg_creeper_bee: 1987
+	productivebees:spawn_egg_cupid_bee: 1988
+	productivebees:spawn_egg_digger_bee: 1994
+	productivebees:spawn_egg_dye_bee: 1980
+	productivebees:spawn_egg_farmer_bee: 1986
+	productivebees:spawn_egg_green_carpenter_bee: 1991
+	productivebees:spawn_egg_hoarder_bee: 1985
+	productivebees:spawn_egg_leafcutter_bee: 1995
+	productivebees:spawn_egg_lumber_bee: 1981
+	productivebees:spawn_egg_mason_bee: 1996
+	productivebees:spawn_egg_neon_cuckoo_bee: 1997
+	productivebees:spawn_egg_nomad_bee: 1998
+	productivebees:spawn_egg_quarry_bee: 1982
+	productivebees:spawn_egg_rancher_bee: 1983
+	productivebees:spawn_egg_reed_bee: 1999
+	productivebees:spawn_egg_resin_bee: 2000
+	productivebees:spawn_egg_sweat_bee: 2001
+	productivebees:spawn_egg_yellow_black_carpenter_bee: 1992
+	productivebees:spruce_wood_nest: 1841
+	productivebees:stone_nest: 1850
+	productivebees:sturdy_bee_cage: 1790
+	productivebees:sugar_cane_nest: 1855
+	productivebees:sugarbag_honeycomb: 1798
+	productivebees:sugarbag_nest: 1869
+	productivebees:treat_on_a_stick: 1799
+	productivebees:upgrade_anti_teleport: 1818
+	productivebees:upgrade_base: 1809
+	productivebees:upgrade_bee_sampler: 1821
+	productivebees:upgrade_breeding: 1815
+	productivebees:upgrade_comb_block: 1817
+	productivebees:upgrade_filter: 1820
+	productivebees:upgrade_not_babee: 1816
+	productivebees:upgrade_productivity: 1810
+	productivebees:upgrade_productivity_2: 1811
+	productivebees:upgrade_productivity_3: 1812
+	productivebees:upgrade_productivity_4: 1813
+	productivebees:upgrade_range: 1819
+	productivebees:upgrade_simulator: 1822
+	productivebees:upgrade_time: 1814
+	productivebees:warped_bee_nest: 1870
+	productivebees:wax: 1800
+	productivebees:wax_block: 1837
+	productivebees:white_petrified_honey: 1874
+	productivebees:wither_skull_chip: 1808
+	productivebees:yellow_petrified_honey: 1878
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:mob_effect
+	ars_nouveau:blasting: 48
+	ars_nouveau:bounce: 45
+	ars_nouveau:flight: 40
+	ars_nouveau:freezing: 49
+	ars_nouveau:glide: 38
+	ars_nouveau:gravity: 41
+	ars_nouveau:hex: 36
+	ars_nouveau:immolate: 43
+	ars_nouveau:magic_find: 46
+	ars_nouveau:mana_regen: 34
+	ars_nouveau:recovery: 47
+	ars_nouveau:scrying: 37
+	ars_nouveau:shielding: 50
+	ars_nouveau:shocked: 0
+	ars_nouveau:snared: 39
+	ars_nouveau:soaked: 44
+	ars_nouveau:spell_damage: 42
+	ars_nouveau:summoning_sickness: 35
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:point_of_interest_type
+	ars_nouveau:arcane_poi: 31
+	productivebees:advanced_beehive: 24
+	productivebees:bumble_bee_nest: 30
+	productivebees:draconic_nest: 27
+	productivebees:nether_nest: 29
+	productivebees:solitary_hive: 25
+	productivebees:solitary_nest: 26
+	productivebees:sugarbag_nest: 28
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:potion
+	ars_nouveau:blasting_potion: 52
+	ars_nouveau:blasting_potion_long: 53
+	ars_nouveau:blasting_potion_strong: 54
+	ars_nouveau:freezing_potion: 55
+	ars_nouveau:freezing_potion_long: 56
+	ars_nouveau:freezing_potion_strong: 57
+	ars_nouveau:mana_regen_potion: 43
+	ars_nouveau:mana_regen_potion_long: 44
+	ars_nouveau:mana_regen_potion_strong: 45
+	ars_nouveau:recovery_potion: 49
+	ars_nouveau:recovery_potion_long: 50
+	ars_nouveau:recovery_potion_strong: 51
+	ars_nouveau:shielding_potion: 58
+	ars_nouveau:shielding_potion_long: 59
+	ars_nouveau:shielding_potion_strong: 60
+	ars_nouveau:spell_damage_potion: 46
+	ars_nouveau:spell_damage_potion_long: 47
+	ars_nouveau:spell_damage_potion_strong: 48
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:sound_event
+	ars_nouveau:aria_biblio: 1489
+	ars_nouveau:ea_channel: 1484
+	ars_nouveau:ea_finish: 1485
+	ars_nouveau:empty: 1483
+	ars_nouveau:fire_family: 1482
+	ars_nouveau:fire_family_2: 1488
+	ars_nouveau:firel_the_wild_hunt: 1490
+	ars_nouveau:gaia_family: 1486
+	ars_nouveau:tempestry_family: 1487
+	ars_nouveau:thistle_the_sound_of_glass: 1491
+	geckolib:jack_in_the_box_music: 1479
+	minecraft:item.bucket.empty_milk: 1480
+	minecraft:item.bucket.fill_milk: 1481
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: Unidentified mapping from registry minecraft:villager_profession
+	ars_nouveau:shady_wizard: 17
+	productivebees:beekeeper: 16
+
+[12:56:56] [main/WARN] [ne.mi.re.GameData/REGISTRIES]: Forge Mod Loader detected missing registry entries.
+
+There are 1121 missing entries in this save.
+If you continue the missing entries will get removed.
+A world backup will be automatically created in your saves directory.
+
+
+[12:56:56] [main/WARN] [ne.mi.re.GameData/REGISTRIES]: Missing minecraft:sound_event:
+    ars_nouveau:aria_biblio
+    ars_nouveau:ea_channel
+    ars_nouveau:ea_finish
+    ars_nouveau:empty
+    ars_nouveau:fire_family
+    ars_nouveau:fire_family_2
+    ars_nouveau:firel_the_wild_hunt
+    ars_nouveau:gaia_family
+    ars_nouveau:tempestry_family
+    ars_nouveau:thistle_the_sound_of_glass
+    geckolib:jack_in_the_box_music
+    minecraft:item.bucket.empty_milk
+    minecraft:item.bucket.fill_milk
+
+Missing minecraft:villager_profession:
+    ars_nouveau:shady_wizard
+    productivebees:beekeeper
+
+Missing minecraft:item:
+    ars_nouveau:abjuration_essence
+    ars_nouveau:agronomic_sourcelink
+    ars_nouveau:air_essence
+    ars_nouveau:alchemical_sourcelink
+    ars_nouveau:alchemists_crown
+    ars_nouveau:allow_scroll
+    ars_nouveau:alteration_table
+    ars_nouveau:amethyst_golem_charm
+    ars_nouveau:amplify_arrow
+    ars_nouveau:amulet_of_mana_boost
+    ars_nouveau:amulet_of_mana_regen
+    ars_nouveau:annotated_codex
+    ars_nouveau:apprentice_spell_book
+    ars_nouveau:arcane_core
+    ars_nouveau:arcane_pedestal
+    ars_nouveau:arcane_platform
+    ars_nouveau:arcanist_boots
+    ars_nouveau:arcanist_hood
+    ars_nouveau:arcanist_leggings
+    ars_nouveau:arcanist_robes
+    ars_nouveau:archmage_spell_book
+    ars_nouveau:archwood_button
+    ars_nouveau:archwood_chest
+    ars_nouveau:archwood_door
+    ars_nouveau:archwood_fence
+    ars_nouveau:archwood_fence_gate
+    ars_nouveau:archwood_planks
+    ars_nouveau:archwood_pressure_plate
+    ars_nouveau:archwood_sconce
+    ars_nouveau:archwood_slab
+    ars_nouveau:archwood_stairs
+    ars_nouveau:archwood_trapdoor
+    ars_nouveau:basic_spell_turret
+    ars_nouveau:bastion_pod
+    ars_nouveau:battlemage_boots
+    ars_nouveau:battlemage_hood
+    ars_nouveau:battlemage_leggings
+    ars_nouveau:battlemage_robes
+    ars_nouveau:belt_of_levitation
+    ars_nouveau:belt_of_unstable_gifts
+    ars_nouveau:blank_glyph
+    ars_nouveau:blank_parchment
+    ars_nouveau:blank_thread
+    ars_nouveau:blue_archwood_leaves
+    ars_nouveau:blue_archwood_log
+    ars_nouveau:blue_archwood_sapling
+    ars_nouveau:blue_archwood_wood
+    ars_nouveau:blue_sbed
+    ars_nouveau:bombegranate_pod
+    ars_nouveau:bookwyrm_charm
+    ars_nouveau:brazier_relay
+    ars_nouveau:burst
+    ars_nouveau:caster_tome
+    ars_nouveau:conjuration_essence
+    ars_nouveau:creative_source_jar
+    ars_nouveau:creative_spell_book
+    ars_nouveau:debug
+    ars_nouveau:deny_scroll
+    ars_nouveau:dominion_wand
+    ars_nouveau:dowsing_rod
+    ars_nouveau:drygmy_charm
+    ars_nouveau:drygmy_se
+    ars_nouveau:drygmy_shard
+    ars_nouveau:drygmy_stone
+    ars_nouveau:dull_trinket
+    ars_nouveau:earth_essence
+    ars_nouveau:enchanters_eye
+    ars_nouveau:enchanters_mirror
+    ars_nouveau:enchanters_shield
+    ars_nouveau:enchanters_sword
+    ars_nouveau:enchanting_apparatus
+    ars_nouveau:experience_gem
+    ars_nouveau:falseweave
+    ars_nouveau:familiar_amethyst_golem
+    ars_nouveau:familiar_bookwyrm
+    ars_nouveau:familiar_drygmy
+    ars_nouveau:familiar_starbuncle
+    ars_nouveau:familiar_whirlisprig
+    ars_nouveau:familiar_wixie
+    ars_nouveau:fire_essence
+    ars_nouveau:frostaya_pod
+    ars_nouveau:ghostweave
+    ars_nouveau:gilded_sourcestone_alternating
+    ars_nouveau:gilded_sourcestone_alternating_slab
+    ars_nouveau:gilded_sourcestone_alternating_stairs
+    ars_nouveau:gilded_sourcestone_basketweave
+    ars_nouveau:gilded_sourcestone_basketweave_slab
+    ars_nouveau:gilded_sourcestone_basketweave_stairs
+    ars_nouveau:gilded_sourcestone_large_bricks
+    ars_nouveau:gilded_sourcestone_large_bricks_slab
+    ars_nouveau:gilded_sourcestone_large_bricks_stairs
+    ars_nouveau:gilded_sourcestone_mosaic
+    ars_nouveau:gilded_sourcestone_mosaic_slab
+    ars_nouveau:gilded_sourcestone_mosaic_stairs
+    ars_nouveau:gilded_sourcestone_small_bricks
+    ars_nouveau:gilded_sourcestone_small_bricks_slab
+    ars_nouveau:gilded_sourcestone_small_bricks_stairs
+    ars_nouveau:glyph_accelerate
+    ars_nouveau:glyph_amplify
+    ars_nouveau:glyph_animate_block
+    ars_nouveau:glyph_aoe
+    ars_nouveau:glyph_blink
+    ars_nouveau:glyph_bounce
+    ars_nouveau:glyph_break
+    ars_nouveau:glyph_cold_snap
+    ars_nouveau:glyph_conjure_water
+    ars_nouveau:glyph_craft
+    ars_nouveau:glyph_crush
+    ars_nouveau:glyph_cut
+    ars_nouveau:glyph_dampen
+    ars_nouveau:glyph_decelerate
+    ars_nouveau:glyph_delay
+    ars_nouveau:glyph_dispel
+    ars_nouveau:glyph_duration_down
+    ars_nouveau:glyph_ender_inventory
+    ars_nouveau:glyph_evaporate
+    ars_nouveau:glyph_exchange
+    ars_nouveau:glyph_explosion
+    ars_nouveau:glyph_extend_time
+    ars_nouveau:glyph_extract
+    ars_nouveau:glyph_fangs
+    ars_nouveau:glyph_fell
+    ars_nouveau:glyph_firework
+    ars_nouveau:glyph_flare
+    ars_nouveau:glyph_fortune
+    ars_nouveau:glyph_freeze
+    ars_nouveau:glyph_glide
+    ars_nouveau:glyph_gravity
+    ars_nouveau:glyph_grow
+    ars_nouveau:glyph_gust
+    ars_nouveau:glyph_harm
+    ars_nouveau:glyph_harvest
+    ars_nouveau:glyph_heal
+    ars_nouveau:glyph_hex
+    ars_nouveau:glyph_ignite
+    ars_nouveau:glyph_infuse
+    ars_nouveau:glyph_intangible
+    ars_nouveau:glyph_interact
+    ars_nouveau:glyph_invisibility
+    ars_nouveau:glyph_launch
+    ars_nouveau:glyph_leap
+    ars_nouveau:glyph_light
+    ars_nouveau:glyph_lightning
+    ars_nouveau:glyph_linger
+    ars_nouveau:glyph_name
+    ars_nouveau:glyph_orbit
+    ars_nouveau:glyph_phantom_block
+    ars_nouveau:glyph_pickup
+    ars_nouveau:glyph_pierce
+    ars_nouveau:glyph_place_block
+    ars_nouveau:glyph_projectile
+    ars_nouveau:glyph_pull
+    ars_nouveau:glyph_randomize
+    ars_nouveau:glyph_redstone_signal
+    ars_nouveau:glyph_rotate
+    ars_nouveau:glyph_rune
+    ars_nouveau:glyph_self
+    ars_nouveau:glyph_sense_magic
+    ars_nouveau:glyph_sensitive
+    ars_nouveau:glyph_slowfall
+    ars_nouveau:glyph_smelt
+    ars_nouveau:glyph_snare
+    ars_nouveau:glyph_split
+    ars_nouveau:glyph_summon_decoy
+    ars_nouveau:glyph_summon_steed
+    ars_nouveau:glyph_summon_undead
+    ars_nouveau:glyph_summon_vex
+    ars_nouveau:glyph_summon_wolves
+    ars_nouveau:glyph_toss
+    ars_nouveau:glyph_touch
+    ars_nouveau:glyph_underfoot
+    ars_nouveau:glyph_wall
+    ars_nouveau:glyph_wind_shear
+    ars_nouveau:glyph_wither
+    ars_nouveau:greater_experience_gem
+    ars_nouveau:green_archwood_leaves
+    ars_nouveau:green_archwood_log
+    ars_nouveau:green_archwood_sapling
+    ars_nouveau:green_archwood_wood
+    ars_nouveau:green_sbed
+    ars_nouveau:imbuement_chamber
+    ars_nouveau:item_detector
+    ars_nouveau:jar_of_light
+    ars_nouveau:jump_ring
+    ars_nouveau:lingering_flask_cannon
+    ars_nouveau:mage_block
+    ars_nouveau:magebloom
+    ars_nouveau:magebloom_block
+    ars_nouveau:magebloom_crop
+    ars_nouveau:magebloom_fiber
+    ars_nouveau:magelight_torch
+    ars_nouveau:magic_fire
+    ars_nouveau:manipulation_essence
+    ars_nouveau:mendosteen_pod
+    ars_nouveau:mimic_scroll
+    ars_nouveau:mirrorweave
+    ars_nouveau:mob_jar
+    ars_nouveau:mundane_belt
+    ars_nouveau:music_disc_aria_biblio
+    ars_nouveau:music_disc_firel_the_wild_hunt
+    ars_nouveau:music_disc_thistle_the_sound_of_glass
+    ars_nouveau:mycelial_sourcelink
+    ars_nouveau:novice_spell_book
+    ars_nouveau:orange_sbed
+    ars_nouveau:pierce_arrow
+    ars_nouveau:polished_sconce
+    ars_nouveau:portal
+    ars_nouveau:potion_diffuser
+    ars_nouveau:potion_flask
+    ars_nouveau:potion_flask_amplify
+    ars_nouveau:potion_flask_extend_time
+    ars_nouveau:potion_jar
+    ars_nouveau:potion_melder
+    ars_nouveau:purple_archwood_leaves
+    ars_nouveau:purple_archwood_log
+    ars_nouveau:purple_archwood_sapling
+    ars_nouveau:purple_archwood_wood
+    ars_nouveau:purple_sbed
+    ars_nouveau:red_archwood_leaves
+    ars_nouveau:red_archwood_log
+    ars_nouveau:red_archwood_sapling
+    ars_nouveau:red_archwood_wood
+    ars_nouveau:red_sbed
+    ars_nouveau:redstone_relay
+    ars_nouveau:relay
+    ars_nouveau:relay_collector
+    ars_nouveau:relay_deposit
+    ars_nouveau:relay_splitter
+    ars_nouveau:relay_warp
+    ars_nouveau:repository
+    ars_nouveau:reset
+    ars_nouveau:rewind
+    ars_nouveau:ring_of_greater_discount
+    ars_nouveau:ring_of_lesser_discount
+    ars_nouveau:ring_of_potential
+    ars_nouveau:ritual_animal_summon
+    ars_nouveau:ritual_awakening
+    ars_nouveau:ritual_binding
+    ars_nouveau:ritual_brazier
+    ars_nouveau:ritual_burrowing
+    ars_nouveau:ritual_challenge
+    ars_nouveau:ritual_cloudshaping
+    ars_nouveau:ritual_conjure_island_desert
+    ars_nouveau:ritual_conjure_island_plains
+    ars_nouveau:ritual_containment
+    ars_nouveau:ritual_disintegration
+    ars_nouveau:ritual_fertility
+    ars_nouveau:ritual_flight
+    ars_nouveau:ritual_flowering
+    ars_nouveau:ritual_forestation
+    ars_nouveau:ritual_gravity
+    ars_nouveau:ritual_harvest
+    ars_nouveau:ritual_moonfall
+    ars_nouveau:ritual_overgrowth
+    ars_nouveau:ritual_restoration
+    ars_nouveau:ritual_sanctuary
+    ars_nouveau:ritual_scrying
+    ars_nouveau:ritual_sunrise
+    ars_nouveau:ritual_warping
+    ars_nouveau:ritual_wilden_summon
+    ars_nouveau:rotating_spell_turret
+    ars_nouveau:rune
+    ars_nouveau:runic_chalk
+    ars_nouveau:sconce
+    ars_nouveau:scribes_table
+    ars_nouveau:scryer_scroll
+    ars_nouveau:scryers_crystal
+    ars_nouveau:scryers_oculus
+    ars_nouveau:shapers_focus
+    ars_nouveau:sky_block
+    ars_nouveau:smooth_gilded_sourcestone_alternating
+    ars_nouveau:smooth_gilded_sourcestone_alternating_slab
+    ars_nouveau:smooth_gilded_sourcestone_alternating_stairs
+    ars_nouveau:smooth_gilded_sourcestone_basketweave
+    ars_nouveau:smooth_gilded_sourcestone_basketweave_slab
+    ars_nouveau:smooth_gilded_sourcestone_basketweave_stairs
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks_slab
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks_stairs
+    ars_nouveau:smooth_gilded_sourcestone_mosaic
+    ars_nouveau:smooth_gilded_sourcestone_mosaic_slab
+    ars_nouveau:smooth_gilded_sourcestone_mosaic_stairs
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks_slab
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks_stairs
+    ars_nouveau:smooth_sourcestone
+    ars_nouveau:smooth_sourcestone_alternating
+    ars_nouveau:smooth_sourcestone_alternating_slab
+    ars_nouveau:smooth_sourcestone_alternating_stairs
+    ars_nouveau:smooth_sourcestone_basketweave
+    ars_nouveau:smooth_sourcestone_basketweave_slab
+    ars_nouveau:smooth_sourcestone_basketweave_stairs
+    ars_nouveau:smooth_sourcestone_large_bricks
+    ars_nouveau:smooth_sourcestone_large_bricks_slab
+    ars_nouveau:smooth_sourcestone_large_bricks_stairs
+    ars_nouveau:smooth_sourcestone_mosaic
+    ars_nouveau:smooth_sourcestone_mosaic_slab
+    ars_nouveau:smooth_sourcestone_mosaic_stairs
+    ars_nouveau:smooth_sourcestone_slab
+    ars_nouveau:smooth_sourcestone_small_bricks
+    ars_nouveau:smooth_sourcestone_small_bricks_slab
+    ars_nouveau:smooth_sourcestone_small_bricks_stairs
+    ars_nouveau:smooth_sourcestone_stairs
+    ars_nouveau:sorcerer_boots
+    ars_nouveau:sorcerer_hood
+    ars_nouveau:sorcerer_leggings
+    ars_nouveau:sorcerer_robes
+    ars_nouveau:source_berry_pie
+    ars_nouveau:source_berry_roll
+    ars_nouveau:source_gem
+    ars_nouveau:source_gem_block
+    ars_nouveau:source_jar
+    ars_nouveau:sourceberry_bush
+    ars_nouveau:sourceberry_sack
+    ars_nouveau:sourcestone
+    ars_nouveau:sourcestone_alternating
+    ars_nouveau:sourcestone_alternating_slab
+    ars_nouveau:sourcestone_alternating_stairs
+    ars_nouveau:sourcestone_basketweave
+    ars_nouveau:sourcestone_basketweave_slab
+    ars_nouveau:sourcestone_basketweave_stairs
+    ars_nouveau:sourcestone_large_bricks
+    ars_nouveau:sourcestone_large_bricks_slab
+    ars_nouveau:sourcestone_large_bricks_stairs
+    ars_nouveau:sourcestone_mosaic
+    ars_nouveau:sourcestone_mosaic_slab
+    ars_nouveau:sourcestone_mosaic_stairs
+    ars_nouveau:sourcestone_sconce
+    ars_nouveau:sourcestone_slab
+    ars_nouveau:sourcestone_small_bricks
+    ars_nouveau:sourcestone_small_bricks_slab
+    ars_nouveau:sourcestone_small_bricks_stairs
+    ars_nouveau:sourcestone_stairs
+    ars_nouveau:spell_bow
+    ars_nouveau:spell_crossbow
+    ars_nouveau:spell_parchment
+    ars_nouveau:spell_prism
+    ars_nouveau:spell_sensor
+    ars_nouveau:spell_turret
+    ars_nouveau:splash_flask_cannon
+    ars_nouveau:split_arrow
+    ars_nouveau:stable_warp_scroll
+    ars_nouveau:starbuncle_charm
+    ars_nouveau:starbuncle_se
+    ars_nouveau:starbuncle_shades
+    ars_nouveau:starbuncle_shards
+    ars_nouveau:starby_gift
+    ars_nouveau:storage_lectern
+    ars_nouveau:stripped_blue_archwood_log
+    ars_nouveau:stripped_blue_archwood_wood
+    ars_nouveau:stripped_green_archwood_log
+    ars_nouveau:stripped_green_archwood_wood
+    ars_nouveau:stripped_purple_archwood_log
+    ars_nouveau:stripped_purple_archwood_wood
+    ars_nouveau:stripped_red_archwood_log
+    ars_nouveau:stripped_red_archwood_wood
+    ars_nouveau:summon_focus
+    ars_nouveau:thread_amethyst_golem
+    ars_nouveau:thread_chilling
+    ars_nouveau:thread_depths
+    ars_nouveau:thread_drygmy
+    ars_nouveau:thread_feather
+    ars_nouveau:thread_gliding
+    ars_nouveau:thread_heights
+    ars_nouveau:thread_high_step
+    ars_nouveau:thread_immolation
+    ars_nouveau:thread_kindling
+    ars_nouveau:thread_life_drain
+    ars_nouveau:thread_magic_capacity
+    ars_nouveau:thread_repairing
+    ars_nouveau:thread_spellpower
+    ars_nouveau:thread_starbuncle
+    ars_nouveau:thread_undying
+    ars_nouveau:thread_warding
+    ars_nouveau:thread_whirlisprig
+    ars_nouveau:thread_wixie
+    ars_nouveau:timer_spell_turret
+    ars_nouveau:vitalic_sourcelink
+    ars_nouveau:void_jar
+    ars_nouveau:void_prism
+    ars_nouveau:volcanic_sourcelink
+    ars_nouveau:wand
+    ars_nouveau:warp_scroll
+    ars_nouveau:water_essence
+    ars_nouveau:whirlisprig_charm
+    ars_nouveau:whirlisprig_flower
+    ars_nouveau:whirlisprig_se
+    ars_nouveau:whirlisprig_shards
+    ars_nouveau:wilden_guardian_se
+    ars_nouveau:wilden_horn
+    ars_nouveau:wilden_hunter_se
+    ars_nouveau:wilden_spike
+    ars_nouveau:wilden_stalker_se
+    ars_nouveau:wilden_tribute
+    ars_nouveau:wilden_wing
+    ars_nouveau:wixie_cauldron
+    ars_nouveau:wixie_charm
+    ars_nouveau:wixie_hat
+    ars_nouveau:wixie_shards
+    ars_nouveau:wololo
+    ars_nouveau:worn_notebook
+    ars_nouveau:yellow_sbed
+    geckolib:bat_spawn_egg
+    geckolib:bike_spawn_egg
+    geckolib:cool_kid_spawn_egg
+    geckolib:fake_glass_spawn_egg
+    geckolib:fertilizer
+    geckolib:gecko_armor_boots
+    geckolib:gecko_armor_chestplate
+    geckolib:gecko_armor_helmet
+    geckolib:gecko_armor_leggings
+    geckolib:gecko_habitat
+    geckolib:gremlin_spawn_egg
+    geckolib:jack_in_the_box
+    geckolib:mutant_zombie_spawn_egg
+    geckolib:parasite_spawn_egg
+    geckolib:race_car_spawn_egg
+    geckolib:wolf_armor_boots
+    geckolib:wolf_armor_chestplate
+    geckolib:wolf_armor_helmet
+    geckolib:wolf_armor_leggings
+    productivebees:acacia_wood_nest
+    productivebees:adv_breed_all_bees
+    productivebees:adv_breed_bee
+    productivebees:advanced_acacia_beehive
+    productivebees:advanced_acacia_canvas_beehive
+    productivebees:advanced_aspen_canvas_beehive
+    productivebees:advanced_bamboo_beehive
+    productivebees:advanced_bamboo_canvas_beehive
+    productivebees:advanced_birch_beehive
+    productivebees:advanced_birch_canvas_beehive
+    productivebees:advanced_cherry_beehive
+    productivebees:advanced_cherry_canvas_beehive
+    productivebees:advanced_comb_canvas_beehive
+    productivebees:advanced_concrete_canvas_beehive
+    productivebees:advanced_crimson_beehive
+    productivebees:advanced_crimson_canvas_beehive
+    productivebees:advanced_dark_oak_beehive
+    productivebees:advanced_dark_oak_canvas_beehive
+    productivebees:advanced_dead_canvas_beehive
+    productivebees:advanced_driftwood_canvas_beehive
+    productivebees:advanced_fir_canvas_beehive
+    productivebees:advanced_grimwood_canvas_beehive
+    productivebees:advanced_hellbark_canvas_beehive
+    productivebees:advanced_jacaranda_canvas_beehive
+    productivebees:advanced_jungle_beehive
+    productivebees:advanced_jungle_canvas_beehive
+    productivebees:advanced_kousa_canvas_beehive
+    productivebees:advanced_magic_canvas_beehive
+    productivebees:advanced_mahogany_canvas_beehive
+    productivebees:advanced_mangrove_beehive
+    productivebees:advanced_mangrove_canvas_beehive
+    productivebees:advanced_maple_canvas_beehive
+    productivebees:advanced_oak_beehive
+    productivebees:advanced_oak_canvas_beehive
+    productivebees:advanced_palm_canvas_beehive
+    productivebees:advanced_redwood_canvas_beehive
+    productivebees:advanced_river_canvas_beehive
+    productivebees:advanced_rosewood_canvas_beehive
+    productivebees:advanced_snake_block_beehive
+    productivebees:advanced_snake_block_canvas_beehive
+    productivebees:advanced_spruce_beehive
+    productivebees:advanced_spruce_canvas_beehive
+    productivebees:advanced_umbran_canvas_beehive
+    productivebees:advanced_warped_beehive
+    productivebees:advanced_warped_canvas_beehive
+    productivebees:advanced_willow_canvas_beehive
+    productivebees:advanced_wisteria_canvas_beehive
+    productivebees:advanced_yucca_canvas_beehive
+    productivebees:amber
+    productivebees:bamboo_hive
+    productivebees:bee_bomb
+    productivebees:bee_bomb_angry
+    productivebees:bee_cage
+    productivebees:bee_nest_diamond_helmet
+    productivebees:birch_wood_nest
+    productivebees:black_petrified_honey
+    productivebees:blue_petrified_honey
+    productivebees:bottler
+    productivebees:breeding_chamber
+    productivebees:brown_petrified_honey
+    productivebees:bumble_bee_nest
+    productivebees:catcher
+    productivebees:centrifuge
+    productivebees:cherry_wood_nest
+    productivebees:coarse_dirt_nest
+    productivebees:comb_ghostly
+    productivebees:comb_milky
+    productivebees:comb_powdery
+    productivebees:configurable_comb
+    productivebees:configurable_honeycomb
+    productivebees:crimson_bee_nest
+    productivebees:cyan_petrified_honey
+    productivebees:dark_oak_wood_nest
+    productivebees:draconic_chunk
+    productivebees:draconic_dust
+    productivebees:dragon_egg_hive
+    productivebees:end_stone_nest
+    productivebees:expansion_box_acacia
+    productivebees:expansion_box_acacia_canvas
+    productivebees:expansion_box_aspen_canvas
+    productivebees:expansion_box_bamboo
+    productivebees:expansion_box_bamboo_canvas
+    productivebees:expansion_box_birch
+    productivebees:expansion_box_birch_canvas
+    productivebees:expansion_box_cherry
+    productivebees:expansion_box_cherry_canvas
+    productivebees:expansion_box_comb_canvas
+    productivebees:expansion_box_concrete_canvas
+    productivebees:expansion_box_crimson
+    productivebees:expansion_box_crimson_canvas
+    productivebees:expansion_box_dark_oak
+    productivebees:expansion_box_dark_oak_canvas
+    productivebees:expansion_box_dead_canvas
+    productivebees:expansion_box_driftwood_canvas
+    productivebees:expansion_box_fir_canvas
+    productivebees:expansion_box_grimwood_canvas
+    productivebees:expansion_box_hellbark_canvas
+    productivebees:expansion_box_jacaranda_canvas
+    productivebees:expansion_box_jungle
+    productivebees:expansion_box_jungle_canvas
+    productivebees:expansion_box_kousa_canvas
+    productivebees:expansion_box_magic_canvas
+    productivebees:expansion_box_mahogany_canvas
+    productivebees:expansion_box_mangrove
+    productivebees:expansion_box_mangrove_canvas
+    productivebees:expansion_box_maple_canvas
+    productivebees:expansion_box_oak
+    productivebees:expansion_box_oak_canvas
+    productivebees:expansion_box_palm_canvas
+    productivebees:expansion_box_redwood_canvas
+    productivebees:expansion_box_river_canvas
+    productivebees:expansion_box_rosewood_canvas
+    productivebees:expansion_box_snake_block
+    productivebees:expansion_box_snake_block_canvas
+    productivebees:expansion_box_spruce
+    productivebees:expansion_box_spruce_canvas
+    productivebees:expansion_box_umbran_canvas
+    productivebees:expansion_box_warped
+    productivebees:expansion_box_warped_canvas
+    productivebees:expansion_box_willow_canvas
+    productivebees:expansion_box_wisteria_canvas
+    productivebees:expansion_box_yucca_canvas
+    productivebees:feeder
+    productivebees:gene
+    productivebees:gene_bottle
+    productivebees:gene_indexer
+    productivebees:glowstone_nest
+    productivebees:gravel_nest
+    productivebees:gray_petrified_honey
+    productivebees:green_petrified_honey
+    productivebees:heated_centrifuge
+    productivebees:honey_bucket
+    productivebees:honey_generator
+    productivebees:honey_treat
+    productivebees:honeycomb_ghostly
+    productivebees:honeycomb_milky
+    productivebees:honeycomb_powdery
+    productivebees:inactive_dragon_egg
+    productivebees:incubator
+    productivebees:invisible_redstone_block
+    productivebees:jar_oak
+    productivebees:jungle_wood_nest
+    productivebees:light_blue_petrified_honey
+    productivebees:light_gray_petrified_honey
+    productivebees:lime_petrified_honey
+    productivebees:magenta_petrified_honey
+    productivebees:mangrove_wood_nest
+    productivebees:milk_bottle
+    productivebees:nest_locator
+    productivebees:nether_brick_nest
+    productivebees:nether_gold_nest
+    productivebees:nether_quartz_nest
+    productivebees:oak_wood_nest
+    productivebees:obsidian_nest
+    productivebees:orange_petrified_honey
+    productivebees:petrified_honey
+    productivebees:pink_petrified_honey
+    productivebees:powered_centrifuge
+    productivebees:purple_petrified_honey
+    productivebees:quartz_netherrack
+    productivebees:red_petrified_honey
+    productivebees:sand_nest
+    productivebees:slimy_nest
+    productivebees:snow_nest
+    productivebees:soul_sand_nest
+    productivebees:spawn_egg_ashy_mining_bee
+    productivebees:spawn_egg_blue_banded_bee
+    productivebees:spawn_egg_bumble_bee
+    productivebees:spawn_egg_chocolate_mining_bee
+    productivebees:spawn_egg_collector_bee
+    productivebees:spawn_egg_configurable_bee
+    productivebees:spawn_egg_creeper_bee
+    productivebees:spawn_egg_cupid_bee
+    productivebees:spawn_egg_digger_bee
+    productivebees:spawn_egg_dye_bee
+    productivebees:spawn_egg_farmer_bee
+    productivebees:spawn_egg_green_carpenter_bee
+    productivebees:spawn_egg_hoarder_bee
+    productivebees:spawn_egg_leafcutter_bee
+    productivebees:spawn_egg_lumber_bee
+    productivebees:spawn_egg_mason_bee
+    productivebees:spawn_egg_neon_cuckoo_bee
+    productivebees:spawn_egg_nomad_bee
+    productivebees:spawn_egg_quarry_bee
+    productivebees:spawn_egg_rancher_bee
+    productivebees:spawn_egg_reed_bee
+    productivebees:spawn_egg_resin_bee
+    productivebees:spawn_egg_sweat_bee
+    productivebees:spawn_egg_yellow_black_carpenter_bee
+    productivebees:spruce_wood_nest
+    productivebees:stone_nest
+    productivebees:sturdy_bee_cage
+    productivebees:sugar_cane_nest
+    productivebees:sugarbag_honeycomb
+    productivebees:sugarbag_nest
+    productivebees:treat_on_a_stick
+    productivebees:upgrade_anti_teleport
+    productivebees:upgrade_base
+    productivebees:upgrade_bee_sampler
+    productivebees:upgrade_breeding
+    productivebees:upgrade_comb_block
+    productivebees:upgrade_filter
+    productivebees:upgrade_not_babee
+    productivebees:upgrade_productivity
+    productivebees:upgrade_productivity_2
+    productivebees:upgrade_productivity_3
+    productivebees:upgrade_productivity_4
+    productivebees:upgrade_range
+    productivebees:upgrade_simulator
+    productivebees:upgrade_time
+    productivebees:warped_bee_nest
+    productivebees:wax
+    productivebees:wax_block
+    productivebees:white_petrified_honey
+    productivebees:wither_skull_chip
+    productivebees:yellow_petrified_honey
+
+Missing minecraft:potion:
+    ars_nouveau:blasting_potion
+    ars_nouveau:blasting_potion_long
+    ars_nouveau:blasting_potion_strong
+    ars_nouveau:freezing_potion
+    ars_nouveau:freezing_potion_long
+    ars_nouveau:freezing_potion_strong
+    ars_nouveau:mana_regen_potion
+    ars_nouveau:mana_regen_potion_long
+    ars_nouveau:mana_regen_potion_strong
+    ars_nouveau:recovery_potion
+    ars_nouveau:recovery_potion_long
+    ars_nouveau:recovery_potion_strong
+    ars_nouveau:shielding_potion
+    ars_nouveau:shielding_potion_long
+    ars_nouveau:shielding_potion_strong
+    ars_nouveau:spell_damage_potion
+    ars_nouveau:spell_damage_potion_long
+    ars_nouveau:spell_damage_potion_strong
+
+Missing minecraft:block:
+    ars_nouveau:agronomic_sourcelink
+    ars_nouveau:alchemical_sourcelink
+    ars_nouveau:alteration_table
+    ars_nouveau:arcane_core
+    ars_nouveau:arcane_pedestal
+    ars_nouveau:arcane_platform
+    ars_nouveau:archwood_button
+    ars_nouveau:archwood_chest
+    ars_nouveau:archwood_door
+    ars_nouveau:archwood_fence
+    ars_nouveau:archwood_fence_gate
+    ars_nouveau:archwood_planks
+    ars_nouveau:archwood_pressure_plate
+    ars_nouveau:archwood_sconce
+    ars_nouveau:archwood_slab
+    ars_nouveau:archwood_stairs
+    ars_nouveau:archwood_trapdoor
+    ars_nouveau:basic_spell_turret
+    ars_nouveau:bastion_pod
+    ars_nouveau:blue_archwood_leaves
+    ars_nouveau:blue_archwood_log
+    ars_nouveau:blue_archwood_sapling
+    ars_nouveau:blue_archwood_wood
+    ars_nouveau:blue_sbed
+    ars_nouveau:bombegranate_pod
+    ars_nouveau:brazier_relay
+    ars_nouveau:creative_source_jar
+    ars_nouveau:drygmy_stone
+    ars_nouveau:enchanting_apparatus
+    ars_nouveau:falseweave
+    ars_nouveau:frostaya_pod
+    ars_nouveau:ghostweave
+    ars_nouveau:gilded_sourcestone_alternating
+    ars_nouveau:gilded_sourcestone_alternating_slab
+    ars_nouveau:gilded_sourcestone_alternating_stairs
+    ars_nouveau:gilded_sourcestone_basketweave
+    ars_nouveau:gilded_sourcestone_basketweave_slab
+    ars_nouveau:gilded_sourcestone_basketweave_stairs
+    ars_nouveau:gilded_sourcestone_large_bricks
+    ars_nouveau:gilded_sourcestone_large_bricks_slab
+    ars_nouveau:gilded_sourcestone_large_bricks_stairs
+    ars_nouveau:gilded_sourcestone_mosaic
+    ars_nouveau:gilded_sourcestone_mosaic_slab
+    ars_nouveau:gilded_sourcestone_mosaic_stairs
+    ars_nouveau:gilded_sourcestone_small_bricks
+    ars_nouveau:gilded_sourcestone_small_bricks_slab
+    ars_nouveau:gilded_sourcestone_small_bricks_stairs
+    ars_nouveau:green_archwood_leaves
+    ars_nouveau:green_archwood_log
+    ars_nouveau:green_archwood_sapling
+    ars_nouveau:green_archwood_wood
+    ars_nouveau:green_sbed
+    ars_nouveau:imbuement_chamber
+    ars_nouveau:intangible_air
+    ars_nouveau:item_detector
+    ars_nouveau:light_block
+    ars_nouveau:mage_block
+    ars_nouveau:magebloom_block
+    ars_nouveau:magebloom_crop
+    ars_nouveau:magelight_torch
+    ars_nouveau:magic_fire
+    ars_nouveau:mendosteen_pod
+    ars_nouveau:mirrorweave
+    ars_nouveau:mob_jar
+    ars_nouveau:mycelial_sourcelink
+    ars_nouveau:orange_sbed
+    ars_nouveau:polished_sconce
+    ars_nouveau:portal
+    ars_nouveau:potion_diffuser
+    ars_nouveau:potion_jar
+    ars_nouveau:potion_melder
+    ars_nouveau:potted_blue_archwood_sapling
+    ars_nouveau:potted_green_archwood_sapling
+    ars_nouveau:potted_magebloom_crop
+    ars_nouveau:potted_purple_archwood_sapling
+    ars_nouveau:potted_red_archwood_sapling
+    ars_nouveau:purple_archwood_leaves
+    ars_nouveau:purple_archwood_log
+    ars_nouveau:purple_archwood_sapling
+    ars_nouveau:purple_archwood_wood
+    ars_nouveau:purple_sbed
+    ars_nouveau:red_archwood_leaves
+    ars_nouveau:red_archwood_log
+    ars_nouveau:red_archwood_sapling
+    ars_nouveau:red_archwood_wood
+    ars_nouveau:red_sbed
+    ars_nouveau:redstone_relay
+    ars_nouveau:relay
+    ars_nouveau:relay_collector
+    ars_nouveau:relay_deposit
+    ars_nouveau:relay_splitter
+    ars_nouveau:relay_warp
+    ars_nouveau:repository
+    ars_nouveau:ritual_brazier
+    ars_nouveau:rotating_spell_turret
+    ars_nouveau:rune
+    ars_nouveau:sconce
+    ars_nouveau:scribes_table
+    ars_nouveau:scryers_crystal
+    ars_nouveau:scryers_oculus
+    ars_nouveau:sky_block
+    ars_nouveau:smooth_gilded_sourcestone_alternating
+    ars_nouveau:smooth_gilded_sourcestone_alternating_slab
+    ars_nouveau:smooth_gilded_sourcestone_alternating_stairs
+    ars_nouveau:smooth_gilded_sourcestone_basketweave
+    ars_nouveau:smooth_gilded_sourcestone_basketweave_slab
+    ars_nouveau:smooth_gilded_sourcestone_basketweave_stairs
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks_slab
+    ars_nouveau:smooth_gilded_sourcestone_large_bricks_stairs
+    ars_nouveau:smooth_gilded_sourcestone_mosaic
+    ars_nouveau:smooth_gilded_sourcestone_mosaic_slab
+    ars_nouveau:smooth_gilded_sourcestone_mosaic_stairs
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks_slab
+    ars_nouveau:smooth_gilded_sourcestone_small_bricks_stairs
+    ars_nouveau:smooth_sourcestone
+    ars_nouveau:smooth_sourcestone_alternating
+    ars_nouveau:smooth_sourcestone_alternating_slab
+    ars_nouveau:smooth_sourcestone_alternating_stairs
+    ars_nouveau:smooth_sourcestone_basketweave
+    ars_nouveau:smooth_sourcestone_basketweave_slab
+    ars_nouveau:smooth_sourcestone_basketweave_stairs
+    ars_nouveau:smooth_sourcestone_large_bricks
+    ars_nouveau:smooth_sourcestone_large_bricks_slab
+    ars_nouveau:smooth_sourcestone_large_bricks_stairs
+    ars_nouveau:smooth_sourcestone_mosaic
+    ars_nouveau:smooth_sourcestone_mosaic_slab
+    ars_nouveau:smooth_sourcestone_mosaic_stairs
+    ars_nouveau:smooth_sourcestone_slab
+    ars_nouveau:smooth_sourcestone_small_bricks
+    ars_nouveau:smooth_sourcestone_small_bricks_slab
+    ars_nouveau:smooth_sourcestone_small_bricks_stairs
+    ars_nouveau:smooth_sourcestone_stairs
+    ars_nouveau:source_gem_block
+    ars_nouveau:source_jar
+    ars_nouveau:sourceberry_bush
+    ars_nouveau:sourceberry_sack
+    ars_nouveau:sourcestone
+    ars_nouveau:sourcestone_alternating
+    ars_nouveau:sourcestone_alternating_slab
+    ars_nouveau:sourcestone_alternating_stairs
+    ars_nouveau:sourcestone_basketweave
+    ars_nouveau:sourcestone_basketweave_slab
+    ars_nouveau:sourcestone_basketweave_stairs
+    ars_nouveau:sourcestone_large_bricks
+    ars_nouveau:sourcestone_large_bricks_slab
+    ars_nouveau:sourcestone_large_bricks_stairs
+    ars_nouveau:sourcestone_mosaic
+    ars_nouveau:sourcestone_mosaic_slab
+    ars_nouveau:sourcestone_mosaic_stairs
+    ars_nouveau:sourcestone_sconce
+    ars_nouveau:sourcestone_slab
+    ars_nouveau:sourcestone_small_bricks
+    ars_nouveau:sourcestone_small_bricks_slab
+    ars_nouveau:sourcestone_small_bricks_stairs
+    ars_nouveau:sourcestone_stairs
+    ars_nouveau:spell_prism
+    ars_nouveau:spell_sensor
+    ars_nouveau:spell_turret
+    ars_nouveau:storage_lectern
+    ars_nouveau:stripped_blue_archwood_log
+    ars_nouveau:stripped_blue_archwood_wood
+    ars_nouveau:stripped_green_archwood_log
+    ars_nouveau:stripped_green_archwood_wood
+    ars_nouveau:stripped_purple_archwood_log
+    ars_nouveau:stripped_purple_archwood_wood
+    ars_nouveau:stripped_red_archwood_log
+    ars_nouveau:stripped_red_archwood_wood
+    ars_nouveau:temporary_block
+    ars_nouveau:temporary_light_block
+    ars_nouveau:timer_spell_turret
+    ars_nouveau:vitalic_sourcelink
+    ars_nouveau:void_prism
+    ars_nouveau:volcanic_sourcelink
+    ars_nouveau:whirlisprig_flower
+    ars_nouveau:wixie_cauldron
+    ars_nouveau:yellow_sbed
+    geckolib:fertilizer
+    geckolib:gecko_habitat
+    productivebees:acacia_wood_nest
+    productivebees:advanced_acacia_beehive
+    productivebees:advanced_acacia_canvas_beehive
+    productivebees:advanced_aspen_canvas_beehive
+    productivebees:advanced_bamboo_beehive
+    productivebees:advanced_bamboo_canvas_beehive
+    productivebees:advanced_birch_beehive
+    productivebees:advanced_birch_canvas_beehive
+    productivebees:advanced_cherry_beehive
+    productivebees:advanced_cherry_canvas_beehive
+    productivebees:advanced_comb_canvas_beehive
+    productivebees:advanced_concrete_canvas_beehive
+    productivebees:advanced_crimson_beehive
+    productivebees:advanced_crimson_canvas_beehive
+    productivebees:advanced_dark_oak_beehive
+    productivebees:advanced_dark_oak_canvas_beehive
+    productivebees:advanced_dead_canvas_beehive
+    productivebees:advanced_driftwood_canvas_beehive
+    productivebees:advanced_fir_canvas_beehive
+    productivebees:advanced_grimwood_canvas_beehive
+    productivebees:advanced_hellbark_canvas_beehive
+    productivebees:advanced_jacaranda_canvas_beehive
+    productivebees:advanced_jungle_beehive
+    productivebees:advanced_jungle_canvas_beehive
+    productivebees:advanced_kousa_canvas_beehive
+    productivebees:advanced_magic_canvas_beehive
+    productivebees:advanced_mahogany_canvas_beehive
+    productivebees:advanced_mangrove_beehive
+    productivebees:advanced_mangrove_canvas_beehive
+    productivebees:advanced_maple_canvas_beehive
+    productivebees:advanced_oak_beehive
+    productivebees:advanced_oak_canvas_beehive
+    productivebees:advanced_palm_canvas_beehive
+    productivebees:advanced_redwood_canvas_beehive
+    productivebees:advanced_river_canvas_beehive
+    productivebees:advanced_rosewood_canvas_beehive
+    productivebees:advanced_snake_block_beehive
+    productivebees:advanced_snake_block_canvas_beehive
+    productivebees:advanced_spruce_beehive
+    productivebees:advanced_spruce_canvas_beehive
+    productivebees:advanced_umbran_canvas_beehive
+    productivebees:advanced_warped_beehive
+    productivebees:advanced_warped_canvas_beehive
+    productivebees:advanced_willow_canvas_beehive
+    productivebees:advanced_wisteria_canvas_beehive
+    productivebees:advanced_yucca_canvas_beehive
+    productivebees:amber
+    productivebees:bamboo_hive
+    productivebees:birch_wood_nest
+    productivebees:black_petrified_honey
+    productivebees:blue_petrified_honey
+    productivebees:bottler
+    productivebees:breeding_chamber
+    productivebees:brown_petrified_honey
+    productivebees:bumble_bee_nest
+    productivebees:catcher
+    productivebees:centrifuge
+    productivebees:cherry_wood_nest
+    productivebees:coarse_dirt_nest
+    productivebees:comb_ghostly
+    productivebees:comb_milky
+    productivebees:comb_powdery
+    productivebees:configurable_comb
+    productivebees:crimson_bee_nest
+    productivebees:cryo_stasis
+    productivebees:cyan_petrified_honey
+    productivebees:dark_oak_wood_nest
+    productivebees:dragon_egg_hive
+    productivebees:end_stone_nest
+    productivebees:expansion_box_acacia
+    productivebees:expansion_box_acacia_canvas
+    productivebees:expansion_box_aspen_canvas
+    productivebees:expansion_box_bamboo
+    productivebees:expansion_box_bamboo_canvas
+    productivebees:expansion_box_birch
+    productivebees:expansion_box_birch_canvas
+    productivebees:expansion_box_cherry
+    productivebees:expansion_box_cherry_canvas
+    productivebees:expansion_box_comb_canvas
+    productivebees:expansion_box_concrete_canvas
+    productivebees:expansion_box_crimson
+    productivebees:expansion_box_crimson_canvas
+    productivebees:expansion_box_dark_oak
+    productivebees:expansion_box_dark_oak_canvas
+    productivebees:expansion_box_dead_canvas
+    productivebees:expansion_box_driftwood_canvas
+    productivebees:expansion_box_fir_canvas
+    productivebees:expansion_box_grimwood_canvas
+    productivebees:expansion_box_hellbark_canvas
+    productivebees:expansion_box_jacaranda_canvas
+    productivebees:expansion_box_jungle
+    productivebees:expansion_box_jungle_canvas
+    productivebees:expansion_box_kousa_canvas
+    productivebees:expansion_box_magic_canvas
+    productivebees:expansion_box_mahogany_canvas
+    productivebees:expansion_box_mangrove
+    productivebees:expansion_box_mangrove_canvas
+    productivebees:expansion_box_maple_canvas
+    productivebees:expansion_box_oak
+    productivebees:expansion_box_oak_canvas
+    productivebees:expansion_box_palm_canvas
+    productivebees:expansion_box_redwood_canvas
+    productivebees:expansion_box_river_canvas
+    productivebees:expansion_box_rosewood_canvas
+    productivebees:expansion_box_snake_block
+    productivebees:expansion_box_snake_block_canvas
+    productivebees:expansion_box_spruce
+    productivebees:expansion_box_spruce_canvas
+    productivebees:expansion_box_umbran_canvas
+    productivebees:expansion_box_warped
+    productivebees:expansion_box_warped_canvas
+    productivebees:expansion_box_willow_canvas
+    productivebees:expansion_box_wisteria_canvas
+    productivebees:expansion_box_yucca_canvas
+    productivebees:feeder
+    productivebees:gene_indexer
+    productivebees:glowstone_nest
+    productivebees:gravel_nest
+    productivebees:gray_petrified_honey
+    productivebees:green_petrified_honey
+    productivebees:heated_centrifuge
+    productivebees:honey
+    productivebees:honey_generator
+    productivebees:inactive_dragon_egg
+    productivebees:incubator
+    productivebees:invisible_redstone_block
+    productivebees:jar_oak
+    productivebees:jungle_wood_nest
+    productivebees:light_blue_petrified_honey
+    productivebees:light_gray_petrified_honey
+    productivebees:lime_petrified_honey
+    productivebees:magenta_petrified_honey
+    productivebees:mangrove_wood_nest
+    productivebees:nether_brick_nest
+    productivebees:nether_gold_nest
+    productivebees:nether_quartz_nest
+    productivebees:oak_wood_nest
+    productivebees:obsidian_nest
+    productivebees:orange_petrified_honey
+    productivebees:petrified_honey
+    productivebees:pink_petrified_honey
+    productivebees:powered_centrifuge
+    productivebees:purple_petrified_honey
+    productivebees:quartz_netherrack
+    productivebees:red_petrified_honey
+    productivebees:sand_nest
+    productivebees:slimy_nest
+    productivebees:snow_nest
+    productivebees:soul_sand_nest
+    productivebees:spruce_wood_nest
+    productivebees:stone_nest
+    productivebees:sugar_cane_nest
+    productivebees:sugarbag_nest
+    productivebees:warped_bee_nest
+    productivebees:wax_block
+    productivebees:white_petrified_honey
+    productivebees:yellow_petrified_honey
+
+Missing minecraft:point_of_interest_type:
+    ars_nouveau:arcane_poi
+    productivebees:advanced_beehive
+    productivebees:bumble_bee_nest
+    productivebees:draconic_nest
+    productivebees:nether_nest
+    productivebees:solitary_hive
+    productivebees:solitary_nest
+    productivebees:sugarbag_nest
+
+Missing minecraft:mob_effect:
+    ars_nouveau:blasting
+    ars_nouveau:bounce
+    ars_nouveau:flight
+    ars_nouveau:freezing
+    ars_nouveau:glide
+    ars_nouveau:gravity
+    ars_nouveau:hex
+    ars_nouveau:immolate
+    ars_nouveau:magic_find
+    ars_nouveau:mana_regen
+    ars_nouveau:recovery
+    ars_nouveau:scrying
+    ars_nouveau:shielding
+    ars_nouveau:shocked
+    ars_nouveau:snared
+    ars_nouveau:soaked
+    ars_nouveau:spell_damage
+    ars_nouveau:summoning_sickness
+
+Missing minecraft:enchantment:
+    ars_nouveau:mana_boost
+    ars_nouveau:mana_regen
+    ars_nouveau:reactive
+
+Missing minecraft:fluid:
+    minecraft:flowing_milk
+    minecraft:milk
+    productivebees:flowing_honey
+    productivebees:honey
+
+Missing minecraft:entity_type:
+    ars_nouveau:ally_vex
+    ars_nouveau:amethyst_golem
+    ars_nouveau:an_lightning
+    ars_nouveau:animated_block
+    ars_nouveau:animated_head
+    ars_nouveau:arcing_spell_proj
+    ars_nouveau:blazing_weald_walker
+    ars_nouveau:bookwyrm
+    ars_nouveau:cascading_weald_walker
+    ars_nouveau:cinder
+    ars_nouveau:drygmy
+    ars_nouveau:dummy
+    ars_nouveau:enchanted_falling_block
+    ars_nouveau:enchanted_head_block
+    ars_nouveau:enchanted_mage_block
+    ars_nouveau:familiar_amethyst_golem
+    ars_nouveau:familiar_bookwyrm
+    ars_nouveau:familiar_drygmy
+    ars_nouveau:familiar_starbuncle
+    ars_nouveau:familiar_whirlisprig
+    ars_nouveau:familiar_wixie
+    ars_nouveau:fangs
+    ars_nouveau:flourishing_weald_walker
+    ars_nouveau:flying_item
+    ars_nouveau:follow_proj
+    ars_nouveau:gift_starby
+    ars_nouveau:homing_spell_proj
+    ars_nouveau:ice_shard
+    ars_nouveau:lily
+    ars_nouveau:linger
+    ars_nouveau:orbit
+    ars_nouveau:ritual
+    ars_nouveau:scryer_camera
+    ars_nouveau:spell_arrow
+    ars_nouveau:spell_proj
+    ars_nouveau:spike
+    ars_nouveau:starbuncle
+    ars_nouveau:summon_horse
+    ars_nouveau:summon_skeleton
+    ars_nouveau:summon_wolf
+    ars_nouveau:vexing_weald_walker
+    ars_nouveau:wall
+    ars_nouveau:whirlisprig
+    ars_nouveau:wilden_boss
+    ars_nouveau:wilden_guardian
+    ars_nouveau:wilden_hunter
+    ars_nouveau:wilden_stalker
+    ars_nouveau:wixie
+    geckolib:bat
+    geckolib:bike
+    geckolib:cool_kid
+    geckolib:fake_glass
+    geckolib:gremlin
+    geckolib:mutant_zombie
+    geckolib:parasite
+    geckolib:race_car
+    productivebees:ashy_mining_bee
+    productivebees:bee_bomb
+    productivebees:blue_banded_bee
+    productivebees:bumble_bee
+    productivebees:chocolate_mining_bee
+    productivebees:collector_bee
+    productivebees:configurable_bee
+    productivebees:creeper_bee
+    productivebees:cupid_bee
+    productivebees:digger_bee
+    productivebees:dye_bee
+    productivebees:farmer_bee
+    productivebees:green_carpenter_bee
+    productivebees:hoarder_bee
+    productivebees:leafcutter_bee
+    productivebees:lumber_bee
+    productivebees:mason_bee
+    productivebees:neon_cuckoo_bee
+    productivebees:nomad_bee
+    productivebees:quarry_bee
+    productivebees:rancher_bee
+    productivebees:reed_bee
+    productivebees:resin_bee
+    productivebees:sweat_bee
+    productivebees:yellow_black_carpenter_bee
+
+
+[12:56:56] [main/ERROR] [ne.mi.re.GameData/REGISTRIES]: There are unidentified mappings in this world - we are going to attempt to process anyway
+[12:56:56] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.4.28
+[12:56:57] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/assets/.mcassetsroot' uses unexpected schema
+[12:56:57] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/data/.mcassetsroot' uses unexpected schema
+[12:56:57] [main/WARN] [minecraft/MinecraftServer]: Missing data pack mod:geckolib
+[12:56:57] [main/WARN] [minecraft/MinecraftServer]: Missing data pack mod:productivelib
+[12:56:57] [main/WARN] [minecraft/MinecraftServer]: Missing data pack mod:productivebees
+[12:56:57] [main/WARN] [minecraft/MinecraftServer]: Missing data pack mod:ars_nouveau
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[12:56:58] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/accumulation_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lumium_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/enderium_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/signalum_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/signalum_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/multidimensional_expansion_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lumium_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/tin_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/invar_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lead_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/netherite_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/complex_link_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/iron_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/constantan_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/nickel_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/electrum_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infusion_source as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/enderium_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/sapphire_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/redstone_crystal as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/ruby_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/nickel_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/shattered_singularity as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/sky_steel_ingot as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/gold_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/copper_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/energy_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/quartz_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/bronze_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/constantan_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/netherite_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infused_dust as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/emerald_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lapis_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/electrum_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/diamond_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/tin_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/invar_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/iron_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/omni_link_processor as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/bronze_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/silver_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/gold_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lead_gear as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/copper_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/ender_ingot as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/silver_plate as it's serializer returned null
+[12:56:58] [main/INFO] [minecraft/RecipeManager]: Loaded 13 recipes
+[12:56:59] [main/INFO] [minecraft/AdvancementList]: Loaded 1784 advancements
+[12:56:59] [main/INFO] [to.th.cu.Curios/]: Loaded 11 curio slots
+[12:56:59] [main/INFO] [to.th.cu.Curios/]: Loaded 1 curio entities
+[12:56:59] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[12:56:59] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[12:56:59] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[12:56:59] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[12:56:59] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25588
+[12:56:59] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using default channel type
+[12:56:59] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[12:56:59] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[12:56:59] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[12:56:59] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[12:56:59] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/overworld <- minecraft:overworld type=ResourceKey[minecraft:dimension_type / minecraft:overworld] minY=-64 height=384
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim <- useless_mod:uselessdim type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim] minY=-64 height=384
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_nether <- minecraft:the_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield <- useless_stretcher:two_i_starfield type=ResourceKey[minecraft:dimension_type / useless_stretcher:two_i_starfield] minY=-64 height=384
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim2 <- useless_mod:uselessdim2 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim2] minY=-64 height=384
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim3 <- useless_mod:uselessdim3 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim3] minY=-64 height=384
+[12:57:00] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_end <- minecraft:the_end type=ResourceKey[minecraft:dimension_type / minecraft:the_end] minY=0 height=256
+[12:57:00] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[12:57:01] [Worker-Main-8/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[12:57:01] [Worker-Main-8/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[12:57:01] [Worker-Main-8/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[12:57:01] [Worker-Main-8/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[12:57:02] [Worker-Main-13/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 42%
+[12:57:02] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 2265 ms
+[12:57:02] [Server thread/INFO] [minecraft/DedicatedServer]: Done (2.675s)! For help, type "help"
+[12:57:02] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[12:57:02] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[12:57:02] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/ae2/spatial_storage <- ae2:spatial_storage type=ResourceKey[minecraft:dimension_type / ae2:spatial_storage] minY=0 height=256
+[12:57:03] [Server thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=809, sources=3, elapsed=402 ms
+2i story session checks passed (multi-round ordering, expiry and replay protection)
+2i starfield data checks passed (24 assertions)
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: CAPSULE SAVE SNAPSHOT PASSED: native Forge chunk-save callback tag detached before asynchronous IO
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF MIGRATION PASSED: staff-only pending/completed, bundled partial masks, interim queue and normalized roundtrip
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=false remaining=Block{minecraft:oak_leaves}[distance=7,persistent=false,waterlogged=false]
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=CREATIVE broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SPECTATOR broken=false remaining=Block{minecraft:oak_leaves}[distance=7,persistent=false,waterlogged=false]
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: LeafRewards received a 2i Doll. Owner: <UUID>
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafRewards mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafStaffFirst mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: LeafStaffFirst received a 2i Doll. Owner: <UUID>
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafStaffFirst mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF BREAK fixture: player=LeafFullInventory mode=SURVIVAL broken=true remaining=Block{minecraft:air}
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: LeafFullInventory received a 2i Doll. Owner: <UUID>
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF RESTART PASSED: pending and claimed fixtures restored from previous server process
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.LeafRewardChecks/]: LEAF REWARDS PASSED: independent one-time rolls, event guards, legacy migration, inventory retry, reconnect, carriers and saved claims
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 1/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 2/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollHeadwearChecks/]: REGRESSION 2i headwear: survival helmet slot, shift-click, main/offhand swaps, occupied helmet and full component preservation passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 3/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollSpawnEggChecks/]: REGRESSION 2i spawn eggs: real capture suppressed (magnet and fortune/silk), ordinary chicken capture preserved, forged pig-carrier and NBT spawner rejected, normal deployment and component-preserving middle pick passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 4/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIStoryEntityChecks/]: REGRESSION 2i story: three rounds, final-only unlock, spoof/order/duplicate rejection, reopen, daily cap, negative/neutral, distance and expiry passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIInteractionChecks/]: REGRESSION 2i gifts: unlimited consecutive +5 precious gifts, ordinary cooldown/day budget isolation, item/entity reload, negative gifts and full-bond preservation passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIInteractionChecks/]: REGRESSION 2i ownership: entity UI/heartbeat/actions, encoded item owner, foreign item use/deploy and legacy binding PASSED
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIInteractionChecks/]: REGRESSION 2i follow: ten/four-block freedom, dialogue pause/resume, ability flight with real movement, landing/reload cleanup, disconnect, death and spectator passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 5/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoICompanionshipChecks/]: 2I COMPANIONSHIP RESTART PASSED: actual prior-process world record restored
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoICompanionshipChecks/]: 2I COMPANIONSHIP STORAGE PASSED: five-second server checks; 200 seconds with zero item changes; independent IDs, hand swaps, world save/load, legacy remainder and item/entity/head continuity
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 6/13
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: TwoICurios received a 2i Doll. Owner: <UUID>
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoICuriosChecks/]: 2I CURIOS RESTART PASSED: real prior-process Curios inventory and world companionship timer restored
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoICuriosChecks/]: 2I CURIOS PASSED: ten native slot types/custom deny-validator/menu validation/cosmetic/owner; actual equip, move/save/load; 2000 ticks zero item changes, 6000 combined ticks +1, hidden/inactive and duplicate samples
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 7/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollHeadwearChecks/]: REGRESSION 2i headwear: survival helmet slot, shift-click, main/offhand swaps, occupied helmet and full component preservation passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollDisplayChecks/]: REGRESSION 2i display ownership: real placement, stranger rotate/pickup denial, owner rotation and pick component PASSED
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 8/13
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: 27 biome entry/entries set between 0, 248, 0 and 8, 256, 8
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: 27 biome entry/entries set between 0, 248, 0 and 8, 256, 8
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIFinalPolishChecks/]: REGRESSION 2i weather: real plains/snow, rain+thunder, shelter and Nether PASSED
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: 27 biome entry/entries set between 0, 248, 0 and 8, 256, 8
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIFinalPolishChecks/]: REGRESSION 2i final polish: summon/passengers, acceleration/legacy/range/placement and carried companionship PASSED
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 9/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollSpawnEggChecks/]: REGRESSION 2i spawn eggs: real capture suppressed (magnet and fortune/silk), ordinary chicken capture preserved, forged pig-carrier and NBT spawner rejected, normal deployment and component-preserving middle pick passed
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIDollUselessKillChecks/]: REGRESSION actual Useless Mod 20.2.4.6: forced-kill aura, forceKillLivingEntity, private forceDie and direct storage purge preserve original 2i UUID/id/world indexes/tick entry; ordinary chicken controls still die/remove
+[12:57:05] [Server thread/INFO] [minecraft/MinecraftServer]: DollSafetyCheck received a 2i Doll. Owner: <UUID>
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 10/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIForcedKillChecks/]: 2I FORCED KILL optional sword absent: generic checks still active
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIForcedKillChecks/]: 2I GENERIC STORAGE GUARDS PASSED: direct lookup/tick-list/spatial-section/removal-callback/level-callback purges blocked; native visibility stop/start and cross-section movement still work
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.TwoIForcedKillChecks/]: 2I GENERIC DESTRUCTIVE CHAINS PASSED: 46 registered damage types with finite/infinite/NaN damage, health data poisoning, kill/die/discard/final removal, invisibility/pose raw data, invalid/void exile; ordinary movement preserved
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 11/13
+[12:57:05] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 12/13
+2i starfield data checks passed (24 assertions)
+[12:57:06] [Server thread/INFO] [minecraft/MinecraftServer]: StarfieldChecks received a 2i Doll. Owner: <UUID>
+[12:57:06] [Server thread/INFO] [co.so.us.st.co.en.TwoIStarfieldServerChecks/]: REGRESSION starfield: independent registration, safe/no-edit landing, 8 persistent real drops and return/revisit passed (fake-player transport shim)
+[12:57:06] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER STAGE PASSED: 13/13
+[12:57:06] [Server thread/INFO] [co.so.us.st.re.ForgeDollServerChecks/]: FORGE 2I SERVER CHECKS PASSED: acquisition, saved memory, headwear, capture/kill protection, gifts, three-round story, companionship, Curios, display, friendship, starfield
+[12:57:06] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[12:57:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[12:57:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[12:57:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[12:57:07] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 36s
+7 actionable tasks: 3 executed, 4 up-to-date

@@ -1,0 +1,10 @@
+{
+  "previous": "<WORKSPACE>\\archive\\pr-5-review-20261029\\artifacts\\useless_stretcher-20.1.6.5-normal-build.jar",
+  "current": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\libs\\useless_stretcher-20.1.6.5.jar",
+  "added": [],
+  "removed": [],
+  "payload_differences": [],
+  "timestamp_differences": 609,
+  "all_uncompressed_contents_identical": true,
+  "current_sha256": "DA0E0FB4E83C766C15E333D59DFD18F10B8729F66724C0CCDF980D1EA9C1C8FA"
+}

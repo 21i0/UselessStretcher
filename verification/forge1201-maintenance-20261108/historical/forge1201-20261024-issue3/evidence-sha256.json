@@ -1,0 +1,38 @@
+[
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\forge1201-issue3-build-v1.log",
+    "Hash": "8F13AFD48CC586D48D5629BF9874BEE49B8885474479F23F270DB6BD5242D436"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\github-build-status.json",
+    "Hash": "F55EF022384D5A1BD16D3F41E847C3BAECB68D9A5DBF5EA4701C6FFE4C900B86"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\jar-audit-build.json",
+    "Hash": "68F05E26BEE10F4B0703890498F69204559A1348E9E15EE010C57BCE4A2B36E2"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\jar-audit-delivery.json",
+    "Hash": "682DBDF5218692722A983502617E92FAA112DFAA06D6C9DAF9F3EAC1EC292731"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\staff-compat-mek101575-v1.log",
+    "Hash": "EF9B350C3F504051D4A48EE55C107E0C0ECB4FF675695C8630C5CC35834F2EBB"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\staff-compat-mek101680-v2.log",
+    "Hash": "76833C1FC1DC623F2E1982E5512E4FD69A530B33A827CADC615F8615FCFE3EBD"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\validation.json",
+    "Hash": "D42DB5592494846BB8C4218CFB91E2F80F04CF88B8EA5708A146CA757C1D7640"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\junit\\TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+    "Hash": "256E036C3BA32ECEEDDBD8F1B768A5AA984018E7CA892EB972FA3A4F7B8E5A89"
+  },
+  {
+    "Path": "<WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\verification\\forge1201-20261024-issue3\\junit\\TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+    "Hash": "03674239735195593D9BFF31FBC3079697EC0DCC593801DC8ACAADBF28ED795C"
+  }
+]

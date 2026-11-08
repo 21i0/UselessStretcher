@@ -1,0 +1,607 @@
+{
+  "date": "2026-11-08",
+  "files": [
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-acceleration-v8.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-acceleration-v8.log",
+      "source_sha256": "C01E997173F968D57883A448C772B922E25A7A2CBDB9A6B06B4F84DBCDBB57A2",
+      "backup_sha256": "CCF6C69DC0DE6B6DC0C38B39AAD33A60B2B9803B78E2EC142FD73D2C3A7B1BD9",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-addon-build-final-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-addon-build-final-v1.log",
+      "source_sha256": "C40D629FB5E479AD7A93E3AD03BA7D868B2626F99D492C664EECF1EE5B924C7E",
+      "backup_sha256": "C23C65AC75DEDFEDA1AA41FE33254B1E910C9099A5775DA4B7C6DEE2E3A2D8A5",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-checkpoint-v5.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-checkpoint-v5.log",
+      "source_sha256": "0A92603B2290BB174AD14712D8B3C7FBF82689A76763188C2294E2C1111C217C",
+      "backup_sha256": "ED850A2CB85ADF5EF4AB5315EB8C49D9EA385F9BA8329010D31AC338CA6DF1A3",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-client-nojei-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-client-nojei-v1.log",
+      "source_sha256": "306997602903A44A5C6BF7C0073903BE8F3F81668D51305D660E2A2EF85B8401",
+      "backup_sha256": "F52470D29B2BD6970139A746CDE9B1B3990C184A545781359DED3DF1B59CB077",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-client-v2.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-client-v2.log",
+      "source_sha256": "3F06A8325C2888B70FFE887516091881F63FD30D3364B24C731C1B7A2AA4EAD1",
+      "backup_sha256": "7B39175CBE96664CC2B97119E0A6FEE5DC1EF721D62737A6AA108544EACB1AF0",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-floor-checkpoint-v2.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-floor-checkpoint-v2.log",
+      "source_sha256": "78F3ADC2057831C3C8667CCC0127D8C5534EFCDD1FF68761B0C66A737B128A8E",
+      "backup_sha256": "F95E93B3D610EBB8CA82C24A3302BE0BEF4EE917489C0D84E96D6536861F1E4E",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-floor-resume-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-floor-resume-v1.log",
+      "source_sha256": "816FA375CA5A35A33872006B0CFA9F12C929DB398AD47D49267F9F0A0275226B",
+      "backup_sha256": "911A1097386604023A6376320217EFB19D4617434C737F77289533E03032D674",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-resume-v4.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-resume-v4.log",
+      "source_sha256": "75C1ED3C8F4964EB26B02DDE795B29BD628A3B67591F2C41D277A199C1A206E4",
+      "backup_sha256": "7E828ABDEFDCD34B5E725D445137EE2545BE3AC3ACA51F21AEACD89B6CD18D58",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/forge1201-capsule-verify-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/forge1201-capsule-verify-v1.log",
+      "source_sha256": "35A29CD8E29C124C010D55749DDDD33755DF0339D62E97C18E6C456AFF7D2091",
+      "backup_sha256": "2352DACB1972634892CCC34A77550665027B723548D739F4390A8015862CAF76",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/jar-build-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/jar-build-audit.json",
+      "source_sha256": "E66FC65BEF0A352FE16D006B1282F8B4352682F34A118E6229ACDF8EED8ABFBA",
+      "backup_sha256": "C0BA5D62281C9DCE9496283ADC88B9D27A88E15D316F854AB40B08BE5428F6F3",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/jar-delivered-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/jar-delivered-audit.json",
+      "source_sha256": "62D2B0BAA97DBBB0519FC951DC31C7654ACB50EC85BC600E6A44BC5A10FAAB20",
+      "backup_sha256": "F18A2FBBE1A2B920D4DA2A98BE6C3EF7A5552349BCFF630AC71DE9877FD43571",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/junit/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/junit/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "source_sha256": "9489E9188AFD4C9EB78878FED2953E9384F2A37EE40D783C15362EF6BA806AC5",
+      "backup_sha256": "9489E9188AFD4C9EB78878FED2953E9384F2A37EE40D783C15362EF6BA806AC5",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261020/junit/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261020/junit/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "source_sha256": "6AD4FBD103EE1F1E71F2E7FEB6F2E2AB6AE12E160D945EA59A83EE886F71A5FB",
+      "backup_sha256": "6AD4FBD103EE1F1E71F2E7FEB6F2E2AB6AE12E160D945EA59A83EE886F71A5FB",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/doll-client-final.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/doll-client-final.log",
+      "source_sha256": "D3BA13B5896F06AF5350442800ECFC491DB7882F7CC717A3E033DFA3108C451F",
+      "backup_sha256": "1E4C02804CBCB03BEAB82CC06B9ACE9BFCDD3406757921CCDE9D36C588B59A57",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/doll-server-capture-v3.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/doll-server-capture-v3.log",
+      "source_sha256": "D5B299821F0C0E001E49C217B7FA551C8D3A607F732A0C73E1569B24AC229AFC",
+      "backup_sha256": "B6EF1C5BE23D696064483C2A6AE73303A7825DE71A5CE672DAE599A06FA8DDD1",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/doll-server-v9.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/doll-server-v9.log",
+      "source_sha256": "0DA75E8E01EC9159E7F526481FAF8A54268867396DD67573B7A3A550F9D8BDDC",
+      "backup_sha256": "6E35B07FA099F23DE7026CB7020652EB8E65E5FE6BC0CBE7CEE61DC315EA3AE4",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/doll-skin-tail-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/doll-skin-tail-v1.log",
+      "source_sha256": "61DF9F8359121ED35D6E7DAE964BB5C7A8761AF58EF303140242537C556709AA",
+      "backup_sha256": "01ABF6E224EE75383E891158E7E615537351A3144DA5CD782D7671229AB4B8DC",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/jar-audit-build.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/jar-audit-build.json",
+      "source_sha256": "09C4332CAC324C86EDF1126C7F2DF148D278EE92BFDDF2F1EB3EBCC0344EE0AA",
+      "backup_sha256": "D4586B616F63E224E8EC1289069DB0F1223F839968031E8F05726429E2FBAAAD",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/jar-audit-delivery.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/jar-audit-delivery.json",
+      "source_sha256": "D07DE23F883F73748B0C9ABBABC4CDE72901A2A7E2A91D968681E3E00E11616E",
+      "backup_sha256": "8E9EBF10F1931D56559C0735FA76F51437D5C24DC61A1BE6ED9B894A219B1596",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/manifest.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/manifest.json",
+      "source_sha256": "B5A96C2AD87BF7C7C063D9A17D0DA5DB06CA9270CA5EDE142081999F4DF868C9",
+      "backup_sha256": "B5A96C2AD87BF7C7C063D9A17D0DA5DB06CA9270CA5EDE142081999F4DF868C9",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/README.md",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/README.md",
+      "source_sha256": "695D2097EBA6A0D8BC32E93CA4F2D7A0390448E7A1B8626321C56CCAE78A01AF",
+      "backup_sha256": "B8A05820FFF992FAB4132BED60729DE77A1E2FEAFEEF1858602BFA152B3EB80F",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/release-build-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/release-build-v1.log",
+      "source_sha256": "8C4EBC90211E638491894DCD9C3A6D6AA009424BD4A75C5243F19FBC5DD0A0E1",
+      "backup_sha256": "8C0EFC381592998B856E65959EB7AF754CCEC33ECFFA9C07E9C74977F2AC324C",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/staff-official-base.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/staff-official-base.log",
+      "source_sha256": "F6947EA8CDEC6E032FCD73E5313BAB1C6581DEE6FC3A072399629DD1E79DF8DF",
+      "backup_sha256": "1047BB6E277DEE3430F2B69C01F2D3CCBC5C01F3F5B3D1A902FCB9865F15C5D8",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "source_sha256": "6EAE8420C99563F41EEA4016A40D606B4CD8E69B0E48E366A21C190570B8AA4D",
+      "backup_sha256": "6EAE8420C99563F41EEA4016A40D606B4CD8E69B0E48E366A21C190570B8AA4D",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-doll-fullport/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-doll-fullport/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "source_sha256": "6DEC6B86574FBC76D3E6866530D98A9720E1CA020359614CAA2F57149E5BACAB",
+      "backup_sha256": "6DEC6B86574FBC76D3E6866530D98A9720E1CA020359614CAA2F57149E5BACAB",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/evidence-sha256.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/evidence-sha256.json",
+      "source_sha256": "6FADDD7C6E9E821F15D128C52C6D67263B42BEC4AB4381F168B57D72F2F54FA6",
+      "backup_sha256": "24E73FFC346DFF9E6F6AE76B8E80DF0AD6E1C2A15020E91A41EE8E38234F3943",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/forge1201-issue3-build-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/forge1201-issue3-build-v1.log",
+      "source_sha256": "8F13AFD48CC586D48D5629BF9874BEE49B8885474479F23F270DB6BD5242D436",
+      "backup_sha256": "5C53D99F94CAEECC6FC7474E0AB0E81B299E9A1A60F24EEC7E827C7EB0A75531",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/jar-audit-build.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/jar-audit-build.json",
+      "source_sha256": "68F05E26BEE10F4B0703890498F69204559A1348E9E15EE010C57BCE4A2B36E2",
+      "backup_sha256": "2D8E2C75DDC478DF523A37EA8319A583C7D73DDD95CA7831ED131F0B0344007F",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/jar-audit-delivery.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/jar-audit-delivery.json",
+      "source_sha256": "682DBDF5218692722A983502617E92FAA112DFAA06D6C9DAF9F3EAC1EC292731",
+      "backup_sha256": "7CC05C9C7FBA5C4F23FED74EE7CC5C8B4114C9EDC753C8079300E09CE26F43E4",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/junit/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/junit/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "source_sha256": "256E036C3BA32ECEEDDBD8F1B768A5AA984018E7CA892EB972FA3A4F7B8E5A89",
+      "backup_sha256": "256E036C3BA32ECEEDDBD8F1B768A5AA984018E7CA892EB972FA3A4F7B8E5A89",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/junit/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/junit/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "source_sha256": "03674239735195593D9BFF31FBC3079697EC0DCC593801DC8ACAADBF28ED795C",
+      "backup_sha256": "03674239735195593D9BFF31FBC3079697EC0DCC593801DC8ACAADBF28ED795C",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/staff-compat-mek101575-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/staff-compat-mek101575-v1.log",
+      "source_sha256": "EF9B350C3F504051D4A48EE55C107E0C0ECB4FF675695C8630C5CC35834F2EBB",
+      "backup_sha256": "DD782FBB6D32BADBA5614D03FD02CD3333FA17C643F3BDD7176E28A3E908AB5A",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/staff-compat-mek101680-v2.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/staff-compat-mek101680-v2.log",
+      "source_sha256": "76833C1FC1DC623F2E1982E5512E4FD69A530B33A827CADC615F8615FCFE3EBD",
+      "backup_sha256": "8AA0A1EA3B0D197ADA9483BACCF258129BA367D128924C5825B9CFAC2A9F429A",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-issue3/validation.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-issue3/validation.json",
+      "source_sha256": "D42DB5592494846BB8C4218CFB91E2F80F04CF88B8EA5708A146CA757C1D7640",
+      "backup_sha256": "139C9F2B18F3FDDE28B8F0B01161F04910E0611BECD479E32E757896A014B320",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-merge/forge1201-premerge-build-20261024.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-merge/forge1201-premerge-build-20261024.log",
+      "source_sha256": "53E4D45E0D258D200D6D15BD1C8EA7191F14F70E95B4E6C1DE4139F895D11340",
+      "backup_sha256": "53E4D45E0D258D200D6D15BD1C8EA7191F14F70E95B4E6C1DE4139F895D11340",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261024-merge/forge1201-premerge-test-20261024.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261024-merge/forge1201-premerge-test-20261024.log",
+      "source_sha256": "7A14A12B653865E087A7CA884FC4E1BE71F988FC30EF2FA00D0050CDC3664039",
+      "backup_sha256": "7A14A12B653865E087A7CA884FC4E1BE71F988FC30EF2FA00D0050CDC3664039",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/build-final-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/build-final-v1.log",
+      "source_sha256": "CD7EC2DD91DD7B4267FE0F204CB7B938CAAA2E7A45EF3B4447CC304ACECCC672",
+      "backup_sha256": "CD7EC2DD91DD7B4267FE0F204CB7B938CAAA2E7A45EF3B4447CC304ACECCC672",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/capture-client-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/capture-client-v1.log",
+      "source_sha256": "2B32F0889B1DB5B09F0DD824883E916B02977A6CEBF8685C17D41508F91A5EDB",
+      "backup_sha256": "0CBAED4AABAAB687CAABB208B32CBF479B9468406C0651AC3F2A289DDFE68A30",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/dependency-manifest.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/dependency-manifest.json",
+      "source_sha256": "B59A140C9C6B5767AADF8DA1ADDCEBC870B3A28D321980B11CFC976F480FE173",
+      "backup_sha256": "3D935DB9122514D356F69B885922F63F6A1343E47AA8634CA0D1DFF949F0BACA",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/doll-server-first-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/doll-server-first-v1.log",
+      "source_sha256": "9FDE9021B893823F5AB629DEACF22DDC4305A90F9F8DD4FA40217DD15A99D313",
+      "backup_sha256": "3E441B7C73E933B9C515C6A212AC678D6892A1F219BEF4F97C728BF69D73173E",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/doll-server-restart-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/doll-server-restart-v1.log",
+      "source_sha256": "A8AC75DD2F44C734EB467772BCCA3A7763D44B4EEBDEB0CC7893772A6BA76703",
+      "backup_sha256": "D4288BF18BB074435B4916BB1D1BD4565AF013E9571A898A38C49BDE072B7096",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/jar-audit-build.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/jar-audit-build.json",
+      "source_sha256": "366F7FAFCD1A9678328D8E46FFC1B1FDAE3B137E95B5F6CC0B0F31DD5BB689A6",
+      "backup_sha256": "1BE3B7CF408A97019EA6566AEC175608339BE2D408BF8CF033F9C5BB10B2518E",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/jar-audit-delivery.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/jar-audit-delivery.json",
+      "source_sha256": "EEB264C8B26E2D0EE5180CFEE1FFB2696D5D9BDE534A78392ACBD7EE9029E8F4",
+      "backup_sha256": "7C9540EFFD451463B8CBBF2D8E51A24E7D811F380DD3A74ACD06CDF7C473C81D",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/manifest.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/manifest.json",
+      "source_sha256": "2476208048C4DD5D788FC426BB80407A23C93F90EABB8F043A286D5A671837F2",
+      "backup_sha256": "2476208048C4DD5D788FC426BB80407A23C93F90EABB8F043A286D5A671837F2",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/merge-ci-status.json",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/merge-ci-status.json",
+      "source_sha256": "A4339AB1B30F5E403350B2CC6451D1F0638AF15AC7A78565E472631ABD0CEAA7",
+      "backup_sha256": "A4339AB1B30F5E403350B2CC6451D1F0638AF15AC7A78565E472631ABD0CEAA7",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/README.md",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/README.md",
+      "source_sha256": "6B051F244633DF5B34A534DE2924BD9F451F2EC52D337BEA427B8F9DC8F4B110",
+      "backup_sha256": "933947AF60AF4CE4142C4B9253550404C18A6DFDCCB4D493E085E23BCA912EAF",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/staff-pack-v1.log",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/staff-pack-v1.log",
+      "source_sha256": "2E615CD0CB8571C22D3617D7C4B86DD81238CDB0541D8AC43FC297E65AE63D89",
+      "backup_sha256": "6043889F683A469EA0D8FF3400E3E97C3AC40149C9F9087CACD74AD7C2B919AB",
+      "redacted": true
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "source_sha256": "0DCF8CD893BCF4D94B633F0FF97F857D2518202687EA43249E82331356C8607C",
+      "backup_sha256": "0DCF8CD893BCF4D94B633F0FF97F857D2518202687EA43249E82331356C8607C",
+      "redacted": false
+    },
+    {
+      "source": "sources/UselessStretcher-1.20.1-review/verification/forge1201-20261025-pr4/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/historical/forge1201-20261025-pr4/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "source_sha256": "589CE5F77747C62D071F1087B3EB0CC1D9B7516CD3350A0BAE174A6D5B2F85B7",
+      "backup_sha256": "589CE5F77747C62D071F1087B3EB0CC1D9B7516CD3350A0BAE174A6D5B2F85B7",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/build-local-cache.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/build-local-cache.log",
+      "source_sha256": "1C9BD128AFA5F410911306B4F866E99459C0D1BFFA7B64A19CA17EF593DC47B7",
+      "backup_sha256": "300F95F21D3EC2BE5BDAD417E324AD32CE0F6A17BD0D4D9C232D8825477C15EB",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/all-checks-build.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/all-checks-build.log",
+      "source_sha256": "E13841EC9819C941D615EC39ED74099B66DFE3F486166D06717DBA05C7570BEB",
+      "backup_sha256": "B59D0BA260E0EA6CDACB3318784EA4D2C52422D737AD942589948D4D4E802A39",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/upstream-server.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/upstream-server.log",
+      "source_sha256": "AD449F833495BE12F56372814246AAE1A3BEE9C7AA09870BC5831DF791DB7BBA",
+      "backup_sha256": "49163AC5FC597D9196202759D5A713B3A9B4FF9A93BF1A8FA58D24CB30FF853E",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/upstream-server-restart.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/upstream-server-restart.log",
+      "source_sha256": "7A9BA2F820A98E9E2AE0481BFF6E94F535E4F40EA5F97B987C4E342123C35113",
+      "backup_sha256": "569F67517BE03025A0D3E3F01E751B05B9FFE2A29FAD8170878540B6DB6F7D1F",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/upstream-client.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/upstream-client.log",
+      "source_sha256": "908EBEE855C81E37E1ECCDEF2F1E5B110FB9072DB7B75E0DBBCFE563A9A8CBCA",
+      "backup_sha256": "7EA6949D5B9796E887376A6E22829BD197004C0E345ED2907C3A36DD7C45DCF7",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/capsule-meteorite-client.log",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/capsule-meteorite-client.log",
+      "source_sha256": "53A307127E49C848AB933DAE5810A4F3B836823D4A7FAC361874C364A977B2F8",
+      "backup_sha256": "6AC6A2A785C8FB8E2D0B86E1D37C1F65FC224E801C60D89832CF340FAAC35B5E",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/capsule-physical-block-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/capsule-physical-block-audit.json",
+      "source_sha256": "FEA0CAE90D48CB3826C3D14311A86101992B3FAB10219C257E322632F4F5CBEE",
+      "backup_sha256": "724E96E18B82692042535BAA080A2C023F29B71AB20AD40BC7DE52F9BC6AB69E",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/inspect_capsule_blocks.py",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/inspect_capsule_blocks.py",
+      "source_sha256": "A0440F3F4E07240B5DF60784B501276C0F0E763069F888DEDE34D39AB08B4EB3",
+      "backup_sha256": "F6D8F36D8661E4C625377AA5C9C00463CB84EE588C5B37E3A6C7ADC675ADD752",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/review-report.md",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/review-report.md",
+      "source_sha256": "2B76006ECF2F621D1FD81346BA2F3D584641064DF27E0472DA085CE22D702F9E",
+      "backup_sha256": "F4408FECE44864EAE73151D6FEA83A86E61B1549AA70D3F4AD6581981C41DD40",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/junit-results.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/junit-results.json",
+      "source_sha256": "F4E1A031DA083EAFD35D0D585EC32006DCDB182D7C9E6BA1695A4A8F128C8337",
+      "backup_sha256": "F4E1A031DA083EAFD35D0D585EC32006DCDB182D7C9E6BA1695A4A8F128C8337",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/release-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/release-audit.json",
+      "source_sha256": "2E6A70D97866E2E5852D2586153297AE58DB943FB412E7C8920FB7038F65DF18",
+      "backup_sha256": "FE27547642E733025237679F5001F71D5A071DA59083C58550B7B6CCBFEA6324",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/all-checks-release-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/all-checks-release-audit.json",
+      "source_sha256": "3B9439AB1BE595FD9C69701BBFD9D9F888B8CCDC43B91D051AC566FE4823B05C",
+      "backup_sha256": "2C5F37A9C1E71BD90DFC62750C3AB5E7F41B9B0B99C461BFBEA8DBB1F4171359",
+      "redacted": true
+    },
+    {
+      "source": "archive/pr-5-review-20261029/resource-validation.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/resource-validation.json",
+      "source_sha256": "AD49947CDD92C8595D0C77A7946F42A55197E59FA9D0EB1DF9D379600D4C6968",
+      "backup_sha256": "AD49947CDD92C8595D0C77A7946F42A55197E59FA9D0EB1DF9D379600D4C6968",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/merge-result.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/merge-result.json",
+      "source_sha256": "E99695A2D9593DD83EB50EEDE35E772AD45991C25AC1A767A80177C6C40526FD",
+      "backup_sha256": "E99695A2D9593DD83EB50EEDE35E772AD45991C25AC1A767A80177C6C40526FD",
+      "redacted": false
+    },
+    {
+      "source": "archive/pr-5-review-20261029/post-merge-checks.json",
+      "backup": "verification/forge1201-maintenance-20261108/pr5/post-merge-checks.json",
+      "source_sha256": "E30040AD562AD2CE7D38783F29DDB029CF1BEEF55DFD031C6460DDE40E638546",
+      "backup_sha256": "9A0DE0F271792544886F50974D576B804A64C480D80D1AA7A3FA1AA475C19C05",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/release-build.log",
+      "backup": "verification/forge1201-maintenance-20261108/release/release-build.log",
+      "source_sha256": "2992EB07E00AF8A6F04D3B4E211454882C5B2710135F8B0BB1A376BA94F11E3D",
+      "backup_sha256": "CBFB021DAAB95D62D1959F4994C40473B011A977703D9AAD46AAE0488237ED12",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/release-tests-fresh.log",
+      "backup": "verification/forge1201-maintenance-20261108/release/release-tests-fresh.log",
+      "source_sha256": "9CDCE1132080EF5532EC8231A0BC68ACB51FA86DE80C3301E7D4CA48FB7FEA61",
+      "backup_sha256": "65EEC24156FB56EA8B3975D68FCCD2AC2D4DCE52038E5CF4513E80C65CB4B337",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/junit-results.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit-results.json",
+      "source_sha256": "F4E1A031DA083EAFD35D0D585EC32006DCDB182D7C9E6BA1695A4A8F128C8337",
+      "backup_sha256": "F4E1A031DA083EAFD35D0D585EC32006DCDB182D7C9E6BA1695A4A8F128C8337",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/build-jar-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/build-jar-audit.json",
+      "source_sha256": "A38E032150A67002A0D5E21D6FD8BFDE5AD57E59F50446B8579112E804BDEB58",
+      "backup_sha256": "3D8F372E03C594B48E81F9A4B2673D5BA887A9BD7DEA9D5C41E2D89308BB2284",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/delivery-jar-audit.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/delivery-jar-audit.json",
+      "source_sha256": "09F023BBB76027D345C2453941F5D0D1199D928CC7AE40CE709BDA6252BAF31C",
+      "backup_sha256": "1C0582626B94403F34573DB756CFA87F2E89D75758D69A9F030592D496C667C7",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/release-manifest.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/release-manifest.json",
+      "source_sha256": "A621670941DF6B5D598137D301014CA5AE968A5F85F0019D44FF317808A35B4A",
+      "backup_sha256": "53D19FEA607B918AE211653A03BDC89B212D5B50A9DF44948048355799CC4DB6",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/previous-reviewed-jar-comparison.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/previous-reviewed-jar-comparison.json",
+      "source_sha256": "9FE7D6CCE72A28C22FF7F467AC2C38DF3947EA2239A8AADC5F5667AC12B22438",
+      "backup_sha256": "8BAC12922F426AA8AB994E8DB20D3421F5AFA2CF75124BD6C62265F626C6983F",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/final-local-state.json",
+      "backup": "verification/forge1201-maintenance-20261108/release/final-local-state.json",
+      "source_sha256": "DF039C05A20ADFA39C977D1324FB8FA5C75041075F486FC84B3CF2CE1DFF5546",
+      "backup_sha256": "DF039C05A20ADFA39C977D1324FB8FA5C75041075F486FC84B3CF2CE1DFF5546",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.config.ConfigurationTranslationsTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.config.ConfigurationTranslationsTest.xml",
+      "source_sha256": "0E26D5696876F4F97EAC781019F693210F510A3D9524BC45DF660FDF7DE28B38",
+      "backup_sha256": "0E26D5696876F4F97EAC781019F693210F510A3D9524BC45DF660FDF7DE28B38",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest.xml",
+      "source_sha256": "091D2441D48AB388BE548541B76FB328E152DDFEAE683F3D228FD440EDE415D6",
+      "backup_sha256": "091D2441D48AB388BE548541B76FB328E152DDFEAE683F3D228FD440EDE415D6",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest.xml",
+      "source_sha256": "D3E3FE967F3706F37B4C9460AC079C347DC952DB419DE67DAAFC9F7C3DB7B978",
+      "backup_sha256": "D3E3FE967F3706F37B4C9460AC079C347DC952DB419DE67DAAFC9F7C3DB7B978",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest.xml",
+      "source_sha256": "5371D31AE40917A0DF986D19616E0160AB0DA08C878EBC82EF9458EFEAA37BF1",
+      "backup_sha256": "5371D31AE40917A0DF986D19616E0160AB0DA08C878EBC82EF9458EFEAA37BF1",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.ForgePortContractTest.xml",
+      "source_sha256": "28A517A5AEBB828648C0B6A7DCFF2D0906AD0987FEFC4C2A5C10BE76BB5611D2",
+      "backup_sha256": "28A517A5AEBB828648C0B6A7DCFF2D0906AD0987FEFC4C2A5C10BE76BB5611D2",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-release-20.1.6.5-20261102/fresh-test-results/TEST-com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest.xml",
+      "backup": "verification/forge1201-maintenance-20261108/release/junit/TEST-com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest.xml",
+      "source_sha256": "EB5AC5600F317B507C729007CE488CBE1084E809B0114642DCBE3CDB4D47EB58",
+      "backup_sha256": "EB5AC5600F317B507C729007CE488CBE1084E809B0114642DCBE3CDB4D47EB58",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-issue3-20261024/issue3.patch",
+      "backup": "verification/forge1201-maintenance-20261108/reproduction/issue3.patch",
+      "source_sha256": "4E9E53B0D891259916C2F13A7AF91C4529ABEC0737BB7FC341017E5AE91CEDF3",
+      "backup_sha256": "CE7DEEEB62983A845BC270830C11082D89067FBB735505923A84590F7C2A8ACB",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-doll-fullport-20261024/doll-main-parity.patch",
+      "backup": "verification/forge1201-maintenance-20261108/reproduction/doll-main-parity.patch",
+      "source_sha256": "E4F91CFBBFEDA06652B668D767CF99ECEE7554D2BDA0AC68E03CF8C837A52143",
+      "backup_sha256": "F012272728BD62D24A20E70008EB90E83113346A9A995225C5B418E6C5F08155",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-doll-fullport-20261024/capture-fixture.py",
+      "backup": "verification/forge1201-maintenance-20261108/reproduction/capture-fixture.py",
+      "source_sha256": "D150F240C010D839591BB526860221F4E34C2A7665E39ADDCC47196707975BE2",
+      "backup_sha256": "F1D7457B3B9939F4BCDA0BBF8C71A150F297F1BAA6BD5BE28DB56577A92CF4A2",
+      "redacted": false
+    },
+    {
+      "source": "archive/forge1201-pr-review-20261025/review-and-fixes.patch",
+      "backup": "verification/forge1201-maintenance-20261108/reproduction/review-and-fixes.patch",
+      "source_sha256": "302F62EFDBD0359A4FD39276CAED32E1CB67FD4DA16AFEDAE42B3C1B9FB5080C",
+      "backup_sha256": "E0ED2D79F2B5994EB460C8CF9E464ECD9FEAAE208E80A06E4DF32E0E0175B56C",
+      "redacted": true
+    },
+    {
+      "source": "archive/forge1201-maintenance-20261108/curseforge-verification.json",
+      "backup": "verification/forge1201-maintenance-20261108/curseforge-verification.json",
+      "source_sha256": "B64217AE2612FA48682A0E24403930345364074603CCDD4FB1F3381F116A58E9",
+      "backup_sha256": "7F4170882B62633EC904E1D65FA07446B5535F97B3F50AA29D835E270E49737B",
+      "redacted": false
+    },
+    {
+      "source": "更新-Forge-1.20.1.txt",
+      "backup": "docs/releases/20.1.6.5/changelog.txt",
+      "source_sha256": "F68C5EC96026CDD915E142E050265F1F4164A13115AC5710BF59327A9343E1DE",
+      "backup_sha256": "B353F24F27FD2BC8C1BC3C2B48B3DE8BF504A16633A29A23008AA171D553E435",
+      "redacted": true
+    },
+    {
+      "source": "万象担架使用说明-Forge-1.20.1.txt",
+      "backup": "docs/releases/20.1.6.5/usage.txt",
+      "source_sha256": "D0902A119AAE34B24BCE38AE2A312D82E43D21222EE18A465BC34AA3507BCE34",
+      "backup_sha256": "983651404C7A79F5AA3D5FCA0C48DF3A220025C4FB2AEFCEA93E4E7A26A3F9EF",
+      "redacted": true
+    },
+    {
+      "source": "release-forge-20.1.6.5.md",
+      "backup": "docs/releases/20.1.6.5/release-notes.md",
+      "source_sha256": "5775295A1690B7F7FC9776294317F368BCF649A7F02A1EAAD532F9EF4A7FD766",
+      "backup_sha256": "80787EB2A25D77EF9E7D65EB45998CF30514C9FD8B981AA917A3FE34111FF0A0",
+      "redacted": false
+    }
+  ]
+}

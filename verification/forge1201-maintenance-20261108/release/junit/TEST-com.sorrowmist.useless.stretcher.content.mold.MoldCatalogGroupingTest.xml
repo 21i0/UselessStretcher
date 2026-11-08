@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-02T08:05:43.613Z" hostname="LAPTOP-D3HPHSTM" time="0.04">
+  <properties/>
+  <testcase name="persistedCacheKeyCarriesAnExplicitDirectoryVersion()" classname="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" time="0.01"/>
+  <testcase name="appMekConvertedMachinesFollowTheirMekanismItemNamespace()" classname="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" time="0.004"/>
+  <testcase name="ae2MachinesFollowTheAe2ItemNamespace()" classname="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" time="0.001"/>
+  <testcase name="oldPersistedCatalogCannotMatchTheVersionedFingerprint()" classname="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" time="0.008"/>
+  <testcase name="unrelatedNamespacesRemainSeparate()" classname="com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

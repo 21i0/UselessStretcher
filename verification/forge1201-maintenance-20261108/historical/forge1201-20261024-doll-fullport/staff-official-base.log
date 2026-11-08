@@ -1,0 +1,1057 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+ע: SpongePowered MIXIN Annotation Processor Version=0.8.5 (MixinGradle Version=0.7)
+ע: Supported obfuscation types: ObfuscationServiceMCP supports [notch] ObfuscationServiceFG3 supports [searge]
+ע: Loading searge mappings from <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\moddev\artifacts\namedToIntermediate.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\MoldMatcherPreparedMoldsMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.recipe.MoldMatcher$PreparedMolds", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollSpawnEggMixin.java:13: ����: Mixin target com.sorrowmist.useless.utils.UselessItemUtils is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.utils.UselessItemUtils", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\TwoIDollUselessKillGuardMixin.java:17: ����: Mixin target com.sorrowmist.useless.content.items.EndlessBeafItem is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.content.items.EndlessBeafItem", remap = false)
+^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessModOptionalJeiMixin.java:12: ����: Mixin target com.sorrowmist.useless.init.ClientSetup is public and should be specified in value
+@Mixin(targets = "com.sorrowmist.useless.init.ClientSetup", remap = false)
+^
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing refmap to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json
+ע: Writing searge composite mappings to <WORKSPACE>\sources\UselessStretcher-1.20.1-review\build\mixin\useless_stretcher.refmap.json.mappings.tsrg
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherClient.java:10: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                                                ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:29: ����: [removal] FMLJavaModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        IEventBus modBus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();
+                                                                                   ^
+<WORKSPACE>\sources\UselessStretcher-1.20.1-review\src\main\java\com\sorrowmist\useless\stretcher\UselessStretcherMod.java:30: ����: [removal] ModLoadingContext �е� get() �ѹ�ʱ, �ұ��Ϊ��ɾ��
+        var modContext=net.minecraftforge.fml.ModLoadingContext.get();
+                                                               ^
+ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+7 ������
+
+> Task :processResources
+> Task :classes
+> Task :downloadAssets UP-TO-DATE
+> Task :writeStaffCompatCheckLegacyClasspath UP-TO-DATE
+> Task :prepareStaffCompatCheckRun UP-TO-DATE
+
+> Task :runStaffCompatCheck
+2026-10-24 13:01:40,422 main WARN Advanced terminal features are not available in this environment
+[13:01:40] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, useless_stretcher.mixins.json, --nogui]
+[13:01:40] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[13:01:40] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\fml.toml is not correct. Correcting
+[13:01:40] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[13:01:40] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[13:01:40] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[13:01:40] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[13:01:40] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[13:01:40] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/<USER_HOME>/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23141!/ Service=ModLauncher Env=SERVER
+[13:01:41] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.10\523aa0cd9a773b2b56268d8689b2fb5c1f072941\fmlcore-1.20.1-47.3.10.jar is missing mods.toml file
+[13:01:41] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.10\7a15037366722893d76a3d0b2e9d1fd13a63a22d\javafmllanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:01:41] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.10\e67d9b3451d64ccc812cbbd33c066bd3ebbf2167\lowcodelanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:01:41] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file <USER_HOME>\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.10\2023f9726a509c5ba5a925cac934944066093de8\mclanguage-1.20.1-47.3.10.jar is missing mods.toml file
+[13:01:41] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras-forge-0.5.0.jar. Using Mod File: <USER_HOME>\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-forge\0.5.0\cebe4d98a42a4a32ebf0ddec7b93d5bdbdad009\mixinextras-forge-0.5.0.jar
+[13:01:41] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[13:01:45] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[13:01:45] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[13:01:45] [main/WARN] [mixin/]: Reference map 'useless_stretcher.refmap.json' for useless_stretcher.mixins.json could not be read. If this is a development environment you can ignore this message
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:46] [main/INFO] [mixin/]: Remapping refMap useless_mod.refmap.json using <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\artifacts\\intermediateToNamed.srg
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor
+[13:01:47] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/block/BlockEntityBotanyPot (java.lang.ClassNotFoundException: net.darkhax.botanypots.block.BlockEntityBotanyPot)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.block.BlockEntityBotanyPot was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: com/enderio/base/common/handler/TravelHandler (java.lang.ClassNotFoundException: com.enderio.base.common.handler.TravelHandler)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target com.enderio.base.common.handler.TravelHandler was not found useless_mod.mixins.json:enderio.EnderIOTravelHandlerMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/base/KineticBlockEntity (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.base.KineticBlockEntity)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.base.KineticBlockEntity was not found useless_mod.create.mixins.json:KineticBlockEntityMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/KineticNetwork (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.KineticNetwork)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target com.simibubi.create.content.kinetics.KineticNetwork was not found useless_mod.create.mixins.json:KineticNetworkMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageProviderMixin
+[13:01:47] [main/WARN] [mixin/]: Error loading class: snownee/jade/addon/universal/ItemStorageProvider (java.lang.ClassNotFoundException: snownee.jade.addon.universal.ItemStorageProvider)
+[13:01:47] [main/WARN] [mixin/]: @Mixin target snownee.jade.addon.universal.ItemStorageProvider was not found useless_mod.jade.mixins.json:JadeItemStorageExtensionMixin
+2026-10-24 13:01:47,647 main WARN Error parsing URI <WORKSPACE>\\sources\\UselessStretcher-1.20.1-review\\build\\moddev\\staffCompatCheckLog4j2.xml
+[13:01:47] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[13:01:55] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.10, for MC 1.20.1 with MCP 20230612.114412
+[13:01:55] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.10 Initialized
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\useless_mod-common.toml is not correct. Correcting
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_advanced_ae_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2cs_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_ae2lt_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_data_energistics_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_extendedae_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.ae.enable_neo_eco_ae_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_barbequesdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_brewinandchewin_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_casualnessdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_crabbersdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_expandeddelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_extradelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_farmersdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_nomadsdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_ubesdelight_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.farmers_delight.enable_youkaishomecoming_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_jdte_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.justdirethings.enable_justdirethings_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_cookery_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_grilling_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.kaleidoscope.enable_kaleidoscope_tavern_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_appmek_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_generators_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_legacy_metallurgic_item_recipe_conversion was corrected from null to its default, false.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.mekanism.enable_mekanism_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_brewing_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_crafting_recipe_conversion was corrected from null to its default, false.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_fishing_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_smelting_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.minecraft.enable_villager_trade_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_actually_additions_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apothic_flux_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_fluxnetworks_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_apotheosis_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_lychee_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_astralsorcery_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ars_nouveau_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_botany_pots_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_exdeorum_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_avaritia_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_bigreactors_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_create_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_draconic_evolution_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ender_io_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_extended_crafting_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_forbidden_arcanus_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_hostilenetworks_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_immersiveengineering_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_thermal_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_blood_magic_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_embers_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_industrial_foregoing_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_irons_spellbooks_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_malum_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_modern_industrialization_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_mystical_agriculture_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_natures_aura_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_neovitae_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_occultism_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_oritech_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_pneumaticcraft_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_powah_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_productive_bees_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_summoningrituals_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_conversion.other.enable_ufo_recipe_conversion was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_capacity was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_capacity was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_capacity was corrected from null to its default, false.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_item_transfer was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_fluid_transfer was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_transfer was corrected from null to its default, true.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.parallel_increase_energy_consumption was corrected from null to its default, false.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key thermal_parallel.base_mod_affect_parallel was corrected from null to its default, false.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\common.toml is not correct. Correcting
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key common was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key common.energyType was corrected from null to its default, FORGE_ENERGY.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key common.temperatureUnit was corrected from null to its default, KELVIN.
+[13:01:57] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key common.enableDecayTimers was corrected from null to its default, true.
+[13:01:57] [modloading-worker-0/INFO] [me.co.Mekanism/]: Version 10.4.15 initializing...
+[13:01:57] [modloading-worker-0/INFO] [me.co.Mekanism/]: Fake player readout: UUID = <UUID>, name = [Mekanism]
+[13:01:57] [modloading-worker-0/INFO] [me.co.Mekanism/]: Mod loaded.
+[13:01:57] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[13:01:59] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13:01:59] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/assets/.mcassetsroot' uses unexpected schema
+[13:01:59] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/moddev/artifacts/forge-1.20.1-47.3.10.jar%23143!/data/.mcassetsroot' uses unexpected schema
+[13:02:00] [main/ERROR] [minecraft/DedicatedServerProperties]: No key layers in MapLike[{}]
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[13:02:00] [main/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[13:02:00] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.4.28
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/accumulation_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lumium_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/invar_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lead_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/netherite_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/complex_link_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/iron_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/nickel_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/nickel_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/shattered_singularity as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/megacells/sky_steel_ingot as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/gold_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/energy_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_alloy_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/quartz_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/netherite_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infused_dust as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/emerald_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lapis_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/electrum_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/tin_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/invar_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/iron_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/omni_link_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/silver_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/ender_ingot as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/lumium_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/enderium_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/signalum_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/signalum_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/omnicells/multidimensional_expansion_processor as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/tin_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/constantan_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/electrum_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/advacedae/quantum_infusion_source as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/enderium_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/sapphire_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/ae2/appflux/redstone_crystal as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/ruby_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/copper_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/bronze_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/constantan_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/diamond_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/bronze_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/gold_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/gear/lead_gear as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/copper_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Skipping loading recipe useless_mod:machine/smelter/thermal/plate/silver_plate as it's serializer returned null
+[13:02:01] [main/INFO] [minecraft/RecipeManager]: Loaded 39 recipes
+[13:02:01] [main/INFO] [minecraft/AdvancementList]: Loaded 1877 advancements
+[13:02:01] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[13:02:01] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[13:02:01] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[13:02:01] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[13:02:02] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25589
+[13:02:02] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using default channel type
+[13:02:02] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[13:02:02] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[13:02:02] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[13:02:02] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\world\serverconfig\jei-server.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key cheat mode was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key cheat mode.enableCheatModeForOp was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key cheat mode.enableCheatModeForCreative was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key cheat mode.enableCheatModeForGive was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\world\serverconfig\useless_stretcher-server.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.staff_acceleration was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.range_acceleration was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.remote_reclaimer was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server_controls.time_stop was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key highlight was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key highlight.highlight_see_through was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration.idle_throttle was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key acceleration.entity_disable_ai was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key summoning was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key summoning.enable was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot_refresh was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot_refresh.enable was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop.enable was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key staff_leaf_drop.probability was corrected from null to its default, 1.0E-5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop.enable was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key doll_leaf_drop.probability was corrected from null to its default, 1.0E-4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key two_i was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key two_i.starfield_invitation was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key recipe_compat was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key recipe_compat.hide_enderio_grinding_balls was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor.enable was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useful_armor.enable_recipes was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\world\serverconfig\forge-server.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file .\world\serverconfig\useless_mod-server.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics.botany_pot_growth_multiplier was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key game_mechanics.matrix_pattern_count was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.pattern_slots was corrected from null to its default, 108.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.mold_slots was corrected from null to its default, 108.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.passive_pattern_slots was corrected from null to its default, 30.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.decode_cache_capacity was corrected from null to its default, 2048.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_threads was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_single_task_parallel was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_energy_divisor was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_1_time_multiplier was corrected from null to its default, 0.5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_threads was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_single_task_parallel was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_energy_divisor was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_2_time_multiplier was corrected from null to its default, 0.25.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_threads was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_single_task_parallel was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_energy_divisor was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_3_time_multiplier was corrected from null to its default, 0.125.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_threads was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_single_task_parallel was corrected from null to its default, 256.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_energy_divisor was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_4_time_multiplier was corrected from null to its default, 0.0625.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_threads was corrected from null to its default, 6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_single_task_parallel was corrected from null to its default, 1024.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_energy_divisor was corrected from null to its default, 32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_5_time_multiplier was corrected from null to its default, 0.03125.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_threads was corrected from null to its default, 7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_single_task_parallel was corrected from null to its default, 4096.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_energy_divisor was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_6_time_multiplier was corrected from null to its default, 0.015625.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_threads was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_single_task_parallel was corrected from null to its default, 16384.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_energy_divisor was corrected from null to its default, 128.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_7_time_multiplier was corrected from null to its default, 0.0078125.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_threads was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_single_task_parallel was corrected from null to its default, 65536.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_energy_divisor was corrected from null to its default, 256.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_8_time_multiplier was corrected from null to its default, 0.00390625.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_threads was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_single_task_parallel was corrected from null to its default, 262144.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_energy_divisor was corrected from null to its default, 512.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.coil_tier_9_time_multiplier was corrected from null to its default, 0.001953125.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_multiblock_alloy_furnace.useful_tier_threads was corrected from null to its default, 11.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_pattern_upload was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key omniversal_pattern_upload.omniversal_pattern_auto_upload was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ore_generator was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ore_generator.ore_generator_slots was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ae2_gift_package was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ae2_gift_package.items was corrected from null to its default, [ae2:creative_energy_cell,1, ae2:fluix_covered_cable,64, ae2:wireless_access_point,1, ae2:wireless_booster,64, ae2:wireless_crafting_terminal,1, ae2:crafting_terminal,1, ae2:item_storage_cell_256k,8, ae2:drive,1].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.custom_potion_effects was corrected from null to its default, [minecraft:saturation,1, minecraft:regeneration,6, minecraft:night_vision,1, minecraft:fire_resistance,1, minecraft:water_breathing,1, minecraft:resistance,6].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_potion_effects was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_flight_effect was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_flight_speed was corrected from null to its default, 0.05.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_x was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_y was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_range_z was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_x was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_y was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_range_z was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_aoe_damage_max_targets was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_kill_aura_interval was corrected from null to its default, 20.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_x was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_y was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_magnet_range_z was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.chain_mining_max_blocks was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.fortune_level was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.looting_level was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.festive_drop_chance was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.enable_grass_wand_drop was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.grass_wand_drop_probability was corrected from null to its default, 1.0E-5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_mining_speed was corrected from null to its default, 10.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_ignores_tool_tier was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_pseudo_hardness was corrected from null to its default, 15.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_entity_interaction_range was corrected from null to its default, 8.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_block_interaction_range was corrected from null to its default, 8.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_short_teleport_range was corrected from null to its default, 24.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_build_limit was corrected from null to its default, 1024.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_angel_limit was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.construction_wand_destruction_limit was corrected from null to its default, 81.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_mining_blacklist was corrected from null to its default, [].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_kill_blacklist was corrected from null to its default, .
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_tool_force_kill_non_living_whitelist was corrected from null to its default, draconicevolution:guardian_crystal.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_capture_strip_keys was corrected from null to its default, [NeoForgeData.Temperature, NeoForgeData.naturesaura:time_alive, NeoForgeData.BalmData, KubeJSPersistentData.senescence, KubeJSPersistentData.isSenescent, KubeJSPersistentData.original_max_health].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key beef_tool.beef_capture_strip_attachment_namespaces was corrected from null to its default, [cold_sweat, malum, blueflame].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension.floor_block_blacklist was corrected from null to its default, [].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key useless_dimension.floor_block_whitelist was corrected from null to its default, [].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink.stafflink_idle_backoff_enabled was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key stafflink.stafflink_idle_backoff_cap was corrected from null to its default, 32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.time_multiplier was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.electricity_multiplier was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.capacity_multiplier was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key mekanism_upgrade.max_upgrade was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.draw_appflux_energy was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.draw_ae_energy was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_batch_ripe_ticks was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_unlimited_bigint_parallelism was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.ae_output_return_budget_millis was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_0_threads was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_1_threads was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_2_threads was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_3_threads was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_4_threads was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_5_threads was corrected from null to its default, 6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_6_threads was corrected from null to its default, 7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_7_threads was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_8_threads was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_9_threads was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.furnace_tier_10_threads was corrected from null to its default, 11.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_parallel was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_0_time_multiplier was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_parallel was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_1_time_multiplier was corrected from null to its default, 0.9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_parallel was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_2_time_multiplier was corrected from null to its default, 0.8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_parallel was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_3_time_multiplier was corrected from null to its default, 0.7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_parallel was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_4_time_multiplier was corrected from null to its default, 0.6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_parallel was corrected from null to its default, 32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_5_time_multiplier was corrected from null to its default, 0.5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_parallel was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_6_time_multiplier was corrected from null to its default, 0.3999999999999999.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_parallel was corrected from null to its default, 128.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_7_time_multiplier was corrected from null to its default, 0.29999999999999993.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_parallel was corrected from null to its default, 256.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_8_time_multiplier was corrected from null to its default, 0.19999999999999996.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_parallel was corrected from null to its default, 512.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_energy_divisor was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.catalyst_tier_9_time_multiplier was corrected from null to its default, 0.1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key advanced_alloy_furnace.recipe_tier_rules was corrected from null to its default, [].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\general.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.logPackets was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.allowChunkloading was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.easyMinerFilters was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.blockDeactivationDelay was corrected from null to its default, 60.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.cardboardModBlacklist was corrected from null to its default, [].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.transmitterAlloyUpgrade was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.maxUpgradeMultiplier was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boilerWaterConductivity was corrected from null to its default, 0.7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.heatPerFuelTick was corrected from null to its default, 400.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.fuelwoodTickMultiplier was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.resistiveHeaterEfficiency was corrected from null to its default, 0.6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.superheatingHeatTransfer was corrected from null to its default, 1.6E7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.maxSolarNeutronActivatorRate was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.dynamic_tank was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.dynamic_tank.fluidPerTank was corrected from null to its default, 350000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.dynamic_tank.chemicalPerTank was corrected from null to its default, 16000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.auto_eject was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.auto_eject.fluid was corrected from null to its default, 1024.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.auto_eject.chemical was corrected from null to its default, 1024.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.auto_eject.dumpExcessKeepRatio was corrected from null to its default, 0.9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled.fluidTanks was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled.gasTanks was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled.infusionTanks was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled.pigmentTanks was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.prefilled.slurryTanks was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.blacklistIC2 was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.euConversionRate was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.blacklistForge was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.feConversionRate was corrected from null to its default, 2.5000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.blacklistFluxNetworks was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.HydrogenEnergyDensity was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.energy_conversion.maxEnergyPerSteam was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.radiationEnabled was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.chunkCheckRadius was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.sourceDecayRate was corrected from null to its default, 0.9995.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.targetDecayRate was corrected from null to its default, 0.9995.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.negativeEffectsMinSeverity was corrected from null to its default, 0.1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.radioactiveWasteBarrelMaxGas was corrected from null to its default, 512000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.radioactiveWasteBarrelProcessTicks was corrected from null to its default, 20.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.radiation.radioactiveWasteBarrelDecayAmount was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.digital_miner was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.digital_miner.silkMultiplier was corrected from null to its default, 12.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.digital_miner.maxRadius was corrected from null to its default, 32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.digital_miner.ticksPerMine was corrected from null to its default, 80.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.laser was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.laser.aestheticWorldDamage was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.laser.range was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.laser.energyNeededPerHardness was corrected from null to its default, 100000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.laser.energyPerDamage was corrected from null to its default, 2500.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.oredictionificator was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.oredictionificator.validItemFilters was corrected from null to its default, [forge:dusts/, forge:ingots/, forge:nuggets/, forge:ores/, forge:raw_materials/, forge:storage_blocks/].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.pump was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.pump.maxPumpRange was corrected from null to its default, 80.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.pump.pumpWaterSources was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.pump.pumpHeavyWaterAmount was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.pump.maxPlenisherNodes was corrected from null to its default, 4000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.quantum_entangloporter was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.quantum_entangloporter.energyBuffer was corrected from null to its default, 256000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.quantum_entangloporter.fluidBuffer was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.quantum_entangloporter.chemicalBuffer was corrected from null to its default, 8192000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.security was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.security.allowProtection was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.security.opsBypassRestrictions was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.nutritional_paste was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.nutritional_paste.saturation was corrected from null to its default, 0.8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.nutritional_paste.mbPerFood was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boiler was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boiler.waterPerTank was corrected from null to its default, 16000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boiler.steamPerTank was corrected from null to its default, 160000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boiler.heatedCoolantPerTank was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.boiler.cooledCoolantPerTank was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.heatDissipation was corrected from null to its default, 0.02.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.tempMultiplier was corrected from null to its default, 0.4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.solarMultiplier was corrected from null to its default, 0.2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.heatCapacity was corrected from null to its default, 100.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.fluidPerTank was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.thermal_evaporation.outputTankCapacity was corrected from null to its default, 10000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sps was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sps.inputPerAntimatter was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sps.outputTankCapacity was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sps.energyPerInput was corrected from null to its default, 1000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\gear.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.energyUsage was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.energyUsageWeapon was corrected from null to its default, 2000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.miningCount was corrected from null to its default, 128.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.slowMode was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.fastMode was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.veinMining was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.minDamage was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.maxDamage was corrected from null to its default, 20.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.attackSpeed was corrected from null to its default, -2.4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.maxEnergy was corrected from null to its default, 1000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.atomic_disassembler.chargeRate was corrected from null to its default, 5000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.configurator was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.configurator.maxEnergy was corrected from null to its default, 60000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.configurator.chargeRate was corrected from null to its default, 300.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.configurator.energyPerConfigure was corrected from null to its default, 400.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.configurator.energyPerItem was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.electric_bow was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.electric_bow.maxEnergy was corrected from null to its default, 120000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.electric_bow.chargeRate was corrected from null to its default, 600.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.electric_bow.energyUsage was corrected from null to its default, 120.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.electric_bow.energyUsageFire was corrected from null to its default, 1200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.energy_tablet was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.energy_tablet.maxEnergy was corrected from null to its default, 1000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.energy_tablet.chargeRate was corrected from null to its default, 5000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.flamethrower was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.flamethrower.maxGas was corrected from null to its default, 24000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.flamethrower.fillRate was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.flamethrower.destroyItems was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.fallEnergyCost was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.fallDamageReductionRatio was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.maxEnergy was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.chargeRate was corrected from null to its default, 320.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.armored was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.armored.armor was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.armored.toughness was corrected from null to its default, 2.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.free_runner.armored.knockbackResistance was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.maxGas was corrected from null to its default, 24000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.fillRate was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.armored was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.armored.armor was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.armored.toughness was corrected from null to its default, 2.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.jetpack.armored.knockbackResistance was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.network_reader was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.network_reader.maxEnergy was corrected from null to its default, 60000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.network_reader.chargeRate was corrected from null to its default, 300.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.network_reader.energyUsage was corrected from null to its default, 400.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.portable_teleporter was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.portable_teleporter.maxEnergy was corrected from null to its default, 1000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.portable_teleporter.chargeRate was corrected from null to its default, 5000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.portable_teleporter.delay was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.scuba_tank was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.scuba_tank.maxGas was corrected from null to its default, 24000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.scuba_tank.fillRate was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.seismic_reader was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.seismic_reader.maxEnergy was corrected from null to its default, 12000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.seismic_reader.chargeRate was corrected from null to its default, 60.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.seismic_reader.energyUsage was corrected from null to its default, 250.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.canteen was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.canteen.maxStorage was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.canteen.transferRate was corrected from null to its default, 128.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsage was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageSilk was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageWeapon was corrected from null to its default, 2000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageTeleport was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.maxTeleportReach was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.baseDamage was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.attackSpeed was corrected from null to its default, -2.4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.baseEfficiency was corrected from null to its default, 4.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.baseEnergyCapacity was corrected from null to its default, 16000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.chargeRate was corrected from null to its default, 100000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageHoe was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageShovel was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageAxe was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.energyUsageShearEntity was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekatool.extendedMining was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.baseEnergyCapacity was corrected from null to its default, 16000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.chargeRate was corrected from null to its default, 100000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.baseJumpEnergyUsage was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.elytraEnergyUsage was corrected from null to its default, 32000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsagePotionTick was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageMagicReduce was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageFall was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageSprintBoost was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageGravitationalModulation was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.inventoryChargeRate was corrected from null to its default, 10000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.solarRechargingRate was corrected from null to its default, 500.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageVisionEnhancement was corrected from null to its default, 500.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageHydrostaticRepulsion was corrected from null to its default, 500.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageNutritionalInjection was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageDamage was corrected from null to its default, 100000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.energyUsageItemAttraction was corrected from null to its default, 250.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.gravitationalVibrations was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.nutritionalMaxStorage was corrected from null to its default, 128000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.nutritionalTransferRate was corrected from null to its default, 256.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.jetpackMaxStorage was corrected from null to its default, 48000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.jetpackTransferRate was corrected from null to its default, 256.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.helmetArmor was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.bodyArmorArmor was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.pantsArmor was corrected from null to its default, 6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.bootsArmor was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.toughness was corrected from null to its default, 3.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.knockbackResistance was corrected from null to its default, 0.10000000149011612.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.damage_absorption was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.damage_absorption.fallDamageReductionRatio was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.damage_absorption.magicDamageReductionRatio was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.damage_absorption.unspecifiedDamageReductionRatio was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key gear.mekasuit.damage_absorption.damageReductionRatio was corrected from null to its default, [minecraft:cactus,1.0, minecraft:cramming,1.0, minecraft:dragon_breath,1.0, minecraft:dry_out,1.0, minecraft:fall,1.0, minecraft:falling_anvil,1.0, minecraft:falling_block,1.0, minecraft:falling_stalactite,1.0, minecraft:fly_into_wall,1.0, minecraft:freeze,1.0, minecraft:generic,1.0, minecraft:hot_floor,1.0, minecraft:in_fire,1.0, minecraft:in_wall,1.0, minecraft:lava,1.0, minecraft:lightning_bolt,1.0, minecraft:on_fire,1.0, minecraft:sonic_boom,0.75, minecraft:stalagmite,1.0, minecraft:sweet_berry_bush,1.0, minecraft:wither,1.0].
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\machine-storage.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.enrichmentChamber was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.osmiumCompressor was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.combiner was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.crusher was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.metallurgicInfuser was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.purificationChamber was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.energizedSmelter was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.digitalMiner was corrected from null to its default, 50000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.electricPump was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chargePad was corrected from null to its default, 2048000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.rotaryCondensentrator was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.oxidationChamber was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chemicalInfuser was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chemicalInjectionChamber was corrected from null to its default, 160000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.electrolyticSeparator was corrected from null to its default, 160000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.precisionSawmill was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chemicalDissolutionChamber was corrected from null to its default, 160000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chemicalWasher was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.chemicalCrystallizer was corrected from null to its default, 160000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.seismicVibrator was corrected from null to its default, 20000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.pressurizedReactionBase was corrected from null to its default, 2000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.fluidicPlenisher was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.laser was corrected from null to its default, 2000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.laserAmplifier was corrected from null to its default, 5000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.laserTractorBeam was corrected from null to its default, 5000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.formulaicAssemblicator was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.teleporter was corrected from null to its default, 5000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.modificationStation was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.isotopicCentrifuge was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.nutritionalLiquifier was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.antiprotonicNucleosynthesizer was corrected from null to its default, 1000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.pigmentExtractor was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.pigmentMixer was corrected from null to its default, 80000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.paintingMachine was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.spsPort was corrected from null to its default, 1000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key storage.dimensionalStabilizer was corrected from null to its default, 40000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\tiers.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.basicStorage was corrected from null to its default, 4000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.basicOutput was corrected from null to its default, 4000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.advancedStorage was corrected from null to its default, 16000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.advancedOutput was corrected from null to its default, 16000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.eliteStorage was corrected from null to its default, 64000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.eliteOutput was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.ultimateStorage was corrected from null to its default, 256000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.ultimateOutput was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.creativeStorage was corrected from null to its default, 18446744073709551615.9999.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.energy_cubes.creativeOutput was corrected from null to its default, 18446744073709551615.9999.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.basicStorage was corrected from null to its default, 32000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.basicOutput was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.advancedStorage was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.advancedOutput was corrected from null to its default, 4000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.eliteStorage was corrected from null to its default, 128000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.eliteOutput was corrected from null to its default, 16000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.ultimateStorage was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.ultimateOutput was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.creativeStorage was corrected from null to its default, 2147483647.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.fluid_tanks.creativeOutput was corrected from null to its default, 1073741823.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.basicStorage was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.basicOutput was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.advancedStorage was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.advancedOutput was corrected from null to its default, 16000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.eliteStorage was corrected from null to its default, 1024000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.eliteOutput was corrected from null to its default, 128000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.ultimateStorage was corrected from null to its default, 8192000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.ultimateOutput was corrected from null to its default, 512000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.creativeStorage was corrected from null to its default, 9223372036854775807.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.chemical_tanks.creativeOutput was corrected from null to its default, 4611686018427387903.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins.basicStorage was corrected from null to its default, 4096.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins.advancedStorage was corrected from null to its default, 8192.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins.eliteStorage was corrected from null to its default, 32768.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins.ultimateStorage was corrected from null to its default, 262144.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.bins.creativeStorage was corrected from null to its default, 2147483647.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.basicStorage was corrected from null to its default, 8000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.advancedStorage was corrected from null to its default, 64000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.eliteStorage was corrected from null to its default, 512000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.ultimateStorage was corrected from null to its default, 4000000000000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.basicOutput was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.advancedOutput was corrected from null to its default, 2048000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.eliteOutput was corrected from null to its default, 16384000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.induction.ultimateOutput was corrected from null to its default, 131072000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.energy was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.energy.basicCapacity was corrected from null to its default, 8000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.energy.advancedCapacity was corrected from null to its default, 128000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.energy.eliteCapacity was corrected from null to its default, 1024000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.energy.ultimateCapacity was corrected from null to its default, 8192000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.basicCapacity was corrected from null to its default, 2000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.basicPullAmount was corrected from null to its default, 250.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.advancedCapacity was corrected from null to its default, 8000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.advancedPullAmount was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.eliteCapacity was corrected from null to its default, 32000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.elitePullAmount was corrected from null to its default, 8000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.ultimateCapacity was corrected from null to its default, 128000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.fluid.ultimatePullAmount was corrected from null to its default, 32000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.basicCapacity was corrected from null to its default, 4000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.basicPullAmount was corrected from null to its default, 750.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.advancedCapacity was corrected from null to its default, 16000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.advancedPullAmount was corrected from null to its default, 2000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.eliteCapacity was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.elitePullAmount was corrected from null to its default, 64000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.ultimateCapacity was corrected from null to its default, 1024000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.chemical.ultimatePullAmount was corrected from null to its default, 256000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.basicPullAmount was corrected from null to its default, 1.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.basicSpeed was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.advancedPullAmount was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.advancedSpeed was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.elitePullAmount was corrected from null to its default, 32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.eliteSpeed was corrected from null to its default, 20.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.ultimatePullAmount was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.items.ultimateSpeed was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.basicInverseConduction was corrected from null to its default, 5.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.basicHeatCapacity was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.basicInsulation was corrected from null to its default, 10.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.advancedInverseConduction was corrected from null to its default, 5.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.advancedHeatCapacity was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.advancedInsulation was corrected from null to its default, 400.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.eliteInverseConduction was corrected from null to its default, 5.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.eliteHeatCapacity was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.eliteInsulation was corrected from null to its default, 8000.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.ultimateInverseConduction was corrected from null to its default, 5.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.ultimateHeatCapacity was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key tier.transmitters.heat.ultimateInsulation was corrected from null to its default, 100000.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\machine-usage.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.enrichmentChamber was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.osmiumCompressor was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.combiner was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.crusher was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.metallurgicInfuser was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.purificationChamber was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.energizedSmelter was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.digitalMiner was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.electricPump was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chargePad was corrected from null to its default, 1024000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.rotaryCondensentrator was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.oxidationChamber was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chemicalInfuser was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chemicalInjectionChamber was corrected from null to its default, 400.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.precisionSawmill was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chemicalDissolutionChamber was corrected from null to its default, 400.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chemicalWasher was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.chemicalCrystallizer was corrected from null to its default, 400.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.seismicVibrator was corrected from null to its default, 50.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.pressurizedReactionBase was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.fluidicPlenisher was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.laser was corrected from null to its default, 10000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.formulaicAssemblicator was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.modificationStation was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.isotopicCentrifuge was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.nutritionalLiquifier was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.antiprotonicNucleosynthesizer was corrected from null to its default, 100000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.pigmentExtractor was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.pigmentMixer was corrected from null to its default, 200.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.paintingMachine was corrected from null to its default, 100.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.dimensionalStabilizer was corrected from null to its default, 5000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.teleporter was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.teleporter.teleporterBase was corrected from null to its default, 1000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.teleporter.teleporterDistance was corrected from null to its default, 10.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key usage.teleporter.teleporterDimensionPenalty was corrected from null to its default, 10000.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file <WORKSPACE>\sources\UselessStretcher-1.20.1-review\run\staff-official-base-check\config\Mekanism\world.toml is not correct. Correcting
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.enableRegeneration was corrected from null to its default, false.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.userWorldGenVersion was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.perChunk was corrected from null to its default, 14.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.maxVeinSize was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.minInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.minInclusive.value was corrected from null to its default, -20.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.maxInclusive.value was corrected from null to its default, 94.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.small.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.perChunk was corrected from null to its default, 12.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.maxVeinSize was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.minInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.minInclusive.value was corrected from null to its default, -32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.maxInclusive.value was corrected from null to its default, 72.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.tin.large.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.perChunk was corrected from null to its default, 65.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.maxVeinSize was corrected from null to its default, 7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.minInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.minInclusive.value was corrected from null to its default, 72.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.maxInclusive.type was corrected from null to its default, BELOW_TOP.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.maxInclusive.value was corrected from null to its default, -24.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.upper.plateau was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.perChunk was corrected from null to its default, 6.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.maxVeinSize was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.minInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.minInclusive.value was corrected from null to its default, -32.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.maxInclusive.value was corrected from null to its default, 56.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.middle.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.perChunk was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.maxVeinSize was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.shape was corrected from null to its default, UNIFORM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.minInclusive.value was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.maxInclusive.value was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.osmium.small.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.perChunk was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.maxVeinSize was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.minInclusive.value was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.maxInclusive.value was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.small.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.perChunk was corrected from null to its default, 7.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.maxVeinSize was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.discardChanceOnAirExposure was corrected from null to its default, 0.75.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.minInclusive.value was corrected from null to its default, -24.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.maxInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.maxInclusive.value was corrected from null to its default, 56.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.uranium.buried.plateau was corrected from null to its default, 16.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.perChunk was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.maxVeinSize was corrected from null to its default, 5.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.discardChanceOnAirExposure was corrected from null to its default, 0.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.shape was corrected from null to its default, UNIFORM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.minInclusive.value was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.maxInclusive.value was corrected from null to its default, 23.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.normal.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.perChunk was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.maxVeinSize was corrected from null to its default, 13.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.discardChanceOnAirExposure was corrected from null to its default, 1.0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.minInclusive.value was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.maxInclusive.value was corrected from null to its default, 4.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.fluorite.buried.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.perChunk was corrected from null to its default, 8.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.maxVeinSize was corrected from null to its default, 9.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.discardChanceOnAirExposure was corrected from null to its default, 0.25.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.shape was corrected from null to its default, TRAPEZOID.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.minInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.minInclusive.type was corrected from null to its default, ABOVE_BOTTOM.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.minInclusive.value was corrected from null to its default, -24.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.maxInclusive was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.maxInclusive.type was corrected from null to its default, ABSOLUTE.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.maxInclusive.value was corrected from null to its default, 64.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.lead.normal.plateau was corrected from null to its default, 0.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt was corrected from null to its default, SimpleCommentedConfig:{}.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt.shouldGenerate was corrected from null to its default, true.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt.perChunk was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt.minRadius was corrected from null to its default, 2.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt.maxRadius was corrected from null to its default, 3.
+[13:02:02] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world_generation.salt.halfHeight was corrected from null to its default, 1.
+[13:02:02] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/overworld <- minecraft:overworld type=ResourceKey[minecraft:dimension_type / minecraft:overworld] minY=-64 height=384
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim <- useless_mod:uselessdim type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim] minY=-64 height=384
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_end <- minecraft:the_end type=ResourceKey[minecraft:dimension_type / minecraft:the_end] minY=0 height=256
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim2 <- useless_mod:uselessdim2 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim2] minY=-64 height=384
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield <- useless_stretcher:two_i_starfield type=ResourceKey[minecraft:dimension_type / useless_stretcher:two_i_starfield] minY=-64 height=384
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/useless_mod/uselessdim3 <- useless_mod:uselessdim3 type=ResourceKey[minecraft:dimension_type / useless_mod:uselessdim3] minY=-64 height=384
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/stretcher_capsule_check/custom_nether <- stretcher_capsule_check:custom_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[13:02:03] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/minecraft/the_nether <- minecraft:the_nether type=ResourceKey[minecraft:dimension_type / minecraft:the_nether] minY=0 height=256
+[13:02:03] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[13:02:03] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:02:03] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:02:04] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 12%
+[13:02:04] [Worker-Main-5/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 69%
+[13:02:04] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 1700 ms
+[13:02:04] [Server thread/INFO] [minecraft/DedicatedServer]: Done (2.642s)! For help, type "help"
+[13:02:04] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[13:02:04] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[13:02:04] [Server thread/INFO] [co.so.us.st.co.ca.CapsuleDimensions/]: CAPSULE ENVIRONMENT useless_stretcher:capsule_mirror/ae2/spatial_storage <- ae2:spatial_storage type=ResourceKey[minecraft:dimension_type / ae2:spatial_storage] minY=0 height=256
+[13:02:05] [Server thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=1479, sources=4, elapsed=611 ms
+[13:02:07] [Server thread/INFO] [co.so.us.st.ca.ForgeStaffCompatChecks/]: FORGE STAFF RADIATION PASSED: disabled control, immediate clear, native manager shielding, 128 pre-effect restored-dose checks, inventory/offhand, NBT and disable
+[13:02:07] [Server thread/INFO] [co.so.us.st.ca.ForgeStaffCompatChecks/]: FORGE STAFF WRENCH TAGS PASSED: nine aliases x off/on/off, staff identity, item NBT, unrelated items
+[13:02:07] [Server thread/INFO] [co.so.us.st.ca.ForgeStaffCompatChecks/]: FORGE STAFF COMPAT CHECKS PASSED: Forge=47.3.10 Mekanism=10.4.15 base=20.2.4.6 survival player, native radiation and nine dynamic wrench aliases
+[13:02:07] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[13:02:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[13:02:07] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[13:02:08] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_end
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim2
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:two_i_starfield
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_mod:uselessdim3
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_nether
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/stretcher_capsule_check:custom_nether
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_overworld
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/overworld
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_end
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim2
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_stretcher/two_i_starfield
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/useless_mod/uselessdim3
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/stretcher_capsule_check/custom_nether
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/minecraft/the_nether
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/ae2:spatial_storage
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/useless_stretcher:capsule_mirror/ae2/spatial_storage
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_end): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_nether): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (capsule_overworld): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (overworld): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_end): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim2): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (two_i_starfield): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (uselessdim3): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (custom_nether): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (the_nether): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[13:02:09] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/sources/UselessStretcher-1.20.1-review/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 40s
+7 actionable tasks: 3 executed, 4 up-to-date

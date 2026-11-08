@@ -1,0 +1,17 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava FROM-CACHE
+> Task :processResources
+> Task :classes
+> Task :jarJar UP-TO-DATE
+> Task :jar UP-TO-DATE
+> Task :reobfJar UP-TO-DATE
+> Task :assemble UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test UP-TO-DATE
+> Task :check UP-TO-DATE
+> Task :build UP-TO-DATE
+
+BUILD SUCCESSFUL in 2s
+8 actionable tasks: 1 executed, 1 from cache, 6 up-to-date

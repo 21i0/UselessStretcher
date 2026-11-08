@@ -1,0 +1,167 @@
+{
+  "world": "source\\run\\capsule-review-client\\saves\\capsule-ui-1793268552585",
+  "rooms": [
+    {
+      "bounds_known": 1,
+      "bedrock_version": 5,
+      "bedrock_cursor": 0,
+      "chunk": 81,
+      "cleanup_version": 2,
+      "generating": 0,
+      "source_dimension": "minecraft:overworld",
+      "slot": 0,
+      "error": "",
+      "attempt": 2,
+      "source_min_y": -64,
+      "bedrock_chunk": 81,
+      "clean_cursor": 0,
+      "source_coordinates": 1,
+      "origin_z": 2000000,
+      "planning_off_thread": 1,
+      "ready": 1,
+      "source_height": 384,
+      "clean_chunk": 121,
+      "dimension": "useless_stretcher:capsule_mirror/minecraft/overworld",
+      "trim_cursor": 0,
+      "preview_cursor": 0,
+      "phase": "ready",
+      "source_biome": "minecraft:plains",
+      "cleanup_entities_removed": 1,
+      "map_cursor": 4096,
+      "source_seed": 2,
+      "source_offset": [
+        -2015216,
+        -5,
+        -1993376
+      ],
+      "completion_notified": 1,
+      "after_placed": 0,
+      "trim_pass": 1,
+      "origin_x": 2000000,
+      "structure": "ae2:meteorite",
+      "terrain_cleaned": 1,
+      "instance_id": 0,
+      "trim_chunk": 121,
+      "piece": 0,
+      "geometry_version": 1,
+      "bounds": [
+        1999936,
+        -63,
+        1999936,
+        2000079,
+        -47,
+        2000079
+      ],
+      "progress": 99,
+      "source_effects": "minecraft:overworld",
+      "relocations": 0,
+      "plan": {
+        "references": 0,
+        "ChunkZ": 125000,
+        "id": "ae2:meteorite",
+        "Children": [
+          {
+            "BB": [
+              1999936,
+              -63,
+              1999936,
+              2000079,
+              -47,
+              2000079
+            ],
+            "p": 0,
+            "r": 2.2496628761291504,
+            "c": 549758845737005001,
+            "t": 4,
+            "f": 1,
+            "id": "minecraft:ae2mtrt",
+            "l": 0,
+            "GD": 0,
+            "O": -1
+          }
+        ],
+        "ChunkX": 125000
+      },
+      "physical_region_directory": "source\\run\\capsule-review-client\\saves\\capsule-ui-1793268552585\\dimensions\\useless_stretcher\\capsule_mirror\\minecraft\\overworld\\region",
+      "examined_chunks": 81,
+      "non_air_counts_room_xz_all_y": {
+        "minecraft:bedrock": 20736,
+        "ae2:sky_stone_block": 62,
+        "ae2:flawless_budding_quartz": 3,
+        "ae2:quartz_block": 2,
+        "ae2:flawed_budding_quartz": 2,
+        "ae2:chipped_budding_quartz": 2,
+        "ae2:large_quartz_bud": 2,
+        "minecraft:grass_block": 2,
+        "ae2:medium_quartz_bud": 1,
+        "ae2:mysterious_cube": 1,
+        "ae2:small_quartz_bud": 1,
+        "minecraft:gravel": 1
+      },
+      "non_air_counts_saved_bounds": {
+        "ae2:sky_stone_block": 62,
+        "ae2:flawless_budding_quartz": 3,
+        "ae2:quartz_block": 2,
+        "ae2:flawed_budding_quartz": 2,
+        "ae2:chipped_budding_quartz": 2,
+        "ae2:large_quartz_bud": 2,
+        "minecraft:grass_block": 2,
+        "ae2:medium_quartz_bud": 1,
+        "ae2:mysterious_cube": 1,
+        "ae2:small_quartz_bud": 1,
+        "minecraft:gravel": 1
+      },
+      "block_entities": [],
+      "special_positions": [
+        {
+          "name": "ae2:flawed_budding_quartz",
+          "x": 2000011,
+          "y": -56,
+          "z": 2000005
+        },
+        {
+          "name": "ae2:flawless_budding_quartz",
+          "x": 2000012,
+          "y": -56,
+          "z": 2000005
+        },
+        {
+          "name": "ae2:flawless_budding_quartz",
+          "x": 2000010,
+          "y": -56,
+          "z": 2000006
+        },
+        {
+          "name": "ae2:chipped_budding_quartz",
+          "x": 2000011,
+          "y": -56,
+          "z": 2000006
+        },
+        {
+          "name": "ae2:flawless_budding_quartz",
+          "x": 2000012,
+          "y": -56,
+          "z": 2000006
+        },
+        {
+          "name": "ae2:chipped_budding_quartz",
+          "x": 2000010,
+          "y": -56,
+          "z": 2000007
+        },
+        {
+          "name": "ae2:flawed_budding_quartz",
+          "x": 2000011,
+          "y": -56,
+          "z": 2000007
+        },
+        {
+          "name": "ae2:mysterious_cube",
+          "x": 2000011,
+          "y": -55,
+          "z": 2000006
+        }
+      ]
+    }
+  ]
+}

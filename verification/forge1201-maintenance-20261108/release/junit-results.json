@@ -1,0 +1,44 @@
+[
+  {
+    "name": "com.sorrowmist.useless.stretcher.config.ConfigurationTranslationsTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "name": "com.sorrowmist.useless.stretcher.content.capsule.CapsuleInstancesTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "name": "com.sorrowmist.useless.stretcher.content.mold.InstalledPatternStoreTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "name": "com.sorrowmist.useless.stretcher.content.mold.MoldCatalogGroupingTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "name": "com.sorrowmist.useless.stretcher.ForgePortContractTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "name": "com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]

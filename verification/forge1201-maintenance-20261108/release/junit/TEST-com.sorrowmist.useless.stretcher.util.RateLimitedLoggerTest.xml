@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-02T08:05:43.662Z" hostname="LAPTOP-D3HPHSTM" time="0.713">
+  <properties/>
+  <testcase name="unrelatedMessagesRemainIndependent()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.069"/>
+  <testcase name="storageCannotEvictAnActiveSuppressionWindow()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.009"/>
+  <testcase name="disabledLogLevelDoesNotConsumeTheFirstDiagnostic()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.55"/>
+  <testcase name="concurrentFailuresOnlyLogOnce()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.023"/>
+  <testcase name="integrationErrorsAcrossPlayersAreThrottledAndKeepTheFirstCause()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.033"/>
+  <testcase name="changingArgumentsDoesNotBypassTheLimitAndTheCauseIsRetained()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.011"/>
+  <testcase name="repeatsAreSuppressedUntilTheIntervalExpires()" classname="com.sorrowmist.useless.stretcher.util.RateLimitedLoggerTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
