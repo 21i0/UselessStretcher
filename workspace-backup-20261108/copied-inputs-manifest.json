@@ -11062,24 +11062,6 @@
       "sha256": "08474ce1f614c621ffda64da445d9fc254fdf55a27a14d33982aa2082b30b93e"
     },
     {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-publication\\runs\\20261106-221156195\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221156195/classpath.txt",
-      "bytes": 19725,
-      "sha256": "c951766706216d6391957e90670d85ae11f1845c44371bce3978af0b54375bbb"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-publication\\runs\\20261106-221333711\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221333711/classpath.txt",
-      "bytes": 19725,
-      "sha256": "9e8a11995dfa299e9fe42a1d304c160d85ef214978a33f4d4c8d63e55f234d76"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-publication\\runs\\20261106-221333711\\source-and-class-hashes.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221333711/source-and-class-hashes.json",
-      "bytes": 3572,
-      "sha256": "c6d27181e3ddf4655d3bbcaa24a07ed3e2fab22de10f4af762d67aa1fcd12c39"
-    },
-    {
       "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-publication\\verification.md",
       "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/verification.md",
       "bytes": 2390,
@@ -14366,168 +14348,6 @@
       "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/run-tests.ps1",
       "bytes": 4717,
       "sha256": "1172dd779adeeffeded05b95d9fda839e52cc8e6f91d44d67fb7a90302a88542"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223256757\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/classpath.txt",
-      "bytes": 19850,
-      "sha256": "ebd0c99c4568a8a81beff31b26fecab35debdb6e3531804cb2b85ae156aa894e"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223256757\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/inputs.json",
-      "bytes": 1059,
-      "sha256": "b72c43e4cfefe931a012ee7920f62c7445b4e4335c963c988f3dea0b6efe5ed9"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223256757\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/result.json",
-      "bytes": 200,
-      "sha256": "44c91f9ca3fa467c77ace6b90f37da2463e9b15259e756f1f91dea5a130392d9"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223558076\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/classpath.txt",
-      "bytes": 19850,
-      "sha256": "36d3e05ea70753e4c699227801344e7095cc08404a295ae92915779ea71245cb"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223558076\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/inputs.json",
-      "bytes": 1059,
-      "sha256": "43653eb91b91874343faec17f89d17f32e624c8848c4fec123661c1a1e96d0cf"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223558076\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/result.json",
-      "bytes": 200,
-      "sha256": "b7fd47dc9df1d359c0d66bf23cfd5109570141f96400588f06969decacd2aa54"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/classpath.txt",
-      "bytes": 19850,
-      "sha256": "8729455015b3883b30023bfd1cc769b1319ea9f28e8fb51ac26bfe34e9cd41d5"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/inputs.json",
-      "bytes": 1059,
-      "sha256": "19291de37e31943be3082989d8a516c2e593e11dff68e26cceabe99fcc8fc1c9"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/result.json",
-      "bytes": 200,
-      "sha256": "1d791f6a2e86066fc6cd1989cf0b01acf43e6b925b8694c777effc5ccc726f3b"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224530203\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/classpath.txt",
-      "bytes": 19980,
-      "sha256": "0bb86af8320cb69b1aceec7c0c10b45193d10724857f7ab143d4f7609543c181"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224530203\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/inputs.json",
-      "bytes": 1169,
-      "sha256": "bfe0fd6b1dec3f98d32a06150ac38afc8b189953ee517e1334338da0cd464750"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224530203\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/result.json",
-      "bytes": 172,
-      "sha256": "6e7a777f328b4f5e37f740fb307b21c1744226163f96d2c5b94178c883edaeb3"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/classpath.txt",
-      "bytes": 19980,
-      "sha256": "59cded766c2468c4152a5067dfbbcdc149268e4520f545fe80d788f885f61644"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/inputs.json",
-      "bytes": 1169,
-      "sha256": "05b01bb69640bad27554ec712f924d8318aecb797ddd0bcfbeed6fce31811f51"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/result.json",
-      "bytes": 172,
-      "sha256": "5a6a0f7e9e5fa2c912ed8d3eef8c53081dc5c1828e520ec044dbe0719a021427"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223415161\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/classpath.txt",
-      "bytes": 19848,
-      "sha256": "d3ed6d75d9ecbcfd14f3e076fa39b9ad36c204242f77fdbea49e9456fbf98a8c"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223415161\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/inputs.json",
-      "bytes": 1602,
-      "sha256": "4a04d62101bee30ecafab5142d6118d433a7ec3896a38e5c6a7f141cf28400ad"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223415161\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/result.json",
-      "bytes": 196,
-      "sha256": "3ca494ed364c00d6a02602e32d9c107f7ca7fb1084c194baff046344330f72b5"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223629359\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/classpath.txt",
-      "bytes": 19848,
-      "sha256": "a27d6ff55ce587bf8d05669ab538f7f9276a5f97c2951a15cbcc37446f160395"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223629359\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/inputs.json",
-      "bytes": 1602,
-      "sha256": "42a8ed9239f620966eb955c579fc0af1287e92dc30e75a5472aa34f6ece4221b"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223629359\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/result.json",
-      "bytes": 196,
-      "sha256": "6bc90428e2bf5df6d02d3b896ca55cfcf370079d2ebc90e9f5d40529f5b939c9"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223853176\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/classpath.txt",
-      "bytes": 19848,
-      "sha256": "5b518fbc1125cdd0b152a921b5d5e3d7dac9f4b48bff09960a54fce59aed561e"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223853176\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/inputs.json",
-      "bytes": 1602,
-      "sha256": "026c094774168da62c0ca70fd3d7443dd8dec14bae02872583f7594bc0a65332"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223853176\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/result.json",
-      "bytes": 196,
-      "sha256": "33d789eb5d6ee6c85abdd5e62c0304f06a1e2e9549af975f22030dfa1b9ed0da"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\classpath.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/classpath.txt",
-      "bytes": 19848,
-      "sha256": "92e32951c92bfa1944848512b30c3d70b2f24c2ca3b734520cef0a57bb597137"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\inputs.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/inputs.json",
-      "bytes": 1602,
-      "sha256": "11d8b61de3221eb7a670824f795137138c008beabf1a14c71c70487fb569bd08"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\result.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/result.json",
-      "bytes": 196,
-      "sha256": "3d2a602f7946906286032d752baea5a722b3f9b725fa5e6bc2341fa0729e726b"
     },
     {
       "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\verification.md",
@@ -18807,5 +18627,37 @@
       "bytes": 12817487,
       "sha256": "9556d497c721ff7227d3a1c160f8dd44572d5982011d09761b88c5da0c334ae7"
     }
+  ],
+  "omitted_git_ignored_generated_evidence": [
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221156195/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221333711/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/runs/20261106-221333711/source-and-class-hashes.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223256757/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223558076/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P2Baseline-20261106-223814672/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224530203/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Previous6EF-20261106-224646036/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223415161/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223629359/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-223853176/result.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/classpath.txt",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/inputs.json",
+    "workspace-backup-20261108/candidates/useless-stretcher-catalog-P3-20261107-a/verification/jei-publication/runs/P3Source-20261106-224715819/result.json"
   ]
 }
