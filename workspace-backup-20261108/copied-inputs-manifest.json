@@ -11050,90 +11050,6 @@
       "sha256": "c165ac1e71f7aef688718fb72a4b4756ccc5f300a09a3de339456d850b797782"
     },
     {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jdte-generated-inspection\\decompiled\\com\\sorrowmist\\useless\\content\\recipe\\adapters\\justdirethings\\jdte\\InfusionRecipeAdapter.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jdte-generated-inspection/decompiled/com/sorrowmist/useless/content/recipe/adapters/justdirethings/jdte/InfusionRecipeAdapter.java",
-      "bytes": 22977,
-      "sha256": "895f21dac18cd72100911230fc4a4787d0e459694af3996fb033aa28fe8395ac"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jdte-generated-inspection\\decompiled\\summary.txt",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jdte-generated-inspection/decompiled/summary.txt",
-      "bytes": 162,
-      "sha256": "98214d9a854df95a2eba771076289e0580635d46e616deca6f1aa90c21779c86"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jdte-generated-inspection\\fluid-types-fixture-check\\README.md",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jdte-generated-inspection/fluid-types-fixture-check/README.md",
-      "bytes": 1646,
-      "sha256": "6c0b8313aec4297fad082861cf61ab64f2f31df9ca69aad28e226ca5113e032c"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\gui\\recipes\\lookups\\IngredientLookupState.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/gui/recipes/lookups/IngredientLookupState.java",
-      "bytes": 5600,
-      "sha256": "ab2715a19194fa161bd672d7a7424e861d483dde311317eeeef80ca4c89499ca"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\gui\\recipes\\lookups\\StaticFocusedRecipes.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/gui/recipes/lookups/StaticFocusedRecipes.java",
-      "bytes": 741,
-      "sha256": "ce7310d356a5a756ab1ae05bc6b83f17806b2d6dcb139bcc8d5af39b29937c97"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\gui\\recipes\\RecipeGuiLogic.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/gui/recipes/RecipeGuiLogic.java",
-      "bytes": 15134,
-      "sha256": "e28c2108b08c3173956c4f9645c5476eaeb40363e78c6a5a91d7539b08a4fcd6"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\gui\\recipes\\RecipesGui.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/gui/recipes/RecipesGui.java",
-      "bytes": 28653,
-      "sha256": "7ebebfb680fde8857d2e75e48c123df814769483ea92a5da1e41ac6616a11a02"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\collect\\RecipeIngredientTable.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/collect/RecipeIngredientTable.java",
-      "bytes": 1496,
-      "sha256": "689dab5defd5efc1da8e216939dc40a806e0104dfe45c3ed7a44c4e470873ef0"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\collect\\RecipeMap.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/collect/RecipeMap.java",
-      "bytes": 6463,
-      "sha256": "6936e2be2b64fae958e22c38a4f94cd2b2d813311fa552da8530867759855d41"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\collect\\RecipeTypeData.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/collect/RecipeTypeData.java",
-      "bytes": 2511,
-      "sha256": "1df22f9a9564fc76e1b518402bb0146cd442de83b74ef49cd85cd1c65f699fa7"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\InternalRecipeManagerPlugin.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/InternalRecipeManagerPlugin.java",
-      "bytes": 3142,
-      "sha256": "8ae3251d41e4acd2b53453dcbad3b8aa94435d377a592673b9c5564ab36a1844"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\PluginManager.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/PluginManager.java",
-      "bytes": 4702,
-      "sha256": "c6e09e4134038ab75dc6c7910e4fc3cbb5277ff7d4923e9093b79c008c89ec6c"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\recipes\\RecipeManagerInternal.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/recipes/RecipeManagerInternal.java",
-      "bytes": 18773,
-      "sha256": "820ba397c83e3658affd37396ac23b9dff1a09626e25980541484b0d66273a45"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-inspection\\decompiled\\mezz\\jei\\library\\util\\IngredientSupplierHelper.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-inspection/decompiled/mezz/jei/library/util/IngredientSupplierHelper.java",
-      "bytes": 1977,
-      "sha256": "d75dd293cb2b879e8fd1aca42c57daf5fa932d67aa8f1921ebcef57f30323049"
-    },
-    {
       "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\jei-publication\\JeiPublicationTestLauncher.java",
       "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-publication/JeiPublicationTestLauncher.java",
       "bytes": 1306,
@@ -11174,42 +11090,6 @@
       "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/jei-semantics.md",
       "bytes": 9671,
       "sha256": "939e687bc449a3cb0b37245fdffcbf615d5b139fb673061a224b02d66c8712a6"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\final-run-hashes.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/final-run-hashes.json",
-      "bytes": 1204,
-      "sha256": "2ff9fa038dcf841df648fa4aab080ac95a5bbac497acc66060e240ec2349695a"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\run-vat-tests.ps1",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/run-vat-tests.ps1",
-      "bytes": 3218,
-      "sha256": "95358bf1b0e10023b5ae483fdabc3cf8c06d3c67decec782e04b66f4cb802703"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\SlicedTestLauncher.java",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/SlicedTestLauncher.java",
-      "bytes": 1229,
-      "sha256": "705ddfbe294e02c592eee7c37bbf1a3b74ddfaa108b29b315f2f5b1fd38ca47d"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\source-hashes.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/source-hashes.json",
-      "bytes": 543,
-      "sha256": "6b657d717904496b3d74cdefa671f9a42806668d687fd985c1f5380d76bf3986"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\vat-abi-class-hashes.json",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/vat-abi-class-hashes.json",
-      "bytes": 1819,
-      "sha256": "80ed0a918af4607b49a7445638ea4cb06a8f7bdb45ad203b5c9f7034e22f3bbc"
-    },
-    {
-      "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\sliced-enderio\\verification.md",
-      "backup": "workspace-backup-20261108/candidates/useless-stretcher-catalog-P2-20261107-a/verification/sliced-enderio/verification.md",
-      "bytes": 5293,
-      "sha256": "2867dbf357776d3ad0e775bc61d46e8c4003f81ec62bf28ba00285aec11a0a6c"
     },
     {
       "source": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\delivery\\P2-freeze-manifest.json",
