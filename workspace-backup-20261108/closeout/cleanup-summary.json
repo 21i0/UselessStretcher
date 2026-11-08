@@ -1,0 +1,16 @@
+{
+  "status": "CLEANUP_COMPLETED",
+  "recorded_at": "2026-11-08T08:17:01.7252282+08:00",
+  "remote_backup_commit": "6b6d9374cda42f5b4cbc957efc9c900ba5b1cec8",
+  "plan_sha256": "E93D588E09E08C38C897287365B5E9856911C528EB62DF34FCA480E2A7E0E3C9",
+  "targets_planned": 368,
+  "targets_removed": 368,
+  "files_removed": 5102,
+  "logical_bytes_removed": 13810244156,
+  "released_single_link_ntfs_allocation_bytes": 13820208552,
+  "drive_d_free_before": 21904060416,
+  "drive_d_free_after": 35724197888,
+  "drive_d_free_delta": 13820137472,
+  "disk_accounting": "Single-link file allocations were queried through FileStandardInfo before deletion and files confirmed absent afterward. Directory metadata not included. Drive delta may include other conversations; do not attribute its full change to this project.",
+  "story_log_preserved": true
+}

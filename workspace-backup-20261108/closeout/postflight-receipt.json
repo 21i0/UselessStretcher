@@ -1,0 +1,98 @@
+{
+  "status": "POSTFLIGHT_PASSED",
+  "source_worktrees": [
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher",
+      "tracked_diff_and_status_unchanged": true
+    },
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants",
+      "tracked_diff_and_status_unchanged": true
+    }
+  ],
+  "protected_paths_checked": 526,
+  "protected_paths_missing": 0,
+  "artifacts": {
+    "latest_candidate": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+      "sha256": "3aeb59b7aad8a2bf50d203bb220192ff45d90d0c50f80f6d8878514249f2f6ef",
+      "bytes": 12817555,
+      "unchanged": true
+    },
+    "latest_frozen_manifest": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\freeze-manifest.json",
+      "sha256": "a9ad4b06fce20bda9fd567177a5aa9dd4b978f654cc0c986b366eb6272703034",
+      "bytes": 4381,
+      "unchanged": true
+    },
+    "published_stable": {
+      "path": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar",
+      "sha256": "00a10f69575b941c6a7545d28b43749362cb02fc9e30288abc271520537b5bfc",
+      "bytes": 12691712,
+      "unchanged": true
+    }
+  },
+  "retained_scoped_directories": [
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher\\build",
+      "files": 37828,
+      "logical_bytes": 6048070982
+    },
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\build",
+      "files": 3127,
+      "logical_bytes": 327260078
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a",
+      "files": 105,
+      "logical_bytes": 17979916
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a",
+      "files": 604,
+      "logical_bytes": 66372551
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a",
+      "files": 1129,
+      "logical_bytes": 71140274
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a",
+      "files": 816,
+      "logical_bytes": 79273726
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P4-20261107-a",
+      "files": 677,
+      "logical_bytes": 48100189
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a",
+      "files": 38,
+      "logical_bytes": 13057852
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a",
+      "files": 45,
+      "logical_bytes": 13263682
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a",
+      "files": 273,
+      "logical_bytes": 22964121
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a",
+      "files": 78,
+      "logical_bytes": 13593938
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a",
+      "files": 530,
+      "logical_bytes": 18342938
+    }
+  ],
+  "notes": "Build roots retain all saves, logs, reports and shared combat/arcana/audio/video material. Directory totals are logical sizes and do not include .git, external Gradle caches or other projects. No game launched."
+}

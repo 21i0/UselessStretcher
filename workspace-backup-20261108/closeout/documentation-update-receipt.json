@@ -1,0 +1,34 @@
+{
+  "updates": [
+    {
+      "path": "D:\\AI\\更新.txt",
+      "sha256": "c01037df8732a01bbcf05042f5025bfc8ef3dcc3321d35adda9655c74c756bec",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    },
+    {
+      "path": "D:\\AI\\万象担架使用说明.txt",
+      "sha256": "8f3ecf0cc7adaa1863a125bb4e871dffa03a93c1071979781132501b5bdd6569",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    },
+    {
+      "path": "D:\\AI\\万象担架-项目交接文档.md",
+      "sha256": "8cc62676f1d0930fecf134813e7d770e68181d245f2b25d11aea7b55f119c1e4",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    },
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\更新.txt",
+      "sha256": "c01037df8732a01bbcf05042f5025bfc8ef3dcc3321d35adda9655c74c756bec",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    },
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\万象担架使用说明.txt",
+      "sha256": "8f3ecf0cc7adaa1863a125bb4e871dffa03a93c1071979781132501b5bdd6569",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    },
+    {
+      "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\万象担架-项目交接文档.md",
+      "sha256": "8cc62676f1d0930fecf134813e7d770e68181d245f2b25d11aea7b55f119c1e4",
+      "change": "Prepended dated closeout status; all previous bytes preserved"
+    }
+  ]
+}
