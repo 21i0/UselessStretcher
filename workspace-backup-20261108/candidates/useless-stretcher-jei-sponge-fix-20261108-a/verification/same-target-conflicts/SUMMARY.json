@@ -1,0 +1,22 @@
+{
+  "source": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods",
+  "targets": [
+    "mezz.jei.library.util.IngredientSupplierHelper",
+    "mezz.jei.library.recipes.RecipeManagerInternal",
+    "mezz.jei.library.recipes.RecipeLookup",
+    "mezz.jei.gui.recipes.RecipesGui",
+    "com.sorrowmist.useless.compat.jei.JEIPlugin"
+  ],
+  "primaryJars": 416,
+  "totalJarsIncludingNested": 596,
+  "classesScanned": 173141,
+  "textEntriesScanned": 216321,
+  "mixinConfigurations": 511,
+  "mixinClasses": 4959,
+  "matchingMixinClasses": 8,
+  "targetReferenceEntries": 62,
+  "coremodAndJsEntries": 27,
+  "errors": 0,
+  "seconds": 17.7743649,
+  "method": "Direct ZIP reads, Gson JSON parsing, ASM class metadata; no mod class loading or launch"
+}

@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "timestampUtc": "2026-11-07T15:23:13.8394470Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970",
+  "full184SuiteRerun": false,
+  "failure": "Duplicate focused main and arguments"
+}

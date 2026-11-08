@@ -1,0 +1,103 @@
+{
+  "status": "FROZEN_FOCUSED_OFFLINE_ABI_AUDIT",
+  "checkedUtc": "2026-11-07T15:23:13.682564+00:00",
+  "candidate": {
+    "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "size": 12817487,
+    "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+  },
+  "baselineHud": {
+    "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+    "size": 12813852,
+    "sha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6"
+  },
+  "evidence": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\FINAL-COMBO-ABI-REPORT.json",
+      "size": 31637,
+      "sha256": "E0FEAACEA05441761E7B0E190A4A7777EA4758618C39C92C05F8A24F484AD9C9"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\FINAL-COMBO-ABI-REPORT.md",
+      "size": 2444,
+      "sha256": "7B8EAE9A505386FBB5C0BBE7CA1BAEB99B6EE6310580E8B83A28020663594FDA"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\UpstreamAbiAudit.java",
+      "size": 14504,
+      "sha256": "6557B929158FB5CFE5916A7E8B55D130B1B22F301708E272FDDBD41173263D96"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\jei-data-type-audit.py",
+      "size": 3605,
+      "sha256": "E7686F3E9E921DAFB267C299020FB44444264C0D88DC1038456BB41AB94D41D1"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\finalize-combo-audit.py",
+      "size": 10573,
+      "sha256": "59180F74BE3168A029DAE9D4E35CF337064DC3DD142AB806CB74469A0F6917B7"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\jdte-generated-slice-hash-audit.json",
+      "size": 307,
+      "sha256": "60D9DADEBF98BB0237D59507E8971320B0437F6D7928B1AC0729BE374DE1F3E3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\vat-sliced-conversion-hash-audit.json",
+      "size": 646,
+      "sha256": "6224B7E9EA8011145BDEAE6C3C1AB557CCA1FB44FE25A41EC7C876B1072EDA84"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\DATA340-PatternProviderMetadata-signatures.txt",
+      "size": 3179,
+      "sha256": "1BF4CD19CCB7A99D6ECEC2B578A30A60D0332372866D5EB80D7B854EA2E3F772"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei-data-type-audit.json",
+      "size": 5090,
+      "sha256": "860FE697DF4C290AC362C90E282B8484B7B4BCF85C5F705CFCD74D841ADC8301"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\native\\reference-audit.tsv",
+      "size": 89854,
+      "sha256": "C02B36C7C19E0E5208ED4DFC0BCC3631EAE88E31E6ABC9B1A49804B6F087AF95"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\native\\method-comparison.tsv",
+      "size": 207954,
+      "sha256": "691D8091D3CF9558A56F0EA387B118FF8223C7C03C91BE115304A28E5EBE779A"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei\\reference-audit.tsv",
+      "size": 4042,
+      "sha256": "1DCCC4DB45E7B25B6012EA553E435B10065001F417DD39F2050755C5565DB340"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei\\method-comparison.tsv",
+      "size": 16353,
+      "sha256": "C2658004A4C5813B0D2D88E8DFC3B9B58FBB29FF5E5E74285CCF72629C4A8A07"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\ae2\\reference-audit.tsv",
+      "size": 52354,
+      "sha256": "6A76F034BFFDFCC8CABFF5E4FAFA1FA4F05463F75D34152849EC97BD6E5CA2BC"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\ae2\\method-comparison.tsv",
+      "size": 21,
+      "sha256": "042D597A982DF6EB66A2FDE8A526FD0BC770C3DD9DA4977A31FF35C88DB6ACB2"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\native\\focused-injection-audit.tsv",
+      "size": 1736,
+      "sha256": "4820E5814EE103F2206647319CEDF4FF97FED6F89AC79F10EF529B4B0CB98BFB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei\\focused-injection-audit.tsv",
+      "size": 1206,
+      "sha256": "36551D6979F915F87BC9F8D14D352ABA20BAF6B64A099A392F00CF43E3EFB2D0"
+    }
+  ],
+  "gameLaunched": false,
+  "modClassesLoaded": false
+}

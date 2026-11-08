@@ -1,0 +1,74 @@
+[
+  {
+    "window": 1,
+    "start": "2026-11-06T02:43:24.707933700Z",
+    "end": "2026-11-06T02:45:31.583235200Z",
+    "elapsed_ms": 126874.7132,
+    "world_count": 0,
+    "gui_count": 0,
+    "gui_p95_ms": null,
+    "gui_max_ms": null,
+    "tick_p95_ms": 68.1518,
+    "tick_max_ms": 863.6821
+  },
+  {
+    "window": 2,
+    "start": "2026-11-06T02:45:31.587573800Z",
+    "end": "2026-11-06T02:46:01.598588800Z",
+    "elapsed_ms": 30011.0902,
+    "world_count": 0,
+    "gui_count": 1282,
+    "gui_p95_ms": 36.9092,
+    "gui_max_ms": 494.245,
+    "tick_p95_ms": 42.703,
+    "tick_max_ms": 113.8424
+  },
+  {
+    "window": 3,
+    "start": "2026-11-06T02:46:01.600093300Z",
+    "end": "2026-11-06T02:46:31.603429500Z",
+    "elapsed_ms": 30003.743,
+    "world_count": 0,
+    "gui_count": 1739,
+    "gui_p95_ms": 27.29,
+    "gui_max_ms": 116.5474,
+    "tick_p95_ms": 23.3215,
+    "tick_max_ms": 91.5336
+  },
+  {
+    "window": 4,
+    "start": "2026-11-06T02:46:31.605427600Z",
+    "end": "2026-11-06T02:47:01.613427Z",
+    "elapsed_ms": 30008.087,
+    "world_count": 0,
+    "gui_count": 1674,
+    "gui_p95_ms": 29.0694,
+    "gui_max_ms": 214.8539,
+    "tick_p95_ms": 32.6481,
+    "tick_max_ms": 215.3185
+  },
+  {
+    "window": 5,
+    "start": "2026-11-06T02:47:01.615438700Z",
+    "end": "2026-11-06T02:47:31.663176300Z",
+    "elapsed_ms": 30047.7982,
+    "world_count": 0,
+    "gui_count": 1507,
+    "gui_p95_ms": 33.5665,
+    "gui_max_ms": 1629.3959,
+    "tick_p95_ms": 33.993,
+    "tick_max_ms": 555.3159
+  },
+  {
+    "window": 6,
+    "start": "2026-11-06T02:47:31.664183500Z",
+    "end": "2026-11-06T02:48:01.710634700Z",
+    "elapsed_ms": 30046.7723,
+    "world_count": 0,
+    "gui_count": 1521,
+    "gui_p95_ms": 35.9376,
+    "gui_max_ms": 175.4881,
+    "tick_p95_ms": 81.8157,
+    "tick_max_ms": 293.755
+  }
+]

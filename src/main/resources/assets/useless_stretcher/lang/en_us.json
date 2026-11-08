@@ -1,4 +1,5 @@
 {
+  "msg.useless_stretcher.library_unavailable": "This pattern library cannot currently be read. Its original data has been preserved unchanged.",
   "gui.useless_stretcher.staff_tabs.machines": "Accelerated targets",
   "gui.useless_stretcher.staff_tabs.main": "General",
   "gui.useless_stretcher.staff_tabs.entity": "Entities",

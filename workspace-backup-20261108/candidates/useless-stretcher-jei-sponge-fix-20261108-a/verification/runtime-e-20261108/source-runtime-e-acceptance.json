@@ -1,0 +1,105 @@
+{
+  "status": "RUNTIME_E_ACCEPTED_EXIT_0",
+  "runtime_id": "runtime-e",
+  "exit_code": 0,
+  "accepted_for_delivery": true,
+  "acceptance_scope": "Internal update candidate smoke checks only; not complete progression or performance acceptance",
+  "recorded_at": "2026-11-07T18:26:58.660444+00:00",
+  "source_candidate": "D:\\AI\\candidates\\MyGenesis-0.3.0-20261107-hotfix5-core-rc7-jei-options",
+  "candidate_manifest_sha256": "91103b8b1a391100be8a646115dbc2d80ea5f69c300db60318dbeb245ad85196",
+  "runtime_game_dir": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client",
+  "production_jars": 414,
+  "test_helpers": false,
+  "max_heap_gib": 8,
+  "core_sha256": "12873d5c024ce339128047457939b1142832fffad53a28debc9ea95db54cb80d",
+  "astral_sha256": "805690dd4184b5b3402c6feddafa34fb4c3e5f789f1b1852ca733580921a6514",
+  "astral_source_inputs_sha256": "3494e6a8e2fec6747a57f486df25d9efeeb7630e48f4edd6f1237aef870739a3",
+  "checks": [
+    {
+      "name": "Production client starts and existing independent test save opens",
+      "status": "PASS"
+    },
+    {
+      "name": "JEI GUI visible and four Utility controls visible; receiver VerifyError absent",
+      "status": "PASS"
+    },
+    {
+      "name": "Chinese centered JEI waiting notice",
+      "status": "PASS",
+      "evidence": "jei-wait-notice-chinese.png"
+    },
+    {
+      "name": "DATA reassembler crystal seed page",
+      "status": "PASS",
+      "observed": "8 data dust + 4 charged certus + 16 sand -> 32 seeds"
+    },
+    {
+      "name": "DATA multiplication card page",
+      "status": "PASS",
+      "observed": "9 item inputs; ninth tooltip is ECO infinite cell component; fluid/resource columns visible. No actual crafting claimed."
+    },
+    {
+      "name": "Coil keyboard U permissions",
+      "status": "PASS",
+      "observed": "T1 1255 pages with visible requirement1; T7 3920 pages with visible requirement7; useful14971 pages including visible requirement10. Page sampling, not exhaustive."
+    },
+    {
+      "name": "Ordinary iron R and T1 coil R acquisition pages",
+      "status": "PASS",
+      "observed": "Normal acquisition pages open; test player has not selected/completed route. No all-route visibility claim."
+    },
+    {
+      "name": "Matching chicken egg restores real production",
+      "status": "PASS",
+      "observed": "Inherited empty-egg paused machine with ME164. Inserted one of8 chicken eggs, backpack7. Native GUI4/s,32AE/t,640FE/t; real ME532 and TotalInserted532, retained egg1. Subsequently retrieved to8."
+    },
+    {
+      "name": "Wrong-source cow egg rejects feather production",
+      "status": "PASS",
+      "observed": "Cow egg1/backpack7, cow meat/leather catalog, selected feather retained, source mismatch status and0/s, matrix unchanged2; real ME remains532. Cow egg returned to8; chicken eggs8. Paused before exit."
+    },
+    {
+      "name": "Normal save and client exit",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "not_tested": [
+    "Utility valid pattern upload to real provider",
+    "Resonance tower real throughput",
+    "Other extractor mobs/full storage/multiplayer edge cases",
+    "New flight/planet landing behavior",
+    "Full survival progression and all quests",
+    "Long-duration 8GiB performance",
+    "Migration of3 upstream-deleted item IDs"
+  ],
+  "known_limits": [
+    "171 third-party latest versions lack complete official catalog evidence; not claimed latest",
+    "Upstream-deleted EAEP entity_speed_ticker/entity_speed_card and neoecoae eco_bulk_item_cell_housing require old-save review",
+    "Existing ECO Chinese GuideME page and Wares old set_nbt loot warnings remain",
+    "JEI publication has observed128ms maximum frame slice; no global smooth-performance claim"
+  ],
+  "evidence_sha256": {
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\jei-wait-notice-chinese.png": "d888fbb9cbd3c36c35790590e0dfb8898964ad1805fb472d7b8120011161d26c",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\data-crystal-seed-jei.png": "4dad9f77eb80b9e38c3b4777ac245da3d6cd3f9cb92a80b241479226884dd310",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\data-multiplication-eco-input.png": "49cffb5eaa85854a12ac8592faab8fffd277b0d024614a0266584b86acb51db4",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-u-initial-page.png": "79ba52126e3de2ea3695c9c08e172f7da689fb1c6eefa49004ddd389669e061a",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-tier1-u.png": "5d00fbe60c25ceca7af15a9f490f98df5600402c4d644165d04ac4689b696642",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-useful-u.png": "5ec9e3ad37a6d4ef9fe472636eb83178b206117caef735433fa6197353951960",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\ordinary-iron-r.png": "0fe166dd55dada987aa1a781419b60c4ad581cae9ad3d3d6b5095f1a14e86443",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-tier1-r.png": "93a1836ac2c5fb6f266db5e36c54e9663ea449c1731320e5a81710c725ec06f0",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-matching-egg-restored.png": "9ef36cf5096dfa690bc7045ceb8104a7e46b09a87413350839f8f3dfc59ce182",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-restored-terminal-me.png": "610a969b5760e05d7db5e055ea980d75e6e00a3e95c1b2662cd6f54502daf5c4",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-rejected.png": "3395d0a3dc919ad4cd3ec9f7de983d11a82a4a1f9d4cdec26ca6756fc6e3f3ce",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-still-zero.png": "3510f67a1a77307f5458265761e8d924cf6fbac1cdd800b3ab40bf5fd5e8c035",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-me-stable-532.png": "f2cc09ab95db43bc1e4a956e7076bb6c9ef414a916b9013de37aaa7e4c6240de",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client\\logs\\latest.log": "0b9dd3def0cd8c10383c854df1548fd7bcba5d0852acc15205a013c33ed79a1b",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client\\launch-evidence\\receipt.json": "04ebee4b36807009b3be8ad1f0d4bc966b89b144afa3f88efb6df9a6814ae2b5",
+    "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\prepared.json": "162daa2ed2c3a0aad0387e57de4949be67ef9477aec7e8d0e70c9d9d26b5d48d"
+  },
+  "intermediate_screenshots_not_acceptance_evidence": [
+    "extractor-restored-me-inventory.png (drive slot only)",
+    "extractor-matching-real-me.png (pause menu)"
+  ],
+  "log_query_caution": "NBT query log returns do not echo queried key names; 532L is paired with observed /data commands and real ME screenshots, never described as JEI search."
+}

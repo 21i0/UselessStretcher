@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-06T22:34:35.1743478Z",
+  "status": "TOOL_SELF_CHECK_PASSED",
+  "gameLaunched": false,
+  "candidateAuditRun": false,
+  "cases": [
+    {
+      "case": "dynamic-7",
+      "passed": true
+    },
+    {
+      "case": "dynamic-101",
+      "passed": true
+    },
+    {
+      "case": "dynamic-137",
+      "passed": true
+    },
+    {
+      "case": "failed-test",
+      "passed": true
+    },
+    {
+      "case": "skipped-test",
+      "passed": true
+    },
+    {
+      "case": "empty-run",
+      "passed": true
+    },
+    {
+      "case": "later-failure",
+      "passed": true
+    },
+    {
+      "case": "truncated-final",
+      "passed": true
+    },
+    {
+      "case": "missing-summary",
+      "passed": true
+    }
+  ]
+}

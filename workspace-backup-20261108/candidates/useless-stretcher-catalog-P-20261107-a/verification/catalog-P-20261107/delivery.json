@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-07",
+  "status": "LOCAL_CANDIDATE_NO_GAME_RUN",
+  "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P1.jar",
+  "sha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+  "bytes": 12737031,
+  "version": "1.21.1-1.6.4-catalog-P1",
+  "tests": {
+    "kind": "Standalone JVM; no client/server/world",
+    "failed": 0,
+    "found": 56,
+    "successful": 56
+  },
+  "staticMixinChecks": 22,
+  "nativeVersions": [
+    "1.21.1-2.4.6",
+    "1.21.1-2.4.6.2"
+  ],
+  "baseline": "Local 1.6.4 snapshot candidate; SavedData format3",
+  "gameStarted": false,
+  "currentPackTouched": false,
+  "detectorIncluded": false,
+  "newPStartupMeasurements": false,
+  "evidence": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\verification\\catalog-P-20261107",
+  "notes": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\delivery\\候选说明.md"
+}

@@ -37,6 +37,12 @@ public final class PatternRepositorySearch {
 
     public static void request(ServerPlayer player, UUID ref, MyriadPatternStore store,
                                Network.PatternPageRequestPayload request, boolean aeBound, boolean trim) {
+        if (!store.isResolved(ref)) {
+            reply(player, request, aeBound, List.of(), "failed", null);
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                    "msg.useless_stretcher.library_unavailable"), true);
+            return;
+        }
         PatternSearchIndex index = store.searchIndex(ref);
         if (index == null) { reply(player, request, aeBound, List.of(), "", null); return; }
         var filter = PatternSearchIndex.Filter.of(request.query(), request.matchingItems(), request.matchingFluids(), request.mode());
@@ -51,6 +57,10 @@ public final class PatternRepositorySearch {
     public static void deduplicate(ServerPlayer player, UUID ref, MyriadPatternStore store,
                                    Network.PatternDeduplicatePayload payload) {
         cancel(player);
+        if (!store.isResolved(ref)) {
+            reply(player, payload.request(), false, List.of(), "failed", null);
+            return;
+        }
         var index = store.searchIndex(ref);
         if (index == null || !index.ready() || index.revision() != payload.revision()) {
             reply(player, payload.request(), false, List.of(), "changed", null);

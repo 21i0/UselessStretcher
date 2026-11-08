@@ -1,0 +1,252 @@
+{
+  "status": "FROZEN_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-06T22:19:31.9007756Z",
+  "gameLaunched": false,
+  "jar": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P2.jar",
+  "size": 12789513,
+  "sha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+  "version": "1.21.1-1.6.4-catalog-P2",
+  "baselineSha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+  "entryCounts": {
+    "baseline": 639,
+    "candidate": 665,
+    "unchanged": 624,
+    "added": 26,
+    "changed": 15,
+    "removed": 0
+  },
+  "tests": {
+    "found": 101,
+    "successful": 101,
+    "failed": 0,
+    "logSha256": "C2765BB3690765647C10B88FB3FB62BDEE9F063E793058D8E8ACC83CF7B1BC3E"
+  },
+  "mixinAbiChecks": 61,
+  "versionGateChecks": 32,
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "sha256": "BF7B3FD6E16B84F375539E2D5306944E60AB74B4A080A6A4B767C4CA3BB77208"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "sha256": "F0ED04282904AFC41A53BCE9CDA3DC200FD6D669CEEBAE948B2B1441C0B493B9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "sha256": "EE366A737AB791E8E3C3A8F169DBF1C3CDDC0D6FD0658E81E601A99BBC455A50"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiTiming.class",
+      "sha256": "A1C7645A6A427095B7C42E37952979626F6B53DAF96611091FF7CD7EFD987B7A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "sha256": "109C8A149EA5A9A828226CEA2C18D13AB4995CF4B9391C9B983EDCABD3D7AAA4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "sha256": "A3936F377422719FEF04A33FF77DBEF072888484321712F7CAC3560C03C728D3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "sha256": "A16E3C720739AA3EB0713E515E4174879C068AE4A47920E62EF365A7FF25014D"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "sha256": "3762420F3091E996D6954718EDEF78F0DA64BD34648774469043E77E305C958B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "sha256": "AD29B60FBAFF4E1982210C3056FB37BB374AD93B7FF8ED41553B1C7C01F244EC"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "sha256": "3D932C92333C6F4BBCC1C71A0D1564FB5DBD1DCCF64C77900AF96A87A33DFD6A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "sha256": "A395D1056B73713FF1C627AD98A82C1A063E3815ADACCA5B036EEFA9C5A58468"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "sha256": "2D5D2FFBCDBD64EF46AD4F85B7EA9BD0807F608340C1994586C117E53C530C6B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "sha256": "CCB62381544F157C2AF1E5D642BA80F861F352E0FD7E2F96C11BE8F704F89927"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "sha256": "BB6BEA8028380384F8D485E9E9A4A0E02F4B6DE9350438E1053B6B083B464B99"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "sha256": "E3B46E640BC1FB32022FB871D2AF84A2E7A13180F216F853E0F0019EE2BBFEFD"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork.class",
+      "sha256": "258A529E253A88FBC009EA1F3C559731B52C85485FD09DAD7B3AD32E03EC5416"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork$Key.class",
+      "sha256": "C88C815C945E357FDCEE7B7B4B10AD11A45734D4B519A7E6B2DA73C0942738C4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSyncGate.class",
+      "sha256": "74346FEA4ACCEEFBD71F77A915D4D5E8F58976B3A35250EFB1B9A1F700244E7F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence.class",
+      "sha256": "78A3C15F9C825FB3EB1FF911C08A2987AA26CCCFEF4E8A87F0AAA2C2C2D0CB2C"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Accumulator.class",
+      "sha256": "E47F3A8AE4971B0ABBD67FFCC674DD70ADB1EEE5D360175F8B84FD1601BD090B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Completed.class",
+      "sha256": "A88174D7188875B3819B660C16377333458BF1C4FD1482662553BBDF56B0AC87"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Digest.class",
+      "sha256": "9C9C242040C4A650D61DAD398ADF38A9B28F64D6AFC0D6F52A317E76E509ADEB"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$SourceSummary.class",
+      "sha256": "8D359A3D364BF60F5DCCE9F92C0D4393EC6084C1260EF55C97F18BC242B5AC05"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Summary.class",
+      "sha256": "E19A30EB8F12750A2A6BBFFD15C8B9304D9CFDBC0D8692D091727D632167B402"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Tuple.class",
+      "sha256": "C80B5F7DFD2035BB0695FF570A93462A397834310B5815F0254029758AE1BB56"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices.class",
+      "sha256": "636AC69B92ECA8A0B3D0D60DAF1D219B707A37997D5B70B40E4E791028EE07AE"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$1.class",
+      "sha256": "44A5B08365E66C090A9C57A52FDD26233B1CFAB4E681BD7A8A669B4B0349B89B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Cursor.class",
+      "sha256": "9060D5DB166E8674116ED817E7B04AD92B05C191A1F8F50AB5C6721968342A61"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$JdteAbi.class",
+      "sha256": "F03A766AE106A18DB2369F73DFFA2312E0F2427E0E0333CA8B15EEE1BB505479"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Phase.class",
+      "sha256": "7A039DB8FB8B0EF9CB55608662335CB296DBA7AD0A50A07582768FE4E5EA55C3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeCatalogAccess.class",
+      "sha256": "7B7CC9433A71EFBBDB77D78F9C32A91A6378C6B342A58839063800B4D1C074ED"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication.class",
+      "sha256": "2369FAC486E158ADD1952BD4841404B59E6C3951AAF4491515A68F4770AB8E1C"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Phase.class",
+      "sha256": "76A6FC83A5C34B678D4D25F41C5C86F4EB87CA78AD6A15120B3573A8CC317D1A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Sink.class",
+      "sha256": "3836169030A0E7BF9E235F4FB6D4B5EBACFE01071F0B0C4FB7B6FD1CDA75BD8F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions.class",
+      "sha256": "A73EE093624CCA244515104022E58A2D4F4E0B03CD4E0E28FC300E09FB4AF8C7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Cursor.class",
+      "sha256": "0F8F9A488FB86C0A877CC7FF8E12B8D8023DAE6AF641D0B7470BB2167DACE89A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$DistinctStacks.class",
+      "sha256": "974183E4022201BDDA8E72239D87734D9E4BC2CAAAD9726CBFD53BB0C7C5AC4F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$StackKey.class",
+      "sha256": "CDE250C4676FB6A1D89C057AFA9836A40B1F03EE911EBB8E2A3CEF459A67D5B4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Stage.class",
+      "sha256": "025673ABB3A90B8E1F8169049F02E046FE7EECBF70861BFDA249F0E3360E20F3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$VatCursor.class",
+      "sha256": "ABF8947FD5570841578834202FD8E02D18A146812761BD2A5207FE085C3905F7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/event/BudgetedCatalogEvents.class",
+      "sha256": "5A880701D2E2F0B3A2CDAB3E9C4B5A87AE34FE7D8BBC57A204DBB6B3512D3F68"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/BudgetedClientCatalogMixin.class",
+      "sha256": "079825767F5A47254B11330515B9BBBA3D3115E0379856C4070FC240C37D822E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/BudgetedRecipeCatalogMixin.class",
+      "sha256": "C290956AB5F02275FB62E10AA4DEC6A7BB4D71AB9148460D6C4D2F14C4B68D1B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class",
+      "sha256": "CC359528D756C2C7F8644ED3E83826F7CD15012A9CF365D83C778452A78A3886"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class",
+      "sha256": "50D7E833FA409E81FCAAEBA8A6233CA35018BB704F0FE3C218A0D4598FC240B7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+      "sha256": "AE2F0BD6D9BF752575EF777CDC25E1B5D6BD7A03291083E699719B1C487C1612"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "sha256": "15751AA913EB05A0DEEED834BC90FED14B969F786E9A09E5CA08CD64DABB5665"
+    }
+  ],
+  "protectedUuidSnapshotClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledPatternHost.class",
+      "sha256": "E1EBD190367CA1C68B20DC4CEBA6CD495EE778F8EC815249203236E6C5778985",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.class",
+      "sha256": "3B1473815A177A593035E0ECF4E7B322D12788429B271AAA9DC29401D496B1ED",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Library.class",
+      "sha256": "2008C43481AC759EC54929F8B708896571BE003CC9C59DECC43C998A5F56C072",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Rewrite.class",
+      "sha256": "E8DB1E6D2666A516B1CF39DE8149D7EED0B5C594DFC30C0AE7A05D7051579BCE",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore.class",
+      "sha256": "38A3204AB8CCF71F028098F5EDFF7912249AC07425E119D4CBEDD0BB35208637",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherAssemblyMixin.class",
+      "sha256": "DDB386DEAD1C341DFA9B69BABBE6B64EAC214768BA9E99AB70DA8A0DCB541036",
+      "unchanged": true
+    }
+  ],
+  "performancePassed": false,
+  "rFullTupleOracleAvailable": false,
+  "pending": "S modpack wall-clock / maximum callback / final JEI / same-input full tuple validation",
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\audit-runs\\20261106-221658679\\audit-patch-report.json"
+}

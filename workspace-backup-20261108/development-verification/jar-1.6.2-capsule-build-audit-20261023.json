@@ -1,0 +1,23 @@
+{
+  "result": "JAR CHECKS PASSED",
+  "jar": "D:\\AI\\sources\\UselessStretcher\\build\\libs\\useless_stretcher-1.21.1-1.6.2.jar",
+  "version": "1.21.1-1.6.2",
+  "network_protocol": 22,
+  "guide_pages_without_hidden_armor": 9,
+  "minimum_useless_mod": "1.21.1-2.4.6",
+  "animated_armor_items": 4,
+  "armor_hidden_from_recipe_viewers": 4,
+  "bytes": 12602932,
+  "sha256": "B2668B6F1D817F9B64976C4276D132AB1A03BF3D53FB34265B7EB7331A8FE17F",
+  "production_sources_with_matching_class": 260,
+  "production_classes_with_matching_bytecode": 448,
+  "source_resources_with_matching_hash": 137,
+  "json_mcmeta_parsed": 86,
+  "story_chapters": 6,
+  "story_images": 17,
+  "original_ogg_files": 7,
+  "forbidden_entries": 0,
+  "artist_skin_sha256": "597DBE84E55288118666187E127167F30686E426D3C0693B398AA63EA6B4E44D",
+  "old_skin_png_matches": 0,
+  "tail_geometry_texture_and_attribution": true
+}

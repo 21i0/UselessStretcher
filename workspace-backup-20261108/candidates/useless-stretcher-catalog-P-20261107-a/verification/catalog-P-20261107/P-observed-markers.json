@@ -1,0 +1,34 @@
+[
+  {
+    "line": 5482,
+    "text": "[03:33:06] [Server thread/WARN] [io.gi.qi.ae.bl.DetectorProgressRecoveryStore/]: Failed to access detector progress SavedData for net.minecraft.client.server.IntegratedServer@1747e355; retaining progress in the server fallback queue"
+  },
+  {
+    "line": 5907,
+    "text": "[03:33:31] [Server thread/INFO] [co.tw.ch.co.BoundedRecipeFingerprintWork/]: MyGenesis bounded recipe fingerprints: entries=161939, workers=2, elapsed=4921 ms, heap_before_mib=3545, heap_after_mib=4498, caller=Server thread"
+  },
+  {
+    "line": 5908,
+    "text": "[03:33:32] [Server thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=161939, sources=39, elapsed=14528 ms"
+  },
+  {
+    "line": 6320,
+    "text": "[03:33:50] [Render thread/INFO] [co.tw.ch.co.BoundedRecipeFingerprintWork/]: MyGenesis bounded recipe fingerprints: entries=25009, workers=2, elapsed=1011 ms, heap_before_mib=5666, heap_after_mib=3455, caller=Render thread"
+  },
+  {
+    "line": 6322,
+    "text": "[03:33:50] [Render thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=1, recipes=25009, sources=20, elapsed=7311 ms"
+  },
+  {
+    "line": 8444,
+    "text": "[03:35:00] [Render thread/INFO] [co.tw.ch.co.BoundedRecipeFingerprintWork/]: MyGenesis bounded recipe fingerprints: entries=162363, workers=2, elapsed=7167 ms, heap_before_mib=4897, heap_after_mib=4735, caller=Render thread"
+  },
+  {
+    "line": 8445,
+    "text": "[03:35:02] [Render thread/INFO] [co.so.us.co.re.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=2, recipes=162363, sources=39, elapsed=10820 ms"
+  },
+  {
+    "line": 8450,
+    "text": "[03:35:27] [Render thread/INFO] [co.tw.ch.cl.RouteRecipeJeiPlugin/]: PERSONAL JEI RECIPES APPLIED route=1 confluence=false hidden=29 restored=0 categories=2 update=1"
+  }
+]

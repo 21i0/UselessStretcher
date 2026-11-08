@@ -1,0 +1,12 @@
+{
+  "utc": "2026-11-06T21:49:04.6649461Z",
+  "left": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\corrupt.tsv",
+  "right": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-0.tsv",
+  "status": "INVALID_EVIDENCE",
+  "orderCompared": false,
+  "firstDifference": null,
+  "sourceDifferences": [],
+  "errors": [
+    "Out-of-order tuple index at 0 in D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\corrupt.tsv"
+  ]
+}

@@ -1,0 +1,57 @@
+modLoader="javafml" #mandatory
+loaderVersion = "[2,)"
+license="LGPL-3.0 license"
+
+[[mods]] #mandatory
+modId="mbd2" #mandatory
+version="21.1.2" #mandatory
+displayName="Multiblocked2" #mandatory
+authors="KilaBash" #optional
+description="Multiblocked2 is a mod that allows you to create multiblocks in Minecraft."
+logoFile = "icon.png"
+displayURL = "https://github.com/Low-Drag-MC/Multiblocked2"
+issueTrackerURL = "https://github.com/Low-Drag-MC/Multiblocked2/issues"
+
+[[mixins]]
+config="mbd2.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.mbd2]] #optional
+    modId="neoforge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[21.1.217,)" #mandatory
+    ordering="NONE"
+    side="BOTH"# Here's another dependency
+
+[[dependencies.mbd2]]
+    modId="minecraft"
+    type = "required"
+    versionRange="[1.21,1.22)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mbd2]]
+    modId="ldlib2"
+    type = "required"
+    versionRange="[2.2.39.a,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mbd2]]
+    modId="kilagraph"
+    type = "required"
+    versionRange="[21.1.0.12,)"
+    ordering="NONE"
+    side="BOTH"
+
+# Optional: machine FX. The range is not cosmetic — MBD2's editor preview constructs a
+# PhotonParticleManager(FXSceneOptions), which only exists from 2.2.5 on. Without the bound an older
+# Photon would load happily and then blow up with NoSuchMethodError the first time the FX view opens.
+[[dependencies.mbd2]]
+    modId="photon"
+    type = "optional"
+    versionRange="[2.2.5,)"
+    ordering="NONE"
+    side="BOTH"

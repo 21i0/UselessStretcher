@@ -1,0 +1,47 @@
+{
+  "baselineSha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+  "candidateSha256": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+  "entryCounts": {
+    "baseline": 665,
+    "candidate": 667,
+    "unchanged": 661,
+    "added": 2,
+    "changed": 4,
+    "removed": 0
+  },
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+      "size": 552,
+      "sha256": "89CA314A8BED2C4D1BDB8246D8474B6033273725CA8EFF95F3B38BE039CA57C9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+      "size": 1975,
+      "sha256": "3BED04AABE831DBD7418AD8E38CA6EB82E57C1620D9DDF26F00D8FD229890455"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "oldSha256": "BF7B3FD6E16B84F375539E2D5306944E60AB74B4A080A6A4B767C4CA3BB77208",
+      "sha256": "6AFA6EF41769F06725B6B62F3E3252F45C8955D972EBFB65F1FE39BC8A7C692E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "oldSha256": "F0ED04282904AFC41A53BCE9CDA3DC200FD6D669CEEBAE948B2B1441C0B493B9",
+      "sha256": "D4006CCAD4C15FE9DFD399BC6E888153158D39C1A71A44AD8B3D3059BB1C08FA"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "oldSha256": "EE366A737AB791E8E3C3A8F169DBF1C3CDDC0D6FD0658E81E601A99BBC455A50",
+      "sha256": "91DC57FA2ADB67D82A87DD6D763630145975B662A0B6CD708891CEB522944E68"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "135372C8D3F7B2BC163D305B8D2434515B388C9CE11CC4DBABEB112C8BF515A7",
+      "sha256": "74EB225E1A8DF8F22614865AE4EFB6A3040B6DF4B1D7A04E5F45C6685798EA5C"
+    }
+  ],
+  "removed": []
+}

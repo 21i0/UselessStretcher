@@ -1,0 +1,17 @@
+import java.util.*;import java.util.zip.*;import org.objectweb.asm.*;import org.objectweb.asm.tree.*;
+public final class JeiLocalizationAudit {
+  static final String ROOT="com/sorrowmist/useless/stretcher/client/";
+  static void require(boolean p,String m){if(!p)throw new IllegalStateException(m);}
+  static ClassNode read(String jar,String name)throws Exception{try(ZipFile z=new ZipFile(jar)){var e=z.getEntry(ROOT+name+".class");require(e!=null,"missing "+name);var n=new ClassNode();try(var in=z.getInputStream(e)){new ClassReader(in).accept(n,0);}return n;}}
+  static byte[] noDebug(ClassNode n){n.sourceFile=null;n.sourceDebug=null;for(var m:n.methods){m.localVariables=null;for(var i:m.instructions.toArray())if(i instanceof LineNumberNode)m.instructions.remove(i);}var w=new ClassWriter(0);n.accept(w);return w.toByteArray();}
+  static MethodNode method(ClassNode c,String name,String desc){var ms=c.methods.stream().filter(m->m.name.equals(name)&&m.desc.equals(desc)).toList();require(ms.size()==1,"unique method missing "+name+desc);return ms.get(0);}
+  static void publicStatic(MethodNode m){require((m.access&(Opcodes.ACC_PUBLIC|Opcodes.ACC_STATIC))==(Opcodes.ACC_PUBLIC|Opcodes.ACC_STATIC),"public static ABI changed");}
+  public static void main(String[] a)throws Exception{
+    var publication=read(a[0],"CatalogJeiPublication");publicStatic(method(publication,"progress","()Ljava/lang/String;"));publicStatic(method(publication,"progressComponent","()Lnet/minecraft/network/chat/Component;"));
+    var accessor=method(publication,"progressComponent","()Lnet/minecraft/network/chat/Component;");int copies=0;for(var n:accessor.instructions)if(n instanceof MethodInsnNode m&&m.name.equals("copy")&&m.desc.equals("()Lnet/minecraft/network/chat/MutableComponent;"))copies++;require(copies==1,"Component accessor must return one detached copy");
+    var lifecycle=read(a[0],"ClientCatalogLifecycle");var hud=method(lifecycle,"progress","(Lnet/neoforged/neoforge/client/event/RenderGuiEvent$Post;)V");int localized=0;
+    for(var n:hud.instructions)if(n instanceof MethodInsnNode m){if(m.owner.equals(ROOT+"CatalogJeiPublication")){require(!m.name.equals("progress"),"HUD still reads diagnostic String");if(m.name.equals("progressComponent")){require(m.desc.equals("()Lnet/minecraft/network/chat/Component;"),"localized call ABI changed");localized++;}}require(!(m.owner.equals("net/minecraft/network/chat/Component")&&m.name.equals("literal")),"HUD still wraps raw literal status");}require(localized==1,"HUD must read localized Component exactly once");
+    System.out.println("progress()String and progressComponent()Component ABI\tPASS");System.out.println("Component detached-copy accessor\tPASS");System.out.println("HUD uses localized Component, no diagnostic literal\tPASS");
+    for(int i=2;i<a.length;i++){String member=a[i];require(member.startsWith(ROOT)&&member.endsWith(".class"),"bad inner member");String name=member.substring(ROOT.length(),member.length()-6);require(Arrays.equals(noDebug(read(a[0],name)),noDebug(read(a[1],name))),"Inner changed beyond SourceFile/SourceDebug/LineNumber/local-variable debug tables: "+member);System.out.println(member+"\tdebug-only normalized class equality\tPASS");}
+  }
+}

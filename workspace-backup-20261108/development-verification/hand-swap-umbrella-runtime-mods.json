@@ -1,0 +1,162 @@
+{
+  "regression-server": [
+    {
+      "file": "appliedenergistics2-19.2.17.jar",
+      "sha256": "460d779a0609b81409907d9956de8f6f70a1b0912257e3e5c3c7e75ac9630e95",
+      "metadata_versions": [
+        "19.2.17"
+      ],
+      "implementation_version": []
+    },
+    {
+      "file": "ars_nouveau-1.21.1-5.13.3.jar",
+      "sha256": "45c1b6022d8e63464177c1f822bda22c3d6fb66970857fd7677e4e3ccffd259f",
+      "metadata_versions": [
+        "${file.jarVersion}"
+      ],
+      "implementation_version": [
+        "5.13.3\r"
+      ]
+    },
+    {
+      "file": "curios-neoforge-9.5.1+1.21.1.jar",
+      "sha256": "a45df2125c26219974aba7507ffc9afe7b83acc941a386af3faacb1cc0056fde",
+      "metadata_versions": [
+        "9.5.1+1.21.1"
+      ],
+      "implementation_version": [
+        "9.5.1+1.21.1\r"
+      ]
+    },
+    {
+      "file": "ender-io-8.2.11-beta.jar",
+      "sha256": "e01af48907781f2d5ccdfa8d71975b611c33f295be11b7021cb91be06ce8070c",
+      "metadata_versions": [
+        "8.2.11-beta"
+      ],
+      "implementation_version": [
+        "8.2.11-beta\r"
+      ]
+    },
+    {
+      "file": "geckolib-neoforge-1.21.1-4.9.3.jar",
+      "sha256": "20a1995e4074f387ff549e2c57ea79dd7d41ee83c6afb9dd6a6e840e592d1c47",
+      "metadata_versions": [
+        "4.9.3"
+      ],
+      "implementation_version": [
+        "4.9.3\r"
+      ]
+    },
+    {
+      "file": "guideme-21.1.17.jar",
+      "sha256": "f66fdc86eecc21bbbfb1e41eaf437de4d175885dc65e0de8c8fc8862e6811d95",
+      "metadata_versions": [
+        "21.1.17"
+      ],
+      "implementation_version": [
+        "21.1.17\r"
+      ]
+    },
+    {
+      "file": "manaitaplus-legacy-0.1.0.jar",
+      "sha256": "de54cd8f60be82153b2bce11c92aa6539615cba7384e1f010920aedef18194d8",
+      "metadata_versions": [
+        "0.1.0"
+      ],
+      "implementation_version": []
+    },
+    {
+      "file": "Patchouli-1.21.1-93-NEOFORGE.jar",
+      "sha256": "959af52ed6640c316c3a8469203420be4aeea11ad6603890ba83bf48f5d9f993",
+      "metadata_versions": [
+        "${file.jarVersion}"
+      ],
+      "implementation_version": [
+        "1.21.1-93-NEOFORGE\r"
+      ]
+    },
+    {
+      "file": "productivebees-1.21.1-13.13.0.jar",
+      "sha256": "4bc29d101f2cabdb7ea8a6df610417320d26650869391b7caf0fc287887296a4",
+      "metadata_versions": [
+        "1.21.1-13.13.0"
+      ],
+      "implementation_version": []
+    },
+    {
+      "file": "useless_mod-latest.jar",
+      "sha256": "cbc4b8c232607126286b704a9141e3327fe01fdc4d26f5ed75c10c0193555910",
+      "metadata_versions": [
+        "1.21.1-2.4.5.11"
+      ],
+      "implementation_version": []
+    }
+  ],
+  "story-client": [
+    {
+      "file": "appliedenergistics2-19.2.17.jar",
+      "sha256": "460d779a0609b81409907d9956de8f6f70a1b0912257e3e5c3c7e75ac9630e95",
+      "metadata_versions": [
+        "19.2.17"
+      ],
+      "implementation_version": []
+    },
+    {
+      "file": "ender-io-8.2.11-beta.jar",
+      "sha256": "e01af48907781f2d5ccdfa8d71975b611c33f295be11b7021cb91be06ce8070c",
+      "metadata_versions": [
+        "8.2.11-beta"
+      ],
+      "implementation_version": [
+        "8.2.11-beta\r"
+      ]
+    },
+    {
+      "file": "guideme-21.1.17.jar",
+      "sha256": "f66fdc86eecc21bbbfb1e41eaf437de4d175885dc65e0de8c8fc8862e6811d95",
+      "metadata_versions": [
+        "21.1.17"
+      ],
+      "implementation_version": [
+        "21.1.17\r"
+      ]
+    },
+    {
+      "file": "manaitaplus-legacy-0.1.0.jar",
+      "sha256": "de54cd8f60be82153b2bce11c92aa6539615cba7384e1f010920aedef18194d8",
+      "metadata_versions": [
+        "0.1.0"
+      ],
+      "implementation_version": []
+    },
+    {
+      "file": "useless_mod-latest.jar",
+      "sha256": "cbc4b8c232607126286b704a9141e3327fe01fdc4d26f5ed75c10c0193555910",
+      "metadata_versions": [
+        "1.21.1-2.4.5.11"
+      ],
+      "implementation_version": []
+    }
+  ],
+  "final-local-artifact": {
+    "result": "JAR CHECKS PASSED",
+    "jar": "D:\\AI\\sources\\UselessStretcher\\build\\libs\\useless_stretcher-1.21.1-1.6.0.jar",
+    "version": "1.21.1-1.6.0",
+    "bytes": 12292926,
+    "sha256": "CCFD3C4D94B0A201AB9D0BE784E9B8C8EF69ABAB0EDA38D239FAB966DF651120",
+    "production_sources_with_matching_class": 192,
+    "production_classes_with_matching_bytecode": 342,
+    "source_resources_with_matching_hash": 109,
+    "json_mcmeta_parsed": 68,
+    "story_chapters": 6,
+    "story_images": 17,
+    "original_ogg_files": 7,
+    "forbidden_entries": 0,
+    "delivered_path": "D:/AI/useless_stretcher-1.21.1-1.6.0-test-2i-motion-weather.jar",
+    "protocol": 16,
+    "server_log": "regression-owner-flight-20261012-final.log",
+    "client_log": "client-owner-flight-gifts-20261012.log",
+    "final_build_log": "build-owner-flight-gifts-20261012-final.log"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-06",
+  "version": "1.21.1-1.6.4",
+  "status": "local-candidate-not-published",
+  "path": "D:\\AI\\1.6.4-候选\\useless_stretcher-1.21.1-1.6.4.jar",
+  "bytes": 12699916,
+  "sha256": "AC78F41EAA7883434F6845CF7323829D77E66B994C82EDCF2B81AEC4AFCD9220",
+  "tests": 40,
+  "failures": 0,
+  "gameRegressionRun": false,
+  "regressionSourcesCompiled": true,
+  "published163": {
+    "sha256": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "untouched": true,
+    "path": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar"
+  },
+  "guide": "assets/ae2/ae2guide/useless_stretcher/stretcher.md",
+  "rollback": "Use a complete pre-upgrade save backup; 1.6.3 cannot safely read format 3"
+}

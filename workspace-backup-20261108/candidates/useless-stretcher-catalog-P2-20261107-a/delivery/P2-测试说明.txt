@@ -1,0 +1,29 @@
+万象担架 1.21.1-1.6.4-catalog-P2 独立测试候选
+
+JAR：D:\AI\candidates\useless-stretcher-catalog-P2-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P2.jar
+SHA256：161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4
+大小：12,789,513 字节。
+
+101/101 离线测试通过，静态 ABI 和 JAR 成员审计 PASS；没有游戏实测，性能尚未通过。
+精确 P1 基底 004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3。
+相对 P1：624 条目不变，新增 26、改变 15、删除 0。UUID/装入时样板库快照及格式 3 字节保留。
+
+只用于独立 S 测试，使用存档副本；不要覆盖生产包或现有 P1/R 包。换包时同一实例只留一份万象担架。
+Minecraft 1.21.1 / NeoForge / Java 21；目录补丁只对无用之物 1.21.1-2.4.6、1.21.1-2.4.6.2 启用。
+JEI 新分批和界面屏障只针对 19.57.0.451；其它版本保留原生注册路径。客户端和服务端使用同一候选。
+仅纯字符串排序及可选字符串证据写盘在后台，recipe/registry/ItemStack/JEI/世界调用均在原 owner。
+
+主要变化：JDTE 生成与 EnderIO Vat 转换分片；提高协作推进占空比；JEI 最后注册分批，异常批次禁止同 runtime 自动重放；目录和 JEI 全部提交后才发最终 ready callback。
+单个第三方 helper/codec 仍不可抢占，SoulBinding 等未拆回调仍有边界，不能保证所有回调或整包已通过性能验证。
+
+完整交接、指标字段、oracle 和测试边界：
+D:\AI\candidates\useless-stretcher-catalog-P2-20261107-a\verification\catalog-P2-20261107\REPORT.md
+
+P2 完整 tuple 导出 JVM 参数：
+-Duseless_stretcher.catalogTupleDirectory=D:/AI/verification/S-P2-tuples
+摘要默认记入日志；导出不会覆盖旧文件。R 无完整 tuple，不能从数量倒推摘要。
+同输入 P1-evidence 诊断脚本及 README 在 verification\catalog-P2-20261107\p1-evidence，不能作为性能基线。
+逐项对比工具：verification\catalog-P2-20261107\compare-tuples.ps1（-Left 实际P1文件 -Right 实际P2文件 -Report D盘报告路径）。
+
+S 请同时验收墙钟、最大单回调、最终 JEI 注册与查询、有序 tuple、重建取消、存档保存退出；不能只看 ready 条数。
+没有启动第二客户端/服务端，没有改生产、P1、旧 1.6.4 或 R，没有提交、推送或发布。

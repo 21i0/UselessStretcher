@@ -1,0 +1,74 @@
+{
+  "status": "EXPECTED_FAILURES_CONFIRMED",
+  "gameLaunched": false,
+  "scope": "Test-only old-behavior helper first on classpath; production source/JAR/frozen records unchanged.",
+  "processExitCode": 1,
+  "metrics": {
+    "tests found": 184,
+    "tests started": 184,
+    "tests successful": 181,
+    "tests failed": 3,
+    "containers failed": 0
+  },
+  "expectedFailureNames": [
+    "nativeHotbarSwapWithGuardConservesBothItemsAndLockedUuid",
+    "nativePickupSwapWithGuardConservesBothItemsAndLockedUuid",
+    "occupiedAssemblyRejectsEncodedPatternBeforeMenuCanExchangeIt"
+  ],
+  "actualFailureNames": [
+    "nativeHotbarSwapWithGuardConservesBothItemsAndLockedUuid",
+    "nativePickupSwapWithGuardConservesBothItemsAndLockedUuid",
+    "occupiedAssemblyRejectsEncodedPatternBeforeMenuCanExchangeIt"
+  ],
+  "old175TestsPassed": true,
+  "productionHelperSource": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\ae\\InstalledStretcherPlacementGuard.java",
+  "negativeControlSource": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\negative-control\\InstalledStretcherPlacementGuard.java",
+  "negativeControlSourceSha256": "E06F9C80BC86D11E45C40D94C8934199FB752EC28ECE4084F819D5DFC5987448",
+  "negativeControlClassSha256": "C93804ECE21D610AC77EDBEF34BBDB0F26D3A418357E8C586C695D24CA609813",
+  "logPath": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\negative-control\\negative-control.log",
+  "logSha256": "F379144B4B9D9B67F99FE140899B6E654A78BCDE84C237D4DD5B9B0A63094163",
+  "protectedBefore": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar",
+      "sha256": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\build-result.json",
+      "sha256": "BD9B75CB27AEB58E04BB9F3507BD1E20FA5692F602F0BADDDC4C3BE649A3A3BF"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\unit-tests.log",
+      "sha256": "D98572E4A5F24CDA504AFD7110B8AB4C39DEB357FDAA96F22C400DCC0CA5F8A7"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\ae\\InstalledStretcherPlacementGuard.java",
+      "sha256": "7E18F9A04A85A1E846EBAAE05F56506773C7F85AFFC9270B03AF5080564761B5"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\InstalledStretcherSlotMixin.java",
+      "sha256": "6E2EDDBC41E5EBDA4273A94B671497F449E785CB40E600EBA56689252346D7CB"
+    }
+  ],
+  "protectedAfter": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar",
+      "sha256": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\build-result.json",
+      "sha256": "BD9B75CB27AEB58E04BB9F3507BD1E20FA5692F602F0BADDDC4C3BE649A3A3BF"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\unit-tests.log",
+      "sha256": "D98572E4A5F24CDA504AFD7110B8AB4C39DEB357FDAA96F22C400DCC0CA5F8A7"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\ae\\InstalledStretcherPlacementGuard.java",
+      "sha256": "7E18F9A04A85A1E846EBAAE05F56506773C7F85AFFC9270B03AF5080564761B5"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\InstalledStretcherSlotMixin.java",
+      "sha256": "6E2EDDBC41E5EBDA4273A94B671497F449E785CB40E600EBA56689252346D7CB"
+    }
+  ]
+}

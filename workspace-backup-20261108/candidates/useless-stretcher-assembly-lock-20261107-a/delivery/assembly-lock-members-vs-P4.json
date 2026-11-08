@@ -1,0 +1,21 @@
+{
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPlacementGuard.class",
+      "sha256": "8EB7781AB47B9ED00991F45DBDEB4FCB5243ABB5B07D545EB1F0E69B1DC60ADD"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+      "baselineSha256": "43186D5E4F7C8CB62829AC4F8B21CC56773588B740B7FA3731A794F26408C2D1",
+      "sha256": "6D7CD60B1653AB47729D448695432B4DAF3CD12A9BFBB478D00B67A51D2F6A35"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "baselineSha256": "B66C70A6FDEDF28C2A20802D208018E4B34736B838AC5C5201EDF9D2E44A6353",
+      "sha256": "6471C3EADA6DB8CFAD8BAC366DD141B38DBE85E6D6CF001F62A2A71562FDBE5C"
+    }
+  ],
+  "removed": []
+}

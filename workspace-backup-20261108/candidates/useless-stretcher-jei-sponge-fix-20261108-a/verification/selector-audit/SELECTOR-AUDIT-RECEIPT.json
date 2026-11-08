@@ -1,0 +1,144 @@
+{
+  "status": "FROZEN_PARSER_MATCHER_EVIDENCE",
+  "checkedUtc": "2026-11-07T16:34:28.391575+00:00",
+  "inputs": {
+    "sponge": {
+      "path": "D:\\AI\\test-runtimes\\DollChronicle-1.21.1-NeoForge21.1.265\\libraries\\net\\fabricmc\\sponge-mixin\\0.16.4+mixin.0.8.7\\sponge-mixin-0.16.4+mixin.0.8.7.jar",
+      "size": 1504204,
+      "sha256": "921A2CA066D82D15D2939EFD5EB22754E308DB74B1E4277130A76625C3638DFD"
+    },
+    "oldJei": {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-native-R-20261107-a\\mods\\jei-1.21.1-neoforge-19.57.0.451.jar",
+      "size": 2253017,
+      "sha256": "44FCDA225B26D14502BB1890512F4356DB0A2577A6C63757B92948A6B951180A"
+    },
+    "newJei": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "size": 4735620,
+      "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+    },
+    "native": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "size": 4106066,
+      "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+    },
+    "baselineJar": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+      "size": 12817487,
+      "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+    },
+    "compiledFix": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163122102\\classes\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.class",
+      "size": 1754,
+      "sha256": "9F085D0C8FECD48C195F0583B13752B85843E4FB81C99038BD6C9F39CB7991D8"
+    },
+    "source": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.java",
+      "size": 1662,
+      "sha256": "73F7B61330A89F3B9D7728337DD844D63EA56923D4A49E5FEC2A854EB19AE18A"
+    },
+    "buildReceipt": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-build.json",
+      "size": 1038,
+      "sha256": "3BE1D1D9AD81DD24DD99E70B72D613B8E0A11C1E90EE27C1B43CDAFB234BFAF3"
+    }
+  },
+  "evidence": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\SELECTOR-AUDIT-REPORT.json",
+      "size": 7479,
+      "sha256": "71CC782382C92AAE9F126DEAA9AC120913C9BB6883827D87501753A8802B954B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\SELECTOR-AUDIT-REPORT.md",
+      "size": 1331,
+      "sha256": "B557EB28BE6E0AE58EBE9749A5DED106FB052F8724294457DC86E783186CD821"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\SelectorProbe.java",
+      "size": 6731,
+      "sha256": "B4E07D73D226B6AF6B6201B077CE915AF717B9546500DB999ABD1B6604E50C81"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\freeze-selector-evidence.py",
+      "size": 7081,
+      "sha256": "ABCE9731209759BD9ACD15762749E8E43E03CD425CD495DDEBE65A14F6C1AB3E"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-build.json",
+      "size": 1038,
+      "sha256": "3BE1D1D9AD81DD24DD99E70B72D613B8E0A11C1E90EE27C1B43CDAFB234BFAF3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163122102\\classes\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.class",
+      "size": 1754,
+      "sha256": "9F085D0C8FECD48C195F0583B13752B85843E4FB81C99038BD6C9F39CB7991D8"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\old1957\\actual-sponge-selector-results.tsv",
+      "size": 6359,
+      "sha256": "2B5A4756A50C45797D656E5CF1698FD958E235969EF1E63C4CC30A5D617997AA"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\old1957\\build-selector-correction.tsv",
+      "size": 638,
+      "sha256": "FA2626F99EE4C929B96030C43F1D54EBC2705AD22DDDB056E69D3541C4F0C71A"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\old1957\\fixed-build-annotation.tsv",
+      "size": 613,
+      "sha256": "F82026C3953CC9492778CD30FE78F69AFFB45FF27EA1B376CA35FF3D32BFAFA2"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\new1970\\actual-sponge-selector-results.tsv",
+      "size": 6548,
+      "sha256": "C871625E30DB0ACD825538E23B5988018B7FC693D8A400EC297CF58130E669A4"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\new1970\\build-selector-correction.tsv",
+      "size": 1041,
+      "sha256": "28EAB7EB608E2708728FB414BD2C63370FDCDD180C0715C33CB8233B7C76BAF2"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\new1970\\fixed-build-annotation.tsv",
+      "size": 613,
+      "sha256": "F82026C3953CC9492778CD30FE78F69AFFB45FF27EA1B376CA35FF3D32BFAFA2"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\TargetSelectors-javap.txt",
+      "size": 44954,
+      "sha256": "86F4CB79C0AE791E73000B0ECE981A3F25FACDEAAB28F3B500C7EDBB4E745B5F"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\MemberInfo-javap.txt",
+      "size": 84376,
+      "sha256": "C48C36CB9D68B78950DC251D3F26C644F19BB629E37250DF5BBE019A04BF5A0B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\Quantifier-javap.txt",
+      "size": 13542,
+      "sha256": "9D88870535F2309543D2AE5C4E3D60B5A29888F07722098DD5BDCEE3D6B4AE6B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\selector-api-signatures.txt",
+      "size": 9499,
+      "sha256": "615472B96480561A431B6642D8D9354EAE3931621B54DD66A2240862C672C008"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\9556-bad-baseline\\actual-sponge-selector-results.tsv",
+      "size": 5575,
+      "sha256": "F83DCAF5BA7A6E2D592B635C37D08BE4A0F7C5EC096617828C94BB15A05A4D3C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\9556-bad-baseline\\build-selector-correction.tsv",
+      "size": 1041,
+      "sha256": "28EAB7EB608E2708728FB414BD2C63370FDCDD180C0715C33CB8233B7C76BAF2"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\9556-bad-baseline\\9556-build-timing-mixin-javap-verbose.txt",
+      "size": 6034,
+      "sha256": "1A178C22869118CB27F9DBF1BFF3A193B7BC6E4C71252A3A11C12A9014C07046"
+    }
+  ],
+  "mixinTransformerRunByThisProbe": false
+}

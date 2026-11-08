@@ -1,0 +1,125 @@
+{
+  "gameLaunched": false,
+  "modClassesLoaded": false,
+  "candidate": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+  "results": {
+    "jei": {
+      "target": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "uniqueReferencedClasses": 13,
+      "classes": [
+        {
+          "name": "mezz/jei/api/gui/builder/IRecipeLayoutBuilder",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/ingredients/IIngredientSupplier",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/recipe/IFocusGroup",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/recipe/IRecipeManager",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/recipe/RecipeType",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/recipe/category/IRecipeCategory",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/runtime/IJeiRuntime",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/api/runtime/IRecipesGui",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/gui/recipes/RecipesGui",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/library/recipes/RecipeLookup",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/library/recipes/RecipeManagerInternal",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/library/recipes/collect/RecipeMap",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+          ],
+          "present": true
+        },
+        {
+          "name": "mezz/jei/library/util/IngredientSupplierHelper",
+          "callers": [
+            "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+          ],
+          "present": true
+        }
+      ],
+      "missing": []
+    },
+    "data": {
+      "target": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+      "uniqueReferencedClasses": 0,
+      "classes": [],
+      "missing": []
+    }
+  },
+  "scope": "All class-file UTF8 constants searched for slash/dot type names, including member descriptors, signatures, Mixin target strings and class literals."
+}

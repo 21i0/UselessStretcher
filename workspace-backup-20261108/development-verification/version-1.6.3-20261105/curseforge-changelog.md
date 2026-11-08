@@ -1,0 +1,23 @@
+# 万象担架 1.6.3
+
+Minecraft 1.21.1 / NeoForge / Java 21。需要无用之物 1.21.1-2.4.6+、AE2 19.2+；GuideME、Curios 可选。
+
+- 修复手杖单体、范围加速 Productive Bees Genesis Extra 离心机，接入原生批处理并合并多来源额外工作，避免重复完整机器 ticker 和 AE 输出；未安装 JDTE 时使用 PBG 自有接口。
+- 修复 MBD2 / LDLib2 2.2.44 / AE2LT 的异步节点同步冲突。同步合并后交主线程处理，保留线程保护、节点和余额；失败完整重试并退避，卸载/停服不复活旧任务。桥接仅对已核对的 LDLib2 版本启用。
+- 旧批次优先；第三方回调提交后异常不自动回退重放，避免重复产出。
+- 保留胶囊变体、邻室保护、地图与陨石修复、2i 玩偶、剧情及原有手杖/担架功能；GuideME 同步说明。
+
+**升级：客户端和服务端同步替换；网络协议保持 23，已有 1.6.x 存档无需重置。**
+
+实际验证包含官方 PBG 1.0.9 真实配方、单体/范围/叠加、联网满储、部分/零接收、NBT 重载和独立进程同存档重启；MBD2 5000 次派发合并与节点/余额重启保留。成品不含测试类或第三方接口。
+测试在隔离兼容环境完成，并非报错服务器完整整包；不能中断单次第三方同步回调，不承诺任意网络零停顿。独立登录超时尚无对应运行日志定因。
+
+## English
+
+- Fix staff acceleration for Productive Bees Genesis Extra centrifuges with native coalesced work instead of replaying complete machine/AE tick paths. Single-target and range contributions share bounded scheduling; uncertain commits are never automatically replayed.
+- Fix managed-node sync conflicts with MBD2 / LDLib2 2.2.44 / AE2LT by handing the standard callback to the server thread. Node identity, balances and thread guards remain intact, with retries and unload/shutdown protection.
+- Keeps capsule layout discovery, neighbor preservation and earlier fixes. Update both client and server; protocol remains 23 and existing 1.6.x worlds can be retained.
+
+Source: https://github.com/21i0/UselessStretcher/releases/tag/v1.6.3
+
+SHA256: 00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC

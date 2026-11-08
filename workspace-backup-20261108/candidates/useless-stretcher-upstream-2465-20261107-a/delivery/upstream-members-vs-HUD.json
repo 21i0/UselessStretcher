@@ -1,0 +1,87 @@
+{
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards.class",
+      "sha256": "1DDFB4B89DCB8F7780FAD642814BAD79D6AEAAB8B81719B024BCE0FB0B3A190D"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.class",
+      "sha256": "81985864359492346AC4C0F244BB3D30BB138EB72DB3384B61B51441C72204E0"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "oldSha256": "A3936F377422719FEF04A33FF77DBEF072888484321712F7CAC3560C03C728D3",
+      "sha256": "6246644D338E7F88EBEBBD8795A2A950939D908B1955F3B13DF556232E2DDB5E",
+      "debugOnly": false
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "oldSha256": "A16E3C720739AA3EB0713E515E4174879C068AE4A47920E62EF365A7FF25014D",
+      "sha256": "8C0752947C98637443AF57BFE0B6FF2743E517C710AA038D9FDF41E8834CB390",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "oldSha256": "3762420F3091E996D6954718EDEF78F0DA64BD34648774469043E77E305C958B",
+      "sha256": "CA03DA784B25C00EA621F6217CE08CD10C14F15CE07E6143F116ED1246C6BE55",
+      "debugOnly": false
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "oldSha256": "AD29B60FBAFF4E1982210C3056FB37BB374AD93B7FF8ED41553B1C7C01F244EC",
+      "sha256": "223F3F6D63EBC93E35EA62D4082AF1C34581A525457D4276BA861806AA03AAA9",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "oldSha256": "3D932C92333C6F4BBCC1C71A0D1564FB5DBD1DCCF64C77900AF96A87A33DFD6A",
+      "sha256": "270190030A24141FB7908B7273C4F864F075F81F8870AA218A87BC2DCA5E7BE2",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "oldSha256": "A395D1056B73713FF1C627AD98A82C1A063E3815ADACCA5B036EEFA9C5A58468",
+      "sha256": "A4230C11B386E8365DE20478F7998F419347AB8B6979632E063CEF3AE3ED9507",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "oldSha256": "2D5D2FFBCDBD64EF46AD4F85B7EA9BD0807F608340C1994586C117E53C530C6B",
+      "sha256": "8D41CE20813F0C57E43447B8E435F5A7C087D2217AA845CD4D8AF59840416E8A",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "oldSha256": "CCB62381544F157C2AF1E5D642BA80F861F352E0FD7E2F96C11BE8F704F89927",
+      "sha256": "F064ACF050A53BBEF5E2F4F44AE3EE675D4208E12F04CC7E94D0B896DB0CCB7B",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "oldSha256": "BB6BEA8028380384F8D485E9E9A4A0E02F4B6DE9350438E1053B6B083B464B99",
+      "sha256": "213DCC5567DBBD309ED39FA93376F8B16D49F90512602CFAE475CA0BF24D0A0F",
+      "debugOnly": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "oldSha256": "E3B46E640BC1FB32022FB871D2AF84A2E7A13180F216F853E0F0019EE2BBFEFD",
+      "sha256": "F0D8CA0C19B206228D3E1FA1E57E0973E6FE73A594000A984BDEA7302A0880FF",
+      "debugOnly": false
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "oldSha256": "3FF5AAF2A26056EB0AE2EA4E0E0D3B3371A19013321DE2EF135BC24263D1D45B",
+      "sha256": "A611A50F57872363BC5810648B52DCADEADE745905DF88538AFD173FE36F7F3D",
+      "debugOnly": false
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8",
+      "sha256": "2B303105015CF6CE1D939DB9060B32129B457EEB19ED48731002E11E6BBA23B4",
+      "debugOnly": false
+    }
+  ],
+  "removed": []
+}

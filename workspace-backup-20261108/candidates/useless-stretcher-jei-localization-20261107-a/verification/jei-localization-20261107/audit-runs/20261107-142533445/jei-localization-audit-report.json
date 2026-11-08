@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "timestampUtc": "2026-11-07T14:25:33.4626669Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh",
+  "full184SuiteRerun": false,
+  "failure": "Unexpected production compiled members"
+}

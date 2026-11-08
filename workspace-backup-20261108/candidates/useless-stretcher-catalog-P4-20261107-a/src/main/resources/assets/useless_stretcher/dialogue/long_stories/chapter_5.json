@@ -1,0 +1,330 @@
+{
+  "opening": [
+    {
+      "text": "夜色沿着石阶慢慢铺开，最后一缕夕光留在鞋尖。刚才的话没有被风带走，2i 把耳朵转向你，留出一段可以重新开口的空白。",
+      "speaker": "narrator",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "先讲清楚一件事，今晚真的没有压轴节目。你要是累了，可以靠着那边的栏杆，我也想把今天从脑袋里一件一件放下来。",
+      "speaker": "2i",
+      "expression": "calm",
+      "mood": "SERIOUS"
+    },
+    {
+      "text": "我今天修了一条总是断开的运输线，来回跑了好多趟。最后机器开始工作，我却站在旁边发呆，连高兴都慢了半拍。",
+      "speaker": "player",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "2i 本来已经抬起手，像是准备给你演示一个新花样。听到最后一句，那只手转了个方向，将身边一颗硌人的小石子拨开。",
+      "speaker": "narrator",
+      "expression": "confused",
+      "mood": "CURIOUS"
+    },
+    {
+      "text": "原来你也会这样。我把纸飞机改好了以后，第一件事不是试飞，是想坐下来吃饼干。以前还以为这样显得我不够认真呢。",
+      "speaker": "2i",
+      "expression": "confused",
+      "mood": "CURIOUS"
+    },
+    {
+      "text": "认真做完一件事，也可以先喘口气吧。运输线明天还在，我不用守着它证明自己没有偷懒，你的飞机也不会连夜忘记怎么飞。",
+      "speaker": "player",
+      "expression": "calm",
+      "mood": "WARM"
+    },
+    {
+      "text": "2i 没有立刻接话，只把双脚晃到同样的高度。过了一会儿，晃动又乱了顺序，像两只终于不必排队的小小钟摆。",
+      "speaker": "narrator",
+      "expression": "smile",
+      "mood": "WARM"
+    },
+    {
+      "text": "那我宣布今天的惊喜店提前打烊。没有营业损失，因为本来也没有顾客付钱。店员现在只负责坐着，偶尔帮忙看一眼月亮。",
+      "speaker": "2i",
+      "expression": "smile",
+      "mood": "PLAYFUL"
+    },
+    {
+      "text": "说完这句，2i 从纸页之间抽出一条窄书签。上面写了几个很小的词：茶凉了、尾巴沾灰、树影像鱼，还有一个被涂掉的句号。",
+      "speaker": "narrator",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "这是我今天记的事，本来想挑最有趣的一件告诉你。挑到最后发现，全是些没头没尾的小事，念出来大概还没有打喷嚏长。",
+      "speaker": "2i",
+      "expression": "shy",
+      "mood": "SHY"
+    },
+    {
+      "text": "为什么句号也要涂掉？别的词我大概猜得到，那片像鱼的树影我回来时也看见了，它还把脑袋伸到了台阶上。",
+      "speaker": "player",
+      "expression": "calm",
+      "mood": "CURIOUS"
+    },
+    {
+      "text": "因为写到这里的时候，我突然不知道下一句写什么了。好像一天结束就应该有个很厉害的总结，没有的话，这一天就白过了。",
+      "speaker": "2i",
+      "expression": "guilty",
+      "mood": "UNEASY"
+    },
+    {
+      "text": "栏杆外传来一声很轻的木响，是风把松动的门扣推回原位。你们同时朝那边看去，又同时发现，那并不是什么值得惊呼的事。",
+      "speaker": "narrator",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "可我记得你把纸飞机捡回来时，一直护着那只歪翅膀。还有你检查过的配料表。那些事很小，但我现在还能想起来。",
+      "speaker": "player",
+      "expression": "calm",
+      "mood": "WARM"
+    },
+    {
+      "text": "连那只翅膀都记得啊……我还以为你只记住它掉下来的样子。等一下，那几声笑到底是笑飞机，还是笑我追着它跑得太快？",
+      "speaker": "2i",
+      "expression": "surprised",
+      "mood": "STARTLED"
+    },
+    {
+      "text": "你指了指书签上空着的背面。2i 顺着你的手看去，没急着把原来的记录划掉，反而将纸条平平放在两个人中间。",
+      "speaker": "narrator",
+      "expression": "smile",
+      "mood": "WARM"
+    }
+  ],
+  "rounds": [
+    {
+      "prompt": [],
+      "choices": []
+    },
+    {
+      "prompt": [
+        {
+          "text": "如果把今天留下一件事，你会挑哪件？不一定要好笑，也不一定是什么大成功。就是明天翻到这一页时，还愿意认出来的那件。",
+          "speaker": "2i",
+          "expression": "calm",
+          "mood": "CURIOUS"
+        },
+        {
+          "text": "风把书签推移了一点，纸角刚好停在你们的影子之间。你想到那条终于接通的线，也想到回来时，台阶旁一直留着的位置。",
+          "speaker": "narrator",
+          "expression": "calm",
+          "mood": "CALM"
+        },
+        {
+          "text": "我在想，是记下修好的机器，还是记下回来的路。前者好像比较重要，可后者一想起来，脚底那点疲惫就没有那么沉。",
+          "speaker": "player",
+          "expression": "calm",
+          "mood": "CALM"
+        },
+        {
+          "text": "可以先想一会儿，我不抢答。你看，我已经把嘴闭好了——唔，这句好像还不算。好，现在真的轮到你。",
+          "speaker": "2i",
+          "expression": "shy_alt",
+          "mood": "WARM"
+        }
+      ],
+      "choices": [
+        {
+          "text": "我想记下回来时，你给我留了一个位置。",
+          "lines": [
+            {
+              "text": "2i 低头看了看身旁，其实那只是一级普通的台阶。尾巴尖却慢慢往外挪了一点，让这块本来就够大的地方显得更宽敞。",
+              "speaker": "narrator",
+              "expression": "shy",
+              "mood": "SHY"
+            },
+            {
+              "text": "那就这样写吧，别写成什么隆重的迎接。我只是看见你回来了，想着这里坐着舒服，顺便……顺便把旁边那块也留住了。",
+              "speaker": "2i",
+              "expression": "shy_alt",
+              "mood": "WARM"
+            }
+          ]
+        },
+        {
+          "text": "这些小事都没用，你就不能想点更厉害的吗？",
+          "lines": [
+            {
+              "text": "2i 把手从纸边收回来，原本弯着的耳尖也抬直了。书签仍然留在中间，没有被揉掉，但接下来那几句话明显放慢了速度。",
+              "speaker": "narrator",
+              "expression": "guilty",
+              "mood": "HURT"
+            },
+            {
+              "text": "它们对我有用。我想记得今天怎么过的，不是交一张成绩单。你可以选你觉得重要的，可别顺手把我的这一页也说成没意思。",
+              "speaker": "2i",
+              "expression": "determined",
+              "mood": "HURT"
+            }
+          ]
+        },
+        {
+          "text": "先记树影像鱼吧，明天看看它会不会换样子。",
+          "lines": [
+            {
+              "text": "2i 歪着头打量那片已经融进夜色的树影，又在纸上描出一条没有尾巴的鱼。画到最后才发现，鱼嘴朝着台阶的反方向。",
+              "speaker": "narrator",
+              "expression": "confused",
+              "mood": "CURIOUS"
+            },
+            {
+              "text": "那它今天游错路了。明天我们再来看，不过不保证它还愿意当鱼，树影也有自己的安排，说不定改行做一条长得奇怪的围巾。",
+              "speaker": "2i",
+              "expression": "smile",
+              "mood": "PLAYFUL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "text": "写完这一行，灯旁忽然响起细小的扑动声。一只夜蛾绕着光圈打转，2i 的肩膀僵了一下，纸条也被下意识捏出了浅浅的折痕。",
+          "speaker": "narrator",
+          "expression": "calm",
+          "mood": "CALM"
+        },
+        {
+          "text": "先别动我，它在灯那边就好。我知道它不一定会飞过来，可我一听见翅膀的声音，还是会忍不住觉得下一秒就在耳朵旁边。",
+          "speaker": "2i",
+          "expression": "surprised",
+          "mood": "UNEASY"
+        },
+        {
+          "text": "我们可以往里挪一点，不用赶它，也不用证明谁更勇敢。灯留在原处，照得到路就够了，这边还有一整段安静的台阶。",
+          "speaker": "player",
+          "expression": "calm",
+          "mood": "SERIOUS"
+        },
+        {
+          "text": "你先把脚收进阴影里，2i 看清你没有伸手捉虫，才一点点移过来。夜蛾仍在追逐自己的小灯，谁也没有被迫离开这片夜晚。",
+          "speaker": "narrator",
+          "expression": "calm",
+          "mood": "CALM"
+        },
+        {
+          "text": "谢谢你没有突然抓给我看。有人会说，看清楚就不怕了，可我现在只想先坐稳。以后能不能不怕，我也不知道。",
+          "speaker": "2i",
+          "expression": "shy",
+          "mood": "UNEASY"
+        },
+        {
+          "text": "新位置比刚才暗一些，书签上的字已经看不清。2i 把它夹回本子，指尖在封面停了一会儿，像是在考虑另一句不太容易说的话。",
+          "speaker": "narrator",
+          "expression": "calm",
+          "mood": "CALM"
+        },
+        {
+          "text": "我说想歇一会儿，也有点像这样。不是在等你劝我赶紧开心。我可能真的只是累了，今天不想逗谁，也不想练习勇敢。",
+          "speaker": "2i",
+          "expression": "calm",
+          "mood": "SERIOUS"
+        }
+      ],
+      "choices": [
+        {
+          "text": "我明白，今晚不用变得更有趣，也不用更勇敢。",
+          "lines": [
+            {
+              "text": "2i 原本缩着的肩膀一点点放松，终于不再频繁回头看那盏灯。你们之间仍有一小段距离，刚好容得下各自舒服的坐姿。",
+              "speaker": "narrator",
+              "expression": "calm",
+              "mood": "WARM"
+            },
+            {
+              "text": "那你也记住这句话。以后你想安静的时候，告诉我就行。我会收起那些响来响去的主意，不追着问你为什么还没有笑。",
+              "speaker": "2i",
+              "expression": "smile",
+              "mood": "WARM"
+            }
+          ]
+        },
+        {
+          "text": "这么点事也怕，胆小就多练几次给我看。",
+          "lines": [
+            {
+              "text": "2i 的尾巴贴着台阶收紧了些，却没有依言朝灯走去。那张夹好的书签露出一角，纸上的小鱼安安静静，不需要证明自己会游。",
+              "speaker": "narrator",
+              "expression": "tsundere",
+              "mood": "HURT"
+            },
+            {
+              "text": "我今天不练，也不是为了表演给你看。等我愿意的时候，我会自己说。现在你可以陪着，也可以先忙，但不要把我往那边推。",
+              "speaker": "2i",
+              "expression": "determined",
+              "mood": "SERIOUS"
+            }
+          ]
+        },
+        {
+          "text": "那我们数十次风声，数乱了也不重新开始。",
+          "lines": [
+            {
+              "text": "2i 认真竖起一根手指，第一阵风却迟迟没来。等到树叶真的响起来时，远处又混进一声鸟叫，计数从开头就变得不太可靠。",
+              "speaker": "narrator",
+              "expression": "confused",
+              "mood": "CURIOUS"
+            },
+            {
+              "text": "那声鸟叫算插队，我们先欠它半次。算了，不数也行，听到多少就多少。今晚的记录员已经下班，不接受补作业。",
+              "speaker": "2i",
+              "expression": "smile",
+              "mood": "PLAYFUL"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ending": [
+    {
+      "text": "过了好一会儿，灯边的扑动声停了。你们没有特意过去确认，夜色里还有别的细小声音，足够让这段沉默慢慢变得自然。",
+      "speaker": "narrator",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "明天我可能还要检查那条运输线，不过不用一早就去。要是你愿意，我们先看看树影，再决定往哪边走。没有计划也没关系。",
+      "speaker": "player",
+      "expression": "calm",
+      "mood": "WARM"
+    },
+    {
+      "text": "那我要负责检查树影有没有迟到。要是它还当鱼，就请它当一天向导；要是它变成生姜……这条路线立刻重新讨论。",
+      "speaker": "2i",
+      "expression": "smile",
+      "mood": "BRIGHT"
+    },
+    {
+      "text": "那一点笑声来得很轻，并没有把安静赶走。2i 笑过以后又靠回原位，终于不再急着往后接第二个、第三个好玩的主意。",
+      "speaker": "narrator",
+      "expression": "happy",
+      "mood": "WARM"
+    },
+    {
+      "text": "今天就到这里吧。你不用为没发生什么特别的事道歉，我也不用。等以后翻到这一页，我会记得我们在这里坐了很久。",
+      "speaker": "2i",
+      "expression": "calm",
+      "mood": "WARM"
+    },
+    {
+      "text": "起身之前，2i 将本子上的折角压平，书签稳稳留在新的一页。里面没有写明天必须完成的事，只给还没想到的话留了空处。",
+      "speaker": "narrator",
+      "expression": "calm",
+      "mood": "CALM"
+    },
+    {
+      "text": "走吧，这回不用赶。我能跟上你；你要是又想坐下，也叫我一声。刚才那块台阶挺舒服，不过下一个地方也可以一起找。",
+      "speaker": "2i",
+      "expression": "shy_alt",
+      "mood": "WARM"
+    }
+  ]
+}

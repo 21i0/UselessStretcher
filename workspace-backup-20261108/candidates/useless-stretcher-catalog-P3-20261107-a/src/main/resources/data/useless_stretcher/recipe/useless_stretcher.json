@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "useless_stretcher:omniversal_myriad" },
+    { "item": "ae2:blank_pattern" }
+  ],
+  "result": {
+    "id": "useless_stretcher:useless_stretcher",
+    "count": 1
+  }
+}

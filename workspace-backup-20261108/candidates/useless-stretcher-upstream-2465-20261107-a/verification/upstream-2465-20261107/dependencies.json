@@ -1,0 +1,50 @@
+[
+  {
+    "id": "base",
+    "version": "1.21.1-2.4.6.5",
+    "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+    "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+  },
+  {
+    "id": "jei",
+    "version": "19.70.0.460",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+    "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+  },
+  {
+    "id": "eaep",
+    "version": "1.6.4.1",
+    "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+    "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237"
+  },
+  {
+    "id": "data",
+    "version": "3.4.0",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+    "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367"
+  },
+  {
+    "id": "ae2",
+    "version": "19.2.18",
+    "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\appliedenergistics2-19.2.18.jar",
+    "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39"
+  },
+  {
+    "id": "appflux",
+    "version": "2.1.7",
+    "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\AppliedFlux-1.21-2.1.7-neoforge.jar",
+    "sha256": "3FA19F02317A795334805D67318708C5025911B55C24AE273125F1A0652311B8"
+  },
+  {
+    "id": "ldlib2",
+    "version": "2.2.44",
+    "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ldlib2-neoforge-1.21.1-2.2.44-all.jar",
+    "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC"
+  },
+  {
+    "id": "ae2wtlib",
+    "version": "19.5.1",
+    "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ae2wtlib-19.5.1.jar",
+    "sha256": "407E7300351353CB4CB7698286E180AEF2BD6E7A97EC7EFC6493F9DAA4DBFFE5"
+  }
+]

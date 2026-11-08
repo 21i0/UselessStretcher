@@ -1,0 +1,10 @@
+{
+  "type": "useless_stretcher:two_i_starfield",
+  "generator": {
+    "type": "useless_stretcher:two_i_starfield_gen",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:the_void"
+    }
+  }
+}

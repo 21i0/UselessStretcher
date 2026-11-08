@@ -1,0 +1,525 @@
+{
+  "checkedUtc": "2026-11-07T15:09:20.901637+00:00",
+  "status": "OFFLINE_NATIVE_ABI_CHECKS_PASSED_MIGRATION_REQUIRED",
+  "gameLaunched": false,
+  "modClassesLoaded": false,
+  "inputs": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+      "size": 12813852,
+      "sha256": "e0e15336f1ffa8d1f9ac1839b7a29509bb2d6ecdc03c502ae92b1b4251048fb6"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+      "size": 4069284,
+      "sha256": "9f6f54af76aa255123b354c8725d55c2ace4525b8683e1136acaebccc8813b17"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "size": 4106066,
+      "sha256": "84f957c02dfac63dd3d9f3b269f59cb9704cc228725e9b044ae54c98718bde31"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+      "size": 1451554,
+      "sha256": "1bfe8540493dd73c6db106937209abc6791f5d2e0e81a2be478cc8b337e77237"
+    }
+  ],
+  "referenceOccurrences": 211,
+  "uniqueReferences": 107,
+  "unresolvedReferences": [],
+  "focusedChecks": [
+    {
+      "status": "PASS",
+      "check": "assembly_unique_recoverable_new",
+      "detail": "NEW occurrences=1"
+    },
+    {
+      "status": "PASS",
+      "check": "assembly_unique_recoverable_constructor",
+      "detail": "Exact (IntSupplier,Predicate,Runnable)V occurrences=1"
+    },
+    {
+      "status": "PASS",
+      "check": "recoverable_not_final",
+      "detail": "access=33"
+    },
+    {
+      "status": "PASS",
+      "check": "snapshot_constructor_descriptor",
+      "detail": "List,4Map,long,2Map,Set"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:content/blockentities/AdvancedAlloyFurnaceBlockEntity$2",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:content/blockentities/RecoverableItemStackHandler",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:inventory/slot/PatternSlotItemHandler",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:content/menus/AdvancedAlloyFurnaceMenu",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:content/blocks/multiblock/MePatternAssemblyBlock",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:core/component/MultiblockPartData",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:content/blockentities/multiblock/PassiveCraftingHatchBlockEntity",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "all_methods_semantically_identical:init/ClientSetup",
+      "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+    },
+    {
+      "status": "PASS",
+      "check": "aeManager_shadow:content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "detail": "private final expected descriptor"
+    },
+    {
+      "status": "PASS",
+      "check": "aeManager_shadow:content/blockentities/multiblock/MultiblockAlloyFurnaceCoreBlockEntity",
+      "detail": "private final expected descriptor"
+    },
+    {
+      "status": "PASS",
+      "check": "menu_encoded_pattern_redirect_count",
+      "detail": "occurrences=1"
+    }
+  ],
+  "focusedPassed": 15,
+  "changedMethods": [
+    {
+      "class": "com/sorrowmist/useless/compat/jei/GenericStackJeiIngredientProviders",
+      "method": "loadOptionalProvider()Lcom/sorrowmist/useless/compat/jei/GenericStackJeiIngredientProvider;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/compat/jei/JEIPlugin",
+      "method": "registerReflectiveTransferHandler(Lmezz/jei/api/registration/IRecipeTransferRegistration;Ljava/lang/String;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/compat/jei/JEIPlugin",
+      "method": "registerWirelessTransferHandler(Lmezz/jei/api/registration/IRecipeTransferRegistration;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "<clinit>()V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "bindExternalInventory(Lcom/sorrowmist/useless/core/component/ExternalInventoryReference;Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "clearRemoved()V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "lambda$clearRemoved$1(Lcom/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity;)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "lambda$clearRemoved$2(Lcom/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity;)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "lambda$new$1(I)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "lambda$repairPatternsIfPending$2(I)Lnet/minecraft/world/item/ItemStack;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "lambda$repairPatternsIfPending$3(Ljava/lang/Integer;Lnet/minecraft/world/item/ItemStack;)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "onItemStorageChanged()V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "onPatternSlotChanged(I)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "repairPatternsIfPending()V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+      "method": "tick(Lnet/minecraft/world/level/Level;Lcom/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "bindExternalInventory(Lcom/sorrowmist/useless/core/component/ExternalInventoryReference;Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "clearRemoved()V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "lambda$clearRemoved$0(Lcom/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity;)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "lambda$clearRemoved$1(Lcom/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity;)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "lambda$repairPatternsIfPending$0([I)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "refreshProviderIfReady()V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity",
+      "method": "repairPatternsIfPending()V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/blockentities/multiblock/MultiblockAlloyFurnaceCoreBlockEntity",
+      "method": "serverTick()V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "build(Lnet/minecraft/world/level/Level;J)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "buildLock(Ljava/lang/Object;)Ljava/lang/Object;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "candidatePatternScales(Ljava/util/List;Ljava/util/List;Ljava/util/Set;)Ljava/util/List;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "collectGenerated(Lcom/sorrowmist/useless/api/recipe/IRecipeAdapter;Ljava/lang/String;Lnet/minecraft/world/level/Level;Ljava/util/List;)V",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "collectSynthetic(Lcom/sorrowmist/useless/api/recipe/IRecipeAdapter;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/List;)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "currentGenerationLocked(Ljava/lang/Object;)J",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "emptySnapshot(J)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "fingerprint(Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$CollectedRecipe;Lnet/minecraft/world/level/Level;)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$FingerprintedRecipe;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$build$10(Ljava/util/List;Ljava/lang/String;Lcom/sorrowmist/useless/content/recipe/AdvancedAlloyFurnaceRecipe;)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$build$11(Ljava/util/List;Ljava/lang/String;Lcom/sorrowmist/useless/content/recipe/AdvancedAlloyFurnaceRecipe;)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$build$11(Lnet/minecraft/world/level/Level;)Ljava/util/List;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$buildLock$10(Ljava/lang/Object;)Ljava/lang/Object;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$buildLock$9(Ljava/lang/Object;)Ljava/lang/Object;",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$candidatePatternScales$25(Ljava/lang/Long;)Z",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$candidatePatternScales$26(Ljava/lang/Long;)Z",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$collectGenerated$24(Lcom/sorrowmist/useless/api/recipe/IRecipeAdapter;Lnet/minecraft/world/level/Level;)Ljava/util/List;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$collectGenerated$24(Ljava/util/List;Ljava/lang/String;Lcom/sorrowmist/useless/content/recipe/AdvancedAlloyFurnaceRecipe;)V",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$collectGenerated$25(Ljava/util/List;Ljava/lang/String;Lcom/sorrowmist/useless/content/recipe/AdvancedAlloyFurnaceRecipe;)V",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$currentGenerationLocked$8(Ljava/lang/Object;)Ljava/lang/Long;",
+      "status": "REMOVED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$currentGenerationLocked$9(Ljava/lang/Object;)Ljava/lang/Long;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "lambda$snapshot$8(Lnet/minecraft/world/level/Level;J)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "status": "ADDED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "resolveAdapters(Ljava/util/List;Ljava/lang/Class;)Ljava/util/List;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog",
+      "method": "snapshot(Lnet/minecraft/world/level/Level;)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "status": "CHANGED"
+    },
+    {
+      "class": "com/sorrowmist/useless/integration/dataenergistics/jei/UselessDataEnergisticsJeiPlugin",
+      "method": "register(Lcom/fish_dan_/data_energistics/api/entrypoint/jei/DataEnergisticsJeiRegistry;)V",
+      "status": "CHANGED"
+    }
+  ],
+  "nativeDependenciesFromDownloadedToml": {
+    "useless": {
+      "useless_mod": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ae2",
+          "type": "required",
+          "versionRange": "[19.2.17,20)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "neoecoae",
+          "type": "optional",
+          "versionRange": "[21.2.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jdte",
+          "type": "optional",
+          "versionRange": "[0.6.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "kaleidoscope_cookery",
+          "type": "optional",
+          "versionRange": "[1.4.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "exdeorum",
+          "type": "optional",
+          "versionRange": "[3.12,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "botanypots",
+          "type": "optional",
+          "versionRange": "[21.1.34,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.0,6.1.0)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "pneumaticcraft",
+          "type": "optional",
+          "versionRange": "[8.2.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "appliedpneumatics",
+          "type": "optional",
+          "versionRange": "[1.0.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "astralsorcery",
+          "type": "optional",
+          "versionRange": "[2.0.1.26,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae_plus",
+          "type": "optional",
+          "versionRange": "[1.6.4,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "data_energistics",
+          "type": "optional",
+          "versionRange": "[3.4.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        }
+      ]
+    },
+    "eaep": {
+      "extendedae_plus": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae",
+          "type": "required",
+          "versionRange": "*",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jei",
+          "type": "optional",
+          "versionRange": "[19.70.0.460,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "neoecoae",
+          "type": "optional",
+          "versionRange": "[21.2.0-beta1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ftbteams",
+          "type": "optional",
+          "versionRange": "[2101.1.0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jecharacters",
+          "type": "optional",
+          "versionRange": "[4.5.24,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        }
+      ]
+    }
+  },
+  "migrationRequirements": [
+    "Do not widen only the native version gate: native 2.4.6.3+ adds AdapterGuards isolation to build, snapshot, synthetic/generated enumeration and per-recipe conversion.",
+    "Preserve native guard disabled-action state across incremental slices; preserve per-recipe RuntimeException versus LinkageError behavior.",
+    "EAEP 1.6.4.1 declares optional JEI >=19.70.0.460; when JEI is present, old 19.57.0.451 does not satisfy metadata.",
+    "Native 2.4.6.5 declares optional DATA >=3.4.0 and EAEP >=1.6.4; existing old versions fail metadata when present."
+  ],
+  "pending": [
+    "Complete official DATA 3.4.0 bytes and inspect exact constructor/interfaces.",
+    "Complete official JEI 19.70.0.460 bytes and scan real candidate references and exact injection points.",
+    "Compile and targeted offline checks for the new integrated candidate; runtime checks owned by MyGenesis thread."
+  ],
+  "limits": [
+    "Static resolution proves owner/name/descriptor and static dispatch compatibility; it does not prove runtime behavior or performance.",
+    "Method comparison skips debug tables and stack-map frames; labels and synthetic lambda names remain visible in evidence.",
+    "Native old-pattern repair operates on physical omniversal-pattern items and skips the stretcher item; internal obsolete patterns are not thereby proven repaired.",
+    "Partial DATA download is retained as .jar.partial and was never opened as a JAR or used as ABI evidence."
+  ]
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-06T06:43:04.651Z" hostname="LAPTOP-D3HPHSTM" time="0.346">
+  <properties/>
+  <testcase name="sourceRewritePublishesOnlyToTheSourceAndPreservesInstalledOrder()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.147"/>
+  <testcase name="nullSourceDoesNotCreateAnInstalledSnapshot()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.002"/>
+  <testcase name="sourceEditsInvalidatePendingRewriteWithoutChangingItsInstalledSnapshot()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.006"/>
+  <testcase name="unknownAndClearedSourcesProduceStableEmptySnapshotsRatherThanLiveLinks()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.002"/>
+  <testcase name="removingOneCopiedGroupDoesNotDropPatternsStillUsedByAnotherGroup()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.001"/>
+  <testcase name="installedWritesCannotModifyItsSourceOrAnotherInstalledSnapshot()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.003"/>
+  <testcase name="clearingSourceInvalidatesPendingRewriteWithoutResurrectingOrErasingSnapshot()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.003"/>
+  <testcase name="copiedReadersAreNotSubscribedToFutureSourceChanges()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.114"/>
+  <testcase name="forksPreserveGlobalOrderAndSharedMembershipAcrossMoldGroups()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.004"/>
+  <testcase name="eachInstallationGetsItsOwnIdentityAndTheContentsAtThatMoment()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.003"/>
+  <testcase name="emptyInstalledIdentitiesSurviveRealStoreNbtRoundTrip()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.002"/>
+  <testcase name="changingSnapshotDoesNotInvalidateOrRedirectPendingSourceRewrite()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.003"/>
+  <testcase name="sourceRemovalInvalidatesPendingRewriteButLeavesCopiedMembershipsUntouched()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.002"/>
+  <testcase name="installedSnapshotSurvivesSourceReplacementRemovalAndDeletion()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.005"/>
+  <testcase name="twoDifferentSourceLibrariesRemainIndependentAfterBothAreInstalled()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.001"/>
+  <testcase name="installationDuringIncrementalRewriteCapturesPublishedContentsOnly()" classname="com.sorrowmist.useless.stretcher.content.mold.InstalledPatternSnapshotTest" time="0.03"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

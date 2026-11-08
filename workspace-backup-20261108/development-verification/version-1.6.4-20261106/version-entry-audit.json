@@ -1,0 +1,24 @@
+{
+  "status": "development-unreleased",
+  "version": "1.21.1-1.6.4",
+  "gradle_version": "1.21.1-1.6.4",
+  "source_metadata_version": "1.21.1-1.6.4",
+  "processed_metadata_version": "1.21.1-1.6.4",
+  "expected_next_jar": "useless_stretcher-1.21.1-1.6.4.jar",
+  "process_resources": "passed",
+  "diff_check": "passed",
+  "documents": [
+    "D:\\AI\\sources\\UselessStretcher-capsule-variants\\更新.txt",
+    "D:\\AI\\sources\\UselessStretcher-capsule-variants\\万象担架使用说明.txt",
+    "D:\\AI\\sources\\UselessStretcher-capsule-variants\\万象担架-项目交接文档.md",
+    "D:\\AI\\更新.txt",
+    "D:\\AI\\万象担架使用说明.txt",
+    "D:\\AI\\万象担架-项目交接文档.md"
+  ],
+  "published_1_6_3_jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar",
+  "published_1_6_3_sha256": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+  "published_1_6_3_remote_tag_commit": "2f1fe845343673512829cbf080117257b7958bec",
+  "game_started": false,
+  "new_jar_built": false,
+  "new_release_published": false
+}

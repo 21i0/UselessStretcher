@@ -1,0 +1,3994 @@
+[
+  {
+    "jar": "accelerated-decay-neoforge-21.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\accelerated-decay-neoforge-21.0.0.jar",
+    "bytes": 10478,
+    "sha256": "808CD7C554CA5953AA7B3EE54DA15CABE9BBAD7CDB8B2D9133929269CF8A00AC",
+    "nested": false
+  },
+  {
+    "jar": "actuallyadditions-1.3.26+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\actuallyadditions-1.3.26+mc1.21.1.jar",
+    "bytes": 3217309,
+    "sha256": "072451BB6069025E255A39216EDC0F892CDA00C12B9905B552E7DD4631D44A41",
+    "nested": false
+  },
+  {
+    "jar": "AdditionalEnchantedMiner-1.21.1-neoforge-21.1.165.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AdditionalEnchantedMiner-1.21.1-neoforge-21.1.165.jar",
+    "bytes": 739879,
+    "sha256": "6D3F8B43044ED66BEEBA44C3BC4E10089F35AC2EF9843E5A33C88391CD5FCA9D",
+    "nested": false
+  },
+  {
+    "jar": "AdvancedAE-1.6.12-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AdvancedAE-1.6.12-1.21.1.jar",
+    "bytes": 4791255,
+    "sha256": "A01D9718667AC13899013E91C5B0B7708B9B9DB1DA9B8E380772DDE54BBE8F41",
+    "nested": false
+  },
+  {
+    "jar": "AdvancedAE-1.6.12-1.21.1.jar!/META-INF/jarjar/ae2addonlib-1.0.3-1.21.1.jar",
+    "bytes": 198113,
+    "sha256": "1D065B46DB71ADDEB7E04AFF4981B424531D40123FE2B0C1D2A2CC9AF81319FE",
+    "nested": true
+  },
+  {
+    "jar": "AdvancedAE-1.6.12-1.21.1.jar!/META-INF/jarjar/ae2wtlib_api-19.2.5.jar",
+    "bytes": 76691,
+    "sha256": "C6CEAA29F847F37F050FE0CB18963D68F27C69E7B395AA361497CF9796460A2C",
+    "nested": true
+  },
+  {
+    "jar": "advancedae_addon-21.1.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\advancedae_addon-21.1.0.jar",
+    "bytes": 14537,
+    "sha256": "039DDC031E5924851ED6AE2836E28A60BDA0A3915EECD58A61277A3C3EB55144",
+    "nested": false
+  },
+  {
+    "jar": "AdvancedPeripherals-1.21.1-0.8.2a.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AdvancedPeripherals-1.21.1-0.8.2a.jar",
+    "bytes": 1681254,
+    "sha256": "40770C284BA859CA0EFB0E113E30625D93A7E252A5587CA5CF45F31D81F481ED",
+    "nested": false
+  },
+  {
+    "jar": "advanced_memory_card-1.2.2-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\advanced_memory_card-1.2.2-1.21.1.jar",
+    "bytes": 231785,
+    "sha256": "D8AE67809CD1401A78B910E2C0CFB64280A3A2A0FF48C46194F9D60E80E16032",
+    "nested": false
+  },
+  {
+    "jar": "ae2-batchcraft-1.21.1-1.0.3-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2-batchcraft-1.21.1-1.0.3-neoforge.jar",
+    "bytes": 627694,
+    "sha256": "DCFCB3117B5B9F5CBAEB73016837068093A9971682E0DB7C8B871DD7CCC571A9",
+    "nested": false
+  },
+  {
+    "jar": "ae2cs-1.21.1-1.2.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2cs-1.21.1-1.2.1.jar",
+    "bytes": 1965309,
+    "sha256": "FB0D921C68D43E3FF76C9DA16B6E3B8BA4944849064FD42AEB27E0F9ED099DDE",
+    "nested": false
+  },
+  {
+    "jar": "ae2ct-1.21.1-1.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2ct-1.21.1-1.1.1.jar",
+    "bytes": 437906,
+    "sha256": "70A704742CF8BC13778A201A2338D0F4108DC0700BCA47ED265ABA02180F6777",
+    "nested": false
+  },
+  {
+    "jar": "ae2importexportcard-1.21.1-1.9.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2importexportcard-1.21.1-1.9.1.jar",
+    "bytes": 688670,
+    "sha256": "D9FADD2008358E3CC12295648E39424968110A2D70FD429D2C4541064AD4F6F0",
+    "nested": false
+  },
+  {
+    "jar": "ae2importexportcard-1.21.1-1.9.1.jar!/META-INF/jarjar/GrandPower-3.0.2.jar",
+    "bytes": 211982,
+    "sha256": "65BCA4F4962F0BA9720FA8CDF8AEC0D2D1B13B2B4F3885A289A1591839A69396",
+    "nested": true
+  },
+  {
+    "jar": "ae2jeiintegration-1.2.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2jeiintegration-1.2.1.jar",
+    "bytes": 91710,
+    "sha256": "2989C5D762D3F14A58B4DB6519DAAFF81E719DFF3445A2B39328948AC23E548B",
+    "nested": false
+  },
+  {
+    "jar": "ae2lt-2.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2lt-2.1.3.jar",
+    "bytes": 6963071,
+    "sha256": "4241F5757F4BE2ABD41EFDB9AD15AAEFEEB23960CCF5D9C4F4A1C92E481DFE3F",
+    "nested": false
+  },
+  {
+    "jar": "ae2lt-2.1.3.jar!/META-INF/jarjar/ae2wtlib_api-19.4.1.jar",
+    "bytes": 77206,
+    "sha256": "DB7EDCF884E81777319F6093F953491716BD430B74C5063A3CE93FEA10CF559C",
+    "nested": true
+  },
+  {
+    "jar": "ae2ltpp-1.2.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2ltpp-1.2.4.jar",
+    "bytes": 1192450,
+    "sha256": "7F96FCA540076C7AD7B3B30401EA00FAC0053B3F0ECB9E85DD0938239DF66A78",
+    "nested": false
+  },
+  {
+    "jar": "AE2NetworkAnalyzer-1.21-2.1.5-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AE2NetworkAnalyzer-1.21-2.1.5-neoforge.jar",
+    "bytes": 1686091,
+    "sha256": "74B68E9EC57DBF21A0417CE099D61B834F88EFB0DE3CCCBA4413E5DCF9D69F3C",
+    "nested": false
+  },
+  {
+    "jar": "ae2omnicells-1.21.1-neoforge-1.1.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2omnicells-1.21.1-neoforge-1.1.6.jar",
+    "bytes": 867711,
+    "sha256": "9CED732D2140D103DF8D675A1986940395C15C82DC1BFD14BF1F45E2C68A2FC1",
+    "nested": false
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "bytes": 712303,
+    "sha256": "27BC943197FBCFEDF644499D93DD013E83F2C767FDEA3D85DE70211ACF8C4CD2",
+    "nested": false
+  },
+  {
+    "jar": "ae2wtlib-19.5.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2wtlib-19.5.1.jar",
+    "bytes": 252091,
+    "sha256": "407E7300351353CB4CB7698286E180AEF2BD6E7A97EC7EFC6493F9DAA4DBFFE5",
+    "nested": false
+  },
+  {
+    "jar": "ae2wtlib-19.5.1.jar!/META-INF/jarjar/de.mari_023.ae2wtlib_api-19.5.1.jar",
+    "bytes": 81626,
+    "sha256": "E674205F18EB2D07CE33CDA69D46CDBA63A6230E7DABBE2ABF98064991D6B3C4",
+    "nested": true
+  },
+  {
+    "jar": "ae2_ftbquest_detector-0.6.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ae2_ftbquest_detector-0.6.2.jar",
+    "bytes": 150064,
+    "sha256": "69115A842BF98AB5EECE2BEC0A633228EEC4BE815B8FE53E3DD80DF24CF0C76B",
+    "nested": false
+  },
+  {
+    "jar": "aeinfinitybooster-neoforge-2.1.2+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\aeinfinitybooster-neoforge-2.1.2+mc1.21.1.jar",
+    "bytes": 42287,
+    "sha256": "68F9C2FC354BDAAB7EE889F5605852D7D7E54AA9A89DB7E556A252FDCEBD19B9",
+    "nested": false
+  },
+  {
+    "jar": "aether-1.21.1-1.5.10-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\aether-1.21.1-1.5.10-neoforge.jar",
+    "bytes": 40223909,
+    "sha256": "B19386301560A017A458E9790A7B59999E270F93010DEF0B61E7CBE4C8630DBF",
+    "nested": false
+  },
+  {
+    "jar": "aether-1.21.1-1.5.10-neoforge.jar!/META-INF/jarjar/cumulus_menus-1.21.1-2.0.7-neoforge.jar",
+    "bytes": 466571,
+    "sha256": "2518ABCCB1A012BB63B5B3EA14B8ED93C82FB5002105C86AFADADF518BF149A1",
+    "nested": true
+  },
+  {
+    "jar": "aether-1.21.1-1.5.10-neoforge.jar!/META-INF/jarjar/accessories-neoforge-1.1.0-beta.48+1.21.1.jar",
+    "bytes": 1064111,
+    "sha256": "A66D62A241C53478A1DFC68381F8476CFB8A6107C2C190B7710F0CDADD839405",
+    "nested": true
+  },
+  {
+    "jar": "aether-1.21.1-1.5.10-neoforge.jar!/META-INF/jarjar/nitrogen_internals-1.21.1-1.1.25-neoforge.jar",
+    "bytes": 998123,
+    "sha256": "00CF0E032076F1220C4A8C760A392E12AACB52E4D8E779B9AAF63CD561B40341",
+    "nested": true
+  },
+  {
+    "jar": "AI-Improvements-1.21-0.5.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AI-Improvements-1.21-0.5.3.jar",
+    "bytes": 28984,
+    "sha256": "795618769FF1AC782750BE9E8FAAF3E3D212F1687C3BAAB98C1282A98A63A41E",
+    "nested": false
+  },
+  {
+    "jar": "AkashicTome-1.8-30.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AkashicTome-1.8-30.jar",
+    "bytes": 50256,
+    "sha256": "C60F58FBA975FE22681D69BD06DC93818E53A67830D9118167979852206F6CA8",
+    "nested": false
+  },
+  {
+    "jar": "allthearcanistgear-1.21.1-21.3.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\allthearcanistgear-1.21.1-21.3.2.jar",
+    "bytes": 375904,
+    "sha256": "4F04704305FCFD8F5C6D92B6ED1F5912A078C77A9442C3C0E224A24B352DDF3B",
+    "nested": false
+  },
+  {
+    "jar": "allthearcanistgear-1.21.1-21.3.2.jar!/META-INF/jarjar/AdditionalEntityAttributes-2.0.0+1.21.1-neoforge.jar",
+    "bytes": 197056,
+    "sha256": "437BBFE32B7DCCD8F3EA96E09674492537A8842F539B760BF70272A2A1D0211F",
+    "nested": true
+  },
+  {
+    "jar": "allthecompressed-1.21.1-4.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\allthecompressed-1.21.1-4.4.0.jar",
+    "bytes": 5901446,
+    "sha256": "D1B0C1135D8C206B8F18C73AFA08256C74F8B9504626F90E2A64614C92163C36",
+    "nested": false
+  },
+  {
+    "jar": "alltheleaks-1.1.14-1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\alltheleaks-1.1.14-1.21.1-neoforge.jar",
+    "bytes": 565897,
+    "sha256": "B78B832E2C7B0D6697A8E6E846074430405F2522F14D275BA518DCF9220EBE5C",
+    "nested": false
+  },
+  {
+    "jar": "alltheleaks-1.1.14-1.21.1-neoforge.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.3.jar",
+    "bytes": 96093,
+    "sha256": "18D515E6A7E8456E0BE35BD5948D3667646069ECE30BA6535D44BB6643814406",
+    "nested": true
+  },
+  {
+    "jar": "alltheleaks-1.1.14-1.21.1-neoforge.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.3.jar!/META-INF/jars/MixinSquared-0.3.3.jar",
+    "bytes": 101936,
+    "sha256": "5AE421A724F2CC9B06ADE3DA79FB3224E8073FDEAC9A35DF6F16AE59147A1ABB",
+    "nested": true
+  },
+  {
+    "jar": "allthemodium-3.2.1_mc_1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\allthemodium-3.2.1_mc_1.21.1.jar",
+    "bytes": 1914549,
+    "sha256": "C18A46415B3740B5C7625656C3E8F67D4B2019022FE113F7F5A2768A3E63DF0A",
+    "nested": false
+  },
+  {
+    "jar": "alltheores-3.2.0_neoforge_1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\alltheores-3.2.0_neoforge_1.21.1.jar",
+    "bytes": 1645297,
+    "sha256": "7DE4018F8475874347BD8DC5B7551CAD80C31446DE8DAAE7C86AEE5480F9C80A",
+    "nested": false
+  },
+  {
+    "jar": "allthewizardgear-1.21.1-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\allthewizardgear-1.21.1-1.2.0.jar",
+    "bytes": 125549,
+    "sha256": "164215A7E5B4722E7515F871FC923A931467B2984B16AA7CCFE3C551D1880119",
+    "nested": false
+  },
+  {
+    "jar": "almostunified-neoforge-1.21.1-1.4.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\almostunified-neoforge-1.21.1-1.4.2.jar",
+    "bytes": 295093,
+    "sha256": "65202ADF4DCCF7B3033537E539E23ECCC541C6A15AD88D87FA1C5A09CEB3359F",
+    "nested": false
+  },
+  {
+    "jar": "Apotheosis-1.21.1-8.9.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Apotheosis-1.21.1-8.9.0.jar",
+    "bytes": 7184314,
+    "sha256": "23A8B4A21D0D8744F097C77C8A96FCBA14C4B95F3B1BB542412F40DAB272872E",
+    "nested": false
+  },
+  {
+    "jar": "ApothicAttributes-1.21.1-2.11.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ApothicAttributes-1.21.1-2.11.0.jar",
+    "bytes": 319609,
+    "sha256": "17C42BB6DD5C0D820FE090E1BB5959578CD5AB7B70CAF98A2A59B319FCC7E1BA",
+    "nested": false
+  },
+  {
+    "jar": "ApothicEnchanting-1.21.1-1.6.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ApothicEnchanting-1.21.1-1.6.4.jar",
+    "bytes": 5422885,
+    "sha256": "AFF9837F45C1C981D47A9E60B780C37A151EF881937FAF5F72092895104C8BBB",
+    "nested": false
+  },
+  {
+    "jar": "ApothicSpawners-1.21.1-1.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ApothicSpawners-1.21.1-1.4.0.jar",
+    "bytes": 129784,
+    "sha256": "F0CBC52AD606997789C36FAC94AE651AB7E2E21C841E26A952C64041CAD9CDBE",
+    "nested": false
+  },
+  {
+    "jar": "appleskin-neoforge-mc1.21-3.0.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\appleskin-neoforge-mc1.21-3.0.9.jar",
+    "bytes": 75804,
+    "sha256": "38B48DD6231341C9F964CE6E42C57EC866C6CC8F72BEC938390A59BAFB3922DF",
+    "nested": false
+  },
+  {
+    "jar": "applied-generators-0.3.1+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\applied-generators-0.3.1+1.21.1.jar",
+    "bytes": 545756,
+    "sha256": "DA2D17139C904F21CA066EB40B0FD69EF83AB3C215D8877AA9DDA646F0DBA21E",
+    "nested": false
+  },
+  {
+    "jar": "Applied-Mekanistics-1.6.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Applied-Mekanistics-1.6.3.jar",
+    "bytes": 149709,
+    "sha256": "8946FEA39451DBCE8E709DEDBEF40A52BA337BDF7A25AC0C4B503800B1BF0773",
+    "nested": false
+  },
+  {
+    "jar": "appliedenergistics2-19.2.18.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\appliedenergistics2-19.2.18.jar",
+    "bytes": 8236552,
+    "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39",
+    "nested": false
+  },
+  {
+    "jar": "appliedenhancements-1.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\appliedenhancements-1.1.3.jar",
+    "bytes": 999779,
+    "sha256": "5512E683EA063382393B04C9E24D53427DC9EC7F42582057F82EB0B0ED548B90",
+    "nested": false
+  },
+  {
+    "jar": "AppliedFlux-1.21-2.1.7-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AppliedFlux-1.21-2.1.7-neoforge.jar",
+    "bytes": 351056,
+    "sha256": "3FA19F02317A795334805D67318708C5025911B55C24AE273125F1A0652311B8",
+    "nested": false
+  },
+  {
+    "jar": "appliedsoul-1.21.1-2.1.0-hotfix.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\appliedsoul-1.21.1-2.1.0-hotfix.jar",
+    "bytes": 144292,
+    "sha256": "F8D0BE4C71C0AC12B513148A1DB3FF3451D91EA00F3EEA8D0222A1EEC52F1219",
+    "nested": false
+  },
+  {
+    "jar": "applied_kjs-1.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\applied_kjs-1.0.0.jar",
+    "bytes": 86754,
+    "sha256": "4C60560D07A062FCA067ECB32024E779A786F2EF21C66DBA4E112DCECE988D32",
+    "nested": false
+  },
+  {
+    "jar": "Aquaculture-1.21.1-2.7.22.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Aquaculture-1.21.1-2.7.22.jar",
+    "bytes": 608905,
+    "sha256": "D77CC93B1285E16C2E8DAE27565E96C86FBCAEC811904B9CDC23A9FC379585AD",
+    "nested": false
+  },
+  {
+    "jar": "architectury-13.0.11-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\architectury-13.0.11-neoforge.jar",
+    "bytes": 584734,
+    "sha256": "9CC92F2C09533FC5482C60F993BD891C655A0E32B637037CDCB7C2B23ADEDEEB",
+    "nested": false
+  },
+  {
+    "jar": "arseng-2.1.1-beta.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\arseng-2.1.1-beta.jar",
+    "bytes": 123229,
+    "sha256": "9E2B78101F08BF325589CB98FFBA9D91171FDD76BA587D54BDEF9D5DE18080BC",
+    "nested": false
+  },
+  {
+    "jar": "ars_additions-1.21.1-21.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_additions-1.21.1-21.3.0.jar",
+    "bytes": 1458261,
+    "sha256": "E634A3F0C39CD38007608CCE1974A7C9BBAD7D8202BFB6C75F17C2901F362C9B",
+    "nested": false
+  },
+  {
+    "jar": "ars_controle-1.21.1-1.6.16.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_controle-1.21.1-1.6.16.jar",
+    "bytes": 313828,
+    "sha256": "595990B532B7E8CF23A5897C39EDCDD9ADD52F208BE9517FF7304E3B35361441",
+    "nested": false
+  },
+  {
+    "jar": "ars_creo-1.21.1-5.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_creo-1.21.1-5.4.0.jar",
+    "bytes": 95973,
+    "sha256": "50F0FE5C5F855151C1482C1772EA94C2EAADC2B0C85C963BB9AEB421FC801E4F",
+    "nested": false
+  },
+  {
+    "jar": "ars_elemancy-1.21.1-1.18.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_elemancy-1.21.1-1.18.3.jar",
+    "bytes": 792016,
+    "sha256": "502366F85DFDE7BF13CEEF571CC3C2BA9C7960D35FA54D5E2CDF6E8F407FC9CF",
+    "nested": false
+  },
+  {
+    "jar": "ars_elemancy-1.21.1-1.18.3.jar!/META-INF/jarjar/sauce-1.21.1-0.0.29.73.jar",
+    "bytes": 216920,
+    "sha256": "33C51A5241A9728C7428BF4DC4DECA15F5B0E3C239D5BDE173E0B67610FD026E",
+    "nested": true
+  },
+  {
+    "jar": "ars_elemental-1.21.1-0.7.10.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_elemental-1.21.1-0.7.10.4.jar",
+    "bytes": 2273778,
+    "sha256": "9BA4393C98228BB1647E3786C71C30C7EB97574B9E65BABA14F34C92F7B86EB9",
+    "nested": false
+  },
+  {
+    "jar": "ars_elemental-1.21.1-0.7.10.4.jar!/META-INF/jarjar/sauce-1.21.1-0.0.61.100.jar",
+    "bytes": 248060,
+    "sha256": "58CE7A36FC6FB7631B35765D58227B2982ECE031559FA4122F1391A17811B251",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_nouveau-1.21.1-5.13.4.jar",
+    "bytes": 19872506,
+    "sha256": "6BD42EAE022C6B78FB907E24BEDE2601AF32861E238DCCE2573EDE23C9AEC86C",
+    "nested": false
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/nuggets-neoforge-1.21.1-1.1.0.48.jar",
+    "bytes": 209407,
+    "sha256": "204BBC9E9EDFE6D96AB51BB39B062388E444E621F8B2692EC78D0634D0831865",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/lambdynamiclights-api-4.5.1+1.21.1-mojmap.jar",
+    "bytes": 199629,
+    "sha256": "5424CDBA38336BA1357805008A9CCCBF697FAE8BCDC3F8BFA2D7359A577AF265",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/lambdynamiclights-api-4.5.1+1.21.1-mojmap.jar!/META-INF/jars/yumi-commons-collections-1.0.0-beta.4.jar",
+    "bytes": 14815,
+    "sha256": "465BB920FDF1CA9CAEACAD01994AEC624DEEA133A7D5B5EFE0AE5984406B320B",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/lambdynamiclights-api-4.5.1+1.21.1-mojmap.jar!/META-INF/jars/yumi-commons-core-1.0.0-beta.4.jar",
+    "bytes": 27575,
+    "sha256": "A104EE2C71B550BD7098ED2F97414AF26A3A657C5BE6E0A0E421D7D134168F06",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/lambdynamiclights-api-4.5.1+1.21.1-mojmap.jar!/META-INF/jars/yumi-commons-event-1.0.0-beta.4.jar",
+    "bytes": 51266,
+    "sha256": "EE3AAB1EE1F7E3B05F44B2EF4DEACFBE9DD59E48E4EEC9DBEADA1E8FD84EAB7F",
+    "nested": true
+  },
+  {
+    "jar": "ars_nouveau-1.21.1-5.13.4.jar!/META-INF/jarjar/infiniverse-568341-5486311.jar",
+    "bytes": 25065,
+    "sha256": "CA0F8B3952120EC566D91D4ACA79C9C9175309329C69B925507E9D627684BD5B",
+    "nested": true
+  },
+  {
+    "jar": "ars_ocultas-1.21.1-2.6.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_ocultas-1.21.1-2.6.2.jar",
+    "bytes": 82755,
+    "sha256": "7C5BBA278D785334601F7A348136C19802D90EDFACED707D3A80F54F121D6A30",
+    "nested": false
+  },
+  {
+    "jar": "ars_polymorphia-1.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_polymorphia-1.0.4.jar",
+    "bytes": 21114,
+    "sha256": "0E5AEBD79C186516410174B7A58FB003D496F13385209C0CB4F514BC7B78A05B",
+    "nested": false
+  },
+  {
+    "jar": "ars_technica-1.21.1-2.7.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_technica-1.21.1-2.7.6.jar",
+    "bytes": 3691171,
+    "sha256": "64B70F39F8C8CA38262C69E2B84A6494A8A11C8EF7E570D8136B1818D5D3159D",
+    "nested": false
+  },
+  {
+    "jar": "ars_technica-1.21.1-2.7.6.jar!/META-INF/jarjar/sauce-1.21.1-0.0.16.46.jar",
+    "bytes": 165983,
+    "sha256": "90A74D07D6BD3FC6EBEF7E07BE860D96D865D4162C62228DF7AD4F89DF13FC58",
+    "nested": true
+  },
+  {
+    "jar": "ars_unification-1.2.23.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ars_unification-1.2.23.jar",
+    "bytes": 120451,
+    "sha256": "8E1237CC5D56C7097A23306156964EBF6D828FFA4B279D196EE463E668A2FB11",
+    "nested": false
+  },
+  {
+    "jar": "artifacts-neoforge-13.2.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\artifacts-neoforge-13.2.5.jar",
+    "bytes": 1086922,
+    "sha256": "E36A929420A0A616ABDB28F5BBBDB866A426AA3BB78D1B39BC1183927C101CE6",
+    "nested": false
+  },
+  {
+    "jar": "artifacts-neoforge-13.2.5.jar!/META-INF/jars/expandability-neoforge-12.0.0.jar",
+    "bytes": 46804,
+    "sha256": "B68DC58B7A56F769FBA7C20D4E6C810E53E140DD99C6149234F3123BEA2DAB9A",
+    "nested": true
+  },
+  {
+    "jar": "astral-data-compat-checks-1.0.0-internal.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\astral-data-compat-checks-1.0.0-internal.jar",
+    "bytes": 17996,
+    "sha256": "85553ED9579AE134076C2A77300ECD030BFFAB386BDF960C3AC0C7E0CC3B916B",
+    "nested": false
+  },
+  {
+    "jar": "AstralSorcery-2.0.3.59.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\AstralSorcery-2.0.3.59.jar",
+    "bytes": 18168322,
+    "sha256": "A25D11D104E450C643369F54D4D4C50A9C5CD1CDA315385803804BD255B182F9",
+    "nested": false
+  },
+  {
+    "jar": "astral_continuum-1.21.1-0.3.6-data-compat2-experimental.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\astral_continuum-1.21.1-0.3.6-data-compat2-experimental.jar",
+    "bytes": 1050956,
+    "sha256": "805690DD4184B5B3402C6FEDDAFA34FB4C3E5F789F1B1852CA733580921A6514",
+    "nested": false
+  },
+  {
+    "jar": "atlas_api-1.21.1-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\atlas_api-1.21.1-1.2.0.jar",
+    "bytes": 28419,
+    "sha256": "42F213C8FC8DB43E307DD5B0B726ACB2B044548258BCAC6C3F666A953688CC64",
+    "nested": false
+  },
+  {
+    "jar": "attributefix-neoforge-1.21.1-21.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\attributefix-neoforge-1.21.1-21.1.3.jar",
+    "bytes": 19809,
+    "sha256": "B2B20F3D44E824071284C14DE3F4D3323D420E1C450040B339A5C37D2C382AD4",
+    "nested": false
+  },
+  {
+    "jar": "auroral-1.21.1-1.1.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\auroral-1.21.1-1.1.5.jar",
+    "bytes": 2215632,
+    "sha256": "D77F397B7DA74A2047D94BDD5C3964F36AA564BBD55B612E380A7D86AE5B12C3",
+    "nested": false
+  },
+  {
+    "jar": "Auroras-1.21-1.6.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Auroras-1.21-1.6.2.jar",
+    "bytes": 2116122,
+    "sha256": "FDA5C3970FB76F80710A591710D51BA3A8E1289427A969B6DD397B09A3570176",
+    "nested": false
+  },
+  {
+    "jar": "balm-neoforge-1.21.1-21.0.67.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\balm-neoforge-1.21.1-21.0.67.jar",
+    "bytes": 786010,
+    "sha256": "EAAE887582A67A02F55A970EC2D7353F1886A99924ED6144AA4D898266606C34",
+    "nested": false
+  },
+  {
+    "jar": "balm-neoforge-1.21.1-21.0.67.jar!/META-INF/jarjar/kuma-api-neoforge-21.0.8+1.21.jar",
+    "bytes": 32710,
+    "sha256": "CF04355DE63F96A84A10309D1C985200EB54B7BC614C7C3B556B39209E829F40",
+    "nested": true
+  },
+  {
+    "jar": "baubley-heart-canisters-1.21.1-1.5.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\baubley-heart-canisters-1.21.1-1.5.0.jar",
+    "bytes": 185285,
+    "sha256": "5FB3CBDF8DFF8269E48FF013E5D1BF10B0BEF8BC6CB94343D7E6F7500A08F632",
+    "nested": false
+  },
+  {
+    "jar": "better-advanced-tooltips-2101.1.0-build.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\better-advanced-tooltips-2101.1.0-build.5.jar",
+    "bytes": 37653,
+    "sha256": "0F76D46F2F18EB67E67C7974170D7B27DEB66473396461C8DC50D6949DE1449B",
+    "nested": false
+  },
+  {
+    "jar": "better-compatability-checker-neoforge-21.1.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\better-compatability-checker-neoforge-21.1.8.jar",
+    "bytes": 25085,
+    "sha256": "1ED1373AA54A486F19A0C68C7446FE39C227628E7F5048BFF97917189307E7E8",
+    "nested": false
+  },
+  {
+    "jar": "BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar",
+    "bytes": 98641,
+    "sha256": "60B548BEF04A2F0E1DA686EE9035C2E3D4ED0459A17D7A4836FC26AF6DE6B60E",
+    "nested": false
+  },
+  {
+    "jar": "bigger_ae2-1.21.1-21.2.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\bigger_ae2-1.21.1-21.2.3.jar",
+    "bytes": 339429,
+    "sha256": "A13B54AE6754F3A4441F01648A68F7B93AF9B93CC664A737114DECBF69FEA14C",
+    "nested": false
+  },
+  {
+    "jar": "bigger_ae2-1.21.1-21.2.3.jar!/META-INF/jarjar/Registrate-MC1.21-1.3.0+67.jar",
+    "bytes": 181448,
+    "sha256": "510F4041C41739F1D8EA8850AB8364D3E3A5FADA8529BEED5D9F479E2523DB52",
+    "nested": true
+  },
+  {
+    "jar": "blueflame-1.21.1-1.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\blueflame-1.21.1-1.1.1.jar",
+    "bytes": 17921,
+    "sha256": "FBCE87DC39EA0ECF0A463C89C69D86BE083DAC74077E5BD1E5CF0171404E4CCB",
+    "nested": false
+  },
+  {
+    "jar": "bonsaitrees4-4.0.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\bonsaitrees4-4.0.9.jar",
+    "bytes": 3812146,
+    "sha256": "CAE8ACACFF71D3A1F4CE1F1F10B69E2D2807171969A0D4FC70AE8C501CD3B1F9",
+    "nested": false
+  },
+  {
+    "jar": "bookshelf-neoforge-1.21.1-21.1.81.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\bookshelf-neoforge-1.21.1-21.1.81.jar",
+    "bytes": 328813,
+    "sha256": "19E88D40DA2B6A114C2B808F7FB469D96E66A5379DF0A8A43FCB7834498B3E76",
+    "nested": false
+  },
+  {
+    "jar": "borderless-neoforge-1.21.1-1.7.5_1-all.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\borderless-neoforge-1.21.1-1.7.5_1-all.jar",
+    "bytes": 47359,
+    "sha256": "2F7055216DA0EE436E558315F8A15E6A53D866E04C58740D02F2EB5984AEAFFD",
+    "nested": false
+  },
+  {
+    "jar": "botanypots-neoforge-1.21.1-21.1.44.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\botanypots-neoforge-1.21.1-21.1.44.jar",
+    "bytes": 1068816,
+    "sha256": "45B23AC195511F724F62AB5F0C2D7A1C2C2403FF324A7403A1142E28A7D65EDD",
+    "nested": false
+  },
+  {
+    "jar": "botanypotsmystical-neoforge-1.21.1-21.1.12.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\botanypotsmystical-neoforge-1.21.1-21.1.12.jar",
+    "bytes": 89696,
+    "sha256": "F7C67BB0FCE976B8DFDD1C07E499FBDC472E1E97305CA7AE5E57CCBA780F293E",
+    "nested": false
+  },
+  {
+    "jar": "botanytrees-neoforge-1.21.1-21.1.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\botanytrees-neoforge-1.21.1-21.1.7.jar",
+    "bytes": 341853,
+    "sha256": "72060638703DA61E868D5D52674C580A58ED68CFC80A99697D360F8ED0092678",
+    "nested": false
+  },
+  {
+    "jar": "BrandonsCore-1.21.1-3.2.1.309.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\BrandonsCore-1.21.1-3.2.1.309.jar",
+    "bytes": 1385131,
+    "sha256": "076B44DE51C606E6CDD89694AC0A879FC028D4F0103880EF44F47DBCC69F1D23",
+    "nested": false
+  },
+  {
+    "jar": "BridgingMod-2.6.2+1.21.1.neoforge-release.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\BridgingMod-2.6.2+1.21.1.neoforge-release.jar",
+    "bytes": 5924051,
+    "sha256": "382F3688C1A6C93AE96C12E8C7B3F529AA1A2F7DD07C2AAABDA5E0B28464715B",
+    "nested": false
+  },
+  {
+    "jar": "buildinggadgets2-1.3.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\buildinggadgets2-1.3.9.jar",
+    "bytes": 3858597,
+    "sha256": "ACAE3B628FA60AE8D34059B40C696EA282C01D20B14D32A506C4F85DD357B114",
+    "nested": false
+  },
+  {
+    "jar": "bwncr-neoforge-1.21.1-3.20.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\bwncr-neoforge-1.21.1-3.20.4.jar",
+    "bytes": 28573,
+    "sha256": "5AD29F3287E9C6F5B20638F051597918657886A0CDBC5123CF20505210584AC4",
+    "nested": false
+  },
+  {
+    "jar": "caelus-neoforge-7.0.1+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\caelus-neoforge-7.0.1+1.21.1.jar",
+    "bytes": 50235,
+    "sha256": "432A645557F29DE159D9EDDE2FD109F8E3B32FF30895B4FEDE04EE5F1A1A682F",
+    "nested": false
+  },
+  {
+    "jar": "cc-tweaked-1.21.1-forge-1.120.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cc-tweaked-1.21.1-forge-1.120.2.jar",
+    "bytes": 3126327,
+    "sha256": "E8651FE24B384E925E563C9AD077644744474E2E7C0ADB8E6D5B4757598DCE9F",
+    "nested": false
+  },
+  {
+    "jar": "cc-tweaked-1.21.1-forge-1.120.2.jar!/META-INF/jarjar/cobalt-0.9.9.jar",
+    "bytes": 357787,
+    "sha256": "ACA9FE1A2CAB3EA7E296A72A1A6F667E29DDFDBAB7AF7CEE35420BC2CC6E6929",
+    "nested": true
+  },
+  {
+    "jar": "cc-tweaked-1.21.1-forge-1.120.2.jar!/META-INF/jarjar/jzlib-1.1.3.jar",
+    "bytes": 71976,
+    "sha256": "89B1360F407381BF61FDE411019D8CBD009EBB10CFF715F3669017A031027560",
+    "nested": true
+  },
+  {
+    "jar": "Cell4-1.21.1-NeoForge-1.0.4fix3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Cell4-1.21.1-NeoForge-1.0.4fix3.jar",
+    "bytes": 161811,
+    "sha256": "02539EFD265499EC6A0092F8921F5048EAE5FDA4B99E6A1E501E76347C3C4562",
+    "nested": false
+  },
+  {
+    "jar": "cleanswing-1.10-1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cleanswing-1.10-1.21.jar",
+    "bytes": 9477,
+    "sha256": "2E4120E52CCD8A920F8DCE5361EC98C21EBD4A1DC49F2501BC97C877800813AA",
+    "nested": false
+  },
+  {
+    "jar": "cloth-config-15.0.140-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cloth-config-15.0.140-neoforge.jar",
+    "bytes": 1163890,
+    "sha256": "65E722E0D98431A07C45F8BDD8D529A217CC8C175FDE1740248BD5C1B4F3C0D4",
+    "nested": false
+  },
+  {
+    "jar": "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Clumps-neoforge-1.21.1-19.0.0.1.jar",
+    "bytes": 18382,
+    "sha256": "B524CCDACE2EF8FD19F5B2074F7DE1103AC5065C52553F064C00E098346C293E",
+    "nested": false
+  },
+  {
+    "jar": "cobblegengalore-1.21.1-0.2.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cobblegengalore-1.21.1-0.2.9.jar",
+    "bytes": 88880,
+    "sha256": "06F2969117C1B79C3114F3CC695F736E78CCAB54DC5F8CE81CD585283DA42BA2",
+    "nested": false
+  },
+  {
+    "jar": "cobweb-neoforge-1.21-1.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cobweb-neoforge-1.21-1.4.0.jar",
+    "bytes": 410948,
+    "sha256": "40C151DCEE6A08DECDD980A7C7FFED6ADA292E77C3D2CD7AEA2D01E5FA8D3B1C",
+    "nested": false
+  },
+  {
+    "jar": "CodeChickenLib-1.21.1-4.6.1.529.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\CodeChickenLib-1.21.1-4.6.1.529.jar",
+    "bytes": 1538382,
+    "sha256": "8C453D5C49092860E9D7A692EB858EA54C15D0F9598DAAE524F9590F8EDF276F",
+    "nested": false
+  },
+  {
+    "jar": "CodeChickenLib-1.21.1-4.6.1.529.jar!/META-INF/jarjar/Quack-0.4.10.115.jar",
+    "bytes": 431644,
+    "sha256": "DAED774CFF5CC80483016538D40019BF799F49160B49D2129430E318FDF3052E",
+    "nested": true
+  },
+  {
+    "jar": "colorfulhearts-neoforge-1.21.1-10.5.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\colorfulhearts-neoforge-1.21.1-10.5.9.jar",
+    "bytes": 156588,
+    "sha256": "332A7F3DF1274CABEAE05E9361C41561C42A670787ADC7E4B6795961B4721401",
+    "nested": false
+  },
+  {
+    "jar": "colorwheel-neoforge-1.3.2+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\colorwheel-neoforge-1.3.2+mc1.21.1.jar",
+    "bytes": 515142,
+    "sha256": "6F881290FF7F71E36BBA189D87C31FB104C668F01AAC19AC0D003FAC3CC1CD5F",
+    "nested": false
+  },
+  {
+    "jar": "comforts-neoforge-9.0.5+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\comforts-neoforge-9.0.5+1.21.1.jar",
+    "bytes": 422658,
+    "sha256": "6B0FD35A1349107E08A45539ADBDE9683BB203FEBC43A3305F6FC4AC73E59615",
+    "nested": false
+  },
+  {
+    "jar": "comforts-neoforge-9.0.5+1.21.1.jar!/META-INF/jarjar/spectrelib-neoforge-0.17.2+1.21.jar",
+    "bytes": 125137,
+    "sha256": "5BE2F580AF278C5707679CEB079AEE46D13FFBE6C2F5138C86598A8E90CA3969",
+    "nested": true
+  },
+  {
+    "jar": "commoncapabilities-1.21.1-neoforge-2.11.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\commoncapabilities-1.21.1-neoforge-2.11.6.jar",
+    "bytes": 283980,
+    "sha256": "05F8237F6AE7E5ACF1A8C0756C714DA1D6B3151FEA4AD60941B57DE788315ABF",
+    "nested": false
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\compactmachines-neoforge-7.0.81.jar",
+    "bytes": 684420,
+    "sha256": "3518F73228C6EAE5829AC087E8644A8B06C8A3B494B9F411958B8D33771EADE5",
+    "nested": false
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/core-0.2.32.jar",
+    "bytes": 7240,
+    "sha256": "B0C40A638872E69F164A91F1D3A98F6E8CB1312CCF8AEAF78E8E1248C4263463",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/dev.compactmods.compactmachines.core-api-7.0.81.jar",
+    "bytes": 103456,
+    "sha256": "8994854C6FC898E7FDF7A7DA79EFE131C7DD085F378784544646A5222388EA9F",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/spatial-0.2.1.jar",
+    "bytes": 10452,
+    "sha256": "816334705A791A8A4225557B98131B42F06AC7454F770F42E7F738ECA3FFAF8C",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/ui-0.2.32.jar",
+    "bytes": 8155,
+    "sha256": "48CF0BE2CB4E548BF033E808252630551D96DC0E1705761717501F498B598008",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/rendering-0.2.32.jar",
+    "bytes": 91461,
+    "sha256": "C9AAD48758738403DE22AA6345D84FF4A938DDE6D7AD85ED65E16DDBD873CE8E",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/feather-0.1.8.jar",
+    "bytes": 14044,
+    "sha256": "4B469B3639F2F36C50BB21D64B19E7EEABD9B4116B38E3AB86E5DC5FB1AE223A",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/jnanoid-2.0.0.jar",
+    "bytes": 4667,
+    "sha256": "EC5B1C07B70D3F1E9F31443A138F1DFA6C4DF8480563744B09E6F3DCF664024D",
+    "nested": true
+  },
+  {
+    "jar": "compactmachines-neoforge-7.0.81.jar!/META-INF/jarjar/levels-0.2.32.jar",
+    "bytes": 36601,
+    "sha256": "240E3BB75B8E02B0D7E3465B1CA900ADCF70C21D59E4609BC11DAE420B746822",
+    "nested": true
+  },
+  {
+    "jar": "connectivity-1.21.1-7.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\connectivity-1.21.1-7.7.jar",
+    "bytes": 115891,
+    "sha256": "D2F7CECB93199139C4FF783161C4B9EC106589F72BB3FEBE85349178E7547CF3",
+    "nested": false
+  },
+  {
+    "jar": "ConstructionSticks-1.21.1-1.5.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ConstructionSticks-1.21.1-1.5.0.jar",
+    "bytes": 264738,
+    "sha256": "26520F830B243840F8CE6FAF2BA0EC4ABE9EA8EF1AFD1086CA9D6F56BFB7DDE2",
+    "nested": false
+  },
+  {
+    "jar": "Controlling-neoforge-1.21.1-19.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Controlling-neoforge-1.21.1-19.0.5.jar",
+    "bytes": 77555,
+    "sha256": "CC525FB6B030D9E4D33176983F278919E17B33935E2CA568929BDFA98F2B44A0",
+    "nested": false
+  },
+  {
+    "jar": "cookingforblockheads-neoforge-1.21.1-21.1.24.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cookingforblockheads-neoforge-1.21.1-21.1.24.jar",
+    "bytes": 1266042,
+    "sha256": "CCF2E9DE8130DEC5642F841E76C2A684822D867B7EB26855B0F1C6D4F31E8419",
+    "nested": false
+  },
+  {
+    "jar": "Corgilib-NeoForge-1.21.1-5.0.0.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Corgilib-NeoForge-1.21.1-5.0.0.10.jar",
+    "bytes": 309788,
+    "sha256": "AE720BCC5BDFF1483B0BFC7502FF885B5F27E4AAEF920BA23C0F6D012C390F82",
+    "nested": false
+  },
+  {
+    "jar": "cosmeticarmorreworked-1.21.1-v1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cosmeticarmorreworked-1.21.1-v1-neoforge.jar",
+    "bytes": 92722,
+    "sha256": "6328049755735159C55F5918AC301CFF53A8D8790C3FE63E32E7D8A0E37F123F",
+    "nested": false
+  },
+  {
+    "jar": "craftingtweaks-neoforge-1.21.1-21.1.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\craftingtweaks-neoforge-1.21.1-21.1.11.jar",
+    "bytes": 256086,
+    "sha256": "0964FEFC4A07120A53232B2D934FAC4BAF15FDAA99B69ADD30A18A642BC1CF98",
+    "nested": false
+  },
+  {
+    "jar": "crafting_on_a_stick-1.21.0.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\crafting_on_a_stick-1.21.0.6.jar",
+    "bytes": 78732,
+    "sha256": "DC90054BC50FCF4680E33E1515629E2C92508C04D5594AFD0EEB08777AD5C9B7",
+    "nested": false
+  },
+  {
+    "jar": "crashutilities-9.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\crashutilities-9.0.4.jar",
+    "bytes": 225310,
+    "sha256": "67A47D02F7F7C8B291E920416EB96242BD48F0CBC50F947ADB439C4212EA39F9",
+    "nested": false
+  },
+  {
+    "jar": "create-1.21.1-6.0.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\create-1.21.1-6.0.10.jar",
+    "bytes": 19123767,
+    "sha256": "EF87FE5709F1BA1F5B8BB20A2925B5AFB4669E178FD6D8BF10C167759EEFE37A",
+    "nested": false
+  },
+  {
+    "jar": "create-1.21.1-6.0.10.jar!/META-INF/jarjar/flywheel-neoforge-1.21.1-1.0.6.jar",
+    "bytes": 873570,
+    "sha256": "31DDA15C205EB596D3B3449EF03F6AF7363A6CD35B3DA4BFE916B304F9E5337E",
+    "nested": true
+  },
+  {
+    "jar": "create-1.21.1-6.0.10.jar!/META-INF/jarjar/ponder-neoforge-1.0.82+mc1.21.1.jar",
+    "bytes": 820109,
+    "sha256": "0CF4611AD853042B689AC386184C5BBE02950EFCFFDDB49E5F604E82BADDB0DC",
+    "nested": true
+  },
+  {
+    "jar": "create-1.21.1-6.0.10.jar!/META-INF/jarjar/Registrate-MC1.21-1.3.0+67.jar",
+    "bytes": 181448,
+    "sha256": "510F4041C41739F1D8EA8850AB8364D3E3A5FADA8529BEED5D9F479E2523DB52",
+    "nested": true
+  },
+  {
+    "jar": "create-enchantment-industry-2.5.4b.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\create-enchantment-industry-2.5.4b.jar",
+    "bytes": 1607432,
+    "sha256": "0230B4DFA5AF59BC91AEF6A26F13165AEEEC7026969CE39C823FC3D198E2241D",
+    "nested": false
+  },
+  {
+    "jar": "create-enchantment-industry-2.5.4b.jar!/META-INF/jarjar/conditional-mixin-neoforge-0.6.4.jar",
+    "bytes": 28550,
+    "sha256": "0AE7B346D87879E81F276E6A590A6AF1E723193E6EB3E94C1F71F7AB5B54D59F",
+    "nested": true
+  },
+  {
+    "jar": "createaddition-1.7.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\createaddition-1.7.2.jar",
+    "bytes": 1772844,
+    "sha256": "71E9C3AC39089E72C1E47A129A44E41EB55EFC9534EECFDEAD8DA8FB64313414",
+    "nested": false
+  },
+  {
+    "jar": "createaddition-1.7.2.jar!/META-INF/jarjar/sable-companion-common-1.21.1-1.6.0.jar",
+    "bytes": 35444,
+    "sha256": "873633E35046E3761B277FF8A1ECAD0D55D9A3014FA81A0B084C9AECBA1F3BED",
+    "nested": true
+  },
+  {
+    "jar": "CreateDragonsPlus-1.11.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\CreateDragonsPlus-1.11.9.jar",
+    "bytes": 1085674,
+    "sha256": "37F05A6775BBE811FE8C2833FA6289A1C704D0B25BDD5F239D343A5C6F62ED8A",
+    "nested": false
+  },
+  {
+    "jar": "CreateDragonsPlus-1.11.9.jar!/META-INF/jarjar/conditional-mixin-neoforge-0.6.4.jar",
+    "bytes": 28550,
+    "sha256": "0AE7B346D87879E81F276E6A590A6AF1E723193E6EB3E94C1F71F7AB5B54D59F",
+    "nested": true
+  },
+  {
+    "jar": "create_aquatic_ambitions-1.21.1-2.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\create_aquatic_ambitions-1.21.1-2.0.4.jar",
+    "bytes": 1074131,
+    "sha256": "D50180FD30DC7F034EA4AD5185D18CFA652457BE1D8E7A45F0B491D0E6642D44",
+    "nested": false
+  },
+  {
+    "jar": "create_hypertube-0.6.0-NEOFORGE.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\create_hypertube-0.6.0-NEOFORGE.jar",
+    "bytes": 546142,
+    "sha256": "7BDB8979C7FF7D3B29F7A23771B6AE4870A6DCB7CE2E4A3214FDD6059AACACE8",
+    "nested": false
+  },
+  {
+    "jar": "cristellib-neoforge-1.21.1-3.1.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cristellib-neoforge-1.21.1-3.1.7.jar",
+    "bytes": 583525,
+    "sha256": "11E05DBC97BD3FE1790BD6361747240E314C1DBF40B590EA20CC691DC8396C38",
+    "nested": false
+  },
+  {
+    "jar": "cristellib-neoforge-1.21.1-3.1.7.jar!/META-INF/jars/jankson-1.2.3.jar",
+    "bytes": 76959,
+    "sha256": "16BAE7B779763248F5CA596E3F7F44793A635B551359233E982EE8A4072F1670",
+    "nested": true
+  },
+  {
+    "jar": "cryonicconfig-neoforge-1.0.0+mc1.21.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cryonicconfig-neoforge-1.0.0+mc1.21.11.jar",
+    "bytes": 133851,
+    "sha256": "A33856FD37D787B3BD4103D5C045E669C2F4274EFB8D10F1EE0A759911A21E2C",
+    "nested": false
+  },
+  {
+    "jar": "CTM-1.21-1.2.1+3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\CTM-1.21-1.2.1+3.jar",
+    "bytes": 240791,
+    "sha256": "BF1BFDF13A7FD8D9F0521B9EF9466E57DABFEBAA54D972563BCB0F379C4C8B35",
+    "nested": false
+  },
+  {
+    "jar": "Cucumber-1.21.1-8.0.16.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Cucumber-1.21.1-8.0.16.jar",
+    "bytes": 275588,
+    "sha256": "371F9551C676B76A39D5580BE28F5CFEFF364E131AD138FBF7108AEB2712F43F",
+    "nested": false
+  },
+  {
+    "jar": "cupboard-1.21.1-4.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cupboard-1.21.1-4.2.jar",
+    "bytes": 30517,
+    "sha256": "5162922647FE07C7B9F446870915B57DDD0AE9DCF56B243611130FEA30F2F77A",
+    "nested": false
+  },
+  {
+    "jar": "curios-neoforge-9.5.1+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\curios-neoforge-9.5.1+1.21.1.jar",
+    "bytes": 410690,
+    "sha256": "A45DF2125C26219974ABA7507FFC9AFE7B83ACC941A386AF3FAACB1CC0056FDE",
+    "nested": false
+  },
+  {
+    "jar": "cyclopscore-1.21.1-neoforge-1.30.0-1205.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\cyclopscore-1.21.1-neoforge-1.30.0-1205.jar",
+    "bytes": 1163240,
+    "sha256": "616DEF3AD0B5F024B3417EB8083603FEDC285AF8CFC8F204F657896EB2F8A425",
+    "nested": false
+  },
+  {
+    "jar": "darkmodeeverywhere-neoforge-1.21.1-1.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\darkmodeeverywhere-neoforge-1.21.1-1.4.0.jar",
+    "bytes": 39416,
+    "sha256": "CBB814B1D7188ADA37EC9236A38EFABEBA0C56A1A36AD750B6BC272049FABBB2",
+    "nested": false
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\data_energistics-1.21.1-3.4.0.jar",
+    "bytes": 18423802,
+    "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367",
+    "nested": false
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar!/META-INF/jarjar/CTM-1.21-1.2.1+3.jar",
+    "bytes": 240791,
+    "sha256": "BF1BFDF13A7FD8D9F0521B9EF9466E57DABFEBAA54D972563BCB0F379C4C8B35",
+    "nested": true
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar!/META-INF/jarjar/configuration-1.21.1-3.1.1-neoforge.jar",
+    "bytes": 423189,
+    "sha256": "907D031A236B51BC2D790D6CAFD857C1FF148320B5EA855F8E711F9B67C125C8",
+    "nested": true
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar!/META-INF/jarjar/mdlib-1.21.1-0.0.1.jar",
+    "bytes": 143467,
+    "sha256": "AFD9F96AE78050216892C2001C17E514AE74B7DA521D0C2F3A84FDFF62F00DC6",
+    "nested": true
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar!/META-INF/jarjar/ojalgo-57.3.0.jar",
+    "bytes": 2773766,
+    "sha256": "125CE9C5D4E0243B8428595D9D98C3508AE1C42D63CBCE41BFE93C529EA83D45",
+    "nested": true
+  },
+  {
+    "jar": "deeperdarker-neoforge-1.21.1-1.4.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\deeperdarker-neoforge-1.21.1-1.4.1.jar",
+    "bytes": 3906057,
+    "sha256": "EEE3F51222B0BCC714DEF002FF089AC9E131D3CAE4575B542FD0A7DD101FE0AF",
+    "nested": false
+  },
+  {
+    "jar": "deimos-1.21.1-neoforge-2.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\deimos-1.21.1-neoforge-2.8.jar",
+    "bytes": 49587,
+    "sha256": "55880C73E1B899993E83486E0A3A66C61CCF50AC12970B51B563CA732BDE44E4",
+    "nested": false
+  },
+  {
+    "jar": "DimStorage-1.21.1-9.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\DimStorage-1.21.1-9.1.1.jar",
+    "bytes": 179454,
+    "sha256": "430E34540916CAE401F8C18FE92C59D4DFA96F8E86CEA3E14346BB1D2F9191DB",
+    "nested": false
+  },
+  {
+    "jar": "doll_chronicle-1.21.1-0.3.0-hotfix5-core.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\doll_chronicle-1.21.1-0.3.0-hotfix5-core.jar",
+    "bytes": 217748820,
+    "sha256": "C226D7F8B89AE0B3E0E7D645435EFA8D8236447E5C62EC94AD2C26C228A2B461",
+    "nested": false
+  },
+  {
+    "jar": "Draconic-Evolution-1.21.1-3.1.4.633.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Draconic-Evolution-1.21.1-3.1.4.633.jar",
+    "bytes": 6046229,
+    "sha256": "E89F3A23A5478E35099905D7C08F9F6A2FF70289E964904E91F06A7CEEED39B5",
+    "nested": false
+  },
+  {
+    "jar": "drippyloadingscreen_neoforge_3.1.5_MC_1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\drippyloadingscreen_neoforge_3.1.5_MC_1.21.1.jar",
+    "bytes": 168632,
+    "sha256": "F1FCB6CF3CBC7A6055FED0912BF284A7C455A0830DE42460943FC5E130072759",
+    "nested": false
+  },
+  {
+    "jar": "dummmmmmy-1.21-2.1.2-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\dummmmmmy-1.21-2.1.2-neoforge.jar",
+    "bytes": 215883,
+    "sha256": "EAECE070B290E8399D97DFD01F8E4C0D8DA5772EFE50D97C99343E35B116CB67",
+    "nested": false
+  },
+  {
+    "jar": "dysoncubeproject-1.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\dysoncubeproject-1.0.5.jar",
+    "bytes": 538975,
+    "sha256": "9B28C535FBF0DCC78460FCBA619099DB97121ABE13CB83400FAAAFC8E7E8BBE5",
+    "nested": false
+  },
+  {
+    "jar": "easy-villagers-neoforge-1.21.1-1.1.49.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\easy-villagers-neoforge-1.21.1-1.1.49.jar",
+    "bytes": 456636,
+    "sha256": "430A4B534C27D2FBBDF6C40BC3B9887A89A59D1A8CAD6301246AFC66DC721715",
+    "nested": false
+  },
+  {
+    "jar": "EdivadLib-1.21-3.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\EdivadLib-1.21-3.0.0.jar",
+    "bytes": 14133,
+    "sha256": "DAF3201364C5E9DBC7C0D99A9617CD82C40F203E489A4701B228DAA765038D92",
+    "nested": false
+  },
+  {
+    "jar": "elevatorid-neoforge-1.21.1-1.11.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\elevatorid-neoforge-1.21.1-1.11.4.jar",
+    "bytes": 191190,
+    "sha256": "C3908B14549ADDAA18951C473D2D1F67A3DF61BCF5599C6031E71CA5685BF14C",
+    "nested": false
+  },
+  {
+    "jar": "enchdesc-neoforge-1.21.1-21.1.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\enchdesc-neoforge-1.21.1-21.1.11.jar",
+    "bytes": 82648,
+    "sha256": "868D3EAB3305D96DD3ECF510D18A7AA7444E2AEA168695CF4AFF23A96BEC975F",
+    "nested": false
+  },
+  {
+    "jar": "enderdrives-neoforge-1.21.1-1.5.23.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\enderdrives-neoforge-1.21.1-1.5.23.jar",
+    "bytes": 506598,
+    "sha256": "5266B6C871C5E0D0CD355AB09205D415727DE9563FF51204B93633BFEFC14AE6",
+    "nested": false
+  },
+  {
+    "jar": "enderio-8.2.12-beta.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\enderio-8.2.12-beta.jar",
+    "bytes": 6598496,
+    "sha256": "5FE098153DDDC2E7CCD9D38B0341DBC61F3072150958C916E5EF63F395E4EAB1",
+    "nested": false
+  },
+  {
+    "jar": "enderio-8.2.12-beta.jar!/META-INF/jarjar/GraphLib3-3.0.5.jar",
+    "bytes": 12089,
+    "sha256": "35547A93AA2C864AC30C2B59991543E373FC708EE0555DE9FC8F3B0A3D9F3F08",
+    "nested": true
+  },
+  {
+    "jar": "enderio-8.2.12-beta.jar!/META-INF/jarjar/com.enderio.endercore-8.2.12-beta.jar",
+    "bytes": 221671,
+    "sha256": "B5B3A7B0D971DCD3D9DBCEC029A36D450EE72600182C565CB29264DE79171A7F",
+    "nested": true
+  },
+  {
+    "jar": "enderio-8.2.12-beta.jar!/META-INF/jarjar/com.enderio.enderio-modded-conduits-8.2.12-beta.jar",
+    "bytes": 192326,
+    "sha256": "F19E96502A03E877B8941BE53C7D4DE3F900F051E757DA6FEA6D25DF3E02784A",
+    "nested": true
+  },
+  {
+    "jar": "enderio_conduit_opt-1.1.6-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\enderio_conduit_opt-1.1.6-1.21.1.jar",
+    "bytes": 92636,
+    "sha256": "57FF2FB51E222B91465FA68EA5EA12C5438B615E6D08080E0023BB3CACA4A454",
+    "nested": false
+  },
+  {
+    "jar": "enderio_evolution-3.1.5-NeoForge-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\enderio_evolution-3.1.5-NeoForge-1.21.1.jar",
+    "bytes": 935954,
+    "sha256": "F1AF482DC6928A9D4C128549508454D9797FA6033A36D51907811A69A1F84FED",
+    "nested": false
+  },
+  {
+    "jar": "endermanoverhaul-neoforge-1.21.1-2.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\endermanoverhaul-neoforge-1.21.1-2.0.3.jar",
+    "bytes": 1330403,
+    "sha256": "FE6C04DCFDBB8815058EBF1102D64CB4C86060A0A1B7350121E4A976D4A92248",
+    "nested": false
+  },
+  {
+    "jar": "EnderStorage-1.21.1-2.13.0.191.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\EnderStorage-1.21.1-2.13.0.191.jar",
+    "bytes": 264089,
+    "sha256": "F52F23F9DF8925C7AEC26154C2F1816CC76422C67A4FA4E30FA8B80B7A854202",
+    "nested": false
+  },
+  {
+    "jar": "energymeter-neoforge-1.21.1-0.6.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\energymeter-neoforge-1.21.1-0.6.0.jar",
+    "bytes": 398803,
+    "sha256": "9FFA9863D80FB15855D92F399C1BCF36D833B8CF325398F687920CEF0E87B8DF",
+    "nested": false
+  },
+  {
+    "jar": "entangled-1.3.21-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\entangled-1.3.21-neoforge-mc1.21.jar",
+    "bytes": 130872,
+    "sha256": "ED3D17B890029613DA36146FD558D5D614595EEFC6A9B9E6447AE95B0970D9C4",
+    "nested": false
+  },
+  {
+    "jar": "eternalstarlight-0.9.1+1.21.1+neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\eternalstarlight-0.9.1+1.21.1+neoforge.jar",
+    "bytes": 59325382,
+    "sha256": "E77369AD1A779036B243EF0F7B24776640A3FF84968E6F3BE1931BC953E92B09",
+    "nested": false
+  },
+  {
+    "jar": "everythingcopper-1.21.1-2.4.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\everythingcopper-1.21.1-2.4.5.jar",
+    "bytes": 620493,
+    "sha256": "5D903A92E9B905E64021091CC1ED5C9300F1E80BAF0BF5F98CF683EEB9F3805F",
+    "nested": false
+  },
+  {
+    "jar": "evilcraft-1.21.1-neoforge-1.2.100.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\evilcraft-1.21.1-neoforge-1.2.100.jar",
+    "bytes": 2854369,
+    "sha256": "D25309BC36F6D5598366B523AC7B51AB9A76676EFFE480A5D22749712AD68185",
+    "nested": false
+  },
+  {
+    "jar": "experiencelib-1.21.1-1.2.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\experiencelib-1.21.1-1.2.1.jar",
+    "bytes": 169856,
+    "sha256": "0B131B76087DD361735D6CF05E9223C68D0A2ACDB022CA5F4616AA36A66D938A",
+    "nested": false
+  },
+  {
+    "jar": "ExplorersCompass-1.21.1-3.4.0-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ExplorersCompass-1.21.1-3.4.0-neoforge.jar",
+    "bytes": 174668,
+    "sha256": "71E7B47BD88C9C210D7C06FE5276736FC2E225E869778216537D584E6D1FAF24",
+    "nested": false
+  },
+  {
+    "jar": "extended-industrialization-1.16.5-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\extended-industrialization-1.16.5-1.21.1.jar",
+    "bytes": 2254555,
+    "sha256": "CD64B296CDD847248268B0DE84C3F32B6E3E17C95B685C84AD16035BDFDC518E",
+    "nested": false
+  },
+  {
+    "jar": "ExtendedAE-1.21-2.2.42-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ExtendedAE-1.21-2.2.42-neoforge.jar",
+    "bytes": 5913692,
+    "sha256": "A15225108AECADEACE640AF3447B7CE13D1097DC1547DD52DA64CD525101903D",
+    "nested": false
+  },
+  {
+    "jar": "ExtendedAE-1.21-2.2.42-neoforge.jar!/META-INF/jarjar/ae2wtlib_api-19.2.0.jar",
+    "bytes": 75183,
+    "sha256": "B3DB0454F743F2BC18CE68DA540C6AF5BB11288F931829A2950675585B4F1C03",
+    "nested": true
+  },
+  {
+    "jar": "extendedae_plus-1.6.4.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\extendedae_plus-1.6.4.1.jar",
+    "bytes": 1451554,
+    "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237",
+    "nested": false
+  },
+  {
+    "jar": "ExtremeReactors2-1.21.1-2.4.28.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ExtremeReactors2-1.21.1-2.4.28.jar",
+    "bytes": 2554779,
+    "sha256": "74FDFDFC91C3C8E5A439D411E6F081D12193635FFFE2C55142F2F28F75B9D621",
+    "nested": false
+  },
+  {
+    "jar": "ExtremeSoundMuffler-3.57_NeoForge-1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ExtremeSoundMuffler-3.57_NeoForge-1.21.jar",
+    "bytes": 270493,
+    "sha256": "25C8AF2A13061D6CD77CBAEBE15E0C4F880151C2876EADBF4768DB8FBAA89613",
+    "nested": false
+  },
+  {
+    "jar": "fancymenu_neoforge_3.9.14_MC_1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\fancymenu_neoforge_3.9.14_MC_1.21.1.jar",
+    "bytes": 25922080,
+    "sha256": "92F74EF89381EA1F74E1145FEAB6DB4CE4638804B1FB43622302D0A647FC0A66",
+    "nested": false
+  },
+  {
+    "jar": "fancymenu_neoforge_3.9.14_MC_1.21.1.jar!/META-INF/jarjar/japng-0.5.3.jar",
+    "bytes": 68238,
+    "sha256": "AC74016549A38EADDBD3533E9746D98AE4CB11ADB4EF3CE68C7D040D2D45C8B0",
+    "nested": true
+  },
+  {
+    "jar": "fancymenu_neoforge_3.9.14_MC_1.21.1.jar!/META-INF/jarjar/animated-gif-lib-for-java-animated-gif-lib-1.7.jar",
+    "bytes": 20816,
+    "sha256": "9BAE7C1154CEC27D65F0AB91E307255789A2C76B73FD3425C211B52C1DE3A343",
+    "nested": true
+  },
+  {
+    "jar": "FarmersDelight-1.21.1-1.3.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\FarmersDelight-1.21.1-1.3.4.jar",
+    "bytes": 3160490,
+    "sha256": "139AD7696462C89C03EEA463F805ABFFA552526C5DADAADAE221DD9624CB197C",
+    "nested": false
+  },
+  {
+    "jar": "farmingforblockheads-neoforge-1.21.1-21.1.14.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\farmingforblockheads-neoforge-1.21.1-21.1.14.jar",
+    "bytes": 895570,
+    "sha256": "473E1E2FE970DF030119F4D1E0214BCF0FD9B1673912C63BF6C5B5A75E65D2DE",
+    "nested": false
+  },
+  {
+    "jar": "FastFurnace-1.21.1-9.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\FastFurnace-1.21.1-9.0.1.jar",
+    "bytes": 4623,
+    "sha256": "4A8743C5D870AA9885D65E20D728C76FEC894E01E81D1B49EF0F4459A67F0EEA",
+    "nested": false
+  },
+  {
+    "jar": "FastSuite-1.21.1-6.0.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\FastSuite-1.21.1-6.0.7.jar",
+    "bytes": 28193,
+    "sha256": "3E274CD01BDC27DFF8E2514213F1C45306C86FE38E4271A4209BC1471DE6C70D",
+    "nested": false
+  },
+  {
+    "jar": "FastWorkbench-1.21.1-9.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\FastWorkbench-1.21.1-9.1.3.jar",
+    "bytes": 28635,
+    "sha256": "ABF593BA1584C761F198989008D334C95932AFE0A7C6B16AF4BAA16B54FD1449",
+    "nested": false
+  },
+  {
+    "jar": "ferritecore-7.0.3-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ferritecore-7.0.3-neoforge.jar",
+    "bytes": 121559,
+    "sha256": "D87EA28262715EBFF45B8A82D493E6B468E7A4521BC021DF5D88302196D030A8",
+    "nested": false
+  },
+  {
+    "jar": "fireproofboats-1.21.1-1.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\fireproofboats-1.21.1-1.0.4.jar",
+    "bytes": 39734,
+    "sha256": "9DC6829A699B16C21079A6A9C39AD006048AC9EFA547FBBEB223B35E55297714",
+    "nested": false
+  },
+  {
+    "jar": "flickerfix-1.21.1-6.1.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\flickerfix-1.21.1-6.1.0.jar",
+    "bytes": 4566,
+    "sha256": "5B3A18046867F9809820DE5E8716285541D5B5418C00215C2ED28FF0246239CD",
+    "nested": false
+  },
+  {
+    "jar": "FluxNetworks-1.21.1-8.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\FluxNetworks-1.21.1-8.0.0.jar",
+    "bytes": 535938,
+    "sha256": "29E511B2D76F85BD247AA213A92BB059ECC037FCC3FED82BAFFCFF97B638D3A6",
+    "nested": false
+  },
+  {
+    "jar": "forbidden_arcanus-1.21.1-2.6.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\forbidden_arcanus-1.21.1-2.6.2.jar",
+    "bytes": 3408442,
+    "sha256": "B6A37DDCEB2D1A4260F2463983C4C24F0835244DE4BDCB040027DCA89D70772D",
+    "nested": false
+  },
+  {
+    "jar": "formations-1.0.4-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\formations-1.0.4-neoforge-mc1.21.jar",
+    "bytes": 287525,
+    "sha256": "2D9B50575FDF42E59D5DACDA23CE5D01FC5CB19DB02A1278329E3AD40893848E",
+    "nested": false
+  },
+  {
+    "jar": "formationsnether-1.0.5b-mc1.21+.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\formationsnether-1.0.5b-mc1.21+.jar",
+    "bytes": 330916,
+    "sha256": "B903E98FDEACB5B70B10BAAFE224C512A6EFA843C53F0386D50CC48CE4AD19C9",
+    "nested": false
+  },
+  {
+    "jar": "formationsoverworld-1.0.5c-mc1.21+.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\formationsoverworld-1.0.5c-mc1.21+.jar",
+    "bytes": 600780,
+    "sha256": "8AC52001FD43B70BDB72209198152AE44137B476CF9124618F3C7106B95524BA",
+    "nested": false
+  },
+  {
+    "jar": "ftb-chunks-neoforge-2101.1.23.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-chunks-neoforge-2101.1.23.jar",
+    "bytes": 671413,
+    "sha256": "6750DA28D725BFB4C7DA43157BB9B82492226CE5ACAB595EF782D48F41FF5647",
+    "nested": false
+  },
+  {
+    "jar": "ftb-essentials-neoforge-2101.1.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-essentials-neoforge-2101.1.10.jar",
+    "bytes": 217288,
+    "sha256": "A61DE1B883EC9D6D652276F453E8E60B18BD315FEF8C62F21D6545260D526587",
+    "nested": false
+  },
+  {
+    "jar": "ftb-filter-system-neoforge-21.1.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-filter-system-neoforge-21.1.4.jar",
+    "bytes": 211671,
+    "sha256": "B8700E8BFD9C78B09BC7819CB28A6318B20D2BF68969BC6894A0BFA39581A99B",
+    "nested": false
+  },
+  {
+    "jar": "ftb-jei-extras-21.1.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-jei-extras-21.1.7.jar",
+    "bytes": 69759,
+    "sha256": "141B02587D71A6591E71C1ED50DE5DDD5B297BB580E26AABF1273BB6FBDBE6DD",
+    "nested": false
+  },
+  {
+    "jar": "ftb-library-neoforge-2101.1.39.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-library-neoforge-2101.1.39.jar",
+    "bytes": 1477833,
+    "sha256": "CA64BD1B5F335406900F74EEAFACEA5A3580A3933D61DE6B6600A64EB12A9A95",
+    "nested": false
+  },
+  {
+    "jar": "ftb-quests-neoforge-2101.1.37.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-quests-neoforge-2101.1.37.jar",
+    "bytes": 1635351,
+    "sha256": "6B42457D680108D0AF5B8DEB21E3FE7B92138209F0683C62441DC360D4FC01D5",
+    "nested": false
+  },
+  {
+    "jar": "ftb-ranks-neoforge-2101.1.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-ranks-neoforge-2101.1.5.jar",
+    "bytes": 89561,
+    "sha256": "C0263094864923125D51F5D44F2E33E87FFADE6FA0E421F47EBCC1D45219421C",
+    "nested": false
+  },
+  {
+    "jar": "ftb-teams-neoforge-2101.1.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-teams-neoforge-2101.1.11.jar",
+    "bytes": 308236,
+    "sha256": "E6BCD670493624E6906DF872A9C6AF4A33FE6405CAC57A32C59CD4CD5838C655",
+    "nested": false
+  },
+  {
+    "jar": "ftb-ultimine-neoforge-2101.1.15.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-ultimine-neoforge-2101.1.15.jar",
+    "bytes": 177109,
+    "sha256": "1393A85CEB6E4794450D5F06043E3A033278E31B86DE8E03950D8B87604B2213",
+    "nested": false
+  },
+  {
+    "jar": "ftb-xmod-compat-neoforge-21.1.14.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftb-xmod-compat-neoforge-21.1.14.jar",
+    "bytes": 149952,
+    "sha256": "143C79710AF4E17DBFF7BB933F2E17C667091353E188E5D53FDAAB4220A5FF64",
+    "nested": false
+  },
+  {
+    "jar": "ftbquestslangsplitter-1.0.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ftbquestslangsplitter-1.0.7.jar",
+    "bytes": 201642,
+    "sha256": "824743D598DD4DC1B61C0A8FE756E828DB5961238151DDEC5B4F99C485488AD3",
+    "nested": false
+  },
+  {
+    "jar": "fuelgoeshere-1.21.1-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\fuelgoeshere-1.21.1-1.2.0.jar",
+    "bytes": 7564,
+    "sha256": "8FF10FBA0F261537AF9717FE3D3C0D53A179DB1B354B2D62E0CD20B0E41E0101",
+    "nested": false
+  },
+  {
+    "jar": "functionalstorage-1.21.1-1.5.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\functionalstorage-1.21.1-1.5.8.jar",
+    "bytes": 810628,
+    "sha256": "E3E7368C28A24E7DE5B877988AA92CC94CA7417C8F60B7D28E7F584A94A51147",
+    "nested": false
+  },
+  {
+    "jar": "fzzy_config-0.7.7+fix1+1.21+neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\fzzy_config-0.7.7+fix1+1.21+neoforge.jar",
+    "bytes": 2392720,
+    "sha256": "414782ABA00502349DA192C1AFFCD4CBAF653119EC26605453F1B0690B3F8CC5",
+    "nested": false
+  },
+  {
+    "jar": "fzzy_config-0.7.7+fix1+1.21+neoforge.jar!/META-INF/jars/jankson-1.2.3.jar",
+    "bytes": 74750,
+    "sha256": "7A71DD9C4AC20CEA37CE19C35C4AEDA15385A40F31836B0058FF18F9E9554AAD",
+    "nested": true
+  },
+  {
+    "jar": "fzzy_config-0.7.7+fix1+1.21+neoforge.jar!/META-INF/jars/tomlkt-jvm-0.3.7.jar",
+    "bytes": 256632,
+    "sha256": "C996B2DEE0BF7BE1D9D962E944D13510331092CF5687FDDCC0523ABA4EADFE4F",
+    "nested": true
+  },
+  {
+    "jar": "GatewaysToEternity-1.21.1-5.1.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\GatewaysToEternity-1.21.1-5.1.0.jar",
+    "bytes": 646451,
+    "sha256": "5E4F87781E045E67492C0589B1062504DF76CA33215AB0358FC8E4A1BE5EFAC5",
+    "nested": false
+  },
+  {
+    "jar": "geckolib-neoforge-1.21.1-4.9.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\geckolib-neoforge-1.21.1-4.9.3.jar",
+    "bytes": 634531,
+    "sha256": "20A1995E4074F387FF549E2C57EA79DD7D41EE83C6AFB9DD6A6E840E592D1C47",
+    "nested": false
+  },
+  {
+    "jar": "generatorgalore-1.21.1-1.7.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\generatorgalore-1.21.1-1.7.0.jar",
+    "bytes": 398332,
+    "sha256": "64CAC6F13F16E21B37BBDD98B360E5533033297FDAE4B92FE2C2D69A4F05D2D4",
+    "nested": false
+  },
+  {
+    "jar": "getittogetherdrops-neoforge-1.21.5-1.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\getittogetherdrops-neoforge-1.21.5-1.4.jar",
+    "bytes": 8825,
+    "sha256": "A09466D03E3DDE0C0F5C179146A8247B33A720A88979EB813C5F2AA2AD1C7A78",
+    "nested": false
+  },
+  {
+    "jar": "Glodium-1.21-2.2-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Glodium-1.21-2.2-neoforge.jar",
+    "bytes": 61377,
+    "sha256": "369E99753DF0BDC90A38A8C52DF4ABB37BAF6B18C6CA130AF4C7BC75FB160A85",
+    "nested": false
+  },
+  {
+    "jar": "GravitationalModulatingAdditionalUnit-1.21.1-6.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\GravitationalModulatingAdditionalUnit-1.21.1-6.4.jar",
+    "bytes": 40188,
+    "sha256": "11C078CF2031CA863A5CEC5D2F69590DDEE84E67A16066F2B42EE7D78221982D",
+    "nested": false
+  },
+  {
+    "jar": "growthacceleratortiers-2.0.1+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\growthacceleratortiers-2.0.1+1.21.1.jar",
+    "bytes": 141928,
+    "sha256": "79B2C075CEFB4BB3BD615970F396AD7AAC648239AA6CC34B4AB6DFD265F24342",
+    "nested": false
+  },
+  {
+    "jar": "guideme-21.1.22.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\guideme-21.1.22.jar",
+    "bytes": 9332340,
+    "sha256": "108337FF98C706B18ED2FBEC077B3337BA72C08F8B46A273534886280E89EF0D",
+    "nested": false
+  },
+  {
+    "jar": "hardenedarmadillos-1.21.1-0.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\hardenedarmadillos-1.21.1-0.2.0.jar",
+    "bytes": 10389,
+    "sha256": "28F4B2CDB77E6B938527C7417F66000C49EEF8E1830315BBC0B41B03B2695DC5",
+    "nested": false
+  },
+  {
+    "jar": "HellishTrials-neoforge-1.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\HellishTrials-neoforge-1.0.5.jar",
+    "bytes": 581988,
+    "sha256": "7F28724652EEDD275970455E37629758F7279BD3918A4F1D852676DCF392DB63",
+    "nested": false
+  },
+  {
+    "jar": "herbsandharvest-1.21.1-24.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\herbsandharvest-1.21.1-24.jar",
+    "bytes": 17821603,
+    "sha256": "D9C504AF8E028835C7CBF0DEE5AD80B32CA1446FAF7D5ADC4D08C1B24B5FE834",
+    "nested": false
+  },
+  {
+    "jar": "heyberryshutup-1.21.0-2.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\heyberryshutup-1.21.0-2.0.4.jar",
+    "bytes": 6186,
+    "sha256": "7A81A96B734AFC96466582724B5011639D653C84716E7150E97B2DBC82EBD078",
+    "nested": false
+  },
+  {
+    "jar": "HostileNeuralNetworks-1.21.1-6.5.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\HostileNeuralNetworks-1.21.1-6.5.1.jar",
+    "bytes": 490546,
+    "sha256": "DD56C109A76CDD2C2BF73A1E62AED7218D087FA1401A539B0D5576386F9FF545",
+    "nested": false
+  },
+  {
+    "jar": "iceandfire-2.1.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\iceandfire-2.1.4.jar",
+    "bytes": 20938104,
+    "sha256": "C1FA9878D4A0F81FE6B2DB69184958F6A802F8BC7C1CD34FEC2B0DC03222EC0B",
+    "nested": false
+  },
+  {
+    "jar": "iceandfire-2.1.4.jar!/META-INF/jarjar/integration-neoforge-0.2.jar",
+    "bytes": 11473,
+    "sha256": "8FE97140DFF3C126558CD5AA762F11C1D0F0B0FA9491BA0A9C0CC22473C7C83A",
+    "nested": true
+  },
+  {
+    "jar": "Iceberg-1.21.1-neoforge-1.3.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Iceberg-1.21.1-neoforge-1.3.2.jar",
+    "bytes": 213853,
+    "sha256": "0D620C975619B04110B94A73D5B42D252563FF59C1EAE9D21AB2EE7E38460A3C",
+    "nested": false
+  },
+  {
+    "jar": "ifeu-1.21.1-3.2.000.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ifeu-1.21.1-3.2.000.jar",
+    "bytes": 909488,
+    "sha256": "53F3E9F7BBD24A8BEEF95C9B56C32852CA57FEDE4C1CE019039FCD71AA136A7F",
+    "nested": false
+  },
+  {
+    "jar": "illagerwarship-1.0.1-neoforge-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\illagerwarship-1.0.1-neoforge-1.21.1.jar",
+    "bytes": 71280,
+    "sha256": "E4C132C07D1AA04EDC55B6E405657992C3D36DA6F9F25EC8F460DB405C5A7B32",
+    "nested": false
+  },
+  {
+    "jar": "imfast-NEOFORGE-1.21.1-1.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\imfast-NEOFORGE-1.21.1-1.0.3.jar",
+    "bytes": 4193,
+    "sha256": "59BEF0451A2045CC357B601FB1FF88DA60E761867B1FD6EEAFF63FA215B51C8B",
+    "nested": false
+  },
+  {
+    "jar": "ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar",
+    "bytes": 368896,
+    "sha256": "7D7B1D7B9F71D5303E42B2FA45F222A5AB06E0EF5982ABB6DA5DD9CC449B3702",
+    "nested": false
+  },
+  {
+    "jar": "ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar!/META-INF/jars/Reflect-1.6.2.jar",
+    "bytes": 222732,
+    "sha256": "2BA24D511EC40AC0AD18134D42E585D210A2BC86BEB45239E6F8E9691E6CDD54",
+    "nested": true
+  },
+  {
+    "jar": "Immersive-Energistics-1.1.0-beta.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Immersive-Energistics-1.1.0-beta.jar",
+    "bytes": 40560,
+    "sha256": "389B6671058915761D5E897A624055ADC78E4680180C521994E39A0EF4E7C79B",
+    "nested": false
+  },
+  {
+    "jar": "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+    "bytes": 14232121,
+    "sha256": "45942985A4A4AEBF265B8E22A0C54A96208637471F36F2532FF5D4911322DEBC",
+    "nested": false
+  },
+  {
+    "jar": "ImmersiveEngineering-1.21.1-12.4.2-194.jar!/META-INF/jarjar/BlockModelSplitter-2.0.1.jar",
+    "bytes": 37351,
+    "sha256": "AB752FBE975E4C6AF2679D0F8B85DFB7EBE3DA3AA04A73951E3B5BFBC3F40537",
+    "nested": true
+  },
+  {
+    "jar": "ImmersiveEngineering-1.21.1-12.4.2-194.jar!/META-INF/jarjar/DualCodecs-0.1.2.jar",
+    "bytes": 75598,
+    "sha256": "0BDDFCAC4D409803A35CBBD5C7B74828F436357AD7B8980FCFBD5A1834C05FEB",
+    "nested": true
+  },
+  {
+    "jar": "incontrol-1.21-10.3.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\incontrol-1.21-10.3.1.jar",
+    "bytes": 357912,
+    "sha256": "ED80956FDC224D5A5284EABD92FCB20A3C0B559E23E011296FF29057F62613C7",
+    "nested": false
+  },
+  {
+    "jar": "industrial-foregoing-souls-1.21.1-1.10.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\industrial-foregoing-souls-1.21.1-1.10.7.jar",
+    "bytes": 136908,
+    "sha256": "F4FB3640FDFCA313688F2E0561B1875CBF740271DBCF5A276C4D67347D7B67EC",
+    "nested": false
+  },
+  {
+    "jar": "industrialforegoing-1.21-3.6.39.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\industrialforegoing-1.21-3.6.39.jar",
+    "bytes": 4717149,
+    "sha256": "ABEB644675398E7729EB5F3637E1DFBE080E0DBDFCCED1B19BD4AB595CCDD4BB",
+    "nested": false
+  },
+  {
+    "jar": "industrialization_overdrive-1.15.1+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\industrialization_overdrive-1.15.1+1.21.1.jar",
+    "bytes": 352026,
+    "sha256": "97BDD8B0919A2B16DA8D866D14C6619450CE87B04A3E92B9D0ECCBAE008FCAD8",
+    "nested": false
+  },
+  {
+    "jar": "integratedcrafting-1.21.1-neoforge-1.8.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\integratedcrafting-1.21.1-neoforge-1.8.1.jar",
+    "bytes": 521588,
+    "sha256": "B8A526DD03029D110D4B3B2F4B52CC516F66666AD8FA2AB73BF7C130C7FB5BB0",
+    "nested": false
+  },
+  {
+    "jar": "integrateddynamics-1.21.1-neoforge-1.38.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\integrateddynamics-1.21.1-neoforge-1.38.2.jar",
+    "bytes": 4501170,
+    "sha256": "7DEE30453F1E8972962108175CF46C09C7531AB273279888BF2162198D241198",
+    "nested": false
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\integratedscripting-1.21.1-neoforge-1.0.27-708.jar",
+    "bytes": 29503588,
+    "sha256": "0FCFBCC029B13C8AD088253253ACDD3B3341BD282456100808215105A00F3F59",
+    "nested": false
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/icu4j-25.2.4.jar",
+    "bytes": 18564119,
+    "sha256": "2337312CF26F26B0D3C2EB73C155C4397944A6E4E5A6DA046C9421A7B502D589",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/jniutils-25.2.4.jar",
+    "bytes": 280789,
+    "sha256": "88C5D7A9F334D1528E83F5FA9D101109FA55B232F85B872CF866198079D67929",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/truffle-compiler-25.2.4.jar",
+    "bytes": 54586,
+    "sha256": "EB0B38486C52BAB0D25507580B770B683AA2704B33C82F2616E1CC7A5E464C7E",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/xz-25.2.4.jar",
+    "bytes": 328273,
+    "sha256": "47E18D6524BE9E2EEE5DBD947E2CC8FF74FFDC68A9F5CC2B7C461E4030BC1976",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/polyglot-25.2.4.jar",
+    "bytes": 513986,
+    "sha256": "CE2E117A1E2F7E095538CF9A42D72E65CD56BA9EAEDF2E4C5BF3BB542BD8C45C",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/regex-25.2.4.jar",
+    "bytes": 3905116,
+    "sha256": "3421CDC2712EFA010139B40203461346D0C1DF1804D7ACDF3E24CEEE766B2C39",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/truffle-api-25.2.4.jar",
+    "bytes": 16961328,
+    "sha256": "AC5ACB0E98B7E05983C34BCAFC80ECDAAEB5AE0DE32470D46452182DD8068628",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/collections-25.2.4.jar",
+    "bytes": 129469,
+    "sha256": "C02710600F7E5FDDCCE9A422726E64743E8F478416C99288A2A622D16A9D7976",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/graal-sdk-25.2.4.jar",
+    "bytes": 1463,
+    "sha256": "5A6830BA5A8EA41BC02D631DADF6CE1C996E12CFED2260CF3603C8204C9956CA",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/word-25.2.4.jar",
+    "bytes": 73154,
+    "sha256": "FD64D18AFD9813346ACF3C2BE3A19CC553EDB3C480C3683FDA80FE324687BD6A",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/js-language-25.2.4.jar",
+    "bytes": 27666127,
+    "sha256": "0BF0B2523D65216AEAD797B6F41C0CA1F1AFC22F4D74B4A3F2B42C245252CA4E",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/nativeimage-25.2.4.jar",
+    "bytes": 249782,
+    "sha256": "235376A14F41D503219E8E81CC3CADE7DD45565917BB5C6936768519ADC07FE1",
+    "nested": true
+  },
+  {
+    "jar": "integratedscripting-1.21.1-neoforge-1.0.27-708.jar!/META-INF/packageddependencies/truffle-runtime-25.2.4.jar",
+    "bytes": 936014,
+    "sha256": "F4F37AF324263C440F67C2C4A463541A17765E1846C9C7D849F66426C59A40F2",
+    "nested": true
+  },
+  {
+    "jar": "integratedterminals-1.21.1-neoforge-1.11.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\integratedterminals-1.21.1-neoforge-1.11.1.jar",
+    "bytes": 878291,
+    "sha256": "B913D6894713DEAB0EC470D2A6CD7AD5C690BEDE8097D274CAA2C1FEA62413B9",
+    "nested": false
+  },
+  {
+    "jar": "integratedtunnels-1.21.1-neoforge-1.13.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\integratedtunnels-1.21.1-neoforge-1.13.0.jar",
+    "bytes": 744647,
+    "sha256": "0858DF6C837B202E7FE976FC0A25D8BCAC5A79CB3DA63432190EFC7A4000E318",
+    "nested": false
+  },
+  {
+    "jar": "invasiveopts-1.0.26.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\invasiveopts-1.0.26.jar",
+    "bytes": 280411,
+    "sha256": "1E3394CF2CF9FF3A2748CB9E2B7EA3255549DCC930045D4F3F340E2967E51AD3",
+    "nested": false
+  },
+  {
+    "jar": "invasiveopts-1.0.26.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.7-beta.2.jar",
+    "bytes": 110953,
+    "sha256": "EE1148678209B1C13A0F2CD5B6A3A062E2F1AB6FA250672297B991813D596656",
+    "nested": true
+  },
+  {
+    "jar": "invasiveopts-1.0.26.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.7-beta.2.jar!/META-INF/jars/MixinSquared-0.3.7-beta.2.jar",
+    "bytes": 120093,
+    "sha256": "4951F24C0B924CDA14937A8C8EFDA1368580352C97A9075C54F025419C99639D",
+    "nested": true
+  },
+  {
+    "jar": "invasiveopts-1.0.26.jar!/META-INF/jarjar/conditional-mixin-neoforge-0.6.4.jar",
+    "bytes": 28550,
+    "sha256": "0AE7B346D87879E81F276E6A590A6AF1E723193E6EB3E94C1F71F7AB5B54D59F",
+    "nested": true
+  },
+  {
+    "jar": "invtweaks-1.21.1-1.3.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\invtweaks-1.21.1-1.3.2.jar",
+    "bytes": 77127,
+    "sha256": "CEB5B20A43CA1C5BD707F60BB5D5FA61099C7A7BA50B19F6BDDFE93F1CA0073C",
+    "nested": false
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\iris-neoforge-1.8.14-beta.1+mc1.21.1.jar",
+    "bytes": 2540723,
+    "sha256": "60D5F8BF52F25E9986440F4A4270A6BD986D9CFF994510E1108AC1547063B314",
+    "nested": false
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/fabric-api-base-0.4.42+d1308ded19.jar",
+    "bytes": 34805,
+    "sha256": "BDF464C6DF587B4AA87DF2CBE326ACBBB307727D3E27DBAF58D592C429E6EAC3",
+    "nested": true
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/fabric-block-view-api-v2-1.0.10+9afaaf8c19.jar",
+    "bytes": 25631,
+    "sha256": "87DA93C4EF283E0CE66F8DA67D6CBA93D9884C55152014A49C2B6F4F861BEC48",
+    "nested": true
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/fabric-renderer-api-v1-3.4.0+acb05a3919.jar",
+    "bytes": 57937,
+    "sha256": "0A504D27DDF494DF91BCF59A3BDC584EF0FD41753323C86BB6E242E4B7958A27",
+    "nested": true
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/fabric-rendering-data-attachment-v1-0.3.48+73761d2e19.jar",
+    "bytes": 20497,
+    "sha256": "A720C7A1E73583E0FED5110556290DF023D158750740BC00E4040D6CD2CB9AF1",
+    "nested": true
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/glsl-transformer-3.0.0-pre3.jar",
+    "bytes": 722670,
+    "sha256": "0D55650FB8E58DAD25B714D447A1ED5A713A6B6120A06610CE216C9B26E852D7",
+    "nested": true
+  },
+  {
+    "jar": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar!/META-INF/jarjar/jcpp-1.4.14.jar",
+    "bytes": 75595,
+    "sha256": "E47D785BFF4D116BF5223B96AABD57A03498A91BD259B4919DED6C511B47CC8C",
+    "nested": true
+  },
+  {
+    "jar": "IrisSearch-1.8.4-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\IrisSearch-1.8.4-neoforge.jar",
+    "bytes": 230710,
+    "sha256": "C303C17030038FB42504D3DB4EC855A3337CF644A073FB27B87C1A9A02F8BC64",
+    "nested": false
+  },
+  {
+    "jar": "ironfurnaces-neoforge-1.21.1-4.3.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ironfurnaces-neoforge-1.21.1-4.3.2.jar",
+    "bytes": 576866,
+    "sha256": "97C0D7C323FDA4AA852FDCE69BF1250A40323BB9D34EF6C87790E07334D1C2DE",
+    "nested": false
+  },
+  {
+    "jar": "IronJetpacks-1.21.1-8.0.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\IronJetpacks-1.21.1-8.0.11.jar",
+    "bytes": 154859,
+    "sha256": "AA589C0A9CEC53F554CACEF95DD4AF45C1BBD351AAB4C12104240F8A8D79B909",
+    "nested": false
+  },
+  {
+    "jar": "irons_jewelry-1.21.1-2.0.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\irons_jewelry-1.21.1-2.0.2.jar",
+    "bytes": 731614,
+    "sha256": "7413DD081598337133E55DD7C42AC3ADFF5213BCEB56F10DA6CFB5B52D57958E",
+    "nested": false
+  },
+  {
+    "jar": "irons_lib-1.21.1-2.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\irons_lib-1.21.1-2.3.0.jar",
+    "bytes": 481888,
+    "sha256": "578D9EBFAD529C0587EFAB2690BB469811F3A0A3593064C74263FDF909449F39",
+    "nested": false
+  },
+  {
+    "jar": "irons_spellbooks-1.21.1-3.16.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\irons_spellbooks-1.21.1-3.16.3.jar",
+    "bytes": 13890046,
+    "sha256": "13D644474DDBA4F8478B4CE68294687FD509C994B3F344A224142B102DBE6F73",
+    "nested": false
+  },
+  {
+    "jar": "itemcollectors-1.1.10-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\itemcollectors-1.1.10-neoforge-mc1.21.jar",
+    "bytes": 100837,
+    "sha256": "148A3A90F2CFCFF8C8C1549A4E7B706494EBC9BD859D848158F469426E6E5FB5",
+    "nested": false
+  },
+  {
+    "jar": "Jade-1.21.1-NeoForge-15.10.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Jade-1.21.1-NeoForge-15.10.6.jar",
+    "bytes": 726853,
+    "sha256": "276F1F65A20D04F536989C4F311949D770B52C440C23C2B904A08860F3C93810",
+    "nested": false
+  },
+  {
+    "jar": "jdte-0.6.5.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jdte-0.6.5.4.jar",
+    "bytes": 3645482,
+    "sha256": "98A1EFDB9043EFAF73118E2825FE9AC2F2299CC63E09D675BC36E4157FACE3D9",
+    "nested": false
+  },
+  {
+    "jar": "jdte-ae-0.6.5.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jdte-ae-0.6.5.4.jar",
+    "bytes": 27283,
+    "sha256": "AE69583C928E6196DDC71C056B84A72BB800EEE4CF2C2D6D1A0B39783842AA8B",
+    "nested": false
+  },
+  {
+    "jar": "jearchaeology-1.21.1-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jearchaeology-1.21.1-1.2.0.jar",
+    "bytes": 53509,
+    "sha256": "36628748BFDD145F764D0BF7AF16E1D8B336A09B31E801EC68954DC39A20F7BF",
+    "nested": false
+  },
+  {
+    "jar": "jecharacters-1.21.1-neoforge-4.5.30.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jecharacters-1.21.1-neoforge-4.5.30.jar",
+    "bytes": 255428,
+    "sha256": "1B8E41C97FE4BC3B569475C2ADB1351A38547E25BFDA322A6AB80E44EFD992E1",
+    "nested": false
+  },
+  {
+    "jar": "jecharacters-1.21.1-neoforge-4.5.30.jar!/META-INF/jarjar/PinIn-1.6.0.jar",
+    "bytes": 184908,
+    "sha256": "DAEC698F825076FF24AB9948E27DACC711DEA683B2E9957EA279CDE66655D768",
+    "nested": true
+  },
+  {
+    "jar": "jecharacters-1.21.1-neoforge-4.5.30.jar!/META-INF/jarjar/JustEnoughCharacters.coremod-neoforge.jar",
+    "bytes": 33015,
+    "sha256": "1FD2FC6ED1CDDEA015DC89AF1CBE91F9D0FF3625E1185381FFC724414CD11B0A",
+    "nested": true
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jei-1.21.1-neoforge-19.70.0.460.jar",
+    "bytes": 4735620,
+    "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF",
+    "nested": false
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar!/META-INF/jarjar/mezz_config-1.21.1-neoforge-0.6.6.jar",
+    "bytes": 346662,
+    "sha256": "89761C5F0B6E7023969F080860306B1F3CF44F9EA8CAE8B815986351A09354C7",
+    "nested": true
+  },
+  {
+    "jar": "jeistuff-1.21.1-1.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jeistuff-1.21.1-1.3.0.jar",
+    "bytes": 233563,
+    "sha256": "FAB7476F78DDCB03598F6606A518E1CC38D540CA1AD5AC5A06F7FA3CA21EE28F",
+    "nested": false
+  },
+  {
+    "jar": "jumpboat-1.21.0-1.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jumpboat-1.21.0-1.0.5.jar",
+    "bytes": 5328,
+    "sha256": "0142C9A3B3B7B4A05A6D7562760B7C258339D914737DD5456AA9E892093A743A",
+    "nested": false
+  },
+  {
+    "jar": "jupiter-2.3.7-1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\jupiter-2.3.7-1.21.1-neoforge.jar",
+    "bytes": 278988,
+    "sha256": "95AF332AF250F97FE2D9D288FE6B2057C266673A388348BF33756B0B693ACE15",
+    "nested": false
+  },
+  {
+    "jar": "justdirethings-1.5.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\justdirethings-1.5.7.jar",
+    "bytes": 2853190,
+    "sha256": "6E5F7DD7091CC271FEE66B0DF62BDE2250E8B52397B51DD911F79C088EB22D2F",
+    "nested": false
+  },
+  {
+    "jar": "justenoughbreeding-neoforge-1.21.1-3.3.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\justenoughbreeding-neoforge-1.21.1-3.3.1.jar",
+    "bytes": 626813,
+    "sha256": "6541EBCBAEB6CD6638CE01E509C38122E744E1D849BFDBD94E4097B54CD555D3",
+    "nested": false
+  },
+  {
+    "jar": "JustEnoughMekanismMultiblocks-1.21.1-7.23.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\JustEnoughMekanismMultiblocks-1.21.1-7.23.jar",
+    "bytes": 246040,
+    "sha256": "69BA91372EED3AD69CAFCC6BD8E2AFEC85E2A009A13E4E4814C4F474812985D6",
+    "nested": false
+  },
+  {
+    "jar": "JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+    "bytes": 24879,
+    "sha256": "B34D6BB434D507874A6EBE49D40169C26F7CAD8F51C9FFEA615EEDB153746696",
+    "nested": false
+  },
+  {
+    "jar": "justzoom_neoforge_3.1.0_MC_1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\justzoom_neoforge_3.1.0_MC_1.21.1.jar",
+    "bytes": 168109,
+    "sha256": "636885577B2EC47B10ABEB62D0F35D5B2267C88ED5C43ED7EA9B3955858CB314",
+    "nested": false
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\kenergyengineering-1.21.1-4.0.5.jar",
+    "bytes": 9198624,
+    "sha256": "265BDA14C9286669B1DEE615747C8173DFE6C6E4CBA61951F8C53C9621961F4A",
+    "nested": false
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/Registrate-MC1.21.1-1.4.8.jar",
+    "bytes": 181998,
+    "sha256": "5FEF5915B2FD7BD386901DC3B38ED16E1946C539F3892B40B4EA01DE0066ECE2",
+    "nested": true
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/ldlib-626676-9304898.jar",
+    "bytes": 7702551,
+    "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC",
+    "nested": true
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/ldlib-626676-9304898.jar!/META-INF/jarjar/taffy-1.1.5.jar",
+    "bytes": 233572,
+    "sha256": "DD89C3FD93A0377062F67575C12FA74BB8DCD842C1EA2929150F1A50DB1E8532",
+    "nested": true
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/ldlib-626676-9304898.jar!/META-INF/jarjar/yoga-1.0.0.jar",
+    "bytes": 139827,
+    "sha256": "BACD086489858CA9FCD438721C75373CE8DEAB5E9FEAD23425A42A16FE1DC9A7",
+    "nested": true
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/ldlib-626676-9304898.jar!/META-INF/jarjar/kotlin-stdlib-2.1.20.jar",
+    "bytes": 1724057,
+    "sha256": "1BCC74E8CE84E2C25EAAFDE10F1248349CCE3062B6E36978CBEEC610DB1E930A",
+    "nested": true
+  },
+  {
+    "jar": "kenergyengineering-1.21.1-4.0.5.jar!/META-INF/jarjar/taffy-1.1.5.jar",
+    "bytes": 233572,
+    "sha256": "DD89C3FD93A0377062F67575C12FA74BB8DCD842C1EA2929150F1A50DB1E8532",
+    "nested": true
+  },
+  {
+    "jar": "keybindbundles-1.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\keybindbundles-1.4.0.jar",
+    "bytes": 89565,
+    "sha256": "2098F7AA403D560D0DA11CFF33E122CA91C34122686A0FD61A675A51FFCDBBD1",
+    "nested": false
+  },
+  {
+    "jar": "KeybindsPurger-1.4.0-neoforge-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\KeybindsPurger-1.4.0-neoforge-1.21.1.jar",
+    "bytes": 39710,
+    "sha256": "E4E7842A26D11EA2470D23AB2600114B4BACE9B74F6EA3478B933CEB24F2479B",
+    "nested": false
+  },
+  {
+    "jar": "konkrete_neoforge_1.9.9_MC_1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\konkrete_neoforge_1.9.9_MC_1.21.jar",
+    "bytes": 618842,
+    "sha256": "791C5538751DD3015EF3A2CE92D98719E1A28A48EBBD817B78506771256654CD",
+    "nested": false
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\kotlinforforge-5.12.0-all.jar",
+    "bytes": 7279276,
+    "sha256": "095AED94F21B4E55895B21EA957750AE3AB829FBCFC6D3C66A3489F5F1128D46",
+    "nested": false
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/thedarkcolour.kfflib-5.12.0.jar",
+    "bytes": 80715,
+    "sha256": "164FF96D4B9FC1C0B61EFF77C39A51A01DEDFD6AA427FFD6E11DA43C4CD5816D",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlin-stdlib-jdk7-2.4.0.jar",
+    "bytes": 946,
+    "sha256": "5072265564B6B0296F9C7B21FEE65EDEE760C5697436F5AE7427033FA58FC034",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlin-stdlib-2.4.0.jar",
+    "bytes": 1841929,
+    "sha256": "CCB14FF83FABCB11458B798DBC9824748CCDFFEEC79C9ABA789E6ED1CDA86B1C",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/thedarkcolour.kfflang-5.12.0.jar",
+    "bytes": 46162,
+    "sha256": "09BF10CDF09B62286482817A06C075DFCA2292F8019A1BB2F999B4D3BBDF3F13",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlinx-serialization-core-jvm-1.11.0.jar",
+    "bytes": 404509,
+    "sha256": "F4A801C647D4351327CD9E1AC4113E2BE9EA37A64AB0ABAE269C25A52E28F35D",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlinx-coroutines-core-jvm-1.11.0.jar",
+    "bytes": 1577052,
+    "sha256": "D1D75AA01DFFBB4D1C520E67E4C4E7F5F6174718E7CB4632412503F2F0E604FA",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlinx-coroutines-jdk8-1.11.0.jar",
+    "bytes": 1018,
+    "sha256": "1238F179DA55360725EC49B887225317F31AE89BD29B652CBE139FF59F5D45CB",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlinx-serialization-json-jvm-1.11.0.jar",
+    "bytes": 294166,
+    "sha256": "563A25B4EB5C9128AE9C2479F3D1A5C44DCD176112B91CF03682E906EBA5C935",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlin-reflect-2.4.0.jar",
+    "bytes": 3750099,
+    "sha256": "F0D8E8908624EB4478BB131E9F887366680D2E239741195E548FA5C906963B90",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/kotlin-stdlib-jdk8-2.4.0.jar",
+    "bytes": 952,
+    "sha256": "D96B4E297136B8A4B2B88C1ADCDC64D92E90D52A417E4315CDCF964ADEDE8AA2",
+    "nested": true
+  },
+  {
+    "jar": "kotlinforforge-5.12.0-all.jar!/META-INF/jarjar/thedarkcolour.kffmod-5.12.0.jar",
+    "bytes": 71724,
+    "sha256": "FFFAADD2379BD43C2FC3263481B0A2ABF1942D1EFA053FA8946DA78843DE1C29",
+    "nested": true
+  },
+  {
+    "jar": "kubejs-neoforge-2101.7.2-build.377.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\kubejs-neoforge-2101.7.2-build.377.jar",
+    "bytes": 2294111,
+    "sha256": "43B656BC2D4CE867141ABB828C9481F080A38585B99BCFA07E54732A4976A601",
+    "nested": false
+  },
+  {
+    "jar": "kubejs-neoforge-2101.7.2-build.377.jar!/META-INF/jarjar/animated-gif-lib-for-java-animated-gif-lib-1.7.jar",
+    "bytes": 20816,
+    "sha256": "9BAE7C1154CEC27D65F0AB91E307255789A2C76B73FD3425C211B52C1DE3A343",
+    "nested": true
+  },
+  {
+    "jar": "kubejs-neoforge-2101.7.2-build.377.jar!/META-INF/jarjar/better-advanced-tooltips-2101.1.0-build.1.jar",
+    "bytes": 33167,
+    "sha256": "8FE810B03FD212720465956292A5A9B23B59259BBFFE86B60FD65FE0558BCF5F",
+    "nested": true
+  },
+  {
+    "jar": "kubejs-neoforge-2101.7.2-build.377.jar!/META-INF/jarjar/tiny-java-server-1.0.0-build.33.jar",
+    "bytes": 111618,
+    "sha256": "E5EB5D6DD6444CF99ECBBDA7DB0345E13D619B1E7CA87DB7561DDF605D68B6BC",
+    "nested": true
+  },
+  {
+    "jar": "kubejstweaks-1.0.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\kubejstweaks-1.0.7.jar",
+    "bytes": 421343,
+    "sha256": "35E10495287DD34FF481E3B20AEE722D4CAC5DD1D32BA23F013D47756C778350",
+    "nested": false
+  },
+  {
+    "jar": "kubejstweaks-1.0.7.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.3.jar",
+    "bytes": 96093,
+    "sha256": "18D515E6A7E8456E0BE35BD5948D3667646069ECE30BA6535D44BB6643814406",
+    "nested": true
+  },
+  {
+    "jar": "kubejstweaks-1.0.7.jar!/META-INF/jarjar/mixinsquared-neoforge-0.3.3.jar!/META-INF/jars/MixinSquared-0.3.3.jar",
+    "bytes": 101936,
+    "sha256": "5AE421A724F2CC9B06ADE3DA79FB3224E8073FDEAC9A35DF6F16AE59147A1ABB",
+    "nested": true
+  },
+  {
+    "jar": "laserio-1.9.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\laserio-1.9.11.jar",
+    "bytes": 1305285,
+    "sha256": "03E8537D75BC2F4CED2FC214D3409753E684D1056EE63B26DB7A2B9E199EF4DF",
+    "nested": false
+  },
+  {
+    "jar": "ldlib2-neoforge-1.21.1-2.2.46-all.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ldlib2-neoforge-1.21.1-2.2.46-all.jar",
+    "bytes": 8019159,
+    "sha256": "FE646B7DF343220905EBBF6C2F65FF39C79DA4710787372FA4B6621CC6D99AF6",
+    "nested": false
+  },
+  {
+    "jar": "ldlib2-neoforge-1.21.1-2.2.46-all.jar!/META-INF/jarjar/taffy-1.1.5.jar",
+    "bytes": 233572,
+    "sha256": "DD89C3FD93A0377062F67575C12FA74BB8DCD842C1EA2929150F1A50DB1E8532",
+    "nested": true
+  },
+  {
+    "jar": "ldlib2-neoforge-1.21.1-2.2.46-all.jar!/META-INF/jarjar/yoga-1.0.0.jar",
+    "bytes": 139827,
+    "sha256": "BACD086489858CA9FCD438721C75373CE8DEAB5E9FEAD23425A42A16FE1DC9A7",
+    "nested": true
+  },
+  {
+    "jar": "ldlib2-neoforge-1.21.1-2.2.46-all.jar!/META-INF/jarjar/kotlin-stdlib-2.1.20.jar",
+    "bytes": 1724057,
+    "sha256": "1BCC74E8CE84E2C25EAAFDE10F1248349CCE3062B6E36978CBEEC610DB1E930A",
+    "nested": true
+  },
+  {
+    "jar": "lionfishapi-3.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\lionfishapi-3.1.jar",
+    "bytes": 91596,
+    "sha256": "AEEBF0692650AFBBC78259C0D4E3D5B7EDF037707E8AE5D56045066D83A19CF6",
+    "nested": false
+  },
+  {
+    "jar": "lithostitched-1.8.1-neoforge-21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\lithostitched-1.8.1-neoforge-21.1.jar",
+    "bytes": 1023751,
+    "sha256": "E0DA669FA5FACC61A09B9B7BAE21B322993DE1FCD1EB05787ADFFB7309598CCA",
+    "nested": false
+  },
+  {
+    "jar": "lithostitched-1.8.1-neoforge-21.1.jar!/META-INF/jarjar/apollib-1.2.0-neoforge-21.1.jar",
+    "bytes": 110989,
+    "sha256": "D8CA42902CC4FE7C6C39917BDC2A9EC86C32C5BEE3E3C3A551513F601968498B",
+    "nested": true
+  },
+  {
+    "jar": "lithostitched-1.8.1-neoforge-21.1.jar!/META-INF/jarjar/apollib-1.2.0-neoforge-21.1.jar!/META-INF/jarjar/json5-java-3.0.0.jar",
+    "bytes": 56460,
+    "sha256": "2E0F73784E6BC4C755E52D485F628D110D397F079D58B118658B903BE9AA0533",
+    "nested": true
+  },
+  {
+    "jar": "little-big-redstone-1.9.13-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\little-big-redstone-1.9.13-1.21.1.jar",
+    "bytes": 1419621,
+    "sha256": "83D4879737F6595B7F0F632546FD822CF333FA487B9841BE752F2CAD974075BE",
+    "nested": false
+  },
+  {
+    "jar": "livingthings-neoforge-1.21.1-2.3.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\livingthings-neoforge-1.21.1-2.3.2.jar",
+    "bytes": 966572,
+    "sha256": "2E551D075858B39932F6B0114DA558D12F94EF503876A58351FC55D72DD39838",
+    "nested": false
+  },
+  {
+    "jar": "lmft-1.1.1+1.21.9-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\lmft-1.1.1+1.21.9-neoforge.jar",
+    "bytes": 78624,
+    "sha256": "932765AAE037197E8ACFE7A90D9E473B143E3E785655C24C02B30C7013CD4458",
+    "nested": false
+  },
+  {
+    "jar": "logisticsnetworks-1.21.1-1.17.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\logisticsnetworks-1.21.1-1.17.2.jar",
+    "bytes": 2169560,
+    "sha256": "2524EC13F6768CCBFF0EAA25DDCA7618817038ABA175288FDAF6490FD2F26F60",
+    "nested": false
+  },
+  {
+    "jar": "lootr-neoforge-1.21.1-1.11.38.127.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\lootr-neoforge-1.21.1-1.11.38.127.jar",
+    "bytes": 1075929,
+    "sha256": "5C74DE4709D1C13B25880FDD241A89D5D9F331346D20EDC76F80CCD4D99DC66C",
+    "nested": false
+  },
+  {
+    "jar": "L_Ender's Cataclysm 1.21.1-3.33.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\L_Ender's Cataclysm 1.21.1-3.33.jar",
+    "bytes": 73375667,
+    "sha256": "371956D0C2E3B56729EE93B955E936875D210E372FE734CDB74326D89EF79875",
+    "nested": false
+  },
+  {
+    "jar": "mahoutsukai-1.21.1-v1.36.30.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mahoutsukai-1.21.1-v1.36.30.jar",
+    "bytes": 5130145,
+    "sha256": "4DC8C9F99B3E5D0D48A58368CCD0BE203B59508D148D6DB863A77A3EFE6F1389",
+    "nested": false
+  },
+  {
+    "jar": "mcjtylib-1.21-9.0.22.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mcjtylib-1.21-9.0.22.jar",
+    "bytes": 699974,
+    "sha256": "F4B66E52844599ECA0E3647AD674CCD7ADB753AF9F2CBC1C06EC884E8339D060",
+    "nested": false
+  },
+  {
+    "jar": "megacells-4.11.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\megacells-4.11.0.jar",
+    "bytes": 1137276,
+    "sha256": "A386BBF12AFB11729B0DCF77F64221893D250F22E6185A4D728B9799B230BC55",
+    "nested": false
+  },
+  {
+    "jar": "Mekanism-1.21.1-10.7.19.85.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Mekanism-1.21.1-10.7.19.85.jar",
+    "bytes": 11976009,
+    "sha256": "004DBC9F3106F4D192AEAA1EE1190DD16EC9CA8059ED3D093B80034F4C574F43",
+    "nested": false
+  },
+  {
+    "jar": "MekanismGenerators-1.21.1-10.7.19.85.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MekanismGenerators-1.21.1-10.7.19.85.jar",
+    "bytes": 1114598,
+    "sha256": "0E5783B111E756F27B48C62B2F0E02FFF750C77F7985FF809BFADC5F444BA4AC",
+    "nested": false
+  },
+  {
+    "jar": "MekanismTools-1.21.1-10.7.19.85.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MekanismTools-1.21.1-10.7.19.85.jar",
+    "bytes": 526620,
+    "sha256": "E1DBCA7D70DF150101DA535F6AB4B165A2E402FDE830D34DF75B58D9AAD24DD8",
+    "nested": false
+  },
+  {
+    "jar": "mekanisticrouters-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mekanisticrouters-1.2.0.jar",
+    "bytes": 248261,
+    "sha256": "EC58C32B11937D283FD3617372C166652376C1E0FFF0339F9405D31F02C06636",
+    "nested": false
+  },
+  {
+    "jar": "mekmm-1.21.1-1.4.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mekmm-1.21.1-1.4.2.jar",
+    "bytes": 3721605,
+    "sha256": "F019B2D47D4DD6DFD72F066BB86B1572AA9089AC530221EF2B2FF136218F3C53",
+    "nested": false
+  },
+  {
+    "jar": "melody_neoforge_1.0.10_MC_1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\melody_neoforge_1.0.10_MC_1.21.jar",
+    "bytes": 36096,
+    "sha256": "6B973A4564703C531FC0EAE09DB08B07A38091E0A743C687B8D2049457E84871",
+    "nested": false
+  },
+  {
+    "jar": "memorysettings-1.21-6.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\memorysettings-1.21-6.0.jar",
+    "bytes": 22329,
+    "sha256": "83721E70A8702B4389CA5D83DAA5B30F55797561EE30D788CEC2987B7CE3E042",
+    "nested": false
+  },
+  {
+    "jar": "meplacementtool-2.1.5-neoforge1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\meplacementtool-2.1.5-neoforge1.21.1.jar",
+    "bytes": 1128423,
+    "sha256": "887DCBEA4F4569773F43125DBBE602861A5CFD5D088B96AA4B02883ED84E65BD",
+    "nested": false
+  },
+  {
+    "jar": "merequester-neoforge-1.21.1-1.5.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\merequester-neoforge-1.21.1-1.5.0.jar",
+    "bytes": 186826,
+    "sha256": "8AC35E46E0A6102FD17EAA7AEDA94EAF4755E448C703B6130F3FF1731BEE03E5",
+    "nested": false
+  },
+  {
+    "jar": "mezz_config-1.21.1-neoforge-0.6.9-standalone.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mezz_config-1.21.1-neoforge-0.6.9-standalone.jar",
+    "bytes": 345479,
+    "sha256": "DEEDD2C3CC30B142D1A50D4A82190970E33A70A86F89C9E5BA7EED8286087F9F",
+    "nested": false
+  },
+  {
+    "jar": "mezz_config-1.21.1-neoforge-0.6.9-standalone.jar!/META-INF/jarjar/mezz_config-1.21.1-neoforge-0.6.9.jar",
+    "bytes": 383042,
+    "sha256": "EA28F9E9A97B1B979DB691DF328E1A7D5B176F655C3C227BA90906834DC571F7",
+    "nested": true
+  },
+  {
+    "jar": "mifa-neoforge-1.21.x-2.1.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mifa-neoforge-1.21.x-2.1.0.jar",
+    "bytes": 122759,
+    "sha256": "DAB09F72C4DF39EFC5D7F8949E4AB02B7D5F74242EE17B8C26FB172C2761D49F",
+    "nested": false
+  },
+  {
+    "jar": "mininggadgets-1.18.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mininggadgets-1.18.8.jar",
+    "bytes": 664111,
+    "sha256": "01E1B6064959074388485E03828CFFAEC3F9A702436EFE66C0FAA296DDE54F91",
+    "nested": false
+  },
+  {
+    "jar": "mob_grinding_utils-1.1.10+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mob_grinding_utils-1.1.10+mc1.21.1.jar",
+    "bytes": 1370085,
+    "sha256": "9781E7A5CFFC53A9B2879160AEF0D39A7E416D7F4B5805240CA03EAFF5F4ED06",
+    "nested": false
+  },
+  {
+    "jar": "modelfix-1.21-1.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\modelfix-1.21-1.10.jar",
+    "bytes": 47035,
+    "sha256": "EE774B72135450EF9DB1C7A75837304F30D05C3541E3A348C4F5769AB0F04912",
+    "nested": false
+  },
+  {
+    "jar": "Modern-Dynamics-0.9.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Modern-Dynamics-0.9.6.jar",
+    "bytes": 707745,
+    "sha256": "4357833F16A8F890E4399DE3C606A27644ADD1384D5D1E7246648A818E9CBDAB",
+    "nested": false
+  },
+  {
+    "jar": "Modern-Industrialization-2.5.12.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Modern-Industrialization-2.5.12.jar",
+    "bytes": 7311721,
+    "sha256": "56F59A5A4481C98D44FA1C582E577B7324E43788227CAB5BA66B5B17EEAB5262",
+    "nested": false
+  },
+  {
+    "jar": "Modern-Industrialization-2.5.12.jar!/META-INF/jarjar/GrandPower-3.0.0.jar",
+    "bytes": 211944,
+    "sha256": "F0DB91E29124A8119C3A511831A52B058F339F9D3AF7C06BBA96CCA3B04D1DB1",
+    "nested": true
+  },
+  {
+    "jar": "modernfix-neoforge-5.27.27+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\modernfix-neoforge-5.27.27+mc1.21.1.jar",
+    "bytes": 614138,
+    "sha256": "7010AAE2E837122FE8DABD5932358E2BA334FCBC62CA6530CB1CB00402D2C63B",
+    "nested": false
+  },
+  {
+    "jar": "modonomicon-1.21.1-neoforge-1.123.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\modonomicon-1.21.1-neoforge-1.123.0.jar",
+    "bytes": 2430324,
+    "sha256": "23F02535D579602D3DA3E15397C9EDC55B9DCAFB6B755C1665F31D70FA6BEC1F",
+    "nested": false
+  },
+  {
+    "jar": "modonomicon-1.21.1-neoforge-1.123.0.jar!/META-INF/jarjar/commonmark-0.31.0.jar",
+    "bytes": 220558,
+    "sha256": "11D5996813F4D6525A134B906844D87112C6ACB6FDD306AD5755EF5DF9B26281",
+    "nested": true
+  },
+  {
+    "jar": "modonomicon-1.21.1-neoforge-1.123.0.jar!/META-INF/jarjar/commonmark-ext-gfm-strikethrough-0.31.0.jar",
+    "bytes": 13258,
+    "sha256": "6236E6605072708D0A172A9C57802529AB71958E71C72A5E0F90A4FBF62AA9AA",
+    "nested": true
+  },
+  {
+    "jar": "modonomicon-1.21.1-neoforge-1.123.0.jar!/META-INF/jarjar/commonmark-ext-ins-0.31.0.jar",
+    "bytes": 11008,
+    "sha256": "CD0C6FB3CEF0ED504F86957C6790C9EEA9255D2106FEF65EB01AC1BA9DD30ED6",
+    "nested": true
+  },
+  {
+    "jar": "modular-routers-13.2.7+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\modular-routers-13.2.7+mc1.21.1.jar",
+    "bytes": 1285765,
+    "sha256": "3BB8FF7096C87920ECDA1BC9D81A3CA5DF6E7830B9DCFE1836BE4E205EA02049",
+    "nested": false
+  },
+  {
+    "jar": "ModularBees-1.21.1-3.4-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ModularBees-1.21.1-3.4-neoforge.jar",
+    "bytes": 575830,
+    "sha256": "4FB53B1DBC345F88F32EAA89711C92A3537337B40390880A57B88429D5453DC8",
+    "nested": false
+  },
+  {
+    "jar": "MoogsStructureLib-neoforge-1.21.1-3.4.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MoogsStructureLib-neoforge-1.21.1-3.4.2.jar",
+    "bytes": 1094979,
+    "sha256": "753337838224C43DFD8070E54B587219847CBCFC3FFCD06128802FA34FB92214",
+    "nested": false
+  },
+  {
+    "jar": "MoogsStructureLib-neoforge-1.21.1-3.4.2.jar!/META-INF/jarjar/mixinextras-neoforge-0.5.3.jar",
+    "bytes": 725927,
+    "sha256": "9822E773BD9F42D36ED53EA3D67486207291747A7BFACC29BEEB92040721BC9B",
+    "nested": true
+  },
+  {
+    "jar": "moonlight-1.21.1-3.8.2-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\moonlight-1.21.1-3.8.2-neoforge.jar",
+    "bytes": 2328918,
+    "sha256": "DB3136188D4F58210BFB5AD4C0D92B7630525258D4F4B0A8B8BA611DAA3B3A84",
+    "nested": false
+  },
+  {
+    "jar": "moonlight-1.21.1-3.8.2-neoforge.jar!/META-INF/jarjar/codecui-neoforge-1.21.1-1.4.7.jar",
+    "bytes": 261647,
+    "sha256": "B7799B7A2769127D23F34E73B28E4B4D62263C125507C7C35562CCD836F54427",
+    "nested": true
+  },
+  {
+    "jar": "moredragoneggs-5.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\moredragoneggs-5.0.jar",
+    "bytes": 6389,
+    "sha256": "D70D9560783E2AA30945185E543C793F890C642E4268C6C2116102A26B73D6BF",
+    "nested": false
+  },
+  {
+    "jar": "moreoverlays-1.24.2-mc1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\moreoverlays-1.24.2-mc1.21.1-neoforge.jar",
+    "bytes": 112984,
+    "sha256": "1AB0D1A49E31BBE5CF0CDFE5BA29FD923ECA5AC60CDB51164780AA3DB317C4B1",
+    "nested": false
+  },
+  {
+    "jar": "morered-1.21.1-6.0.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\morered-1.21.1-6.0.0.3.jar",
+    "bytes": 535669,
+    "sha256": "8075126184F540C6B35B92127088F6CC4C9544627ACAC9F2287C62A0DFBDE74E",
+    "nested": false
+  },
+  {
+    "jar": "MoreRed-CCT-Compat-1.21.1-1.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MoreRed-CCT-Compat-1.21.1-1.3.0.jar",
+    "bytes": 7312,
+    "sha256": "25A0C4FD36033719CC08750FCFF509E215F49C8009C28C5C4B5EE61181B7901C",
+    "nested": false
+  },
+  {
+    "jar": "MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+    "bytes": 73938,
+    "sha256": "68E6F4201C5DE97B77929A7215C9552495696CA6A3BF3AE4EACC34E135F6CC8B",
+    "nested": false
+  },
+  {
+    "jar": "mygenesis-update-checks-0.0.3-test-only.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\mygenesis-update-checks-0.0.3-test-only.jar",
+    "bytes": 16499,
+    "sha256": "E1441484A6D94D32E6EEEFC2768E282B44D18F47CA8EE1E679899AC942DA0928",
+    "nested": false
+  },
+  {
+    "jar": "MysticalAgradditions-1.21.1-8.0.15.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MysticalAgradditions-1.21.1-8.0.15.jar",
+    "bytes": 318385,
+    "sha256": "8876B360DEDF006CD3BFF26719FCCC4B148D626FB8BE1E7F5E427107826FB01E",
+    "nested": false
+  },
+  {
+    "jar": "MysticalAgriculture-1.21.1-8.0.29.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MysticalAgriculture-1.21.1-8.0.29.jar",
+    "bytes": 2328280,
+    "sha256": "15C2CBDE18F25D228B8DA26D8C6A040F217F24CC73084B8176D3E18E7140971E",
+    "nested": false
+  },
+  {
+    "jar": "MysticalCustomization-1.21.1-6.0.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\MysticalCustomization-1.21.1-6.0.2.jar",
+    "bytes": 49374,
+    "sha256": "70C63D765EC2BC0AB6E76097AF08F6E0AA854F6C737BCA828F50EC5B2D7E0F48",
+    "nested": false
+  },
+  {
+    "jar": "NaturesAura-41.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\NaturesAura-41.10.jar",
+    "bytes": 1553371,
+    "sha256": "5401704E76FB59719D48CD3AA76F088220AE90D8E3B1F4859365AD260355700C",
+    "nested": false
+  },
+  {
+    "jar": "NaturesCompass-1.21.1-3.4.0-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\NaturesCompass-1.21.1-3.4.0-neoforge.jar",
+    "bytes": 224657,
+    "sha256": "0E249AC11B2F916C5570D9679E188DA652FA5664BA9CDB7BE5DC9FF69497539C",
+    "nested": false
+  },
+  {
+    "jar": "NeoAuth-1.21.1-1.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\NeoAuth-1.21.1-1.0.1.jar",
+    "bytes": 61287,
+    "sha256": "CD945B64BA805E42CA0B039BA0DF69EB087182988EBC35D0BDE8E7DF400EDA72",
+    "nested": false
+  },
+  {
+    "jar": "neoecoae-21.2.15.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\neoecoae-21.2.15.jar",
+    "bytes": 7271865,
+    "sha256": "64248CBFBED64C9A552BD67BF13BF8091A408ADF608301C9A7122F744C4D9082",
+    "nested": false
+  },
+  {
+    "jar": "neoecoae-21.2.15.jar!/META-INF/jarjar/Registrate-MC1.21.1-1.4.8.jar",
+    "bytes": 181998,
+    "sha256": "5FEF5915B2FD7BD386901DC3B38ED16E1946C539F3892B40B4EA01DE0066ECE2",
+    "nested": true
+  },
+  {
+    "jar": "neovitae-1.21.1-1.1.51.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\neovitae-1.21.1-1.1.51.jar",
+    "bytes": 12348069,
+    "sha256": "4F7C55E2E0AEF1F341BA7B79596E419D49EC34ED948B724EAD4A6508037047EC",
+    "nested": false
+  },
+  {
+    "jar": "netherportalfix-neoforge-1.21.1-21.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\netherportalfix-neoforge-1.21.1-21.1.1.jar",
+    "bytes": 211972,
+    "sha256": "C1077DE0C7F1FF5289D1852E0674D9C477247D4318C9809B21C60E56A31AE31A",
+    "nested": false
+  },
+  {
+    "jar": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+    "bytes": 306668,
+    "sha256": "866AC9A47AFCD829BDB03890B5D8F80BB4C6F47332C64717B6E909BEE51337B6",
+    "nested": false
+  },
+  {
+    "jar": "notenoughanimations-neoforge-1.12.7-mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\notenoughanimations-neoforge-1.12.7-mc1.21.1.jar",
+    "bytes": 1868196,
+    "sha256": "5B8107CF01128523233287D9B0789F743F9D6186BDA651DE838E02350B311828",
+    "nested": false
+  },
+  {
+    "jar": "notenoughanimations-neoforge-1.12.7-mc1.21.1.jar!/META-INF/jars/TRansition-1.0.28-1.21.1-neoforge-SNAPSHOT.jar",
+    "bytes": 1252168,
+    "sha256": "FC1396745E511C3FAECD81FC2065F46DA9BFFA24A602668D8A4C125A174E2888",
+    "nested": true
+  },
+  {
+    "jar": "notenoughanimations-neoforge-1.12.7-mc1.21.1.jar!/META-INF/jars/TRender-1.0.17-1.21.1-neoforge-SNAPSHOT.jar",
+    "bytes": 335079,
+    "sha256": "96B2E59E61ABAFFB2D799EE56E24659828563783CA3FA7B73C928111E7571367",
+    "nested": true
+  },
+  {
+    "jar": "not_enough_glyphs-1.21.1-4.6.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\not_enough_glyphs-1.21.1-4.6.2.jar",
+    "bytes": 637382,
+    "sha256": "EFD90F8ED292FD1B6B08FC33330F4344B70ED1661FFBE3684A64B1B485856C12",
+    "nested": false
+  },
+  {
+    "jar": "not_enough_glyphs-1.21.1-4.6.2.jar!/META-INF/jarjar/sauce-1.21.1-0.0.50.97.jar",
+    "bytes": 235643,
+    "sha256": "7402E4B42204E0F2FC91B5FB6E77AA2C826ABDF5B62DF4773FB3A4D6495E407C",
+    "nested": true
+  },
+  {
+    "jar": "novillagerdm-1.21.1-6.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\novillagerdm-1.21.1-6.0.0.jar",
+    "bytes": 4884,
+    "sha256": "0301A4D56BEF137AB8A48A388D80AE4B750B30522D9E8B98DA7017D495107297",
+    "nested": false
+  },
+  {
+    "jar": "observable-5.4.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\observable-5.4.4.jar",
+    "bytes": 388133,
+    "sha256": "F344B47B58F4FD48D1AA95EE4D5C16252B5E5BD39F829FABC96B27097202D2E5",
+    "nested": false
+  },
+  {
+    "jar": "observerlib-1.10.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\observerlib-1.10.3.jar",
+    "bytes": 114651,
+    "sha256": "D2A2AE28D0F04845E1C803F200F89E47F4F5B4F1AF917FE7750D0190820AEFBF",
+    "nested": false
+  },
+  {
+    "jar": "occultism-1.21.1-neoforge-1.226.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\occultism-1.21.1-neoforge-1.226.0.jar",
+    "bytes": 6961785,
+    "sha256": "FC9BBF6C0692A82BD2DE45E4D4D8A6A673EDF85B64E67AF91F9BC8994B72D7E4",
+    "nested": false
+  },
+  {
+    "jar": "occultism_kubejs-1.21.1-neoforge-1.11.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\occultism_kubejs-1.21.1-neoforge-1.11.0.jar",
+    "bytes": 434372,
+    "sha256": "7499B1AE2278F620EB57FD6CFCD455D27D0C1A8BEA277D5C7471E9F5AD55C493",
+    "nested": false
+  },
+  {
+    "jar": "OctoLib-NEOFORGE-0.6.3+1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\OctoLib-NEOFORGE-0.6.3+1.21.jar",
+    "bytes": 544385,
+    "sha256": "B9356F308AFD66C8B32FCF7914DC4F7B9403F910683AD0544E038C732F9177BB",
+    "nested": false
+  },
+  {
+    "jar": "OctoLib-NEOFORGE-0.6.3+1.21.jar!/META-INF/jars/snakeyaml-2.2.jar",
+    "bytes": 344685,
+    "sha256": "69E4E90FF788A0674D6BF3A82520EF135017FA56D3151503799F2732C70E7370",
+    "nested": true
+  },
+  {
+    "jar": "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.6.jar",
+    "bytes": 176815,
+    "sha256": "457FE8CB11B46C786B1E171AD0E000552E80E1F72CC6D48990AD2E322823390B",
+    "nested": false
+  },
+  {
+    "jar": "omegaconfig-neoforge-1.5.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\omegaconfig-neoforge-1.5.1.jar",
+    "bytes": 20604,
+    "sha256": "99D01CF77F3D1CE5BDD8B8132D148A4CE6D49EDD2F82AF65952FE7B745B69C0D",
+    "nested": false
+  },
+  {
+    "jar": "omni_upgrades-1.0.4-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\omni_upgrades-1.0.4-1.21.1.jar",
+    "bytes": 84433,
+    "sha256": "C332EB52DFD24F535F668B97F01E3E91BEA2E18B8D6AFAA33B15689671F8344C",
+    "nested": false
+  },
+  {
+    "jar": "OpenLoader-neoforge-1.21.1-21.1.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\OpenLoader-neoforge-1.21.1-21.1.5.jar",
+    "bytes": 35602,
+    "sha256": "C0BECABBB2D45C254E959D3A26A0237DACDFCCB7CDE85DE98C4B863057E842FF",
+    "nested": false
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\oracle_index-neoforge-1.4.0.jar",
+    "bytes": 29675090,
+    "sha256": "6E2B5EBB726AE942EE767722E5057C9C4F9F2A9AC045CE605B29033B6E2BB15B",
+    "nested": false
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/api-0.31.1.jar",
+    "bytes": 957666,
+    "sha256": "C5D297FF0BBBF78F3537D964F7824FF26374B2218013861DA9FB88B1D4157499",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/commonmark-0.27.1.jar",
+    "bytes": 218657,
+    "sha256": "51068D5E40987017B44D99DD34850AE52CFB1BB01A595AB6D5F410B3918FF048",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/commonmark-ext-gfm-tables-0.27.1.jar",
+    "bytes": 24743,
+    "sha256": "B90E9D4B561141DE06D7A25474221F9DE0957DFAF9EC4176DF5E938C81548B21",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/commonmark-ext-yaml-front-matter-0.27.1.jar",
+    "bytes": 10785,
+    "sha256": "3801A20F91BA6B50C8D1E14E318E31671DABE5C722D46A86DD99FD344CA8D78C",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/exp4j-0.4.8.jar",
+    "bytes": 48271,
+    "sha256": "0E100B7B72C68CBE81A2D68751C34B2B307088401251B3C70B9E0275DDD9A262",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/jsoup-1.17.2.jar",
+    "bytes": 446258,
+    "sha256": "0D42DA5CA906FFAA6D3716DF293E8F58E605737D80449154E97303F3CBF9BD82",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/langchain4j-1.0.0.jar",
+    "bytes": 192142,
+    "sha256": "149AB72BB877FC054A20EF1DB9B68F39E0366B569699AFE03678322B7A92C19F",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/langchain4j-core-1.0.0.jar",
+    "bytes": 323137,
+    "sha256": "3531FEB86DDB954C424BE1DC8FD8F7107DA70DD3BA3A4B545650D1A27F4E6B81",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/langchain4j-embeddings-1.0.0-beta5.jar",
+    "bytes": 337559,
+    "sha256": "77BAD58BDD5DA943E73254EFF49108602BEBAE5CBB4FD84F2EBD429F8A9F7398",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/langchain4j-embeddings-all-minilm-l6-v2-q-1.0.0-beta5.jar",
+    "bytes": 16430936,
+    "sha256": "4C5C68659B8A5DEAA6617E134180928E9800390E2BEC2FEDD73F7317A82FB99C",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/onnxruntime-1.20.0.jar",
+    "bytes": 4574408,
+    "sha256": "49D132252DD38088E3BC66484EBFA372303941E9F3BE4BBE9B68FC7F921D629F",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/opennlp-tools-2.5.4.jar",
+    "bytes": 1396937,
+    "sha256": "73FFA000360F398315E680727386C082C2FF6C01249BC191E30EBCFC7B16C380",
+    "nested": true
+  },
+  {
+    "jar": "oracle_index-neoforge-1.4.0.jar!/META-INF/jars/tokenizers-0.31.1.jar",
+    "bytes": 4898407,
+    "sha256": "C6D8252DADE598BEC68019A3AB80789FC01EC2615AADF4D5BE35E708EA0BC6B5",
+    "nested": true
+  },
+  {
+    "jar": "oritech-neoforge-1.21.1-1.2.13.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\oritech-neoforge-1.21.1-1.2.13.jar",
+    "bytes": 11000860,
+    "sha256": "32600BF5B08FCF6D4A49E557F90EE45B238098170777872C8919D9FDB0A1B828",
+    "nested": false
+  },
+  {
+    "jar": "oritech-neoforge-1.21.1-1.2.13.jar!/META-INF/jarjar/GrandPower-3.0.2.jar",
+    "bytes": 211982,
+    "sha256": "65BCA4F4962F0BA9720FA8CDF8AEC0D2D1B13B2B4F3885A289A1591839A69396",
+    "nested": true
+  },
+  {
+    "jar": "overlapless-1.21.1-1.2.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\overlapless-1.21.1-1.2.0.jar",
+    "bytes": 16585,
+    "sha256": "5BC9AF371C6A30F17844A0E5EB6B3E5D96F4D1F8A709DFB5C38B4A3F89DCBDFE",
+    "nested": false
+  },
+  {
+    "jar": "overloadedarmorbar-neoforge-1.21-2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\overloadedarmorbar-neoforge-1.21-2.jar",
+    "bytes": 22307,
+    "sha256": "D9C809D62E4DAC5E2DABFD6C672BBE47E89E41F680D0937AA59E49F7F65FF405",
+    "nested": false
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar",
+    "bytes": 1223197,
+    "sha256": "5FC306AD3D42E1DC26812F2DF856E7C232376405CAAB6AF4F5AAFFE89CD2B256",
+    "nested": false
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/endec-0.1.8.1.jar",
+    "bytes": 150821,
+    "sha256": "BAA91134E150F5EF34AFAFEB6670E2D752A062501684D5A5B8898ECED8FA70E7",
+    "nested": true
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/fabric-api-base-0.4.42+d1308dedd1.jar",
+    "bytes": 36542,
+    "sha256": "7F9147A7C0AAAFD561D7ADECF5039EDD4D768E63EBD31009AD7D135AB421039D",
+    "nested": true
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/gson-0.1.5.1.jar",
+    "bytes": 21464,
+    "sha256": "F717BAB0101AF9E5C8D5978B6421CEC42110AFD426A06EDFE27304B8812BC1B4",
+    "nested": true
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/jankson-0.1.5.1.jar",
+    "bytes": 21933,
+    "sha256": "42CC397DE0B93F708CC4A43696496E24D26947D9ECA345224FFF54B2B4FFE9DB",
+    "nested": true
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/jankson-1.2.2.jar",
+    "bytes": 76934,
+    "sha256": "C0255B368E858934F0EED0A8EA7B9C7610AA21834CD09AD0F28E73753A0FEF02",
+    "nested": true
+  },
+  {
+    "jar": "owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar!/META-INF/jars/netty-0.1.4.1.jar",
+    "bytes": 10528,
+    "sha256": "6743305BC845EDA5E8D7228D4A6F77E7C24E0CFD1E3761B512993104D6A7812B",
+    "nested": true
+  },
+  {
+    "jar": "PackagedAuto-1.21.1-4.0.8.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\PackagedAuto-1.21.1-4.0.8.21.jar",
+    "bytes": 573307,
+    "sha256": "1DD7EAF0E695855D98B322D62EF145F41457B90FB80F5CE08139EA4D197079EA",
+    "nested": false
+  },
+  {
+    "jar": "PackagedDraconic-1.21.1-4.0.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\PackagedDraconic-1.21.1-4.0.0.1.jar",
+    "bytes": 143334,
+    "sha256": "5B97B3A3D620D74AB00B826EDEDBC5508F22B70025EB12AEBFF40A248F6B5A35",
+    "nested": false
+  },
+  {
+    "jar": "pamhc2crops-NEOFORGE-1.21.1-1.0.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pamhc2crops-NEOFORGE-1.21.1-1.0.9.jar",
+    "bytes": 1536646,
+    "sha256": "EBDB8AAF2BDA8D4A46FB655AF57B546F285A1FF15411BBA691C18420064B84B5",
+    "nested": false
+  },
+  {
+    "jar": "pamhc2foodcore-NEOFORGE-1.21.1-1.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pamhc2foodcore-NEOFORGE-1.21.1-1.0.4.jar",
+    "bytes": 1699044,
+    "sha256": "ACD5DD380EAFC3F317B67231A2355C204CAB254DFDF4AB1F25C084FDD3D317B9",
+    "nested": false
+  },
+  {
+    "jar": "pamhc2foodextended-NEOFORGE-1.21.1-1.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pamhc2foodextended-NEOFORGE-1.21.1-1.0.0.jar",
+    "bytes": 1983616,
+    "sha256": "D61DDA7D00AB69BFAEF45854DF01AB6CFD64243D7F9A5AE870C89DD954247A8C",
+    "nested": false
+  },
+  {
+    "jar": "pamhc2trees-NEOFORGE-1.21.1-1.0.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pamhc2trees-NEOFORGE-1.21.1-1.0.9.jar",
+    "bytes": 1399642,
+    "sha256": "64C34129468B0D75738CF0FAF667A52067D2DB1E72EE8564C0A8F850BBF154C7",
+    "nested": false
+  },
+  {
+    "jar": "Patchouli-1.21.1-93-NEOFORGE.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Patchouli-1.21.1-93-NEOFORGE.jar",
+    "bytes": 646777,
+    "sha256": "959AF52ED6640C316C3A8469203420BE4AEEA11AD6603890BA83BF48F5D9F993",
+    "nested": false
+  },
+  {
+    "jar": "pipez-neoforge-1.21.1-1.2.31.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pipez-neoforge-1.21.1-1.2.31.jar",
+    "bytes": 456599,
+    "sha256": "9B37E922443EA3452DAEACBFBA4BCF69DE07692183C4EE09F1D1E82C9FC5CC5F",
+    "nested": false
+  },
+  {
+    "jar": "Placebo-1.21.1-9.9.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Placebo-1.21.1-9.9.4.jar",
+    "bytes": 326063,
+    "sha256": "D8952C019D6E54BEFE37155BC9876985EC57BF73DD33872115C7A65AC6BCEBA0",
+    "nested": false
+  },
+  {
+    "jar": "player-animation-lib-forge-2.0.4+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\player-animation-lib-forge-2.0.4+1.21.1.jar",
+    "bytes": 203149,
+    "sha256": "DBE5DE45F5CD60C0E5E47AF14E6D564534A98456E973CF670CB881F6938EEE92",
+    "nested": false
+  },
+  {
+    "jar": "pneumaticcraft-repressurized-8.2.24+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pneumaticcraft-repressurized-8.2.24+mc1.21.1.jar",
+    "bytes": 11885688,
+    "sha256": "03FA26883002B4252EC669A277B6FECF3367284E333A2165178FD236056F0B15",
+    "nested": false
+  },
+  {
+    "jar": "pocketstorage-1.2.5+1.21.1-b3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pocketstorage-1.2.5+1.21.1-b3.jar",
+    "bytes": 264788,
+    "sha256": "4C6E052210D74CF6A7B50AD556233D86E4AF5E52F0C5F50B19D96D82C70C8303",
+    "nested": false
+  },
+  {
+    "jar": "polyeng-0.4.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\polyeng-0.4.1.jar",
+    "bytes": 20130,
+    "sha256": "69E565DC00ABC5881CCFF6801C8A0817F479EAF871D578AEFD992B9B6614A2F9",
+    "nested": false
+  },
+  {
+    "jar": "polylib-2100.1.0-build.183-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\polylib-2100.1.0-build.183-neoforge.jar",
+    "bytes": 1299974,
+    "sha256": "6861974B2300C899627374470B81CF4922378CD042363C383C36D758FB3808CB",
+    "nested": false
+  },
+  {
+    "jar": "polymorph-neoforge-1.2.0+1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\polymorph-neoforge-1.2.0+1.21.1.jar",
+    "bytes": 172671,
+    "sha256": "4A09B7A3C8EA4F5B79ACADB405A18140FE20D882E6930403C46CC7AD49C5EC06",
+    "nested": false
+  },
+  {
+    "jar": "ponderjs-neoforge-1.21.1-2.4.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ponderjs-neoforge-1.21.1-2.4.0.jar",
+    "bytes": 1571893,
+    "sha256": "D9139C619CB0FA0A0A3058001C4CA993ECDF955C9AA8A81640BC24702B443466",
+    "nested": false
+  },
+  {
+    "jar": "ponderjs-neoforge-1.21.1-2.4.0.jar!/META-INF/jarjar/ponder-neoforge-1.0.81+mc1.21.1.jar",
+    "bytes": 820115,
+    "sha256": "B94099A82D51FA378F6CE30D788CA3F8CF0699FE16BBB536B516B03025301A42",
+    "nested": true
+  },
+  {
+    "jar": "ponderjs-neoforge-1.21.1-2.4.0.jar!/META-INF/jarjar/flywheel-neoforge-1.21.1-1.0.5.jar",
+    "bytes": 864786,
+    "sha256": "4FFB3E4B3AA94F4B92C1E639BF3AE3DB34768D4DE3A2A74EF0417C5E647EE6AE",
+    "nested": true
+  },
+  {
+    "jar": "potionsmaster-21.1.113-1.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\potionsmaster-21.1.113-1.0.1.jar",
+    "bytes": 216980,
+    "sha256": "DF18C93B8AB22AC529F5DD8342678F3A3C287D85FF9A587ED31B27B79ED42560",
+    "nested": false
+  },
+  {
+    "jar": "Powah-6.2.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Powah-6.2.10.jar",
+    "bytes": 2737991,
+    "sha256": "0E604A7356111C1DD44A00EA42FC1AA960D9FAEB978261349DF1138FCEE4D0B4",
+    "nested": false
+  },
+  {
+    "jar": "prickle-neoforge-1.21.1-21.1.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\prickle-neoforge-1.21.1-21.1.11.jar",
+    "bytes": 84812,
+    "sha256": "CCF46C442ED3C7FE41AD056F0940560829EC4DD88360985DFACD78F4614EB167",
+    "nested": false
+  },
+  {
+    "jar": "Prism-1.21.1-neoforge-1.0.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Prism-1.21.1-neoforge-1.0.11.jar",
+    "bytes": 62031,
+    "sha256": "B6A1E585416C48D7D9FA53FC12C67122AD1F3A6965202B51D4E2C643FFCA61C2",
+    "nested": false
+  },
+  {
+    "jar": "productivebees-1.21.1-13.14.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\productivebees-1.21.1-13.14.0.jar",
+    "bytes": 5377508,
+    "sha256": "2A7ECBCEBB8BB91ECA141261ADDFCDBC112F0BE160B618ED47960C3B20FF0BF4",
+    "nested": false
+  },
+  {
+    "jar": "productivebees-1.21.1-13.14.0.jar!/META-INF/jarjar/productivelib-1.21.1-0.2.0.jar",
+    "bytes": 154249,
+    "sha256": "6671C8AA783D5FC3056B5A24B041EDCF51B9C774B68FD85A790AE3346E4550E7",
+    "nested": true
+  },
+  {
+    "jar": "productivebeesgenesis-1.2.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\productivebeesgenesis-1.2.1.jar",
+    "bytes": 5289799,
+    "sha256": "E508E7935BD3682FDAED3EE60444C0DEB06571E65A9A66F903CC57E59B928CEF",
+    "nested": false
+  },
+  {
+    "jar": "productivemetalworks-1.21.1-1.15.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\productivemetalworks-1.21.1-1.15.1.jar",
+    "bytes": 3033210,
+    "sha256": "100132424F9659B76FD1326A8F0068A58B91D6D94351D47484B5B9CEE394E812",
+    "nested": false
+  },
+  {
+    "jar": "productivemetalworks-1.21.1-1.15.1.jar!/META-INF/jarjar/flywheel-neoforge-1.21.1-1.0.4-30.jar",
+    "bytes": 856789,
+    "sha256": "F427A88B8AF5AFCA237B40367CA3CED8707472461497985FA21105F6681A99AF",
+    "nested": true
+  },
+  {
+    "jar": "productivemetalworks-1.21.1-1.15.1.jar!/META-INF/jarjar/ponder-neoforge-1.0.81+mc1.21.1.jar",
+    "bytes": 820115,
+    "sha256": "B94099A82D51FA378F6CE30D788CA3F8CF0699FE16BBB536B516B03025301A42",
+    "nested": true
+  },
+  {
+    "jar": "productivemetalworks-1.21.1-1.15.1.jar!/META-INF/jarjar/productivelib-1.21.1-0.2.0.jar",
+    "bytes": 154249,
+    "sha256": "6671C8AA783D5FC3056B5A24B041EDCF51B9C774B68FD85A790AE3346E4550E7",
+    "nested": true
+  },
+  {
+    "jar": "productivetrees-1.21.1-1.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\productivetrees-1.21.1-1.1.1.jar",
+    "bytes": 14095830,
+    "sha256": "EE33AE3AABC8FF592509662F2F5A84D8F39D3CDE80904949130C0354F6619B1B",
+    "nested": false
+  },
+  {
+    "jar": "productivetrees-1.21.1-1.1.1.jar!/META-INF/jarjar/productivelib-1.21.1-0.2.0.jar",
+    "bytes": 154249,
+    "sha256": "6671C8AA783D5FC3056B5A24B041EDCF51B9C774B68FD85A790AE3346E4550E7",
+    "nested": true
+  },
+  {
+    "jar": "pylons-1.21.1-5.4.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\pylons-1.21.1-5.4.2.jar",
+    "bytes": 217973,
+    "sha256": "AA650D4741DFC5506468D6472D30C2A98F91E38C4F5CDE259EDA471895D02BA7",
+    "nested": false
+  },
+  {
+    "jar": "rangedpumps-1.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rangedpumps-1.3.0.jar",
+    "bytes": 25483,
+    "sha256": "3ED1392E19B76168541E7441CDF7F5739651D72778ED631C405146E2691C0676",
+    "nested": false
+  },
+  {
+    "jar": "rebind_narrator-1.21.1-neoforge-2026.08.31.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rebind_narrator-1.21.1-neoforge-2026.08.31.jar",
+    "bytes": 210378,
+    "sha256": "865B1321670839C3D6C1547B39495BA79CBCF1674156511436F1648A95BC27EA",
+    "nested": false
+  },
+  {
+    "jar": "rebind_narrator-1.21.1-neoforge-2026.08.31.jar!/META-INF/jarjar/modder_name_lib-1.21.1-neoforge-2026.08.31.jar",
+    "bytes": 213934,
+    "sha256": "186DC778080DDC505D249D0AC2567ED0ACEE9FFF0AD7F822BBA54E3F546AEDAD",
+    "nested": true
+  },
+  {
+    "jar": "redstonepen-1.21-neoforge-1.11.42.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\redstonepen-1.21-neoforge-1.11.42.jar",
+    "bytes": 513816,
+    "sha256": "C5DA28A85A77FB0C12E6C71A15F5007ECCEDBF901F825B21B5366250A73F0915",
+    "nested": false
+  },
+  {
+    "jar": "relics-1.21.1-0.12.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\relics-1.21.1-0.12.11.jar",
+    "bytes": 5096604,
+    "sha256": "74CD000A5F3C9A97AD3A1A02820EC1813FED0B2B75AEDF770E1B11DD909F5C0A",
+    "nested": false
+  },
+  {
+    "jar": "reliquary-1.21.1-2.0.81.1579.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\reliquary-1.21.1-2.0.81.1579.jar",
+    "bytes": 2239779,
+    "sha256": "91E17F3EA4613F65D2A9EF042CCDD942B3C2DD6147CCD560728CB80E6A612946",
+    "nested": false
+  },
+  {
+    "jar": "reliquified_artifacts-1.21.1-1.0.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\reliquified_artifacts-1.21.1-1.0.9.jar",
+    "bytes": 699259,
+    "sha256": "B074E7BBB010B1030F4DEF909548CCCA1B43BEC82584E2CC03E29E6BAA6040D6",
+    "nested": false
+  },
+  {
+    "jar": "repeatable_trial_vaults-neoforge-1.21-1.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\repeatable_trial_vaults-neoforge-1.21-1.0.3.jar",
+    "bytes": 12970,
+    "sha256": "4A13FE4FBD0738E6129CAF1CFCAF7EA26949FFD6E70CAF384AB67A9B99475741",
+    "nested": false
+  },
+  {
+    "jar": "resourcefulconfig-neoforge-1.21-3.0.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\resourcefulconfig-neoforge-1.21-3.0.11.jar",
+    "bytes": 341009,
+    "sha256": "25B4F3502D25C535004ACD4A9420272FFF01D2F1E2DF352239FEC93FDAB005D4",
+    "nested": false
+  },
+  {
+    "jar": "resourcefullib-neoforge-1.21-3.0.12.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\resourcefullib-neoforge-1.21-3.0.12.jar",
+    "bytes": 484332,
+    "sha256": "5E36F2C69DE008DC5795F730C84AB767688F15C810944B585485349A0C911261",
+    "nested": false
+  },
+  {
+    "jar": "resourcefullib-neoforge-1.21-3.0.12.jar!/META-INF/jars/bytecodecs-1.1.2.jar",
+    "bytes": 77418,
+    "sha256": "3F418220FEAB93D791C9FDD63A6C6D999F7B2164EDAD359DEE35F08A9AD175CC",
+    "nested": true
+  },
+  {
+    "jar": "resourcefullib-neoforge-1.21-3.0.12.jar!/META-INF/jars/yabn-1.0.3.jar",
+    "bytes": 31489,
+    "sha256": "BDC5A03A9B577C48BC6D7C06118B2418AFD2C537081511C24B3259C561C8355A",
+    "nested": true
+  },
+  {
+    "jar": "restrictions-1.21-7.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\restrictions-1.21-7.0.3.jar",
+    "bytes": 45018,
+    "sha256": "E6C7B86B3AC698BD687B391747D52F932C5F09BA736E2C93FB191784E9087673",
+    "nested": false
+  },
+  {
+    "jar": "rftoolsbase-1.21-6.0.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rftoolsbase-1.21-6.0.11.jar",
+    "bytes": 463973,
+    "sha256": "5195BA530E6CF9BA61C9954A3297679E6D29AA1B6182E27AE14EA43463DD4B00",
+    "nested": false
+  },
+  {
+    "jar": "rftoolsbuilder-1.21-7.0.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rftoolsbuilder-1.21-7.0.8.jar",
+    "bytes": 1054376,
+    "sha256": "D08CD08993D5327893014B765D0C2ADCB9A4B88823F71B2B24F9DD0540644617",
+    "nested": false
+  },
+  {
+    "jar": "rftoolspower-1.21-7.0.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rftoolspower-1.21-7.0.6.jar",
+    "bytes": 579975,
+    "sha256": "259EBD617CC48E82BF0F1384AB661584829C6BCF0296273E338CEAA38A11F5D8",
+    "nested": false
+  },
+  {
+    "jar": "rftoolsstorage-1.21-6.0.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rftoolsstorage-1.21-6.0.5.jar",
+    "bytes": 398718,
+    "sha256": "4FE6241DC79421EE7BF129C476814E664C7DACB0D37005748474B2C08818A1E6",
+    "nested": false
+  },
+  {
+    "jar": "rftoolsutility-1.21-7.0.12.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rftoolsutility-1.21-7.0.12.jar",
+    "bytes": 1434987,
+    "sha256": "1FDBF7505C6D6F4EF93B8B15961C9C1A6A4D35A5D676297F8F647916238F4D2A",
+    "nested": false
+  },
+  {
+    "jar": "rhino-2101.2.8-build.91.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\rhino-2101.2.8-build.91.jar",
+    "bytes": 980936,
+    "sha256": "1D53D962AA4DAC54BCBB4F998C1845980CF194318F1D6B1580EA6AC15CCE5EF3",
+    "nested": false
+  },
+  {
+    "jar": "RootsClassic-1.21.1-1.5.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\RootsClassic-1.21.1-1.5.10.jar",
+    "bytes": 649579,
+    "sha256": "29D8A909126A93947197AB4B7B8C0BFA779B0F0EEEB0068423254FFB9631C7DC",
+    "nested": false
+  },
+  {
+    "jar": "ScalableCatsForce-NeoForge-3.7.1-build-11-with-library.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ScalableCatsForce-NeoForge-3.7.1-build-11-with-library.jar",
+    "bytes": 16872119,
+    "sha256": "48CC7A8B4448D539AA7F4B56AE899B1484EC40ED8481AF56818416726EE01193",
+    "nested": false
+  },
+  {
+    "jar": "Searchables-neoforge-1.21.1-1.0.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Searchables-neoforge-1.21.1-1.0.2.jar",
+    "bytes": 77326,
+    "sha256": "CA193F0C69033D8F709F9E073A7C1EF4EA46714E5C2F94EB23ACE12781C6AA68",
+    "nested": false
+  },
+  {
+    "jar": "sgearmetalworks-1.21.1-1.5.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sgearmetalworks-1.21.1-1.5.0.jar",
+    "bytes": 638209,
+    "sha256": "A8D3512F94CF4DF1C2F5881DD59401B754F30D352E96B3C49772CEBD527A2615",
+    "nested": false
+  },
+  {
+    "jar": "shiny-1.21.1-1.3.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\shiny-1.21.1-1.3.0.jar",
+    "bytes": 971120,
+    "sha256": "895681E3D9EB2A3A586FE2CA98C74FD982A0985160563B1150FDBC67525C4F1C",
+    "nested": false
+  },
+  {
+    "jar": "shrink-2.0.1.47-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\shrink-2.0.1.47-neoforge.jar",
+    "bytes": 46062,
+    "sha256": "5C1769DCB772F194A835CBA3731AD2AD26155D9144124FC5B27C9A366CF1AD25",
+    "nested": false
+  },
+  {
+    "jar": "silent-gear-1.21.1-neoforge-4.2.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\silent-gear-1.21.1-neoforge-4.2.1.1.jar",
+    "bytes": 3147675,
+    "sha256": "D24D5F4794B069941845C1BDE30475F8EA6066635DDB1139D706F6A627B4C0F3",
+    "nested": false
+  },
+  {
+    "jar": "silent-lib-1.21.1-neoforge-10.6.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\silent-lib-1.21.1-neoforge-10.6.0.jar",
+    "bytes": 268791,
+    "sha256": "E5676F940802AF3B7F2C393DC6C74D6C68D657EFCA4135478C5B54CED06950D1",
+    "nested": false
+  },
+  {
+    "jar": "silentgems-1.21.1-neoforge-5.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\silentgems-1.21.1-neoforge-5.1.3.jar",
+    "bytes": 1457506,
+    "sha256": "595EEF36895991A5A2199E6B6BFB1B55CABB3F7A9E808D396697AEC1FE4FDC3D",
+    "nested": false
+  },
+  {
+    "jar": "SimpleBackups-1.21-4.0.30.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\SimpleBackups-1.21-4.0.30.jar",
+    "bytes": 70269,
+    "sha256": "0C322781B3C559F7D2C62AC87EB9D7CE459F3F3B5AB771A8794D009B42C729EC",
+    "nested": false
+  },
+  {
+    "jar": "simplemagnets-1.1.12c-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\simplemagnets-1.1.12c-neoforge-mc1.21.jar",
+    "bytes": 146262,
+    "sha256": "C9236A8BFADB519B820BE1D28E73876F034463CA8BCB4E8DCE8A1897CF8446C1",
+    "nested": false
+  },
+  {
+    "jar": "simple_weather-1.0.13-hotfix.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\simple_weather-1.0.13-hotfix.jar",
+    "bytes": 82792,
+    "sha256": "BB8F5A73AD7E32D82149A1BA7BD1CB494CDFABE346FE196F1A2C30EAE4216325",
+    "nested": false
+  },
+  {
+    "jar": "SmartBrainLib-neoforge-1.21.1-1.16.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\SmartBrainLib-neoforge-1.21.1-1.16.11.jar",
+    "bytes": 391053,
+    "sha256": "68036561CC5511766D54CC0DEABC3FC3A5E68F9E3DB2478F2574EC82B494374B",
+    "nested": false
+  },
+  {
+    "jar": "smithingtemplateviewer-1.0.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\smithingtemplateviewer-1.0.4.jar",
+    "bytes": 39702,
+    "sha256": "AB08B7E4CEF635D095D244BAE3DFFA844B73748EFA68450637120F332FC63F9F",
+    "nested": false
+  },
+  {
+    "jar": "sodium-extra-neoforge-0.9.5+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sodium-extra-neoforge-0.9.5+mc1.21.1.jar",
+    "bytes": 483373,
+    "sha256": "37C33EFDEE16FC515392FD422B6EC8769CBC1079F6A2EB6CFF2072411D511FAF",
+    "nested": false
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sodium-neoforge-0.8.13+mc1.21.1.jar",
+    "bytes": 1292934,
+    "sha256": "575D187B15328D7BDDD8A9B1BEE64333C22C14735F5780EC49EAC0CD5503C08D",
+    "nested": false
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar!/META-INF/jarjar/fabric-api-base-0.4.42+d1308ded19.jar",
+    "bytes": 34805,
+    "sha256": "729AEF08D1DF36C2F04FBF52EE4D92A7D29E33047865A8A8CF5546EBEAC687E0",
+    "nested": true
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar!/META-INF/jarjar/fabric-block-view-api-v2-1.0.10+9afaaf8c19.jar",
+    "bytes": 25631,
+    "sha256": "87DA93C4EF283E0CE66F8DA67D6CBA93D9884C55152014A49C2B6F4F861BEC48",
+    "nested": true
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar!/META-INF/jarjar/fabric-renderer-api-v1-3.4.1+9125b6dc19.jar",
+    "bytes": 58938,
+    "sha256": "ABA3E2DC8D670EAE242A75C5AE961ACBB542792AC587CA3A3B4B177BCBB9CDA7",
+    "nested": true
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar!/META-INF/jarjar/fabric-rendering-data-attachment-v1-0.3.48+73761d2e19.jar",
+    "bytes": 20497,
+    "sha256": "A720C7A1E73583E0FED5110556290DF023D158750740BC00E4040D6CD2CB9AF1",
+    "nested": true
+  },
+  {
+    "jar": "sodium-neoforge-0.8.13+mc1.21.1.jar!/META-INF/jarjar/net.caffeinemc.sodium-neoforge-0.8.13+mc1.21.1-mod.jar",
+    "bytes": 1226309,
+    "sha256": "D71ACBFFAFD3D177ADD7624710114D8570CDD70D5553A2B5C8AB371852C59CE3",
+    "nested": true
+  },
+  {
+    "jar": "solcarrot-1.21.1-1.16.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\solcarrot-1.21.1-1.16.6.jar",
+    "bytes": 105355,
+    "sha256": "AE3E73A08C8373FBEE639B2FEAF21C2E08CAF9E4A44F8DFA610F44A5143F2FD1",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedbackpacks-1.21.1-3.26.19.2243.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedbackpacks-1.21.1-3.26.19.2243.jar",
+    "bytes": 1260034,
+    "sha256": "D3B3E48216726563089E791A245C3C2EFEB0E2F4428BEBE9602C037D5133C6EE",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedbackpackscreateintegration-1.21.1-0.2.3.194.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedbackpackscreateintegration-1.21.1-0.2.3.194.jar",
+    "bytes": 94059,
+    "sha256": "9BA0257F64F244041F5B7EB8D1E1C16FDCEA2FC593B78297950685DABF6A8E52",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedcore-1.21.1-1.5.23.2446.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedcore-1.21.1-1.5.23.2446.jar",
+    "bytes": 1829042,
+    "sha256": "F7C1E688E9E53C3A93FA86169C9D0026A217CD1CF5085F2DBDFD9C734BA8E188",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedstorage-1.21.1-1.6.13.2216.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedstorage-1.21.1-1.6.13.2216.jar",
+    "bytes": 1935455,
+    "sha256": "E8F04ED2C3B92820FEAEC53ADCFC9B938F2E22E7FF33E614CACDF2C40E019269",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedstoragecreateintegration-1.21.1-0.1.23.246.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedstoragecreateintegration-1.21.1-0.1.23.246.jar",
+    "bytes": 148042,
+    "sha256": "ACE48F4052A34B1EB82F4B5607DB1A607F3E28B30B3D1CF03AB5AC52447FCC77",
+    "nested": false
+  },
+  {
+    "jar": "sophisticatedstorageinmotion-1.21.1-0.10.38.395.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sophisticatedstorageinmotion-1.21.1-0.10.38.395.jar",
+    "bytes": 429320,
+    "sha256": "5A390D950879F188B268082EF52829D25817284472CD9510F17164A5B3A47EA3",
+    "nested": false
+  },
+  {
+    "jar": "soulplied_energistics-1.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\soulplied_energistics-1.0.3.jar",
+    "bytes": 25946,
+    "sha256": "A28A2A088141817ED18A034A07DC36A9659119D8A2FBA0EA7D7EE6BDFE4A8699",
+    "nested": false
+  },
+  {
+    "jar": "spark-1.10.124-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\spark-1.10.124-neoforge.jar",
+    "bytes": 3642581,
+    "sha256": "647E8A81AFBE414DBA1DF4BA15FD06C5D32D4CB544E68828405E8E074C2E16DB",
+    "nested": false
+  },
+  {
+    "jar": "starbunclemania-1.21.1-1.5.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\starbunclemania-1.21.1-1.5.9.jar",
+    "bytes": 726370,
+    "sha256": "193B43AF8169FF7551504C895E674E39201D026E189CECB16CA2CFAEC7903C72",
+    "nested": false
+  },
+  {
+    "jar": "starbunclemania-1.21.1-1.5.9.jar!/META-INF/jarjar/sauce-1.21.1-0.0.40.82.jar",
+    "bytes": 227375,
+    "sha256": "DB12B86DDB23FE5F17EB2C28A39BB38887FBD89FC5E9ECB898561CA0101ED0F9",
+    "nested": true
+  },
+  {
+    "jar": "Super Factory Manager (SFM)-MC1.21.1-4.34.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\Super Factory Manager (SFM)-MC1.21.1-4.34.0.jar",
+    "bytes": 1597623,
+    "sha256": "4B589E0B310133998F26F0C12C3EE8D367360BE1771E0E96C951322CEA6C7AD0",
+    "nested": false
+  },
+  {
+    "jar": "supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+    "bytes": 207514,
+    "sha256": "D2BA7B839A2268E4E223457E813D11AA2476C3BF708A7BBA691D8FC851778A4B",
+    "nested": false
+  },
+  {
+    "jar": "supermartijn642corelib-1.1.26a-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\supermartijn642corelib-1.1.26a-neoforge-mc1.21.jar",
+    "bytes": 593442,
+    "sha256": "F7E032E74AB404062E2FA2FE224BA97E29B8F618FFBBDCF4CECB01076B3A41B6",
+    "nested": false
+  },
+  {
+    "jar": "sushigocrafting-1.21-0.6.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sushigocrafting-1.21-0.6.7.jar",
+    "bytes": 725161,
+    "sha256": "0A40528D2B95B212B3EA9EC7C890A5326BEA0ACAB044D37BBC65413CB6AFF25B",
+    "nested": false
+  },
+  {
+    "jar": "sussysniffers-1.21.1-0.1.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\sussysniffers-1.21.1-0.1.3.jar",
+    "bytes": 95574,
+    "sha256": "66ACF51A7278BDD9A168E8FD846EDDD5DB7AFB99D3A70D6D74B51EC9B0E42A44",
+    "nested": false
+  },
+  {
+    "jar": "tempad-1.21.1-3.0.4-all.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\tempad-1.21.1-3.0.4-all.jar",
+    "bytes": 1696464,
+    "sha256": "932DD8A1CBB86D7632330EE3B9DA43211B7C7A2FB6246443FD8207F74A74EBA3",
+    "nested": false
+  },
+  {
+    "jar": "tempad-1.21.1-3.0.4-all.jar!/META-INF/jarjar/resourcefullibkt-neoforge-1.21-2.0.2.jar",
+    "bytes": 26649,
+    "sha256": "17E930FD88C4187E9E5113FCA115E44178FEF0E147FEC85F52CCFC36F7E43A2A",
+    "nested": true
+  },
+  {
+    "jar": "tempad-1.21.1-3.0.4-all.jar!/META-INF/jarjar/common-storage-lib-data-neoforge-1.21.1-0.0.7.jar",
+    "bytes": 36065,
+    "sha256": "DE60FB9AD025B591B386B403A4B449D4EA4545CA2A1E2997EDD11B58F38C0901",
+    "nested": true
+  },
+  {
+    "jar": "tempad-1.21.1-3.0.4-all.jar!/META-INF/jarjar/olympus-neoforge-1.21-1.0.18.jar",
+    "bytes": 246016,
+    "sha256": "F5DD6624616184B177B451E3A3C01DB6970F0CDD91450DB25C22613F8E250654",
+    "nested": true
+  },
+  {
+    "jar": "TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+    "bytes": 120364,
+    "sha256": "EDB34C388FE17EA88D0A7FD11174BBF8AE8F28A4C8CE886F1BF9A5CF0EBC36B8",
+    "nested": false
+  },
+  {
+    "jar": "tesseract-api-neoforge-1.12.20-1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\tesseract-api-neoforge-1.12.20-1.21.1.jar",
+    "bytes": 768957,
+    "sha256": "D9173BC65D09DF1D152399B3702C0A417850AC1A45701AB0996FE7FDCBEDBACE",
+    "nested": false
+  },
+  {
+    "jar": "tesseract-api-neoforge-1.12.20-1.21.1.jar!/META-INF/jarjar/tesseract-api-1.0.2.jar",
+    "bytes": 36481,
+    "sha256": "B7D25F246D94594C484FF824A40EA56B8A38FC996E98F741D35BA9C3A6115686",
+    "nested": true
+  },
+  {
+    "jar": "theurgy-1.21.1-neoforge-1.78.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\theurgy-1.21.1-neoforge-1.78.0.jar",
+    "bytes": 5323672,
+    "sha256": "2165C80889E24F30D3351941078247C37DE238C59354EAF6BC1BB278AF2BC7DD",
+    "nested": false
+  },
+  {
+    "jar": "theurgy_kubejs-1.21.1-neoforge-1.6.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\theurgy_kubejs-1.21.1-neoforge-1.6.0.jar",
+    "bytes": 25206,
+    "sha256": "F98982FE4E23CA3A446843383B9D96B084691C3DEA266921CD38A4B3A6626C22",
+    "nested": false
+  },
+  {
+    "jar": "the_bumblezone-7.17.3+1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\the_bumblezone-7.17.3+1.21.1-neoforge.jar",
+    "bytes": 83641779,
+    "sha256": "859D87B44D3D17C63F38317AC34D124E30B6DE8C3043FA61EE987FF8B1F236D6",
+    "nested": false
+  },
+  {
+    "jar": "the_bumblezone-7.17.3+1.21.1-neoforge.jar!/META-INF/jarjar/athena-neoforge-1.21.1-4.0.6.jar",
+    "bytes": 99944,
+    "sha256": "43699885BBCE3343916D4C5C4940CF0E3F9F6F02FDEB46E8655E121B42282EC5",
+    "nested": true
+  },
+  {
+    "jar": "the_bumblezone-7.17.3+1.21.1-neoforge.jar!/META-INF/jarjar/resourcefullib-neoforge-1.21-3.0.12.jar",
+    "bytes": 484332,
+    "sha256": "5E36F2C69DE008DC5795F730C84AB767688F15C810944B585485349A0C911261",
+    "nested": true
+  },
+  {
+    "jar": "the_bumblezone-7.17.3+1.21.1-neoforge.jar!/META-INF/jarjar/resourcefullib-neoforge-1.21-3.0.12.jar!/META-INF/jars/bytecodecs-1.1.2.jar",
+    "bytes": 77418,
+    "sha256": "3F418220FEAB93D791C9FDD63A6C6D999F7B2164EDAD359DEE35F08A9AD175CC",
+    "nested": true
+  },
+  {
+    "jar": "the_bumblezone-7.17.3+1.21.1-neoforge.jar!/META-INF/jarjar/resourcefullib-neoforge-1.21-3.0.12.jar!/META-INF/jars/yabn-1.0.3.jar",
+    "bytes": 31489,
+    "sha256": "BDC5A03A9B577C48BC6D7C06118B2418AFD2C537081511C24B3259C561C8355A",
+    "nested": true
+  },
+  {
+    "jar": "The_Undergarden-1.21.1-0.9.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\The_Undergarden-1.21.1-0.9.6.jar",
+    "bytes": 45294936,
+    "sha256": "49E3DB6CE2CF6864E9D45F0633DE95BC3EF72CBD5EBFFEE493FCA7198D30CCB0",
+    "nested": false
+  },
+  {
+    "jar": "thunderbolt-2.0.3.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\thunderbolt-2.0.3.jar",
+    "bytes": 5203013,
+    "sha256": "FE3BE9A409F4D90DA41E95EC1D6C8545D8C2004434DC23420442913C07A9F79F",
+    "nested": false
+  },
+  {
+    "jar": "thunderbolt-2.0.3.jar!/META-INF/thunderbolt/cp-sat/protobuf-java-4.33.1.jar",
+    "bytes": 1886269,
+    "sha256": "FD5CF3D55BC2C3DDB2A8640C9D4C69DAA9A5B326FB6E05BAE0E56B3F4F85E0F7",
+    "nested": true
+  },
+  {
+    "jar": "thunderbolt-2.0.3.jar!/META-INF/thunderbolt/cp-sat/ortools-java-9.15.6755.jar",
+    "bytes": 2352618,
+    "sha256": "483F27408386FD1AB718AA72244BEEAD10756E1BE6D25C7AB7FCB83EB1788D9A",
+    "nested": true
+  },
+  {
+    "jar": "tiab-neoforge-6.5.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\tiab-neoforge-6.5.4.jar",
+    "bytes": 77755,
+    "sha256": "0BEB4FF1D81FACFE9039E8D657A75836D1E8C13C137C90B491CC07E763F26325",
+    "nested": false
+  },
+  {
+    "jar": "titanium-1.21-4.0.51.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\titanium-1.21-4.0.51.jar",
+    "bytes": 608070,
+    "sha256": "B227ACA8447C79D4789F77A896231C5A403F747CCD4D133165AAAF177C40C2D6",
+    "nested": false
+  },
+  {
+    "jar": "ToastControl-1.21.1-9.0.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ToastControl-1.21.1-9.0.1.jar",
+    "bytes": 21079,
+    "sha256": "F80BC1BE4375FAAAC73971E6D51CC1500935F7144FA33108EE4F2FDBD8F70F66",
+    "nested": false
+  },
+  {
+    "jar": "ToolBelt-1.21.1-2.2.10.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ToolBelt-1.21.1-2.2.10.jar",
+    "bytes": 217020,
+    "sha256": "918B35093DFAF8033115ACD8DACD8978E325DCBA36355F8D1A938EE92D5AB4FF",
+    "nested": false
+  },
+  {
+    "jar": "torchmaster-neoforge-1.21.1-21.1.13.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\torchmaster-neoforge-1.21.1-21.1.13.jar",
+    "bytes": 161205,
+    "sha256": "661AFE53647EF687D3D970E5DF7B53107D94D080671E25317F67CB02B4349CBA",
+    "nested": false
+  },
+  {
+    "jar": "transfer_labels-0.1.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\transfer_labels-0.1.9.jar",
+    "bytes": 154972,
+    "sha256": "63CF347C3449FC5AF431F7747CCF7F308BFCB7A9CD16AF94E816871D7F2079D5",
+    "nested": false
+  },
+  {
+    "jar": "trashcans-1.1.2-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\trashcans-1.1.2-neoforge-mc1.21.jar",
+    "bytes": 169363,
+    "sha256": "7759029B3D169CC0ED333CA771259A127DB62848CC10356B9F4CAAF385BA7464",
+    "nested": false
+  },
+  {
+    "jar": "trashslot-neoforge-1.21.1-21.1.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\trashslot-neoforge-1.21.1-21.1.11.jar",
+    "bytes": 77535,
+    "sha256": "3289B5C84A79E63D83D4CE05D8E3E15B622B2E286E0770B86F00807974A77695",
+    "nested": false
+  },
+  {
+    "jar": "treetap-1.21.1-0.4.6.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\treetap-1.21.1-0.4.6.jar",
+    "bytes": 83361,
+    "sha256": "AE83AA53B3A737BB356776F53F76A5F085CFD158496D6FB6C3DFDDE72B6F8716",
+    "nested": false
+  },
+  {
+    "jar": "twilightforest-1.21.1-4.8.3345-universal.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\twilightforest-1.21.1-4.8.3345-universal.jar",
+    "bytes": 27154121,
+    "sha256": "493DA16D10210F9F53A3C33B3D8FCB4AE9B14016EE420D753C894562BD9ABA35",
+    "nested": false
+  },
+  {
+    "jar": "twilightforest-1.21.1-4.8.3345-universal.jar!/META-INF/jarjar/s.tf-asm-4.8.3345.jar",
+    "bytes": 67108,
+    "sha256": "1324A81E5CF085D62385F85E4B06E6217BF977977F92C58034AF315C5D975690",
+    "nested": true
+  },
+  {
+    "jar": "two_i_combat_doll-1.21.1-1.3.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\two_i_combat_doll-1.21.1-1.3.4.jar",
+    "bytes": 22048329,
+    "sha256": "61159B2DBDF145EAE17D5C884F59DDB7A6DEE896A187DF2D2968136335BD97B3",
+    "nested": false
+  },
+  {
+    "jar": "uranus-2.4.1-bugfix-1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\uranus-2.4.1-bugfix-1.21.1-neoforge.jar",
+    "bytes": 847836,
+    "sha256": "2F98DB9E0FED13AAD87340BEAFF185E95C9D56EE27CDF1D111346B91A5725A69",
+    "nested": false
+  },
+  {
+    "jar": "uranus-2.4.1-bugfix-1.21.1-neoforge.jar!/META-INF/jars/architectury-neoforge-13.0.8.jar",
+    "bytes": 609154,
+    "sha256": "9645603FFB637BF4E43676D669C012D3A2808C55C5CBD3BE93846A51D4BEAE90",
+    "nested": true
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\useless_mod-1.21.1-2.4.6.5.jar",
+    "bytes": 4106066,
+    "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31",
+    "nested": false
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "bytes": 12817487,
+    "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7",
+    "nested": false
+  },
+  {
+    "jar": "utilitarian-1.21.1-0.19.2.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\utilitarian-1.21.1-0.19.2.jar",
+    "bytes": 623325,
+    "sha256": "C7090EF1E7259339A22D49A97125E1514C186F4E0174834DA39DF6987720DB78",
+    "nested": false
+  },
+  {
+    "jar": "utilityvest-1.3.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\utilityvest-1.3.1.jar",
+    "bytes": 223694,
+    "sha256": "351474922AD564DBEAC0AFCE548E5225010442AB5A9E2949919EECFE19C8F661",
+    "nested": false
+  },
+  {
+    "jar": "valhelsia_core-neoforge-1.21.1-1.1.5.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\valhelsia_core-neoforge-1.21.1-1.1.5.jar",
+    "bytes": 181277,
+    "sha256": "8364C248EA4B8975327BC6CC36478ECDC1567110A6C8A47CE6B43E648EDD1127",
+    "nested": false
+  },
+  {
+    "jar": "variantsandventures-neoforge-1.0.29+mc1.21.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\variantsandventures-neoforge-1.0.29+mc1.21.1.jar",
+    "bytes": 1101475,
+    "sha256": "C9CB10777088EC1382A0E98A303A4A741BD47931720F27D0512F14BB9EB74B38",
+    "nested": false
+  },
+  {
+    "jar": "waystones-neoforge-1.21.1-21.1.46.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\waystones-neoforge-1.21.1-21.1.46.jar",
+    "bytes": 1223229,
+    "sha256": "CA76A4457160E8353B1F013A21AB377B264141F466D84EC8952A123058B8AF78",
+    "nested": false
+  },
+  {
+    "jar": "wcwt-1.3.11.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\wcwt-1.3.11.jar",
+    "bytes": 1296213,
+    "sha256": "78A3C3CC61582A2C0A71FFB95308DD4E3EB5CD0F6A16316F469F02075BE2DFCB",
+    "nested": false
+  },
+  {
+    "jar": "wirelesschargers-1.0.9a-neoforge-mc1.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\wirelesschargers-1.0.9a-neoforge-mc1.21.jar",
+    "bytes": 315836,
+    "sha256": "AF4232489439D3C2DC52BE3BA18743B301B1441DDF1F5707CC74BEBFA01D8296",
+    "nested": false
+  },
+  {
+    "jar": "WitherSkeletonTweaks-1.21.1-10.1.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\WitherSkeletonTweaks-1.21.1-10.1.1.jar",
+    "bytes": 21929,
+    "sha256": "C8DD24EE672FD1E620AB20AE1D34D5E85B203D653258914D7E2B8C74498940D0",
+    "nested": false
+  },
+  {
+    "jar": "wits-neoforge-1.3.1.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\wits-neoforge-1.3.1.jar",
+    "bytes": 11148,
+    "sha256": "1AC1297DF094F4019589093F5A4A5E1DDBEF2BDAF494A7C83AA049ED225E0698",
+    "nested": false
+  },
+  {
+    "jar": "xaerominimap-neoforge-1.21.1-26.6.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\xaerominimap-neoforge-1.21.1-26.6.0.jar",
+    "bytes": 2186351,
+    "sha256": "D3398221B2262ABFE2D394B588122E5B3FD2E4D8C4BF66A5FD357352FCF51B2E",
+    "nested": false
+  },
+  {
+    "jar": "xaerominimap-neoforge-1.21.1-26.6.0.jar!/META-INF/jarjar/xaerolib-neoforge-1.21.1-1.7.3.jar",
+    "bytes": 568376,
+    "sha256": "010DC4C2FF154AA8BA04C779600658B77AC0003EEE3A98AC9453F6E7ACD28898",
+    "nested": true
+  },
+  {
+    "jar": "xaeroworldmap-neoforge-1.21.1-1.47.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\xaeroworldmap-neoforge-1.21.1-1.47.0.jar",
+    "bytes": 1427078,
+    "sha256": "6A42B6F01BD96B496E5FCC07D4541BAD1A699D9EC8AD58AD40D5DCFE23A7D4C7",
+    "nested": false
+  },
+  {
+    "jar": "xaeroworldmap-neoforge-1.21.1-1.47.0.jar!/META-INF/jarjar/xaerolib-neoforge-1.21.1-1.7.3.jar",
+    "bytes": 568376,
+    "sha256": "010DC4C2FF154AA8BA04C779600658B77AC0003EEE3A98AC9453F6E7ACD28898",
+    "nested": true
+  },
+  {
+    "jar": "xnet-1.21-7.0.7.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\xnet-1.21-7.0.7.jar",
+    "bytes": 611577,
+    "sha256": "0F393A4BFF91A90E0665EC6D66FF649E45F9C33311DC038E4A5DF0B154EA9D80",
+    "nested": false
+  },
+  {
+    "jar": "yeetusexperimentus-neoforge-87.0.0.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\yeetusexperimentus-neoforge-87.0.0.jar",
+    "bytes": 570057,
+    "sha256": "9117DB8B5905ABF18F64FDF8F8D8CA5A91C23ABD0A7FA2C9986C21AA17D74E75",
+    "nested": false
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
+    "bytes": 1118651,
+    "sha256": "B5C30321B46CFAA521645A04AFF89D2804D8167A25BB23AD4B1AE8DA73093A2F",
+    "nested": false
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/common-image-3.12.0.jar",
+    "bytes": 79655,
+    "sha256": "62A3821C724FADFDA346C1E2D83B0C506A0C4074BE269A52BF4E3192C7DD92BC",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/common-io-3.12.0.jar",
+    "bytes": 92346,
+    "sha256": "BFACFEB02ACAC47DBFD1FAB0002EAECA65547D04249498B654320C9E0FDF6647",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/common-lang-3.12.0.jar",
+    "bytes": 121817,
+    "sha256": "5C65E504B5B64D80683E0FA70A1DD154DD83D4DE7DA37F21E950F5A9C03BC66D",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/gson-0.2.1.jar",
+    "bytes": 4409,
+    "sha256": "4EF02CF5A6E54CF32CED063002A7A243B6086E2886905274FAF2F0A80BABF2C9",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/imageio-core-3.12.0.jar",
+    "bytes": 119909,
+    "sha256": "34C6F91BF3B217ED0115BCE8283238FBD0264562AA682B4226A3960D0EDE9815",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/imageio-metadata-3.12.0.jar",
+    "bytes": 83615,
+    "sha256": "797D026B67D07E6D5EB00A1AB53A55ACAAB6F80A71C5EE325572093EB90C0CAA",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/imageio-webp-3.12.0.jar",
+    "bytes": 79713,
+    "sha256": "43DC447CCFE34C5C5C6F5D31190270E1F9BF65F60375D697AE2A8FF433468526",
+    "nested": true
+  },
+  {
+    "jar": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar!/META-INF/jarjar/json-0.2.1.jar",
+    "bytes": 23025,
+    "sha256": "5A9C7D005C7C4B07474B8E07E25F33116A923F7DB19C92673F1AC47461F8A57D",
+    "nested": true
+  },
+  {
+    "jar": "YungsApi-1.21.1-NeoForge-5.1.9.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\YungsApi-1.21.1-NeoForge-5.1.9.jar",
+    "bytes": 413763,
+    "sha256": "375E0B2F988AB4F5BDE182166C0F0B102377ADC8F823660C24ADE08B0B3CDE56",
+    "nested": false
+  },
+  {
+    "jar": "ZeroCore2-1.21.1-2.4.21.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\ZeroCore2-1.21.1-2.4.21.jar",
+    "bytes": 1551013,
+    "sha256": "54AC755031B05C3A5B6DDFA22DABC45FB3775481041503DCECD75E5E86627779",
+    "nested": false
+  },
+  {
+    "jar": "[neoforge]ctov-1.21.1-3.6.4.jar",
+    "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-c\\client\\mods\\[neoforge]ctov-1.21.1-3.6.4.jar",
+    "bytes": 7239618,
+    "sha256": "B06DF0653DB66FB697E0A6A0752C58964C8A873008C57CC96F06E30A1045229F",
+    "nested": false
+  }
+]

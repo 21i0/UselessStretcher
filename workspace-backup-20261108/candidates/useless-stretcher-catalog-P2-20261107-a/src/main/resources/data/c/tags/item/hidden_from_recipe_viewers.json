@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "useless_stretcher:useful_armor_helmet",
+    "useless_stretcher:useful_armor_chestplate",
+    "useless_stretcher:useful_armor_leggings",
+    "useless_stretcher:useful_armor_boots"
+  ]
+}

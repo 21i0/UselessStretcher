@@ -1,0 +1,107 @@
+Compiled from "MemberInfo.java"
+public final class org.spongepowered.asm.mixin.injection.struct.MemberInfo implements org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorConstructor,org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorRemappable {
+  private final java.lang.String owner;
+  private final java.lang.String name;
+  private final java.lang.String desc;
+  private final org.spongepowered.asm.util.Quantifier matches;
+  private final boolean forceField;
+  private final java.lang.String input;
+  private final java.lang.String tail;
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, org.spongepowered.asm.util.Quantifier);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, java.lang.String, org.spongepowered.asm.util.Quantifier);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, java.lang.String, java.lang.String);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, java.lang.String, java.lang.String, org.spongepowered.asm.util.Quantifier);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, java.lang.String, java.lang.String, org.spongepowered.asm.util.Quantifier, java.lang.String);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(java.lang.String, java.lang.String, java.lang.String, org.spongepowered.asm.util.Quantifier, java.lang.String, java.lang.String);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(org.objectweb.asm.tree.AbstractInsnNode);
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo(org.spongepowered.asm.obfuscation.mapping.IMapping<?>);
+  private org.spongepowered.asm.mixin.injection.struct.MemberInfo(org.spongepowered.asm.mixin.injection.struct.MemberInfo, org.spongepowered.asm.obfuscation.mapping.common.MappingMethod, boolean);
+  private org.spongepowered.asm.mixin.injection.struct.MemberInfo(org.spongepowered.asm.mixin.injection.struct.MemberInfo, java.lang.String);
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelector next();
+  public java.lang.String getOwner();
+  public java.lang.String getName();
+  public java.lang.String getDesc();
+  public int getMinMatchCount();
+  public int getMaxMatchCount();
+  public java.lang.String toString();
+  public java.lang.String toSrg();
+  public java.lang.String toDescriptor();
+  public java.lang.String toCtorType();
+  public java.lang.String toCtorDesc();
+  private java.lang.String getReturnType();
+  public org.spongepowered.asm.obfuscation.mapping.IMapping<?> asMapping();
+  public org.spongepowered.asm.obfuscation.mapping.common.MappingMethod asMethodMapping();
+  public org.spongepowered.asm.obfuscation.mapping.common.MappingField asFieldMapping();
+  public boolean isFullyQualified();
+  public boolean isField();
+  public boolean isConstructor();
+  public boolean isClassInitialiser();
+  public boolean isInitialiser();
+  public org.spongepowered.asm.mixin.injection.struct.MemberInfo validate() throws org.spongepowered.asm.mixin.injection.selectors.InvalidSelectorException;
+  public <TNode> org.spongepowered.asm.mixin.injection.selectors.MatchResult match(org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode>);
+  public org.spongepowered.asm.mixin.injection.selectors.MatchResult matches(java.lang.String, java.lang.String, java.lang.String);
+  public boolean equals(java.lang.Object);
+  private boolean compareMatches(org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorByName);
+  public int hashCode();
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelector configure(org.spongepowered.asm.mixin.injection.selectors.ITargetSelector$Configure, java.lang.String...);
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelector attach(org.spongepowered.asm.mixin.injection.selectors.ISelectorContext) throws org.spongepowered.asm.mixin.injection.selectors.InvalidSelectorException;
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorRemappable move(java.lang.String);
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorRemappable transform(java.lang.String);
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorRemappable remapUsing(org.spongepowered.asm.obfuscation.mapping.common.MappingMethod, boolean);
+  public static org.spongepowered.asm.mixin.injection.struct.MemberInfo parse(java.lang.String, org.spongepowered.asm.mixin.injection.selectors.ISelectorContext);
+  public static org.spongepowered.asm.mixin.injection.struct.MemberInfo fromMapping(org.spongepowered.asm.obfuscation.mapping.IMapping<?>);
+  public org.spongepowered.asm.mixin.injection.selectors.ITargetSelector validate() throws org.spongepowered.asm.mixin.injection.selectors.InvalidSelectorException;
+}
+Compiled from "ElementNode.java"
+public abstract class org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode> {
+  public org.spongepowered.asm.mixin.injection.selectors.ElementNode();
+  public boolean isField();
+  public abstract org.spongepowered.asm.mixin.injection.selectors.ElementNode$NodeType getType();
+  public org.objectweb.asm.tree.MethodNode getMethod();
+  public org.objectweb.asm.tree.FieldNode getField();
+  public org.objectweb.asm.tree.AbstractInsnNode getInsn();
+  public abstract java.lang.String getOwner();
+  public abstract java.lang.String getName();
+  public java.lang.String getSyntheticName();
+  public abstract java.lang.String getDesc();
+  public java.lang.String getDelegateDesc();
+  public java.lang.String getImplDesc();
+  public abstract java.lang.String getSignature();
+  public abstract TNode get();
+  public java.lang.String toString();
+  public static org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.MethodNode> of(org.objectweb.asm.tree.ClassNode, org.objectweb.asm.tree.MethodNode);
+  public static org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.FieldNode> of(org.objectweb.asm.tree.ClassNode, org.objectweb.asm.tree.FieldNode);
+  public static <TNode> org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode> of(org.objectweb.asm.tree.ClassNode, TNode);
+  public static <TNode extends org.objectweb.asm.tree.AbstractInsnNode> org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode> of(TNode);
+  public static <TNode> java.util.List<org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode>> listOf(org.objectweb.asm.tree.ClassNode, java.util.List<TNode>);
+  public static java.util.List<org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.FieldNode>> fieldList(org.objectweb.asm.tree.ClassNode);
+  public static java.util.List<org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.MethodNode>> methodList(org.objectweb.asm.tree.ClassNode);
+  public static java.lang.Iterable<org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.AbstractInsnNode>> insnList(org.objectweb.asm.tree.InsnList);
+  public static java.lang.Iterable<org.spongepowered.asm.mixin.injection.selectors.ElementNode<org.objectweb.asm.tree.AbstractInsnNode>> dynamicInsnList(org.objectweb.asm.tree.InsnList);
+}
+Compiled from "ITargetSelector.java"
+public interface org.spongepowered.asm.mixin.injection.selectors.ITargetSelector {
+  public abstract org.spongepowered.asm.mixin.injection.selectors.ITargetSelector next();
+  public abstract org.spongepowered.asm.mixin.injection.selectors.ITargetSelector configure(org.spongepowered.asm.mixin.injection.selectors.ITargetSelector$Configure, java.lang.String...);
+  public abstract org.spongepowered.asm.mixin.injection.selectors.ITargetSelector validate() throws org.spongepowered.asm.mixin.injection.selectors.InvalidSelectorException;
+  public abstract org.spongepowered.asm.mixin.injection.selectors.ITargetSelector attach(org.spongepowered.asm.mixin.injection.selectors.ISelectorContext) throws org.spongepowered.asm.mixin.injection.selectors.InvalidSelectorException;
+  public abstract int getMinMatchCount();
+  public abstract int getMaxMatchCount();
+  public abstract <TNode> org.spongepowered.asm.mixin.injection.selectors.MatchResult match(org.spongepowered.asm.mixin.injection.selectors.ElementNode<TNode>);
+}
+Compiled from "ITargetSelectorDynamic.java"
+public interface org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorDynamic extends org.spongepowered.asm.mixin.injection.selectors.ITargetSelector {
+}
+Compiled from "ITargetSelectorByName.java"
+public interface org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorByName extends org.spongepowered.asm.mixin.injection.selectors.ITargetSelector {
+  public abstract java.lang.String getOwner();
+  public abstract java.lang.String getName();
+  public abstract java.lang.String getDesc();
+  public abstract java.lang.String toDescriptor();
+  public abstract org.spongepowered.asm.mixin.injection.selectors.MatchResult matches(java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "ITargetSelectorConstructor.java"
+public interface org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorConstructor extends org.spongepowered.asm.mixin.injection.selectors.ITargetSelectorByName {
+  public abstract java.lang.String toCtorType();
+  public abstract java.lang.String toCtorDesc();
+}

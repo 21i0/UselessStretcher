@@ -1,0 +1,50 @@
+[
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\verification\\longhuan-runtime-20261106\\candidate-D\\client.log",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\r6-client-prefix.log",
+    "bytes": 1460421,
+    "sha256": "B17254A1838FC41920502E630A78A3C3A64C48C73E62DA3417B2F9CB8FF7DEDB"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\logs\\latest.log",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\r6-latest-prefix.log",
+    "bytes": 1565879,
+    "sha256": "6E74739357C36C167BE798A17E94D2B79FBE5EEB2D551A9F334D1C6E3303EDC1"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-1.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-1.json",
+    "bytes": 1413,
+    "sha256": "88F3F889266FD135CC4BDF2C241D2B584CDAAEFA8AC6915D0DD2D99AF128CC88"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-2.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-2.json",
+    "bytes": 1443,
+    "sha256": "B97C3CA134AEB388AAC3955DB86B80E1946DDF9268BE5C2CC6C6DA6B55C3F656"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-3.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-3.json",
+    "bytes": 1442,
+    "sha256": "4F93C0CAA47089DAAC954A58BACD1BA63FFBBEBD4EFFAEBCD426B6DFE02A9278"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-4.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-4.json",
+    "bytes": 1439,
+    "sha256": "7505647FAF4DEC338D6C7C9FD5B3C8E998D3A9050C87480D81215FCA57414566"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-5.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-5.json",
+    "bytes": 1447,
+    "sha256": "0C3A0328D48442E64BA4529BDEEED0062F21C640A8A45B7D2D5CEC06EBB05795"
+  },
+  {
+    "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-6.json",
+    "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\performance\\runtime-c63f21e1-8b14-42b8-a4eb-113ad110849c-6.json",
+    "bytes": 1445,
+    "sha256": "88F4B6BC2016F10E004EB84863092EF6515A3D9B976E0B3698BF0FD281CDFEAA"
+  }
+]

@@ -1,0 +1,222 @@
+{
+  "baselineSha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+  "candidateSha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+  "entryCounts": {
+    "baseline": 639,
+    "candidate": 665,
+    "unchanged": 624,
+    "added": 26,
+    "changed": 15,
+    "removed": 0
+  },
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "size": 13090,
+      "sha256": "BF7B3FD6E16B84F375539E2D5306944E60AB74B4A080A6A4B767C4CA3BB77208"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "size": 3231,
+      "sha256": "F0ED04282904AFC41A53BCE9CDA3DC200FD6D669CEEBAE948B2B1441C0B493B9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "size": 498,
+      "sha256": "EE366A737AB791E8E3C3A8F169DBF1C3CDDC0D6FD0658E81E601A99BBC455A50"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence.class",
+      "size": 9078,
+      "sha256": "78A3C15F9C825FB3EB1FF911C08A2987AA26CCCFEF4E8A87F0AAA2C2C2D0CB2C"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Accumulator.class",
+      "size": 5179,
+      "sha256": "E47F3A8AE4971B0ABBD67FFCC674DD70ADB1EEE5D360175F8B84FD1601BD090B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Completed.class",
+      "size": 1912,
+      "sha256": "A88174D7188875B3819B660C16377333458BF1C4FD1482662553BBDF56B0AC87"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Digest.class",
+      "size": 1520,
+      "sha256": "9C9C242040C4A650D61DAD398ADF38A9B28F64D6AFC0D6F52A317E76E509ADEB"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$SourceSummary.class",
+      "size": 1769,
+      "sha256": "8D359A3D364BF60F5DCCE9F92C0D4393EC6084C1260EF55C97F18BC242B5AC05"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Summary.class",
+      "size": 3049,
+      "sha256": "E19A30EB8F12750A2A6BBFFD15C8B9304D9CFDBC0D8692D091727D632167B402"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Tuple.class",
+      "size": 1910,
+      "sha256": "C80B5F7DFD2035BB0695FF570A93462A397834310B5815F0254029758AE1BB56"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices.class",
+      "size": 6652,
+      "sha256": "636AC69B92ECA8A0B3D0D60DAF1D219B707A37997D5B70B40E4E791028EE07AE"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$1.class",
+      "size": 1757,
+      "sha256": "44A5B08365E66C090A9C57A52FDD26233B1CFAB4E681BD7A8A669B4B0349B89B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Cursor.class",
+      "size": 8305,
+      "sha256": "9060D5DB166E8674116ED817E7B04AD92B05C191A1F8F50AB5C6721968342A61"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$JdteAbi.class",
+      "size": 5173,
+      "sha256": "F03A766AE106A18DB2369F73DFFA2312E0F2427E0E0333CA8B15EEE1BB505479"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Phase.class",
+      "size": 1759,
+      "sha256": "7A039DB8FB8B0EF9CB55608662335CB296DBA7AD0A50A07582768FE4E5EA55C3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication.class",
+      "size": 8336,
+      "sha256": "2369FAC486E158ADD1952BD4841404B59E6C3951AAF4491515A68F4770AB8E1C"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Phase.class",
+      "size": 1726,
+      "sha256": "76A6FC83A5C34B678D4D25F41C5C86F4EB87CA78AD6A15120B3573A8CC317D1A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Sink.class",
+      "size": 519,
+      "sha256": "3836169030A0E7BF9E235F4FB6D4B5EBACFE01071F0B0C4FB7B6FD1CDA75BD8F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions.class",
+      "size": 4725,
+      "sha256": "A73EE093624CCA244515104022E58A2D4F4E0B03CD4E0E28FC300E09FB4AF8C7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Cursor.class",
+      "size": 603,
+      "sha256": "0F8F9A488FB86C0A877CC7FF8E12B8D8023DAE6AF641D0B7470BB2167DACE89A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$DistinctStacks.class",
+      "size": 1510,
+      "sha256": "974183E4022201BDDA8E72239D87734D9E4BC2CAAAD9726CBFD53BB0C7C5AC4F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$StackKey.class",
+      "size": 1668,
+      "sha256": "CDE250C4676FB6A1D89C057AFA9836A40B1F03EE911EBB8E2A3CEF459A67D5B4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Stage.class",
+      "size": 1814,
+      "sha256": "025673ABB3A90B8E1F8169049F02E046FE7EECBF70861BFDA249F0E3360E20F3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$VatCursor.class",
+      "size": 8434,
+      "sha256": "ABF8947FD5570841578834202FD8E02D18A146812761BD2A5207FE085C3905F7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class",
+      "size": 1098,
+      "sha256": "CC359528D756C2C7F8644ED3E83826F7CD15012A9CF365D83C778452A78A3886"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class",
+      "size": 1566,
+      "sha256": "50D7E833FA409E81FCAAEBA8A6233CA35018BB704F0FE3C218A0D4598FC240B7"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "oldSha256": "650961C3A20EFEF2ED95AC208F33B33D5EA107A9EB54AB98E311BF4F3E8E1ADF",
+      "sha256": "109C8A149EA5A9A828226CEA2C18D13AB4995CF4B9391C9B983EDCABD3D7AAA4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "oldSha256": "8674FB64D6C7ED064F70AFB275D970046B412F6309EB94BA9ED7C8AC91903E48",
+      "sha256": "A3936F377422719FEF04A33FF77DBEF072888484321712F7CAC3560C03C728D3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "oldSha256": "7CF739CE11172C9A58A8DCE2BD76037012CF312FBA43F9D2AD83B9BFAD6D20F6",
+      "sha256": "A16E3C720739AA3EB0713E515E4174879C068AE4A47920E62EF365A7FF25014D"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "oldSha256": "003E703B55BEE465B799099D1178F8F5BB62DC6E8C0FAAEEE8C6F7FA72E30147",
+      "sha256": "3762420F3091E996D6954718EDEF78F0DA64BD34648774469043E77E305C958B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "oldSha256": "A0521343AAB28B532901AF1E80A58ACE767F908A1C6198AC42DB5853AF9064FE",
+      "sha256": "AD29B60FBAFF4E1982210C3056FB37BB374AD93B7FF8ED41553B1C7C01F244EC"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "oldSha256": "CB971BDE8FA6405B1B053394480E344023DC1984C0173BB4D2C4ECE5951915ED",
+      "sha256": "3D932C92333C6F4BBCC1C71A0D1564FB5DBD1DCCF64C77900AF96A87A33DFD6A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "oldSha256": "B8622AAD5A7763E1ABE61E8CC97FACF2ED965E6EA65C96002D63E39522C0F273",
+      "sha256": "A395D1056B73713FF1C627AD98A82C1A063E3815ADACCA5B036EEFA9C5A58468"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "oldSha256": "CFF6B209B37D0D59D60002B69B9F33E8D42553899976A1BDA4923E0CD25006DB",
+      "sha256": "2D5D2FFBCDBD64EF46AD4F85B7EA9BD0807F608340C1994586C117E53C530C6B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "oldSha256": "B9A96B03C785337779957C285C6DB20B76D664929AB26BE3362E87B9BA3B75F1",
+      "sha256": "CCB62381544F157C2AF1E5D642BA80F861F352E0FD7E2F96C11BE8F704F89927"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "oldSha256": "64D9894AB17D1890FE2EFFBF013D478C8EC465D543E7CED6B3F497D2EE90A303",
+      "sha256": "BB6BEA8028380384F8D485E9E9A4A0E02F4B6DE9350438E1053B6B083B464B99"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "oldSha256": "3F3809D91525B762E50BBE25B2B29C5543A8638CF3222845954AE1B6BB55C623",
+      "sha256": "E3B46E640BC1FB32022FB871D2AF84A2E7A13180F216F853E0F0019EE2BBFEFD"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+      "oldSha256": "EB40AEE23E024B9EA92792E8AE244EA5348D1C9FFC0B893931825B3E64FAE726",
+      "sha256": "AE2F0BD6D9BF752575EF777CDC25E1B5D6BD7A03291083E699719B1C487C1612"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "oldSha256": "4E3AA5E8B71289E0BCF7C675950C8D3F7016552DB27C381AE7C0DE729637F354",
+      "sha256": "15751AA913EB05A0DEEED834BC90FED14B969F786E9A09E5CA08CD64DABB5665"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "63D4E763EEA2EBE96E00AE0A9B83AD8EEC09AAC57CBD77135733053B47128053",
+      "sha256": "135372C8D3F7B2BC163D305B8D2434515B388C9CE11CC4DBABEB112C8BF515A7"
+    },
+    {
+      "name": "useless_stretcher.mixins.json",
+      "oldSha256": "69972040B2B5420DA96904668C76CD124F4F91D479711B73E7E4CF085CBA9678",
+      "sha256": "58582CA5C1604B6D25E06C7FB756501553F4DDE0AFA4A0FF15A839C8B50A5D37"
+    }
+  ],
+  "removed": []
+}

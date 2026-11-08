@@ -1,0 +1,148 @@
+{
+  "status": "FROZEN_FOCUSED_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-07T14:53:46.9946606Z",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+  "sha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6",
+  "size": 12813852,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud",
+  "baselineSha256": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+  "gameLaunched": false,
+  "full184SuiteRerun": false,
+  "checks": {
+    "status": "PASS",
+    "checksFound": 21,
+    "checksStarted": 21,
+    "checksPassed": 21,
+    "checksFailed": 0,
+    "gameLaunched": false,
+    "scope": "Pure GUI geometry and actual public StringSplitter; no Font/render/client instance and no 184-test rerun.",
+    "geometryMatrixCases": 10000,
+    "minimapBoundary": "Only the supplied map rectangle (12..254,43..283) at physical 1280x960 GUI2/4 is asserted; arbitrary minimap settings are not covered.",
+    "conditions": [
+      {
+        "name": "1280x960_gui2_top_center_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "1280x960_gui4_top_center_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "gui2_avoids_map_if_given_map_coordinates_are_physical_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "gui4_avoids_map_if_given_map_coordinates_are_physical_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "gui2_avoids_map_if_given_map_coordinates_are_gui_units",
+        "status": "PASS"
+      },
+      {
+        "name": "gui4_avoids_map_if_given_map_coordinates_are_gui_units",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid_screen_font_or_requested_lines_produces_empty_layout",
+        "status": "PASS"
+      },
+      {
+        "name": "ultranarrow_screen_without_padding_and_text_space_stays_empty",
+        "status": "PASS"
+      },
+      {
+        "name": "short_height_never_draws_partial_glyph_rows",
+        "status": "PASS"
+      },
+      {
+        "name": "requested_line_capacity_is_zero_one_or_at_most_two",
+        "status": "PASS"
+      },
+      {
+        "name": "ten_thousand_small_viewport_font_combinations_stay_inside_screen",
+        "status": "PASS"
+      },
+      {
+        "name": "integer_extremes_do_not_overflow_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "nonpositive_text_width_or_line_limit_returns_no_lines",
+        "status": "PASS"
+      },
+      {
+        "name": "long_chinese_text_wraps_and_last_line_marks_omitted_text",
+        "status": "PASS"
+      },
+      {
+        "name": "long_english_text_wraps_and_last_line_marks_omitted_text",
+        "status": "PASS"
+      },
+      {
+        "name": "one_line_limit_truncates_using_real_splitter",
+        "status": "PASS"
+      },
+      {
+        "name": "two_explicit_short_lines_keep_text_without_unneeded_ellipsis",
+        "status": "PASS"
+      },
+      {
+        "name": "glyph_wider_than_content_and_ellipsis_wider_than_content_do_not_overflow",
+        "status": "PASS"
+      },
+      {
+        "name": "emoji_wrapping_and_trimming_never_split_surrogate_pairs",
+        "status": "PASS"
+      },
+      {
+        "name": "native_formatted_wrapping_preserves_visible_styles",
+        "status": "PASS"
+      },
+      {
+        "name": "text_width_row_cap_and_unicode_hold_across_narrow_width_matrix",
+        "status": "PASS"
+      }
+    ]
+  },
+  "checkLogSha256": "45D82E311EA0FAE0AF9AE626DD8D0778FDE220E07EB27A50326B4523B77C0248",
+  "entryCounts": {
+    "baseline": 678,
+    "candidate": 680,
+    "unchanged": 676,
+    "added": 2,
+    "changed": 2,
+    "removed": 0
+  },
+  "memberDiff": {
+    "added": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+        "sha256": "CDE88CD6E174B8728693D3CF5432DED2C428C796C4959B84C9A9CBBA9CD044F4"
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+        "sha256": "E18084153844FC818CB22240E165AA9AE497FFA25D2D24882A712EA82FD3A45E"
+      }
+    ],
+    "changed": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+        "oldSha256": "FB2772659B693897B1C4F70B79FDD60C3E5BE06FC639FCA7FEAAFCEEAD3B4F3A",
+        "sha256": "C4FE1494ED9753BA6A365011A8AEF6C9D8661DB634E81F8B113D48CDB1E8DF17"
+      },
+      {
+        "name": "META-INF/neoforge.mods.toml",
+        "oldSha256": "D9CBA049863127463659C6163CF89CD4859D4039BF5CC4F048DDC1E5111CF0B7",
+        "sha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8"
+      }
+    ],
+    "removed": []
+  },
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\audit-runs\\20261107-145346981\\jei-hud-layout-audit-report.json",
+  "auditReportSha256": "7FA5A63AA82F9C3F079E985BBEAC790C3CCB3A482D1DEDA9DF4E0C682D805780",
+  "auditToolSha256": "C9542F266444C375F2EC55D9E1FB72EF7ED1740302CED658C193E5C469712205",
+  "performancePassed": false,
+  "runtimeMixinApplied": false,
+  "pending": "Actual GUI scale 4 rendering, minimap overlap and live window/translation changes need client verification. No MC or new 184-test run."
+}

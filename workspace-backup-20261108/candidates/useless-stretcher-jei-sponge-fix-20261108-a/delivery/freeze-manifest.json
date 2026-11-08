@@ -1,0 +1,80 @@
+{
+  "status": "FROZEN_OFFLINE_SPONGE_MERGE_PASSED",
+  "frozenUtc": "2026-11-07T16:49:36.0299895Z",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+  "sha256": "3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF",
+  "size": 12817555,
+  "baseline": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+  "baselineSha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7",
+  "changedMembers": [
+    "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class",
+    "META-INF/neoforge.mods.toml"
+  ],
+  "unchangedFileMembers": 680,
+  "addedMembers": 0,
+  "deletedMembers": 0,
+  "engine": "Official Sponge 0.16.4+mixin.0.8.7 MixinTransformer",
+  "old9556NegativeControl": "EXPECTED InjectionError 0/1 Scanned 0 targets reproduced",
+  "positive1957": 7,
+  "positive1970": 7,
+  "combined1970Targets": 7,
+  "combined1970Mixins": 10,
+  "gameLaunched": false,
+  "modLauncherUsed": false,
+  "historical147Or184Rerun": false,
+  "evidence": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\build-result.json",
+      "sha256": "A180A23A12A85660A68CF5CD018E36F5A63CA73F587CDFAB1A60ABD808437369"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-build.json",
+      "sha256": "3BE1D1D9AD81DD24DD99E70B72D613B8E0A11C1E90EE27C1B43CDAFB234BFAF3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\REPORT.md",
+      "sha256": "D72857C73F1B106591A5F5D2705A2562900F2E3CC7B44E6DDED0C77BB4AB8EEE"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\测试说明.txt",
+      "sha256": "C3D5170B48773E521D70FC0513CE9BE6C9ED3C920DF26304B60B5861398F45CB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\runtime-evidence\\receipt.json",
+      "sha256": "B463D7D3C5B66B920EE8017F99FE50F9C68A814C497FD079E5C5D3AB2355690A"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-audit\\SELECTOR-AUDIT-RECEIPT.json",
+      "sha256": "2AB2AA8F941345AF7332A3D94DCF6BA29BB0657A594B93C5E699F882D02E591B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\same-target-conflicts\\SCAN-AUDIT-RECEIPT.json",
+      "sha256": "951F157C41ED8505994609D0736AB641C3DCC45689E088A178DC58C715CD8796"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\same-target-conflicts\\final-jar-audit\\FINAL-JAR-AUDIT.json",
+      "sha256": "89B0B9DCC134E8233546214DEC155D5E83C52874900DF467D95903867C17C995"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-byte-binding-receipt.json",
+      "sha256": "CB63CFA968823A8F1F29701A020BD0ED4FFAEA22362B832C8998434C912F0C4C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\negative-1970-a\\result.json",
+      "sha256": "60FA5D42409CB8812C35FC52FB99FF395F3AACCA0178D0E2275C121E49EAC16E"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1957-b\\result.json",
+      "sha256": "1A91E6630BBAADAFDB060054675FC0C4CD4FE55C51E172790ACF6E526B850CAE"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1970-b\\result.json",
+      "sha256": "79192C3569ED4F53CECCD1351791C43A25E1D8A9858188CE1B189BB1FD38E6F8"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\combined-1970-b\\result.json",
+      "sha256": "A968F4AD647CEF12DB06A87D0F96B16153CFB4BEA3804C0761836BCA1B8E62DA"
+    }
+  ],
+  "runtimeBoundary": "Actual full loader/JEI startup, gameplay and performance remain for My Genesis sole client."
+}

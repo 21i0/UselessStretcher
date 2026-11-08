@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-06T06:43:03.992Z" hostname="LAPTOP-D3HPHSTM" time="0.653">
+  <properties/>
+  <testcase name="unboundItemsAreRejectedAndSnapshotMarkerMustMatchBindingAndDimension()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.58"/>
+  <testcase name="missingAndMalformedExplicitDimensionsNeverFallbackToLocalLibrary()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.006"/>
+  <testcase name="explicitDimensionControlsSourceAndBothSnapshotMarkers()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.003"/>
+  <testcase name="actualInstallationAndReinstallationCreateDistinctIndependentReferences()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.036"/>
+  <testcase name="legacyUuidWithoutDimensionResolvesItsActualLoadedDimension()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.005"/>
+  <testcase name="unsupportedSourceFormatIsRejectedWithoutChangingOfferedBinding()" classname="com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherBindingTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

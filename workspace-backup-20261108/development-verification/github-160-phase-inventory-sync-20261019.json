@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/21i0/UselessStretcher",
+  "branch": "main",
+  "implementation_commit": "304aab736a92e2f6d1d15a1ed008acea4907be6e",
+  "verified_remote_implementation_commit": "304aab736a92e2f6d1d15a1ed008acea4907be6e",
+  "verified_at": "2026-10-19T13:01:57.4166051+08:00",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0.jar",
+  "bytes": 12550692,
+  "sha256": "F1476F9A37D9E7EBFB82CF254D0FD09E8273EDE241C3B71DA70F2B5997273123",
+  "server_check": "REGRESSION CARRIED STAFF PHASE PASSED",
+  "client_check": "PHASE CLIENT MOVEMENT PASSED",
+  "guide_check": "GUIDE CHECKS PASSED",
+  "release_created": false,
+  "tag_created": false,
+  "old_jar_archive": "D:/AI/jar归档/20261019-before-phase-inventory/",
+  "retained_untracked_directories": [
+    "$dir/",
+    "$new/",
+    "net/"
+  ]
+}

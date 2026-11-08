@@ -1,0 +1,27 @@
+万象担架 1.21.1-1.6.4-catalog-P3 独立候选
+
+普通 JAR：D:\AI\candidates\useless-stretcher-catalog-P3-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar
+SHA256：0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A
+大小：12,792,091 字节。
+
+修复 P2：JEI 已部分变更→回调重入失效/替换任务→随后抛异常时，旧任务故障被提前 return 漏掉，导致同 runtime 重放。
+P3 先消费旧任务故障，按实际 target runtime 的弱身份记录；同 runtime 停止重放，新的其它 runtime 保持独立。补充 runtime 回切、注册重置、嵌套 frame 和 native/已观察 runtime 次序不同的保护。
+
+149/149 全量离线回归通过，其中生命周期60/60；29项成员ABI与32项版本分支检查通过。
+相对精确P2：661条目逐字节不变，新增2、改变4、删除0。改动仅控制器类族及包内版本。
+UUID/装入时样板快照、SavedData格式3、目录算法、tuple、预算、JEI mixin及其它功能字节保留。
+不含测试、夹具、测试库和第三方类。
+
+没有启动Minecraft/客户端/服务器或附加游戏诊断，没有修改P2/S/生产/P1/旧1.6.4，也未提交、推送、发布。
+离线通过不代表S已可开测或整包性能通过，仍需来源任务独立审查和实测。
+Minecraft1.21.1/NeoForge/Java21；沿用P2的本体2.4.6/2.4.6.2及JEI19.57.0.451启用边界。
+在独立测试实例和存档副本使用；不要覆盖生产或冻结P2。一实例只保留一份万象担架。
+
+精确差异：同目录 P3-members-vs-P2.json
+冻结证明：同目录 P3-freeze-manifest.json
+完整交接与原P2反例、最终日志：
+D:\AI\candidates\useless-stretcher-catalog-P3-20261107-a\verification\catalog-P3-20261107\REPORT.md
+
+有序tuple/导出协议与P2保持相同：
+-Duseless_stretcher.catalogTupleDirectory=D:/AI/verification/S-P3-tuples
+R没有完整tuple，不能从配方数量倒推摘要；完整有序比较及整包性能仍待执行。

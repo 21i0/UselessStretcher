@@ -1,0 +1,401 @@
+{
+  "timestampUtc": "2026-11-06T20:11:58.5505537Z",
+  "status": "PASS",
+  "gameLaunched": false,
+  "paths": {
+    "candidate": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\verification\\catalog-P-20261107\\interim-52-tests.jar",
+    "baseline164": "D:\\AI\\1.6.4-候选\\useless_stretcher-1.21.1-1.6.4.jar",
+    "published163": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar",
+    "native246": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\libs\\compile\\useless_mod-1.21.1-2.4.6.jar",
+    "native2462": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar"
+  },
+  "hashesBefore": {
+    "candidate": "55B6E61D68EDED83B9849B96B96F61593454BB454DF50DDE0F78654C91EE2A33",
+    "baseline164": "AC78F41EAA7883434F6845CF7323829D77E66B994C82EDCF2B81AEC4AFCD9220",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "native246": "B86A12E8BD6417FD3C89F7C723CA195D68D1F9F9F099480850FFD3C93E5897BC",
+    "native2462": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+  },
+  "entryCounts": {
+    "baseline": 619,
+    "candidate": 637,
+    "unchanged": 616,
+    "added": 18,
+    "changed": 3,
+    "removed": 0
+  },
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiTiming.class",
+      "size": 1708,
+      "sha256": "A1C7645A6A427095B7C42E37952979626F6B53DAF96611091FF7CD7EFD987B7A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "size": 6373,
+      "sha256": "C2E354AE0EF80A56C4DD3F788889BEF39E7162EDB27FA5EBE517CBCF7E24C227"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "size": 6766,
+      "sha256": "D2017AF2E63F1E9B1CCCAFEB5D6FB48CD8FB1589797B90ED826EF1D68FAAF418"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "size": 2010,
+      "sha256": "A712FC79F9EFA255626740AD2EA4F88E4FD3C36686C6F2824CC722BFCBB62DFF"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "size": 19797,
+      "sha256": "4787092759EE35936ED9B36B49656BA1256D10FC9A44211BFDCD4EFEB4B92682"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "size": 1153,
+      "sha256": "20654896256BF4E8E3E2CC3FC815434A6DB74166B509C6E4203A6BBA3580B6C5"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "size": 1831,
+      "sha256": "506E4A216BDD1880719FBE2E0CDD2C68952D6BBC11066D39C2B8D7FE49ED9289"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "size": 1992,
+      "sha256": "5E4C0008A71155C609D533F10087B2B568D9DCF397E98E8689888BC8A4824E3A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "size": 619,
+      "sha256": "E7879B6F0AA528981859754AF64650D304AF3E884174F827691293FEF40A73F7"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "size": 2029,
+      "sha256": "3F3809D91525B762E50BBE25B2B29C5543A8638CF3222845954AE1B6BB55C623"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork.class",
+      "size": 3210,
+      "sha256": "258A529E253A88FBC009EA1F3C559731B52C85485FD09DAD7B3AD32E03EC5416"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork$Key.class",
+      "size": 1696,
+      "sha256": "C88C815C945E357FDCEE7B7B4B10AD11A45734D4B519A7E6B2DA73C0942738C4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSyncGate.class",
+      "size": 1543,
+      "sha256": "74346FEA4ACCEEFBD71F77A915D4D5E8F58976B3A35250EFB1B9A1F700244E7F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeCatalogAccess.class",
+      "size": 8422,
+      "sha256": "7B7CC9433A71EFBBDB77D78F9C32A91A6378C6B342A58839063800B4D1C074ED"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/event/BudgetedCatalogEvents.class",
+      "size": 1673,
+      "sha256": "5A880701D2E2F0B3A2CDAB3E9C4B5A87AE34FE7D8BBC57A204DBB6B3512D3F68"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/BudgetedClientCatalogMixin.class",
+      "size": 1258,
+      "sha256": "079825767F5A47254B11330515B9BBBA3D3115E0379856C4070FC240C37D822E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/BudgetedRecipeCatalogMixin.class",
+      "size": 2090,
+      "sha256": "C290956AB5F02275FB62E10AA4DEC6A7BB4D71AB9148460D6C4D2F14C4B68D1B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+      "size": 2032,
+      "sha256": "EB40AEE23E024B9EA92792E8AE244EA5348D1C9FFC0B893931825B3E64FAE726"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "oldSha256": "F0E20D8FB2E2C31F1AB8E1146DBB4CA5A15893AB22C4692DCFF44108A716CC84",
+      "sha256": "4E3AA5E8B71289E0BCF7C675950C8D3F7016552DB27C381AE7C0DE729637F354"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "DE02C38211584783BD5A1808BBCA327FADC17CA823F63ABD94DA55179B440448",
+      "sha256": "63D4E763EEA2EBE96E00AE0A9B83AD8EEC09AAC57CBD77135733053B47128053"
+    },
+    {
+      "name": "useless_stretcher.mixins.json",
+      "oldSha256": "FC0E2C50F1E71C9DA93F566C798F927AB752B06632B5337AE2CC6A7ABC3B109F",
+      "sha256": "69972040B2B5420DA96904668C76CD124F4F91D479711B73E7E4CF085CBA9678"
+    }
+  ],
+  "removed": [],
+  "version": "1.21.1-1.6.4-catalog-P1",
+  "asmDependencies": [
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\9.9.1\\2ceea6ab43bcae1979b2a6d85fc0ca429877e5ab\\asm-9.9.1.jar",
+      "sha256": "6F3828A215C920059A5EFA2FB55C233D6C54EC5CADCA99CE1B1BDD10077C7DDD"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\9.9.1\\b6b1b3366296163b4b1f540731aad0a2baa484d8\\asm-tree-9.9.1.jar",
+      "sha256": "0F3555096B720B820BBACAB0B515589BEE0200BEE099BDA14C561738AE837BA1"
+    }
+  ],
+  "mixinChecks": [
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$nonBlockingQuery",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.snapshot(Lnet/minecraft/world/level/Level;)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "selector": "snapshot",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$coalescePrewarm",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.prewarm(Lnet/minecraft/world/level/Level;)V",
+      "selector": "prewarm",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$cancelAll",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.invalidate()V",
+      "selector": "invalidate()V",
+      "at": "RETURN",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$cancel",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.invalidate(Lnet/minecraft/world/level/Level;)V",
+      "selector": "invalidate(Lnet/minecraft/world/level/Level;)V",
+      "at": "RETURN",
+      "matches": "2",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "BudgetedClientCatalogMixin",
+      "handler": "stretcher$clientBarrier",
+      "target": "com/sorrowmist/useless/init/ClientSetup.onClientTick(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V",
+      "selector": "onClientTick",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$runtimeAvailable",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.onRuntimeAvailable(Lmezz/jei/api/runtime/IJeiRuntime;)V",
+      "selector": "onRuntimeAvailable",
+      "at": "RETURN",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$runtimeUnavailable",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.onRuntimeUnavailable()V",
+      "selector": "onRuntimeUnavailable",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$refreshStart",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$refreshEnd",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "RETURN",
+      "matches": "4",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$addStart",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "INVOKE:Lmezz/jei/api/recipe/IRecipeManager;addRecipes(Lmezz/jei/api/recipe/RecipeType;Ljava/util/List;)V",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$addEnd",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "INVOKE:Lmezz/jei/api/recipe/IRecipeManager;addRecipes(Lmezz/jei/api/recipe/RecipeType;Ljava/util/List;)V shift=AFTER",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$nonBlockingQuery",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.snapshot(Lnet/minecraft/world/level/Level;)Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot;",
+      "selector": "snapshot",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$coalescePrewarm",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.prewarm(Lnet/minecraft/world/level/Level;)V",
+      "selector": "prewarm",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$cancelAll",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.invalidate()V",
+      "selector": "invalidate()V",
+      "at": "RETURN",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "BudgetedRecipeCatalogMixin",
+      "handler": "stretcher$cancel",
+      "target": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.invalidate(Lnet/minecraft/world/level/Level;)V",
+      "selector": "invalidate(Lnet/minecraft/world/level/Level;)V",
+      "at": "RETURN",
+      "matches": "2",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "BudgetedClientCatalogMixin",
+      "handler": "stretcher$clientBarrier",
+      "target": "com/sorrowmist/useless/init/ClientSetup.onClientTick(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V",
+      "selector": "onClientTick",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "all-target-args",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$runtimeAvailable",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.onRuntimeAvailable(Lmezz/jei/api/runtime/IJeiRuntime;)V",
+      "selector": "onRuntimeAvailable",
+      "at": "RETURN",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$runtimeUnavailable",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.onRuntimeUnavailable()V",
+      "selector": "onRuntimeUnavailable",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$refreshStart",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "HEAD",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$refreshEnd",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "RETURN",
+      "matches": "4",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$addStart",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "INVOKE:Lmezz/jei/api/recipe/IRecipeManager;addRecipes(Lmezz/jei/api/recipe/RecipeType;Ljava/util/List;)V",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    },
+    {
+      "native": "useless_mod-1.21.1-2.4.6.2.jar",
+      "mixin": "CatalogJeiTimingMixin",
+      "handler": "stretcher$addEnd",
+      "target": "com/sorrowmist/useless/compat/jei/JEIPlugin.refreshAlloyFurnaceRecipes()V",
+      "selector": "refreshAlloyFurnaceRecipes",
+      "at": "INVOKE:Lmezz/jei/api/recipe/IRecipeManager;addRecipes(Lmezz/jei/api/recipe/RecipeType;Ljava/util/List;)V shift=AFTER",
+      "matches": "1",
+      "callbackShape": "callback-only",
+      "require": "1"
+    }
+  ],
+  "hashesAfter": {
+    "candidate": "55B6E61D68EDED83B9849B96B96F61593454BB454DF50DDE0F78654C91EE2A33",
+    "baseline164": "AC78F41EAA7883434F6845CF7323829D77E66B994C82EDCF2B81AEC4AFCD9220",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "native246": "B86A12E8BD6417FD3C89F7C723CA195D68D1F9F9F099480850FFD3C93E5897BC",
+    "native2462": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+  },
+  "failures": [],
+  "limits": "Static ZIP and bytecode audit only. Does not prove runtime Mixin application, JEI behavior, gameplay correctness or performance."
+}

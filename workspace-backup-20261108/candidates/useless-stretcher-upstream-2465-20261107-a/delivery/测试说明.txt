@@ -1,0 +1,21 @@
+万象担架 新本体/JEI精确组合独立候选
+版本：1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970
+
+JAR：D:\AI\candidates\useless-stretcher-upstream-2465-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar
+SHA256：9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7
+大小：12,817,487 字节
+
+精确目标：无用之物2.4.6.5、JEI19.70.0.460、EAEP1.6.4.1、DATA正式3.4.0；完整依赖和SHA见verification/upstream-2465-20261107/dependencies.json。依赖由来源任务统一装配，本候选没有修改整合包实例。
+
+接回官方AdapterGuards安全补丁：结构性异常禁用对应适配器动作；转换Runtime异常只跳过当前holder，Linkage错误停用同类同动作。生成后段失败回滚本生成段，转换后段失败清空当前holder输出。旧本体缺少新类时保持原回调/catch；owner线程、预算、三次重试和失败提示保留。查询空快照不写CACHE。总成UUID/样板快照、HUD和中文资源全部继承原冻结字节。
+
+实际147组专项检查全通过：门控127组/1131断言，新保护14组，真实旧本体环境6组。日志ERROR/WARN为主动故障注入的预期，不是游戏报错。未重跑184项完整回归；HUD的21组检查是先前基线证据。
+
+静态成员解析：本体216、JEI11、AE2150全通过，另28项精确检查。2新增/12改变/668原字节不变；其中7个既有内类只有调试表变化，已ASM归一确认。检查类没有打包。冻结manifest与精确差异在本目录。
+
+未启动Minecraft、服务端、ModLauncher，未提交发布。实际新组合加载、Mixin应用、完整目录、游戏交互和性能仍待来源唯一客户端测试。原生修复不会修好担架内部旧失效样板。
+
+VAT由来源任务删除，不是本包修改。目录数量随输入变化，不固定155024，不同VAT/本体/JEI输入不能拿旧P3做单变量性能比较。样板库存档格式3不能安全降级1.6.3，回退应恢复升级前整存档备份。
+
+报告：D:\AI\candidates\useless-stretcher-upstream-2465-20261107-a\verification\upstream-2465-20261107\REPORT.md
+交接：同目录 HANDOFF-TO-GENESIS.md

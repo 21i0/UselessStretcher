@@ -1,0 +1,14 @@
+{
+  "two_i_voice": { "sounds": ["useless_stretcher:two_i_voice"] },
+  "two_i_voice_soft": { "sounds": ["useless_stretcher:two_i_voice_soft"] },
+  "two_i_voice_bright": { "sounds": ["useless_stretcher:two_i_voice_bright"] },
+  "player_voice": { "sounds": ["useless_stretcher:player_voice"] },
+  "two_i_pat": {
+    "subtitle": "subtitles.useless_stretcher.two_i_pat",
+    "sounds": [
+      "useless_stretcher:two_i_pat_1",
+      "useless_stretcher:two_i_pat_2",
+      "useless_stretcher:two_i_pat_3"
+    ]
+  }
+}

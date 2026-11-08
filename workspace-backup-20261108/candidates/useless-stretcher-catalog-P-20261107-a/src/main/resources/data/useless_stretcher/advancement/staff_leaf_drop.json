@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "useless_stretcher:wondrous_staff"
+    },
+    "title": {
+      "translate": "advancements.useless_stretcher.staff_leaf_drop.title",
+      "color": "dark_purple"
+    },
+    "description": {
+      "translate": "advancements.useless_stretcher.staff_leaf_drop.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "main"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

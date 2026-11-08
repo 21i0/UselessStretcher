@@ -1,0 +1,10 @@
+{
+  "production_jar": "D:\\AI\\sources\\UselessStretcher\\build\\libs\\useless_stretcher-1.21.1-1.6.1.jar",
+  "production_sha256": "9afe6dedf04bf11a5db0d3c03bb4ae0c9e6573c49ce4b36c123603aa01ed856d",
+  "unchanged_production_entries": 686,
+  "test_entries_added": [
+    "com/sorrowmist/useless/stretcher/regression/InstalledStretcherChecks$1.class",
+    "com/sorrowmist/useless/stretcher/regression/InstalledStretcherChecks$ItemStore.class",
+    "com/sorrowmist/useless/stretcher/regression/InstalledStretcherChecks.class"
+  ]
+}

@@ -1,0 +1,107 @@
+package com.sorrowmist.useless.stretcher.mixin;
+
+import net.neoforged.fml.loading.FMLLoader;
+import org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
+import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+
+import java.util.List;
+import java.util.Set;
+
+/** Only load integration mixins when their optional mods are present. */
+public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
+    @Override
+    public void onLoad(String mixinPackage) { }
+
+    @Override
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".CatalogJeiLookupMixin") || mixinClassName.endsWith(".CatalogJeiGuiMixin")
+                || mixinClassName.endsWith(".CatalogJeiBuildTimingMixin")
+                || mixinClassName.endsWith(".CatalogJeiIndexTimingMixin")) {
+            String base = modVersionEarly("useless_mod");
+            return ("1.21.1-2.4.6".equals(base) || "1.21.1-2.4.6.2".equals(base))
+                    && "19.57.0.451".equals(modVersionEarly("jei"));
+        }
+        if (mixinClassName.endsWith(".BudgetedRecipeCatalogMixin")
+                || mixinClassName.endsWith(".BudgetedClientCatalogMixin")
+                || mixinClassName.endsWith(".CatalogJeiTimingMixin")) {
+            String version = modVersionEarly("useless_mod");
+            boolean verified = "1.21.1-2.4.6".equals(version) || "1.21.1-2.4.6.2".equals(version);
+            if (!verified) com.mojang.logging.LogUtils.getLogger().warn(
+                    "Catalog budget candidate does not patch unverified Useless Mod {}", version);
+            return verified && (!mixinClassName.endsWith(".CatalogJeiTimingMixin") || isModLoadedEarly("jei"));
+        }
+        if (mixinClassName.endsWith(".Mbd2AsyncSyncMixin")) {
+            if (!(isModLoadedEarly("ldlib2") && isModLoadedEarly("mbd2")
+                    && isModLoadedEarly("ae2") && isModLoadedEarly("ae2lt"))) return false;
+            String version = modVersionEarly("ldlib2");
+            if (!"2.2.44".equals(version)) {
+                com.mojang.logging.LogUtils.getLogger().warn(
+                        "MBD2/AE2LT sync bridge is verified for LDLib2 2.2.44; installed {} is not patched",
+                        version == null ? "unknown version" : version);
+                return false;
+            }
+            return true;
+        }
+        if (mixinClassName.endsWith(".OccultismRitualClockMixin")) return isModLoadedEarly("occultism");
+        if (mixinClassName.endsWith(".StaffRadiationShieldingMixin") || mixinClassName.endsWith(".StaffRadiationEntityMixin"))
+            return isModLoadedEarly("mekanism");
+        if (mixinClassName.endsWith(".TwoIArsRitualMixin") || mixinClassName.endsWith(".TwoIArsJarMixin"))
+            return isModLoadedEarly("ars_nouveau");
+        if (mixinClassName.endsWith(".TwoIBeeEncaseMixin") || mixinClassName.endsWith(".TwoIAmberMixin"))
+            return isModLoadedEarly("productivebees");
+        if (mixinClassName.endsWith(".ApotheosisEnchantingMenuMixin")) {
+            return isModLoadedEarly("apothic_enchanting");
+        }
+        if (mixinClassName.endsWith(".ApotheosisEnchantingStatsMixin")) {
+            // The stats mixin declares both gatherStats descriptors with require = 0, so it
+            // self-adapts to the installed Apothic Enchanting ABI and only needs the mod
+            // itself to be present. Apothic Enchanting is standalone; Apotheosis is not
+            // required for the virtual-bookshelf boost.
+            return isModLoadedEarly("apothic_enchanting");
+        }
+        return true;
+    }
+
+    private static boolean isModLoadedEarly(String modId) {
+        try {
+            var loadingList = FMLLoader.getLoadingModList();
+            if (loadingList != null) {
+                return loadingList.getMods().stream().anyMatch(mod -> modId.equals(mod.getModId()));
+            }
+        } catch (RuntimeException | LinkageError ignored) {
+            // Continue to the normal list when bootstrap has already completed.
+        }
+        try {
+            var modList = net.neoforged.fml.ModList.get();
+            return modList != null && modList.isLoaded(modId);
+        } catch (RuntimeException | LinkageError ignored) {
+            return false;
+        }
+    }
+
+    private static String modVersionEarly(String modId) {
+        try {
+            var loadingList = FMLLoader.getLoadingModList();
+            if (loadingList != null) {
+                return loadingList.getMods().stream().filter(mod -> modId.equals(mod.getModId()))
+                        .findFirst().map(mod -> mod.getVersion().toString()).orElse(null);
+            }
+        } catch (RuntimeException | LinkageError ignored) { }
+        try {
+            var modList = net.neoforged.fml.ModList.get();
+            return modList == null ? null : modList.getModContainerById(modId)
+                    .map(container -> container.getModInfo().getVersion().toString()).orElse(null);
+        } catch (RuntimeException | LinkageError ignored) {
+            return null;
+        }
+    }
+
+    @Override public String getRefMapperConfig() { return null; }
+    @Override public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) { }
+    @Override public List<String> getMixins() { return null; }
+    @Override public void preApply(String targetClassName, ClassNode targetClass,
+                                    String mixinClassName, IMixinInfo mixinInfo) { }
+    @Override public void postApply(String targetClassName, ClassNode targetClass,
+                                     String mixinClassName, IMixinInfo mixinInfo) { }
+}

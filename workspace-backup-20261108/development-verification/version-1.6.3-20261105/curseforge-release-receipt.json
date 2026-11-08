@@ -1,0 +1,38 @@
+{
+  "result": "CURSEFORGE APPROVED AND PUBLICLY AVAILABLE",
+  "projectId": 1690885,
+  "fileId": 9451528,
+  "fileName": "useless_stretcher-1.21.1-1.6.3.jar",
+  "displayName": "useless_stretcher-1.21.1-1.6.3.jar",
+  "releaseType": "Release",
+  "status": "Approved",
+  "verifiedAt": "2026-11-05T08:55:10.931Z",
+  "publicUrl": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9451528",
+  "downloadUrl": "https://edge.forgecdn.net/files/9451/528/useless_stretcher-1.21.1-1.6.3.jar",
+  "environment": [
+    "Client",
+    "Server"
+  ],
+  "minecraft": "1.21.1",
+  "loader": "NeoForge",
+  "java": "21",
+  "requiredDependencies": [
+    "Some-Useless-Things",
+    "Applied Energistics 2"
+  ],
+  "optionalDependencies": [
+    "GuideME",
+    "Curios API"
+  ],
+  "descriptionSavedAndPublic": true,
+  "existingForgeFilesRetained": true,
+  "sha256": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+  "bytes": 12691712,
+  "downloadAudit": "curseforge-download-audit.json",
+  "screenshot": "curseforge-published.png",
+  "previousRejectedFile": {
+    "fileId": 9430671,
+    "reason": "Duplicate of deleted file #9430416; historical 1.6.2 binary",
+    "unchanged": true
+  }
+}

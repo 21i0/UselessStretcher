@@ -1,0 +1,42 @@
+{
+  "utc": "2026-11-06T21:47:30.3304635Z",
+  "left": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-tests\\evidence-8319534446220054436\\tuple-a.tsv",
+  "right": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-tests\\evidence-8319534446220054436\\tuple-a.tsv",
+  "status": "MATCH",
+  "orderCompared": true,
+  "firstDifference": null,
+  "sourceDifferences": [],
+  "errors": [],
+  "leftSummary": {
+    "count": 2,
+    "sha256": "a48ed6dff54a00e78fe445b6f8a74f487855c5a4912b73f5f17ec45bc68c2a15",
+    "sources": [
+      {
+        "sourceId": "adapter",
+        "count": 1,
+        "sha256": "ca3b88375fa4c358349ccc919d6c8efdf6a593f99e4c42049ee5d70b72058c1b"
+      },
+      {
+        "sourceId": "core",
+        "count": 1,
+        "sha256": "a69275ee3c2c1b2814b7463f30ddf4b982feb265953a775f28b22b39734194d8"
+      }
+    ]
+  },
+  "rightSummary": {
+    "count": 2,
+    "sha256": "a48ed6dff54a00e78fe445b6f8a74f487855c5a4912b73f5f17ec45bc68c2a15",
+    "sources": [
+      {
+        "sourceId": "adapter",
+        "count": 1,
+        "sha256": "ca3b88375fa4c358349ccc919d6c8efdf6a593f99e4c42049ee5d70b72058c1b"
+      },
+      {
+        "sourceId": "core",
+        "count": 1,
+        "sha256": "a69275ee3c2c1b2814b7463f30ddf4b982feb265953a775f28b22b39734194d8"
+      }
+    ]
+  }
+}

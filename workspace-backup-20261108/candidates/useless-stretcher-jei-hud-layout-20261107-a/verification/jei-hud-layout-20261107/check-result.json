@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "checksFound": 21,
+  "checksStarted": 21,
+  "checksPassed": 21,
+  "checksFailed": 0,
+  "gameLaunched": false,
+  "scope": "Pure GUI geometry and actual public StringSplitter; no Font/render/client instance and no 184-test rerun.",
+  "geometryMatrixCases": 10000,
+  "minimapBoundary": "Only the supplied map rectangle (12..254,43..283) at physical 1280x960 GUI2/4 is asserted; arbitrary minimap settings are not covered.",
+  "conditions": [
+    {
+      "name": "1280x960_gui2_top_center_geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "1280x960_gui4_top_center_geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "gui2_avoids_map_if_given_map_coordinates_are_physical_pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "gui4_avoids_map_if_given_map_coordinates_are_physical_pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "gui2_avoids_map_if_given_map_coordinates_are_gui_units",
+      "status": "PASS"
+    },
+    {
+      "name": "gui4_avoids_map_if_given_map_coordinates_are_gui_units",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid_screen_font_or_requested_lines_produces_empty_layout",
+      "status": "PASS"
+    },
+    {
+      "name": "ultranarrow_screen_without_padding_and_text_space_stays_empty",
+      "status": "PASS"
+    },
+    {
+      "name": "short_height_never_draws_partial_glyph_rows",
+      "status": "PASS"
+    },
+    {
+      "name": "requested_line_capacity_is_zero_one_or_at_most_two",
+      "status": "PASS"
+    },
+    {
+      "name": "ten_thousand_small_viewport_font_combinations_stay_inside_screen",
+      "status": "PASS"
+    },
+    {
+      "name": "integer_extremes_do_not_overflow_geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "nonpositive_text_width_or_line_limit_returns_no_lines",
+      "status": "PASS"
+    },
+    {
+      "name": "long_chinese_text_wraps_and_last_line_marks_omitted_text",
+      "status": "PASS"
+    },
+    {
+      "name": "long_english_text_wraps_and_last_line_marks_omitted_text",
+      "status": "PASS"
+    },
+    {
+      "name": "one_line_limit_truncates_using_real_splitter",
+      "status": "PASS"
+    },
+    {
+      "name": "two_explicit_short_lines_keep_text_without_unneeded_ellipsis",
+      "status": "PASS"
+    },
+    {
+      "name": "glyph_wider_than_content_and_ellipsis_wider_than_content_do_not_overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "emoji_wrapping_and_trimming_never_split_surrogate_pairs",
+      "status": "PASS"
+    },
+    {
+      "name": "native_formatted_wrapping_preserves_visible_styles",
+      "status": "PASS"
+    },
+    {
+      "name": "text_width_row_cap_and_unicode_hold_across_narrow_width_matrix",
+      "status": "PASS"
+    }
+  ]
+}

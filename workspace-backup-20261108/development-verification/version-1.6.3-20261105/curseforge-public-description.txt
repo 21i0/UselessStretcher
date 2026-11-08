@@ -1,0 +1,646 @@
+- link "promotional banner":
+  - /url: https://links.curseforge.com/wow_forever_launch_top
+  - img "promotional banner"
+- button "dismiss banner":
+- banner:
+  - navigation:
+    - link "Goto home page":
+      - /url: /
+    - list:
+      - link "Browse":
+        - /url: https://www.curseforge.com/games
+        - text: Browse
+      - link "Browse all (130)":
+        - /url: /games
+        - text: Browse all (130)
+      - list:
+        - link "icon Minecraft":
+          - /url: /minecraft
+          - img "icon"
+          - text: Minecraft
+        - link "icon The Sims 4":
+          - /url: /sims4
+          - img "icon"
+          - text: The Sims 4
+        - link "icon World of Warcraft":
+          - /url: /wow
+          - img "icon"
+          - text: World of Warcraft
+        - link "icon Minecraft Bedrock":
+          - /url: /minecraft-bedrock
+          - img "icon"
+          - text: Minecraft Bedrock
+        - link "icon Ark Survival Ascended":
+          - /url: /ark-survival-ascended
+          - img "icon"
+          - text: Ark Survival Ascended
+        - link "icon Hytale":
+          - /url: /hytale
+          - img "icon"
+          - text: Hytale
+        - link "icon inZOI":
+          - /url: /inzoi
+          - img "icon"
+          - text: inZOI
+        - link "icon StarCraft II":
+          - /url: /sc2
+          - img "icon"
+          - text: StarCraft II
+        - link "icon Kerbal Space Program":
+          - /url: /kerbal
+          - img "icon"
+          - text: Kerbal Space Program
+        - link "icon Stardew Valley":
+          - /url: /stardewvalley
+          - img "icon"
+          - text: Stardew Valley
+        - link "icon American Truck Simulator":
+          - /url: /american-truck-simulator
+          - img "icon"
+          - text: American Truck Simulator
+        - link "icon Hogwarts Legacy":
+          - /url: /hogwarts-legacy
+          - img "icon"
+          - text: Hogwarts Legacy
+        - link "icon Terraria":
+          - /url: /terraria
+          - img "icon"
+          - text: Terraria
+        - link "icon WildStar":
+          - /url: /wildstar
+          - img "icon"
+          - text: WildStar
+        - link "icon Palworld":
+          - /url: /palworld
+          - img "icon"
+          - text: Palworld
+        - link "icon World of Tanks":
+          - /url: /worldoftanks
+          - img "icon"
+          - text: World of Tanks
+        - 'link "icon PUBG: BATTLEGROUNDS"':
+          - /url: /pubg-battlegrounds
+          - img "icon"
+          - text: "PUBG: BATTLEGROUNDS"
+        - link "icon Runes of Magic":
+          - /url: /rom
+          - img "icon"
+          - text: Runes of Magic
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+      - link "Create":
+        - /url: https://authors.curseforge.com/welcome
+        - text: Create
+      - generic: MOD AUTHORS
+      - list:
+        - link "Become an Author":
+          - /url: https://authors.curseforge.com/welcome
+        - link "Start a Project":
+          - /url: https://authors.curseforge.com/#/projects/create/choose-game
+        - link "Project Submission Guide":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000199552-project-submission-guide-and-tips
+      - generic: MODDING TOOL DEVELOPERS
+      - list:
+        - link "Apply for an API Key":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key
+        - link "Documentation":
+          - /url: https://docs.curseforge.com/rest-api/#getting-started
+        - link "Terms & Conditions":
+          - /url: https://support.curseforge.com/en/support/solutions/articles/9000207405-curse-forge-3rd-party-api-terms-and-conditions
+      - generic: SOCIAL
+      - list:
+        - link "Join Our Discord!":
+          - /url: https://www.discord.com/invite/curseforge
+        - link "Authors Discord":
+          - /url: https://discord.gg/S3EaZArYz2
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+      - link "Studios":
+        - /url: https://studios.curseforge.com/
+        - text: Studios
+      - generic: GAME DEVELOPERS
+      - list:
+        - link "Unlock Modding for Your Game":
+          - /url: https://studios.curseforge.com
+        - link "Documentation":
+          - /url: https://docs.curseforge.com/
+      - generic: ARKathon 2
+      - link "ARKathon 2 Promo":
+        - /url: https://links.curseforge.com/arkathon_teaser_nav
+    - list:
+      - link "Go Premium":
+        - /url: /premium?source=7
+        - generic: Go Premium
+      - link "Get CurseForge App":
+        - /url: /download/app
+        - generic: Get CurseForge App
+    - link "Go to your messages page":
+      - /url: https://legacy.curseforge.com/private-messages
+    - generic: "14"
+    - img "user avatar"
+    - list:
+      - img "user avatar"
+      - text: 2ixuexi
+      - link "Go Premium":
+        - /url: /premium?source=3
+        - text: Go Premium
+      - link "My profile":
+        - /url: /members/2ixuexi
+        - generic: My profile
+      - link "Following":
+        - /url: https://legacy.curseforge.com/account/subscriptions
+        - generic: Following
+      - link "Dashboard":
+        - /url: https://authors.curseforge.com
+        - generic: Dashboard
+      - link "Reward store":
+        - /url: https://authors.curseforge.com/#/reward-store
+        - generic: Reward store
+      - link "Settings":
+        - /url: /settings
+        - generic: Settings
+      - link "Log out":
+        - /url: https://www.curseforge.com/api/v1/auth/logout-oidc?returnUrl=https://www.curseforge.com/minecraft/mc-mods/useless-stretcher
+        - generic: Log out
+    - button "More options":
+- navigation "Game navigation":
+  - link "Minecraft":
+    - /url: /minecraft
+  - link "Discover":
+    - /url: /minecraft
+  - link "Browse All":
+    - /url: /minecraft/search?page=1&pageSize=20&sortBy=relevancy
+  - searchbox "Search for a project"
+  - button "Search":
+- main:
+  - navigation "Breadcrumb":
+    - list:
+      - link "Minecraft":
+        - /url: /minecraft
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+  - button "Back To Top":
+  - link "Enlarge Useless Stretcher logo":
+    - /url: "#project-logo"
+    - img "Useless Stretcher logo"
+  - heading "Useless Stretcher" [level=1]
+  - list:
+    - generic: By
+    - link "2ixuexi 2ixuexi":
+      - /url: /members/2ixuexi
+      - img "2ixuexi"
+      - generic: 2ixuexi
+  - generic: "An addon for Useless Mod and AE2: wildcard molds, remote pattern tools, configurable time acceleration, an animated 2i companion, and persistent structure capsules with layout discovery."
+  - complementary:
+    - separator
+    - generic: Useless Stretcher
+    - button "Manage Project":
+      - generic: Manage Project
+    - button "Download":
+      - generic: Download
+    - 'button "Add Project to Favorites. Favorites: 7"':
+      - text: Favorite (7)
+      - generic: "7"
+    - link "Follow Project":
+      - /url: "#follow"
+      - button "Follow Project":
+        - text: Follow
+    - separator
+    - heading "Details" [level=3]
+    - term: "Downloads:"
+    - definition: 7,794
+    - term: "Created:"
+    - definition:
+      - generic: 1 month ago
+    - term: "Updated:"
+    - definition:
+      - generic: 4 minutes ago
+    - term: "Project ID:"
+    - definition:
+      - generic: "1690885"
+      - button "Copy to clipboard":
+    - term: "License:"
+    - definition:
+      - link "All Rights Reserved":
+        - /url: /minecraft/mc-mods/useless-stretcher/license
+    - term: "Environment:"
+    - definition:
+      - generic: Client
+    - separator
+    - heading "Game Versions" [level=3]
+    - list:
+      - link "1.21.1":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&version=1.21.1&showAlphaFiles=hide
+      - link "1.20.1":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&version=1.20.1&showAlphaFiles=hide
+    - separator
+    - heading "Mod Loaders" [level=3]:
+      - generic: Mod Loaders
+    - list:
+      - link "NeoForge":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&gameVersionTypeId=6&showAlphaFiles=hide
+      - link "Forge":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&gameVersionTypeId=1&showAlphaFiles=hide
+    - separator
+    - img "informative placeholder"
+    - separator
+    - heading "Class & Categories" [level=3]
+    - list:
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+      - link "Applied Energistics 2":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy&categories=applied-energistics-2
+    - separator
+    - heading "Main File" [level=3]
+    - heading "1.21.1" [level=4]
+    - link "useless_stretcher-1.21.1-1.6.3.jar R 1.21.1 NeoForge Nov 5, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528
+      - generic "useless_stretcher-1.21.1-1.6.3.jar"
+      - list:
+        - generic: R
+        - listitem: 1.21.1
+        - listitem: NeoForge
+        - time: Nov 5, 2026
+    - separator
+    - heading "Recent Files View all" [level=3]:
+      - text: Recent Files
+      - link "View all":
+        - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&showAlphaFiles=hide&sortBy=dateCreated&sortOrder=desc
+        - text: View all
+    - heading "Minecraft 1.21" [level=4]
+    - link "useless_stretcher-1.21.1-1.6.3.jar R 1.21.1 NeoForge Nov 5, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9451528
+      - generic "useless_stretcher-1.21.1-1.6.3.jar"
+      - list:
+        - generic: R
+        - listitem: 1.21.1
+        - listitem: NeoForge
+        - time: Nov 5, 2026
+    - heading "Minecraft 1.20" [level=4]
+    - link "useless_stretcher-20.1.6.5.jar R 1.20.1 Forge Nov 2, 2026":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/9404126
+      - generic "useless_stretcher-20.1.6.5.jar"
+      - list:
+        - generic: R
+        - listitem: 1.20.1
+        - listitem: Forge
+        - time: Nov 2, 2026
+    - separator
+    - link "Report":
+      - /url: "#report"
+      - button "Report":
+        - text: Report
+  - text: Favorite (7) Follow
+  - list:
+    - link "Description":
+      - /url: /minecraft/mc-mods/useless-stretcher
+    - link "Files":
+      - /url: /minecraft/mc-mods/useless-stretcher/files/all?page=1&pageSize=20&showAlphaFiles=hide
+    - link "Gallery":
+      - /url: /minecraft/mc-mods/useless-stretcher/gallery
+    - link "Relations":
+      - /url: /minecraft/mc-mods/useless-stretcher/relations/dependencies
+  - heading "万象担架 / Useless Stretcher" [level=1]
+  - paragraph: 《无用之物 / Useless Mod》的附属模组，为合金炉与 AE2 带来通配模具、远程样板工具、时间加速，以及可以陪伴你的 2i 玩偶和探索结构的维度胶囊。
+  - paragraph:
+    - text: An addon for
+    - strong: Useless Mod
+    - text: and
+    - strong: Applied Energistics 2
+    - text: ", featuring a wildcard mold block, remote pattern tools, time acceleration, an animated 2i companion, and structure capsules."
+  - heading "1.21.1 安装要求 / Requirements for 1.21.1" [level=2]
+  - table:
+    - rowgroup:
+      - row "项目 / Component 要求 / Requirement":
+        - columnheader "项目 / Component"
+        - columnheader "要求 / Requirement"
+    - rowgroup:
+      - row "Minecraft 1.21.1":
+        - cell "Minecraft"
+        - cell "1.21.1":
+          - strong: 1.21.1
+      - row "加载器 / Loader NeoForge 21.1.x":
+        - cell "加载器 / Loader"
+        - cell "NeoForge 21.1.x":
+          - strong: NeoForge 21.1.x
+      - row "Java 21":
+        - cell "Java"
+        - cell "21":
+          - strong: "21"
+      - row "必需前置 / Required Useless Mod 1.21.1-2.4.6+, AE2 19.2+":
+        - cell "必需前置 / Required"
+        - cell "Useless Mod 1.21.1-2.4.6+, AE2 19.2+":
+          - strong: Useless Mod 1.21.1-2.4.6+
+          - text: ","
+          - strong: AE2 19.2+
+      - row "可选前置 / Optional GuideME 21.1.17+, Curios 9.5.1+":
+        - cell "可选前置 / Optional"
+        - cell "GuideME 21.1.17+, Curios 9.5.1+":
+          - strong: GuideME 21.1.17+
+          - text: ","
+          - strong: Curios 9.5.1+
+      - row "安装位置 / Installation 客户端与服务端都安装，并保持相同版本 / Install on both client and server with matching versions":
+        - cell "安装位置 / Installation"
+        - cell "客户端与服务端都安装，并保持相同版本 / Install on both client and server with matching versions"
+  - paragraph:
+    - text: 本页介绍
+    - strong: 1.21.1-1.6.3
+    - text: 主线。仓库中的
+    - strong: 1.20.1 移植分支单独维护、单独构建
+    - text: ，请按游戏版本选择对应文件，不能混用。
+  - paragraph:
+    - text: This page describes the
+    - strong: 1.21.1-1.6.3
+    - text: mainline. The
+    - strong: 1.20.1 port is maintained and built separately
+    - text: ; its files are not interchangeable with the 1.21.1 build.
+  - paragraph:
+    - strong: 升级注意：1.21.1-1.6.3 保持网络协议 23，客户端与服务端请同时更新。已有 1.6.x 存档无需重置。
+  - paragraph:
+    - strong: "Upgrade note: 1.21.1-1.6.3 keeps network protocol 23. Update both client and server together. Existing 1.6.x worlds do not need a reset."
+  - heading "1.6.3 兼容修复 / Compatibility update" [level=2]
+  - paragraph: 修复手杖对 Productive Bees Genesis Extra 离心机的单体和范围加速，使用原生批处理合并额外工作；修复 MBD2 / LDLib2 2.2.44 / AE2LT 的标准节点异步同步冲突，同步交主线程处理并保留节点与余额。已验证真实配方、满储、部分/零接收、NBT 重载及同存档进程重启。兼容测试使用隔离环境；预算不能中断单次第三方同步回调，实际开销仍受整合包影响。
+  - paragraph: Fixes single-target and area staff acceleration for Productive Bees Genesis Extra centrifuges using native coalesced work, and fixes standard managed-node sync conflicts with MBD2 / LDLib2 2.2.44 / AE2LT while preserving node identity and balances. Real recipes, full storage, partial/rejected inserts, NBT reload and same-world process restart were checked in an isolated compatibility environment. Individual third-party callbacks remain synchronous and workload-dependent.
+  - paragraph:
+    - link "完整更新 / Full release notes":
+      - /url: https://github.com/21i0/UselessStretcher/releases/tag/v1.6.3
+  - heading "1.20.1 移植版 / 1.20.1 Port" [level=2]
+  - paragraph:
+    - strong: 20.1.6.5
+    - text: ：Minecraft
+    - strong: 1.20.1
+    - text: 、
+    - strong: Forge 47.3.10–47.x
+    - text: 、
+    - strong: Java 17
+    - text: 。需要无用之物
+    - strong: 20.2.4.9 或兼容 20.x 构建
+    - text: （须包含 Apple UI API）、
+    - strong: AE2 15.4.8–15.x
+    - text: 及其匹配的
+    - strong: GuideME 20.x
+    - text: 。客户端与服务端均安装相同的 1.20.1 包，不能混用 1.21.1 / NeoForge 构建。请按文件页与更新记录选择版本；本次胶囊变体更新属于 1.21.1 包，移植版单独维护。
+  - paragraph:
+    - strong: "20.1.6.5:"
+    - text: Minecraft
+    - strong: 1.20.1
+    - text: ","
+    - strong: Forge 47.3.10–47.x
+    - text: ","
+    - strong: Java 17
+    - text: ","
+    - strong: Useless Mod 20.2.4.9 or a compatible 20.x build containing the Apple UI API
+    - text: ","
+    - strong: AE2 15.4.8–15.x
+    - text: and its matching
+    - strong: GuideME 20.x
+    - text: dependency. Install the same 1.20.1 build on both client and server. Do not mix it with 1.21.1 / NeoForge files. Check the file page and changelog for your build; the capsule-layout update below is for 1.21.1.
+  - heading "1.21.1 中文介绍" [level=2]
+  - heading "万象万物之块：一个方块管理模具与样板" [level=3]
+  - paragraph:
+    - text: 按机器名称搜索，或用
+    - code: "@模组ID"
+    - text: 筛选，选择需要的模具和样板。模具选择与样板获取互相独立，支持批量选择、分批获取和重复样板去重。将方块放入小合金炉模具槽或万象模具集散中心，即可使用已启用的模具功能；配方原有的能源、材料和模具数量要求继续生效。
+  - paragraph: 可绑定 AE 网络，编码样板时优先使用网络已有或可合成的材料。使用无用之物 2.4.6+ 原生的 4096 槽容量，目录与大量选择数据保存在世界存档中。
+  - heading "万象担架：远程送样板，也能直接装入设备" [level=3]
+  - paragraph:
+    - text: 潜行右键万物之块绑定样板库，再右键目标设备投送样板。也可把绑定后的担架直接放入
+    - strong: 小合金炉、样板总成和被动合成仓
+    - text: 的样板槽，让设备读取库中的样板。库内容变化会刷新已装载的设备；能源、材料与模具要求不变。
+  - heading "荒辰移晷之杖：统一窗口管理加速与附加功能" [level=3]
+  - paragraph: 继承造化垂青之杖的工具功能，增加机器、AE 目标、实体、昼夜与天气加速。支持单体、范围、普通与永久模式，以及加速名单、自动休眠、放置历史和远程回收。执行使用共享预算，实际加速速度取决于服务器负载与目标机器开销。
+  - paragraph:
+    - text: 默认按
+    - strong: X
+    - text: 打开带侧边标签的统一窗口；位置、大小、当前标签、侧栏及展开状态会被记住。可配置吸取周围完整源流体的范围与速率，并沿用无用之物本体的无线节点绑定，将流体存入绑定的 AE 网络。还提供自由穿墙、Mekanism 辐射防护等可选功能；相关模组和服务端配置会影响功能是否可用。
+  - heading "2i 玩偶：从掌心到身边的陪伴" [level=3]
+  - paragraph: 2i 可以作为实体跟随、摆件、手持或头戴玩偶；安装 Curios 后也可放入有效饰品槽。各种形态共用外观、细臂、尾巴与动画，包含天气反应、撑伞、朋友共伞和飞行跟随。
+  - paragraph: 所有者专属互动面板提供短聊、送礼、摸头、六章分支剧情、章节回顾和图片欣赏。陪伴进度与好感随存档保存。生存模式亲手打树叶有机会获得 2i，默认概率为万分之一，每名玩家每个存档一次；手杖奖励独立按十万分之一抽取。满背包时保留待领取奖励，首次获得 2i 会向服务器公布所有者。
+  - heading "维度胶囊：发现布局，保存自己的结构实例" [level=3]
+  - paragraph:
+    - text: 右键打开可移动缩放的窗口，按模组分类、名称或
+    - code: "@模组ID"
+    - text: 搜索结构。使用结构自身的原生生成流程与运行时数据包规则；实例按来源环境放入自有空白世界的相邻区域，底部由基岩兜底。规划、生成与地图预览显示阶段进度；关闭窗口后继续加载，就绪时弹出通知。
+  - paragraph: 同一个实例可反复往返，重新进入不会重置建筑或刷新已领取战利品；需要新建筑时可生成相邻实例。计划、进度和实例写入世界存档，已经完成的房间保留玩家改建。
+  - paragraph:
+    - strong: 同名结构的变体选择：
+    - text: 后台采样原生生成计划，按实际模板、片段及相对位置区分布局。原版堡垒遗迹可识别宝藏室、桥梁、居住区与疣猪兽棚；其它结构展示已发现的布局、模板 ID、尺寸与片段边界示意。选择布局后使用保存的原计划生成，不再重新抽取。搜索可以暂停和继续，候选保存在存档中；这是有预算限制的发现过程，不代表穷尽所有随机变体。候选示意图展示片段边界，生成后才有真实方块地图。
+  - paragraph: 结构内容依赖已安装模组与数据包。直接检查原维度 ID、依赖第三方私有系统或执行昂贵原生回调的结构，仍需在对应整合包中验证；大型结构有分批处理与安全限制，不承诺任意结构兼容或零卡顿。
+  - heading "游戏内指南" [level=3]
+  - paragraph:
+    - text: 安装 GuideME 后，从 AE2 指南左侧进入
+    - strong: “万象担架附属”
+    - text: ；也可悬停对应物品按指南阅读键查看。Curios 和 GuideME 均为可选前置。
+  - heading "1.21.1 English Overview" [level=2]
+  - heading "Omniversal Myriad Block" [level=3]
+  - paragraph:
+    - text: Manage enabled molds and encoded patterns in one searchable interface. Filter by machine name or
+    - code: "@modid"
+    - text: ", select molds and patterns independently, and request patterns in batches with duplicate detection. The block works in the Small Alloy Furnace's mold slot and the mold distribution center. Existing recipe requirements still apply, including energy, ingredients and mold counts."
+  - paragraph: Bind an AE network to prefer stored or craftable ingredients when encoding patterns. The addon uses the base mod's native 4096-slot capacity, with large selections and catalogs stored in the world save.
+  - heading "Useless Stretcher" [level=3]
+  - paragraph:
+    - text: Bind a Myriad Block's pattern library, then deliver patterns remotely. A bound stretcher can also be installed directly in the pattern slots of the
+    - strong: Small Alloy Furnace, Pattern Assembly and Passive Crafting Chamber
+    - text: . These devices read the bound library and refresh when its contents change, while retaining their normal operating requirements.
+  - heading "Chronoshift Staff" [level=3]
+  - paragraph: Accelerate machines, selected AE targets, entities, the day/night cycle and weather. Configure single targets or areas, timed or permanent operation, acceleration lists, idle throttling and remote management. A shared execution budget limits server load; achieved throughput depends on the target and server workload.
+  - paragraph:
+    - text: Press
+    - strong: X
+    - text: by default to open the unified tabbed window. Window geometry, the active tab, sidebar and expanded controls are remembered. Collect complete source-fluid blocks into the staff's bound AE network using configurable range and rate, with the base mod's wireless-node binding. Optional controls include free movement through blocks and Mekanism radiation protection, subject to installed mods and server settings.
+  - heading "2i Companion" [level=3]
+  - paragraph: Keep 2i as a following entity, a placed doll, a handheld companion or headwear. Curios adds accessory-slot support. These forms share the same appearance, slim arms, animated tail and weather reactions, including umbrellas and shared umbrellas between friends.
+  - paragraph: The owner-only interaction panel includes chat, gifts, petting, a six-chapter branching story, chapter reviews and an image gallery. Companion progress is saved with the world. Breaking leaves in survival can award a doll once per player per save, at a default chance of 1 in 10,000. The staff has its own independent once-per-save reward at 1 in 100,000. Full inventories retain pending rewards, and the first doll acquisition announces its owner to the server.
+  - heading "Dimension Capsule" [level=3]
+  - paragraph:
+    - text: Browse structures by mod, name or
+    - code: "@modid"
+    - text: in a movable, resizable window. Capsules use native structure generation and the active datapack rules, placing instances in neighboring regions of dedicated worlds associated with their source environments. Stage progress is visible, loading continues after closing the interface, and a toast announces when entry is ready.
+  - paragraph: Return to the same saved instance without resetting buildings or collected loot, or create an adjacent instance when you want a new structure. Completed rooms preserve player changes.
+  - paragraph:
+    - strong: "Discover and choose layouts:"
+    - text: background sampling identifies layouts from their real templates and relative piece positions. Vanilla bastions receive treasure, bridge, housing and hoglin-stable labels; other structures show discovered layouts, template IDs, dimensions and a piece-footprint diagram. Generation uses the saved selected plan rather than rerolling it. Searches can be paused and continued, and candidates are saved with the world. Discovery is bounded sampling, not an exhaustive catalog of every random variation. Candidate diagrams show piece boundaries; the generated instance has the actual block map.
+  - paragraph: Compatibility depends on the installed mods and datapacks. Structures that check a specific dimension ID, depend on private third-party systems or perform expensive callbacks require testing in their target modpack. Batched work and safety limits help manage large structures, but universal compatibility and zero pauses are not promised.
+  - heading "In-game Guide" [level=3]
+  - paragraph:
+    - text: With GuideME installed, open AE2's guide and select
+    - strong: Useless Stretcher
+    - text: in the navigation, or use the guide-reading key while hovering over a supported item. GuideME and Curios are optional.
+  - heading "链接 / Links" [level=2]
+  - list:
+    - link "源码与更新 / Source and updates":
+      - /url: https://github.com/21i0/UselessStretcher
+    - link "问题反馈 / Issue tracker":
+      - /url: https://github.com/21i0/UselessStretcher/issues
+    - link "无用之物 / Useless Mod":
+      - /url: https://github.com/SorrowMist/UselessMod
+  - heading "鸣谢与许可 / Credits and Licenses" [level=2]
+  - paragraph:
+    - text: 代码使用 MIT License。美术由虾比等创作者提供，素材许可单独说明。2i 尾巴几何改编自 Touhou Little Maid 的 Winefox（酒狐），原作者 tartaric_acid 及贡献者；改编几何使用
+    - strong: CC BY-NC-SA 4.0
+    - text: ，并在 JAR 中附有
+    - code: TWO_I_TAIL_CREDITS.txt
+    - text: 和
+    - code: TWO_I_TAIL_LICENSE.txt
+    - text: 。
+  - paragraph:
+    - text: Code is licensed under MIT. Artwork credits and asset-specific terms apply separately. The adapted 2i tail geometry comes from Winefox in
+    - link "Touhou Little Maid":
+      - /url: https://github.com/TartaricAcid/TouhouLittleMaid
+    - text: ", by tartaric_acid and contributors, under"
+    - strong: CC BY-NC-SA 4.0
+    - text: . The JAR includes the full tail attribution and license. See the repository's
+    - code: THIRD_PARTY_NOTICES.md
+    - text: for additional credits.
+  - heading "Useless Stretcher Team" [level=2]
+  - img "profile avatar"
+  - link "View 2ixuexi's profile":
+    - /url: /members/2ixuexi
+    - text: 2ixuexi
+  - generic: Owner
+  - list:
+    - generic: "2"
+    - generic: Projects
+    - generic: 7.8K
+    - generic: Downloads
+  - heading "Members" [level=3]
+  - list:
+    - link "View xiabi418's profile":
+      - /url: /members/xiabi418
+      - img "profile avatar"
+      - generic: xiabi418
+      - generic: Artist
+  - heading "More from 2ixuexi" [level=2]:
+    - generic: More from 2ixuexi
+  - text: Downloads Downloads Latest release
+  - list:
+    - img "The 2i Doll project image"
+    - link "Go to The 2i Doll Project Page":
+      - /url: /minecraft/mc-mods/the-2i-doll
+    - heading "Go to The 2i Doll Project Page" [level=3]:
+      - link "Go to The 2i Doll Project Page":
+        - /url: /minecraft/mc-mods/the-2i-doll
+        - generic: The 2i Doll
+    - generic: By
+    - generic: 2ixuexi
+    - list:
+      - listitem: Downloads 52
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+    - paragraph: Animated doll companions with personal stories, affection, a starfield garden and three cinematic combat styles. A standalone mod for Minecraft 1.21.1 NeoForge.
+    - list:
+      - listitem: Downloads 52
+      - listitem: Latest release November 4, 2026
+    - list:
+      - link "Mods":
+        - /url: /minecraft/search?class=mc-mods&page=1&pageSize=20&sortBy=relevancy
+      - listitem: "+3"
+    - link "Go to The 2i Doll Project Page":
+      - /url: /minecraft/mc-mods/the-2i-doll
+      - text: View
+    - link "Install":
+      - /url: /minecraft/mc-mods/the-2i-doll/install/9430865
+      - generic: Install
+- contentinfo:
+  - link "Goto home page":
+    - /url: /
+  - text: CurseForge - a world of endless gaming possibilities for modders and gamers alike.
+  - text: Download the best mods and addons!
+  - navigation:
+    - list:
+      - generic: Games
+      - list:
+        - link "All games":
+          - /url: /games
+        - link "Minecraft":
+          - /url: /minecraft
+        - link "World of Warcraft":
+          - /url: /wow
+        - link "The Sims 4":
+          - /url: /sims4
+        - link "Starcraft II":
+          - /url: /sc2
+        - link "Kerbal Space Program":
+          - /url: /kerbal
+        - link "Minecraft Dungeons":
+          - /url: /minecraft-dungeons
+        - link "World of Tanks":
+          - /url: /worldoftanks
+      - generic: Create
+      - list:
+        - link "Start a project":
+          - /url: https://authors.curseforge.com/#/projects/create/choose-game
+        - link "Project submission guide":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000199552-project-submission-guide-and-tips
+        - link "Author Rewards Program":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000197898-rewards-program-terms-of-service
+        - link "Apply for an API Key":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key
+        - link "3rd Party API T&C":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000207405-curse-forge-3rd-party-api-terms-and-conditions
+      - generic: Community
+      - list:
+        - link "Join Our Discord!":
+          - /url: https://discord.gg/curseforge
+        - link "Ideas Portal":
+          - /url: //curseforge-ideas.overwolf.com/
+        - link "CF blog":
+          - /url: //blog.curseforge.com/
+        - link "Newsletter":
+          - /url: //blog.curseforge.com/tag/newsletter/
+        - link "Roadmap":
+          - /url: //trello.com/b/Slaz6xBq/curseforge-roadmap
+        - link "Bukkit forums":
+          - /url: //bukkit.org/forums/
+        - link "CurseForge Servers":
+          - /url: //www.curseforge.com/servers/minecraft
+      - generic: Support
+      - list:
+        - link "Knowledge base":
+          - /url: //support.curseforge.com/
+        - link "Troubleshooting":
+          - /url: //support.curseforge.com/en/support/solutions/articles/9000194900-curseforge-troubleshooting
+        - link "Contact us":
+          - /url: //support.curseforge.com/en/support/tickets/new
+      - generic: Companions
+      - list:
+        - link "Overwolf":
+          - /url: //overwolf.com
+        - link "CurseForge for Studios":
+          - /url: //studios.curseforge.com
+        - link "Tebex":
+          - /url: //tebex.io
+        - link "Nitro":
+          - /url: //nitropay.com/
+  - list:
+    - link "Instagram link":
+      - /url: https://www.instagram.com/curseforgeofficial
+    - link "Tiktok link":
+      - /url: https://www.tiktok.com/@curseforge
+    - link "Youtube link":
+      - /url: https://www.youtube.com/@CurseForge
+    - link "Discord link":
+      - /url: https://discord.gg/curseforge
+    - link "X link":
+      - /url: https://x.com/CurseForge
+    - link "Reddit link":
+      - /url: https://www.reddit.com/r/CurseForge
+  - list:
+    - link "Terms of Service":
+      - /url: https://legal.overwolf.com/docs/overwolf/platform/platform-terms-of-use
+    - link "Privacy Policy":
+      - /url: https://legal.overwolf.com/docs/overwolf/platform/platform-privacy-policy
+    - link "Licenses":
+      - /url: //support.overwolf.com/en/support/solutions/articles/9000203492-licenses-we-use
+    - link "Mod Author Terms":
+      - /url: https://legal.overwolf.com/docs/curseforge/mod-authors-terms
+  - generic: © 2026 Overwolf. All rights reserved.
+- alert
+- text: We use cookies to improve your experience and increase the relevancy of content when using CurseForge. Our cookies are used for analytics,
+- text: optimization, and advertising operations.
+- link "View our Cookies Policy":
+  - /url: https://legal.overwolf.com/docs/overwolf/cookies-policy
+- button "Got it"

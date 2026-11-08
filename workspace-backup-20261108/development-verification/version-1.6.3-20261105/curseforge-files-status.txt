@@ -1,0 +1,325 @@
+- button "Skip to content"
+- banner:
+  - button "Open menu":
+  - link "Authors Discord":
+    - /url: https://discord.gg/GdMcDgvKHX
+  - separator
+  - button "Help":
+  - separator
+  - generic "Notifications":
+    - button:
+  - button "Profile":
+    - img "2ixuexi"
+- main:
+  - heading "Back to projects Edit 'Useless Stretcher'" [level=1]:
+    - button "Back to projects":
+    - text: Edit 'Useless Stretcher'
+    - button:
+  - tablist:
+    - tab "Description":
+      - paragraph: Description
+    - tab "General":
+      - paragraph: General
+    - tab "License":
+      - paragraph: License
+    - tab "Files" [selected]:
+      - paragraph: Files
+    - tab "Source":
+      - paragraph: Source
+    - tab "Media":
+      - paragraph: Media
+    - tab "Default Relations":
+      - paragraph: Default Relations
+    - tab "Members":
+      - paragraph: Members
+    - tab "Issues" [disabled]:
+      - paragraph:
+        - link "Issues":
+          - /url: https://legacy.curseforge.com/minecraft/mc-mods/useless-stretcher/settings/issues
+          - paragraph: Issues
+  - separator
+  - generic "Files":
+    - textbox "Search…" [active]
+    - button:
+    - table:
+      - rowgroup:
+        - row "Sort by Name ascending Type Status Sort by Uploaded ascending Game versions Downloads":
+          - columnheader:
+            - button:
+          - columnheader "Sort by Name ascending":
+            - button "Sort by Name ascending":
+              - generic: Name
+          - columnheader "Type"
+          - columnheader "Status"
+          - columnheader "Sort by Uploaded ascending":
+            - button "Sort by Uploaded ascending":
+              - generic: Uploaded
+          - columnheader "Game versions"
+          - columnheader "Downloads"
+          - columnheader
+      - rowgroup:
+        - row "useless_stretcher-1.21.1-1.6.3.jar Release Approved 2026年11月5日 16:49 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Server 0":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.6.3.jar":
+            - generic "useless_stretcher-1.21.1-1.6.3.jar":
+              - paragraph: useless_stretcher-1.21.1-1.6.3.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年11月5日 16:49":
+            - paragraph: 5 minutes ago
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Server":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Server" [level=2]: ...
+          - cell "0":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9451/528/useless_stretcher-1.21.1-1.6.3.jar
+            - generic "0"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9451528
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.6.2.jar Release Rejected Your file was rejected by moderation and can no longer be submitted or published. 2026年11月4日 12:59 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Server 0":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.6.2.jar":
+            - generic "useless_stretcher-1.21.1-1.6.2.jar":
+              - paragraph: useless_stretcher-1.21.1-1.6.2.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Rejected Your file was rejected by moderation and can no longer be submitted or published.":
+            - text: Rejected
+            - generic "Your file was rejected by moderation and can no longer be submitted or published.":
+          - cell "2026年11月4日 12:59":
+            - paragraph: 1 days ago
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Server":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Server" [level=2]: ...
+          - cell "0":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9430/671/useless_stretcher-1.21.1-1.6.2.jar
+            - generic "0"
+          - cell:
+            - link:
+              - /url: /#/projects/1690885/files/9430671
+              - button "Edit file":
+        - row "useless_stretcher-20.1.6.5.jar Release Approved 2026年11月2日 16:17 Java 21 1.20.1 Client Java 21, 1.20.1, Client, Forge, Java 17 92":
+          - cell:
+            - button:
+          - cell "useless_stretcher-20.1.6.5.jar":
+            - generic "useless_stretcher-20.1.6.5.jar":
+              - paragraph: useless_stretcher-20.1.6.5.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年11月2日 16:17":
+            - paragraph: 3 days ago
+          - cell "Java 21 1.20.1 Client Java 21, 1.20.1, Client, Forge, Java 17":
+            - generic: Java 21
+            - generic: 1.20.1
+            - generic: Client
+            - heading "Java 21, 1.20.1, Client, Forge, Java 17" [level=2]: ...
+          - cell "92":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9404/126/useless_stretcher-20.1.6.5.jar
+            - generic "92"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9404126
+              - button "Edit file":
+        - row "useless_stretcher-20.1.6.3.jar Release Approved 2026年10月25日 12:31 Java 21 1.20.1 Client Java 21, 1.20.1, Client, Forge, Java 17 325":
+          - cell:
+            - button:
+          - cell "useless_stretcher-20.1.6.3.jar":
+            - generic "useless_stretcher-20.1.6.3.jar":
+              - paragraph: useless_stretcher-20.1.6.3.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月25日 12:31"
+          - cell "Java 21 1.20.1 Client Java 21, 1.20.1, Client, Forge, Java 17":
+            - generic: Java 21
+            - generic: 1.20.1
+            - generic: Client
+            - heading "Java 21, 1.20.1, Client, Forge, Java 17" [level=2]: ...
+          - cell "325":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9317/592/useless_stretcher-20.1.6.3.jar
+            - generic "325"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9317592
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.6.2.jar Release Approved 2026年10月23日 15:47 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 2,234":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.6.2.jar":
+            - generic "useless_stretcher-1.21.1-1.6.2.jar":
+              - paragraph: useless_stretcher-1.21.1-1.6.2.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月23日 15:47"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "2,234":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9295/653/useless_stretcher-1.21.1-1.6.2.jar
+            - generic "2,234": 2.2K
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9295653
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.6.1.jar Release Approved 2026年10月23日 14:29 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 46":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.6.1.jar":
+            - generic "useless_stretcher-1.21.1-1.6.1.jar":
+              - paragraph: useless_stretcher-1.21.1-1.6.1.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月23日 14:29"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "46":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9295/197/useless_stretcher-1.21.1-1.6.1.jar
+            - generic "46"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9295197
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.6.0.jar Release Approved 2026年10月19日 13:41 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 507":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.6.0.jar":
+            - generic "useless_stretcher-1.21.1-1.6.0.jar":
+              - paragraph: useless_stretcher-1.21.1-1.6.0.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月19日 13:41"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "507":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9252/732/useless_stretcher-1.21.1-1.6.0.jar
+            - generic "507"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9252732
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.5.4.jar Release Approved 2026年10月5日 11:27 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 1,384":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.5.4.jar":
+            - generic "useless_stretcher-1.21.1-1.5.4.jar":
+              - paragraph: useless_stretcher-1.21.1-1.5.4.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月5日 11:27"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "1,384":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9065/824/useless_stretcher-1.21.1-1.5.4.jar
+            - generic "1,384": 1.4K
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9065824
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.5.3.jar Release Approved 2026年10月4日 13:25 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 141":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.5.3.jar":
+            - generic "useless_stretcher-1.21.1-1.5.3.jar":
+              - paragraph: useless_stretcher-1.21.1-1.5.3.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月4日 13:25"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "141":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9054/797/useless_stretcher-1.21.1-1.5.3.jar
+            - generic "141"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9054797
+              - button "Edit file":
+        - row "useless_stretcher-1.21.1-1.5.2.jar Release Approved 2026年10月2日 12:22 1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17 225":
+          - cell:
+            - button:
+          - cell "useless_stretcher-1.21.1-1.5.2.jar":
+            - generic "useless_stretcher-1.21.1-1.5.2.jar":
+              - paragraph: useless_stretcher-1.21.1-1.5.2.jar
+          - cell "Release":
+            - generic "Release":
+              - generic: R
+          - cell "Approved":
+            - text: Approved
+          - cell "2026年10月2日 12:22"
+          - cell "1.21.1 Java 21 NeoForge 1.21.1, Java 21, NeoForge, Client, Java 17":
+            - generic: 1.21.1
+            - generic: Java 21
+            - generic: NeoForge
+            - heading "1.21.1, Java 21, NeoForge, Client, Java 17" [level=2]: ...
+          - cell "225":
+            - link "Download file":
+              - /url: https://edge.forgecdn.net/files/9034/422/useless_stretcher-1.21.1-1.5.2.jar
+            - generic "225"
+          - cell:
+            - button "Archive file":
+            - link:
+              - /url: /#/projects/1690885/files/9034422
+              - button "Edit file":
+- iframe [id="launcher-frame"]:
+  - img "Help"

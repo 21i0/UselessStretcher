@@ -1,4 +1,5 @@
 {
+  "msg.useless_stretcher.library_unavailable": "样板库暂时无法读取，原始数据已保留，未作修改。",
   "gui.useless_stretcher.staff_tabs.machines": "加速记录",
   "gui.useless_stretcher.staff_tabs.main": "常规设置",
   "gui.useless_stretcher.staff_tabs.entity": "实体加速",

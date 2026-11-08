@@ -1,0 +1,284 @@
+package com.sorrowmist.useless.stretcher.client;
+
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
+import com.sorrowmist.useless.stretcher.client.gui.AE2RangeSlider;
+import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
+import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSavedData;
+import com.sorrowmist.useless.stretcher.content.range.RangeAccelerationSettings;
+import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.network.RangeNetwork;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+
+/** Button-based range setup using the same visual language as the upstream G screen. */
+public final class RangeAccelerationConfigScreen extends StaffScreen {
+
+    private final Screen parent;
+    private final InteractionHand hand;
+    private int panelLeft;
+    private int panelTop;
+    private boolean placementMode;
+    private boolean filterMarkingMode;
+    private boolean markSleepList;
+    private int sizeX;
+    private int sizeY;
+    private int sizeZ;
+    private int offsetX;
+    private int offsetY;
+    private int offsetZ;
+    private boolean accelerationWhitelistMode;
+    private boolean sleepWhitelistMode;
+    private int accelerationMarkCount;
+    private int sleepMarkCount;
+    private SelectableAE2Button placementButton;
+    private SelectableAE2Button accelerationListButton;
+    private SelectableAE2Button sleepListButton;
+    private SelectableAE2Button markingButton;
+    private SelectableAE2Button offsetXButton;
+    private SelectableAE2Button offsetYButton;
+    private SelectableAE2Button offsetZButton;
+    private boolean settingsLoaded;
+
+    public RangeAccelerationConfigScreen(Screen parent, InteractionHand hand) {
+        super(Component.translatable("gui.useless_stretcher.range.title"), Tab.RANGE, parent, hand);
+        this.parent = parent;
+        this.hand = hand;
+    }
+
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
+
+    @Override
+    protected void initContent() {
+        int panelWidth = contentWidth();
+        panelLeft = contentLeft();
+        panelTop = contentTop();
+        if (!settingsLoaded) {
+            ItemStack staff = currentStaff();
+            placementMode = RangeAccelerationSettings.placementMode(staff);
+            filterMarkingMode = RangeAccelerationSettings.filterMarkingMode(staff);
+            markSleepList = RangeAccelerationSettings.markSleepList(staff);
+            sizeX = RangeAccelerationSettings.sizeX(staff);
+            sizeY = RangeAccelerationSettings.sizeY(staff);
+            sizeZ = RangeAccelerationSettings.sizeZ(staff);
+            offsetX = RangeAccelerationSettings.offsetX(staff);
+            offsetY = RangeAccelerationSettings.offsetY(staff);
+            offsetZ = RangeAccelerationSettings.offsetZ(staff);
+            accelerationWhitelistMode = RangeAccelerationSettings.whitelistMode(staff);
+            sleepWhitelistMode = RangeAccelerationSettings.sleepWhitelistMode(staff);
+            accelerationMarkCount = RangeAccelerationSettings.accelerationMarkCount(staff);
+            sleepMarkCount = RangeAccelerationSettings.sleepMarkCount(staff);
+            settingsLoaded = true;
+        }
+
+        placementButton = addRenderableWidget(new SelectableAE2Button(
+                panelLeft + panelWidth - 103, panelTop, 103, 17,
+                placementMessage(), ignored -> {
+                    placementMode = !placementMode;
+                    if (placementMode) filterMarkingMode = false;
+                    apply();
+                }));
+        markingButton = addRenderableWidget(new SelectableAE2Button(
+                panelLeft + panelWidth - 103, panelTop + 20, 103, 17,
+                markingMessage(), ignored -> {
+                    filterMarkingMode = !filterMarkingMode;
+                    if (filterMarkingMode) placementMode = false;
+                    apply();
+                }));
+
+        int cardLeft = panelLeft;
+        int cardWidth = panelWidth;
+        addAxisSlider(cardLeft + 5, panelTop + 44, cardWidth - 10, 'X', sizeX, offsetX);
+        addAxisSlider(cardLeft + 5, panelTop + 64, cardWidth - 10, 'Y', sizeY, offsetY);
+        addAxisSlider(cardLeft + 5, panelTop + 84, cardWidth - 10, 'Z', sizeZ, offsetZ);
+
+        int half = (cardWidth - 13) / 2;
+        accelerationListButton = addRenderableWidget(new SelectableAE2Button(
+                cardLeft + 5, panelTop + 112, half, 18,
+                accelerationListMessage(), ignored -> {
+                    if (markSleepList) markSleepList = false;
+                    else accelerationWhitelistMode = !accelerationWhitelistMode;
+                    apply();
+                }));
+        sleepListButton = addRenderableWidget(new SelectableAE2Button(
+                cardLeft + 8 + half, panelTop + 112, cardWidth - 13 - half, 18,
+                sleepListMessage(), ignored -> {
+                    if (!markSleepList) markSleepList = true;
+                    else sleepWhitelistMode = !sleepWhitelistMode;
+                    apply();
+                }));
+        int footerY = panelTop + Math.max(143, contentHeight() - 21);
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft + 5, footerY, (cardWidth - 13) / 2, 18,
+                Component.translatable("gui.useless_stretcher.range.history"),
+                ignored -> navigate(Tab.HISTORY)));
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft + 8 + (cardWidth - 13) / 2, footerY,
+                cardWidth - 13 - (cardWidth - 13) / 2, 18,
+                Component.translatable("gui.useless_stretcher.back"), ignored -> onClose()));
+        updateButtons();
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(accelerationListButton, "acceleration_list");
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(sleepListButton, "sleep_list");
+        setContentExtent(footerY - panelTop + 21);
+    }
+
+    private void addAxisSlider(int left, int y, int rowWidth, char axis, int initialValue, int initialOffset) {
+        int offsetLeft = left + rowWidth - 74;
+        int plusLeft = offsetLeft - 22;
+        AE2RangeSlider slider = addRenderableWidget(new AE2RangeSlider(
+                left + 21, y, Math.max(20, plusLeft - left - 24), 18, String.valueOf(axis),
+                1, 15, initialValue, value -> setAxis(axis, value)));
+        addRenderableWidget(new SelectableAE2Button(left, y, 18, 18,
+                Component.literal("-"), ignored -> slider.step(-1))).setTooltip(slider.getTooltip());
+        addRenderableWidget(new SelectableAE2Button(plusLeft, y, 18, 18,
+                Component.literal("+"), ignored -> slider.step(1))).setTooltip(slider.getTooltip());
+
+        SelectableAE2Button decrement = new SelectableAE2Button(offsetLeft, y, 18, 18,
+                Component.literal("-"), ignored -> stepOffset(axis, -1));
+        SelectableAE2Button value = new SelectableAE2Button(offsetLeft + 20, y, 34, 18,
+                offsetMessage(initialOffset), ignored -> { });
+        value.active = false;
+        SelectableAE2Button increment = new SelectableAE2Button(offsetLeft + 56, y, 18, 18,
+                Component.literal("+"), ignored -> stepOffset(axis, 1));
+        addRenderableWidget(decrement);
+        addRenderableWidget(value);
+        addRenderableWidget(increment);
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(decrement, "offset_decrease", String.valueOf(axis));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(value, "offset_axis", String.valueOf(axis));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(increment, "offset_increase", String.valueOf(axis));
+        switch (axis) {
+            case 'X' -> offsetXButton = value;
+            case 'Y' -> offsetYButton = value;
+            default -> offsetZButton = value;
+        }
+    }
+
+    private void setAxis(char axis, int value) {
+        switch (axis) {
+            case 'X' -> sizeX = value;
+            case 'Y' -> sizeY = value;
+            default -> sizeZ = value;
+        }
+        apply();
+    }
+
+    private void stepOffset(char axis, int delta) {
+        switch (axis) {
+            case 'X' -> offsetX = RangeAccelerationSavedData.clampOffset(offsetX + delta);
+            case 'Y' -> offsetY = RangeAccelerationSavedData.clampOffset(offsetY + delta);
+            default -> offsetZ = RangeAccelerationSavedData.clampOffset(offsetZ + delta);
+        }
+        apply();
+    }
+
+    private void apply() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        RangeAccelerationSettings.set(staff, placementMode, filterMarkingMode, markSleepList,
+                sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ,
+                accelerationWhitelistMode, sleepWhitelistMode);
+        RangeNetwork.sendSettings(hand, placementMode, filterMarkingMode, markSleepList,
+                sizeX, sizeY, sizeZ, offsetX, offsetY, offsetZ,
+                accelerationWhitelistMode, sleepWhitelistMode);
+        updateButtons();
+    }
+
+    private void updateButtons() {
+        if (placementButton != null) {
+            placementButton.setSelected(placementMode);
+            placementButton.setMessage(placementMessage());
+        }
+        if (accelerationListButton != null) {
+            accelerationListButton.setSelected(!markSleepList);
+            accelerationListButton.setMessage(accelerationListMessage());
+        }
+        if (sleepListButton != null) {
+            sleepListButton.setSelected(markSleepList);
+            sleepListButton.setMessage(sleepListMessage());
+        }
+        if (markingButton != null) {
+            markingButton.setSelected(filterMarkingMode);
+            markingButton.setMessage(markingMessage());
+        }
+        if (offsetXButton != null) offsetXButton.setMessage(offsetMessage(offsetX));
+        if (offsetYButton != null) offsetYButton.setMessage(offsetMessage(offsetY));
+        if (offsetZButton != null) offsetZButton.setMessage(offsetMessage(offsetZ));
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        ItemStack staff = currentStaff();
+        int accelerationCount = RangeAccelerationSettings.accelerationMarkCount(staff);
+        int sleepCount = RangeAccelerationSettings.sleepMarkCount(staff);
+        if (accelerationCount != accelerationMarkCount || sleepCount != sleepMarkCount) {
+            accelerationMarkCount = accelerationCount;
+            sleepMarkCount = sleepCount;
+            updateButtons();
+        }
+    }
+
+    @Override
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int panelWidth = contentWidth();
+        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 40,
+                panelLeft + panelWidth, panelTop + 108);
+        StretcherScreenStyle.drawInset(graphics, panelLeft, panelTop + 109,
+                panelLeft + panelWidth, panelTop + 138);
+        graphics.drawString(font,
+                Component.translatable("gui.useless_stretcher.range.speed",
+                        WondrousStaffAcceleration.getSpeed(currentStaff())),
+                panelLeft + 5, panelTop + 6, StretcherScreenStyle.SUBTLE_TEXT_COLOR, false);
+    }
+
+    @Override
+    public void onClose() {
+        returnToPage(parent);
+    }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    private ItemStack currentStaff() {
+        return minecraft == null || minecraft.player == null
+                ? ItemStack.EMPTY : minecraft.player.getItemInHand(hand);
+    }
+
+    private Component placementMessage() {
+        return Component.translatable("gui.useless_stretcher.range.placement",
+                Component.translatable(placementMode
+                        ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component accelerationListMessage() {
+        return Component.translatable("gui.useless_stretcher.range.list_with_count",
+                Component.translatable(accelerationWhitelistMode
+                        ? "gui.useless_stretcher.range.acceleration_whitelist"
+                        : "gui.useless_stretcher.range.acceleration_blacklist"), accelerationMarkCount);
+    }
+
+    private Component sleepListMessage() {
+        return Component.translatable("gui.useless_stretcher.range.list_with_count",
+                Component.translatable(sleepWhitelistMode
+                        ? "gui.useless_stretcher.range.sleep_whitelist"
+                        : "gui.useless_stretcher.range.sleep_blacklist"), sleepMarkCount);
+    }
+
+    private Component markingMessage() {
+        return Component.translatable("gui.useless_stretcher.range.marking",
+                Component.translatable(filterMarkingMode
+                        ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private static Component offsetMessage(int value) {
+        return Component.translatable("gui.useless_stretcher.range.offset_short", value);
+    }
+}

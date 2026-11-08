@@ -1,0 +1,40 @@
+[
+  {
+    "id": "version-gates",
+    "sources": [
+      "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\verification\\upstream-abi\\VersionGateChecks.java"
+    ],
+    "main": "com.sorrowmist.useless.stretcher.verification.VersionGateChecks",
+    "arguments": [
+      "{result}",
+      "19.57.0.451,19.70.0.460",
+      "19.57.0.451,19.70.0.460"
+    ]
+  },
+  {
+    "id": "native-guards",
+    "sources": [
+      "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\NativeAdapterGuardChecks.java"
+    ],
+    "main": "com.sorrowmist.useless.stretcher.content.catalog.NativeAdapterGuardChecks",
+    "arguments": [
+      "new",
+      "{result}"
+    ]
+  },
+  {
+    "id": "legacy-guards",
+    "sources": [
+      "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\NativeAdapterGuardChecks.java"
+    ],
+    "main": "com.sorrowmist.useless.stretcher.content.catalog.NativeAdapterGuardChecks",
+    "arguments": [
+      "legacy",
+      "{result}"
+    ],
+    "legacyBase": {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+      "sha256": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+    }
+  }
+]

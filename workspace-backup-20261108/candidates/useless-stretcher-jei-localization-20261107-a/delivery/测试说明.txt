@@ -1,0 +1,18 @@
+万象担架 JEI 左上角延迟加载通知本地化候选
+包内版本：1.21.1-1.6.4-catalog-P4-assembly-lock-zh
+
+文件：D:\AI\candidates\useless-stretcher-jei-localization-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh.jar
+SHA256：7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D
+大小：12,810,599 字节
+
+仅修改JEI左上角延迟加载通知的展示：等待、准备、整理、更新、加入、恢复、完成和暂停状态使用中英翻译。不同阶段显示对应数量，新增条数不冒充目录总数或百分比。暂停提示请查看日志，完整异常仍保留日志中。原progress()String诊断接口保留，HUD改用本地化Component快照的副本。
+
+18/18专项离线检查通过：真实Component/Language解析、各阶段计数、中英切换后的同一Component翻译、防御副本、失败细节不进入HUD、off-owner只读状态等。未重跑184项完整回归，没有启动Minecraft、服务端或模组加载器。真实客户端绘制/语言切换和整合包性能仍待实测。
+
+精确差异审计通过并冻结：两生产outer class、两语言资源、版本元数据变化；另4个既有inner class只发生调试信息变化，ASM去调试信息后与基线相同；其余669项包内原字节不变。两个语言文件各只新增10个指定前缀的键，原翻译不变；检查类未入包。原P4-lock/P4/P3/生产JAR哈希未变。
+
+VAT已由来源任务删除，不是本包修改。本候选未改整合包模组；目录总数随实际输入变化，不预设155024。不能拿VAT输入不同的P3结果作单变量性能对比。
+
+冻结manifest：本目录 jei-localization-freeze-manifest.json
+精确差异：本目录 jei-localization-members-vs-P4-lock.json
+报告：D:\AI\candidates\useless-stretcher-jei-localization-20261107-a\verification\jei-localization-20261107\REPORT.md

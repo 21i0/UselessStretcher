@@ -1,0 +1,234 @@
+package com.sorrowmist.useless.stretcher.init;
+
+import com.mojang.serialization.Codec;
+import com.sorrowmist.useless.stretcher.content.entity.TwoIDollMemory;
+import com.sorrowmist.useless.stretcher.UselessStretcherMod;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.UnaryOperator;
+
+/** Data components for the wondrous staff's time-acceleration control. */
+public final class StretcherComponents {
+    private static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS =
+            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, UselessStretcherMod.MODID);
+
+    /** Selected acceleration multiplier. 0 = off; valid presets range from 2 to 1024. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WONDROUS_STAFF_SPEED =
+            register("wondrous_staff_speed", builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
+
+    /** Opt-in timer-only entity acceleration. Old stacks retain complete-tick behavior. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> ENTITY_TIMER_MODE =
+            register("entity_timer_mode", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENTITY_TIMER_SPEED =
+            integerComponent("entity_timer_speed");
+
+    /** When true, the acceleration never expires. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PERMANENT =
+            register("wondrous_staff_permanent", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /**
+     * Staff acceleration mode: 0 = normal, 1 = permanent, 2 = permanent without idle throttling.
+     * The separate legacy boolean above is retained so pre-mode stacks can still be read.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WONDROUS_STAFF_MODE =
+            register("wondrous_staff_mode", builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
+
+    /** Enables the staff's summon catalog and summon action. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_SUMMON_ENABLED =
+            register("wondrous_staff_summon_enabled", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Enables Shift+right-click refresh for loot-table containers and container minecarts. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_LOOT_REFRESH =
+            register("wondrous_staff_loot_refresh", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Lets the carrier pass through solid blocks while this staff is in their inventory or offhand. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PHASE_ENABLED =
+            register("wondrous_staff_phase_enabled", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Keeps normal block/entity interaction available while phase mode is active. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_PHASE_INTERACTION =
+            register("wondrous_staff_phase_interaction", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Clears and shields personal Mekanism radiation while this staff is carried. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WONDROUS_STAFF_RADIATION_PROTECTION =
+            register("wondrous_staff_radiation_protection", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Opt-in full fluid source collection while held in either hand. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> STAFF_FLUID_COLLECT =
+            register("staff_fluid_collect", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> STAFF_FLUID_RADIUS = integerComponent("staff_fluid_radius");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> STAFF_FLUID_RATE = integerComponent("staff_fluid_rate");
+    /** At most one already-removed source bucket awaiting the bound network's remaining space. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid>> STAFF_FLUID_PENDING =
+            register("staff_fluid_pending", builder -> builder.persistent(com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid.CODEC)
+                    .networkSynchronized(com.sorrowmist.useless.stretcher.content.item.StaffFluidCollector.PendingFluid.STREAM_CODEC));
+
+    /** Rotation of the 2i mascot while it is held as an item. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_ROTATION =
+            integerComponent("two_i_rotation");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_GIFT_SCORE =
+            integerComponent("two_i_gift_score");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TWO_I_BOND =
+            integerComponent("two_i_bond");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_OWNER =
+            register("two_i_owner", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
+                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                            buffer -> buffer.readUUID())));
+    /** Stable physical identity distinguishes two held dolls when the player swaps hands. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<java.util.UUID>> TWO_I_DOLL_ID =
+            register("two_i_doll_id", builder -> builder.persistent(net.minecraft.core.UUIDUtil.CODEC)
+                    .networkSynchronized(StreamCodec.of((buffer, value) -> buffer.writeUUID(value),
+                            buffer -> buffer.readUUID())));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<TwoIDollMemory>> TWO_I_MEMORY =
+            register("two_i_memory", builder -> builder.persistent(TwoIDollMemory.CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> TWO_I_INVITATION_USED =
+            register("two_i_invitation_used", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Server-validated structure selected by a dimension capsule. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> CAPSULE_STRUCTURE =
+            register("capsule_structure", builder -> builder.persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CAPSULE_ROTATION =
+            integerComponent("capsule_rotation");
+
+    /** Last-used virtual bookshelf settings, copied onto a table when selected. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_ETERNA =
+            integerComponent("apotheosis_eterna");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_QUANTA =
+            integerComponent("apotheosis_quanta");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_ARCANA =
+            integerComponent("apotheosis_arcana");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> APOTHEOSIS_CLUES =
+            integerComponent("apotheosis_clues");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> APOTHEOSIS_TABLE_SELECTION =
+            register("apotheosis_table_selection", builder -> builder.persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> APOTHEOSIS_WORLD_TIER =
+            register("apotheosis_world_tier", builder -> builder.persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
+    /** Whether Shift+right-click places an independent range instead of accelerating one target. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_PLACEMENT_MODE =
+            register("range_placement_mode", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** While true, right-clicking a machine only toggles its type in the range filter list. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_FILTER_MARKING_MODE =
+            register("range_filter_marking_mode", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** False marks the acceleration list; true marks the idle-sleep list. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_MARK_SLEEP_LIST =
+            register("range_mark_sleep_list", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    /** Counts from the last placed or edited range, shown beside the two list controls. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_ACCELERATION_MARK_COUNT =
+            integerComponent("range_acceleration_mark_count");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_SLEEP_MARK_COUNT =
+            integerComponent("range_sleep_mark_count");
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_SIZE_X =
+            integerComponent("range_size_x");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_SIZE_Y =
+            integerComponent("range_size_y");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_SIZE_Z =
+            integerComponent("range_size_z");
+
+    /** Signed offset of the range center from the placement anchor, bounded to +/-15. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_X =
+            integerComponent("range_offset_x");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_Y =
+            integerComponent("range_offset_y");
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE_OFFSET_Z =
+            integerComponent("range_offset_z");
+
+    /** Legacy-compatible storage: true now means the sleep list is a whitelist. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_IDLE_THROTTLE_DISABLED =
+            register("range_idle_throttle_disabled", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> RANGE_WHITELIST_MODE =
+            register("range_whitelist_mode", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceLocation>>> RANGE_FILTERS =
+            register("range_filters", builder -> builder
+                    .persistent(ResourceLocation.CODEC.listOf().xmap(List::copyOf, List::copyOf))
+                    .networkSynchronized(StreamCodec.of(
+                            (buffer, values) -> {
+                                buffer.writeVarInt(values.size());
+                                for (ResourceLocation value : values) ResourceLocation.STREAM_CODEC.encode(buffer, value);
+                            },
+                            buffer -> {
+                                int size = buffer.readVarInt();
+                                if (size < 0 || size > 128) throw new IllegalArgumentException("Invalid range filter count: " + size);
+                                List<ResourceLocation> values = new ArrayList<>(size);
+                                for (int i = 0; i < size; i++) values.add(ResourceLocation.STREAM_CODEC.decode(buffer));
+                                return List.copyOf(values);
+                            })));
+
+    /** Small server-store reference replacing the pattern assembly's potentially multi-megabyte item data. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> PATTERN_ASSEMBLY_REF =
+            register("pattern_assembly_ref", builder -> builder
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> MYRIAD_MOLD_REF =
+            register("myriad_mold_ref", builder -> builder
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeUtf, FriendlyByteBuf::readUtf)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MYRIAD_MOLD_COUNT =
+            integerComponent("myriad_mold_count");
+
+    private StretcherComponents() {
+    }
+
+    public static void init(IEventBus modEventBus) {
+        DATA_COMPONENTS.register(modEventBus);
+    }
+
+    private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
+            String name, UnaryOperator<DataComponentType.Builder<T>> operator) {
+        return DATA_COMPONENTS.register(name, () -> operator.apply(DataComponentType.builder()).build());
+    }
+
+    private static DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> integerComponent(String name) {
+        return register(name, builder -> builder
+                .persistent(Codec.INT)
+                .networkSynchronized(StreamCodec.of(FriendlyByteBuf::writeVarInt, FriendlyByteBuf::readVarInt)));
+    }
+}

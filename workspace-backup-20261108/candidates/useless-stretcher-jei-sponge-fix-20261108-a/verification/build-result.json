@@ -1,0 +1,62 @@
+{
+  "packagedUtc": "2026-11-07T16:35:09.3429371Z",
+  "gameLaunched": false,
+  "modLauncherUsed": false,
+  "full184SuiteRerun": false,
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+  "sha256": "3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF",
+  "size": 12817555,
+  "baseline": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+  "baselineSha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7",
+  "compiledClassesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163122102\\classes",
+  "changedMembers": [
+    "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class",
+    "META-INF/neoforge.mods.toml"
+  ],
+  "unchangedMembers": 680,
+  "addedMembers": 0,
+  "deletedMembers": 0,
+  "inputHashes": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+      "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\selector-build.json",
+      "sha256": "3BE1D1D9AD81DD24DD99E70B72D613B8E0A11C1E90EE27C1B43CDAFB234BFAF3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.java",
+      "sha256": "73F7B61330A89F3B9D7728337DD844D63EA56923D4A49E5FEC2A854EB19AE18A"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163122102\\classes\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.class",
+      "sha256": "9F085D0C8FECD48C195F0583B13752B85843E4FB81C99038BD6C9F39CB7991D8"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "sha256": "F6FFAAB5A824A5ADB235F85FECCB96430968E02E7B12AB7F48B6C85B5DC28AFE"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\build-candidate.ps1",
+      "sha256": "6DEF5673A783E7A0EAA61020878B3A19E065F4415517DF5E7A1515A60867203D"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\negative-1970-a\\result.json",
+      "sha256": "60FA5D42409CB8812C35FC52FB99FF395F3AACCA0178D0E2275C121E49EAC16E"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1970-a\\result.json",
+      "sha256": "4E2D3D76A7CC1D4C20809B8404DD0FBC787665CDD7AA34F7DE2938D53C7169B4"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1957-a\\result.json",
+      "sha256": "3A61EE5C6D245F13DF8DCBAA638F9D056A05D3987F84C900EBC9528BA35226C4"
+    }
+  ],
+  "negativeControl": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\negative-1970-a\\result.json",
+  "positiveControls": [
+    "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1970-a\\result.json",
+    "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-all-1957-a\\result.json"
+  ]
+}

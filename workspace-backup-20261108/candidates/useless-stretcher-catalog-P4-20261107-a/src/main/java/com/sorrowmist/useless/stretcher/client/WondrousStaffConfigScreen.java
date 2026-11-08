@@ -1,0 +1,394 @@
+package com.sorrowmist.useless.stretcher.client;
+
+import com.sorrowmist.useless.core.component.UComponents;
+import com.sorrowmist.useless.stretcher.client.gui.SelectableAE2Button;
+import com.sorrowmist.useless.stretcher.client.gui.StretcherScreenStyle;
+import com.sorrowmist.useless.stretcher.client.gui.FloatingScreen;
+import com.sorrowmist.useless.stretcher.content.entity.WondrousStaffAcceleration;
+import com.sorrowmist.useless.stretcher.content.apotheosis.ApotheosisStaffSettings;
+import com.sorrowmist.useless.stretcher.config.StretcherConfig;
+import com.sorrowmist.useless.stretcher.init.ModItems;
+import com.sorrowmist.useless.stretcher.init.StretcherComponents;
+import com.sorrowmist.useless.stretcher.network.Network;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlainTextButton;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/** Button-based acceleration selector styled after Useless Mod's current G configuration screen. */
+public final class WondrousStaffConfigScreen extends StaffScreen {
+    private static final int[] GEARS = {0, 2, 4, 16, 32, 64, 128, 256, 512, 1024};
+
+    private final InteractionHand hand;
+    private final List<ChoiceButton> speedButtons = new ArrayList<>();
+    private final List<ChoiceButton> modeButtons = new ArrayList<>();
+    private SelectableAE2Button accelerationButton;
+    private SelectableAE2Button lootRefreshButton;
+    private SelectableAE2Button summonOpenButton;
+    private SelectableAE2Button apotheosisOpenButton;
+    private SelectableAE2Button phaseButton;
+    private SelectableAE2Button phaseInteractionButton;
+    private SelectableAE2Button radiationButton;
+    private PlainTextButton extrasFoldText;
+    private int panelLeft;
+    private int panelTop;
+    private int selectedSpeed;
+    private int selectedMode;
+    private boolean accelerationEnabled;
+    private boolean summonEnabled;
+    private boolean lootRefreshEnabled;
+    private boolean phaseEnabled;
+    private boolean phaseInteractionEnabled;
+    private boolean radiationEnabled;
+    private boolean extrasCollapsed = true;
+    private boolean settingsLoaded;
+    private int speedTop, speedHeight, modeTop, modeHeight, featuresTop, featuresHeight;
+
+    public WondrousStaffConfigScreen(InteractionHand hand) {
+        this(null, hand);
+    }
+
+    public WondrousStaffConfigScreen(StaffScreen parent, InteractionHand hand) {
+        super(Component.translatable("gui.useless_stretcher.staff_config.title"), Tab.MAIN, parent, hand);
+        this.hand = hand;
+        extrasCollapsed = Boolean.parseBoolean(floatingWindow().preference("extrasCollapsed", "true"));
+    }
+
+    @Override protected void refreshStaffSettings() { settingsLoaded = false; }
+
+    @Override
+    protected void initContent() {
+        panelLeft = contentLeft();
+        panelTop = contentTop();
+        int panelWidth = contentWidth();
+        if (!settingsLoaded) {
+            ItemStack staff = currentStaff();
+            selectedSpeed = WondrousStaffAcceleration.getSpeed(staff);
+            selectedMode = WondrousStaffAcceleration.getMode(staff);
+            accelerationEnabled = WondrousStaffAcceleration.isEnabled(staff);
+            summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+            lootRefreshEnabled = WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+            phaseEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), false);
+            radiationEnabled = staff.getOrDefault(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), false);
+            phaseInteractionEnabled = staff.getOrDefault(
+                    StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), true);
+            settingsLoaded = true;
+        }
+
+        speedButtons.clear();
+        modeButtons.clear();
+        accelerationButton = addRenderableWidget(new SelectableAE2Button(
+                panelLeft + panelWidth - 104, panelTop, 104, 18,
+                accelerationMessage(), ignored -> toggleAcceleration()));
+
+        int cardLeft = panelLeft;
+        int cardWidth = panelWidth;
+        int gap = 3;
+        int columns = Math.max(2, Math.min(GEARS.length, (cardWidth - 10 + gap) / 46));
+        int buttonWidth = (cardWidth - 10 - gap * (columns - 1)) / columns;
+        speedTop = panelTop + 23;
+        speedHeight = 23 + ((GEARS.length + columns - 1) / columns) * 20;
+        for (int i = 0; i < GEARS.length; i++) {
+            int speed = GEARS[i];
+            int x = cardLeft + 5 + (i % columns) * (buttonWidth + gap);
+            int y = speedTop + 18 + (i / columns) * 20;
+            Component label = speed == 0
+                    ? Component.translatable("gui.useless_stretcher.speed_off")
+                    : Component.literal("x" + speed);
+            SelectableAE2Button button = addRenderableWidget(new SelectableAE2Button(
+                    x, y, buttonWidth, 17, label, ignored -> selectSpeed(speed)));
+            speedButtons.add(new ChoiceButton(speed, button));
+        }
+
+        String[] modeKeys = {
+                "gui.useless_stretcher.mode_normal",
+                "gui.useless_stretcher.mode_permanent",
+                "gui.useless_stretcher.mode_no_throttle_short"
+        };
+        modeTop = speedTop + speedHeight + 4;
+        int modeColumns = 3;
+        modeHeight = 43;
+        int modeButtonWidth = (cardWidth - 10 - (modeColumns - 1) * gap) / modeColumns;
+        for (int mode = 0; mode < modeKeys.length; mode++) {
+            int value = mode;
+            SelectableAE2Button button = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5 + (mode % modeColumns) * (modeButtonWidth + gap),
+                    modeTop + 18 + (mode / modeColumns) * 20, modeButtonWidth, 17,
+                    Component.translatable(modeKeys[mode]), ignored -> selectMode(value)));
+            modeButtons.add(new ChoiceButton(mode, button));
+            com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(button,
+                    mode == 0 ? "normal" : mode == 1 ? "permanent" : "no_throttle");
+        }
+        Component foldText = Component.translatable(extrasCollapsed
+                ? "gui.useless_stretcher.staff_summon.expand"
+                : "gui.useless_stretcher.staff_summon.collapse");
+        int foldWidth = font.width(foldText);
+        featuresTop = modeTop + modeHeight + 4;
+        boolean showApotheosis = StretcherConfig.hasApotheosisConfig();
+        int featureWidth = (cardWidth - 13) / 2;
+        featuresHeight = extrasCollapsed ? 42 : 126;
+        addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 18, featureWidth, 17,
+                Component.translatable("gui.useless_stretcher.entity_acceleration.title"),
+                ignored -> navigate(Tab.ENTITY)))
+                .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                        "gui.useless_stretcher.entity_acceleration.open_tooltip")));
+        extrasFoldText = addRenderableWidget(new PlainTextButton(
+                cardLeft + cardWidth - foldWidth - 6, featuresTop + 22, foldWidth, 10,
+                foldText, ignored -> toggleExtrasFold(), font));
+        com.sorrowmist.useless.stretcher.client.gui.ButtonHelp.set(extrasFoldText, "fold");
+        if (!extrasCollapsed) {
+            addRenderableWidget(new SelectableAE2Button(cardLeft + 5, featuresTop + 102, cardWidth - 10, 17,
+                    Component.translatable("gui.useless_stretcher.fluid.title"),
+                    ignored -> navigate(Tab.FLUIDS)))
+                    .setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                            "gui.useless_stretcher.fluid.open_help")));
+            lootRefreshButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5, featuresTop + 39, featureWidth, 17,
+                    lootRefreshMessage(), ignored -> toggleLootRefresh()));
+            summonOpenButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 8 + featureWidth, featuresTop + 39, featureWidth, 17,
+                    summonOpenMessage(),
+                    ignored -> navigate(Tab.SUMMON)));
+            if (showApotheosis) {
+                apotheosisOpenButton = addRenderableWidget(new SelectableAE2Button(
+                        cardLeft + 5, featuresTop + 81, featureWidth, 17,
+                        apotheosisOpenMessage(), ignored -> navigate(Tab.APOTHEOSIS)));
+            } else {
+                apotheosisOpenButton = null;
+            }
+            phaseButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 5, featuresTop + 60, featureWidth, 17,
+                    phaseMessage(), ignored -> togglePhase()));
+            phaseInteractionButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + 8 + featureWidth, featuresTop + 60, featureWidth, 17,
+                    phaseInteractionMessage(), ignored -> togglePhaseInteraction()));
+            radiationButton = addRenderableWidget(new SelectableAE2Button(
+                    cardLeft + (showApotheosis ? 8 + featureWidth : 5), featuresTop + 81, featureWidth, 17,
+                    radiationMessage(), ignored -> toggleRadiation()));
+        } else {
+            lootRefreshButton = null;
+            summonOpenButton = null;
+            apotheosisOpenButton = null;
+            phaseButton = null;
+            phaseInteractionButton = null;
+            radiationButton = null;
+        }
+
+        int footerWidth = (cardWidth - 3) / 2;
+        int footerY = Math.max(featuresTop + featuresHeight + 5, panelTop + contentHeight() - 20);
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft, footerY, footerWidth, 17,
+                Component.translatable("gui.useless_stretcher.range.open"),
+                ignored -> navigate(Tab.RANGE)));
+        addRenderableWidget(new SelectableAE2Button(
+                cardLeft + footerWidth + 3, footerY, cardWidth - footerWidth - 3, 17,
+                Component.translatable("gui.useless_stretcher.range.history"),
+                ignored -> navigate(Tab.HISTORY)));
+        updateSelection();
+        setContentExtent(footerY - panelTop + 20);
+    }
+
+    @Override
+    protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int cardLeft = panelLeft;
+        int cardRight = panelLeft + contentWidth();
+        StretcherScreenStyle.drawInset(graphics, cardLeft, speedTop, cardRight, speedTop + speedHeight);
+        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.speed"),
+                cardLeft + 5, speedTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, cardLeft, modeTop, cardRight, modeTop + modeHeight);
+        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.duration"),
+                cardLeft + 5, modeTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
+        StretcherScreenStyle.drawInset(graphics, cardLeft, featuresTop, cardRight, featuresTop + featuresHeight);
+        graphics.drawString(font, Component.translatable("gui.useless_stretcher.staff_config.features"),
+                cardLeft + 5, featuresTop + 5, StretcherScreenStyle.TEXT_COLOR, false);
+    }
+
+    private void selectSpeed(int speed) {
+        selectedSpeed = speed;
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        staff.set(StretcherComponents.WONDROUS_STAFF_SPEED.get(), speed);
+        sendSelection();
+    }
+
+    private void selectMode(int mode) {
+        selectedMode = mode;
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        WondrousStaffAcceleration.setMode(staff, mode);
+        sendSelection();
+    }
+
+    private void toggleAcceleration() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        accelerationEnabled = !accelerationEnabled;
+        staff.set(UComponents.BeefTimeAccelerationEnabledComponent.get(), accelerationEnabled);
+        sendSelection();
+    }
+
+    private void toggleLootRefresh() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !StretcherConfig.enableStaffLootRefresh()) return;
+        summonEnabled = WondrousStaffAcceleration.isSummonEnabled(staff);
+        lootRefreshEnabled = !WondrousStaffAcceleration.isLootRefreshEnabled(staff);
+        staff.set(StretcherComponents.WONDROUS_STAFF_LOOT_REFRESH.get(), lootRefreshEnabled);
+        Network.sendWondrousStaffFeatures(summonEnabled, lootRefreshEnabled, hand);
+        updateSelection();
+    }
+
+    private void sendSelection() {
+        updateSelection();
+        Network.sendWondrousStaffSpeed(selectedSpeed, selectedMode, accelerationEnabled, hand);
+    }
+
+    private void updateSelection() {
+        boolean allowAcceleration = StretcherConfig.serverStaffAcceleration();
+        speedButtons.forEach(entry -> entry.button().active = allowAcceleration);
+        modeButtons.forEach(entry -> entry.button().active = allowAcceleration);
+        speedButtons.forEach(entry -> entry.button().setSelected(entry.value() == selectedSpeed));
+        modeButtons.forEach(entry -> entry.button().setSelected(entry.value() == selectedMode));
+        if (accelerationButton != null) {
+            accelerationButton.active = allowAcceleration;
+            accelerationButton.setSelected(accelerationEnabled);
+            accelerationButton.setMessage(accelerationMessage());
+        }
+        if (lootRefreshButton != null) {
+            boolean configEnabled = StretcherConfig.enableStaffLootRefresh();
+            lootRefreshButton.active = configEnabled;
+            lootRefreshButton.setSelected(configEnabled && lootRefreshEnabled);
+            lootRefreshButton.setMessage(configEnabled
+                    ? lootRefreshMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_config.loot_refresh_disabled"));
+        }
+        if (summonOpenButton != null) {
+            boolean configEnabled = StretcherConfig.enableStaffSummon();
+            summonOpenButton.visible = true;
+            summonOpenButton.active = configEnabled;
+            summonOpenButton.setMessage(configEnabled
+                    ? summonOpenMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_summon.disabled"));
+        }
+        if (apotheosisOpenButton != null) {
+            boolean configEnabled = StretcherConfig.enableApotheosisCompat();
+            apotheosisOpenButton.active = configEnabled && ApotheosisStaffSettings.isApotheosisLoaded();
+            apotheosisOpenButton.setMessage(configEnabled
+                    ? apotheosisOpenMessage()
+                    : Component.translatable("gui.useless_stretcher.staff_apotheosis.disabled"));
+        }
+        if (phaseButton != null) {
+            phaseButton.setSelected(phaseEnabled);
+            phaseButton.setMessage(phaseMessage());
+            phaseButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.phase")));
+        }
+        if (radiationButton != null) {
+            radiationButton.active = net.neoforged.fml.ModList.get().isLoaded("mekanism");
+            radiationButton.setSelected(radiationEnabled);
+            radiationButton.setMessage(radiationMessage());
+            radiationButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.radiation")));
+        }
+        if (phaseInteractionButton != null) {
+            phaseInteractionButton.setSelected(phaseInteractionEnabled);
+            phaseInteractionButton.setMessage(phaseInteractionMessage());
+            phaseInteractionButton.active = phaseEnabled;
+            phaseInteractionButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(
+                    "help.useless_stretcher.staff_config.phase_interaction")));
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        updateSelection(); // Reflect live server config updates while this screen stays open.
+    }
+
+    private Component accelerationMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.master",
+                Component.translatable(accelerationEnabled
+                        ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component summonOpenMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_summon.open");
+    }
+
+    private Component apotheosisOpenMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_apotheosis.open");
+    }
+
+    private Component lootRefreshMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.loot_refresh",
+                Component.translatable(lootRefreshEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component phaseMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.phase",
+                Component.translatable(phaseEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private Component phaseInteractionMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.phase_interaction",
+                Component.translatable(phaseInteractionEnabled ? "gui.useless_stretcher.staff_config.on"
+                        : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private void togglePhase() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get())) return;
+        phaseEnabled = !phaseEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_ENABLED.get(), phaseEnabled);
+        Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
+        updateSelection();
+    }
+
+    private void togglePhaseInteraction() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !phaseEnabled) return;
+        phaseInteractionEnabled = !phaseInteractionEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_PHASE_INTERACTION.get(), phaseInteractionEnabled);
+        Network.sendWondrousStaffPhase(phaseEnabled, phaseInteractionEnabled, hand);
+        updateSelection();
+    }
+
+    private void toggleExtrasFold() {
+        extrasCollapsed = !extrasCollapsed;
+        floatingWindow().setPreference("extrasCollapsed", Boolean.toString(extrasCollapsed));
+        rebuildWidgets();
+    }
+
+    private Component radiationMessage() {
+        return Component.translatable("gui.useless_stretcher.staff_config.radiation", Component.translatable(
+                radiationEnabled ? "gui.useless_stretcher.staff_config.on" : "gui.useless_stretcher.staff_config.off"));
+    }
+
+    private void toggleRadiation() {
+        ItemStack staff = currentStaff();
+        if (!staff.is(ModItems.WONDROUS_STAFF.get()) || !net.neoforged.fml.ModList.get().isLoaded("mekanism")) return;
+        radiationEnabled = !radiationEnabled;
+        staff.set(StretcherComponents.WONDROUS_STAFF_RADIATION_PROTECTION.get(), radiationEnabled);
+        Network.sendWondrousStaffRadiation(radiationEnabled, hand);
+        updateSelection();
+    }
+
+    private ItemStack currentStaff() {
+        if (minecraft == null || minecraft.player == null) return ItemStack.EMPTY;
+        return minecraft.player.getItemInHand(hand);
+    }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    private record ChoiceButton(int value, SelectableAE2Button button) {
+    }
+}

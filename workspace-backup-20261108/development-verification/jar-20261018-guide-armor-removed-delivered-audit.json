@@ -1,0 +1,18 @@
+{
+  "result": "JAR CHECKS PASSED",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0.jar",
+  "version": "1.21.1-1.6.0",
+  "minimum_useless_mod": "1.21.1-2.4.6",
+  "animated_armor_items": 4,
+  "armor_hidden_from_recipe_viewers": 4,
+  "bytes": 12487179,
+  "sha256": "EF5FD79A319EF13275B3F6D58A9B6146BCE2BE9ECBC3D03B1743F2FBC2476A71",
+  "production_sources_with_matching_class": 229,
+  "production_classes_with_matching_bytecode": 404,
+  "source_resources_with_matching_hash": 133,
+  "json_mcmeta_parsed": 85,
+  "story_chapters": 6,
+  "story_images": 17,
+  "original_ogg_files": 7,
+  "forbidden_entries": 0
+}

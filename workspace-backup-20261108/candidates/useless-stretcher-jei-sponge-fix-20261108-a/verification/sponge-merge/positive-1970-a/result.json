@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "gameLaunched": false,
+  "modLauncherUsed": false,
+  "transformer": "org.spongepowered.asm.mixin.transformer.MixinTransformer",
+  "mixinVersion": "0.8.7",
+  "spongeCodeSource": "file:/D:/AI/test-runtimes/DollChronicle-1.21.1-NeoForge21.1.265/libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar",
+  "checksFound": 1,
+  "checksPassed": 1,
+  "checksFailed": 0,
+  "auditApplied": [
+    "mezz.jei.library.util.IngredientSupplierHelper \u003c- offline-check.mixins.json:CatalogJeiBuildTimingMixin from mod (unknown)"
+  ],
+  "targets": [
+    {
+      "target": "mezz.jei.library.util.IngredientSupplierHelper",
+      "inputSha256": "c3549cea5af2f27c3c724307e8bf862d6d6aa6b1892000cbe221f3141af922ed",
+      "mergedHandlers": [
+        "redirect$zza000$stretcher$timeCategory(Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Ljava/lang/Object;Lmezz/jei/api/recipe/IFocusGroup;)V"
+      ],
+      "outputSha256": "afaa8eb87088093805601676d71d506059bd7c69f4e47a27a59fcfa2208334d0",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\positive-1970-a\\transformed\\mezz\\jei\\library\\util\\IngredientSupplierHelper.class",
+      "status": "PASS"
+    }
+  ]
+}

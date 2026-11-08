@@ -147,6 +147,9 @@ public final class InstalledStretcherChecks {
                 var assemblyMenu = new MePatternAssemblyMenu(2, fake.getInventory(), assembly.getBlockPos());
                 check(assemblyMenu.slots.getFirst().mayPlace(item), "assembly actual UI accepts stretcher");
                 check(assembly.getPatterns().insertItem(0, item.copy(), false).isEmpty(), "assembly actual handler inserts stretcher");
+                check(!LIBRARY.equals(MyriadMoldData.readPatternRef(assembly.getPatterns().getStackInSlot(0))),
+                        "assembly installation owns an independent snapshot UUID");
+                verifyAssemblySnapshot(level, item);
                 var hatchMenu = new PassiveCraftingHatchMenu(3, fake.getInventory(), hatch.getBlockPos());
                 check(hatchMenu.slots.getFirst().mayPlace(item), "passive UI accepts stretcher");
                 check(hatch.getPatterns().insertItem(0, item.copy(), false).isEmpty(), "passive actual handler inserts stretcher");
@@ -193,8 +196,9 @@ public final class InstalledStretcherChecks {
                 MyriadPatternStore.get(level).removeKeys(LIBRARY, List.of(patterns.getFirst()));
                 phase = 4; return;
             }
-            if (phase == 4 && small.getAvailablePatterns().size() == 1 && core.getAvailablePatterns().size() == 1) {
-                check(!core.getAvailablePatterns().getFirst().getDefinition().equals(patterns.getFirst()), "deleted pattern is unpublished");
+            if (phase == 4 && small.getAvailablePatterns().size() == 1 && core.getAvailablePatterns().size() == 2) {
+                check(core.getAvailablePatterns().stream().anyMatch(p -> p.getDefinition().equals(patterns.getFirst())),
+                        "assembly snapshot retains the pattern deleted from the source library");
                 MyriadPatternStore.get(level).replace(LIBRARY, GROUP, new LinkedHashSet<>(patterns));
                 // Stop ordinary providers while testing autonomous passive cycles.
                 small.getTerminalPatternInventory().setItemDirect(0, ItemStack.EMPTY);
@@ -233,6 +237,35 @@ public final class InstalledStretcherChecks {
         ItemStack item = new ItemStack(ModItems.USELESS_STRETCHER.get());
         MyriadMoldData.writePatternRef(item, LIBRARY); InstalledStretcherPatterns.bindDimension(item, level);
         return item;
+    }
+
+    private static void verifyAssemblySnapshot(ServerLevel level, ItemStack original) {
+        var handler = assembly.getPatterns();
+        UUID installed = MyriadMoldData.readPatternRef(handler.getStackInSlot(0));
+        var store = MyriadPatternStore.get(level);
+        UUID other = UUID.randomUUID();
+        store.replace(other, GROUP, new LinkedHashSet<>(List.of(patterns.getFirst())));
+        ItemStack offered = original.copy();
+        MyriadMoldData.writePatternRef(offered, other);
+        check(!handler.isItemValid(0, offered), "occupied assembly slot rejects another stretcher before item removal");
+        check(!assembly.getTerminalPatternInventory().isItemValid(0, offered), "AE terminal respects installed UUID lock");
+        handler.setStackInSlot(0, offered);
+        check(installed.equals(MyriadMoldData.readPatternRef(handler.getStackInSlot(0))), "direct set cannot replace installed UUID");
+        check(handler.insertItem(0, offered, false).getCount() == offered.getCount(), "rejected insertion returns the entire offered item");
+        check(handler.insertItem(1, offered, true).isEmpty() && handler.getStackInSlot(1).isEmpty(), "simulated insertion does not install or lock an item");
+        check(handler.insertItem(1, offered, false).isEmpty(), "different library may use another empty slot");
+        UUID second = MyriadMoldData.readPatternRef(handler.getStackInSlot(1));
+        check(!other.equals(second) && !installed.equals(second), "each installation receives its own UUID");
+        store.clear(other);
+        check(store.snapshot(second).equals(List.of(patterns.getFirst())), "clearing the other source preserves installed contents");
+        check(store.snapshot(installed).equals(patterns), "other installations cannot change the first snapshot");
+        ItemStack exposed = handler.getStackInSlot(0);
+        MyriadMoldData.writePatternRef(exposed, other);
+        check(installed.equals(MyriadMoldData.readPatternRef(handler.getStackInSlot(0))), "returned stack cannot mutate installed binding");
+        ItemStack removed = handler.extractItem(1, 1, false);
+        check(handler.insertItem(1, removed, false).isEmpty(), "explicit extraction permits reinstallation");
+        check(!second.equals(MyriadMoldData.readPatternRef(handler.getStackInSlot(1))), "reinstallation isolates the previous item UUID too");
+        handler.extractItem(1, 1, false);
     }
     private static List<AEItemKey> realPatterns(ServerLevel level) {
         List<AEItemKey> result = new ArrayList<>();

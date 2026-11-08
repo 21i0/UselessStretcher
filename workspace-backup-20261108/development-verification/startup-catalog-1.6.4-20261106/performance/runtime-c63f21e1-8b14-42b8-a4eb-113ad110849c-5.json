@@ -1,0 +1,50 @@
+{
+  "schema": "mygenesis-passive-performance-v1",
+  "run": "c63f21e1-8b14-42b8-a4eb-113ad110849c",
+  "window": 5,
+  "started_utc": "2026-11-06T02:47:01.615438700Z",
+  "ended_utc": "2026-11-06T02:47:31.663176300Z",
+  "reason": "window_or_dimension_boundary",
+  "dimension": "minecraft:overworld",
+  "elapsed_ms": 30047.7982,
+  "world_frame_intervals": {
+    "unit": "ms",
+    "count": 0,
+    "percentile_samples": 0,
+    "retention": "first_8192_per_30s_window",
+    "minimum": null,
+    "maximum": null,
+    "mean": null,
+    "p50": null,
+    "p95": null,
+    "p99": null
+  },
+  "gui_frame_intervals": {
+    "unit": "ms",
+    "count": 1507,
+    "percentile_samples": 1507,
+    "retention": "first_8192_per_30s_window",
+    "minimum": 4.9646,
+    "maximum": 1629.3959,
+    "mean": 19.917428069011283,
+    "p50": 17.1717,
+    "p95": 33.5665,
+    "p99": 40.6228
+  },
+  "server_tick_event_elapsed": {
+    "unit": "ms",
+    "count": 601,
+    "percentile_samples": 601,
+    "retention": "first_8192_per_30s_window",
+    "minimum": 10.4109,
+    "maximum": 555.3159,
+    "mean": 21.682449084858572,
+    "p50": 18.0553,
+    "p95": 33.993,
+    "p99": 65.3121
+  },
+  "heap_peak_sampled_bytes": 7345271376,
+  "heap_max_bytes": 8589934592,
+  "hardware_acceptance": false,
+  "measurement_limit": "frame intervals include frame cap; server samples cover NeoForge Pre/Post boundaries, not full profiler MSPT or scheduled 50ms; no warmup automatically excluded"
+}

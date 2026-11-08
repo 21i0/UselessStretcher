@@ -1,0 +1,861 @@
+{
+  "status": "PASS_FOCUSED_STATIC_ABI_AND_EXACT_INJECTION_TARGETS",
+  "checkedUtc": "2026-11-07T15:23:13.682564+00:00",
+  "gameLaunched": false,
+  "modClassesLoaded": false,
+  "oldJarsAllowedToFillMissingTargetMembers": false,
+  "inputs": {
+    "candidate": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+      "size": 12817487,
+      "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+    },
+    "baselineHud": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+      "size": 12813852,
+      "sha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6"
+    },
+    "native2465": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "size": 4106066,
+      "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+    },
+    "jei1970": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "size": 4735620,
+      "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+    },
+    "data340": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+      "size": 18423802,
+      "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367"
+    },
+    "eaep1641": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+      "size": 1451554,
+      "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237"
+    },
+    "ae219218": {
+      "path": "D:\\AI\\candidates\\MyGenesis-0.3.0-20261107-hotfix4-core-rc2-night\\overrides\\mods\\appliedenergistics2-19.2.18.jar",
+      "size": 8236552,
+      "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39"
+    }
+  },
+  "memberResolution": {
+    "native": {
+      "status": "PASS",
+      "referenceOccurrences": 216,
+      "uniqueReferences": 112,
+      "unresolved": [],
+      "report": {
+        "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\native\\reference-audit.tsv",
+        "size": 89854,
+        "sha256": "C02B36C7C19E0E5208ED4DFC0BCC3631EAE88E31E6ABC9B1A49804B6F087AF95"
+      },
+      "focusedChecks": [
+        {
+          "status": "PASS",
+          "check": "assembly_unique_recoverable_new",
+          "detail": "NEW occurrences=1"
+        },
+        {
+          "status": "PASS",
+          "check": "assembly_unique_recoverable_constructor",
+          "detail": "Exact (IntSupplier,Predicate,Runnable)V occurrences=1"
+        },
+        {
+          "status": "PASS",
+          "check": "recoverable_not_final",
+          "detail": "access=33"
+        },
+        {
+          "status": "PASS",
+          "check": "snapshot_constructor_descriptor",
+          "detail": "List,4Map,long,2Map,Set"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:content/blockentities/AdvancedAlloyFurnaceBlockEntity$2",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:content/blockentities/RecoverableItemStackHandler",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:inventory/slot/PatternSlotItemHandler",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:content/menus/AdvancedAlloyFurnaceMenu",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:content/blocks/multiblock/MePatternAssemblyBlock",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:core/component/MultiblockPartData",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:content/blockentities/multiblock/PassiveCraftingHatchBlockEntity",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "all_methods_semantically_identical:init/ClientSetup",
+          "detail": "SKIP_DEBUG and SKIP_FRAMES; full method Textifier comparison"
+        },
+        {
+          "status": "PASS",
+          "check": "aeManager_shadow:content/blockentities/AdvancedAlloyFurnaceBlockEntity",
+          "detail": "private final expected descriptor"
+        },
+        {
+          "status": "PASS",
+          "check": "aeManager_shadow:content/blockentities/multiblock/MultiblockAlloyFurnaceCoreBlockEntity",
+          "detail": "private final expected descriptor"
+        },
+        {
+          "status": "PASS",
+          "check": "menu_encoded_pattern_redirect_count",
+          "detail": "occurrences=1"
+        }
+      ],
+      "focusedPassed": 15,
+      "focusedReport": {
+        "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\native\\focused-injection-audit.tsv",
+        "size": 1736,
+        "sha256": "4820E5814EE103F2206647319CEDF4FF97FED6F89AC79F10EF529B4B0CB98BFB"
+      }
+    },
+    "jei": {
+      "status": "PASS",
+      "referenceOccurrences": 11,
+      "uniqueReferences": 9,
+      "unresolved": [],
+      "report": {
+        "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei\\reference-audit.tsv",
+        "size": 4042,
+        "sha256": "1DCCC4DB45E7B25B6012EA553E435B10065001F417DD39F2050755C5565DB340"
+      },
+      "focusedChecks": [
+        {
+          "status": "PASS",
+          "check": "lookup_recipeType_shadow",
+          "detail": "private final RecipeType"
+        },
+        {
+          "status": "PASS",
+          "check": "lookup_get_target",
+          "detail": "get()Stream unique"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_show",
+          "detail": "[(Ljava/util/List;)V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_showTypes",
+          "detail": "[(Ljava/util/List;)V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_showRecipes",
+          "detail": "[(Lmezz/jei/api/recipe/category/IRecipeCategory;Ljava/util/List;Ljava/util/List;)V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_back",
+          "detail": "[()V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_forward",
+          "detail": "[()V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_open",
+          "detail": "[()V]"
+        },
+        {
+          "status": "PASS",
+          "check": "gui_HEAD_updateLayout",
+          "detail": "[()V]"
+        },
+        {
+          "status": "DETAIL",
+          "check": "setRecipe_count_for_overload",
+          "detail": "(Ljava/lang/Object;Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/runtime/IIngredientManager;)Lmezz/jei/library/ingredients/RecipeIngredientSupplier; count=0"
+        },
+        {
+          "status": "DETAIL",
+          "check": "setRecipe_count_for_overload",
+          "detail": "(Ljava/lang/Object;Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/runtime/IIngredientManager;Ljava/util/Set;)Lmezz/jei/library/ingredients/RecipeIngredientSupplier; count=1"
+        },
+        {
+          "status": "PASS",
+          "check": "build_unique_setRecipe_redirect",
+          "detail": "all getIngredientSupplier overloads combined=1"
+        },
+        {
+          "status": "PASS",
+          "check": "build_retains_native_catches",
+          "detail": "RuntimeException and LinkageError protect redirected call"
+        },
+        {
+          "status": "PASS",
+          "check": "index_unique_addRecipe_redirect",
+          "detail": "addRecipe overloads combined=1"
+        },
+        {
+          "status": "PASS",
+          "check": "index_retains_native_catches",
+          "detail": "RuntimeException and LinkageError protect redirected call"
+        }
+      ],
+      "focusedPassed": 13,
+      "focusedReport": {
+        "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\jei\\focused-injection-audit.tsv",
+        "size": 1206,
+        "sha256": "36551D6979F915F87BC9F8D14D352ABA20BAF6B64A099A392F00CF43E3EFB2D0"
+      }
+    },
+    "ae2": {
+      "status": "PASS",
+      "referenceOccurrences": 150,
+      "uniqueReferences": 75,
+      "unresolved": [],
+      "report": {
+        "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\final-candidate-ref-audit\\ae2\\reference-audit.tsv",
+        "size": 52354,
+        "sha256": "6A76F034BFFDFCC8CABFF5E4FAFA1FA4F05463F75D34152849EC97BD6E5CA2BC"
+      }
+    }
+  },
+  "newAdapterGuardsReferences": [
+    {
+      "status": "RESOLVED",
+      "caller": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.call(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "kind": "method",
+      "owner": "com/sorrowmist/useless/content/recipe/AdapterGuards",
+      "name": "call",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "resolvedOldOwner": "UNRESOLVED_OLD",
+      "resolvedNewOwner": "com/sorrowmist/useless/content/recipe/AdapterGuards"
+    },
+    {
+      "status": "RESOLVED",
+      "caller": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.callEach(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "kind": "method",
+      "owner": "com/sorrowmist/useless/content/recipe/AdapterGuards",
+      "name": "callEach",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "resolvedOldOwner": "UNRESOLVED_OLD",
+      "resolvedNewOwner": "com/sorrowmist/useless/content/recipe/AdapterGuards"
+    },
+    {
+      "status": "RESOLVED",
+      "caller": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.guard(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "kind": "method",
+      "owner": "com/sorrowmist/useless/content/recipe/AdapterGuards",
+      "name": "guard",
+      "descriptor": "(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;",
+      "resolvedOldOwner": "UNRESOLVED_OLD",
+      "resolvedNewOwner": "com/sorrowmist/useless/content/recipe/AdapterGuards"
+    },
+    {
+      "status": "RESOLVED",
+      "caller": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.isDisabled(Ljava/lang/Object;Ljava/lang/String;)Z",
+      "kind": "method",
+      "owner": "com/sorrowmist/useless/content/recipe/AdapterGuards",
+      "name": "isDisabled",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Z",
+      "resolvedOldOwner": "UNRESOLVED_OLD",
+      "resolvedNewOwner": "com/sorrowmist/useless/content/recipe/AdapterGuards"
+    },
+    {
+      "status": "RESOLVED",
+      "caller": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.rememberSource(Ljava/lang/Object;Ljava/lang/String;)V",
+      "kind": "method",
+      "owner": "com/sorrowmist/useless/content/recipe/AdapterGuards",
+      "name": "rememberSource",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)V",
+      "resolvedOldOwner": "UNRESOLVED_OLD",
+      "resolvedNewOwner": "com/sorrowmist/useless/content/recipe/AdapterGuards"
+    }
+  ],
+  "nativeToData340": {
+    "status": "PASS",
+    "referenceOccurrences": 45,
+    "report": {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\native-to-data-340-audit\\reference-audit.tsv",
+      "size": 26012,
+      "sha256": "B1D098516676B72C4DFE10893CCB736A8B830CA02A954CC7BEA44980F24E0E5D"
+    }
+  },
+  "types": {
+    "gameLaunched": false,
+    "modClassesLoaded": false,
+    "candidate": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "results": {
+      "jei": {
+        "target": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+        "uniqueReferencedClasses": 13,
+        "classes": [
+          {
+            "name": "mezz/jei/api/gui/builder/IRecipeLayoutBuilder",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/ingredients/IIngredientSupplier",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/recipe/IFocusGroup",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/recipe/IRecipeManager",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/recipe/RecipeType",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/recipe/category/IRecipeCategory",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/runtime/IJeiRuntime",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/api/runtime/IRecipesGui",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/gui/recipes/RecipesGui",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/library/recipes/RecipeLookup",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/library/recipes/RecipeManagerInternal",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/library/recipes/collect/RecipeMap",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class"
+            ],
+            "present": true
+          },
+          {
+            "name": "mezz/jei/library/util/IngredientSupplierHelper",
+            "callers": [
+              "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class"
+            ],
+            "present": true
+          }
+        ],
+        "missing": []
+      },
+      "data": {
+        "target": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+        "uniqueReferencedClasses": 0,
+        "classes": [],
+        "missing": []
+      }
+    },
+    "scope": "All class-file UTF8 constants searched for slash/dot type names, including member descriptors, signatures, Mixin target strings and class literals."
+  },
+  "dependenciesFromOfficialToml": {
+    "native2465": {
+      "useless_mod": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ae2",
+          "type": "required",
+          "versionRange": "[19.2.17,20)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "neoecoae",
+          "type": "optional",
+          "versionRange": "[21.2.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jdte",
+          "type": "optional",
+          "versionRange": "[0.6.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "kaleidoscope_cookery",
+          "type": "optional",
+          "versionRange": "[1.4.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "exdeorum",
+          "type": "optional",
+          "versionRange": "[3.12,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "botanypots",
+          "type": "optional",
+          "versionRange": "[21.1.34,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.0,6.1.0)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "pneumaticcraft",
+          "type": "optional",
+          "versionRange": "[8.2.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "appliedpneumatics",
+          "type": "optional",
+          "versionRange": "[1.0.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "astralsorcery",
+          "type": "optional",
+          "versionRange": "[2.0.1.26,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae_plus",
+          "type": "optional",
+          "versionRange": "[1.6.4,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "data_energistics",
+          "type": "optional",
+          "versionRange": "[3.4.0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        }
+      ]
+    },
+    "eaep1641": {
+      "extendedae_plus": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae",
+          "type": "required",
+          "versionRange": "*",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jei",
+          "type": "optional",
+          "versionRange": "[19.70.0.460,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "neoecoae",
+          "type": "optional",
+          "versionRange": "[21.2.0-beta1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ftbteams",
+          "type": "optional",
+          "versionRange": "[2101.1.0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jecharacters",
+          "type": "optional",
+          "versionRange": "[4.5.24,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        }
+      ]
+    },
+    "data340": {
+      "data_energistics": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21, 1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ae2",
+          "type": "required",
+          "versionRange": "[19.2.18,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "configuration",
+          "type": "required",
+          "embedded": true,
+          "versionRange": "[3.1.1,4)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ldlib2",
+          "type": "required",
+          "versionRange": "[2.2.44,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "emi",
+          "type": "optional",
+          "versionRange": "[1.1.24+1.21.1,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "jei",
+          "type": "optional",
+          "versionRange": "[19.56.0.433,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "ae2jeiintegration",
+          "type": "optional",
+          "versionRange": "[1.2.1,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "ae2ct",
+          "type": "optional",
+          "versionRange": "[1.21.1-1.1.1,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "curios",
+          "type": "optional",
+          "versionRange": "[9.5.1+1.21.1,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "journeymap",
+          "type": "optional",
+          "versionRange": "[1.21.1-6.0.8,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "xaeroworldmap",
+          "type": "optional",
+          "versionRange": "[1.40.2,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "xaerolib",
+          "type": "optional",
+          "versionRange": "[1.7.3,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "ftbchunks",
+          "type": "optional",
+          "versionRange": "[2101.1.22,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ftbteams",
+          "type": "optional",
+          "versionRange": "[2101.1.11,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ftbquests",
+          "type": "optional",
+          "versionRange": "[2101.1.37,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ae2cs",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "megacells",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "extendedae_plus",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "ae2wtlib",
+          "type": "required",
+          "versionRange": "[0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "mekanism",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "appmek",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "draconicevolution",
+          "type": "optional",
+          "versionRange": "[0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        }
+      ]
+    },
+    "jei1970": {
+      "jei": [
+        {
+          "modId": "mezz_config",
+          "type": "required",
+          "versionRange": "[0.6.3,1.0.0)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "mezz_config_gui",
+          "type": "optional",
+          "versionRange": "[0.5.5,)",
+          "ordering": "AFTER",
+          "side": "CLIENT"
+        },
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.238,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21, 1.21.1)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        }
+      ]
+    },
+    "ae219218": {
+      "ae2": [
+        {
+          "modId": "neoforge",
+          "type": "REQUIRED",
+          "versionRange": "[21.1.169,)",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "minecraft",
+          "type": "REQUIRED",
+          "versionRange": "[1.21.1]",
+          "ordering": "NONE",
+          "side": "BOTH"
+        },
+        {
+          "modId": "guideme",
+          "type": "REQUIRED",
+          "versionRange": "[21.1.1,)",
+          "side": "BOTH"
+        },
+        {
+          "modId": "emi",
+          "type": "OPTIONAL",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "theoneprobe",
+          "type": "OPTIONAL",
+          "versionRange": "[1.20.0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "jade",
+          "type": "OPTIONAL",
+          "versionRange": "[15.0.0,)",
+          "ordering": "AFTER",
+          "side": "BOTH"
+        },
+        {
+          "modId": "vanillafix",
+          "type": "discouraged",
+          "reason": "VanillaFix breaks some NeoForge features that AE2 depends on. Do not report AE2 bugs if VanillaFix is present."
+        }
+      ]
+    }
+  },
+  "exactFindings": [
+    "Native 2.4.6.5 catalog private constructor/fields and focused inventory Mixin targets remain compatible; native catalog guard behavior changed and requires the new bridge.",
+    "All five new AdapterGuards calls in the final candidate resolve to exact native 2.4.6.5 methods.",
+    "JEI getIngredientSupplier three-argument overload now delegates to a new four-argument overload. Exactly one category.setRecipe call remains across both; both native exception handlers cover the redirected call.",
+    "RecipeManagerInternal.addRecipe still invokes the exact RecipeMap.addRecipe(RecipeType,Object,IIngredientSupplier)V once, inside RuntimeException and LinkageError handlers. New role-set input remains native.",
+    "RecipeLookup recipeType stays private final RecipeType. get() reads the same focus/hidden state and calls getRecipesStream. All seven GUI HEAD targets remain unique void methods.",
+    "RecipesGui open now captures keyboard selection; updateLayout uses grid/scrollbar logic. HEAD cancellation retains the original body when not blocked.",
+    "DATA 3.4.0 PatternProviderMetadata constructor takes ObjectList,ObjectList. Native 2.4.6.5 already calls this descriptor; applying an old List-widen patch would be incorrect.",
+    "DATA 3.4.0 requires AE2 >=19.2.18, LDLib2 >=2.2.44 and AE2WTLib. EAEP 1.6.4.1 requires installed JEI >=19.70.0.460. These are official metadata facts, not runtime assertions.",
+    "JDTE InfusionRecipeAdapter exact SHA remains A10245FBCB26DE8E194E726676409DA2BC0BA15902DEEAEE73D32638FE59DD45; GeneratedRecipeSlices exact-byte gate remains applicable.",
+    "VAT adapter and PairResult full bytes differ, but every method matches after debug/frame removal. SlicedRecipeConversions uses a reflective profile without an exact SHA gate."
+  ],
+  "limits": [
+    "This is an offline focused ABI/bytecode audit, not a game, server, rendering, total-pack compatibility or performance run.",
+    "Exact target existence/counts do not themselves prove transformed Mixin execution; candidate build/targeted checks and subsequent runtime verification are separate evidence.",
+    "Parent-reported 147 targeted checks were not rerun by this audit.",
+    "Native physical-slot pattern repair skips stretcher items, preserving installed UUID/snapshot; automatic repair of old patterns inside the snapshot is not established.",
+    "All unrelated baseline source and prior audit outputs were preserved. No production mod directory or running client was modified."
+  ]
+}

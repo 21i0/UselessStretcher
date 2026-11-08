@@ -1,0 +1,565 @@
+[
+  {
+    "jar": "ae2lt-2.1.3.jar",
+    "entry": "com/moakiee/ae2lt/mixin/recipeviewer/jei/JeiRecipeTransferButtonControllerMixin.class",
+    "class": "com.moakiee.ae2lt.mixin.recipeviewer.jei.JeiRecipeTransferButtonControllerMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2lt-2.1.3.jar",
+    "entry": "com/moakiee/ae2lt/mixin/recipeviewer/jei/JeiMultiblockLayoutMixin.class",
+    "class": "com.moakiee.ae2lt.mixin.recipeviewer.jei.JeiMultiblockLayoutMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2lt-2.1.3.jar",
+    "entry": "com/moakiee/ae2lt/client/compat/JeiWirelessSupplyClient.class",
+    "class": "com.moakiee.ae2lt.client.compat.JeiWirelessSupplyClient",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/client/jei/EncodePatternPreviewStorage.class",
+    "class": "com.lhy.ae2utility.client.jei.EncodePatternPreviewStorage",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/client/jei/EncodePatternRecipeLayoutContext.class",
+    "class": "com.lhy.ae2utility.client.jei.EncodePatternRecipeLayoutContext",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/jei/EncodePatternButtonController.class",
+    "class": "com.lhy.ae2utility.jei.EncodePatternButtonController",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/jei/JeiRecipesBatchEncode.class",
+    "class": "com.lhy.ae2utility.jei.JeiRecipesBatchEncode",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/mixin/MixinRecipeTransferButtonController.class",
+    "class": "com.lhy.ae2utility.mixin.MixinRecipeTransferButtonController",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/mixin/RecipesGuiAccessor.class",
+    "class": "com.lhy.ae2utility.mixin.RecipesGuiAccessor",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "data_energistics-1.21.1-3.4.0.jar",
+    "entry": "com/fish_dan_/data_energistics/integration/viewer/jei/transfer/PlayerTerminalJeiRecipeTransfer.class",
+    "class": "com.fish_dan_.data_energistics.integration.viewer.jei.transfer.PlayerTerminalJeiRecipeTransfer",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/input/handlers/BookmarkCommands.class",
+    "class": "mezz.jei.gui.input.handlers.BookmarkCommands",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/input/handlers/IngredientCommands.class",
+    "class": "mezz.jei.gui.input.handlers.IngredientCommands",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/overlay/ingredients/IngredientGridWithNavigationController.class",
+    "class": "mezz.jei.gui.overlay.ingredients.IngredientGridWithNavigationController",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/plugins/JeiGuiPlugin.class",
+    "class": "mezz.jei.gui.plugins.JeiGuiPlugin",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/IRecipeGuiLogic.class",
+    "class": "mezz.jei.gui.recipes.IRecipeGuiLogic",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/InteractiveIngredientTooltip.class",
+    "class": "mezz.jei.gui.recipes.InteractiveIngredientTooltip",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/InteractiveIngredientTooltipController.class",
+    "class": "mezz.jei.gui.recipes.InteractiveIngredientTooltipController",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipeGuiLogic.class",
+    "class": "mezz.jei.gui.recipes.RecipeGuiLogic",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipeLayoutWithButtons.class",
+    "class": "mezz.jei.gui.recipes.RecipeLayoutWithButtons",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipeTransferButtonController.class",
+    "class": "mezz.jei.gui.recipes.RecipeTransferButtonController",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$1.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$1",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$2.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$2",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$3.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$3",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$4.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$4",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$RecipeCategoryScrollInputHandler.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$RecipeCategoryScrollInputHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$RecipeNavigationInputHandler.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$RecipeNavigationInputHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui$ResizeInputHandler.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui$ResizeInputHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/RecipesGui.class",
+    "class": "mezz.jei.gui.recipes.RecipesGui",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/layouts/IRecipeLayoutList.class",
+    "class": "mezz.jei.gui.recipes.layouts.IRecipeLayoutList",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/recipes/layouts/LazyRecipeLayoutList.class",
+    "class": "mezz.jei.gui.recipes.layouts.LazyRecipeLayoutList",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/startup/JeiGuiStarter.class",
+    "class": "mezz.jei.gui.startup.JeiGuiStarter",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/gui/startup/JeiInputSetup.class",
+    "class": "mezz.jei.gui.startup.JeiInputSetup",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/load/PluginLoader.class",
+    "class": "mezz.jei.library.load.PluginLoader",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/load/registration/RecipeManagerPluginHelper.class",
+    "class": "mezz.jei.library.load.registration.RecipeManagerPluginHelper",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/load/registration/RecipeRegistration.class",
+    "class": "mezz.jei.library.load.registration.RecipeRegistration",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/recipes/RecipeCatalystLookup.class",
+    "class": "mezz.jei.library.recipes.RecipeCatalystLookup",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/recipes/RecipeCategoriesLookup.class",
+    "class": "mezz.jei.library.recipes.RecipeCategoriesLookup",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/recipes/RecipeLookup.class",
+    "class": "mezz.jei.library.recipes.RecipeLookup",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal",
+      "mezz.jei.library.recipes.RecipeLookup"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/recipes/RecipeManager.class",
+    "class": "mezz.jei.library.recipes.RecipeManager",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.util.IngredientSupplierHelper",
+      "mezz.jei.library.recipes.RecipeManagerInternal",
+      "mezz.jei.library.recipes.RecipeLookup"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/recipes/RecipeManagerInternal.class",
+    "class": "mezz.jei.library.recipes.RecipeManagerInternal",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.util.IngredientSupplierHelper",
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/util/IngredientSupplierHelper.class",
+    "class": "mezz.jei.library.util.IngredientSupplierHelper",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.util.IngredientSupplierHelper"
+    ]
+  },
+  {
+    "jar": "jei-1.21.1-neoforge-19.70.0.460.jar",
+    "entry": "mezz/jei/library/util/RecipeDebugUtil.class",
+    "class": "mezz.jei.library.util.RecipeDebugUtil",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.library.util.IngredientSupplierHelper"
+    ]
+  },
+  {
+    "jar": "JustEnoughMekanismMultiblocks-1.21.1-7.23.jar",
+    "entry": "giselle/jei_mekanism_multiblocks/client/mixin/jei/RecipesGuiMixin.class",
+    "class": "giselle.jei_mekanism_multiblocks.client.mixin.jei.RecipesGuiMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "neoecoae-21.2.15.jar",
+    "entry": "cn/dancingsnow/neoecoae/mixins/client/jei/MultiblockRecipesGuiMixin.class",
+    "class": "cn.dancingsnow.neoecoae.mixins.client.jei.MultiblockRecipesGuiMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/init/ClientSetup.class",
+    "class": "com.sorrowmist.useless.init.ClientSetup",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$StaffLinkGhostHandler$2.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$StaffLinkGhostHandler$2",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$ChainGroupGhostHandler.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$ChainGroupGhostHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$StaffLinkGhostHandler.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$StaffLinkGhostHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$ChainGroupGhostHandler$1.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$ChainGroupGhostHandler$1",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$StaffLinkGhostHandler$1.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$StaffLinkGhostHandler$1",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$DimensionConfigGhostHandler.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$DimensionConfigGhostHandler",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin$DimensionConfigGhostHandler$1.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin$DimensionConfigGhostHandler$1",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/compat/jei/JEIPlugin.class",
+    "class": "com.sorrowmist.useless.compat.jei.JEIPlugin",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/client/gui/ChainGroupScreen.class",
+    "class": "com.sorrowmist.useless.client.gui.ChainGroupScreen",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_mod-1.21.1-2.4.6.5.jar",
+    "entry": "com/sorrowmist/useless/client/gui/AdvancedAlloyFurnaceScreen.class",
+    "class": "com.sorrowmist.useless.client.gui.AdvancedAlloyFurnaceScreen",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiGuiMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiLookupMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeLookup"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiTimingMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiBuildTimingMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.library.util.IngredientSupplierHelper"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiIndexTimingMixin",
+    "isMixin": true,
+    "targetsReferenced": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+    "class": "com.sorrowmist.useless.stretcher.client.CatalogJeiPublication",
+    "isMixin": false,
+    "targetsReferenced": [
+      "mezz.jei.gui.recipes.RecipesGui",
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+    "class": "com.sorrowmist.useless.stretcher.client.CatalogJeiPublication$1",
+    "isMixin": false,
+    "targetsReferenced": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\tests.log",
+    "SHA256": "20EAD1BB70F1ACF368CFA1A66DE6B33FFC334D8F61A47DBAF0BF066FB43B6688"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\inputs.json",
+    "SHA256": "11D8B61DE3221EB7A670824F795137138C008BEABF1A14C71C70487FB569BD08"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\result.json",
+    "SHA256": "3D2A602F7946906286032D752BAEA5A722B3F9B725FA5E6BC2341FA0729E726B"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\tests.log",
+    "SHA256": "1DBCE745CBE8AA083FADF9A34505A5E86507D9A6B04382973FBB2007BAA2C7DD"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\inputs.json",
+    "SHA256": "05B01BB69640BAD27554EC712F924D8318AECB797DDD0BCFBEED6FCE31811F51"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Previous6EF-20261106-224646036\\result.json",
+    "SHA256": "5A6A0F7E9E5FA2C912ED8D3EEF8C53081DC5C1828E520EC044DBE0719A021427"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223853176\\inputs.json",
+    "SHA256": "026C094774168DA62C0CA70FD3D7443DD8DEC14BAE02872583F7594BC0A65332"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-223853176\\classes\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.class",
+    "SHA256": "5479DC4F06952BB014E5F2C578742CA4FA81695B12267DB9C3EDB1848AA5ED82"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\classes\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.class",
+    "SHA256": "6AFA6EF41769F06725B6B62F3E3252F45C8955D972EBFB65F1FE39BC8A7C692E"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P3Source-20261106-224715819\\classes\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\OwnerRecipePublication.class",
+    "SHA256": "2369FAC486E158ADD1952BD4841404B59E6C3951AAF4491515A68F4770AB8E1C"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\tests.log",
+    "SHA256": "05060218C2C736E76C36DC458EABFF801BB7BEB627522CC7633F1AA35F06A8D5"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\inputs.json",
+    "SHA256": "19291DE37E31943BE3082989D8A516C2E593E11DFF68E26CCEABE99FCC8FC1C9"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\runs\\P2Baseline-20261106-223814672\\result.json",
+    "SHA256": "1D791F6A2E86066FC6CD1989CF0B01ACF43E6B925B8694C777EFFC5CCC726F3B"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.java",
+    "SHA256": "03D9F3E41087BBA6CA41513554C0E5BD6F15DA205FB81A8FEE5BD49862B716EC"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublicationTest.java",
+    "SHA256": "7AB3C4B42FF102FACA193F27D7F835FDFE1739B377CC7394778CACED12171977"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\run-tests.ps1",
+    "SHA256": "1172DD779ADEEFFEDED05B95D9FDA839E52CC8E6F91D44D67FB7A90302A88542"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\JeiPublicationTestLauncher.java",
+    "SHA256": "C889B1647DEBA6EAA303F0F70FD58CE0F601A37B1C66C3E75B12C56A51A81D33"
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\jei-publication\\verification.md",
+    "SHA256": "F8060B9C050BB35E0F0E4E93F73B5C3BE530CD5F2DAF5C2851AC07B09DEC1457"
+  }
+]

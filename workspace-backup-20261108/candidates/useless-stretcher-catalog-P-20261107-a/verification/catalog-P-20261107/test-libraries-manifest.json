@@ -1,0 +1,74 @@
+[
+  {
+    "file": "junit-jupiter-api-5.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar",
+    "bytes": 216413,
+    "sha256": "AB83EF9E51AC4597D59D26B4B58812129550E2F579A404C8AF7D09F5CE5B4293"
+  },
+  {
+    "file": "junit-jupiter-params-5.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar",
+    "bytes": 591594,
+    "sha256": "02A6E015DE7CE94AC7F256E7FA05B8091DEA861FE79A555A7993313D0F6C7D96"
+  },
+  {
+    "file": "junit-jupiter-engine-5.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar",
+    "bytes": 260117,
+    "sha256": "CDF8AC59F3FAD774CA738AD03890950EEB91833EF0E8908753177EDD26F1581C"
+  },
+  {
+    "file": "junit-platform-commons-1.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar",
+    "bytes": 142008,
+    "sha256": "9EDD969B0D0670C54105BC91AE79BD1C6F503E12115FABA82073B84C86BBC334"
+  },
+  {
+    "file": "junit-platform-engine-1.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar",
+    "bytes": 246800,
+    "sha256": "B1DD998F64F9ACADC15966D9CD3D08074662677B3E390F0A38FCBF0BB4C72330"
+  },
+  {
+    "file": "junit-platform-launcher-1.11.4.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.11.4/junit-platform-launcher-1.11.4.jar",
+    "bytes": 189006,
+    "sha256": "D7430BD029E7FCCED53EE445E4D2D1A8A1E043EA4C4DF43B6335A857F79761AE"
+  },
+  {
+    "file": "opentest4j-1.3.0.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+    "bytes": 14304,
+    "sha256": "48E2DF636CAB6563CED64DCDFF8ABB2355627CB236EF0BF37598682DDF742F1B"
+  },
+  {
+    "file": "apiguardian-api-1.1.2.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+    "bytes": 6806,
+    "sha256": "B509448AC506D607319F182537F0B35D71007582EC741832A1F111E5B5B70B38"
+  },
+  {
+    "file": "mockito-core-5.15.2.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/mockito/mockito-core/5.15.2/mockito-core-5.15.2.jar",
+    "bytes": 710045,
+    "sha256": "BF48B7372D9491D5EC8AEBB4CDD187D15663931599C0FBE7410166CE0E1E58FF"
+  },
+  {
+    "file": "byte-buddy-1.15.11.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar",
+    "bytes": 8469021,
+    "sha256": "FA08998AAE1E7BDAE83BDE0712C50E8444D71C0E0C196BB2247ADE8D4AD0EB90"
+  },
+  {
+    "file": "byte-buddy-agent-1.15.11.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar",
+    "bytes": 365425,
+    "sha256": "316D2C0795C2A4D4C4756F2E6F9349837C7430AC34E0477EAD874D05F5CC19E5"
+  },
+  {
+    "file": "objenesis-3.3.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/objenesis/objenesis/3.3/objenesis-3.3.jar",
+    "bytes": 49423,
+    "sha256": "02DFD0B0439A5591E35B708ED2F5474EB0948F53ABF74637E959B8E4EF69BFEB"
+  }
+]

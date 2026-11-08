@@ -1,0 +1,27 @@
+{
+  "utc": "2026-11-06T22:10:47.3470770Z",
+  "purpose": "P1 full ordered tuple evidence only",
+  "status": "SOURCE_VERIFIED_ONLY",
+  "gameLaunched": false,
+  "performanceBaseline": false,
+  "rTupleExportAvailable": false,
+  "rTupleDigest": "unavailable; not inferred",
+  "unmodifiedP1SourceBytecodeEquivalent": true,
+  "baselineClassFamily": [
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class"
+  ],
+  "baseSha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+  "originalBudget": {
+    "nanos": 2000000,
+    "maxSteps": 8192,
+    "fingerprintsPerTick": 128
+  }
+}

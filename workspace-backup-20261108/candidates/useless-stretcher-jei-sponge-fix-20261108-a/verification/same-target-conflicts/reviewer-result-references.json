@@ -1,0 +1,46 @@
+[
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-combined-1970\\result.json",
+    "SHA256": "6E56371FA6251155296F44DEF2056FDC243852D860CE55D6137A1767F6492A6E",
+    "Status": "PASS",
+    "ChecksFound": 7,
+    "ChecksPassed": 7,
+    "ChecksFailed": 0,
+    "AppliedMixins": 10,
+    "GameLaunched": false,
+    "ModLauncherUsed": false
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1970\\result.json",
+    "SHA256": "102FF05B4DC06E80499E42466912CDC2BB5D2A1D9491FA01D14DA9F2D053D902",
+    "Status": "PASS",
+    "ChecksFound": 7,
+    "ChecksPassed": 7,
+    "ChecksFailed": 0,
+    "AppliedMixins": 7,
+    "GameLaunched": false,
+    "ModLauncherUsed": false
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\result.json",
+    "SHA256": "4FEF527BE286B437464E6195A0B0D5F12215CBB707FDC7FA25FEB5479B5DC1A4",
+    "Status": "PASS",
+    "ChecksFound": 7,
+    "ChecksPassed": 7,
+    "ChecksFailed": 0,
+    "AppliedMixins": 7,
+    "GameLaunched": false,
+    "ModLauncherUsed": false
+  },
+  {
+    "Path": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-negative-1970\\result.json",
+    "SHA256": "B349D9E6A3EDBBAC40FE6777150C7E691944A0767FE91BD2DDD1752897932B16",
+    "Status": "FAIL",
+    "ChecksFound": 1,
+    "ChecksPassed": 0,
+    "ChecksFailed": 1,
+    "AppliedMixins": 1,
+    "GameLaunched": false,
+    "ModLauncherUsed": false
+  }
+]

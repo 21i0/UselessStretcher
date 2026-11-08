@@ -1,0 +1,71 @@
+{
+  "timestampUtc": "2026-11-06T22:41:14.3748876Z",
+  "gameLaunched": false,
+  "jar": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar",
+  "sha256": "A87DE20A4B7AB55C03C80753EA75103A32AA7662E9443A741FB5C0B7B1732CA4",
+  "size": 12792044,
+  "baselineSha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+  "classesDirectory": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\build\\catalog-patch-20261106-224034368\\classes",
+  "testClassesDirectory": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\build\\catalog-patch-20261106-224034368\\test-classes",
+  "testLogSha256": "DA55205E97828C6886AFD3C8646578588AB6C800CFEC83875B9D55BD2DB5BB98",
+  "mainSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.java",
+      "sha256": "6EF173A38952AABF328D8D69478F3842D3E039031E9A4248946412802E24203F"
+    }
+  ],
+  "testSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublicationTest.java",
+      "sha256": "C106BF3CFB0C630F6E8BF56239B392CBA285416E4ADEE1B2740EB1B5536889CB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\ae\\AssemblyStretcherInventoryTest.java",
+      "sha256": "6F6FFEA31E2486BFD5832EA5ABCA46097B3AF1754F711DA487486915F9A7C6D4"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\ae\\InstalledStretcherBindingTest.java",
+      "sha256": "0CDAF1E6A0DA7A3A46FFB1C6CC075DB2E55B484370DBAEAA4441549065628140"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\BudgetedRecipeCatalogTest.java",
+      "sha256": "B8511A471F1579A45449696F8F5516892025DA53F6905FCFBDCE4D2DD58B11F8"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogSyncGateTest.java",
+      "sha256": "A73A32FBA4E78420C4EB9A3FDB9B093AA38E2E449AD159D8D44EF2379F91D460"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogTupleEvidenceTest.java",
+      "sha256": "428FDF2A3B3AFE526FEE22E090B6411E4CBC6E70FF87B36D158019723A549A2B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\GeneratedRecipeSlicesTest.java",
+      "sha256": "3CDD538648B0B9EE3256E92484806FAEEADE6723D37A195EDB26D722E4A3DE9F"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\OwnerRecipePublicationTest.java",
+      "sha256": "0CB6B2F6F57F0A17D8FD450E01D60E46C1D8ADECC4598B4B656E875D500E731C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\SlicedVatConversionTest.java",
+      "sha256": "DD5AD28FAE00094CC12B2AECC8FA715F1FBE7F97FB61E020EA94B92E25194556"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\mold\\InstalledPatternSnapshotTest.java",
+      "sha256": "2B733A0B227BB488C47F25DBE7BFF195BF9F85490C46E2DCD76F4ECDA90F486B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\content\\mold\\PatternSnapshotPersistenceTest.java",
+      "sha256": "94BF8BBB4DB8F3673B7B4544D7EF961C32071956690C1603FD690CA841C35092"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\src\\test\\java\\com\\sorrowmist\\useless\\stretcher\\VanillaTestRegistries.java",
+      "sha256": "04522D00366E4BE68A9B8CCEA02A810CF9BB0722DA101D99474CFB7505A3EA00"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\OfflineTestLauncher.java",
+      "sha256": "B334B6789FAF088A20FE37816727D75D3852ACDFC5B3246DC765D5B5D231D832"
+    }
+  ]
+}

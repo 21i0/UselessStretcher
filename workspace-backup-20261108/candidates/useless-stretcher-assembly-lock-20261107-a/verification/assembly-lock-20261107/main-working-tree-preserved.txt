@@ -1,0 +1,14 @@
+ M src/main/java/com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.java
+ M src/main/java/com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity.java
+ M src/main/java/com/sorrowmist/useless/stretcher/network/Network.java
+ M src/main/resources/assets/ae2/ae2guide/useless_stretcher/two_i.md
+ M src/regression/java/com/sorrowmist/useless/stretcher/regression/RegressionChecks.java
+ M "\344\270\207\350\261\241\346\213\205\346\236\266-\351\241\271\347\233\256\344\272\244\346\216\245\346\226\207\346\241\243.md"
+ M "\344\270\207\350\261\241\346\213\205\346\236\266\344\275\277\347\224\250\350\257\264\346\230\216.txt"
+ M "\346\233\264\346\226\260.txt"
+?? $dir/
+?? $new/
+?? net/
+?? verification/extract-two-i-combat-addon.py
+?? verification/generate-two-i-arcana-assets.py
+?? verification/prepare-two-i-combat-addon.py

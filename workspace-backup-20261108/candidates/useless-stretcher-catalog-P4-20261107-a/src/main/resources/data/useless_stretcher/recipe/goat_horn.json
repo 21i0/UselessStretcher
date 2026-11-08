@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:bone" },
+    { "item": "minecraft:bone" },
+    { "item": "minecraft:bone" },
+    { "item": "minecraft:bone" },
+    { "item": "minecraft:copper_ingot" },
+    { "item": "minecraft:copper_ingot" }
+  ],
+  "result": {
+    "id": "minecraft:goat_horn",
+    "count": 1
+  }
+}

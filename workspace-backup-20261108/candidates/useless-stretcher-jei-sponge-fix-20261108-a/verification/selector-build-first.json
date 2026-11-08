@@ -1,0 +1,12 @@
+{
+  "compiledUtc": "2026-11-07T16:30:23.3995309Z",
+  "classesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163017389\\classes",
+  "classpath": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163017389\\classpath.txt",
+  "baseline": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+  "baselineSha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7",
+  "source": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.java",
+  "sourceSha256": "2C041C026D6C9AE4AFFF911B637F5C6481066806C013C9F7AE0A474A148466F4",
+  "arguments": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\build\\selector-20261107-163017389\\javac-main.args",
+  "compilerExitCode": 0,
+  "gameLaunched": false
+}

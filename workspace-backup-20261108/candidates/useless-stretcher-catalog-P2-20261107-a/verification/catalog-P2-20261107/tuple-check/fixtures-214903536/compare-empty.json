@@ -1,0 +1,20 @@
+{
+  "utc": "2026-11-06T21:49:04.6080724Z",
+  "left": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-3.tsv",
+  "right": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-3.tsv",
+  "status": "MATCH",
+  "orderCompared": true,
+  "firstDifference": null,
+  "sourceDifferences": [],
+  "errors": [],
+  "leftSummary": {
+    "count": 0,
+    "sha256": "7df46239a6c56ed3daa40a48ca601baae733199ea5d55394959f8a0ddb23c108",
+    "sources": []
+  },
+  "rightSummary": {
+    "count": 0,
+    "sha256": "7df46239a6c56ed3daa40a48ca601baae733199ea5d55394959f8a0ddb23c108",
+    "sources": []
+  }
+}

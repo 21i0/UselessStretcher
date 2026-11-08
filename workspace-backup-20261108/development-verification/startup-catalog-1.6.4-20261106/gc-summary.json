@@ -1,0 +1,154 @@
+{
+  "source": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\logs\\gc.log",
+  "snapshot": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\verification\\startup-catalog-1.6.4-20261106\\gc-snapshot.log",
+  "captured_utc": "2026-11-06T02:56:47.4283993Z",
+  "captured_bytes": 3604864,
+  "sha256": "71A95724315539397F7C87769E7428E27B387E9599C7F2241454A1F97C74D7D4",
+  "first_line": "[2026-11-06T10:54:11.848+0800][1662.590s][info][safepoint   ] Safepoint \"ThreadDump\", Time since last: 657490699 ns, Reaching safepoint: 43301 ns, Cleanup: 11800 ns, At safepoint: 124500 ns, Leaving safepoint: 13600 ns, Total: 193201 ns",
+  "last_line": "[2026-11-06T10:56:44.293+0800][1815.034s][info][safepoint   ] Safepoint \"ThreadDump\", Time since last: 9870799 ns, Reaching safepoint: 17401 ns, Cleanup: 7300 ns, At safepoint: 84700 ns, Leaving safepoint: 8000 ns, Total: 117401 ns",
+  "line_count": 15575,
+  "pause_count": 19,
+  "full_gc_count": 0,
+  "gc_pause_total_ms": 473.43399999999997,
+  "gc_pause_max_ms": 60.453,
+  "safepoint_count": 15329,
+  "windows": [
+    {
+      "window": "jei",
+      "start": "2026-11-06T10:43:26.953",
+      "end": "2026-11-06T10:44:44.837",
+      "gc_pause_count": 0,
+      "gc_total_ms": 0.0,
+      "gc_max_ms": null,
+      "safepoint_count": 0,
+      "safepoint_total_ms": 0.0,
+      "safepoint_max_ms": null,
+      "safepoint_reach_max_ms": null
+    },
+    {
+      "window": "second_client_catalog_approximate",
+      "start": "2026-11-06T10:44:47",
+      "end": "2026-11-06T10:45:01",
+      "gc_pause_count": 0,
+      "gc_total_ms": 0.0,
+      "gc_max_ms": null,
+      "safepoint_count": 0,
+      "safepoint_total_ms": 0.0,
+      "safepoint_max_ms": null,
+      "safepoint_reach_max_ms": null
+    },
+    {
+      "window": "startup_observer_window",
+      "start": "2026-11-06T10:43:24",
+      "end": "2026-11-06T10:45:32",
+      "gc_pause_count": 0,
+      "gc_total_ms": 0.0,
+      "gc_max_ms": null,
+      "safepoint_count": 0,
+      "safepoint_total_ms": 0.0,
+      "safepoint_max_ms": null,
+      "safepoint_reach_max_ms": null
+    }
+  ],
+  "longest_gc": [
+    {
+      "line": 14412,
+      "time": "2026-11-06T10:56:33.013+0800",
+      "id": 313,
+      "ms": 60.453,
+      "kind": "Pause Remark 5983M->5983M(7944M)"
+    },
+    {
+      "line": 3854,
+      "time": "2026-11-06T10:54:49.103+0800",
+      "id": 303,
+      "ms": 49.108,
+      "kind": "Pause Young (Mixed) (G1 Evacuation Pause) 7539M->4452M(7944M)"
+    },
+    {
+      "line": 7974,
+      "time": "2026-11-06T10:55:29.600+0800",
+      "id": 307,
+      "ms": 47.765,
+      "kind": "Pause Young (Mixed) (G1 Evacuation Pause) 7542M->4449M(7944M)"
+    },
+    {
+      "line": 12154,
+      "time": "2026-11-06T10:56:10.693+0800",
+      "id": 311,
+      "ms": 40.9,
+      "kind": "Pause Young (Mixed) (G1 Evacuation Pause) 7542M->4446M(7944M)"
+    },
+    {
+      "line": 5919,
+      "time": "2026-11-06T10:55:09.462+0800",
+      "id": 305,
+      "ms": 37.937,
+      "kind": "Pause Remark 6019M->6019M(7944M)"
+    }
+  ],
+  "longest_safepoints": [
+    {
+      "line": 12363,
+      "time": "2026-11-06T10:56:12.784+0800",
+      "ms": 62.9744,
+      "reach_ms": 62.8873,
+      "kind": "ThreadDump"
+    },
+    {
+      "line": 14414,
+      "time": "2026-11-06T10:56:33.013+0800",
+      "ms": 60.6679,
+      "reach_ms": 0.0181,
+      "kind": "G1PauseRemark"
+    },
+    {
+      "line": 3856,
+      "time": "2026-11-06T10:54:49.103+0800",
+      "ms": 49.3521,
+      "reach_ms": 0.019099,
+      "kind": "G1CollectForAllocation"
+    },
+    {
+      "line": 7976,
+      "time": "2026-11-06T10:55:29.601+0800",
+      "ms": 47.9428,
+      "reach_ms": 0.0112,
+      "kind": "G1CollectForAllocation"
+    },
+    {
+      "line": 12156,
+      "time": "2026-11-06T10:56:10.693+0800",
+      "ms": 41.028601,
+      "reach_ms": 0.012201,
+      "kind": "G1CollectForAllocation"
+    }
+  ],
+  "safepoint_kinds": [
+    {
+      "kind": "G1CollectForAllocation",
+      "count": 11,
+      "total_ms": 324.132204,
+      "max_ms": 49.3521
+    },
+    {
+      "kind": "G1PauseCleanup",
+      "count": 4,
+      "total_ms": 3.592498,
+      "max_ms": 1.183199
+    },
+    {
+      "kind": "G1PauseRemark",
+      "count": 4,
+      "total_ms": 153.737401,
+      "max_ms": 60.6679
+    },
+    {
+      "kind": "ThreadDump",
+      "count": 15310,
+      "total_ms": 2097.1003660000006,
+      "max_ms": 62.9744
+    }
+  ],
+  "limits": "GC pauses are also contained in safepoint totals. Do not add both totals. Safepoint reaching time is not proof that all threads were paused for that duration. Concurrent GC cycles are excluded. Existing diagnostics are observed, not started by this audit."
+}

@@ -1,0 +1,291 @@
+{
+  "result": "PRODUCTION JAR AUDIT PASSED",
+  "utc": "2026-11-06T06:47:49.5157101Z",
+  "scope": "Static ZIP/source/build-output/hash audit only; no Minecraft or Mixin runtime was started",
+  "failures": [],
+  "baseline": {
+    "path": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar",
+    "sha256_before": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "sha256_after": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "pinned_sha256": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "bytes": 12691712
+  },
+  "candidate": {
+    "path": "D:\\AI\\sources\\UselessStretcher-capsule-variants\\build\\libs\\useless_stretcher-1.21.1-1.6.4.jar",
+    "sha256": "AC78F41EAA7883434F6845CF7323829D77E66B994C82EDCF2B81AEC4AFCD9220",
+    "bytes": 12699916,
+    "mod_version": "1.21.1-1.6.4",
+    "display_name": "Useless Stretcher"
+  },
+  "entries": {
+    "baseline": 618,
+    "candidate": 619,
+    "unchanged": 603,
+    "added": 1,
+    "removed": 0,
+    "changed": 15
+  },
+  "production_sources": {
+    "top_level_java": 270,
+    "absent_classes": [],
+    "compiled_class_mismatches": [],
+    "resources_checked": 137,
+    "resource_mismatches": []
+  },
+  "exclusions": {
+    "test_sources_checked": 78,
+    "forbidden_entries": [],
+    "language_entries": [
+      "assets/useless_stretcher/lang/en_us.json",
+      "assets/useless_stretcher/lang/zh_cn.json",
+      "assets/useless_stretcher/lang/zh_tw.json"
+    ],
+    "unexpected_language_entries": [],
+    "test_language_keys": []
+  },
+  "mixins": {
+    "required_registrations": [
+      "InstalledStretcherAssemblyMixin",
+      "InstalledStretcherSlotMixin"
+    ],
+    "packaged_mixin_count": 59,
+    "candidate_constructs_new_inventory": true,
+    "javap_exit": 0,
+    "javap_bytecode": "Compiled from \"InstalledStretcherAssemblyMixin.java\"\npublic abstract class com.sorrowmist.useless.stretcher.mixin.InstalledStretcherAssemblyMixin {\n  public com.sorrowmist.useless.stretcher.mixin.InstalledStretcherAssemblyMixin();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  private com.sorrowmist.useless.content.blockentities.RecoverableItemStackHandler uselessStretcher$lockInstalledBindings(java.util.function.IntSupplier, java.util.function.Predicate<net.minecraft.world.item.ItemStack>, java.lang.Runnable);\n    Code:\n       0: new           #7                  // class com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory\n       3: dup\n       4: aload_1\n       5: aload_2\n       6: aload_3\n       7: aload_0\n       8: checkcast     #9                  // class net/minecraft/world/level/block/entity/BlockEntity\n      11: invokespecial #11                 // Method com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory.\"<init>\":(Ljava/util/function/IntSupplier;Ljava/util/function/Predicate;Ljava/lang/Runnable;Lnet/minecraft/world/level/block/entity/BlockEntity;)V\n      14: areturn\n\n  private static void uselessStretcher$accept(net.minecraft.world.item.ItemStack, org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<java.lang.Boolean>);\n    Code:\n       0: aload_0\n       1: invokestatic  #14                 // Method com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.isStretcher:(Lnet/minecraft/world/item/ItemStack;)Z\n       4: ifeq          15\n       7: aload_1\n       8: iconst_1\n       9: invokestatic  #20                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;\n      12: invokevirtual #26                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable.setReturnValue:(Ljava/lang/Object;)V\n      15: return\n}"
+  },
+  "added_entries": [
+    "com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory.class"
+  ],
+  "removed_entries": [],
+  "changed_entries": [
+    "assets/ae2/ae2guide/useless_stretcher/stretcher.md",
+    "assets/useless_stretcher/lang/en_us.json",
+    "assets/useless_stretcher/lang/zh_cn.json",
+    "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.class",
+    "com/sorrowmist/useless/stretcher/content/blockentity/OmniversalMyriadBlockEntity.class",
+    "com/sorrowmist/useless/stretcher/content/item/UselessStretcherItem.class",
+    "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore.class",
+    "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Library.class",
+    "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Rewrite.class",
+    "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch.class",
+    "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch$Job.class",
+    "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherAssemblyMixin.class",
+    "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+    "com/sorrowmist/useless/stretcher/network/Network.class",
+    "META-INF/neoforge.mods.toml"
+  ],
+  "removed_resources": [],
+  "changed_resources": [
+    "assets/ae2/ae2guide/useless_stretcher/stretcher.md",
+    "assets/useless_stretcher/lang/en_us.json",
+    "assets/useless_stretcher/lang/zh_cn.json",
+    "META-INF/neoforge.mods.toml"
+  ],
+  "entry_diff": [
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/stretcher.md",
+      "status": "changed",
+      "kind": "resource",
+      "baseline": {
+        "sha256": "BC92393749D986A4F2E1A34A9BAB32E934D867D1FCC02E82B20F12D65BF0A749",
+        "bytes": 4839
+      },
+      "candidate": {
+        "sha256": "9F451E8441DB31AFB14844EC88CEDC9D79F5AA5E8627398443B823FDD93240E8",
+        "bytes": 5483
+      }
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/en_us.json",
+      "status": "changed",
+      "kind": "resource",
+      "baseline": {
+        "sha256": "A2784019181C08919DE782AE0F3BD60075C4D0E82AF1689D0A74E30F219CA341",
+        "bytes": 92177
+      },
+      "candidate": {
+        "sha256": "EB3A6A3E0A6DCEF445FA4402F6991E2C246181BD2CDB56343624EE98CE703E60",
+        "bytes": 92323
+      }
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/zh_cn.json",
+      "status": "changed",
+      "kind": "resource",
+      "baseline": {
+        "sha256": "A0A9DD69BA9F41B0C6EFC4DB054AEDC12097490650BF26FF1966663F167F18F0",
+        "bytes": 90399
+      },
+      "candidate": {
+        "sha256": "E07B365DEEEAB70391168006E5C0667A922520E8457EBF19B159A5ECBF224EED",
+        "bytes": 90520
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory.class",
+      "status": "added",
+      "kind": "class",
+      "baseline": null,
+      "candidate": {
+        "sha256": "BD7CE205554707D016BB084FD1350FE1D6A7B766227B5F2FF6418351F3FDED8B",
+        "bytes": 5757
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "BEAF9527AFDA03A082FF57F62A143ACD67E1FE53E58F5BFE26F7B8EC143F273D",
+        "bytes": 8580
+      },
+      "candidate": {
+        "sha256": "3B1473815A177A593035E0ECF4E7B322D12788429B271AAA9DC29401D496B1ED",
+        "bytes": 10841
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/blockentity/OmniversalMyriadBlockEntity.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "54DEAA0EC9CC0FF30A9AD93E0E4B42943C07C6FE04DB1B78E28A6C622DB0343C",
+        "bytes": 12797
+      },
+      "candidate": {
+        "sha256": "BCB241AEC3BEB90599FF668777B649C5B42661C788A8F2BE62E8567F1691A7CA",
+        "bytes": 13004
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/UselessStretcherItem.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "BB2EF40D22483226859E84C95ACAF16986AAF987A28FFA9F089137F7C7998014",
+        "bytes": 11849
+      },
+      "candidate": {
+        "sha256": "0100BD3372999C596B07382D216F5B2E0232120CAA1241BA47E5CFA81204462F",
+        "bytes": 11934
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "5EC26BB23CCD135B44818C1F5582BB67C70585E26396E10B3208DAB9FC976DA1",
+        "bytes": 15725
+      },
+      "candidate": {
+        "sha256": "38A3204AB8CCF71F028098F5EDFF7912249AC07425E119D4CBEDD0BB35208637",
+        "bytes": 22882
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Library.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "7A15B0F2CF86FD044972DB95D00BA6175C5A4DD6B0F09A6CC394BD70F9683F3D",
+        "bytes": 4533
+      },
+      "candidate": {
+        "sha256": "2008C43481AC759EC54929F8B708896571BE003CC9C59DECC43C998A5F56C072",
+        "bytes": 5888
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Rewrite.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "E75820B37736B6B97329FFF9438AD26ED78FF5CB4DD8803ED70FD533A6FA054C",
+        "bytes": 5855
+      },
+      "candidate": {
+        "sha256": "E8DB1E6D2666A516B1CF39DE8149D7EED0B5C594DFC30C0AE7A05D7051579BCE",
+        "bytes": 5855
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "305834C0700AC283E57F2DABD7015E3E6C2C36628FE982972F9C60605DDD0137",
+        "bytes": 13894
+      },
+      "candidate": {
+        "sha256": "825638E8E0ECCB2C7175E3EC535041ECB11C9ABEFB92441AE6B47752BDE93B22",
+        "bytes": 14285
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch$Job.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "C30A260D1A61A7FEA2B2920690A048C3ACEF7E61077A2C36BFD083E1E468330B",
+        "bytes": 5721
+      },
+      "candidate": {
+        "sha256": "A9F9BAA40FABF187E754EDA2FBF72E67CC96C8AECACAC1FD779075DB9BFBD814",
+        "bytes": 5721
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherAssemblyMixin.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "2E14566667CE76769DB8A0B9C5567E5A4AF4196FC16E792FC6D993C60AF9C3FD",
+        "bytes": 1808
+      },
+      "candidate": {
+        "sha256": "DDB386DEAD1C341DFA9B69BABBE6B64EAC214768BA9E99AB70DA8A0DCB541036",
+        "bytes": 3022
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "7CD43EBFD0A9B5CD5FF25848F3744EAD62552AE4E386C96CBB6324175B5FB80C",
+        "bytes": 1773
+      },
+      "candidate": {
+        "sha256": "43186D5E4F7C8CB62829AC4F8B21CC56773588B740B7FA3731A794F26408C2D1",
+        "bytes": 2135
+      }
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network.class",
+      "status": "changed",
+      "kind": "class",
+      "baseline": {
+        "sha256": "F59DFDC53A5AB6FA66865A6B67CFA5AEC61FE42C7325CC9AC8DAC801B3ACB848",
+        "bytes": 92921
+      },
+      "candidate": {
+        "sha256": "1D8670B9A7D2C586C64FE1A1F576D303B117159790ECB2321517782D433077D4",
+        "bytes": 93047
+      }
+    },
+    {
+      "entry": "META-INF/neoforge.mods.toml",
+      "status": "changed",
+      "kind": "resource",
+      "baseline": {
+        "sha256": "CFCE529CAF4A6548265F09A703190FA36A3846D6648B99EE9D81E210F7E8E439",
+        "bytes": 1005
+      },
+      "candidate": {
+        "sha256": "DE02C38211584783BD5A1808BBCA327FADC17CA823F63ABD94DA55179B440448",
+        "bytes": 1005
+      }
+    }
+  ]
+}

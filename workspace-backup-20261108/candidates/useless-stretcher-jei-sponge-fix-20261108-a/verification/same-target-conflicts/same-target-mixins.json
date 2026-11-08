@@ -1,0 +1,1316 @@
+[
+  {
+    "jar": "ae2utility-1.8.0-mygenesis-compat.2.jar",
+    "entry": "com/lhy/ae2utility/mixin/RecipesGuiAccessor.class",
+    "class": "com.lhy.ae2utility.mixin.RecipesGuiAccessor",
+    "mixinTargets": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.gui.recipes.RecipesGui"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.gui.recipes.RecipesGui"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "ae2utility$layouts",
+        "descriptor": "()Lmezz/jei/gui/recipes/RecipeGuiLayouts;",
+        "access": 1025,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/gen/Accessor;",
+            "values": {
+              "value": "layouts"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ae2utility$recipeLogic",
+        "descriptor": "()Lmezz/jei/gui/recipes/IRecipeGuiLogic;",
+        "access": 1025,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/gen/Accessor;",
+            "values": {
+              "value": "logic"
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [],
+    "classSha256": "CFF4F9EEC7B158E3AD8250E510CC52D97E1204EB6589A5E2D7D062BDCCD2872D",
+    "classEvidence": "matched-classes\\8FA48E50D5C2\\com\\lhy\\ae2utility\\mixin\\RecipesGuiAccessor.class",
+    "configuredIn": [
+      {
+        "entry": "ae2utility.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.lhy.ae2utility.mixin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "MixinAEBaseMenu",
+            "AppEngSlotMenuAccessor",
+            "AEBaseMenuInvoker",
+            "PatternProviderLogicInvoker",
+            "CraftingServiceAccessor",
+            "CraftingTreeProcessAccessor",
+            "CraftingTreeNodeAccessor",
+            "ScreenRenderableAccessor",
+            "MixinAdvPatternProviderLogic",
+            "MixinCraftingCpuLogicGroup",
+            "MixinAeStylePatternProviderBlock",
+            "MixinAdvStylePatternProviderBlock",
+            "MixinCraftingStylePatternInput",
+            "MixinProcessingStylePatternInput",
+            "MixinProcessingStylePatternPushInputs",
+            "MixinMeteoritePatternProviderLogic",
+            "MixinResonatingPatternProviderLogic",
+            "MixinCraftingCalculation",
+            "MixinCraftingCalculationMissing",
+            "MixinCraftingCpuHelper",
+            "MixinCraftingTreeNode",
+            "MixinCraftingTreeProcess",
+            "MixinCtrlQPendingUploadUtil",
+            "MixinNetworkCraftingProviders",
+            "MixinPatternProviderLogic",
+            "MixinOverloadedPatternProviderLogic",
+            "MixinOverloadedPatternProviderBlockEntity",
+            "MixinPatternProviderMenu",
+            "MixinRestrictedInputSlot"
+          ],
+          "client": [
+            "AEBaseScreenStyleAccessor",
+            "AEBaseScreenInvoker",
+            "MixinAEBaseScreen",
+            "MixinPatternEncodingTermScreenUpload",
+            "MixinProviderSelectScreen",
+            "ProviderSelectScreenInvoker",
+            "MixinRecipeLayout",
+            "MixinRecipeSlotEncodeShiftPin",
+            "RecipeGuiLayoutsAccessor",
+            "RecipeGuiLogicAccessor",
+            "RecipesGuiAccessor",
+            "MixinRecipeOptionButtons"
+          ],
+          "injectors": {
+            "defaultRequire": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jar": "JustEnoughMekanismMultiblocks-1.21.1-7.23.jar",
+    "entry": "giselle/jei_mekanism_multiblocks/client/mixin/jei/RecipesGuiMixin.class",
+    "class": "giselle.jei_mekanism_multiblocks.client.mixin.jei.RecipesGuiMixin",
+    "mixinTargets": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "value": [
+          {
+            "type": "mezz.jei.gui.recipes.RecipesGui",
+            "descriptor": "Lmezz/jei/gui/recipes/RecipesGui;"
+          }
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "value": [
+            {
+              "type": "mezz.jei.gui.recipes.RecipesGui",
+              "descriptor": "Lmezz/jei/gui/recipes/RecipesGui;"
+            }
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [],
+    "fields": [
+      {
+        "name": "logic",
+        "descriptor": "Lmezz/jei/gui/recipes/IRecipeGuiLogic;",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Shadow;",
+            "values": {}
+          }
+        ]
+      },
+      {
+        "name": "jei_mekanism_multiblocks$onStateChangeWasCaught",
+        "descriptor": "Z",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Unique;",
+            "values": {}
+          }
+        ]
+      }
+    ],
+    "classSha256": "BC980F4DB0782E93DDC152186B003204A5689472DF78B3A0C77027827B4E13A8",
+    "classEvidence": "matched-classes\\3B5E448C8CFD\\giselle\\jei_mekanism_multiblocks\\client\\mixin\\jei\\RecipesGuiMixin.class",
+    "configuredIn": [
+      {
+        "entry": "jei_mekanism_multiblocks.mixin.client.json",
+        "side": "client",
+        "configPriority": 1000,
+        "configuration": {
+          "required": true,
+          "package": "giselle.jei_mekanism_multiblocks.client.mixin",
+          "minVersion": "0.0.0",
+          "compatibilityLevel": "JAVA_17",
+          "client": [
+            "jei.RecipeGuiLogicAccessor",
+            "jei.RecipesGuiMixin",
+            "emi.JemiPluginMixin"
+          ],
+          "mixins": [],
+          "injectors": {
+            "defaultRequire": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jar": "neoecoae-21.2.15.jar",
+    "entry": "cn/dancingsnow/neoecoae/mixins/client/jei/MultiblockRecipesGuiMixin.class",
+    "class": "cn.dancingsnow.neoecoae.mixins.client.jei.MultiblockRecipesGuiMixin",
+    "mixinTargets": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.gui.recipes.RecipesGui"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.gui.recipes.RecipesGui"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "neoecoae$selectedCategory",
+        "descriptor": "(Lmezz/jei/api/recipe/category/IRecipeCategory;)Lmezz/jei/api/recipe/category/IRecipeCategory;",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lcom/llamalad7/mixinextras/injector/ModifyExpressionValue;",
+            "values": {
+              "method": [
+                "updateLayout"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "INVOKE",
+                    "target": "Lmezz/jei/gui/recipes/IRecipeGuiLogic;getSelectedRecipeCategory()Lmezz/jei/api/recipe/category/IRecipeCategory;"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "neoecoae$compactHeight",
+        "descriptor": "(I)I",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/ModifyArg;",
+            "values": {
+              "method": [
+                "updateSize",
+                "init",
+                "m_7856_"
+              ],
+              "at": {
+                "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                "values": {
+                  "value": "INVOKE",
+                  "target": "Lmezz/jei/gui/recipes/RecipeGuiSizing;calculateInitialSize(IZI)Lmezz/jei/gui/recipes/RecipeGuiSizing$Size;"
+                }
+              },
+              "index": 2,
+              "require": 0
+            }
+          }
+        ]
+      },
+      {
+        "name": "neoecoae$resizeOnCategoryChange",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "updateLayout"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "RETURN"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "name": "neoecoae$compactMultiblock",
+        "descriptor": "Z",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Unique;",
+            "values": {}
+          }
+        ]
+      },
+      {
+        "name": "neoecoae$resizePending",
+        "descriptor": "Z",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Unique;",
+            "values": {}
+          }
+        ]
+      }
+    ],
+    "classSha256": "1C484A8942BF9A077ED8A53CD487E81BAE875DFD484FDC645A1983E25CC080B4",
+    "classEvidence": "matched-classes\\409BE5A856BC\\cn\\dancingsnow\\neoecoae\\mixins\\client\\jei\\MultiblockRecipesGuiMixin.class",
+    "configuredIn": [
+      {
+        "entry": "neoecoae.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8",
+          "package": "cn.dancingsnow.neoecoae.mixins",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "ae2.accessor.AEBaseMenuAccessor",
+            "ae2.accessor.AECraftingPatternAccessor",
+            "ae2.accessor.CraftingPlanSummaryAccessor",
+            "ae2.accessor.DelegatingMEInventoryAccessor",
+            "ae2.accessor.SupplierStorageAccessor",
+            "ae2.accessor.PatternProviderLogicAccessor",
+            "ae2.crafting.CraftingCalculationMixin",
+            "ae2.crafting.AEProcessingPatternComponentMixin",
+            "ae2.crafting.Ae2CpuJobAccessor",
+            "ae2.crafting.Ae2CpuTaskAccessor",
+            "ae2.crafting.Ae2CpuTimeTrackerAccessor",
+            "ae2.crafting.Ae2CraftingCpuFastPathMixin",
+            "ae2.crafting.CraftingPlanMixin",
+            "ae2.crafting.CraftingServiceMixin",
+            "ae2.crafting.MultiCraftingTrackerMixin",
+            "ae2.crafting.CraftingTreeNodeMixin",
+            "ae2.crafting.PatternProviderDiagnosticsMixin",
+            "ae2.crafting.PatternProviderProcessingTargetMixin",
+            "ae2.menu.CellWorkbenchMenuMixin",
+            "ae2.menu.CraftConfirmMenuMixin",
+            "ae2.menu.CraftConfirmMenuForceStartMixin",
+            "ae2.menu.CraftingCpuListEntryMixin",
+            "ae2.menu.CraftingCpuMenuMixin",
+            "ae2.menu.CraftingStatusMenuMixin",
+            "ae2.menu.IOPortMenuMixin",
+            "ae2.menu.MenuOpenerMixin",
+            "ae2.menu.PatternEncodingTermMenuMixin",
+            "ae2.menu.SetStockAmountMenuMixin",
+            "ae2.storage.AppEngInternalInventoryMixin",
+            "ae2.storage.CellWorkbenchBlockEntityMixin",
+            "ae2.storage.DigitalSingularityEnergyServiceMixin",
+            "ae2.storage.IOPortBlockEntityMixin",
+            "ae2.storage.NativeMEStorageCellFilterMixin",
+            "ae2.storage.NetworkStorageMixin",
+            "ae2.storage.KeyCounterSnapshotMixin",
+            "ae2.storage.StorageBusInventoryMixin",
+            "ae2.storage.StorageServiceMixin",
+            "ae2.storage.StorageLevelEmitterPartMixin",
+            "ae2.storage.StorageLevelWatcherMixin",
+            "ae2.storage.StoredEnergyAmountMixin",
+            "ldlib.AsyncThreadDataMixin",
+            "minecraft.LightningBoltMixin",
+            "minecraft.PlayerRemoteMachineReachMixin"
+          ],
+          "client": [
+            "client.jei.RecipeLayoutMixin",
+            "client.jei.MultiblockRecipesGuiMixin",
+            "client.jei.RecipeLayoutBuilderMixin",
+            "client.accessor.MenuScreensAccessor",
+            "client.ae2.AEBaseScreenGrayToolbarMixin",
+            "client.ae2.CellWorkbenchScreenMixin",
+            "client.ae2.CpuSelectionListMixin",
+            "client.ae2.CpuSelectionListPagingMixin",
+            "client.ae2.CraftConfirmScreenMixin",
+            "client.ae2.CraftingCpuScreenMixin",
+            "client.ae2.CraftingStatusTableMixin",
+            "client.ae2.PatternEncodingTermScreenMixin",
+            "client.ae2.SetStockAmountScreenMixin",
+            "client.ae2.FluidHatchNumberEntryWidgetMixin",
+            "client.minecraft.ModelBakeryMixin"
+          ],
+          "server": [],
+          "injectors": {
+            "defaultRequire": 1
+          },
+          "mixinextras": {
+            "minVersion": "0.5.3"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiGuiMixin",
+    "mixinTargets": [
+      "mezz.jei.gui.recipes.RecipesGui"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.gui.recipes.RecipesGui"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.gui.recipes.RecipesGui"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "stretcher$pendingGui",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "show",
+                "showTypes",
+                "showRecipes",
+                "back",
+                "forward",
+                "open",
+                "updateLayout"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "HEAD"
+                  }
+                }
+              ],
+              "cancellable": true,
+              "require": 1
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [],
+    "classSha256": "CC359528D756C2C7F8644ED3E83826F7CD15012A9CF365D83C778452A78A3886",
+    "classEvidence": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiGuiMixin.class",
+    "configuredIn": [
+      {
+        "entry": "useless_stretcher.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.sorrowmist.useless.stretcher.mixin",
+          "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "BudgetedRecipeCatalogMixin",
+            "CapsuleDimensionBootstrapMixin",
+            "CapsuleGenerationHeightMixin",
+            "CapsuleScatteredHeightMixin",
+            "DesertPyramidCheckpointMixin",
+            "OccultismRitualClockMixin",
+            "Mbd2AsyncSyncMixin",
+            "StaffRadiationShieldingMixin",
+            "StaffRadiationEntityMixin",
+            "UsefulArmorGameModeMixin",
+            "EntityNoPhysicsAccessor",
+            "StaffPhaseMovementMixin",
+            "StaffPhasePacketMovementMixin",
+            "LivingHealthDataAccessor",
+            "TwoIDollRemovalGuardMixin",
+            "TwoIDollLookupGuardMixin",
+            "TwoIDollTickListGuardMixin",
+            "TwoIDollSectionGuardMixin",
+            "TwoIDollManagerLifecycleMixin",
+            "TwoIDollSectionLifecycleMixin",
+            "TwoIDollLevelCallbackGuardMixin",
+            "TwoIDollUselessKillGuardMixin",
+            "TwoIDollSpawnEggMixin",
+            "TwoIDollBrainTargetMixin",
+            "TwoIArsRitualMixin",
+            "TwoIArsJarMixin",
+            "TwoIBeeEncaseMixin",
+            "TwoIAmberMixin",
+            "TwoISummonCommandMixin",
+            "BeeTimerAccessor",
+            "TurtleTimerAccessor",
+            "AdapterUtilsMoldMixin",
+            "AdapterUtilsItemRepresentativeMixin",
+            "MoldHubMultiMoldMixin",
+            "MoldMatcherPreparedMoldsMixin",
+            "EmptyMyriadMoldMixin",
+            "MyriadContainerMigrationMixin",
+            "StaffMiningDispatcherMixin",
+            "StaffMiningDropsMixin",
+            "BrushableBlockEntityMixin",
+            "ServerLevelTimeStopMixin",
+            "RandomizableContainerLootMemoryMixin",
+            "MinecartContainerLootMemoryMixin",
+            "BeefTimeAccelerationMixin",
+            "UselessModLightningRodMixin",
+            "BeefToolVariantsMixin",
+            "ItemStackToolTagsMixin",
+            "BlockEntityChangedMixin",
+            "MePatternAssemblyBlockMixin",
+            "MePatternAssemblyBlockEntityMixin",
+            "InstalledStretcherFurnaceMixin",
+            "InstalledStretcherAssemblyMixin",
+            "InstalledStretcherSlotMixin",
+            "InstalledStretcherTerminalMixin",
+            "InstalledStretcherMenuMixin",
+            "InstalledStretcherPassiveMixin",
+            "SagMillingRecipeAdapterMixin",
+            "ApotheosisEnchantingStatsMixin",
+            "EnchantmentMenuAccessor",
+            "ApotheosisEnchantingMenuMixin"
+          ],
+          "client": [
+            "BudgetedClientCatalogMixin",
+            "CatalogJeiTimingMixin",
+            "CatalogJeiBuildTimingMixin",
+            "CatalogJeiIndexTimingMixin",
+            "CatalogJeiLookupMixin",
+            "CatalogJeiGuiMixin",
+            "TwoIDollClientRemovalMixin",
+            "StaffPhaseLocalMovementMixin",
+            "StaffPhaseVisibilityMixin",
+            "UsefulArmorLayerMixin",
+            "TwoIPlayerArmMixin",
+            "TwoIHeldDollMixin",
+            "LevelRendererCloudMixin"
+          ],
+          "server": []
+        }
+      }
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiLookupMixin",
+    "mixinTargets": [
+      "mezz.jei.library.recipes.RecipeLookup"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.library.recipes.RecipeLookup"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.library.recipes.RecipeLookup"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "stretcher$pendingLookup",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "get"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "HEAD"
+                  }
+                }
+              ],
+              "cancellable": true,
+              "require": 1
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "name": "recipeType",
+        "descriptor": "Lmezz/jei/api/recipe/RecipeType;",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Shadow;",
+            "values": {}
+          },
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/Final;",
+            "values": {}
+          }
+        ]
+      }
+    ],
+    "classSha256": "50D7E833FA409E81FCAAEBA8A6233CA35018BB704F0FE3C218A0D4598FC240B7",
+    "classEvidence": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiLookupMixin.class",
+    "configuredIn": [
+      {
+        "entry": "useless_stretcher.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.sorrowmist.useless.stretcher.mixin",
+          "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "BudgetedRecipeCatalogMixin",
+            "CapsuleDimensionBootstrapMixin",
+            "CapsuleGenerationHeightMixin",
+            "CapsuleScatteredHeightMixin",
+            "DesertPyramidCheckpointMixin",
+            "OccultismRitualClockMixin",
+            "Mbd2AsyncSyncMixin",
+            "StaffRadiationShieldingMixin",
+            "StaffRadiationEntityMixin",
+            "UsefulArmorGameModeMixin",
+            "EntityNoPhysicsAccessor",
+            "StaffPhaseMovementMixin",
+            "StaffPhasePacketMovementMixin",
+            "LivingHealthDataAccessor",
+            "TwoIDollRemovalGuardMixin",
+            "TwoIDollLookupGuardMixin",
+            "TwoIDollTickListGuardMixin",
+            "TwoIDollSectionGuardMixin",
+            "TwoIDollManagerLifecycleMixin",
+            "TwoIDollSectionLifecycleMixin",
+            "TwoIDollLevelCallbackGuardMixin",
+            "TwoIDollUselessKillGuardMixin",
+            "TwoIDollSpawnEggMixin",
+            "TwoIDollBrainTargetMixin",
+            "TwoIArsRitualMixin",
+            "TwoIArsJarMixin",
+            "TwoIBeeEncaseMixin",
+            "TwoIAmberMixin",
+            "TwoISummonCommandMixin",
+            "BeeTimerAccessor",
+            "TurtleTimerAccessor",
+            "AdapterUtilsMoldMixin",
+            "AdapterUtilsItemRepresentativeMixin",
+            "MoldHubMultiMoldMixin",
+            "MoldMatcherPreparedMoldsMixin",
+            "EmptyMyriadMoldMixin",
+            "MyriadContainerMigrationMixin",
+            "StaffMiningDispatcherMixin",
+            "StaffMiningDropsMixin",
+            "BrushableBlockEntityMixin",
+            "ServerLevelTimeStopMixin",
+            "RandomizableContainerLootMemoryMixin",
+            "MinecartContainerLootMemoryMixin",
+            "BeefTimeAccelerationMixin",
+            "UselessModLightningRodMixin",
+            "BeefToolVariantsMixin",
+            "ItemStackToolTagsMixin",
+            "BlockEntityChangedMixin",
+            "MePatternAssemblyBlockMixin",
+            "MePatternAssemblyBlockEntityMixin",
+            "InstalledStretcherFurnaceMixin",
+            "InstalledStretcherAssemblyMixin",
+            "InstalledStretcherSlotMixin",
+            "InstalledStretcherTerminalMixin",
+            "InstalledStretcherMenuMixin",
+            "InstalledStretcherPassiveMixin",
+            "SagMillingRecipeAdapterMixin",
+            "ApotheosisEnchantingStatsMixin",
+            "EnchantmentMenuAccessor",
+            "ApotheosisEnchantingMenuMixin"
+          ],
+          "client": [
+            "BudgetedClientCatalogMixin",
+            "CatalogJeiTimingMixin",
+            "CatalogJeiBuildTimingMixin",
+            "CatalogJeiIndexTimingMixin",
+            "CatalogJeiLookupMixin",
+            "CatalogJeiGuiMixin",
+            "TwoIDollClientRemovalMixin",
+            "StaffPhaseLocalMovementMixin",
+            "StaffPhaseVisibilityMixin",
+            "UsefulArmorLayerMixin",
+            "TwoIPlayerArmMixin",
+            "TwoIHeldDollMixin",
+            "LevelRendererCloudMixin"
+          ],
+          "server": []
+        }
+      }
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiTimingMixin",
+    "mixinTargets": [
+      "com.sorrowmist.useless.compat.jei.JEIPlugin"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "com.sorrowmist.useless.compat.jei.JEIPlugin"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "com.sorrowmist.useless.compat.jei.JEIPlugin"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "stretcher$registrationReset",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "registerRecipes"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "HEAD"
+                  }
+                }
+              ],
+              "require": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "stretcher$deferInitialCatalog",
+        "descriptor": "(Lnet/minecraft/world/level/Level;)Z",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Redirect;",
+            "values": {
+              "method": [
+                "registerRecipes"
+              ],
+              "at": {
+                "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                "values": {
+                  "value": "INVOKE",
+                  "target": "Lcom/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog;isReady(Lnet/minecraft/world/level/Level;)Z"
+                }
+              },
+              "require": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "stretcher$runtimeAvailable",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "onRuntimeAvailable"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "RETURN"
+                  }
+                }
+              ],
+              "require": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "stretcher$runtimeUnavailable",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "onRuntimeUnavailable"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "RETURN"
+                  }
+                }
+              ],
+              "require": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "stretcher$refreshInSlices",
+        "descriptor": "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "access": 10,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+            "values": {
+              "method": [
+                "refreshAlloyFurnaceRecipes"
+              ],
+              "at": [
+                {
+                  "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                  "values": {
+                    "value": "HEAD"
+                  }
+                }
+              ],
+              "cancellable": true,
+              "require": 1
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [],
+    "classSha256": "AE2F0BD6D9BF752575EF777CDC25E1B5D6BD7A03291083E699719B1C487C1612",
+    "classEvidence": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiTimingMixin.class",
+    "configuredIn": [
+      {
+        "entry": "useless_stretcher.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.sorrowmist.useless.stretcher.mixin",
+          "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "BudgetedRecipeCatalogMixin",
+            "CapsuleDimensionBootstrapMixin",
+            "CapsuleGenerationHeightMixin",
+            "CapsuleScatteredHeightMixin",
+            "DesertPyramidCheckpointMixin",
+            "OccultismRitualClockMixin",
+            "Mbd2AsyncSyncMixin",
+            "StaffRadiationShieldingMixin",
+            "StaffRadiationEntityMixin",
+            "UsefulArmorGameModeMixin",
+            "EntityNoPhysicsAccessor",
+            "StaffPhaseMovementMixin",
+            "StaffPhasePacketMovementMixin",
+            "LivingHealthDataAccessor",
+            "TwoIDollRemovalGuardMixin",
+            "TwoIDollLookupGuardMixin",
+            "TwoIDollTickListGuardMixin",
+            "TwoIDollSectionGuardMixin",
+            "TwoIDollManagerLifecycleMixin",
+            "TwoIDollSectionLifecycleMixin",
+            "TwoIDollLevelCallbackGuardMixin",
+            "TwoIDollUselessKillGuardMixin",
+            "TwoIDollSpawnEggMixin",
+            "TwoIDollBrainTargetMixin",
+            "TwoIArsRitualMixin",
+            "TwoIArsJarMixin",
+            "TwoIBeeEncaseMixin",
+            "TwoIAmberMixin",
+            "TwoISummonCommandMixin",
+            "BeeTimerAccessor",
+            "TurtleTimerAccessor",
+            "AdapterUtilsMoldMixin",
+            "AdapterUtilsItemRepresentativeMixin",
+            "MoldHubMultiMoldMixin",
+            "MoldMatcherPreparedMoldsMixin",
+            "EmptyMyriadMoldMixin",
+            "MyriadContainerMigrationMixin",
+            "StaffMiningDispatcherMixin",
+            "StaffMiningDropsMixin",
+            "BrushableBlockEntityMixin",
+            "ServerLevelTimeStopMixin",
+            "RandomizableContainerLootMemoryMixin",
+            "MinecartContainerLootMemoryMixin",
+            "BeefTimeAccelerationMixin",
+            "UselessModLightningRodMixin",
+            "BeefToolVariantsMixin",
+            "ItemStackToolTagsMixin",
+            "BlockEntityChangedMixin",
+            "MePatternAssemblyBlockMixin",
+            "MePatternAssemblyBlockEntityMixin",
+            "InstalledStretcherFurnaceMixin",
+            "InstalledStretcherAssemblyMixin",
+            "InstalledStretcherSlotMixin",
+            "InstalledStretcherTerminalMixin",
+            "InstalledStretcherMenuMixin",
+            "InstalledStretcherPassiveMixin",
+            "SagMillingRecipeAdapterMixin",
+            "ApotheosisEnchantingStatsMixin",
+            "EnchantmentMenuAccessor",
+            "ApotheosisEnchantingMenuMixin"
+          ],
+          "client": [
+            "BudgetedClientCatalogMixin",
+            "CatalogJeiTimingMixin",
+            "CatalogJeiBuildTimingMixin",
+            "CatalogJeiIndexTimingMixin",
+            "CatalogJeiLookupMixin",
+            "CatalogJeiGuiMixin",
+            "TwoIDollClientRemovalMixin",
+            "StaffPhaseLocalMovementMixin",
+            "StaffPhaseVisibilityMixin",
+            "UsefulArmorLayerMixin",
+            "TwoIPlayerArmMixin",
+            "TwoIHeldDollMixin",
+            "LevelRendererCloudMixin"
+          ],
+          "server": []
+        }
+      }
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiBuildTimingMixin",
+    "mixinTargets": [
+      "mezz.jei.library.util.IngredientSupplierHelper"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.library.util.IngredientSupplierHelper"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.library.util.IngredientSupplierHelper"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "stretcher$timeCategory",
+        "descriptor": "(Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Ljava/lang/Object;Lmezz/jei/api/recipe/IFocusGroup;)V",
+        "access": 10,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Redirect;",
+            "values": {
+              "method": [
+                "getIngredientSupplier"
+              ],
+              "at": {
+                "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                "values": {
+                  "value": "INVOKE",
+                  "target": "Lmezz/jei/api/recipe/category/IRecipeCategory;setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Ljava/lang/Object;Lmezz/jei/api/recipe/IFocusGroup;)V"
+                }
+              },
+              "require": 1
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [],
+    "classSha256": "A6A0E4C6D10886D27BD33ADAF3CB7DED17F0223E4114F0350C765056F20F96B4",
+    "classEvidence": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.class",
+    "configuredIn": [
+      {
+        "entry": "useless_stretcher.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.sorrowmist.useless.stretcher.mixin",
+          "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "BudgetedRecipeCatalogMixin",
+            "CapsuleDimensionBootstrapMixin",
+            "CapsuleGenerationHeightMixin",
+            "CapsuleScatteredHeightMixin",
+            "DesertPyramidCheckpointMixin",
+            "OccultismRitualClockMixin",
+            "Mbd2AsyncSyncMixin",
+            "StaffRadiationShieldingMixin",
+            "StaffRadiationEntityMixin",
+            "UsefulArmorGameModeMixin",
+            "EntityNoPhysicsAccessor",
+            "StaffPhaseMovementMixin",
+            "StaffPhasePacketMovementMixin",
+            "LivingHealthDataAccessor",
+            "TwoIDollRemovalGuardMixin",
+            "TwoIDollLookupGuardMixin",
+            "TwoIDollTickListGuardMixin",
+            "TwoIDollSectionGuardMixin",
+            "TwoIDollManagerLifecycleMixin",
+            "TwoIDollSectionLifecycleMixin",
+            "TwoIDollLevelCallbackGuardMixin",
+            "TwoIDollUselessKillGuardMixin",
+            "TwoIDollSpawnEggMixin",
+            "TwoIDollBrainTargetMixin",
+            "TwoIArsRitualMixin",
+            "TwoIArsJarMixin",
+            "TwoIBeeEncaseMixin",
+            "TwoIAmberMixin",
+            "TwoISummonCommandMixin",
+            "BeeTimerAccessor",
+            "TurtleTimerAccessor",
+            "AdapterUtilsMoldMixin",
+            "AdapterUtilsItemRepresentativeMixin",
+            "MoldHubMultiMoldMixin",
+            "MoldMatcherPreparedMoldsMixin",
+            "EmptyMyriadMoldMixin",
+            "MyriadContainerMigrationMixin",
+            "StaffMiningDispatcherMixin",
+            "StaffMiningDropsMixin",
+            "BrushableBlockEntityMixin",
+            "ServerLevelTimeStopMixin",
+            "RandomizableContainerLootMemoryMixin",
+            "MinecartContainerLootMemoryMixin",
+            "BeefTimeAccelerationMixin",
+            "UselessModLightningRodMixin",
+            "BeefToolVariantsMixin",
+            "ItemStackToolTagsMixin",
+            "BlockEntityChangedMixin",
+            "MePatternAssemblyBlockMixin",
+            "MePatternAssemblyBlockEntityMixin",
+            "InstalledStretcherFurnaceMixin",
+            "InstalledStretcherAssemblyMixin",
+            "InstalledStretcherSlotMixin",
+            "InstalledStretcherTerminalMixin",
+            "InstalledStretcherMenuMixin",
+            "InstalledStretcherPassiveMixin",
+            "SagMillingRecipeAdapterMixin",
+            "ApotheosisEnchantingStatsMixin",
+            "EnchantmentMenuAccessor",
+            "ApotheosisEnchantingMenuMixin"
+          ],
+          "client": [
+            "BudgetedClientCatalogMixin",
+            "CatalogJeiTimingMixin",
+            "CatalogJeiBuildTimingMixin",
+            "CatalogJeiIndexTimingMixin",
+            "CatalogJeiLookupMixin",
+            "CatalogJeiGuiMixin",
+            "TwoIDollClientRemovalMixin",
+            "StaffPhaseLocalMovementMixin",
+            "StaffPhaseVisibilityMixin",
+            "UsefulArmorLayerMixin",
+            "TwoIPlayerArmMixin",
+            "TwoIHeldDollMixin",
+            "LevelRendererCloudMixin"
+          ],
+          "server": []
+        }
+      }
+    ]
+  },
+  {
+    "jar": "useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+    "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class",
+    "class": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiIndexTimingMixin",
+    "mixinTargets": [
+      "mezz.jei.library.recipes.RecipeManagerInternal"
+    ],
+    "priority": 1000,
+    "mixinAnnotation": {
+      "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+      "values": {
+        "targets": [
+          "mezz.jei.library.recipes.RecipeManagerInternal"
+        ],
+        "remap": false
+      }
+    },
+    "allClassAnnotations": [
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Pseudo;",
+        "values": {}
+      },
+      {
+        "descriptor": "Lorg/spongepowered/asm/mixin/Mixin;",
+        "values": {
+          "targets": [
+            "mezz.jei.library.recipes.RecipeManagerInternal"
+          ],
+          "remap": false
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "stretcher$timeIndex",
+        "descriptor": "(Lmezz/jei/library/recipes/collect/RecipeMap;Lmezz/jei/api/recipe/RecipeType;Ljava/lang/Object;Lmezz/jei/api/ingredients/IIngredientSupplier;)V",
+        "access": 2,
+        "annotations": [
+          {
+            "descriptor": "Lorg/spongepowered/asm/mixin/injection/Redirect;",
+            "values": {
+              "method": [
+                "addRecipe"
+              ],
+              "at": {
+                "descriptor": "Lorg/spongepowered/asm/mixin/injection/At;",
+                "values": {
+                  "value": "INVOKE",
+                  "target": "Lmezz/jei/library/recipes/collect/RecipeMap;addRecipe(Lmezz/jei/api/recipe/RecipeType;Ljava/lang/Object;Lmezz/jei/api/ingredients/IIngredientSupplier;)V"
+                }
+              },
+              "require": 1
+            }
+          }
+        ]
+      }
+    ],
+    "fields": [],
+    "classSha256": "4503033D2D11A6401503C19A48C28A1DBAD169D36AE8C076E322DE71E033EF15",
+    "classEvidence": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiIndexTimingMixin.class",
+    "configuredIn": [
+      {
+        "entry": "useless_stretcher.mixins.json",
+        "side": "client",
+        "configPriority": 1000,
+        "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+        "configuration": {
+          "required": true,
+          "minVersion": "0.8.5",
+          "package": "com.sorrowmist.useless.stretcher.mixin",
+          "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
+          "compatibilityLevel": "JAVA_21",
+          "mixins": [
+            "BudgetedRecipeCatalogMixin",
+            "CapsuleDimensionBootstrapMixin",
+            "CapsuleGenerationHeightMixin",
+            "CapsuleScatteredHeightMixin",
+            "DesertPyramidCheckpointMixin",
+            "OccultismRitualClockMixin",
+            "Mbd2AsyncSyncMixin",
+            "StaffRadiationShieldingMixin",
+            "StaffRadiationEntityMixin",
+            "UsefulArmorGameModeMixin",
+            "EntityNoPhysicsAccessor",
+            "StaffPhaseMovementMixin",
+            "StaffPhasePacketMovementMixin",
+            "LivingHealthDataAccessor",
+            "TwoIDollRemovalGuardMixin",
+            "TwoIDollLookupGuardMixin",
+            "TwoIDollTickListGuardMixin",
+            "TwoIDollSectionGuardMixin",
+            "TwoIDollManagerLifecycleMixin",
+            "TwoIDollSectionLifecycleMixin",
+            "TwoIDollLevelCallbackGuardMixin",
+            "TwoIDollUselessKillGuardMixin",
+            "TwoIDollSpawnEggMixin",
+            "TwoIDollBrainTargetMixin",
+            "TwoIArsRitualMixin",
+            "TwoIArsJarMixin",
+            "TwoIBeeEncaseMixin",
+            "TwoIAmberMixin",
+            "TwoISummonCommandMixin",
+            "BeeTimerAccessor",
+            "TurtleTimerAccessor",
+            "AdapterUtilsMoldMixin",
+            "AdapterUtilsItemRepresentativeMixin",
+            "MoldHubMultiMoldMixin",
+            "MoldMatcherPreparedMoldsMixin",
+            "EmptyMyriadMoldMixin",
+            "MyriadContainerMigrationMixin",
+            "StaffMiningDispatcherMixin",
+            "StaffMiningDropsMixin",
+            "BrushableBlockEntityMixin",
+            "ServerLevelTimeStopMixin",
+            "RandomizableContainerLootMemoryMixin",
+            "MinecartContainerLootMemoryMixin",
+            "BeefTimeAccelerationMixin",
+            "UselessModLightningRodMixin",
+            "BeefToolVariantsMixin",
+            "ItemStackToolTagsMixin",
+            "BlockEntityChangedMixin",
+            "MePatternAssemblyBlockMixin",
+            "MePatternAssemblyBlockEntityMixin",
+            "InstalledStretcherFurnaceMixin",
+            "InstalledStretcherAssemblyMixin",
+            "InstalledStretcherSlotMixin",
+            "InstalledStretcherTerminalMixin",
+            "InstalledStretcherMenuMixin",
+            "InstalledStretcherPassiveMixin",
+            "SagMillingRecipeAdapterMixin",
+            "ApotheosisEnchantingStatsMixin",
+            "EnchantmentMenuAccessor",
+            "ApotheosisEnchantingMenuMixin"
+          ],
+          "client": [
+            "BudgetedClientCatalogMixin",
+            "CatalogJeiTimingMixin",
+            "CatalogJeiBuildTimingMixin",
+            "CatalogJeiIndexTimingMixin",
+            "CatalogJeiLookupMixin",
+            "CatalogJeiGuiMixin",
+            "TwoIDollClientRemovalMixin",
+            "StaffPhaseLocalMovementMixin",
+            "StaffPhaseVisibilityMixin",
+            "UsefulArmorLayerMixin",
+            "TwoIPlayerArmMixin",
+            "TwoIHeldDollMixin",
+            "LevelRendererCloudMixin"
+          ],
+          "server": []
+        }
+      }
+    ]
+  }
+]

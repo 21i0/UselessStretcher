@@ -1,0 +1,76 @@
+{
+  "status": "FROZEN_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-07T13:12:14.2965592Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar",
+  "sha256": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+  "size": 12809113,
+  "tests": {
+    "tests found": 184,
+    "tests skipped": 0,
+    "tests started": 184,
+    "tests aborted": 0,
+    "tests successful": 184,
+    "tests failed": 0,
+    "containers aborted": 0,
+    "containers failed": 0
+  },
+  "testLogSha256": "D98572E4A5F24CDA504AFD7110B8AB4C39DEB357FDAA96F22C400DCC0CA5F8A7",
+  "entryCounts": {
+    "baseline": 677,
+    "candidate": 678,
+    "unchanged": 675,
+    "added": 1,
+    "changed": 2,
+    "removed": 0
+  },
+  "memberDiff": {
+    "added": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPlacementGuard.class",
+        "sha256": "8EB7781AB47B9ED00991F45DBDEB4FCB5243ABB5B07D545EB1F0E69B1DC60ADD"
+      }
+    ],
+    "changed": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+        "baselineSha256": "43186D5E4F7C8CB62829AC4F8B21CC56773588B740B7FA3731A794F26408C2D1",
+        "sha256": "6D7CD60B1653AB47729D448695432B4DAF3CD12A9BFBB478D00B67A51D2F6A35"
+      },
+      {
+        "name": "META-INF/neoforge.mods.toml",
+        "baselineSha256": "B66C70A6FDEDF28C2A20802D208018E4B34736B838AC5C5201EDF9D2E44A6353",
+        "sha256": "6471C3EADA6DB8CFAD8BAC366DD141B38DBE85E6D6CF001F62A2A71562FDBE5C"
+      }
+    ],
+    "removed": []
+  },
+  "baselineSha256": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+  "referenceHashes": {
+    "baselineP4": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+    "frozenP3": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "native246": "B86A12E8BD6417FD3C89F7C723CA195D68D1F9F9F099480850FFD3C93E5897BC",
+    "native2462": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17",
+    "candidate": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F"
+  },
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPlacementGuard.class",
+      "sha256": "8EB7781AB47B9ED00991F45DBDEB4FCB5243ABB5B07D545EB1F0E69B1DC60ADD"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+      "sha256": "6D7CD60B1653AB47729D448695432B4DAF3CD12A9BFBB478D00B67A51D2F6A35"
+    }
+  ],
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\audit-runs\\20261107-131214283\\assembly-lock-audit-report.json",
+  "auditReportSha256": "0FF1334644F3A3B3F7C46B172BAD0AA9E75548B9E98B33E8227B36EDBBFECC38",
+  "auditToolSha256": "56C0B25C27571850CB7D875635671D62DA45E1298E75BA5B41FF940B9F791B84",
+  "buildResult": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\verification\\assembly-lock-20261107\\build-result.json",
+  "buildResultSha256": "BD9B75CB27AEB58E04BB9F3507BD1E20FA5692F602F0BADDDC4C3BE649A3A3BF",
+  "performancePassed": false,
+  "runtimeMixinApplied": false,
+  "pending": "Real game menu click/shift/drag swap paths, persistence and full-pack runtime validation remain untested."
+}

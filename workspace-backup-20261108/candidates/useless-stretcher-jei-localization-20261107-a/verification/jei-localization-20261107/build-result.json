@@ -1,0 +1,108 @@
+{
+  "timestampUtc": "2026-11-07T14:24:53.9976519Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh.jar",
+  "sha256": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+  "size": 12810599,
+  "baselineSha256": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+  "classesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\build\\localization-20261107-142442439\\classes",
+  "checkClassesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\build\\localization-20261107-142442439\\check-classes",
+  "compilerExitCode": 0,
+  "checkCompilerExitCode": 0,
+  "checkExitCode": 0,
+  "checkArguments": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\build\\localization-20261107-142442439\\java-checks.args",
+  "checkCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\build\\localization-20261107-142442439\\javac-checks.args",
+  "mainCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\build\\localization-20261107-142442439\\javac-main.args",
+  "checkLog": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\verification\\jei-localization-20261107\\focused-checks.log",
+  "checkLogSha256": "4CDC7C52BE07678AC6526032DCF08E415D6C185D9409D3550C633ADDA37B6A50",
+  "checkResult": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\verification\\jei-localization-20261107\\check-result.json",
+  "checkResultSha256": "0B28BD5600EDF9B6B3856C8F972F9AA66D0B792246890F30E8EB511D20EB3EB6",
+  "inputs": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.java",
+      "sha256": "CBCE127F5EBC3BB84F0BA60DB1E9E15993614A3DD53C45A28838862939297215"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\ClientCatalogLifecycle.java",
+      "sha256": "E2BBD8E40FF09B76227A6D45228E2E284B10398E99BD3A6D3BAC56054C17B12E"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\verification\\jei-localization-20261107\\JeiLocalizationChecks.java",
+      "sha256": "53BC6D5DAE78FABCFC5FC8EBAE85CF17B57ECA2E591660D2AE5AA5D689935E29"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "sha256": "D9CBA049863127463659C6163CF89CD4859D4039BF5CC4F048DDC1E5111CF0B7"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\resources\\assets\\useless_stretcher\\lang\\zh_cn.json",
+      "sha256": "24956D8E9BEA267591D5A33AC1CF6861E422984FFAB0816FDFEBA02F3493F735"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\resources\\assets\\useless_stretcher\\lang\\en_us.json",
+      "sha256": "6996D09BA95337792928F68745BE13EAD38422CE1EF6637EA710E98FDCB6C70A"
+    }
+  ],
+  "mainSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.java",
+      "sha256": "CBCE127F5EBC3BB84F0BA60DB1E9E15993614A3DD53C45A28838862939297215"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\ClientCatalogLifecycle.java",
+      "sha256": "E2BBD8E40FF09B76227A6D45228E2E284B10398E99BD3A6D3BAC56054C17B12E"
+    }
+  ],
+  "checkSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\verification\\jei-localization-20261107\\JeiLocalizationChecks.java",
+      "sha256": "53BC6D5DAE78FABCFC5FC8EBAE85CF17B57ECA2E591660D2AE5AA5D689935E29"
+    }
+  ],
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "sha256": "0FE8FC1B4DB381D9AC7C227C2EAC787D5DC5CF3CB5BB038716DB5654EB0C896F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "sha256": "8025FA26DBC3921C1FB3E2B8ACB715E35BF086F5347077B43B8590DAD1453064"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+      "sha256": "0199A838590904B48F21BA2F3E284BA3F3723C67D33A842C8EF723D2141EE2B3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+      "sha256": "F250B508CE298085CA9A635403043395467C3C6A1F942C637F42D138C0B383F6"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "sha256": "74088AC10DE888B2F52FD7248467E515F92ADC50E8FB9DEF5184E30A83B46484"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "sha256": "FB2772659B693897B1C4F70B79FDD60C3E5BE06FC639FCA7FEAAFCEEAD3B4F3A"
+    }
+  ],
+  "checkCompiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiLocalizationChecks.class",
+      "sha256": "F238D6B86F7FAC9C101F35EA1FC8989E1FE75CE8A732AD2BC6075BB314F0D3A4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiLocalizationChecks$1.class",
+      "sha256": "FACD0FD1CCFAD723232518062C8A0387703B7557938A2E2FB5F7CF4942047873"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiLocalizationChecks$TableLanguage.class",
+      "sha256": "1513040E28DCD9BF2DCA4749FDD89A1ED3CEBDBA0384049A8B1A5599CBD02F20"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiLocalizationChecks$Throwing.class",
+      "sha256": "15A008A9C83B4CB2B5A6B7E21357AA46B13B2D98E0FF83F80D99D95835970591"
+    }
+  ],
+  "full184SuiteRerun": false
+}

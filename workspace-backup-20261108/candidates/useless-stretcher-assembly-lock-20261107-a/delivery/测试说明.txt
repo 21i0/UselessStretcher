@@ -1,0 +1,21 @@
+万象担架 1.6.4 独立候选：样板总成安装锁定
+包内版本：1.21.1-1.6.4-catalog-P4-assembly-lock
+
+JAR：D:\AI\candidates\useless-stretcher-assembly-lock-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar
+SHA256：28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F
+大小：12,809,113 字节
+
+本轮修复：总成槽已有担架时，菜单在交换前拒绝其它担架和普通已编码样板，避免仅在库存setter拒绝时发生物品交换不一致。空光标取出保留可用。总成继续使用装入时独立UUID和样板快照，不跟随源万物之块后续变化。
+
+184/184离线测试通过；精确包内差异、版本、测试类排除和静态Mixin目标检查通过，已冻结。相对P4仅新增1个guard class、修改slot Mixin和版本元数据，其余675项原字节不变。
+另用独立测试替身恢复旧行为，原175项仍通过，3个新增菜单/编码样板回归按预期失败；替身未入包，生产源码和JAR未变。
+
+未启动Minecraft客户端、服务器、世界或模组加载器。未提交、推送、发布，未改运行实例与原P3/P4。原生菜单的鼠标交换/数字键交换/取出已做离线测试；游戏内Mixin应用、shift/拖拽/自动化和同存档进程重启仍需实际验证。
+
+使用完整存档副本测试。旧已安装担架只能在首次迁移时截取当前可读源库，无法追溯历史装入内容。样板库保存升级为格式3；旧1.6.3无法安全读取，回退必须恢复升级前整存档备份。
+
+P4的JEI自适应批次和计时原样保留，真实性能仍待完整端实测。单条native JEI调用不可抢占，不能保证帧耗时低于4ms。
+
+冻结manifest：本目录 assembly-lock-freeze-manifest.json
+包内差异：本目录 assembly-lock-members-vs-P4.json
+完整报告：D:\AI\candidates\useless-stretcher-assembly-lock-20261107-a\verification\assembly-lock-20261107\REPORT.md

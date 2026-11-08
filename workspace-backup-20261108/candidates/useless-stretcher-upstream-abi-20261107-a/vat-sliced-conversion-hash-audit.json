@@ -1,0 +1,14 @@
+[
+  {
+    "class": "com/sorrowmist/useless/content/recipe/adapters/enderio/VatFermentingRecipeAdapter.class",
+    "oldSha256": "f7269e370d7e13f56a8ff33bf77b17d664d4a4e6911e765bc1c08364b97b0494",
+    "newSha256": "5283929e624fba3ddabb4bffac031d89d3e5ad210878f9c1904a442410a1d255",
+    "byteIdentical": false
+  },
+  {
+    "class": "com/sorrowmist/useless/content/recipe/adapters/enderio/VatFermentingRecipeAdapter$PairResult.class",
+    "oldSha256": "a1ed2e67b5a2b0627ba0a052296870f8726dd9542571d27f97f0edc940ae4652",
+    "newSha256": "02b65d501fbf8e7a3bf6ce1e6d44f95973629fc36ceaec395fa89da1f49f4ce0",
+    "byteIdentical": false
+  }
+]

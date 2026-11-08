@@ -1,0 +1,162 @@
+{
+  "status": "FROZEN_FOCUSED_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-07T14:27:14.1674732Z",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh.jar",
+  "sha256": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+  "size": 12810599,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh",
+  "baselineSha256": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+  "gameLaunched": false,
+  "full184SuiteRerun": false,
+  "checks": {
+    "status": "PASS",
+    "checksFound": 18,
+    "checksStarted": 18,
+    "checksPassed": 18,
+    "checksFailed": 0,
+    "gameLaunched": false,
+    "scope": "Actual Component/Language translation and detached presentation snapshots only; no Minecraft runtime or 184-test regression rerun.",
+    "assertions": [
+      {
+        "name": "ten_localization_keys_exist_in_both_resources",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_PLAN_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_HIDE_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_ADD_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_UNHIDE_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_COMMIT_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_DONE_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_CANCELLED_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "phase_FAILED_uses_correct_translation_and_counters",
+        "status": "PASS"
+      },
+      {
+        "name": "waiting_and_preparing_messages_really_resolve_from_both_json_files",
+        "status": "PASS"
+      },
+      {
+        "name": "initial_hud_snapshot_is_translatable_waiting_runtime",
+        "status": "PASS"
+      },
+      {
+        "name": "hud_snapshot_is_defensive_copy",
+        "status": "PASS"
+      },
+      {
+        "name": "diagnostic_progress_string_abi_and_initial_text_are_preserved",
+        "status": "PASS"
+      },
+      {
+        "name": "same_component_retranslates_after_language_switch",
+        "status": "PASS"
+      },
+      {
+        "name": "new_addition_count_is_not_total_or_a_false_percentage",
+        "status": "PASS"
+      },
+      {
+        "name": "ledger_status_updates_actual_detached_hud_snapshot",
+        "status": "PASS"
+      },
+      {
+        "name": "failure_details_stay_in_diagnostic_text_and_out_of_hud",
+        "status": "PASS"
+      },
+      {
+        "name": "off_owner_getters_only_read_detached_snapshot",
+        "status": "PASS"
+      }
+    ]
+  },
+  "checkLogSha256": "4CDC7C52BE07678AC6526032DCF08E415D6C185D9409D3550C633ADDA37B6A50",
+  "entryCounts": {
+    "baseline": 678,
+    "candidate": 678,
+    "unchanged": 669,
+    "added": 0,
+    "changed": 9,
+    "removed": 0
+  },
+  "memberDiff": [
+    {
+      "name": "assets/useless_stretcher/lang/en_us.json",
+      "oldSha256": "EB3A6A3E0A6DCEF445FA4402F6991E2C246181BD2CDB56343624EE98CE703E60",
+      "sha256": "6996D09BA95337792928F68745BE13EAD38422CE1EF6637EA710E98FDCB6C70A"
+    },
+    {
+      "name": "assets/useless_stretcher/lang/zh_cn.json",
+      "oldSha256": "E07B365DEEEAB70391168006E5C0667A922520E8457EBF19B159A5ECBF224EED",
+      "sha256": "24956D8E9BEA267591D5A33AC1CF6861E422984FFAB0816FDFEBA02F3493F735"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "oldSha256": "B06D40E1896DC4072D2BD6EB5F37E69E9A4F00C5A01EDC7BC65C7D5A19D900EB",
+      "sha256": "0FE8FC1B4DB381D9AC7C227C2EAC787D5DC5CF3CB5BB038716DB5654EB0C896F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "oldSha256": "38ABE1255B4A18752E844FE773B1EF451D47FB9179BE506778EFC0DD1C549C19",
+      "sha256": "8025FA26DBC3921C1FB3E2B8ACB715E35BF086F5347077B43B8590DAD1453064"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+      "oldSha256": "E0A9AEB327883AD209E006522BE79695AAE339DD60675B89B44197FDBB8CFD15",
+      "sha256": "0199A838590904B48F21BA2F3E284BA3F3723C67D33A842C8EF723D2141EE2B3"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+      "oldSha256": "796B5CE3574CE854C0FAAF5055968D0436851CB2A789BC6653603218DDFFDAEE",
+      "sha256": "F250B508CE298085CA9A635403043395467C3C6A1F942C637F42D138C0B383F6"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "oldSha256": "8334DA6D31AA4F78AA507A038A2478D6E76C5C7A4CBCE60A326D77A41A594870",
+      "sha256": "74088AC10DE888B2F52FD7248467E515F92ADC50E8FB9DEF5184E30A83B46484"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "oldSha256": "109C8A149EA5A9A828226CEA2C18D13AB4995CF4B9391C9B983EDCABD3D7AAA4",
+      "sha256": "FB2772659B693897B1C4F70B79FDD60C3E5BE06FC639FCA7FEAAFCEEAD3B4F3A"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "6471C3EADA6DB8CFAD8BAC366DD141B38DBE85E6D6CF001F62A2A71562FDBE5C",
+      "sha256": "D9CBA049863127463659C6163CF89CD4859D4039BF5CC4F048DDC1E5111CF0B7"
+    }
+  ],
+  "debugOnlyInnerClasses": [
+    "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+    "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+    "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+    "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class"
+  ],
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\verification\\jei-localization-20261107\\audit-runs\\20261107-142714146\\jei-localization-audit-report.json",
+  "auditReportSha256": "FD8C62031B1E92486569367CF944EA79B716523C6D89EC8525A34B3AA29E2CAA",
+  "auditToolSha256": "D14111A595EEDC305BFEF303255D32DD303081F77D57FD2E242C72627284C7F6",
+  "performancePassed": false,
+  "runtimeMixinApplied": false,
+  "pending": "HUD display and live language switching need actual client verification; no new 184-test or JEI performance run."
+}

@@ -1,0 +1,121 @@
+{
+  "status": "SOURCE_ACCEPTANCE_AND_FILE_BINDING_VERIFIED",
+  "recorded_at": "2026-11-08T02:37:08.2967924+08:00",
+  "source_thread_title": "我的创世纪",
+  "source_thread_id": "01a18fa2-fb29-7f13-a025-cb15b908048e",
+  "source_receipt": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\native-rc7\\runtime-e-acceptance.json",
+  "source_receipt_sha256": "2EB11A0F9B41C85D923E20A8AAAF3DAFCB4B1A163CAC2CDF01B86ABD3B340A2E",
+  "source_runtime_status": "RUNTIME_E_ACCEPTED_EXIT_0",
+  "source_exit_code": 0,
+  "production_jars": 414,
+  "test_helpers": false,
+  "max_heap_gib": 8,
+  "candidate_jar": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+  "candidate_jar_sha256": "3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF",
+  "candidate_jar_bytes": 12817555,
+  "frozen_manifest": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\freeze-manifest.json",
+  "frozen_manifest_sha256": "A9AD4B06FCE20BDA9FD567177A5AA9DD4B978F654CC0C986B366EB6272703034",
+  "runtime_stretcher_jar_count": 1,
+  "runtime_stretcher_jar": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client\\mods\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+  "runtime_stretcher_jar_sha256": "3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF",
+  "verified_evidence_count": 16,
+  "evidence": [
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\jei-wait-notice-chinese.png",
+      "sha256": "D888FBB9CBD3C36C35790590E0DFB8898964AD1805FB472D7B8120011161D26C",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\data-crystal-seed-jei.png",
+      "sha256": "4DAD9F77EB80B9E38C3B4777AC245DA3D6CD3F9CB92A80B241479226884DD310",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\data-multiplication-eco-input.png",
+      "sha256": "49CFFB5EAA85854A12AC8592FAAB8FFFD277B0D024614A0266584B86ACB51DB4",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-u-initial-page.png",
+      "sha256": "79BA52126E3DE2EA3695C9C08E172F7DA689FB1C6EEFA49004DDD389669E061A",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-tier1-u.png",
+      "sha256": "5D00FBE60C25CECA7AF15A9F490F98DF5600402C4D644165D04AC4689B696642",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-useful-u.png",
+      "sha256": "5EC9E3AD37A6D4EF9FE472636EB83178B206117CAEF735433FA6197353951960",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\ordinary-iron-r.png",
+      "sha256": "0FE166DD55DADA987AA1A781419B60C4AD581CAE9AD3D3D6B5095F1A14E86443",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\coil-tier1-r.png",
+      "sha256": "93A1836AC2C5FB6F266DB5E36C54E9663EA449C1731320E5A81710C725EC06F0",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-matching-egg-restored.png",
+      "sha256": "9EF36CF5096DFA690BC7045CEB8104A7E46B09A87413350839F8F3DFC59CE182",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-restored-terminal-me.png",
+      "sha256": "610A969B5760E05D7DB5E055EA980D75E6E00A3E95C1B2662CD6F54502DAF5C4",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-rejected.png",
+      "sha256": "3395D0A3DC919AD4CD3EC9F7DE983D11A82A4A1F9D4CDEC26CA6756FC6E3F3CE",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-still-zero.png",
+      "sha256": "3510F67A1A77307F5458265761E8D924CF6FBAC1CDD800B3AB40BF5FD5E8C035",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\ui-evidence\\extractor-wrong-source-me-stable-532.png",
+      "sha256": "F2CC09AB95DB43BC1E4A956E7076BB6C9EF414A916B9013DE37AAA7E4C6240DE",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client\\logs\\latest.log",
+      "sha256": "0B9DD3DEF0CD8C10383C854DF1548FD7BCBA5D0852ACC15205A013C33ED79A1B",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\client\\launch-evidence\\receipt.json",
+      "sha256": "04EBEE4B36807009B3BE8AD1F0D4BC966B89B144AFA3F88EFB6DF9A6814AE2B5",
+      "matched": true
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\runtime-e-production\\prepared.json",
+      "sha256": "162DAA2ED2C3A0AAD0387E57DE4949BE67EF9477AEC7E8D0E70C9D9D26B5D48D",
+      "matched": true
+    }
+  ],
+  "verification_method": "Read-only source receipt, file hashes and log inspection. GUI checks were performed by source thread. No game or server launched, no tests rerun, no frozen artifacts changed.",
+  "acceptance_scope": "Internal update candidate smoke checks only; not complete progression or performance acceptance",
+  "source_not_tested": [
+    "Utility valid pattern upload to real provider",
+    "Resonance tower real throughput",
+    "Other extractor mobs/full storage/multiplayer edge cases",
+    "New flight/planet landing behavior",
+    "Full survival progression and all quests",
+    "Long-duration 8GiB performance",
+    "Migration of3 upstream-deleted item IDs"
+  ],
+  "source_known_limits": [
+    "171 third-party latest versions lack complete official catalog evidence; not claimed latest",
+    "Upstream-deleted EAEP entity_speed_ticker/entity_speed_card and neoecoae eco_bulk_item_cell_housing require old-save review",
+    "Existing ECO Chinese GuideME page and Wares old set_nbt loot warnings remain",
+    "JEI publication has observed128ms maximum frame slice; no global smooth-performance claim"
+  ]
+}

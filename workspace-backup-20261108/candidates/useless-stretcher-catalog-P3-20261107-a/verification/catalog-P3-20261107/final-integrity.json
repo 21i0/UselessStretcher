@@ -1,0 +1,38 @@
+[
+  {
+    "name": "production163",
+    "path": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar",
+    "sha256": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "matched": true
+  },
+  {
+    "name": "old164",
+    "path": "D:\\AI\\1.6.4-候选\\useless_stretcher-1.21.1-1.6.4.jar",
+    "sha256": "AC78F41EAA7883434F6845CF7323829D77E66B994C82EDCF2B81AEC4AFCD9220",
+    "matched": true
+  },
+  {
+    "name": "p1",
+    "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P1.jar",
+    "sha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+    "matched": true
+  },
+  {
+    "name": "p2",
+    "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P2.jar",
+    "sha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+    "matched": true
+  },
+  {
+    "name": "p2OriginalTests",
+    "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\unit-tests.log",
+    "sha256": "C2765BB3690765647C10B88FB3FB62BDEE9F063E793058D8E8ACC83CF7B1BC3E",
+    "matched": true
+  },
+  {
+    "name": "p3",
+    "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar",
+    "sha256": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "matched": true
+  }
+]

@@ -1,0 +1,191 @@
+{
+  "status": "FROZEN_FOCUSED_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-07T14:53:46.9946606Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud",
+  "full184SuiteRerun": false,
+  "references": {
+    "baseline": "D:\\AI\\candidates\\useless-stretcher-jei-localization-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh.jar",
+    "assemblyLock": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar",
+    "p4": "D:\\AI\\candidates\\useless-stretcher-catalog-P4-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4.jar",
+    "p3": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar",
+    "published163": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar"
+  },
+  "hashesBefore": {
+    "baseline": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+    "assemblyLock": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+    "p4": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+    "p3": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "candidate": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6"
+  },
+  "hashesAfter": {
+    "baseline": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+    "assemblyLock": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+    "p4": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+    "p3": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "candidate": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6"
+  },
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+  "size": 12813852,
+  "checks": {
+    "status": "PASS",
+    "checksFound": 21,
+    "checksStarted": 21,
+    "checksPassed": 21,
+    "checksFailed": 0,
+    "gameLaunched": false,
+    "scope": "Pure GUI geometry and actual public StringSplitter; no Font/render/client instance and no 184-test rerun.",
+    "geometryMatrixCases": 10000,
+    "minimapBoundary": "Only the supplied map rectangle (12..254,43..283) at physical 1280x960 GUI2/4 is asserted; arbitrary minimap settings are not covered.",
+    "conditions": [
+      {
+        "name": "1280x960_gui2_top_center_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "1280x960_gui4_top_center_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "gui2_avoids_map_if_given_map_coordinates_are_physical_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "gui4_avoids_map_if_given_map_coordinates_are_physical_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "gui2_avoids_map_if_given_map_coordinates_are_gui_units",
+        "status": "PASS"
+      },
+      {
+        "name": "gui4_avoids_map_if_given_map_coordinates_are_gui_units",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid_screen_font_or_requested_lines_produces_empty_layout",
+        "status": "PASS"
+      },
+      {
+        "name": "ultranarrow_screen_without_padding_and_text_space_stays_empty",
+        "status": "PASS"
+      },
+      {
+        "name": "short_height_never_draws_partial_glyph_rows",
+        "status": "PASS"
+      },
+      {
+        "name": "requested_line_capacity_is_zero_one_or_at_most_two",
+        "status": "PASS"
+      },
+      {
+        "name": "ten_thousand_small_viewport_font_combinations_stay_inside_screen",
+        "status": "PASS"
+      },
+      {
+        "name": "integer_extremes_do_not_overflow_geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "nonpositive_text_width_or_line_limit_returns_no_lines",
+        "status": "PASS"
+      },
+      {
+        "name": "long_chinese_text_wraps_and_last_line_marks_omitted_text",
+        "status": "PASS"
+      },
+      {
+        "name": "long_english_text_wraps_and_last_line_marks_omitted_text",
+        "status": "PASS"
+      },
+      {
+        "name": "one_line_limit_truncates_using_real_splitter",
+        "status": "PASS"
+      },
+      {
+        "name": "two_explicit_short_lines_keep_text_without_unneeded_ellipsis",
+        "status": "PASS"
+      },
+      {
+        "name": "glyph_wider_than_content_and_ellipsis_wider_than_content_do_not_overflow",
+        "status": "PASS"
+      },
+      {
+        "name": "emoji_wrapping_and_trimming_never_split_surrogate_pairs",
+        "status": "PASS"
+      },
+      {
+        "name": "native_formatted_wrapping_preserves_visible_styles",
+        "status": "PASS"
+      },
+      {
+        "name": "text_width_row_cap_and_unicode_hold_across_narrow_width_matrix",
+        "status": "PASS"
+      }
+    ]
+  },
+  "checkLog": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\focused-checks.log",
+  "checkLogSha256": "45D82E311EA0FAE0AF9AE626DD8D0778FDE220E07EB27A50326B4523B77C0248",
+  "checkResultSha256": "8DF7AE9139DED11C4CC730249C3985BDE0C8DC07DF6A7AF42A1C0C56FBFA0356",
+  "staticChecks": [
+    "Lifecycle excluding progress: class/fields/annotations/other methods unchanged after debug normalization\tPASS",
+    "progress delegates once to overlay; no old fill/draw or diagnostic String\tPASS",
+    "Overlay scissor restores in normal and catch-all exceptional exits\tPASS",
+    "Overlay uses no minimap/world-level method APIs\tPASS"
+  ],
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+      "sha256": "CDE88CD6E174B8728693D3CF5432DED2C428C796C4959B84C9A9CBBA9CD044F4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+      "sha256": "E18084153844FC818CB22240E165AA9AE497FFA25D2D24882A712EA82FD3A45E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "sha256": "C4FE1494ED9753BA6A365011A8AEF6C9D8661DB634E81F8B113D48CDB1E8DF17"
+    }
+  ],
+  "entryCounts": {
+    "baseline": 678,
+    "candidate": 680,
+    "unchanged": 676,
+    "added": 2,
+    "changed": 2,
+    "removed": 0
+  },
+  "memberDiff": {
+    "added": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+        "sha256": "CDE88CD6E174B8728693D3CF5432DED2C428C796C4959B84C9A9CBBA9CD044F4"
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+        "sha256": "E18084153844FC818CB22240E165AA9AE497FFA25D2D24882A712EA82FD3A45E"
+      }
+    ],
+    "changed": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+        "oldSha256": "FB2772659B693897B1C4F70B79FDD60C3E5BE06FC639FCA7FEAAFCEEAD3B4F3A",
+        "sha256": "C4FE1494ED9753BA6A365011A8AEF6C9D8661DB634E81F8B113D48CDB1E8DF17"
+      },
+      {
+        "name": "META-INF/neoforge.mods.toml",
+        "oldSha256": "D9CBA049863127463659C6163CF89CD4859D4039BF5CC4F048DDC1E5111CF0B7",
+        "sha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8"
+      }
+    ],
+    "removed": []
+  },
+  "buildResult": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\build-result.json",
+  "buildResultSha256": "87AC25B13021E8CD56548C439E8338B7E1F804D829292F193C8B60816495B9F6",
+  "auditToolSha256": "C9542F266444C375F2EC55D9E1FB72EF7ED1740302CED658C193E5C469712205",
+  "performancePassed": false,
+  "runtimeMixinApplied": false,
+  "pending": "Actual GUI scale 4 rendering, minimap overlap and live window/translation changes need client verification. No MC or new 184-test run."
+}

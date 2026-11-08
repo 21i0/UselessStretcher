@@ -1,0 +1,18 @@
+{
+  "preparedUtc": "2026-11-06T22:09:05.82905Z",
+  "purpose": "Ordered tuple evidence only; not a performance comparison, P2 delivery, or inferred R oracle.",
+  "expectedP1JarSha256": "004AE477920BAA6ADF890417FF11431771A52D2F2733E818B49C446484549BD3",
+  "p1SourceOrigin": "D:\\AI\\candidates\\useless-stretcher-catalog-P-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\BudgetedRecipeCatalog.java",
+  "p1SourceSha256": "AEFE4369F5AB88832F260C5671579336A74BF06240B0857EF6217EB6FB93C4C1",
+  "instrumentedSourceSha256": "D859A32B08E50AAC736E127A96B93575AD47C18ACD1C0743A9C9A64C5C605151",
+  "tupleHelperSha256": "D4F5CF5E562841CAB8762424953E26D2CB1014B1B0214B257CC0B736C1F60016",
+  "originalBudgetNanos": 2000000,
+  "originalMaxSteps": 8192,
+  "originalFingerprintCapPerTick": 128,
+  "diagnosticJarBuilt": false,
+  "sourceBytecodeEquivalenceChecked": true,
+  "rTupleExportAvailable": false,
+  "rTupleDigest": "not available; cannot be inferred",
+  "sourceBytecodeProof": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\p1-evidence\\attempts\\20261106-221047331\\build-report.json",
+  "instrumentationCompilationPassed": true
+}

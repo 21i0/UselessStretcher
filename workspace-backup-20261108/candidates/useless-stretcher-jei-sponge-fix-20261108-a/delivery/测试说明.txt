@@ -1,0 +1,14 @@
+万象担架 JEI Sponge 注入修订
+版本：1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1
+
+JAR：D:\AI\candidates\useless-stretcher-jei-sponge-fix-20261108-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar
+SHA256：3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF
+大小：12,817,555 字节。
+
+修复 JEI 19.70 的计时注入错误：旧裸方法名只选择三参转发入口，现显式匹配三参/四参完整签名，并要求恰好命中一次。保持计时功能、原参数和异常处理。
+
+实际 Sponge Transformer 已复现旧包相同错误；修订在 JEI 19.57、19.70 的七个目标分别合并通过，新版与三个外部 RecipesGui Mixin 的真实组合也通过。正式产物仅两个文件改变，另680文件原字节保留，测试类排除。
+
+不替换或覆盖旧9556冻结件。由创世纪对话安排下一独立完整端测试，此处未启动游戏/ModLauncher，未改实例，未重跑历史147/184测试，未提交推送发布。整包 JEI 实际可用性仍待实机确认。
+
+证据：上级verification/REPORT.md，sponge-merge、selector-audit及same-target-conflicts目录。

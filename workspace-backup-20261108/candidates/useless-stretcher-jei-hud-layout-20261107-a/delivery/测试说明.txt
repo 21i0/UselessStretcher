@@ -1,0 +1,20 @@
+万象担架 JEI 加载通知布局局部候选
+版本：1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud
+
+JAR：D:\AI\candidates\useless-stretcher-jei-hud-layout-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar
+SHA256：E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6
+大小：12,813,852 字节
+
+通知移到上方居中，宽度最多占逻辑GUI的一半且不超过320，最多两行；长文本换行后省略，过窄/过矮无法容纳完整文字时不画残缺行。渲染采用公开GUI/文本API和finally恢复裁剪，不依赖Xaero API。
+
+21/21专项离线检查通过，包括GUI2/GUI4、10000个视口/字体组合、窄屏、极值、中英文长文本、emoji和样式保留。针对来源给定小地图矩形(12,43)–(254,283)的两种坐标解释确认不相交；不代表任意地图设置都不会重叠。
+
+精确审计冻结通过：新增Overlay和Layout record，修改Lifecycle.progress及版本元数据；其余676个包内成员原字节不变。Lifecycle其它方法/类结构去调试表后相等，progress的ABI与注解保留。Publication、语言、调度预算、总成UUID/快照完全不变。检查类未入包，原中文候选/P4-lock/P4/P3/生产JAR未变。
+
+没有启动Minecraft或服务端，没有重跑184项完整回归，没有修改运行实例、提交或发布。实际GUI4、窄屏与小地图重叠效果仍需客户端确认；本包没有性能修复。
+
+VAT由来源任务删除，不是本候选修改。目录总数随输入变化，不预设155024，不能用不同VAT输入的旧P3作单变量性能比较。
+
+冻结：本目录 jei-hud-layout-freeze-manifest.json
+差异：本目录 jei-hud-layout-members-vs-zh.json
+报告：D:\AI\candidates\useless-stretcher-jei-hud-layout-20261107-a\verification\jei-hud-layout-20261107\REPORT.md

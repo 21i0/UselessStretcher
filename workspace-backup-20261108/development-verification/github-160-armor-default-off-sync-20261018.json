@@ -1,0 +1,21 @@
+{
+  "result": "SOURCE PUSH AND REMOTE VERIFICATION PASSED",
+  "verified_at": "2026-10-18T11:13:19+08:00",
+  "repository": "https://github.com/21i0/UselessStretcher",
+  "branch": "main",
+  "source_commit": "d2446a34d31f5f687fa629daf1394c931e1a4c0c",
+  "remote_main_at_source_verification": "d2446a34d31f5f687fa629daf1394c931e1a4c0c",
+  "note": "Source commit verified on remote main before the subsequent evidence-only commit.",
+  "version": "1.21.1-1.6.0",
+  "local_jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0.jar",
+  "jar_bytes": 12487693,
+  "jar_sha256": "4A1FF8C14836F69B3CEAF50B65AF7D362E09D648F60F6DD544D95B7727016F31",
+  "useful_armor_enable_default": false,
+  "useful_armor_enable_recipes_default": false,
+  "useful_armor_always_hidden_in_jei": true,
+  "server_regression": "REGRESSION ARMOR AND UPSTREAM COMPATIBILITY PASSED",
+  "real_jei_client": "USEFUL ARMOR JEI CHECKS PASSED",
+  "guideme": "GUIDE CHECKS PASSED: 9 pages, 4 item entries",
+  "release_created": false,
+  "tag_created": false
+}

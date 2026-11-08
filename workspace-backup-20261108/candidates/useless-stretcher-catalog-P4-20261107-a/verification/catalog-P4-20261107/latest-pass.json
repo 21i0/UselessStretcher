@@ -1,0 +1,9 @@
+{
+  "timestampUtc": "2026-11-07T12:58:05.9256915Z",
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-catalog-P4-20261107-a\\verification\\catalog-P4-20261107\\audit-runs\\20261107-125805901\\audit-patch-report.json",
+  "auditReportSha256": "561F128003F26DD8B6B4924C0EFE179CA89FF51BDAB60EB06704C55A9A0D1B99",
+  "candidate": "D:\\AI\\candidates\\useless-stretcher-catalog-P4-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4.jar",
+  "candidateSha256": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+  "baselineSha256": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+  "version": "1.21.1-1.6.4-catalog-P4"
+}

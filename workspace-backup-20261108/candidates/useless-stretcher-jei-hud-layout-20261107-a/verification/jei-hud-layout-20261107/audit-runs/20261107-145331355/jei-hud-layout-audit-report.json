@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "timestampUtc": "2026-11-07T14:53:31.3706738Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud",
+  "full184SuiteRerun": false,
+  "failure": "Standalone ASM helper compilation failed."
+}

@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "gameLaunched": false,
+  "modLauncherUsed": false,
+  "transformer": "org.spongepowered.asm.mixin.transformer.MixinTransformer",
+  "mixinVersion": "0.8.7",
+  "spongeCodeSource": "file:/D:/AI/test-runtimes/DollChronicle-1.21.1-NeoForge21.1.265/libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar",
+  "checksFound": 7,
+  "checksPassed": 7,
+  "checksFailed": 0,
+  "auditApplied": [
+    "mezz.jei.library.util.IngredientSupplierHelper \u003c- offline-check.mixins.json:CatalogJeiBuildTimingMixin from mod (unknown)",
+    "mezz.jei.library.recipes.RecipeManagerInternal \u003c- offline-check.mixins.json:CatalogJeiIndexTimingMixin from mod (unknown)",
+    "mezz.jei.library.recipes.RecipeLookup \u003c- offline-check.mixins.json:CatalogJeiLookupMixin from mod (unknown)",
+    "mezz.jei.gui.recipes.RecipesGui \u003c- offline-check.mixins.json:CatalogJeiGuiMixin from mod (unknown)",
+    "com.sorrowmist.useless.compat.jei.JEIPlugin \u003c- offline-check.mixins.json:CatalogJeiTimingMixin from mod (unknown)",
+    "com.sorrowmist.useless.init.ClientSetup \u003c- offline-check.mixins.json:BudgetedClientCatalogMixin from mod (unknown)",
+    "com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog \u003c- offline-check.mixins.json:BudgetedRecipeCatalogMixin from mod (unknown)"
+  ],
+  "targets": [
+    {
+      "target": "mezz.jei.library.util.IngredientSupplierHelper",
+      "inputSha256": "724d74d6c4f2f88b00be3c449ad4e0518137adc0eb9aba0c339fe94f55063d44",
+      "ingredientSupplierRedirectEvidence": [
+        {
+          "method": "getIngredientSupplier(Ljava/lang/Object;Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/runtime/IIngredientManager;)Lmezz/jei/library/ingredients/RecipeIngredientSupplier;",
+          "nativeSetRecipeBefore": 1,
+          "nativeSetRecipeAfter": 0,
+          "redirectCallsAfter": 1,
+          "redirectCallsInsideNativeTry": 1,
+          "catchTypes": [
+            "java/lang/RuntimeException",
+            "java/lang/LinkageError"
+          ]
+        }
+      ],
+      "mergedHandlers": [
+        "redirect$zza000$stretcher$timeCategory(Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Ljava/lang/Object;Lmezz/jei/api/recipe/IFocusGroup;)V"
+      ],
+      "outputSha256": "ea8f8ee382dda92f214c8561f180357718cd66df3f8f60301356f02c8d72471e",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\mezz\\jei\\library\\util\\IngredientSupplierHelper.class",
+      "status": "PASS"
+    },
+    {
+      "target": "mezz.jei.library.recipes.RecipeManagerInternal",
+      "inputSha256": "3d2b7f4058c3dad1aaad164f61a80f25a52136933cff5e8f8fea972bd0b39d59",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "redirect$zzb000$stretcher$timeIndex(Lmezz/jei/library/recipes/collect/RecipeMap;Lmezz/jei/api/recipe/RecipeType;Ljava/lang/Object;Lmezz/jei/api/ingredients/IIngredientSupplier;)V"
+      ],
+      "outputSha256": "9bc98d351676976adc8527f46c4859ae22993856d7e94707b1befc994af31a99",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\mezz\\jei\\library\\recipes\\RecipeManagerInternal.class",
+      "status": "PASS"
+    },
+    {
+      "target": "mezz.jei.library.recipes.RecipeLookup",
+      "inputSha256": "8a36e179c7cf196f58af9c4a14cabe9ce43c6284354ee550cbeac29256c97083",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "handler$zzc000$stretcher$pendingLookup(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V"
+      ],
+      "outputSha256": "4d2051b784edd7697d1b724ca21754e712faeb1571cb3f6b03733a658db52e31",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\mezz\\jei\\library\\recipes\\RecipeLookup.class",
+      "status": "PASS"
+    },
+    {
+      "target": "mezz.jei.gui.recipes.RecipesGui",
+      "inputSha256": "a8c87aa014c1eaf675bb0c4c07d0e0dad0394c2b0b2b6aeaead038e2cbefa0a3",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "handler$zzd000$stretcher$pendingGui(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V"
+      ],
+      "outputSha256": "3feab7cb7e3f6769766aa12f2dd02cafaaa59b456f6ee9502b11e896a08dcd84",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\mezz\\jei\\gui\\recipes\\RecipesGui.class",
+      "status": "PASS"
+    },
+    {
+      "target": "com.sorrowmist.useless.compat.jei.JEIPlugin",
+      "inputSha256": "9a992e4b687a7585116d7070a76ad4347196a2a9e47530c21e6bd9910b7da212",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "handler$zze000$stretcher$registrationReset(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "redirect$zze000$stretcher$deferInitialCatalog(Lnet/minecraft/world/level/Level;)Z",
+        "handler$zze000$stretcher$runtimeAvailable(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "handler$zze000$stretcher$runtimeUnavailable(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "handler$zze000$stretcher$refreshInSlices(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V"
+      ],
+      "outputSha256": "79447fab43d3424ea58c682cb293b44e3e20535907d86910bb60066e90ef99ce",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\com\\sorrowmist\\useless\\compat\\jei\\JEIPlugin.class",
+      "status": "PASS"
+    },
+    {
+      "target": "com.sorrowmist.useless.init.ClientSetup",
+      "inputSha256": "4dad44c4f7b8238f6cf0ed5640ea14cd44bca34e98c80ccff2e2c76b3b0d6b0a",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "handler$zzf000$stretcher$clientBarrier(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V"
+      ],
+      "outputSha256": "2ef6aca62d7fe1343b6e2a4450a3f2482a8c72e9055ee120b9a570818d1060df",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\com\\sorrowmist\\useless\\init\\ClientSetup.class",
+      "status": "PASS"
+    },
+    {
+      "target": "com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog",
+      "inputSha256": "5d19a28d51f65e756de7c101e58644b873c1be09f58aceb46f888f43b20374c4",
+      "ingredientSupplierRedirectEvidence": [],
+      "mergedHandlers": [
+        "handler$zzg000$stretcher$nonBlockingQuery(Lnet/minecraft/world/level/Level;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V",
+        "handler$zzg000$stretcher$coalescePrewarm(Lnet/minecraft/world/level/Level;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "handler$zzg000$stretcher$cancelAll(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+        "handler$zzg000$stretcher$cancel(Lnet/minecraft/world/level/Level;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V"
+      ],
+      "outputSha256": "a2449ffbade3a9869807d28dcb84067bf91e29807cbb8e21b7c0942987c17d9e",
+      "transformedClass": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\verification\\sponge-merge\\final-1957\\transformed\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeCatalog.class",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "status": "FROZEN_FOCUSED_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-07T15:23:43.8990451Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970",
+  "full184SuiteRerun": false,
+  "references": {
+    "baseline": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+    "assemblyLock": "D:\\AI\\candidates\\useless-stretcher-assembly-lock-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock.jar",
+    "p4": "D:\\AI\\candidates\\useless-stretcher-catalog-P4-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4.jar",
+    "p3": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar",
+    "published163": "D:\\AI\\useless_stretcher-1.21.1-1.6.3.jar"
+  },
+  "hashesBefore": {
+    "baseline": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6",
+    "assemblyLock": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+    "p4": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+    "p3": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "candidate": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+  },
+  "hashesAfter": {
+    "baseline": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6",
+    "assemblyLock": "28317D3E41034B13E1EFFCB75C5C76E71CEFD29AC60437E089DF4E4D5F0A495F",
+    "p4": "9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC",
+    "p3": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+    "published163": "00A10F69575B941C6A7545D28B43749362CB02FC9E30288ABC271520537B5BFC",
+    "candidate": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7"
+  },
+  "jar": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+  "size": 12817487,
+  "checks": [
+    {
+      "id": "version-gates",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-version-gates.args",
+      "argumentsSha256": "12140D2DB6C85A29C4869E4805CEDD9D39EEFF987094AC2086E0F1F0106C65E3",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-version-gates.txt",
+      "runtimeClasspathSha256": "911C4DB907B06BE228A36392820EF96B40FFF40D04D64C12D6A0B1B7A7F7B8A1",
+      "legacyBase": null,
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-version-gates.log",
+      "logSha256": "1A9B42208302169375683EC1479355279DE54C465BBBF30397C946518DB507AB",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-version-gates.json",
+      "resultSha256": "C955E87DDAD089A7BF61AAC51A96D5CD399E67DF86FC8159E2C8EABC1233D965",
+      "resultSchema": "PASSED/passed/failed/checks-rows",
+      "checksFound": 127,
+      "checksStarted": 127,
+      "checksPassed": 127,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": true
+    },
+    {
+      "id": "native-guards",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-native-guards.args",
+      "argumentsSha256": "1B59FF861E30A7B8980F464B5C6705463FE3249BF7DB41D255E21FFE9D538C65",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-native-guards.txt",
+      "runtimeClasspathSha256": "911C4DB907B06BE228A36392820EF96B40FFF40D04D64C12D6A0B1B7A7F7B8A1",
+      "legacyBase": null,
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-native-guards.log",
+      "logSha256": "0EB7421B5C0A81490D1CAFB7456560A1DAEE0F8276534E3DA7D237EE3EAA6FC2",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-native-guards.json",
+      "resultSha256": "AE1544615BB6085DA884AC0934CFCBF5D2C36A8216A1A036A533F0F7C3D6A924",
+      "resultSchema": "PASS/checksFound/checksPassed/checksFailed",
+      "checksFound": 14,
+      "checksStarted": 14,
+      "checksPassed": 14,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": false
+    },
+    {
+      "id": "legacy-guards",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-legacy-guards.args",
+      "argumentsSha256": "C9EB00A1037D5233C8E4088110C67F03BD87E0F480D508D3B3BF7C94650D0C2C",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-legacy-guards.txt",
+      "runtimeClasspathSha256": "13ED3485ADC9D51ABEDA7B098C5A93D63F323388B87005E41B3DBE30D71EC376",
+      "legacyBase": {
+        "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+        "sha256": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+      },
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-legacy-guards.log",
+      "logSha256": "3F41D6C1891625FEA6D6D9FD0B7CAE63D2B9A48126C4AD35E0473058D7ECF374",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-legacy-guards.json",
+      "resultSha256": "C0A0DE98A79F3F098A0B2922E644AC47DD6C1C893F4139F121EC049DD1FF3968",
+      "resultSchema": "PASS/checksFound/checksPassed/checksFailed",
+      "checksFound": 6,
+      "checksStarted": 6,
+      "checksPassed": 6,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": false
+    }
+  ],
+  "focusedCount": 147,
+  "staticChecks": [
+    "content/catalog/CatalogPatchSupport\toutside-gate normalized equality\tPASS",
+    "mixin/UselessStretcherMixinPlugin\toutside-gate normalized equality\tPASS",
+    "AdapterGuards.call(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;\texact ABI\tPASS",
+    "AdapterGuards.callEach(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;\texact ABI\tPASS",
+    "AdapterGuards.guard(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;\texact ABI\tPASS",
+    "AdapterGuards.isDisabled(Ljava/lang/Object;Ljava/lang/String;)Z\texact ABI\tPASS",
+    "AdapterGuards.rememberSource(Ljava/lang/Object;Ljava/lang/String;)V\texact ABI\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class\tdebug-only normalized equality\tPASS",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class\tdebug-only normalized equality\tPASS"
+  ],
+  "debugOnlyInnerClasses": [
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class"
+  ],
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "sha256": "6246644D338E7F88EBEBBD8795A2A950939D908B1955F3B13DF556232E2DDB5E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "sha256": "8C0752947C98637443AF57BFE0B6FF2743E517C710AA038D9FDF41E8834CB390"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "sha256": "CA03DA784B25C00EA621F6217CE08CD10C14F15CE07E6143F116ED1246C6BE55"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "sha256": "223F3F6D63EBC93E35EA62D4082AF1C34581A525457D4276BA861806AA03AAA9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "sha256": "270190030A24141FB7908B7273C4F864F075F81F8870AA218A87BC2DCA5E7BE2"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "sha256": "A4230C11B386E8365DE20478F7998F419347AB8B6979632E063CEF3AE3ED9507"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "sha256": "8D41CE20813F0C57E43447B8E435F5A7C087D2217AA845CD4D8AF59840416E8A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "sha256": "F064ACF050A53BBEF5E2F4F44AE3EE675D4208E12F04CC7E94D0B896DB0CCB7B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "sha256": "213DCC5567DBBD309ED39FA93376F8B16D49F90512602CFAE475CA0BF24D0A0F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "sha256": "F0D8CA0C19B206228D3E1FA1E57E0973E6FE73A594000A984BDEA7302A0880FF"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards.class",
+      "sha256": "1DDFB4B89DCB8F7780FAD642814BAD79D6AEAAB8B81719B024BCE0FB0B3A190D"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.class",
+      "sha256": "81985864359492346AC4C0F244BB3D30BB138EB72DB3384B61B51441C72204E0"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "sha256": "A611A50F57872363BC5810648B52DCADEADE745905DF88538AFD173FE36F7F3D"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "base",
+      "version": "1.21.1-2.4.6.5",
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+    },
+    {
+      "id": "jei",
+      "version": "19.70.0.460",
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+    },
+    {
+      "id": "eaep",
+      "version": "1.6.4.1",
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+      "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237"
+    },
+    {
+      "id": "data",
+      "version": "3.4.0",
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+      "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367"
+    },
+    {
+      "id": "ae2",
+      "version": "19.2.18",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\appliedenergistics2-19.2.18.jar",
+      "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39"
+    },
+    {
+      "id": "appflux",
+      "version": "2.1.7",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\AppliedFlux-1.21-2.1.7-neoforge.jar",
+      "sha256": "3FA19F02317A795334805D67318708C5025911B55C24AE273125F1A0652311B8"
+    },
+    {
+      "id": "ldlib2",
+      "version": "2.2.44",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ldlib2-neoforge-1.21.1-2.2.44-all.jar",
+      "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC"
+    },
+    {
+      "id": "ae2wtlib",
+      "version": "19.5.1",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ae2wtlib-19.5.1.jar",
+      "sha256": "407E7300351353CB4CB7698286E180AEF2BD6E7A97EC7EFC6493F9DAA4DBFFE5"
+    }
+  ],
+  "entryCounts": {
+    "baseline": 680,
+    "candidate": 682,
+    "unchanged": 668,
+    "added": 2,
+    "changed": 12,
+    "removed": 0
+  },
+  "memberDiff": {
+    "added": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards.class",
+        "sha256": "1DDFB4B89DCB8F7780FAD642814BAD79D6AEAAB8B81719B024BCE0FB0B3A190D"
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.class",
+        "sha256": "81985864359492346AC4C0F244BB3D30BB138EB72DB3384B61B51441C72204E0"
+      }
+    ],
+    "changed": [
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+        "oldSha256": "A3936F377422719FEF04A33FF77DBEF072888484321712F7CAC3560C03C728D3",
+        "sha256": "6246644D338E7F88EBEBBD8795A2A950939D908B1955F3B13DF556232E2DDB5E",
+        "debugOnly": false
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+        "oldSha256": "A16E3C720739AA3EB0713E515E4174879C068AE4A47920E62EF365A7FF25014D",
+        "sha256": "8C0752947C98637443AF57BFE0B6FF2743E517C710AA038D9FDF41E8834CB390",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+        "oldSha256": "3762420F3091E996D6954718EDEF78F0DA64BD34648774469043E77E305C958B",
+        "sha256": "CA03DA784B25C00EA621F6217CE08CD10C14F15CE07E6143F116ED1246C6BE55",
+        "debugOnly": false
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+        "oldSha256": "AD29B60FBAFF4E1982210C3056FB37BB374AD93B7FF8ED41553B1C7C01F244EC",
+        "sha256": "223F3F6D63EBC93E35EA62D4082AF1C34581A525457D4276BA861806AA03AAA9",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+        "oldSha256": "3D932C92333C6F4BBCC1C71A0D1564FB5DBD1DCCF64C77900AF96A87A33DFD6A",
+        "sha256": "270190030A24141FB7908B7273C4F864F075F81F8870AA218A87BC2DCA5E7BE2",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+        "oldSha256": "A395D1056B73713FF1C627AD98A82C1A063E3815ADACCA5B036EEFA9C5A58468",
+        "sha256": "A4230C11B386E8365DE20478F7998F419347AB8B6979632E063CEF3AE3ED9507",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+        "oldSha256": "2D5D2FFBCDBD64EF46AD4F85B7EA9BD0807F608340C1994586C117E53C530C6B",
+        "sha256": "8D41CE20813F0C57E43447B8E435F5A7C087D2217AA845CD4D8AF59840416E8A",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+        "oldSha256": "CCB62381544F157C2AF1E5D642BA80F861F352E0FD7E2F96C11BE8F704F89927",
+        "sha256": "F064ACF050A53BBEF5E2F4F44AE3EE675D4208E12F04CC7E94D0B896DB0CCB7B",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+        "oldSha256": "BB6BEA8028380384F8D485E9E9A4A0E02F4B6DE9350438E1053B6B083B464B99",
+        "sha256": "213DCC5567DBBD309ED39FA93376F8B16D49F90512602CFAE475CA0BF24D0A0F",
+        "debugOnly": true
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+        "oldSha256": "E3B46E640BC1FB32022FB871D2AF84A2E7A13180F216F853E0F0019EE2BBFEFD",
+        "sha256": "F0D8CA0C19B206228D3E1FA1E57E0973E6FE73A594000A984BDEA7302A0880FF",
+        "debugOnly": false
+      },
+      {
+        "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+        "oldSha256": "3FF5AAF2A26056EB0AE2EA4E0E0D3B3371A19013321DE2EF135BC24263D1D45B",
+        "sha256": "A611A50F57872363BC5810648B52DCADEADE745905DF88538AFD173FE36F7F3D",
+        "debugOnly": false
+      },
+      {
+        "name": "META-INF/neoforge.mods.toml",
+        "oldSha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8",
+        "sha256": "2B303105015CF6CE1D939DB9060B32129B457EEB19ED48731002E11E6BBA23B4",
+        "debugOnly": false
+      }
+    ],
+    "removed": []
+  },
+  "buildResult": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\build-result.json",
+  "buildResultSha256": "E61A006CA29647DE78BF84911D51589EB7AFFF7D43C6D4EAC4FF216904711457",
+  "auditToolSha256": "CC622BF3601F17CA0C8D02BCF36AA65867D537434D64F70F2F25C16269D3916F",
+  "performancePassed": false,
+  "runtimeMixinApplied": false,
+  "pending": "New full-pack loading, actual Mixin application and gameplay/performance validation remain pending; no new full 184-test regression."
+}

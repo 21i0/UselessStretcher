@@ -1,0 +1,99 @@
+{
+  "status": "FROZEN_OFFLINE_CHECKS_PASSED",
+  "timestampUtc": "2026-11-06T22:51:38.3666735Z",
+  "gameLaunched": false,
+  "jar": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P3.jar",
+  "size": 12792091,
+  "sha256": "0D2CCCBD03E95EEC6AC1688F00028372D92313D90189BA8B5EBCA4DC3EE6832A",
+  "version": "1.21.1-1.6.4-catalog-P3",
+  "baselineSha256": "161D9CF701F2C3060DFC17416F9E557111D325C4C11767E0460BA2CBED76EEA4",
+  "entryCounts": {
+    "baseline": 665,
+    "candidate": 667,
+    "unchanged": 661,
+    "added": 2,
+    "changed": 4,
+    "removed": 0
+  },
+  "tests": {
+    "found": 149,
+    "skipped": 0,
+    "started": 149,
+    "aborted": 0,
+    "successful": 149,
+    "failed": 0,
+    "containersAborted": 0,
+    "containersFailed": 0
+  },
+  "testLogSha256": "550D1C3277FD7DF2222DCECB2EFC50369ECC2C488F5C30DE47E5811FB0678D6C",
+  "expectedTests": 149,
+  "totalStaticChecks": 61,
+  "memberAbiChecks": 29,
+  "versionGateChecks": 32,
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "sha256": "6AFA6EF41769F06725B6B62F3E3252F45C8955D972EBFB65F1FE39BC8A7C692E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "sha256": "D4006CCAD4C15FE9DFD399BC6E888153158D39C1A71A44AD8B3D3059BB1C08FA"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+      "sha256": "89CA314A8BED2C4D1BDB8246D8474B6033273725CA8EFF95F3B38BE039CA57C9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+      "sha256": "3BED04AABE831DBD7418AD8E38CA6EB82E57C1620D9DDF26F00D8FD229890455"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "sha256": "91DC57FA2ADB67D82A87DD6D763630145975B662A0B6CD708891CEB522944E68"
+    }
+  ],
+  "protectedUuidSnapshotClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory.class",
+      "sha256": "BD7CE205554707D016BB084FD1350FE1D6A7B766227B5F2FF6418351F3FDED8B",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledPatternHost.class",
+      "sha256": "E1EBD190367CA1C68B20DC4CEBA6CD495EE778F8EC815249203236E6C5778985",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.class",
+      "sha256": "3B1473815A177A593035E0ECF4E7B322D12788429B271AAA9DC29401D496B1ED",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Library.class",
+      "sha256": "2008C43481AC759EC54929F8B708896571BE003CC9C59DECC43C998A5F56C072",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Rewrite.class",
+      "sha256": "E8DB1E6D2666A516B1CF39DE8149D7EED0B5C594DFC30C0AE7A05D7051579BCE",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore.class",
+      "sha256": "38A3204AB8CCF71F028098F5EDFF7912249AC07425E119D4CBEDD0BB35208637",
+      "unchanged": true
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherAssemblyMixin.class",
+      "sha256": "DDB386DEAD1C341DFA9B69BABBE6B64EAC214768BA9E99AB70DA8A0DCB541036",
+      "unchanged": true
+    }
+  ],
+  "performancePassed": false,
+  "rFullTupleOracleAvailable": false,
+  "pending": "Real integrated runtime-boundary validation and same-input full ordered tuple comparison",
+  "buildResult": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\build-result.json",
+  "auditReport": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\audit-runs\\20261106-224959577\\audit-patch-report.json",
+  "auditReportSha256": "5C20584D195CB721F42D9C13CAACACC297CD2064EEC6A5C1267D2077A75B462C",
+  "freezeToolSha256": "212A69312A96A858F5DE0A940ED15EFCF75312C5CA7FB7EC20722A2BBC20FDB6"
+}

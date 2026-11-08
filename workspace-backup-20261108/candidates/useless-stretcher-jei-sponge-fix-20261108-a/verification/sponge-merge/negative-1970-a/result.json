@@ -1,0 +1,23 @@
+{
+  "status": "FAIL",
+  "gameLaunched": false,
+  "modLauncherUsed": false,
+  "transformer": "org.spongepowered.asm.mixin.transformer.MixinTransformer",
+  "mixinVersion": "0.8.7",
+  "spongeCodeSource": "file:/D:/AI/test-runtimes/DollChronicle-1.21.1-NeoForge21.1.265/libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar",
+  "checksFound": 1,
+  "checksPassed": 0,
+  "checksFailed": 1,
+  "auditApplied": [
+    "mezz.jei.library.util.IngredientSupplierHelper \u003c- offline-check.mixins.json:CatalogJeiBuildTimingMixin from mod (unknown)"
+  ],
+  "targets": [
+    {
+      "target": "mezz.jei.library.util.IngredientSupplierHelper",
+      "inputSha256": "c3549cea5af2f27c3c724307e8bf862d6d6aa6b1892000cbe221f3141af922ed",
+      "status": "FAIL",
+      "failure": "org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered",
+      "trace": "org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered\r\n\tat org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:381)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:237)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)\r\n\tat offline.SpongeMergeMain.main(SpongeMergeMain.java:34)\r\nCaused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure: Redirector stretcher$timeCategory(Lmezz/jei/api/recipe/category/IRecipeCategory;Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Ljava/lang/Object;Lmezz/jei/api/recipe/IFocusGroup;)V in offline-check.mixins.json:CatalogJeiBuildTimingMixin from mod (unknown) failed injection check, (0/1) succeeded. Scanned 0 target(s). No refMap loaded.\r\n\tat org.spongepowered.asm.mixin.injection.struct.InjectionInfo.postInject(InjectionInfo.java:531)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1490)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyInjections(MixinApplicatorStandard.java:752)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:330)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:246)\r\n\tat org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:437)\r\n\tat org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:418)\r\n\tat org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:352)\r\n\t... 3 more\r\n"
+    }
+  ]
+}

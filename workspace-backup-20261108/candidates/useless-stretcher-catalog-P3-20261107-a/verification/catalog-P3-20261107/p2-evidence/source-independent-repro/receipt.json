@@ -1,0 +1,300 @@
+{
+  "candidate": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P2.jar",
+  "sha256": "161d9cf701f2c3060dfc17416f9e557111d325c4c11767e0460ba2cbed76eea4",
+  "candidateUnchanged": true,
+  "scope": "Actual extracted P2 CatalogJeiPublication and OwnerRecipePublication classes; isolated minimal external-ABI stubs. No game launch, no native JEI execution, no performance or gameplay acceptance.",
+  "extractedActualClasses": [
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication.class",
+      "bytes": 8336,
+      "sha256": "2369fac486e158add1952bd4841404b59e6c3951aaf4491515a68f4770ab8e1c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Phase.class",
+      "bytes": 1726,
+      "sha256": "76a6fc83a5c34b678d4d25f41c5c86f4eb87ca78ad6a15120b3573a8cc317d1a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "bytes": 498,
+      "sha256": "ee366a737ab791e8e3c3a8f169dbf1c3cddc0d6fd0658e81e601a99bbc455a50"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Sink.class",
+      "bytes": 519,
+      "sha256": "3836169030a0e7bf9e235f4fb6d4b5ebacfe01071f0b0c4fb7b6fd1cda75bd8f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "bytes": 3231,
+      "sha256": "f0ed04282904afc41a53bce9cda3dc200fd6d669ceebae948b2b1441c0b493b9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "bytes": 13090,
+      "sha256": "bf7b3fd6e16b84f375539e2d5306944e60ab74b4a080a6a4b767c4ca3bb77208"
+    }
+  ],
+  "compileCommand": [
+    "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot\\bin\\javac.exe",
+    "-J-XX:-UsePerfData",
+    "-J-Djava.io.tmpdir=D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\tmp",
+    "-J-Duser.home=D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\home",
+    "-encoding",
+    "UTF-8",
+    "-cp",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\classes",
+    "-d",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\classes",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\com\\mojang\\logging\\LogUtils.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\compat\\jei\\AdvancedAlloyFurnaceRecipeCategory.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\compat\\jei\\JEIPlugin.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeCatalog.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeIdentity.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\recipe\\IRecipeManager.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\recipe\\RecipeType.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\runtime\\IJeiRuntime.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\runtime\\IRecipesGui.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\gui\\screens\\Screen.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\Minecraft.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\multiplayer\\ClientLevel.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\net\\minecraft\\world\\item\\crafting\\RecipeManager.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\net\\minecraft\\world\\level\\Level.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\org\\slf4j\\Logger.java",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\sources\\ReentryPartialThrow.java"
+  ],
+  "compileExit": 0,
+  "runCommand": [
+    "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot\\bin\\java.exe",
+    "-XX:-UsePerfData",
+    "-Djava.io.tmpdir=D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\tmp",
+    "-Duser.home=D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\home",
+    "-cp",
+    "D:\\AI\\sources\\DollChronicle\\verification\\S-P2-independent-audit-20261107\\reentry-partial-throw-run-2\\classes",
+    "ReentryPartialThrow"
+  ],
+  "runExit": 0,
+  "conclusion": "BLOCK",
+  "artifacts": [
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\mojang\\logging\\LogUtils$1.class",
+      "bytes": 386,
+      "sha256": "e55641260ae9785532158d61510230a3e9f75bf26050671bc8d4b491c93a25fc"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\mojang\\logging\\LogUtils.class",
+      "bytes": 385,
+      "sha256": "4c0fad525ff69b8e6b922c9f39ea50ba68764f4491b274d7d2ae6fbfe6ca4040"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\compat\\jei\\AdvancedAlloyFurnaceRecipeCategory.class",
+      "bytes": 748,
+      "sha256": "197d576cc5636b4a0a03acb35b9b2e4cb01a966afac8bdf6d894ad6e3eb27aaf"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\compat\\jei\\JEIPlugin.class",
+      "bytes": 1074,
+      "sha256": "b0bafc64d3270ba030c428cc842d4beb580b8c6162b9c93306becd7691ab1988"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeCatalog$Entry.class",
+      "bytes": 1636,
+      "sha256": "cb41f5ce02e9a6275f052ac3ac89a3ab22616cbf82b71448c98918e31644bfc8"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeCatalog.class",
+      "bytes": 887,
+      "sha256": "ecf86a92cd0d1ad613d5532dce0d753b45962e0929acb8cb1ef81f3e8c5d2b06"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeIdentity.class",
+      "bytes": 1340,
+      "sha256": "f3a41c39116d9004b170ccda7afa27c3197be55289bc0f144e31ef2425bad6ad"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication$1.class",
+      "bytes": 3231,
+      "sha256": "f0ed04282904afc41a53bce9cda3dc200fd6d669ceebae948b2b1441c0b493b9"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication$StaleRevision.class",
+      "bytes": 498,
+      "sha256": "ee366a737ab791e8e3c3a8f169dbf1c3cddc0d6fd0658e81e601a99bbc455a50"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiPublication.class",
+      "bytes": 13090,
+      "sha256": "bf7b3fd6e16b84f375539e2d5306944e60ab74b4a080a6a4b767c4ca3bb77208"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\OwnerRecipePublication$Phase.class",
+      "bytes": 1726,
+      "sha256": "76a6fc83a5c34b678d4d25f41c5c86f4eb87ca78ad6a15120b3573a8cc317d1a"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\OwnerRecipePublication$Sink.class",
+      "bytes": 519,
+      "sha256": "3836169030a0e7bf9e235f4fb6d4b5ebacfe01071f0b0c4fb7b6fd1cda75bd8f"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\OwnerRecipePublication.class",
+      "bytes": 8336,
+      "sha256": "2369fac486e158add1952bd4841404b59e6c3951aaf4491515a68f4770ab8e1c"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\mezz\\jei\\api\\recipe\\IRecipeManager.class",
+      "bytes": 372,
+      "sha256": "a104160f6d159d97319ccd0a1f95e6a41df19a0369ce314abf69bec4e773412c"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\mezz\\jei\\api\\recipe\\RecipeType.class",
+      "bytes": 277,
+      "sha256": "00744367b70a4c8b0d9715e388916522497b09f042162e45c1999ff3606e9dc9"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\mezz\\jei\\api\\runtime\\IJeiRuntime.class",
+      "bytes": 255,
+      "sha256": "0c88e19dbc9dcb69c2912c252dd95e990a4802ed90aaa56ea16b120de67237fc"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\mezz\\jei\\api\\runtime\\IRecipesGui.class",
+      "bytes": 263,
+      "sha256": "eeccec6340e6ddda51b64f22dcd6418091e54867d796c6e96c54bebf692c5088"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\net\\minecraft\\client\\gui\\screens\\Screen.class",
+      "bytes": 268,
+      "sha256": "3a8e46b2d5fe7ea82d61a9bb49957b89639f98837f0d4466685d52a60c6b040b"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\net\\minecraft\\client\\Minecraft.class",
+      "bytes": 932,
+      "sha256": "a5218f05d74e7aa845513e21210cd158eac2eb1224d05fb7c8449fd5811fa203"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\net\\minecraft\\client\\multiplayer\\ClientLevel.class",
+      "bytes": 509,
+      "sha256": "fa4a227495aaa77d5d4d91a453c688774c2a6cdf0fceae001385ee5e4f9169e8"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\net\\minecraft\\world\\item\\crafting\\RecipeManager.class",
+      "bytes": 234,
+      "sha256": "ab234ad0e964617ebd884bc8bf968b0b08daba5f5fdb94377a8bfd1bf8ea6808"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\net\\minecraft\\world\\level\\Level.class",
+      "bytes": 210,
+      "sha256": "51d88795b301f98f46bd71c3cb996cd4795c3ccf47e69cfe3163b421b6d02a20"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\org\\slf4j\\Logger.class",
+      "bytes": 264,
+      "sha256": "2f7bd61c92ba7d7368fcb04bba7e3d16984fc930d80e082a183807b250ed565a"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\ReentryPartialThrow$Runtime.class",
+      "bytes": 2299,
+      "sha256": "7e6900b9e939bcdc4e35b429ad2c96d08c6af6a0a8d2fb001c99a81d06210885"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\classes\\ReentryPartialThrow.class",
+      "bytes": 4242,
+      "sha256": "466a1f7eaa391b99f30d37066f39ba214143e91426e265251c092ac8d1df74ba"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\executed-reproduce.py",
+      "bytes": 10745,
+      "sha256": "9e3fa0cc9af5aad4cfd0cffbe176965bfdb31f59b4e35d9877471861570a22f5"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\reproduction.log",
+      "bytes": 604,
+      "sha256": "321b17294a9b222f19b7f4e34941889d0a39e04753d0fae5ff1974cdfb4ea63b"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\com\\mojang\\logging\\LogUtils.java",
+      "bytes": 136,
+      "sha256": "202daab72cec99e35629bee6025bff3a61ec654302fd3bfc9daa9b0bbc8b2567"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\compat\\jei\\AdvancedAlloyFurnaceRecipeCategory.java",
+      "bytes": 263,
+      "sha256": "92d826422925db7b1c09ad4da6c21882344629bb76443e7de5a8311d8044917f"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\compat\\jei\\JEIPlugin.java",
+      "bytes": 580,
+      "sha256": "4440f6001ea95731d9af44aabb1dbef29482d7c78d2799ee366a4f4898f5f0df"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeCatalog.java",
+      "bytes": 365,
+      "sha256": "3d843ab03ac4d46cd685701cee232ba94a34893da5d2360dca7561c847e439b0"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\com\\sorrowmist\\useless\\content\\recipe\\AlloyFurnaceRecipeIdentity.java",
+      "bytes": 101,
+      "sha256": "7646670378bf9cf7a85f88a5fec8f4e5915e7c17660e71f5b43e3338cd68bc52"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\recipe\\IRecipeManager.java",
+      "bytes": 272,
+      "sha256": "2dc98161623f3463a99fd4d6be7af2854deac1ca74469d0f3d76303d6d629b34"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\recipe\\RecipeType.java",
+      "bytes": 58,
+      "sha256": "6ff28854680833fe53d99a9ccb3a85798aae5d2017fe3904ead076c0b71f1dd0"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\runtime\\IJeiRuntime.java",
+      "bytes": 146,
+      "sha256": "9ffef3ae7494613adfa2c2801936c9ae75376c6d4c4b60a22111dea16e784713"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\mezz\\jei\\api\\runtime\\IRecipesGui.java",
+      "bytes": 141,
+      "sha256": "040e15c3fc81ec7268f81989f2ed6cd9a67e5ec873c4784dfc6fbf2f2fd3112e"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\gui\\screens\\Screen.java",
+      "bytes": 89,
+      "sha256": "b0a4c867849f4ed1ae42196f1ad0a17218b129527c64e1339421d51707bd3d17"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\Minecraft.java",
+      "bytes": 498,
+      "sha256": "b3655c8184380b47870dd3742d31f65e1ea0235bab5db3c6e76e19f8294f940a"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\net\\minecraft\\client\\multiplayer\\ClientLevel.java",
+      "bytes": 328,
+      "sha256": "45c5774c69061835c2d259719586bf9f885b68fd0d1cc308b522953028feb660"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\net\\minecraft\\world\\item\\crafting\\RecipeManager.java",
+      "bytes": 72,
+      "sha256": "123eb1420698fae512c0725e4f4a39ee428dcc2e1feba26bf6db1b09b1cc8fd8"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\net\\minecraft\\world\\level\\Level.java",
+      "bytes": 56,
+      "sha256": "e0cd11891d8cc27ef47b150abcc91f5f88a2f2163b888812836961cad844f82b"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\org\\slf4j\\Logger.java",
+      "bytes": 131,
+      "sha256": "787de7bf88876b585af902bcbeddbaf27a8ddfa6dbf3480a0b5b6d1712b26af1"
+    },
+    {
+      "path": "reentry-partial-throw-run-2\\sources\\ReentryPartialThrow.java",
+      "bytes": 3325,
+      "sha256": "a8b00bc2e0bd3e67854d43e836071bad178484ea0a9cb7946d5226a721b40910"
+    }
+  ]
+}

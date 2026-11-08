@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-06T06:43:01.620Z" hostname="LAPTOP-D3HPHSTM" time="2.362">
+  <properties/>
+  <testcase name="returnedStackCannotMutateInstalledCountOrLibraryBinding()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="1.752"/>
+  <testcase name="clientMirrorAcceptsAuthoritativeUuidReplacementWithoutForking()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.143"/>
+  <testcase name="failedSnapshotPreparationKeepsOfferedItemAndSlotUnchanged()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.023"/>
+  <testcase name="realInsertionForksExactlyOnceAndRemainderKeepsOriginalBinding()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.021"/>
+  <testcase name="unboundItemRecoverySlotAndOversizedDirectSetDoNotFork()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.015"/>
+  <testcase name="extractionUnlocksTheSlotAndReinstallationForksAnIndependentIdentity()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.021"/>
+  <testcase name="legacyGetterMigratesOnceEvenWhenChangeListenerImmediatelySerializesInventory()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.095"/>
+  <testcase name="legacySerializationBatchesMigrationAndProtectsRecursiveExternalSave()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.237"/>
+  <testcase name="simulatedExtractionDoesNotForkClearOrNotify()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.012"/>
+  <testcase name="missingSourceIsRejectedBeforeInsertionOrDirectSetCanAllocateSnapshot()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.005"/>
+  <testcase name="simulatedInsertionDoesNotForkConsumeOrNotify()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.006"/>
+  <testcase name="occupiedSlotRejectsOtherAndSameLibraryInsertionsAndDirectReplacement()" classname="com.sorrowmist.useless.stretcher.content.ae.AssemblyStretcherInventoryTest" time="0.008"/>
+  <system-out><![CDATA[WARN StatusConsoleListener Advanced terminal features are not available in this environment
+[14:42:52] [Test worker/WARN] [minecraft/DetectedVersion]: Missing version information!
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (D:\AI\sources\UselessStretcher-capsule-variants\verification\assembly-snapshot-1.6.4-20261106\test-libraries\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

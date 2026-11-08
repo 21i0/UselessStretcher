@@ -1,0 +1,50 @@
+{
+  "Status": "PASS",
+  "CandidateSha256": "3AEB59B7AAD8A2BF50D203BB220192FF45D90D0C50F80F6D8878514249F2F6EF",
+  "PrimaryJars": 416,
+  "NestedJars": 180,
+  "ClassesScanned": 173141,
+  "MatchingMixinClasses": 8,
+  "ScanErrors": 0,
+  "ChangedMembers": 2,
+  "UnchangedMembers": 680,
+  "AddedMembers": 0,
+  "RemovedMembers": 0,
+  "NormalizedTimingBytecodeEqual": true,
+  "MetadataVersionOnly": true,
+  "GameLaunched": false,
+  "ModLauncherUsed": false,
+  "Reports": [
+    {
+      "Path": "REPORT.md",
+      "SHA256": "9C56FD17D4ABB7C0588DE4D895F2AF1CD2C3100C17320EE23D6AA3833B76E7AC",
+      "Bytes": 8616
+    },
+    {
+      "Path": "FINAL-AUDIT-REPORT.md",
+      "SHA256": "BEE13070B8A4D9641F35545011FDC1F6701946B10B16E6EF3E9CAA322DEF79F8",
+      "Bytes": 3140
+    },
+    {
+      "Path": "DELIVERY-TEST-NOTE.md",
+      "SHA256": "31264D9DEA060205AEEB0C494E7AF4A161EF74844A5B7EAD828A5014E71DAED9",
+      "Bytes": 1566
+    },
+    {
+      "Path": "SUMMARY.json",
+      "SHA256": "50E79696B28C50248A32276E8CF9FD3F93777419FF3D009E21E2D3F8007A0D56",
+      "Bytes": 776
+    },
+    {
+      "Path": "final-jar-audit\\FINAL-JAR-AUDIT.json",
+      "SHA256": "89B0B9DCC134E8233546214DEC155D5E83C52874900DF467D95903867C17C995",
+      "Bytes": 58442
+    },
+    {
+      "Path": "reviewer-result-references.json",
+      "SHA256": "EB9D94886B66F34E50BDCA239A93BD8A470A23F0C307DF96F611365673E1DF16",
+      "Bytes": 1640
+    }
+  ],
+  "Limits": "All-mod inventory is static; actual Sponge evidence uses reduced config, omits original plugin gates, and does not establish full modpack/UI/runtime performance."
+}

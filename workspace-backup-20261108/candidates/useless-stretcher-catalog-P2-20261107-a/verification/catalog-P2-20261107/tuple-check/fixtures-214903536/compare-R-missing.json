@@ -1,0 +1,15 @@
+{
+  "utc": "2026-11-06T21:49:04.7182097Z",
+  "left": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\R-no-export.tsv",
+  "right": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-0.tsv",
+  "status": "EVIDENCE_MISSING",
+  "orderCompared": false,
+  "firstDifference": null,
+  "sourceDifferences": [],
+  "errors": [
+    "A tuple export is absent. No tuple order, count or digest can be inferred for that run.",
+    [
+      "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\R-no-export.tsv"
+    ]
+  ]
+}

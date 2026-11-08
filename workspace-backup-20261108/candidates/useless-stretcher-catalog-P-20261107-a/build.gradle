@@ -1,0 +1,250 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.107'
+    id 'idea'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+repositories {
+    mavenCentral {
+        content {
+            includeGroupByRegex 'org\\.junit.*'
+            includeGroupByRegex 'org\\.mockito.*'
+            includeGroup 'org.opentest4j'
+            includeGroup 'org.apiguardian'
+            includeGroup 'org.objenesis'
+            includeGroup 'net.bytebuddy'
+        }
+    }
+    maven { name = 'Modmaven'; url = uri('https://modmaven.dev/') }
+    maven { name = 'Shadowsoffire'; url = uri('https://maven.shadowsoffire.dev/releases') }
+    maven { name = 'cursemaven'; url = uri('https://www.cursemaven.com') }
+    maven { name = 'Curios'; url = uri('https://maven.theillusivec4.top/') }
+    mavenCentral()
+}
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+            gameDirectory = file(providers.gradleProperty('compatClientDirectory').getOrElse('build/compat-client'))
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            jvmArguments.addAll '-Xmx3G', '-Xms3G'
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            jvmArguments.addAll '-Xmx3G', '-Xms3G'
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+def defaultCompatibilityMods = file('build/client-mod-fixture-useful-armor-20261017')
+
+tasks.register('prepareCompatClientMods', Copy) {
+    if (providers.gradleProperty('compatibilityModsDirectory').isPresent()) {
+        from(file(providers.gradleProperty('compatibilityModsDirectory').get())) {
+            include '*.jar'
+            exclude 'useless_stretcher-*.jar'
+        }
+    } else {
+        from(defaultCompatibilityMods) {
+            include '*.jar'
+            exclude 'useless_stretcher-*.jar'
+        }
+    }
+    into file(providers.gradleProperty('compatClientDirectory').getOrElse('build/compat-client') + '/mods')
+}
+
+tasks.named('runClient') { dependsOn 'prepareCompatClientMods' }
+
+// Test source sets deliberately share the game classpath, but never the distributable artifact.
+tasks.named('jar') {
+    exclude 'com/sorrowmist/useless/stretcher/regression/**'
+    exclude 'com/sorrowmist/useless/stretcher/storytest/**'
+    exclude 'com/sorrowmist/useless/stretcher/guidetest/**'
+    exclude '**/*Checks*.class'
+    exclude 'data/useless_stretcher_test/**'
+}
+
+// Opt-in integration checks run in an isolated world and are excluded from release jars.
+if (providers.gradleProperty('regressionTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/regression/java'
+    sourceSets.main.resources.srcDir 'src/regression/resources'
+    tasks.named('compileJava') { outputs.upToDateWhen { false } }
+    tasks.register('copyRegressionFixtureMods', Copy) {
+        if (providers.gradleProperty('compatibilityModsDirectory').isPresent()) {
+            from(file(providers.gradleProperty('compatibilityModsDirectory').get())) {
+                include '*.jar'
+                exclude 'useless_stretcher-*.jar'
+            }
+        } else {
+            from(defaultCompatibilityMods) {
+                include '*.jar'
+                exclude 'useless_stretcher-*.jar'
+            }
+        }
+        into file(providers.gradleProperty('regressionDirectory').getOrElse('build/regression-server') + '/mods')
+    }
+    neoForge.runs {
+        regression {
+            server()
+            gameDirectory = file(providers.gradleProperty('regressionDirectory').getOrElse('build/regression-server'))
+            taskBefore tasks.named('copyRegressionFixtureMods')
+            programArguments.add '--nogui'
+            systemProperty 'useless_stretcher.regression', 'true'
+            systemProperty 'useless_stretcher.atm_only', providers.gradleProperty('atmOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.armor_only', providers.gradleProperty('armorOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.native_only', providers.gradleProperty('nativeOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.environment_only', providers.gradleProperty('environmentOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.acceleration_only', providers.gradleProperty('accelerationOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.watchdog_only', providers.gradleProperty('watchdogOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.watchdog_live', providers.gradleProperty('watchdogLive').getOrElse('false')
+            systemProperty 'useless_stretcher.watchdog_mbd2', providers.gradleProperty('watchdogMbd2').getOrElse('false')
+            systemProperty 'useless_stretcher.watchdog_restart', providers.gradleProperty('watchdogRestart').getOrElse('false')
+            systemProperty 'useless_stretcher.jdte_only', providers.gradleProperty('jdteOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.surface_only', providers.gradleProperty('surfaceOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.protection_only', providers.gradleProperty('protectionOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.fluid_only', providers.gradleProperty('fluidOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.installed_patterns_only', providers.gradleProperty('installedPatternsOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_repair_only', providers.gradleProperty('capsuleRepairOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_variants_only', providers.gradleProperty('capsuleVariantsOnly').getOrElse('false')
+        }
+    }
+}
+
+// Optional visual guide check in its own client directory; never part of release jars.
+if (providers.gradleProperty('guideTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/guideTest/java'
+    neoForge.runs {
+        guidePreview {
+            client()
+            gameDirectory = file(providers.gradleProperty('guideDirectory').getOrElse('build/guide-client'))
+            programArguments.addAll '--width', '1280', '--height', '800'
+            systemProperty 'useless_stretcher.guide_test', 'true'
+            systemProperty 'useless_stretcher.guide_pages_only', providers.gradleProperty('guidePagesOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.fluid_ui', providers.gradleProperty('fluidUi').getOrElse('false')
+            systemProperty 'useless_stretcher.staff_tabs_ui', providers.gradleProperty('staffTabsUi').getOrElse('false')
+            jvmArguments.addAll '-Xmx3G', '-Xms1G'
+        }
+    }
+    tasks.register('prepareGuidePreviewMods', Copy) {
+        from(file(providers.gradleProperty('guideModsDirectory').getOrElse(defaultCompatibilityMods.path))) {
+            include '*.jar'
+            exclude 'useless_stretcher-*.jar'
+        }
+        into file(providers.gradleProperty('guideDirectory').getOrElse('build/guide-client') + '/mods')
+    }
+    tasks.named('runGuidePreview') { dependsOn 'prepareGuidePreviewMods' }
+    dependencies {
+        compileOnly('org.appliedenergistics:guideme:21.1.17') { transitive = false }
+    }
+}
+
+// Opt-in story UI checks use a separate client directory and cannot enter a release jar.
+if (providers.gradleProperty('storyTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/storyTest/java'
+    if (providers.gradleProperty('protectionTests').isPresent()) sourceSets.main.java.srcDir 'src/regression/java'
+    sourceSets.main.resources.srcDir 'src/regression/resources'
+    neoForge.runs {
+        storyPreview {
+            client()
+            gameDirectory = file(providers.gradleProperty('storyDirectory').getOrElse('build/story-client'))
+            programArguments.addAll '--width', '1280', '--height', '800'
+            systemProperty 'useless_stretcher.story_test', 'true'
+            systemProperty 'useless_stretcher.capsule_ui_only', providers.gradleProperty('capsuleUiOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.capsule_repair_only', providers.gradleProperty('capsuleRepairOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.armor_jei_only', providers.gradleProperty('armorJeiOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.feature_client_only', providers.gradleProperty('featureClientOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.forced_kill_client_only', providers.gradleProperty('forcedKillClientOnly').getOrElse('false')
+            systemProperty 'useless_stretcher.skin_tail_only', providers.gradleProperty('skinTailOnly').getOrElse('false')
+            jvmArguments.addAll '-Xmx2G', '-Xms1G'
+        }
+    }
+    tasks.register('prepareStoryPreviewMods', Copy) {
+        if (providers.gradleProperty('storyModsDirectory').isPresent()) {
+            from(file(providers.gradleProperty('storyModsDirectory').get())) { include '*.jar' }
+        } else {
+            // Keep the default story client aligned with the complete compatibility
+            // fixture used by the native regression runs. The project mod itself is
+            // supplied by ModDev, so only external jars are copied here.
+            from(defaultCompatibilityMods) { include '*.jar'; exclude 'useless_stretcher-*.jar' }
+        }
+        into file(providers.gradleProperty('storyDirectory').getOrElse('build/story-client') + '/mods')
+    }
+    tasks.named('runStoryPreview') { dependsOn 'prepareStoryPreviewMods' }
+    tasks.named('jar') { exclude 'com/sorrowmist/useless/stretcher/storytest/**' }
+}
+
+dependencies {
+    // Compile against the locally built Useless Mod and AE2. Both are resolved
+    // at runtime by the host pack, so they stay compileOnly here.
+    // Compile against the latest upstream tool-switch API; keep the legacy jar on disk
+    // for older pack references without allowing Gradle to select its older classpath.
+    compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'],
+            excludes: ['useless_mod-1.21.1-2.3.6.1.jar', 'useless_mod-latest.jar'])
+    compileOnly('dev.shadowsoffire:ApothicEnchanting:1.21.1-1.6.2')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.15.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Optional integration: the host pack supplies Curios, and no Curios classes enter our jar.
+    compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api') { transitive = false }
+    if (providers.gradleProperty('regressionTests').isPresent()
+            || providers.gradleProperty('storyTests').isPresent()) {
+        compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1') { transitive = false }
+    }
+}
+
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+    maxHeapSize = '512m'
+}

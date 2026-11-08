@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "checksFound": 18,
+  "checksStarted": 18,
+  "checksPassed": 18,
+  "checksFailed": 0,
+  "gameLaunched": false,
+  "scope": "Actual Component/Language translation and detached presentation snapshots only; no Minecraft runtime or 184-test regression rerun.",
+  "assertions": [
+    {
+      "name": "ten_localization_keys_exist_in_both_resources",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_PLAN_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_HIDE_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_ADD_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_UNHIDE_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_COMMIT_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_DONE_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_CANCELLED_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_FAILED_uses_correct_translation_and_counters",
+      "status": "PASS"
+    },
+    {
+      "name": "waiting_and_preparing_messages_really_resolve_from_both_json_files",
+      "status": "PASS"
+    },
+    {
+      "name": "initial_hud_snapshot_is_translatable_waiting_runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "hud_snapshot_is_defensive_copy",
+      "status": "PASS"
+    },
+    {
+      "name": "diagnostic_progress_string_abi_and_initial_text_are_preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "same_component_retranslates_after_language_switch",
+      "status": "PASS"
+    },
+    {
+      "name": "new_addition_count_is_not_total_or_a_false_percentage",
+      "status": "PASS"
+    },
+    {
+      "name": "ledger_status_updates_actual_detached_hud_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "failure_details_stay_in_diagnostic_text_and_out_of_hud",
+      "status": "PASS"
+    },
+    {
+      "name": "off_owner_getters_only_read_detached_snapshot",
+      "status": "PASS"
+    }
+  ]
+}

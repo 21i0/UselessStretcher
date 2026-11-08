@@ -1,0 +1,25 @@
+{
+  "added": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+      "sha256": "CDE88CD6E174B8728693D3CF5432DED2C428C796C4959B84C9A9CBBA9CD044F4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+      "sha256": "E18084153844FC818CB22240E165AA9AE497FFA25D2D24882A712EA82FD3A45E"
+    }
+  ],
+  "changed": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "oldSha256": "FB2772659B693897B1C4F70B79FDD60C3E5BE06FC639FCA7FEAAFCEEAD3B4F3A",
+      "sha256": "C4FE1494ED9753BA6A365011A8AEF6C9D8661DB634E81F8B113D48CDB1E8DF17"
+    },
+    {
+      "name": "META-INF/neoforge.mods.toml",
+      "oldSha256": "D9CBA049863127463659C6163CF89CD4859D4039BF5CC4F048DDC1E5111CF0B7",
+      "sha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8"
+    }
+  ],
+  "removed": []
+}

@@ -1,0 +1,222 @@
+[
+  {
+    "Path": "all-mixin-targets.json",
+    "Bytes": 3324269,
+    "SHA256": "3CD79656BA8216C8DBFCDAB521D7CD76F51A7E26093CED59037B7885D16ACBFD"
+  },
+  {
+    "Path": "cn.dancingsnow.neoecoae.mixins.client.jei.MultiblockRecipesGuiMixin.javap.txt",
+    "Bytes": 14990,
+    "SHA256": "2539FB31961D953D20E740FF515CE5338E42CBA62F59A8C011A60C2F862759D6"
+  },
+  {
+    "Path": "com.lhy.ae2utility.mixin.RecipesGuiAccessor.javap.txt",
+    "Bytes": 2746,
+    "SHA256": "8A976E900AAD5DB9886A2AF9F99FF06D32FD190281567BF5AEF5F72732860F19"
+  },
+  {
+    "Path": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiBuildTimingMixin.javap.txt",
+    "Bytes": 6006,
+    "SHA256": "CD224F7A8312F1A91BF4D8339C05A01F3DEBE1C28C388C163877B76660B253BA"
+  },
+  {
+    "Path": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiGuiMixin.javap.txt",
+    "Bytes": 5312,
+    "SHA256": "FFB83E27CCB57BAC361E1C8839F92B5265B11FAD9C1D86EF28FDDCDAB0C3C5FC"
+  },
+  {
+    "Path": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiIndexTimingMixin.javap.txt",
+    "Bytes": 5925,
+    "SHA256": "6F59D5845CF44452447421D00C49EDACEB696A265B09D5C8733AAB7038D58615"
+  },
+  {
+    "Path": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiLookupMixin.javap.txt",
+    "Bytes": 7714,
+    "SHA256": "27436622670A95393AA4C3136A464EB91E970A44700FAD735BD7CBB3A6869938"
+  },
+  {
+    "Path": "com.sorrowmist.useless.stretcher.mixin.CatalogJeiTimingMixin.javap.txt",
+    "Bytes": 12919,
+    "SHA256": "707B53A318F3CFB21C2C2615F2818922240565BC68C146DA457B2F6E29E055F8"
+  },
+  {
+    "Path": "coremod-inventory.json",
+    "Bytes": 49946,
+    "SHA256": "65672112FEDDBB40627C1868B767D75523948F37AA4DD6E439A83640B506CEC2"
+  },
+  {
+    "Path": "DELIVERY-TEST-NOTE.md",
+    "Bytes": 1566,
+    "SHA256": "31264D9DEA060205AEEB0C494E7AF4A161EF74844A5B7EAD828A5014E71DAED9"
+  },
+  {
+    "Path": "FINAL-AUDIT-REPORT.md",
+    "Bytes": 3140,
+    "SHA256": "BEE13070B8A4D9641F35545011FDC1F6701946B10B16E6EF3E9CAA322DEF79F8"
+  },
+  {
+    "Path": "final-jar-audit-console.log",
+    "Bytes": 552,
+    "SHA256": "B4E7F4319B87388FC59EB4AAF3B5A47001A8D6D50ED884550A23B13847311DF4"
+  },
+  {
+    "Path": "final-jar-audit\\baseline-neoforge.mods.toml",
+    "Bytes": 1054,
+    "SHA256": "2B303105015CF6CE1D939DB9060B32129B457EEB19ED48731002E11E6BBA23B4"
+  },
+  {
+    "Path": "final-jar-audit\\baseline-timing-normalized.class",
+    "Bytes": 870,
+    "SHA256": "E0FF0F8B8A4572F04773F15C645419A22579BB2566CA0CAAB41D4AAB2C5E788D"
+  },
+  {
+    "Path": "final-jar-audit\\baseline-timing.class",
+    "Bytes": 1375,
+    "SHA256": "A6A0E4C6D10886D27BD33ADAF3CB7DED17F0223E4114F0350C765056F20F96B4"
+  },
+  {
+    "Path": "final-jar-audit\\baseline-timing.javap.txt",
+    "Bytes": 5943,
+    "SHA256": "C323CC387DF26D872C33876E6172775708231C9504A0EF17165878436AA450AA"
+  },
+  {
+    "Path": "final-jar-audit\\candidate-neoforge.mods.toml",
+    "Bytes": 1062,
+    "SHA256": "F6FFAAB5A824A5ADB235F85FECCB96430968E02E7B12AB7F48B6C85B5DC28AFE"
+  },
+  {
+    "Path": "final-jar-audit\\candidate-timing-normalized.class",
+    "Bytes": 870,
+    "SHA256": "E0FF0F8B8A4572F04773F15C645419A22579BB2566CA0CAAB41D4AAB2C5E788D"
+  },
+  {
+    "Path": "final-jar-audit\\candidate-timing.class",
+    "Bytes": 1754,
+    "SHA256": "9F085D0C8FECD48C195F0583B13752B85843E4FB81C99038BD6C9F39CB7991D8"
+  },
+  {
+    "Path": "final-jar-audit\\candidate-timing.javap.txt",
+    "Bytes": 6763,
+    "SHA256": "2325C28B5BECC5E74B1E445749EA1CDA98F9E4D57B0248AFF59CC6F39DC60980"
+  },
+  {
+    "Path": "final-jar-audit\\FINAL-JAR-AUDIT.json",
+    "Bytes": 58442,
+    "SHA256": "89B0B9DCC134E8233546214DEC155D5E83C52874900DF467D95903867C17C995"
+  },
+  {
+    "Path": "FinalJarAudit.class",
+    "Bytes": 11832,
+    "SHA256": "B754AD5E59F7A21F94D5ACFDDECFEB05D4C228BD65CFE979DDA11D3C3696EA4D"
+  },
+  {
+    "Path": "FinalJarAudit.java",
+    "Bytes": 6892,
+    "SHA256": "005182FF6911FD420CE5AF094F59BFDFB7EA800A6182D813F64CC56002A29BEA"
+  },
+  {
+    "Path": "giselle.jei_mekanism_multiblocks.client.mixin.jei.RecipesGuiMixin.javap.txt",
+    "Bytes": 9898,
+    "SHA256": "22A3FFEC88A9DDD41DAA5DD6E4D43C369C92821AF226CA27D877A9C958E051EA"
+  },
+  {
+    "Path": "jar-inventory.json",
+    "Bytes": 176642,
+    "SHA256": "A7FD4505233891906C8EB4881DC95702D6E1B11D0642CAD8AAA253FA83CB9BB6"
+  },
+  {
+    "Path": "matched-classes\\3B5E448C8CFD\\giselle\\jei_mekanism_multiblocks\\client\\mixin\\jei\\RecipesGuiMixin.class",
+    "Bytes": 1769,
+    "SHA256": "BC980F4DB0782E93DDC152186B003204A5689472DF78B3A0C77027827B4E13A8"
+  },
+  {
+    "Path": "matched-classes\\409BE5A856BC\\cn\\dancingsnow\\neoecoae\\mixins\\client\\jei\\MultiblockRecipesGuiMixin.class",
+    "Bytes": 3051,
+    "SHA256": "1C484A8942BF9A077ED8A53CD487E81BAE875DFD484FDC645A1983E25CC080B4"
+  },
+  {
+    "Path": "matched-classes\\8FA48E50D5C2\\com\\lhy\\ae2utility\\mixin\\RecipesGuiAccessor.class",
+    "Bytes": 574,
+    "SHA256": "CFF4F9EEC7B158E3AD8250E510CC52D97E1204EB6589A5E2D7D062BDCCD2872D"
+  },
+  {
+    "Path": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiBuildTimingMixin.class",
+    "Bytes": 1375,
+    "SHA256": "A6A0E4C6D10886D27BD33ADAF3CB7DED17F0223E4114F0350C765056F20F96B4"
+  },
+  {
+    "Path": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiGuiMixin.class",
+    "Bytes": 1098,
+    "SHA256": "CC359528D756C2C7F8644ED3E83826F7CD15012A9CF365D83C778452A78A3886"
+  },
+  {
+    "Path": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiIndexTimingMixin.class",
+    "Bytes": 1349,
+    "SHA256": "4503033D2D11A6401503C19A48C28A1DBAD169D36AE8C076E322DE71E033EF15"
+  },
+  {
+    "Path": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiLookupMixin.class",
+    "Bytes": 1566,
+    "SHA256": "50D7E833FA409E81FCAAEBA8A6233CA35018BB704F0FE3C218A0D4598FC240B7"
+  },
+  {
+    "Path": "matched-classes\\B37257B6C94F\\com\\sorrowmist\\useless\\stretcher\\mixin\\CatalogJeiTimingMixin.class",
+    "Bytes": 2254,
+    "SHA256": "AE2F0BD6D9BF752575EF777CDC25E1B5D6BD7A03291083E699719B1C487C1612"
+  },
+  {
+    "Path": "mixin-configurations.json",
+    "Bytes": 805450,
+    "SHA256": "124BD0993B0E060A47A2CCEBC7271DCE6AEDD8C02F102B8294D3FDA37566F730"
+  },
+  {
+    "Path": "REPORT.md",
+    "Bytes": 8616,
+    "SHA256": "9C56FD17D4ABB7C0588DE4D895F2AF1CD2C3100C17320EE23D6AA3833B76E7AC"
+  },
+  {
+    "Path": "reviewer-result-references.json",
+    "Bytes": 1640,
+    "SHA256": "EB9D94886B66F34E50BDCA239A93BD8A470A23F0C307DF96F611365673E1DF16"
+  },
+  {
+    "Path": "same-target-mixins.json",
+    "Bytes": 45384,
+    "SHA256": "75D1F6C8242707F53F0A837BBF9B2B956EFF8DDBE9AE9EFCAD027DC05220D15E"
+  },
+  {
+    "Path": "SameTargetScan.class",
+    "Bytes": 17192,
+    "SHA256": "5095D7CCC509411A8FAD7714FA08A1DC965F50143886DF3479D5C780C874D466"
+  },
+  {
+    "Path": "SameTargetScan.java",
+    "Bytes": 12309,
+    "SHA256": "48F08178425AA265F18ED5E4DA7BA0BDB3FE64130EB042AACDC743728FF0C109"
+  },
+  {
+    "Path": "SCAN-AUDIT-RECEIPT.json",
+    "Bytes": 1637,
+    "SHA256": "951F157C41ED8505994609D0736AB641C3DCC45689E088A178DC58C715CD8796"
+  },
+  {
+    "Path": "scan-console.log",
+    "Bytes": 1181,
+    "SHA256": "F89A81D4C67C1B61C7E229B718405B468AFCADA0C94C9D5A3CB481C34451F6C4"
+  },
+  {
+    "Path": "scan-errors.json",
+    "Bytes": 3,
+    "SHA256": "37517E5F3DC66819F61F5A7BB8ACE1921282415F10551D2DEFA5C3EB0985B570"
+  },
+  {
+    "Path": "SUMMARY.json",
+    "Bytes": 776,
+    "SHA256": "50E79696B28C50248A32276E8CF9FD3F93777419FF3D009E21E2D3F8007A0D56"
+  },
+  {
+    "Path": "target-references.json",
+    "Bytes": 19367,
+    "SHA256": "0D63E123006A19412EB623E5F4E676C66F288CB926902DB7909D5056A47B1D67"
+  }
+]

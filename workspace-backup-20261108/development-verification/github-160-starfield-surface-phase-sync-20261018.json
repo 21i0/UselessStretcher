@@ -1,0 +1,29 @@
+{
+  "result": "GITHUB SOURCE SYNC VERIFIED",
+  "verified_at": "2026-10-18T13:34:11+08:00",
+  "repository": "https://github.com/21i0/UselessStretcher",
+  "branch": "main",
+  "source_commit": "3579e819f3a9eb6daabf4a93470d39701f4a501c",
+  "verified_remote_commit": "3579e819f3a9eb6daabf4a93470d39701f4a501c",
+  "jar": "D:\\AI\\useless_stretcher-1.21.1-1.6.0.jar",
+  "jar_bytes": 12509777,
+  "jar_sha256": "5395845E7F001311A996CC600F8BD44E495BD1541F1556BCA688F5E2579B219C",
+  "network_protocol": 21,
+  "release_created": false,
+  "tag_created": false,
+  "preserved_untracked": [
+    "$dir/",
+    "$new/",
+    "net/"
+  ],
+  "tests": [
+    "PHASE CLIENT MOVEMENT PASSED",
+    "CAPSULE BACKGROUND READY TOAST PASSED",
+    "CAPSULE READY ROUNDTRIPS PASSED",
+    "SURFACE CAPSULE CHECKS PASSED",
+    "CAPSULE NATIVE CHECKS PASSED",
+    "CAPSULE AE2LT CHECKS PASSED",
+    "GUIDE CHECKS PASSED",
+    "JAR CHECKS PASSED"
+  ]
+}

@@ -13,6 +13,16 @@ version = mod_version
 group = mod_group_id
 
 repositories {
+    mavenCentral {
+        content {
+            includeGroupByRegex 'org\\.junit.*'
+            includeGroupByRegex 'org\\.mockito.*'
+            includeGroup 'org.opentest4j'
+            includeGroup 'org.apiguardian'
+            includeGroup 'org.objenesis'
+            includeGroup 'net.bytebuddy'
+        }
+    }
     maven { name = 'Modmaven'; url = uri('https://modmaven.dev/') }
     maven { name = 'Shadowsoffire'; url = uri('https://maven.shadowsoffire.dev/releases') }
     maven { name = 'cursemaven'; url = uri('https://www.cursemaven.com') }
@@ -219,10 +229,22 @@ dependencies {
     compileOnly fileTree(dir: 'libs/compile', includes: ['*.jar'],
             excludes: ['useless_mod-1.21.1-2.3.6.1.jar', 'useless_mod-latest.jar'])
     compileOnly('dev.shadowsoffire:ApothicEnchanting:1.21.1-1.6.2')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.15.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // Optional integration: the host pack supplies Curios, and no Curios classes enter our jar.
     compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api') { transitive = false }
     if (providers.gradleProperty('regressionTests').isPresent()
             || providers.gradleProperty('storyTests').isPresent()) {
         compileOnly('top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1') { transitive = false }
     }
+}
+
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+    maxHeapSize = '512m'
 }

@@ -1,0 +1,65 @@
+{
+  "utc": "2026-11-06T21:49:04.5604398Z",
+  "left": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-0.tsv",
+  "right": "D:\\AI\\candidates\\useless-stretcher-catalog-P2-20261107-a\\verification\\catalog-P2-20261107\\tuple-check\\fixtures-214903536\\fixture-2.tsv",
+  "status": "DIFFERENT",
+  "orderCompared": true,
+  "firstDifference": {
+    "index": 1,
+    "left": {
+      "index": 1,
+      "recipeId": "mod:b",
+      "fingerprint": "fp-b",
+      "sourceId": "adapter"
+    },
+    "right": {
+      "index": 1,
+      "recipeId": "mod:b",
+      "fingerprint": "changed",
+      "sourceId": "adapter"
+    },
+    "reason": "ordered-tuple"
+  },
+  "sourceDifferences": [
+    {
+      "sourceId": "adapter",
+      "leftCount": 1,
+      "rightCount": 1,
+      "leftSha256": "3199867899b300c40e4bf5bf692f2cc8131e0260575ae0a5c7e35cd7010a9bf2",
+      "rightSha256": "8fc67ead082a2c7be355bb6ac11b5ba6956a53f5f79dd1cce22cca347f9e5117"
+    }
+  ],
+  "errors": [],
+  "leftSummary": {
+    "count": 3,
+    "sha256": "e6391f517758783fe1d44b8ea349d51e01ab11e67fc2bcafcc0b4a3cd130d0ab",
+    "sources": [
+      {
+        "sourceId": "adapter",
+        "count": 1,
+        "sha256": "3199867899b300c40e4bf5bf692f2cc8131e0260575ae0a5c7e35cd7010a9bf2"
+      },
+      {
+        "sourceId": "core",
+        "count": 2,
+        "sha256": "1a6dbdb139a55d0d30ffc714669ec7d0c404119ce61f7e94df10f124b90296a8"
+      }
+    ]
+  },
+  "rightSummary": {
+    "count": 3,
+    "sha256": "8e3c3ea6992d09262551b3c1ab30d751d616b1ac04148a4153c3ea37fb662f21",
+    "sources": [
+      {
+        "sourceId": "adapter",
+        "count": 1,
+        "sha256": "8fc67ead082a2c7be355bb6ac11b5ba6956a53f5f79dd1cce22cca347f9e5117"
+      },
+      {
+        "sourceId": "core",
+        "count": 2,
+        "sha256": "1a6dbdb139a55d0d30ffc714669ec7d0c404119ce61f7e94df10f124b90296a8"
+      }
+    ]
+  }
+}

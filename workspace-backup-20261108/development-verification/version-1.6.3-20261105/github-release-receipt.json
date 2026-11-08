@@ -1,0 +1,34 @@
+{
+  "result": "GITHUB RELEASE PUBLISHED AND VERIFIED",
+  "repository": "21i0/UselessStretcher",
+  "commit": "2f1fe845343673512829cbf080117257b7958bec",
+  "tag": "v1.6.3",
+  "title": "万象担架 1.6.3",
+  "releaseUrl": "https://github.com/21i0/UselessStretcher/releases/tag/v1.6.3",
+  "releaseId": 434944851,
+  "publishedAt": "2026-11-05T08:32:13Z",
+  "assets": [
+    {
+      "name": "useless_stretcher-1.21.1-1.6.3.jar",
+      "bytes": 12691712,
+      "digest": "sha256:00a10f69575b941c6a7545d28b43749362cb02fc9e30288abc271520537b5bfc",
+      "url": "https://github.com/21i0/UselessStretcher/releases/download/v1.6.3/useless_stretcher-1.21.1-1.6.3.jar",
+      "id": 712662649
+    },
+    {
+      "name": "changelog-1.6.3.txt",
+      "bytes": 1939,
+      "digest": "sha256:b6ea4ab97fcc25744f88ddfb1c669349c536fd1ed359f07b9a0c743b373d7529",
+      "url": "https://github.com/21i0/UselessStretcher/releases/download/v1.6.3/changelog-1.6.3.txt",
+      "id": 712662833
+    },
+    {
+      "name": "usage-1.6.3.txt",
+      "bytes": 8345,
+      "digest": "sha256:d1754de131cec68e8d957d93ed6e123c018ceaf024be97aa13520a67dd56e997",
+      "url": "https://github.com/21i0/UselessStretcher/releases/download/v1.6.3/usage-1.6.3.txt",
+      "id": 712662871
+    }
+  ],
+  "verifiedAt": "2026-11-05T08:48:04.3386726Z"
+}

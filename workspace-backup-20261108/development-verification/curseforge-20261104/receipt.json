@@ -1,0 +1,30 @@
+{
+  "projectId": 1690885,
+  "fileId": 9430416,
+  "recordedAtShanghai": "2026-11-04 12:12:45",
+  "projectUrl": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher",
+  "fileUrl": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9430416",
+  "status": "Under Review",
+  "automaticPublishAfterApproval": true,
+  "displayName": "useless_stretcher-1.21.1-1.6.2.jar - Capsule Variants (Protocol 23)",
+  "productionJar": "D:/AI/useless_stretcher-1.21.1-1.6.2.jar",
+  "bytes": 12666911,
+  "sha256": "D6F5E4F8CCA14A1127EE00D23883E52C1A7D6F06BCC8F7F9BE77D5AA18B94D83",
+  "labels": [
+    "1.21.1",
+    "NeoForge",
+    "Java 21",
+    "Client",
+    "Server"
+  ],
+  "required": [
+    "Some-Useless-Things",
+    "Applied Energistics 2"
+  ],
+  "optional": [
+    "Curios API",
+    "GuideME"
+  ],
+  "publicDescriptionVerified": true,
+  "downloadVerification": "No downloaded file obtained: Timed out after 15000ms waiting for download."
+}

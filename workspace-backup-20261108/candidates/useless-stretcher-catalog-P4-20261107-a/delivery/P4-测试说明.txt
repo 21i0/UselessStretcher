@@ -1,0 +1,23 @@
+万象担架 Catalog P4 独立测试候选
+版本：1.21.1-1.6.4-catalog-P4
+
+文件：D:\AI\candidates\useless-stretcher-catalog-P4-20261107-a\delivery\useless_stretcher-1.21.1-1.6.4-catalog-P4.jar
+SHA256：9C57CBB3B1343C8837B773003AC906C630378786A784B7490F1F4E943A5021FC
+大小：12,808,495 字节
+
+本轮将固定16条JEI发布批次改为自适应批次：ADD/HIDE/UNHIDE分别从1条开始，连续快速调用后扩大，慢调用后回退；增加分类构建、索引、guard及native分阶段计时。慢调用最多记录8条。
+
+离线验证：175/175测试通过；95项静态检查通过（31 ABI、64版本gate）；已冻结。包内版本已核对，测试类已排除。P3、生产JAR、运行中的整合包未改动，未提交、推送或发布。
+
+没有启动Minecraft或服务端。合成时钟测试不能代替实际整合包性能验证；单条native JEI调用仍不可抢占，因此不能保证所有帧低于4ms，也不能声称此前约0.9秒卡顿已完全消失。
+
+交由拥有完整端的测试任务装入，采集同输入的日志：
+1. Stretcher JEI publication complete
+2. Stretcher JEI publication stages
+3. Stretcher JEI publication budget
+4. 慢调用明细（如有，最多8条）
+核对完整条目与配方顺序，并继续观察实际帧耗时。
+
+冻结记录：本目录 P4-freeze-manifest.json
+包内差异：本目录 P4-members-vs-P3.json
+详细报告：D:\AI\candidates\useless-stretcher-catalog-P4-20261107-a\verification\catalog-P4-20261107\REPORT.md

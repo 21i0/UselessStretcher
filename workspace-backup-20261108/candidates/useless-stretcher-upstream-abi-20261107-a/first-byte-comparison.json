@@ -1,0 +1,92 @@
+[
+  {
+    "name": "com/sorrowmist/useless/content/blockentities/RecoverableItemStackHandler.class",
+    "identical": true,
+    "oldSize": 4267,
+    "newSize": 4267
+  },
+  {
+    "name": "com/sorrowmist/useless/content/blockentities/AdvancedAlloyFurnaceBlockEntity.class",
+    "identical": false,
+    "oldSize": 65156,
+    "newSize": 66936
+  },
+  {
+    "name": "com/sorrowmist/useless/content/blockentities/multiblock/MePatternAssemblyBlockEntity.class",
+    "identical": false,
+    "oldSize": 23608,
+    "newSize": 25531
+  },
+  {
+    "name": "com/sorrowmist/useless/content/blockentities/multiblock/PassiveCraftingHatchBlockEntity.class",
+    "identical": false,
+    "oldSize": 51717,
+    "newSize": 51717
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$PatternFluidInput.class",
+    "identical": false,
+    "oldSize": 2199,
+    "newSize": 2199
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeIdentity.class",
+    "identical": true,
+    "oldSize": 2273,
+    "newSize": 2273
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$FingerprintedRecipe.class",
+    "identical": false,
+    "oldSize": 2469,
+    "newSize": 2469
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$CollectedRecipe.class",
+    "identical": false,
+    "oldSize": 2248,
+    "newSize": 2248
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Snapshot.class",
+    "identical": false,
+    "oldSize": 6360,
+    "newSize": 6360
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$SourceRecipeKey.class",
+    "identical": false,
+    "oldSize": 2180,
+    "newSize": 2180
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog.class",
+    "identical": false,
+    "oldSize": 55691,
+    "newSize": 58258
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$PatternContents.class",
+    "identical": false,
+    "oldSize": 6290,
+    "newSize": 6290
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$AdapterSource.class",
+    "identical": false,
+    "oldSize": 2329,
+    "newSize": 2329
+  },
+  {
+    "name": "com/sorrowmist/useless/content/recipe/AlloyFurnaceRecipeCatalog$Entry.class",
+    "identical": false,
+    "oldSize": 2780,
+    "newSize": 2780
+  },
+  {
+    "name": "com/sorrowmist/useless/init/ClientSetup.class",
+    "identical": false,
+    "oldSize": 24665,
+    "newSize": 24665
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:turtle_helmet" },
+    { "item": "minecraft:purple_dye" }
+  ],
+  "result": {
+    "id": "minecraft:shulker_shell",
+    "count": 1
+  }
+}
