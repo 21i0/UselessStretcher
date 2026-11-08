@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-08",
+  "removed_bytes": 1353998116,
+  "removed_files": 4485,
+  "removed_targets": 41,
+  "latest_file": "useless_stretcher-20.1.6.5.jar",
+  "latest_sha256": "DA0E0FB4E83C766C15E333D59DFD18F10B8729F66724C0CCDF980D1EA9C1C8FA",
+  "rollback_version": "20.1.6.3",
+  "github_evidence_commit": "82aa41b423e7eb3228439466d0ae161f9e6b7484",
+  "curseforge_url": "https://www.curseforge.com/minecraft/mc-mods/useless-stretcher/files/9404126",
+  "curseforge_binary_already_current": true,
+  "curseforge_metadata_updated": [
+    "changelog",
+    "AE2 required relation",
+    "GuideME required relation",
+    "server environment"
+  ],
+  "minecraft_started": false,
+  "third_party_binaries_uploaded": false,
+  "modpack_uploaded": false,
+  "retained_project_bytes_approximate": 103168575,
+  "shared_maven_cache_bytes_preserved": 473984409,
+  "original_weapon_archive_bytes_preserved": 314004126,
+  "cleanup_scope": "Only the Forge 1.20.1 checkout and named Forge archives; 1.21.1, original assets and other projects untouched."
+}
