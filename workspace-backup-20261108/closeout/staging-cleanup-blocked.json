@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED_BY_AUTOMATIC_APPROVAL",
+  "action": "Remove temporary independent Git backup checkout",
+  "path": "D:\\AI\\backups\\useless-stretcher-closeout-20261108",
+  "files_retained": 3617,
+  "logical_bytes_retained": 271702305,
+  "review_reason": "blocked by policy; no further reason supplied",
+  "deletion_executed": false,
+  "earlier_cleanup_completed": true
+}

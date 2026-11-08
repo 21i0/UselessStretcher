@@ -37,3 +37,9 @@
 - 因本轮禁止开 MC，未将改名作为验收，未创建新 Release 或上传 CF。详细版本/依赖/协议/升级限制见 `RELEASE-STATUS.md`，并已复制至 `D:\AI\万象担架-CurseForge发布资料\20261108-1.6.4-hold\`。
 
 本目录的 cleanup-plan、cleanup-receipt、postflight-receipt、remote-backup-receipt 和文档更新收据保留精确数字与路径；原冻结候选没有因收尾操作重写。
+
+## 临时检出保留及自动审批阻断
+
+本轮为备份创建的独立临时检出 `D:\AI\backups\useless-stretcher-closeout-20261108` 仍保留：3,617 个文件、271,702,305 逻辑字节（约 272 MB）。它不属于原来的共享 Git/worktree，全部必要源码及收尾资料已经推送并核验。
+
+在确认远端备份、目标绝对路径及无重解析点后，删除这个明确临时检出的终端动作被自动审批拒绝，返回 `blocked by policy`，没有提供更细理由。该动作没有执行，本报告不把这 272 MB 计入释放空间；未继续改用其它接口重复删除。原始 368 个目标的清理已经成功，与此阻断分别记录。
