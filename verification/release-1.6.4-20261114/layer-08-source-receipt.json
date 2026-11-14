@@ -1,0 +1,171 @@
+{
+  "status": "PREPARED_NOT_COMPILED_NOT_TESTED",
+  "version": "1.21.1-1.6.4",
+  "baseline": {
+    "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\private-packages\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1-capsule-gravity-e1.jar",
+    "size": 15105953,
+    "sha256": "58dad32e8644a8612ef1ed30d6088531f16cf9849df6f844f1e27534865f63c3"
+  },
+  "productionSources": [
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.java",
+      "size": 6133,
+      "sha256": "b76a7329574de07cbd8470a4c213cb36fed6a58e9586f61474b9dbec947b806d"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.java",
+      "size": 1090,
+      "sha256": "1831d3ddd19c21b06546f0a2c5f477619d2df662e8c91b1ec726520cc12c3b5c"
+    }
+  ],
+  "dependencyJars": [
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\net.neoforged.fancymodloader\\loader\\4.0.44\\63433608b68302a442e3dba87880e54f42ea0583\\loader-4.0.44.jar",
+      "size": 505708,
+      "sha256": "f2096cd86d605c0484971fc712208e0dc6cecfe53e056db61d44a98cadc19499"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.apache.maven\\maven-artifact\\3.8.5\\4433f50c07debefaed0553bd0068f4f48d449313\\maven-artifact-3.8.5.jar",
+      "size": 58077,
+      "sha256": "91172bc294d6eab02fc9f45f4ea01fd0e418962d128cf489abea7b6957d988ee"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\net.fabricmc\\sponge-mixin\\0.15.2+mixin.0.8.7\\2af2f021d8e02a0220dc27a7a72b4666d66d44ca\\sponge-mixin-0.15.2+mixin.0.8.7.jar",
+      "size": 1494751,
+      "sha256": "1d45cfe3ae4a2eab38dc74276803748cf799088986260d6d912e50ddb35d15c5"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\9.10.1\\e244332a17564c1d1572449399a842de35881be2\\asm-tree-9.10.1.jar",
+      "size": 51958,
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\9.10.1\\ada2141c0cc52ee8f5c48cd5fa4ce0e794f22236\\asm-9.10.1.jar",
+      "size": 126151,
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\com.mojang\\logging\\1.2.7\\24cb95ffb0e3433fd6e844c04e68009e504ca1c0\\logging-1.2.7.jar",
+      "size": 15343,
+      "sha256": "3dc3190204bac5f4184d8405bfe1f724f73a6a15a0d3f36ec7f69e6872c1a76c"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\2.0.9\\7cf2726fdcfbc8610f9a71fb3ed639871f315340\\slf4j-api-2.0.9.jar",
+      "size": 64579,
+      "sha256": "0818930dc8d7debb403204611691da58e49d42c50b6ffcfdce02dadb7c3c2b6c"
+    }
+  ],
+  "expectedClassEntries": [
+    "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+    "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class"
+  ],
+  "metadataPolicy": "Only formal version changes; existing required dependency lower bounds remain unchanged.",
+  "inputs": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\private-packages\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1-capsule-gravity-e1.jar",
+      "size": 15105953,
+      "sha256": "58dad32e8644a8612ef1ed30d6088531f16cf9849df6f844f1e27534865f63c3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\classpath.txt",
+      "size": 18416,
+      "sha256": "69e94badffc298dc7cc78a007697cf3ba6719447eb66052f7ec6e714afe8fb96"
+    },
+    {
+      "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot\\bin\\javac.exe",
+      "size": 24704,
+      "sha256": "00f7c6f9ec89ebba4bb96cf8760403cccf1268df2eae8685900ba38e58a7aff9"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\net.neoforged.fancymodloader\\loader\\4.0.44\\63433608b68302a442e3dba87880e54f42ea0583\\loader-4.0.44.jar",
+      "size": 505708,
+      "sha256": "f2096cd86d605c0484971fc712208e0dc6cecfe53e056db61d44a98cadc19499"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.apache.maven\\maven-artifact\\3.8.5\\4433f50c07debefaed0553bd0068f4f48d449313\\maven-artifact-3.8.5.jar",
+      "size": 58077,
+      "sha256": "91172bc294d6eab02fc9f45f4ea01fd0e418962d128cf489abea7b6957d988ee"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\net.fabricmc\\sponge-mixin\\0.15.2+mixin.0.8.7\\2af2f021d8e02a0220dc27a7a72b4666d66d44ca\\sponge-mixin-0.15.2+mixin.0.8.7.jar",
+      "size": 1494751,
+      "sha256": "1d45cfe3ae4a2eab38dc74276803748cf799088986260d6d912e50ddb35d15c5"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\9.10.1\\e244332a17564c1d1572449399a842de35881be2\\asm-tree-9.10.1.jar",
+      "size": 51958,
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\9.10.1\\ada2141c0cc52ee8f5c48cd5fa4ce0e794f22236\\asm-9.10.1.jar",
+      "size": 126151,
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\com.mojang\\logging\\1.2.7\\24cb95ffb0e3433fd6e844c04e68009e504ca1c0\\logging-1.2.7.jar",
+      "size": 15343,
+      "sha256": "3dc3190204bac5f4184d8405bfe1f724f73a6a15a0d3f36ec7f69e6872c1a76c"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\2.0.9\\7cf2726fdcfbc8610f9a71fb3ed639871f315340\\slf4j-api-2.0.9.jar",
+      "size": 64579,
+      "sha256": "0818930dc8d7debb403204611691da58e49d42c50b6ffcfdce02dadb7c3c2b6c"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.java",
+      "size": 5991,
+      "sha256": "96277b8de6f15d6a31d86596c4f2289f4fe0d0f666abe178ca02cad7ee5c44e3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.java",
+      "size": 965,
+      "sha256": "195820c505a67ab5f62e74d2556d116af8cc9a64053484ff8c4b845c51ec2a70"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.java",
+      "size": 6133,
+      "sha256": "b76a7329574de07cbd8470a4c213cb36fed6a58e9586f61474b9dbec947b806d"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.java",
+      "size": 1090,
+      "sha256": "1831d3ddd19c21b06546f0a2c5f477619d2df662e8c91b1ec726520cc12c3b5c"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "size": 1005,
+      "sha256": "de02c38211584783bd5a1808bbca327fadc17ca823f63abd94da55179b440448"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\classpath.txt",
+      "size": 1023,
+      "sha256": "3c562ee03a66ae9bd0853bc31c8f05a0ca2301e0601d32f1c9eccd07c28f3a2a"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\javac-production.args",
+      "size": 1577,
+      "sha256": "a9ba989df2acf05b996b17e0028b9a8a52ef246b34a78549535fc49140173390"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\finalize_candidate.py",
+      "size": 9612,
+      "sha256": "17b04fa849b505648b130c3f2c7d98c90ce946b4fa59b418f005330584a3f98c"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\SOURCE.patch",
+      "size": 3001,
+      "sha256": "c45d6629ce45b76a739e32d44d15275a9b9e5f3a79ba9e14a6913905840708b2"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\finalize_candidate_b.py",
+      "size": 9639,
+      "sha256": "2d3c234dfc70186d62f9b2c74531694d959bb90e55e862ce391c1efe7b9593fd"
+    }
+  ],
+  "supersedesFinalizerOnly": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\finalize_candidate.py",
+    "size": 9612,
+    "sha256": "17b04fa849b505648b130c3f2c7d98c90ce946b4fa59b418f005330584a3f98c"
+  },
+  "failedAttemptPreserved": "Original finalizer, INPUTS.json and jar.part preserved. Root reports fresh compilation exit0; no recompile requested."
+}

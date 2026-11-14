@@ -93,6 +93,7 @@ public final class UselessStretcherItem extends Item {
             if (be instanceof OmniversalMyriadBlockEntity myriad) {
                 if (!level.isClientSide) {
                     UUID ref = myriad.getPatternRef();
+                    com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.clearAssemblySnapshot(stretcher);
                     MyriadMoldData.writePatternRef(stretcher, ref);
                     com.sorrowmist.useless.stretcher.content.ae.InstalledStretcherPatterns.bindDimension(stretcher, (ServerLevel) level);
                     UUID aeRef = MyriadMoldData.readAeRef(stretcher);

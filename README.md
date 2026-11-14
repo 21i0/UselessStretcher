@@ -11,11 +11,19 @@
 An addon for **Useless Mod**: a wildcard mold block, remote pattern delivery,
 native **4096** pattern slots in Useless Mod 2.4.6+, and a time-acceleration staff.
 
-## 1.6.3
+## 1.6.4
+
+正式文件为 `useless_stretcher-1.21.1-1.6.4.jar`，网络协议 23；客户端与服务端同时更新。适配无用之物 `1.21.1-2.4.6.6`、AE2 `19.2.19`、JEI `19.70.0.469` 和 mezz_config `0.7.1`。新增精确版本门控，保留目录分批构建、适配器隔离、总成装入时的独立样板快照和胶囊重力方块稳定机制。
+
+真实集成客户端通过 18 项普通检查，覆盖 G/X、主副手及混持、正常 F 换手与热键切槽后重开、JEI 目录、下界往返后的布局与服务端倍率修改。人工在已打开窗口中强制替换同一手的另一把同类杖仍按当前手定位；换手或切换物品后请关窗重开。没有声称覆盖零 Tick 竞态、远程多人或全部整合包。
+
+升级前备份整个存档；样板库格式 3 不支持只换旧 JAR 原地降级，回退应一并恢复完整备份。详见 [1.6.4 更新说明](changelog-1.6.4.txt)、[使用说明](usage-1.6.4.txt) 和 [发布验证与来源](verification/release-1.6.4-20261114/PROVENANCE.md)。该精确二进制继承冻结 E1 条目并重编两个门控类，未宣称完成全量 clean build。
+
+## 1.6.3（历史版本）
 
 修复手杖单体和范围加速 Productive Bees Genesis Extra 离心机的调用方式，接入机器原生批处理并合并多来源工作；兼容 MBD2、LDLib2 2.2.44 与闪电科技的节点同步，保留 AE2LT 的线程保护及保存数据。真实配方、联网满储、部分接收、NBT 重载和同存档进程重启已验证。
 
-当前主线版本为 `1.21.1-1.6.3`，构建文件 `useless_stretcher-1.21.1-1.6.3.jar`，网络协议保持 23。客户端和服务端同时更新，从 1.6.x 升级无需重置存档。详见 [1.6.3 更新说明](changelog-1.6.3.txt)、[使用说明](usage-1.6.3.txt) 和 [兼容验证记录](verification/1.6.3-watchdog-compat-20261105.md)。
+该历史版本为 `1.21.1-1.6.3`，构建文件 `useless_stretcher-1.21.1-1.6.3.jar`，网络协议保持 23。客户端和服务端同时更新，从 1.6.x 升级无需重置存档。详见 [1.6.3 更新说明](changelog-1.6.3.txt)、[使用说明](usage-1.6.3.txt) 和 [兼容验证记录](verification/1.6.3-watchdog-compat-20261105.md)。
 
 ## 1.6.2
 

@@ -1547,6 +1547,10 @@ public final class Network {
         }
         if (ref == null) return;
         com.sorrowmist.useless.stretcher.content.mold.PatternRepositorySearch.cancel(player);
+        if (!store.isResolved(ref)) {
+            player.displayClientMessage(Component.translatable("msg.useless_stretcher.library_unavailable"), true);
+            return;
+        }
         store.removeKeys(ref, payload.patterns());
         if (be != null) { be.markPatternsChanged(); replyState(player, be); }
         // The item screen follows deletion with its current tagged search request. An untagged

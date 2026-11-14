@@ -21,6 +21,8 @@ import java.util.UUID;
 /** Resolves the existing world-owned library; the installed item remains a small UUID reference. */
 public final class InstalledStretcherPatterns {
     private static final String DIMENSION = "pattern_dimension";
+    private static final String ASSEMBLY_SNAPSHOT = "assembly_snapshot_ref";
+    private static final String ASSEMBLY_DIMENSION = "assembly_snapshot_dimension";
     private InstalledStretcherPatterns() { }
 
     public static boolean isStretcher(ItemStack stack) {
@@ -33,24 +35,71 @@ public final class InstalledStretcherPatterns {
     }
 
     public static MyriadPatternStore store(ServerLevel current, ItemStack stack) {
+        ServerLevel source = sourceLevel(current, stack);
+        return source == null ? new MyriadPatternStore() : MyriadPatternStore.get(source);
+    }
+
+    private static ServerLevel sourceLevel(ServerLevel current, ItemStack stack) {
         UUID ref = MyriadMoldData.readPatternRef(stack);
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         String storedDimension = data.copyTag().getString(DIMENSION);
         ResourceLocation dimension = storedDimension.isBlank() ? null : ResourceLocation.tryParse(storedDimension);
-        if (dimension != null) {
-            ServerLevel source = current.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, dimension));
+        if (!storedDimension.isBlank()) {
             // A missing source dimension must not silently bind to another library.
-            return source == null ? new MyriadPatternStore() : MyriadPatternStore.get(source);
+            return dimension == null ? null
+                    : current.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, dimension));
         }
         MyriadPatternStore local = MyriadPatternStore.get(current);
-        if (ref == null || local.contains(ref)) return local;
+        if (ref == null || local.contains(ref)) return current;
         // Old stretchers have only a UUID. Resolve their original loaded dimension without loading chunks.
         for (ServerLevel level : current.getServer().getAllLevels()) {
             if (level == current) continue;
             MyriadPatternStore candidate = MyriadPatternStore.get(level);
-            if (candidate.contains(ref)) return candidate;
+            if (candidate.contains(ref)) return level;
         }
-        return local;
+        return current;
+    }
+
+    /** An installed snapshot keeps its identity when extracted, saved or moved to another machine. */
+    public static boolean isAssemblySnapshot(ItemStack stack) {
+        UUID ref = MyriadMoldData.readPatternRef(stack);
+        if (ref == null) return false;
+        var tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        return ref.toString().equals(tag.getString(ASSEMBLY_SNAPSHOT))
+                && !tag.getString(DIMENSION).isBlank()
+                && tag.getString(DIMENSION).equals(tag.getString(ASSEMBLY_DIMENSION));
+    }
+
+    public static boolean canSnapshotForAssembly(ServerLevel current, ItemStack original) {
+        UUID ref = MyriadMoldData.readPatternRef(original);
+        if (ref == null) return false;
+        ServerLevel source = sourceLevel(current, original);
+        return source != null && MyriadPatternStore.get(source).isResolved(ref);
+    }
+
+    /** Called only for a real installation, never for insertion simulation or client-side validation. */
+    public static ItemStack snapshotForAssembly(ServerLevel current, ItemStack original) {
+        UUID ref = MyriadMoldData.readPatternRef(original);
+        if (ref == null) return ItemStack.EMPTY;
+        ServerLevel source = sourceLevel(current, original);
+        if (source == null || !MyriadPatternStore.get(source).isResolved(ref)) return ItemStack.EMPTY;
+        // A real reinstallation forks too: another extracted/creative copy must not edit this machine's UUID.
+        UUID snapshot = MyriadPatternStore.get(source).fork(ref);
+        ItemStack installed = original.copy();
+        MyriadMoldData.writePatternRef(installed, snapshot);
+        bindDimension(installed, source);
+        CustomData.update(DataComponents.CUSTOM_DATA, installed, tag -> {
+            tag.putString(ASSEMBLY_SNAPSHOT, snapshot.toString());
+            tag.putString(ASSEMBLY_DIMENSION, source.dimension().location().toString());
+        });
+        return installed;
+    }
+
+    public static void clearAssemblySnapshot(ItemStack stack) {
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
+            tag.remove(ASSEMBLY_SNAPSHOT);
+            tag.remove(ASSEMBLY_DIMENSION);
+        });
     }
 
     public static List<AEItemKey> keys(ServerLevel level, ItemStack stack, BlockEntity reader) {

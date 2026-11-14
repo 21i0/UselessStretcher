@@ -1,0 +1,869 @@
+{
+  "timestampUtc": "2026-11-07T15:19:15.4351594Z",
+  "gameLaunched": false,
+  "full184SuiteRerun": false,
+  "jar": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970.jar",
+  "sha256": "9556D497C721FF7227D3A1C160F8DD44572D5982011D09761B88C5DA0C334AE7",
+  "size": 12817487,
+  "baselineSha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6",
+  "classesDirectory": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\classes",
+  "checkClassesDirectory": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-classes",
+  "compilerExitCode": 0,
+  "checkCompilerExitCode": 0,
+  "mainCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\javac-main.args",
+  "mainCompilerArgumentsSha256": "5A1F5DA749F008C4CA70FCB15ABA201171A270BBBB79FF28FCC5946EFFF1E7C3",
+  "checkCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\javac-checks.args",
+  "checkCompilerArgumentsSha256": "D8FF81E3414D408126E1ECFB83F351B87CC9428E28ACCA6FAA9C3C0069B0CD04",
+  "mainCompilerLog": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\compile-main.log",
+  "mainCompilerLogSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+  "checkCompilerLog": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\compile-checks.log",
+  "checkCompilerLogSha256": "46A2085C35EDAF95A37D0DB49236ACEB16D9C5093281CEA87A1A304A8BBDFE57",
+  "classpath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\classpath.txt",
+  "classpathSha256": "079727C6FBCCE772ED73B5548C5E4AD48E139D29CC3FBFDA82F626052C0CC4F0",
+  "checkClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-classpath.txt",
+  "checkClasspathSha256": "911C4DB907B06BE228A36392820EF96B40FFF40D04D64C12D6A0B1B7A7F7B8A1",
+  "dependencies": [
+    {
+      "id": "base",
+      "version": "1.21.1-2.4.6.5",
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+    },
+    {
+      "id": "jei",
+      "version": "19.70.0.460",
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+    },
+    {
+      "id": "eaep",
+      "version": "1.6.4.1",
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+      "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237"
+    },
+    {
+      "id": "data",
+      "version": "3.4.0",
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+      "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367"
+    },
+    {
+      "id": "ae2",
+      "version": "19.2.18",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\appliedenergistics2-19.2.18.jar",
+      "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39"
+    },
+    {
+      "id": "appflux",
+      "version": "2.1.7",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\AppliedFlux-1.21-2.1.7-neoforge.jar",
+      "sha256": "3FA19F02317A795334805D67318708C5025911B55C24AE273125F1A0652311B8"
+    },
+    {
+      "id": "ldlib2",
+      "version": "2.2.44",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ldlib2-neoforge-1.21.1-2.2.44-all.jar",
+      "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC"
+    },
+    {
+      "id": "ae2wtlib",
+      "version": "19.5.1",
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ae2wtlib-19.5.1.jar",
+      "sha256": "407E7300351353CB4CB7698286E180AEF2BD6E7A97EC7EFC6493F9DAA4DBFFE5"
+    }
+  ],
+  "legacyBases": [
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+      "sha256": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+    }
+  ],
+  "checks": [
+    {
+      "id": "version-gates",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-version-gates.args",
+      "argumentsSha256": "12140D2DB6C85A29C4869E4805CEDD9D39EEFF987094AC2086E0F1F0106C65E3",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-version-gates.txt",
+      "runtimeClasspathSha256": "911C4DB907B06BE228A36392820EF96B40FFF40D04D64C12D6A0B1B7A7F7B8A1",
+      "legacyBase": null,
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-version-gates.log",
+      "logSha256": "1A9B42208302169375683EC1479355279DE54C465BBBF30397C946518DB507AB",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-version-gates.json",
+      "resultSha256": "C955E87DDAD089A7BF61AAC51A96D5CD399E67DF86FC8159E2C8EABC1233D965",
+      "resultSchema": "PASSED/passed/failed/checks-rows",
+      "checksFound": 127,
+      "checksStarted": 127,
+      "checksPassed": 127,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": true
+    },
+    {
+      "id": "native-guards",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-native-guards.args",
+      "argumentsSha256": "1B59FF861E30A7B8980F464B5C6705463FE3249BF7DB41D255E21FFE9D538C65",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-native-guards.txt",
+      "runtimeClasspathSha256": "911C4DB907B06BE228A36392820EF96B40FFF40D04D64C12D6A0B1B7A7F7B8A1",
+      "legacyBase": null,
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-native-guards.log",
+      "logSha256": "0EB7421B5C0A81490D1CAFB7456560A1DAEE0F8276534E3DA7D237EE3EAA6FC2",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-native-guards.json",
+      "resultSha256": "AE1544615BB6085DA884AC0934CFCBF5D2C36A8216A1A036A533F0F7C3D6A924",
+      "resultSchema": "PASS/checksFound/checksPassed/checksFailed",
+      "checksFound": 14,
+      "checksStarted": 14,
+      "checksPassed": 14,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": false
+    },
+    {
+      "id": "legacy-guards",
+      "exitCode": 0,
+      "arguments": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\java-legacy-guards.args",
+      "argumentsSha256": "C9EB00A1037D5233C8E4088110C67F03BD87E0F480D508D3B3BF7C94650D0C2C",
+      "runtimeClasspath": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\runtime-classpath-legacy-guards.txt",
+      "runtimeClasspathSha256": "13ED3485ADC9D51ABEDA7B098C5A93D63F323388B87005E41B3DBE30D71EC376",
+      "legacyBase": {
+        "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+        "sha256": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+      },
+      "log": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\focused-legacy-guards.log",
+      "logSha256": "3F41D6C1891625FEA6D6D9FD0B7CAE63D2B9A48126C4AD35E0473058D7ECF374",
+      "result": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\build\\upstream-20261107-151855221-3a835e71\\check-result-legacy-guards.json",
+      "resultSha256": "C0A0DE98A79F3F098A0B2922E644AC47DD6C1C893F4139F121EC049DD1FF3968",
+      "resultSchema": "PASS/checksFound/checksPassed/checksFailed",
+      "checksFound": 6,
+      "checksStarted": 6,
+      "checksPassed": 6,
+      "checksFailed": 0,
+      "startedDerivedFromCompleted": false
+    }
+  ],
+  "inputs": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\BudgetedRecipeCatalog.java",
+      "sha256": "B76E4B35C1A1B29FA4977C9EE0D1B3F05FCDE6A756559EDA4428E04315EE1802"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.java",
+      "sha256": "195820C505A67AB5F62E74D2556D116AF8CC9A64053484FF8C4B845C51EC2A70"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\NativeAdapterGuards.java",
+      "sha256": "01D011907BCA28C392FE7E86D479DC309C49A6E92EF60F56BB1985A23D7409CB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.java",
+      "sha256": "96277B8DE6F15D6A31D86596C4F2289F4FE0D0F666ABE178CA02CAD7EE5C44E3"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\verification\\upstream-abi\\VersionGateChecks.java",
+      "sha256": "04A3AB3B8168666921923EA9593C9C236266BC5604917410DEEC81F2928BAB4C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\NativeAdapterGuardChecks.java",
+      "sha256": "0DB39686831A9CB7C23988059E0FF8001F0A4013E62D3A901899CE0909A0B0AB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "sha256": "2B303105015CF6CE1D939DB9060B32129B457EEB19ED48731002E11E6BBA23B4"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\dependencies.json",
+      "sha256": "7E8ADBFC42D37E7A862869F11737325E58A2425678DE9495CADEFDC9FADB3E63"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\checks.json",
+      "sha256": "217AF18A7B07C27FCE3320B1A82F62E645B34540E29E2A901ED69B470D757546"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\build-candidate.ps1",
+      "sha256": "28373439FAF21F68FA14D2CB058806EF8F6DFC860DBB2A00D921B680459483B4"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+      "sha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\build-result.json",
+      "sha256": "87AC25B13021E8CD56548C439E8338B7E1F804D829292F193C8B60816495B9F6"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\classpath.txt",
+      "sha256": "69E94BADFFC298DC7CC78A007697CF3BA6719447EB66052F7EC6E714AFE8FB96"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\useless_mod-1.21.1-2.4.6.5-official.jar",
+      "sha256": "84F957C02DFAC63DD3D9F3B269F59CB9704CC228725E9B044AE54C98718BDE31"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\jei-1.21.1-neoforge-19.70.0.460.jar",
+      "sha256": "097CDFAE99B208DFB94F8C55E813AF10E55688ECF4E42116FED1B7E26F0F4FCF"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\extendedae_plus-1.6.4.1.jar",
+      "sha256": "1BFE8540493DD73C6DB106937209ABC6791F5D2E0E81A2BE478CC8B337E77237"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\mod-updates-20261107\\staging\\data_energistics-1.21.1-3.4.0.jar",
+      "sha256": "5FC69019F1068C9C333EFAEBF0D7F731DD663C38245A104AD597D91003299367"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\appliedenergistics2-19.2.18.jar",
+      "sha256": "DF15A07F86CA1CA93AA66373F9D5D84DD3D4586631FCEB38F4FBC85DAD591E39"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\AppliedFlux-1.21-2.1.7-neoforge.jar",
+      "sha256": "3FA19F02317A795334805D67318708C5025911B55C24AE273125F1A0652311B8"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ldlib2-neoforge-1.21.1-2.2.44-all.jar",
+      "sha256": "301E115072E99B69BC8E9B7BC55C3093BE66E92D275ACFB62A3EDC9831D28ADC"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\ae2wtlib-19.5.1.jar",
+      "sha256": "407E7300351353CB4CB7698286E180AEF2BD6E7A97EC7EFC6493F9DAA4DBFFE5"
+    },
+    {
+      "path": "D:\\AI\\sources\\DollChronicle\\build\\mygenesis-longhuan-r6-D\\mods\\useless_mod-1.21.1-2.4.6.2.jar",
+      "sha256": "9F6F54AF76AA255123B354C8725D55C2ACE4525B8683E1136ACAEBCCC8813B17"
+    },
+    {
+      "path": "D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249.jar",
+      "sha256": "3008711D5F61AEBC141C7F15B8E98FE4BC353ADBB8BD8EEE3CD6D8998B202FB6"
+    },
+    {
+      "path": "D:/AI/sources/UselessStretcher/build/moddev/artifacts/neoforge-21.1.249-client-extra-aka-minecraft-resources.jar",
+      "sha256": "8E9CF6F4B6EAFB1C6BF745A67A61DD1736F31865CAD409E5B2BEC918667DAB5E"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/DevLaunch/1.0.2/2e0e9a67793d5bfdedee4f9ea00934dbf3f2e22d/DevLaunch-1.0.2.jar",
+      "sha256": "366ADC4E95AB9B32C8E33B9F449529C8937C6FC021EE0C6B25419EA2BB703740"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/4.0.44/cb2afcf15672180eca1c49b1c9b1208951ef322e/earlydisplay-4.0.44.jar",
+      "sha256": "96922D7589000AF7550F42D437F05676EEA6B9708823E47C78E882560746042E"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/4.0.44/63433608b68302a442e3dba87880e54f42ea0583/loader-4.0.44.jar",
+      "sha256": "F2096CD86D605C0484971FC712208E0DC6CECFE53E056DB61D44A98CADC19499"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged.accesstransformers/at-modlauncher/10.0.1/5aba50202aceead086bc09fbc2751c9f05cb4890/at-modlauncher-10.0.1.jar",
+      "sha256": "2A4B447C6944A2B89E383C1EED9A26BB5CC60330A5BB26EF0A912A38D52DF935"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/accesstransformers/10.0.1/fd83b5725f76eae9115e9355fa1c456a6a441400/accesstransformers-10.0.1.jar",
+      "sha256": "89FB0DC3D68F8A5961F309EE110DAD7D2C1094BA204595602B71E02E104838A1"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/bus/8.0.5/5b2d33285ab5d1554e9798ad98c40d6ea3868bd5/bus-8.0.5.jar",
+      "sha256": "705E24F37752809499A5CD0C7DD31EAABF3D933C5D3B2060168E94E9EF62593A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/coremods/7.0.3/9147e6f638b4272b3bd5fc8f92ad37802512c6c/coremods-7.0.3.jar",
+      "sha256": "D24C0D3E31AF23CAC36A0F9F98654B875F678B27DDCCD8B28D331C1878A6DE4A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/cpw.mods/modlauncher/11.0.5/b8f0d49294f733fdb6173931b263553e943dc950/modlauncher-11.0.5.jar",
+      "sha256": "FD9B9FC7CF043D2264EA0113EAC6B258F0A71FECE5B00E831BFBDF9726C78A24"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/mergetool/2.0.0/52fe1949be64e3303aabaaa21e315f551db9c9f4/mergetool-2.0.0-api.jar",
+      "sha256": "0260881294D8B218AFE3D673F084D3745A55C28B35205D07D5E62D7F22202A00"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.electronwill.night-config/toml/3.8.3/90b2fd6efcb4a7d5b9810cf78f9d824994d717f2/toml-3.8.3.jar",
+      "sha256": "CCB92882264BF071E3916AB122FE5EA3E211B8EBF199201698A1324F151F928F"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.electronwill.night-config/core/3.8.3/b442a95f09e349927f5a945ecb594455870fcf4f/core-3.8.3.jar",
+      "sha256": "971DC88C1C22085611EE1C300F5BBF8595938178E819BEFBB5E98C3CBD272B79"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/JarJarSelector/0.4.1/fb3cc7a58af22ad2880adb98af6d518128c47dae/JarJarSelector-0.4.1.jar",
+      "sha256": "F34BAB02A5E967650DC52B7CB37A200051A7078F7D1868597699D78697DA2400"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/JarJarMetadata/0.4.1/f8da03683dc81694556dc3e177c5e3bb77ae6fcb/JarJarMetadata-0.4.1.jar",
+      "sha256": "05D7B89F09C6DE1A9B61D0E786C8FD808AED044BABF321653E14ABD6740D5546"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.8.5/4433f50c07debefaed0553bd0068f4f48d449313/maven-artifact-3.8.5.jar",
+      "sha256": "91172BC294D6EAB02FC9F45F4EA01FD0E418962D128CF489ABEA7B6957D988EE"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.jodah/typetools/0.6.3/a01aaa6ddaea9ec07ec4f209487b7a46a526283a/typetools-0.6.3.jar",
+      "sha256": "408300867804BE05D1083CC0287DD3A21295A9E76090E288013BA5A4182DC96D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.minecrell/terminalconsoleappender/1.3.0/b562e9bb61235c9520e26282cdee71f8f802d1fc/terminalconsoleappender-1.3.0.jar",
+      "sha256": "1AFEA1BCA095068F7F4483F061FEED94753BE34233DDB0DF9EC380FC14D5A985"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar",
+      "sha256": "1D45CFE3AE4A2EAB38DC74276803748CF799088986260D6D912E50DDB35D15C5"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.openjdk.nashorn/nashorn-core/15.4/f67f5ffaa5f5130cf6fb9b133da00c7df3b532a5/nashorn-core-15.4.jar",
+      "sha256": "6F816E84DFD63A81D4EAA7829C08337BBAFF3EC683FF3BF6BBD90D017A00DC6F"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.14.0/1ed471194b02f2c6cb734a0cd6f6f107c673afae/commons-lang3-3.14.0.jar",
+      "sha256": "7B96BF3EE68949ABB5BC465559AC270E0551596FA34523FDDF890EC418DDE13C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/cpw.mods/bootstraplauncher/2.0.2/1a2d076cbc33b0520cbacd591224427b2a20047d/bootstraplauncher-2.0.2.jar",
+      "sha256": "D3F29309140540570FD6C709509706AA8FB133C1C8AEF24491688F1A3F4E1D49"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/3.0.8/c0ef95cecd8699a0449053ac7d9c160748d902cd/securejarhandler-3.0.8.jar",
+      "sha256": "945C63D6DEAFC821616B0380C23867D9B8C2852438F8A6DF72732AB933FC587D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.10.1/4229e4c55fd8e01c23f9fe9884075cc628aacc50/asm-commons-9.10.1.jar",
+      "sha256": "6D0ABEFB7CBF972EA16EDB37EC14835372505063A45F976AB7EA889ED9497895"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/9.10.1/7bb9d450e8d4cbf9f9e04096c44bbfe7fba80b15/asm-util-9.10.1.jar",
+      "sha256": "1BB99D091FBA2597DC6D51193E9BBCF0D8447E7ED96BD8F0198B18152F09655C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/9.10.1/8d49f14d51f632cb1d87c88d1ceaf50db0d8af1b/asm-analysis-9.10.1.jar",
+      "sha256": "DEDE75A21306B65974ECD8F87114FF6970F09FB794157A4CA09AB25C888C2BFC"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.10.1/e244332a17564c1d1572449399a842de35881be2/asm-tree-9.10.1.jar",
+      "sha256": "3DFB0D5B6A106CD40B5B250E39935FBF2F927F4477546A5369A3AC609CF0506B"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.10.1/ada2141c0cc52ee8f5c48cd5fa4ce0e794f22236/asm-9.10.1.jar",
+      "sha256": "ED825D10AB1399C8C0CB669E688CF0C8C82629B4C8399B58352B68E92CA10FCB"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.neoforged/JarJarFileSystems/0.4.1/78f59f89defcd032ed788b151ca6a0d40ace796a/JarJarFileSystems-0.4.1.jar",
+      "sha256": "D9F88AF1223FF23395C64FF0B0FE367563288A37BD38709BF667B6B39944BFAB"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/5.0.4/4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c/jopt-simple-5.0.4.jar",
+      "sha256": "DF26CC58F235F477DB07F753BA5A3AB243EBE5789D9F89ECF68DD62EA9A66C28"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.15.1/f11560da189ab563a5c8e351941415430e9304ea/commons-io-2.15.1.jar",
+      "sha256": "A58AF12EE1B68CFD2EBB0C27CAEF164F084381A00EC81A48CC275FD7EA54E154"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/logging/1.2.7/24cb95ffb0e3433fd6e844c04e68009e504ca1c0/logging-1.2.7.jar",
+      "sha256": "3DC3190204BAC5F4184D8405BFE1F724F73A6A15A0D3F36EC7F69E6872C1A76C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j2-impl/2.22.1/d7e6693c2606cb7e7335047d7bb96dec52db5665/log4j-slf4j2-impl-2.22.1.jar",
+      "sha256": "1920CD69D8682C7EF249BB407A3D0685723AA1785867CF4C53258DA6BF14DA97"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.22.1/7183a25510a02ad00cc6a95d3b3d2a7d3c5a8dc4/log4j-core-2.22.1.jar",
+      "sha256": "46DCCECAC556623D8E2CE8648496824A82951D139062A4E61148AFF1A25ED18D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.22.1/bea6fede6328fabafd7e68363161a7ea6605abd1/log4j-api-2.22.1.jar",
+      "sha256": "5D7BEAE7FF15D8516D6517121D7F12A79A6AC180DF64B5FCEC55D5BE21056E53"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/32.1.2-jre/5e64ec7e056456bef3a4bc4c6fdaef71e8ab6318/guava-32.1.2-jre.jar",
+      "sha256": "BC65DEA7CFD9E4DACF8419D8AF0E741655857D27885BB35D943D7187FC3A8FCE"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.10.1/b3add478d4382b78ea20b1671390a858002feb6c/gson-2.10.1.jar",
+      "sha256": "4241C14A7727C34FEEA6507EC801318A3D4A90F070E4525681079FB94EE4C593"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.9/7cf2726fdcfbc8610f9a71fb3ed639871f315340/slf4j-api-2.0.9.jar",
+      "sha256": "0818930DC8D7DEBB403204611691DA58E49D42C50B6FFCFDCE02DADB7C3C2B6C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.13.1/17125bae1d965624e265ef49552f6465a2bfa307/antlr4-runtime-4.13.1.jar",
+      "sha256": "54665D2838CC66458343468EFC539E454FC95B46A8A04B13C6AC43FC9BE63505"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.minecraftforge/srgutils/0.4.15/ca408b131759478f164e010fae0d73997e125fb5/srgutils-0.4.15.jar",
+      "sha256": "F6BDEBB7FAE108329ACDDFC812F237C7F6328A98E3F282A105EDFC161D0215E3"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.3.0/cf43b5391de623b36fe066a21127baef82c64022/plexus-utils-3.3.0.jar",
+      "sha256": "76D174792540E2775AF94D03D10FB2D3C776E2CD0AC0EBF427D3E570072BB9CE"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.jline/jline-reader/3.20.0/8f15415b022a25b473e8e16c28ae913186ffb9c4/jline-reader-3.20.0.jar",
+      "sha256": "ACD1C94D1E228AA7B7962F69B21ED3A9FD828EB3A63E4BAF9086954E626AF1F0"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.machinezoo.noexception/noexception/1.7.1/b65330c98e38a1f915fa54a6e5eca496505e3f0a/noexception-1.7.1.jar",
+      "sha256": "3D70AAEA3904918587A21BDF99AB6ADE9AB1DD0EAF6119344BA513F60F575816"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.github.oshi/oshi-core/6.4.10/b1d8ab82d11d92fd639b56d639f8f46f739dd5fa/oshi-core-6.4.10.jar",
+      "sha256": "FEF001A7A13515C273F30915915580782AFBC45273CC07AA15994E51563EF310"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar",
+      "sha256": "A171EE4C734DD2DA837E4B16BE9DF4661AFAB72A41ADAF31EB84DFDAF936CA26"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j/73.2/61ad4ef7f9131fcf6d25c34b817f90d6da06c9e9/icu4j-73.2.jar",
+      "sha256": "29280822F4B0796ACEF1F79B90B1D0C1EDD86C10E876A848E04B8A6298A16BF9"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/6.0.54/de8bc95660e1b2fe8793fd427a7a10dcec5b3ea7/authlib-6.0.54.jar",
+      "sha256": "319EA7B53B5E52F62AD3E2B81E9DB7F0751240EDAC548BD74F5F19E35DC21A3B"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/blocklist/1.0.10/5c685c5ffa94c4cd39496c7184c1d122e515ecef/blocklist-1.0.10.jar",
+      "sha256": "830BFD639C8DB49236BBD8E45D3A2B8C96C56FF654A10118654958A6235D4C44"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/brigadier/1.3.10/d15b53a14cf20fdcaa98f731af5dda654452c010/brigadier-1.3.10.jar",
+      "sha256": "C8EE4136E474AC7723CA2B432EC8D1A2BC88EF7D1EC57C314BA9E33CDC83DD75"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/datafixerupper/8.0.16/67d4de6d7f95d89bcf5862995fb854ebaec02a34/datafixerupper-8.0.16.jar",
+      "sha256": "FFC138BC2596C291781B0D5E211CCAC51F0F2345F27FC2742F335CEDF7E2870D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/patchy/2.2.10/da05971b07cbb379d002cf7eaec6a2048211fefc/patchy-2.2.10.jar",
+      "sha256": "16D70E7968B45CAFFC81576268EB000F473FB60BF257182D3447DEA8EC919D5A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.mojang/text2speech/1.17.9/3cad216e3a7f0c19b4b394388bc9ffc446f13b14/text2speech-1.17.9.jar",
+      "sha256": "C2A95B499E76FADA7DD63E9B0EC797B678D411C2B0EE6F37F4DC674662BFB0AF"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.16.0/4e3eb3d79888d76b54e28b350915b5dc3919c9de/commons-codec-1.16.0.jar",
+      "sha256": "56595FB20B0B85BC91D0D503DAD50BB7F1B9AFC0EED5DFFA6CBB25929000484D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar",
+      "sha256": "DADDEA1EA0BE0F56978AB3006B8AC92834AFEEFBD9B7E4E6316FCA57DF0FA636"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.97.Final/f8f3d8644afa5e6e1a40a3a6aeb9d9aa970ecb4f/netty-buffer-4.1.97.Final.jar",
+      "sha256": "A4393F5B395486CC74D0325C9B41311ABB9513BA0FD7EF8CF46E9345C3BFFBEA"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.97.Final/384ba4d75670befbedb45c4d3b497a93639c206d/netty-codec-4.1.97.Final.jar",
+      "sha256": "BCC96737A0F912FCF031CF8C45EBDA352A90A40437DB0832CAAD3D5A63618B38"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.97.Final/7cceacaf11df8dc63f23d0fb58e9d4640fc88404/netty-common-4.1.97.Final.jar",
+      "sha256": "A8ACA0C8E9347ACC75C885ECC749195D9775369AA520B9276F2D1128210A6C17"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.97.Final/abb86c6906bf512bf2b797a41cd7d2e8d3cd7c36/netty-handler-4.1.97.Final.jar",
+      "sha256": "BD4771D19149CBC9C7464ED2D58035D79CDFED7ADB59D38718B0D8E7A3DCC2DE"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.97.Final/cec8348108dc76c47cf87c669d514be52c922144/netty-resolver-4.1.97.Final.jar",
+      "sha256": "38A018C6D9FB2CB11B72881354782B45080BBD20B9A0AD6CDE28B80D431ED0B1"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-classes-epoll/4.1.97.Final/795da37ded759e862457a82d9d92c4d39ce8ecee/netty-transport-classes-epoll-4.1.97.Final.jar",
+      "sha256": "EE65FA17FE65F18FD22269F92BDDAD85BFB3A263CF65EBA01E116A2F30B86FF5"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-unix-common/4.1.97.Final/d469d84265ab70095b01b40886cabdd433b6e664/netty-transport-native-unix-common-4.1.97.Final.jar",
+      "sha256": "412FE140257C2DDA5A5E15BEE911298BD61928D03EE6BE4DB588E82C196C5DC6"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.97.Final/f37380d23c9bb079bc702910833b2fd532c9abd0/netty-transport-4.1.97.Final.jar",
+      "sha256": "197FD2D6C6B4AFE677D9E95BF2E36B49A0BCABDFCE0583683FB73F29A3F5A407"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/8.5.12/c24946d46824bd528054bface3231d2ecb7e95e8/fastutil-8.5.12.jar",
+      "sha256": "B5543EE08D062D551CF0A5C9BC0FB70588B0382079029BA48941FA9C9BE8A5D4"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/5.14.0/28934d48aed814f11e4c584da55c49fa7032b31b/jna-platform-5.14.0.jar",
+      "sha256": "AE4CACEB3840730C2537F9B7FB55A01BABA580286B4122951488BCEE558C2449"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.14.0/67bf3eaea4f0718cb376a181a629e5f88fa1c9dd/jna-5.14.0.jar",
+      "sha256": "34ED1E1F27FA896BCA50DBC4E99CF3732967CEC387A7A0D5E3486C09673FE8C6"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.26.0/659feffdd12280201c8aacb8f7be94f9a883c824/commons-compress-1.26.0.jar",
+      "sha256": "051ACEB8BBCC62D0F5B2B8AC72C53767F9C59BFBD050151E65BEF6F51C8ED9C9"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.13/e5f6cae5ca7ecaac1ec2827a9e2d65ae2869cada/httpclient-4.5.13.jar",
+      "sha256": "6FE9026A566C6A5001608CF3FC32196641F6C1E5E1986D1037CCDBD5F31EF743"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.16/51cf043c87253c9f58b539c9f7e44c8894223850/httpcore-4.4.16.jar",
+      "sha256": "6C9B3DD142A09DC468E23AD39AAD6F75A0F2B85125104469F026E52A474E464F"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar",
+      "sha256": "E067F29A3701426B67ED973036949C6E58CA5BB53EEF7240B2E71E286D252A9E"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.5/22566d58af70ad3d72308bab63b8339906deb649/joml-1.10.5.jar",
+      "sha256": "CAC9F22F83A7AA33EEBDA73C16FF5261E3CB4911B6BAFCF4C79EA486099D0C9A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-freetype/3.3.3/a0db6c84a8becc8ca05f9dbfa985edc348a824c7/lwjgl-freetype-3.3.3.jar",
+      "sha256": "E1A7AB07106349D9A8A68F6860B7B73B353C502B81E662ACA77F931C6FDD3DE8"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-freetype/3.3.3/81091b006dbb43fab04c8c638e9ac87c51b4096d/lwjgl-freetype-3.3.3-natives-windows.jar",
+      "sha256": "022E59514B1ECB45249413AE62AD094971D7AC88C0DCE9A32C627D06A3C01A1F"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-freetype/3.3.3/82028265a0a2ff33523ca75137ada7dc176e5210/lwjgl-freetype-3.3.3-natives-windows-arm64.jar",
+      "sha256": "B589983EC143FF09ACD8D9A215B4EF3F80750855646C1B96279066EA5E44F40C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-freetype/3.3.3/15a8c1de7f51d07a92eae7ce1222557073a0c0c3/lwjgl-freetype-3.3.3-natives-windows-x86.jar",
+      "sha256": "75A798A5F492E1376D05DC637A9105198E71D06F38A11E9BCE1C5072E0D60B3A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.3.3/efa1eb78c5ccd840e9f329717109b5e892d72f8e/lwjgl-glfw-3.3.3.jar",
+      "sha256": "BEDC757FD2B1B255146DB26B74B9CBD1FCF5644B89B47B104FA721C741604259"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.3.3/e449e28b4891fc423c54c85fbc5bb0b9efece67a/lwjgl-glfw-3.3.3-natives-windows.jar",
+      "sha256": "98155B451DFC6F585089DEC77A12F9C05789C4DCEB8DA472F9D308160101A70D"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.3.3/f27018dc74f6289574502b46cce55d52817554e2/lwjgl-glfw-3.3.3-natives-windows-arm64.jar",
+      "sha256": "70CA9DB0D2764CB9DBC8FB5FD425318C5AF597173B134D03259E2030652E94B5"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.3.3/32334f3fd5270a59bad9939a93115acb6de36dcf/lwjgl-glfw-3.3.3-natives-windows-x86.jar",
+      "sha256": "9646555D405F0D2A3A9576B506F57C1632AF64F69A8AE58CB0448AE04A9C7824"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.3/b543467b7ff3c6920539a88ee602d34098628be5/lwjgl-jemalloc-3.3.3.jar",
+      "sha256": "E99E31269E6678A4BFC62EF24C50A481C01CBDD004861ECE9A59BA12768C6516"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.3/426222fc027602a5f21b9c0fe79cde6a4c7a011f/lwjgl-jemalloc-3.3.3-natives-windows.jar",
+      "sha256": "9949C8E49998BD0C878D842884011F1383E2851005091E0B2BCF7B7671B848EB"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.3/ba1f3fed0ee4be0217eaa41c5bbfb4b9b1383c33/lwjgl-jemalloc-3.3.3-natives-windows-arm64.jar",
+      "sha256": "1F204ACE18E3512765003D83B9A853856F65DDA70B63B9722638483F2D5D34C2"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.3/f6063b6e0f23be483c5c88d84ce51b39dc69126c/lwjgl-jemalloc-3.3.3-natives-windows-x86.jar",
+      "sha256": "D9B4E06E2A84205583FB05440D2238385A91CB01A060DDB1D376223AE225F14A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.3.3/daada81ceb5fc0c291fbfdd4433cb8d9423577f2/lwjgl-openal-3.3.3.jar",
+      "sha256": "AE0E82767CACF08921F578FBA9D84753DDEB00CEADA0510A2B4A882BE28FBF95"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.3.3/cf83862ae95d98496b26915024c7e666d8ab1c8f/lwjgl-openal-3.3.3-natives-windows.jar",
+      "sha256": "E3DA7C3DB25C81DB8D425EF1E3DBFA15000B040D669F008B0813C94333AC96C8"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.3.3/8e0615235116b9e4160dfe87bec90f5f6378bf72/lwjgl-openal-3.3.3-natives-windows-arm64.jar",
+      "sha256": "875F81451731DF2CAC48BBE3C4559834A94D36FC15F461C933E4D4ACDD2F1F26"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.3.3/87b8d5050e3adb46bb58fe1cb2669a4a48fce10d/lwjgl-openal-3.3.3-natives-windows-x86.jar",
+      "sha256": "852CA4E36B1FDFDD3EFB6CE42F08B7D0F957B04C4BCFBD78057B0C799F399231"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.3.3/2f6b0147078396a58979125a4c947664e98293a/lwjgl-opengl-3.3.3.jar",
+      "sha256": "5062DA750E5F7EC89E27E8B67B7D40FA8C4B16890159E35F828116CE6C8ECA1E"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.3.3/e6c1eec8be8a71951b830a4d69efc01c6531900c/lwjgl-opengl-3.3.3-natives-windows.jar",
+      "sha256": "F45E5F60596B03B2E3D8B98A123C855EBD0B5154C8155DC2A56B890CCC907477"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.3.3/65e956d3735a1abdc82eff4baec1b61174697d4b/lwjgl-opengl-3.3.3-natives-windows-arm64.jar",
+      "sha256": "68C8DBC41436E421FF0B3927E62D2AA533552D8F02D73DE3FD928D7A51FD797A"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.3.3/d32d833dcaa2f355a886eaf21f0408b5f03241d/lwjgl-opengl-3.3.3-natives-windows-x86.jar",
+      "sha256": "9D99D203DE4E31286CAE753A1DFB981367C93734F1944644BA71BE521B3AF2CC"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.3.3/25dd6161988d7e65f71d5065c99902402ee32746/lwjgl-stb-3.3.3.jar",
+      "sha256": "0CFF7AA46EA9D70FCC20857015293EA80FBF21ADCAC34600C84DA9B81A44CA93"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.3.3/1d9facdf6541de114b0f963be33505b7679c78cb/lwjgl-stb-3.3.3-natives-windows.jar",
+      "sha256": "D12AB866FE1169E924AC5B4D6BB7767AE7842A9FC8652798682C0069BB73FCF2"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.3.3/a584ab44de569708871f0a79561f4d8c37487f2c/lwjgl-stb-3.3.3-natives-windows-arm64.jar",
+      "sha256": "3D1454DFBAD9E1B8A7DA25E2928C16A4A63A14050B27DA1912C3BE0C60B02E7C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.3.3/b5c874687b9aac1a936501d4ed2c49567fd1b575/lwjgl-stb-3.3.3-natives-windows-x86.jar",
+      "sha256": "46424E45459733B26C4A7B0DD2695209CB6938DAFA3A9012C6A5682C94A2C40E"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.3.3/82d755ca94b102e9ca77283b9e2dc46d1b15fbe5/lwjgl-tinyfd-3.3.3.jar",
+      "sha256": "EE0515054EE19A3F4088426FEE9D879EB2EE657B07E5064E4E2C851F6ADCF14B"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.3.3/a6697981b0449a5087c1d546fc08b4f73e8f98c9/lwjgl-tinyfd-3.3.3-natives-windows.jar",
+      "sha256": "02285911F1C881735FA4D0EB141FFEAAFD9A2BB9349D98F7C1FB8A9CB49C0F58"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.3.3/a88c494f3006eb91a7433b12a3a55a9a6c20788b/lwjgl-tinyfd-3.3.3-natives-windows-arm64.jar",
+      "sha256": "71076FC5C01788577719F4B1983473026B2EB8CBB02D3DC736F8B5724A49FD8C"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.3.3/c336c84ee88cccb495c6ffa112395509e7378e8a/lwjgl-tinyfd-3.3.3-natives-windows-x86.jar",
+      "sha256": "43C9264F0661087B06AE29D78AAB98121DFAD69EFE3202424E3419738D5E9994"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.3.3/29589b5f87ed335a6c7e7ee6a5775f81f97ecb84/lwjgl-3.3.3.jar",
+      "sha256": "DC9C7B2D48E8396D68895F8902FFA01E46253DE44DFE927533FF09457EBFEEC4"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.3.3/a5ed18a2b82fc91b81f40d717cb1f64c9dcb0540/lwjgl-3.3.3-natives-windows.jar",
+      "sha256": "5EE63A19187EFE5BB8747FD24F7B13257DB348DF5AD641113A3695E43F213959"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.3.3/e9aca8c5479b520a2a7f0d542a118140e812c5e8/lwjgl-3.3.3-natives-windows-arm64.jar",
+      "sha256": "D35582CA7EDFF59D4A5C8F4A0EDEC779CAEA4CA8E26C9AFF8244710049BB4350"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.3.3/9e670718e050aeaeea0c2d5b907cffb142f2e58f/lwjgl-3.3.3-natives-windows-x86.jar",
+      "sha256": "22A22338262554EB5E133C8441DEEEDAC84DA082EB3BAC84D032DA4FAF369749"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.lz4/lz4-java/1.8.0/4b986a99445e49ea5fbf5d149c4b63f6ed6c6780/lz4-java-1.8.0.jar",
+      "sha256": "D74A3334FB35195009B338A951F918203D6BBCA3D1D359033DC33EDD1CADC9EF"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.jline/jline-terminal/3.20.0/d0ddcc708ddf527a3454c941b7b9225cc83a15ff/jline-terminal-3.20.0.jar",
+      "sha256": "12125170E795519BA6DC8010C070B53C76AAE92B485C1E37530E54AB5DD08D43"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "sha256": "B372A037D4230AA57FBEFFDEF30FD6123F9C0C2DB85D0ACED00C91B974F33F99"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar",
+      "sha256": "766AD2A0783F2687962C8AD74CEECC38A28B9F72A2D085EE438B7813E928D0C7"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/3.33.0/de2b60b62da487644fc11f734e73c8b0b431238f/checker-qual-3.33.0.jar",
+      "sha256": "E316255BBFCD9FE50D165314B85ABB2B33CB2A66A93C491DB648E498A82C2DE1"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.18.0/89b684257096f548fa39a7df9fdaa409d4d4df91/error_prone_annotations-2.18.0.jar",
+      "sha256": "9E6814CB71816988A4FD1B07A993A8F21BB7058D522C162B1DE849E19BEA54AE"
+    },
+    {
+      "path": "C:/Users/Lenovo/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/2.8/c85270e307e7b822f1086b93689124b89768e273/j2objc-annotations-2.8.jar",
+      "sha256": "F02A95FA1A5E95EDB3ED859FD0FB7DF709D121A35290EFF8B74DCE2AB7F4D6ED"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\geckolib-neoforge-1.21.1-4.9.3.jar",
+      "sha256": "20A1995E4074F387FF549E2C57EA79DD7D41EE83C6AFB9DD6A6E840E592D1C47"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\mcjtylib-1.21-9.0.21.jar",
+      "sha256": "B8ECA900D4FE77A495C74137BD6BE79C67281E5D7AE67CA55F59980C64960A0E"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\Mekanism-1.21.1-10.7.19.85.jar",
+      "sha256": "004DBC9F3106F4D192AEAA1EE1190DD16EC9CA8059ED3D093B80034F4C574F43"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\modonomicon-1.21.1-neoforge-1.120.7.jar",
+      "sha256": "1166EB113230BBC69A3E9464262195A336B29401EF03BFD47BFE86FD558578DA"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\occultism-1.21.1-neoforge-1.224.5.jar",
+      "sha256": "D08B1C776221A32190EC09878B10FAC9C19582D4173A8C0B3F25E8F6BCCBD44D"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\productivebeesgenesis-1.0.9.jar",
+      "sha256": "CBD6280828A5AF08A92A9F857FB886B4CBC3E1C05773765AE80A12675E1FA2E5"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\rftoolsbase-1.21-6.0.11.jar",
+      "sha256": "5195BA530E6CF9BA61C9954A3297679E6D29AA1B6182E27AE14EA43463DD4B00"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\rftoolsbuilder-1.21-7.0.7.jar",
+      "sha256": "4EF28484D88923395C2359CF8772C1EC9757DBBF697E3ABF5C9BDD1E837CC5B1"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\libs\\compile\\SmartBrainLib-neoforge-1.21.1-1.16.11.jar",
+      "sha256": "68036561CC5511766D54CC0DEABC3FC3A5E68F9E3DB2478F2574EC82B494374B"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\apiguardian-api-1.1.2.jar",
+      "sha256": "B509448AC506D607319F182537F0B35D71007582EC741832A1F111E5B5B70B38"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\byte-buddy-1.15.11.jar",
+      "sha256": "FA08998AAE1E7BDAE83BDE0712C50E8444D71C0E0C196BB2247ADE8D4AD0EB90"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\byte-buddy-agent-1.15.11.jar",
+      "sha256": "316D2C0795C2A4D4C4756F2E6F9349837C7430AC34E0477EAD874D05F5CC19E5"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-jupiter-api-5.11.4.jar",
+      "sha256": "AB83EF9E51AC4597D59D26B4B58812129550E2F579A404C8AF7D09F5CE5B4293"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-jupiter-engine-5.11.4.jar",
+      "sha256": "CDF8AC59F3FAD774CA738AD03890950EEB91833EF0E8908753177EDD26F1581C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-jupiter-params-5.11.4.jar",
+      "sha256": "02A6E015DE7CE94AC7F256E7FA05B8091DEA861FE79A555A7993313D0F6C7D96"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-platform-commons-1.11.4.jar",
+      "sha256": "9EDD969B0D0670C54105BC91AE79BD1C6F503E12115FABA82073B84C86BBC334"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-platform-engine-1.11.4.jar",
+      "sha256": "B1DD998F64F9ACADC15966D9CD3D08074662677B3E390F0A38FCBF0BB4C72330"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\junit-platform-launcher-1.11.4.jar",
+      "sha256": "D7430BD029E7FCCED53EE445E4D2D1A8A1E043EA4C4DF43B6335A857F79761AE"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\mockito-core-5.15.2.jar",
+      "sha256": "BF48B7372D9491D5EC8AEBB4CDD187D15663931599C0FBE7410166CE0E1E58FF"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\objenesis-3.3.jar",
+      "sha256": "02DFD0B0439A5591E35B708ED2F5474EB0948F53ABF74637E959B8E4EF69BFEB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-catalog-P3-20261107-a\\verification\\catalog-P3-20261107\\test-libraries\\opentest4j-1.3.0.jar",
+      "sha256": "48E2DF636CAB6563CED64DCDFF8ABB2355627CB236EF0BF37598682DDF742F1B"
+    }
+  ],
+  "mainSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\BudgetedRecipeCatalog.java",
+      "sha256": "B76E4B35C1A1B29FA4977C9EE0D1B3F05FCDE6A756559EDA4428E04315EE1802"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.java",
+      "sha256": "195820C505A67AB5F62E74D2556D116AF8CC9A64053484FF8C4B845C51EC2A70"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\NativeAdapterGuards.java",
+      "sha256": "01D011907BCA28C392FE7E86D479DC309C49A6E92EF60F56BB1985A23D7409CB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.java",
+      "sha256": "96277B8DE6F15D6A31D86596C4F2289F4FE0D0F666ABE178CA02CAD7EE5C44E3"
+    }
+  ],
+  "checkSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-abi-20261107-a\\verification\\upstream-abi\\VersionGateChecks.java",
+      "sha256": "04A3AB3B8168666921923EA9593C9C236266BC5604917410DEEC81F2928BAB4C"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-upstream-2465-20261107-a\\verification\\upstream-2465-20261107\\NativeAdapterGuardChecks.java",
+      "sha256": "0DB39686831A9CB7C23988059E0FF8001F0A4013E62D3A901899CE0909A0B0AB"
+    }
+  ],
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "sha256": "6246644D338E7F88EBEBBD8795A2A950939D908B1955F3B13DF556232E2DDB5E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "sha256": "8C0752947C98637443AF57BFE0B6FF2743E517C710AA038D9FDF41E8834CB390"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "sha256": "CA03DA784B25C00EA621F6217CE08CD10C14F15CE07E6143F116ED1246C6BE55"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "sha256": "223F3F6D63EBC93E35EA62D4082AF1C34581A525457D4276BA861806AA03AAA9"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "sha256": "270190030A24141FB7908B7273C4F864F075F81F8870AA218A87BC2DCA5E7BE2"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "sha256": "A4230C11B386E8365DE20478F7998F419347AB8B6979632E063CEF3AE3ED9507"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "sha256": "8D41CE20813F0C57E43447B8E435F5A7C087D2217AA845CD4D8AF59840416E8A"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "sha256": "F064ACF050A53BBEF5E2F4F44AE3EE675D4208E12F04CC7E94D0B896DB0CCB7B"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "sha256": "213DCC5567DBBD309ED39FA93376F8B16D49F90512602CFAE475CA0BF24D0A0F"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "sha256": "F0D8CA0C19B206228D3E1FA1E57E0973E6FE73A594000A984BDEA7302A0880FF"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards.class",
+      "sha256": "1DDFB4B89DCB8F7780FAD642814BAD79D6AEAAB8B81719B024BCE0FB0B3A190D"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.class",
+      "sha256": "81985864359492346AC4C0F244BB3D30BB138EB72DB3384B61B51441C72204E0"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "sha256": "A611A50F57872363BC5810648B52DCADEADE745905DF88538AFD173FE36F7F3D"
+    }
+  ],
+  "checkCompiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuardChecks.class",
+      "sha256": "DBD92BA2883C84733D6D0C1E13A62DFA314A3DDC508A7A3D99CA02E4F43C4038"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuardChecks$1.class",
+      "sha256": "76225DECF32D7D08600ADDE714185307D29CDF64F42F10F8CD0E3C620464739C"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuardChecks$OtherMarker.class",
+      "sha256": "7E03F0591FB1C56E5535A91A169EA91813B4B1BFF71AB4BBBBCB250F4C344261"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuardChecks$Throwing.class",
+      "sha256": "6D228FB2B6D47AA461069F1741E132098CBE351D34C8925F1C7D28BF9E1F7616"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/verification/VersionGateChecks.class",
+      "sha256": "D2319DC1752588B0D1B2991B9F4E655C0454C6D28DC103C7F7F5BB1C4047CDB0"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/verification/VersionGateChecks$Checked.class",
+      "sha256": "40B6B6D0471168FF69DC3EA09DE18227EAD97D3E2C568D62A2644F18E59E3F84"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/verification/VersionGateChecks$LoaderFixture.class",
+      "sha256": "DD4486133862FADA98FF6BF8590461CEB6420AF23C6CC079AB2BC480045CD1E8"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/verification/VersionGateChecks$Route.class",
+      "sha256": "816759A32614A0AF9ED647D7D56564907B5636A7C4DE7131CF59EA2E598A4574"
+    }
+  ]
+}

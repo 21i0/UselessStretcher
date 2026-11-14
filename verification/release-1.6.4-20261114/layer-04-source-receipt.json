@@ -1,0 +1,80 @@
+{
+  "timestampUtc": "2026-11-07T14:52:52.6912441Z",
+  "gameLaunched": false,
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud",
+  "jar": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud.jar",
+  "sha256": "E0E15336F1FFA8D1F9AC1839B7A29509BB2D6ECDC03C502AE92B1B4251048FB6",
+  "size": 12813852,
+  "baselineSha256": "7D54D427EE4E8D19B62B94B9B8DA3630FE20D8207D21A872F2101596EC59127D",
+  "classesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\classes",
+  "checkClassesDirectory": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\check-classes",
+  "compilerExitCode": 0,
+  "checkCompilerExitCode": 0,
+  "checkExitCode": 0,
+  "checkArguments": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\java-checks.args",
+  "checkCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\javac-checks.args",
+  "mainCompilerArguments": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\build\\hud-layout-20261107-145241638\\javac-main.args",
+  "checkLog": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\focused-checks.log",
+  "checkLogSha256": "45D82E311EA0FAE0AF9AE626DD8D0778FDE220E07EB27A50326B4523B77C0248",
+  "checkResult": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\check-result.json",
+  "checkResultSha256": "8DF7AE9139DED11C4CC730249C3985BDE0C8DC07DF6A7AF42A1C0C56FBFA0356",
+  "inputs": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiProgressOverlay.java",
+      "sha256": "BFF679F6AD47AB52227B27547C993CAE6AFA642573B1AA8411A3D58C59A47BAB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\ClientCatalogLifecycle.java",
+      "sha256": "00CD3890E016BE3B036292054F6BFE0280CF9D57E014A544EC2770AB6CFC05EB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\JeiHudLayoutChecks.java",
+      "sha256": "C4DC46E413A7590C1730DEBE988BA016E1DB1AA2E07C70D8E8E15A07FD41D6EF"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "sha256": "23B034A3CC8506173723E1164BCF5C91484F6393BC6D9E90A28C482D32D3A0C8"
+    }
+  ],
+  "mainSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\CatalogJeiProgressOverlay.java",
+      "sha256": "BFF679F6AD47AB52227B27547C993CAE6AFA642573B1AA8411A3D58C59A47BAB"
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\client\\ClientCatalogLifecycle.java",
+      "sha256": "00CD3890E016BE3B036292054F6BFE0280CF9D57E014A544EC2770AB6CFC05EB"
+    }
+  ],
+  "checkSources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-jei-hud-layout-20261107-a\\verification\\jei-hud-layout-20261107\\JeiHudLayoutChecks.java",
+      "sha256": "C4DC46E413A7590C1730DEBE988BA016E1DB1AA2E07C70D8E8E15A07FD41D6EF"
+    }
+  ],
+  "compiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+      "sha256": "CDE88CD6E174B8728693D3CF5432DED2C428C796C4959B84C9A9CBBA9CD044F4"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+      "sha256": "E18084153844FC818CB22240E165AA9AE497FFA25D2D24882A712EA82FD3A45E"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "sha256": "C4FE1494ED9753BA6A365011A8AEF6C9D8661DB634E81F8B113D48CDB1E8DF17"
+    }
+  ],
+  "checkCompiledClasses": [
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiHudLayoutChecks.class",
+      "sha256": "58BF50D4E627F68FBE5AFF3A85E7A09C7270C28CFCBF2875777898C123CC6BAA"
+    },
+    {
+      "name": "com/sorrowmist/useless/stretcher/client/JeiHudLayoutChecks$Throwing.class",
+      "sha256": "E44883DACE3DDDE83B3E6C82B89E3DF3E944B7E2B9918BCC099ADB772287A26C"
+    }
+  ],
+  "full184SuiteRerun": false
+}

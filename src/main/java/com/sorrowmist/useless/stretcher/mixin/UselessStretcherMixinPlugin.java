@@ -15,6 +15,26 @@ public final class UselessStretcherMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".CatalogJeiLookupMixin") || mixinClassName.endsWith(".CatalogJeiGuiMixin")
+                || mixinClassName.endsWith(".CatalogJeiBuildTimingMixin")
+                || mixinClassName.endsWith(".CatalogJeiIndexTimingMixin")) {
+            String base = modVersionEarly("useless_mod");
+            return ("1.21.1-2.4.6".equals(base) || "1.21.1-2.4.6.2".equals(base)
+                    || "1.21.1-2.4.6.5".equals(base) || "1.21.1-2.4.6.6".equals(base))
+                    && ("19.57.0.451".equals(modVersionEarly("jei"))
+                        || "19.70.0.460".equals(modVersionEarly("jei"))
+                        || "19.70.0.469".equals(modVersionEarly("jei")));
+        }
+        if (mixinClassName.endsWith(".BudgetedRecipeCatalogMixin")
+                || mixinClassName.endsWith(".BudgetedClientCatalogMixin")
+                || mixinClassName.endsWith(".CatalogJeiTimingMixin")) {
+            String version = modVersionEarly("useless_mod");
+            boolean verified = "1.21.1-2.4.6".equals(version) || "1.21.1-2.4.6.2".equals(version)
+                    || "1.21.1-2.4.6.5".equals(version) || "1.21.1-2.4.6.6".equals(version);
+            if (!verified) com.mojang.logging.LogUtils.getLogger().warn(
+                    "Catalog budget candidate does not patch unverified Useless Mod {}", version);
+            return verified && (!mixinClassName.endsWith(".CatalogJeiTimingMixin") || isModLoadedEarly("jei"));
+        }
         if (mixinClassName.endsWith(".Mbd2AsyncSyncMixin")) {
             if (!(isModLoadedEarly("ldlib2") && isModLoadedEarly("mbd2")
                     && isModLoadedEarly("ae2") && isModLoadedEarly("ae2lt"))) return false;

@@ -1,0 +1,141 @@
+{
+  "status": "PASS_WITH_SEPARATE_IDENTITY_OBSERVATION",
+  "fixtureTicks": 293,
+  "integratedServer": true,
+  "productionBytesModified": false,
+  "identityDriftObserved": true,
+  "checks": [
+    {
+      "name": "JEI_RUNTIME_AND_NATIVE_ALLOY_CATEGORY",
+      "status": "PASS",
+      "detail": "Actual runtime, category lookup, nonempty recipes and staff ingredient"
+    },
+    {
+      "name": "G_CASE_0",
+      "status": "PASS",
+      "detail": "useless_stretcher:wondrous_staff | minecraft:air; real layout request/response and mode packet"
+    },
+    {
+      "name": "X_CASE_0",
+      "status": "PASS",
+      "detail": "real input event + production selectSpeed + server component; hand\u003dMAIN_HAND"
+    },
+    {
+      "name": "G_CASE_1",
+      "status": "PASS",
+      "detail": "minecraft:stick | useless_stretcher:wondrous_staff; real layout request/response and mode packet"
+    },
+    {
+      "name": "X_CASE_1",
+      "status": "PASS",
+      "detail": "real input event + production selectSpeed + server component; hand\u003dOFF_HAND"
+    },
+    {
+      "name": "G_CASE_2",
+      "status": "PASS",
+      "detail": "useless_stretcher:wondrous_staff | useless_stretcher:wondrous_staff; real layout request/response and mode packet"
+    },
+    {
+      "name": "X_CASE_2",
+      "status": "PASS",
+      "detail": "real input event + production selectSpeed + server component; hand\u003dMAIN_HAND"
+    },
+    {
+      "name": "G_CASE_3",
+      "status": "PASS",
+      "detail": "useless_mod:endless_beaf_item | useless_stretcher:wondrous_staff; real layout request/response and mode packet"
+    },
+    {
+      "name": "X_CASE_3",
+      "status": "PASS",
+      "detail": "real input event + production selectSpeed + server component; hand\u003dOFF_HAND"
+    },
+    {
+      "name": "G_CASE_4",
+      "status": "PASS",
+      "detail": "useless_stretcher:wondrous_staff | useless_mod:endless_beaf_item; real layout request/response and mode packet"
+    },
+    {
+      "name": "X_CASE_4",
+      "status": "PASS",
+      "detail": "real input event + production selectSpeed + server component; hand\u003dMAIN_HAND"
+    },
+    {
+      "name": "G_CASE_5",
+      "status": "PASS",
+      "detail": "useless_mod:endless_beaf_item | minecraft:air; real layout request/response and mode packet"
+    },
+    {
+      "name": "G_CASE_6",
+      "status": "PASS",
+      "detail": "minecraft:stick | useless_mod:endless_beaf_item; real layout request/response and mode packet"
+    },
+    {
+      "name": "OPEN_UI_LIVE_HAND_SWAP_IDENTITY",
+      "status": "OBSERVED_FIXED_HAND_IDENTITY_DRIFT",
+      "detail": "Separate release decision required; ordinary re-open tests do not cover this race"
+    },
+    {
+      "name": "OPEN_UI_SWITCH_TO_NONSTAFF",
+      "status": "PASS",
+      "detail": "production action + server guard retain unrelated item"
+    },
+    {
+      "name": "CLOSE_F_SWAP_REOPEN",
+      "status": "PASS",
+      "detail": "vanilla keymapping click, server swap inventory sync, production X event and speed action"
+    },
+    {
+      "name": "CLOSE_HOTBAR_CHANGE_REOPEN",
+      "status": "PASS",
+      "detail": "vanilla hotbar keymapping + carried item packet, production X event and speed action"
+    },
+    {
+      "name": "DIMENSION_UI_ROUND_0",
+      "status": "PASS",
+      "detail": "minecraft:the_nether; native layout ACK and changed staff speed ACK\u003d16"
+    },
+    {
+      "name": "DIMENSION_UI_ROUND_1",
+      "status": "PASS",
+      "detail": "minecraft:overworld; native layout ACK and changed staff speed ACK\u003d64"
+    }
+  ],
+  "contract": {
+    "execute": true,
+    "evidence": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\staff-compat-result.json",
+    "modVersions": {
+      "useless_stretcher": "1.21.1-1.6.4",
+      "useless_mod": "1.21.1-2.4.6.6",
+      "ae2": "19.2.19",
+      "jei": "19.70.0.469",
+      "mezz_config": "0.7.1"
+    },
+    "production": {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\staging\\useless_stretcher-1.21.1-1.6.4.jar",
+      "sha256": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe",
+      "size": 15106028
+    },
+    "base": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\update-041-20261114\\catalog-agent\\staging\\useless_mod-1.21.1-2.4.6.6.jar",
+      "sha256": "fbadd572c3cafb27c4bee7397b57eaa2edb2278b2bca9335b91e74197f1e0d65",
+      "size": 4104693
+    },
+    "ae2": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\update-041-20261114\\mr-agent\\staging\\appliedenergistics2-19.2.19.jar",
+      "sha256": "7db959595ca8734acccac51c963567460e7db9f31b145b23dea72778b692777b",
+      "size": 8238387
+    },
+    "jei": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\update-041-20261114\\mr-agent\\staging\\jei-1.21.1-neoforge-19.70.0.469.jar",
+      "sha256": "9ab82d9bdbc8d9a08b80bc2023e1d886f6335b92f937d3afac878c9ea995dc33",
+      "size": 4784333
+    },
+    "mezz": {
+      "path": "D:\\AI\\sources\\DollChronicle\\verification\\update-041-20261114\\mr-agent\\staging\\mezz_config-1.21.1-neoforge-0.7.1-standalone.jar",
+      "sha256": "c42510938584eda0aae134003e367d745fd32ceac1836221cecac4cbc7bfa3a1",
+      "size": 347249
+    },
+    "note": "Explicitly enabled only in this disposable, root-owned single-client run."
+  }
+}

@@ -88,6 +88,31 @@ public final class NativeCapsules {
     private static final Map<UUID, PendingEntry> ENTRIES = new LinkedHashMap<>();
     private NativeCapsules() { }
 
+    static boolean gravityRecoveryBusy(String key) {
+        return JOBS.stream().anyMatch(job -> job.room.key().equals(key))
+                || RESUMING.stream().anyMatch(room -> room.key().equals(key))
+                || ENTRIES.values().stream().anyMatch(entry -> entry.roomKey.equals(key));
+    }
+
+    static String resumeGravityPreflight(net.minecraft.server.MinecraftServer server, CapsuleInstances.Instance room,
+                                        CompoundTag record, String recordHash) {
+        if (gravityRecoveryBusy(room.key()) || JOBS.size() >= 4
+                || JOBS.stream().anyMatch(job -> job.room.owner.equals(room.owner))) return "job_capacity_or_owner_busy";
+        var target = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.dimension)));
+        var source = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(room.sourceDimension)));
+        var structure = server.registryAccess().registryOrThrow(Registries.STRUCTURE).get(ResourceLocation.parse(room.structure));
+        if (target == null || source == null || structure == null || source.getSeed() != room.sourceSeed)
+            return "source_environment_unavailable";
+        var data = CapsuleInstances.get(server);
+        String before = CapsuleGravityFingerprint.roomHash(room);
+        Job job = new Job(data, room, target, source, structure, true);
+        if (!before.equals(CapsuleGravityFingerprint.roomHash(room))) return "strict_reconstruction_changed_state";
+        job.gravityResumeGuard = CapsuleGravityRecovery.consume(server, room.key(), record, recordHash);
+        room.error = ""; room.generating = true;
+        data.setDirty(); JOBS.addLast(job);
+        return "resumed";
+    }
+
     /** Discovery shares the native planner: optional callbacks never run concurrently. */
     static <T> FutureTask<T> submitPlanning(Callable<T> work) {
         if (!PLANNER_BUSY.compareAndSet(false, true)) return null;
@@ -147,6 +172,9 @@ public final class NativeCapsules {
         if (start == null || !start.isValid()) throw new IllegalStateException("Candidate no longer decodes");
         var data = CapsuleInstances.get(player.getServer());
         int count = data.instanceCount(player.getUUID(), id, target);
+        String allocationKey = CapsuleInstances.key(player.getUUID(), id, target, count);
+        if (CapsuleGravityRecovery.paused(player.getServer(), allocationKey))
+            throw new IllegalStateException("Candidate allocation blocked by unresolved room gravity state");
         var room = count == 0 ? data.getOrCreate(player.getUUID(), id, target)
                 : data.getOrCreateAdjacent(player.getUUID(), id, target, count - 1);
         if (!room.plan.isEmpty() || room.ready || room.generating) throw new IllegalStateException("Candidate cannot replace an existing room");
@@ -193,11 +221,26 @@ public final class NativeCapsules {
         boolean knownCapsuleDimension = CapsuleDimensions.isCapsule(level.dimension().location());
         if (!knownCapsuleDimension || (action == 1 || existing == null)
                 && !DimensionCapsuleCatalog.dimensions(player, structure).contains(dimension)) return;
+        if (action == 1 && existing == null && CapsuleGravityRecovery.paused(player.getServer(),
+                CapsuleInstances.key(player.getUUID(), id, dimension, instanceId))) {
+            CapsuleNetwork.state(player, id, dimension, instanceId, data.instanceCount(player.getUUID(), id, dimension),
+                    0, 0, "gravity_index_preflight_blocked", 0, new int[0], 0, 0, 0);
+            return;
+        }
         CapsuleInstances.Instance room;
         if (action == 3) {
             CapsuleInstances.Instance selected = data.rooms.get(
                     CapsuleInstances.key(player.getUUID(), id, dimension, instanceId));
             if (selected == null || !selected.ready) return;
+
+            // Gate both keys before source migration, allocation or inheritance.
+            // No room may use a ready-room entry exception to create new work.
+            if (instanceId == Integer.MAX_VALUE || !CapsuleGravityRecovery.mayUseReadySource(player.getServer(), selected)
+                    || CapsuleGravityRecovery.paused(player.getServer(), CapsuleInstances.key(player.getUUID(), id,
+                            dimension, Math.max(0, instanceId) + 1))) {
+                sendState(player, selected, null);
+                return;
+            }
 
             // Resolve/migrate the selected room before allocating its neighbour.  This
             // prevents an adjacent request from inheriting an empty source contract.
@@ -222,6 +265,22 @@ public final class NativeCapsules {
                     0, 0, "empty", 0, new int[0], 0, 0, 0);
             return;
         }
+        if (action == 0) {
+            sendState(player, room, currentJob(key));
+            return;
+        }
+        if (action == 2) {
+            if (CapsuleGravityRecovery.mayEnterReady(player.getServer(), room)
+                    && !ENTRIES.containsKey(player.getUUID()) && !DimensionCapsuleService.hasReturnPoint(player))
+                ENTRIES.put(player.getUUID(), new PendingEntry(player, room, level, side));
+            sendState(player, room, currentJob(key));
+            return;
+        }
+        // Guard before source errors can overwrite the persistent pause category.
+        if (CapsuleGravitySupport.isPausedError(room.error) || CapsuleGravityRecovery.paused(player.getServer(), room.key())) {
+            sendState(player, room, null);
+            return;
+        }
         ServerLevel sourceLevel = resolveSource(player, structure, dimension, room);
         if (action == 1) {
             if (sourceLevel == null) {
@@ -241,8 +300,7 @@ public final class NativeCapsules {
             if (room.plan.isEmpty()) room.attempt = 0;
             data.setDirty();
         }
-        Job current = null;
-        for (Job job : JOBS) if (job.room.key().equals(key)) current = job;
+        Job current = currentJob(key);
         if (action == 1 && current == null && (!room.ready || room.bedrockVersion < FINALIZATION_VERSION) && room.error.isEmpty()) {
             if (JOBS.size() >= 4 || JOBS.stream().anyMatch(job -> job.room.owner.equals(player.getUUID()))) {
                 CapsuleNetwork.state(player, id, dimension, "queue_full", 0, new int[0], 0, 0, 0); return;
@@ -253,12 +311,12 @@ public final class NativeCapsules {
             data.setDirty();
             JOBS.add(current);
         }
-        if (action == 2 && room.ready && !ENTRIES.containsKey(player.getUUID())
-                && !DimensionCapsuleService.hasReturnPoint(player)) {
-            PendingEntry pending = new PendingEntry(player, room, level, side);
-            ENTRIES.put(player.getUUID(), pending);
-        }
         sendState(player, room, current);
+    }
+
+    private static Job currentJob(String key) {
+        for (Job job : JOBS) if (job.room.key().equals(key)) return job;
+        return null;
     }
 
     /**
@@ -298,6 +356,8 @@ public final class NativeCapsules {
         try {
             long began = System.nanoTime();
             boolean done = job.step();
+            job.confirmGravityResume();
+            job.observeGravityWitness();
             job.room.progress = Math.max(job.room.progress, job.progress());
             long elapsed = System.nanoTime() - began;
             job.maxStep = Math.max(job.maxStep, elapsed);
@@ -322,6 +382,33 @@ public final class NativeCapsules {
                         job.room.structure, job.chunkCount, job.start.getPieces().size(), job.maxStep / 1_000_000.0);
             }
         } catch (Exception failure) {
+            var blocked = CapsuleGenerationContext.takeGravityFailure();
+            if (blocked == null && failure instanceof CapsuleGravitySupport.IndexBlocked direct) blocked = direct;
+            if (blocked == null && job.gravityResumeGuard != null)
+                blocked = new CapsuleGravitySupport.IndexBlocked(job.level,
+                        job.gravityChunk == null ? job.start.getChunkPos() : job.gravityChunk, false, "resume_step_failed");
+            if (blocked != null) {
+                // Record visible paused state BEFORE cleanup, which third parties can break.
+                job.room.ready = false;
+                job.room.generating = false;
+                boolean provenBefore = blocked.beforeCallback && blocked == job.verifiedGravityPreflight;
+                job.room.error = provenBefore ? "gravity_index_preflight_blocked" : "gravity_index_partial_unknown";
+                job.data.setDirty();
+                CompoundTag cleanup = job.gravityCleanupPlan();
+                try {
+                    CapsuleGravityRecovery.begin(event.getServer(), job.room, job.sourceLevel, job.level, blocked,
+                            provenBefore, job.gravityCallback, job.gravityWitness, cleanup);
+                } catch (RuntimeException journalFailure) {
+                    LogUtils.getLogger().error("Cannot record gravity pause {}; recovery disabled", job.room.key(), journalFailure);
+                }
+                job.releaseAfterGravityFailure(failure, cleanup);
+                try { CapsuleGravityRecovery.finishCleanup(event.getServer(), job.room.key(), cleanup); }
+                catch (RuntimeException journalFailure) {
+                    LogUtils.getLogger().error("Cannot confirm gravity cleanup {}; recovery disabled", job.room.key(), journalFailure);
+                }
+                LogUtils.getLogger().error("Native capsule {} gravity index paused; phase/cursors/partial contents retained; no automatic replay", job.room.key(), failure);
+                return;
+            }
             job.release(); job.room.error = "failed"; job.data.setDirty();
             job.room.generating = false;
             if (failure instanceof CapsuleLimitException limit) job.room.error = limit.code;
@@ -329,22 +416,25 @@ public final class NativeCapsules {
         }
     }
     @SubscribeEvent public static void stopped(ServerStoppedEvent event) {
+        CapsuleGravityRecovery.stopped(event.getServer());
         while (!JOBS.isEmpty()) JOBS.remove().release();
         RESUMING.clear();
         ENTRIES.values().forEach(PendingEntry::release); ENTRIES.clear();
     }
 
     @SubscribeEvent public static void started(net.neoforged.neoforge.event.server.ServerStartedEvent event) {
+        CapsuleGravityRecovery.started(event.getServer());
         RESUMING.clear();
         for (var room : CapsuleInstances.get(event.getServer()).rooms.values())
-            if (room.generating && !room.ready && room.error.isEmpty()) RESUMING.add(room);
+            if (room.generating && !room.ready && room.error.isEmpty()
+                    && !CapsuleGravityRecovery.paused(event.getServer(), room.key())) RESUMING.add(room);
     }
 
     /** Reload only accepted jobs, retaining their plan and cursors; never regenerate finished rooms. */
     private static void resumeNext(net.minecraft.server.MinecraftServer server) {
         if (RESUMING.isEmpty() || JOBS.size() >= 4) return;
         var room = RESUMING.remove();
-        if (!room.generating || room.ready || !room.error.isEmpty()
+        if (!room.generating || room.ready || !room.error.isEmpty() || CapsuleGravityRecovery.paused(server, room.key())
                 || JOBS.stream().anyMatch(job -> job.room.key().equals(room.key()))) return;
         if (JOBS.stream().anyMatch(job -> job.room.owner.equals(room.owner))) {
             RESUMING.addLast(room); return;
@@ -418,10 +508,22 @@ public final class NativeCapsules {
         List<StructurePlacement> placements;
         ChunkPos biomeAnchor;
         ChunkPos plannedAnchor;
+        CapsuleGravitySupport.IndexBlocked verifiedGravityPreflight;
+        CapsuleGravityRecovery.Witness gravityWitness;
+        ChunkPos gravityChunk;
+        String gravityCallback = "unknown";
+        boolean gravityResumed;
+        CapsuleGravityRecovery.ResumeGuard gravityResumeGuard;
+        boolean gravityResumeValidated;
         Job(CapsuleInstances data, CapsuleInstances.Instance room, ServerLevel level,
             ServerLevel sourceLevel, Structure structure) {
+            this(data, room, level, sourceLevel, structure, false);
+        }
+        Job(CapsuleInstances data, CapsuleInstances.Instance room, ServerLevel level,
+            ServerLevel sourceLevel, Structure structure, boolean strictGravityResume) {
             this.data = data; this.room = room; this.level = level; this.sourceLevel = sourceLevel;
             this.structure = structure;
+            if (strictGravityResume) { initializeGravityResume(); return; }
             if (!room.plan.isEmpty()) {
                 start = StructureStart.loadStaticStart(serializationContext(), room.plan, generationSeed());
                 if (start == null || !start.isValid()) throw new IllegalStateException("Saved structure plan cannot be restored");
@@ -498,6 +600,73 @@ public final class NativeCapsules {
                     java.util.Arrays.fill(room.pixels, 0);
                     data.setDirty();
                 }
+            }
+        }
+        /** Rebuild derived state only; never call the legacy migration/cleanup constructor. */
+        private void initializeGravityResume() {
+            if (room.ready || room.generating || !room.phase.equals("placing") || room.plan.isEmpty()
+                    || !room.terrainCleaned || !room.boundsKnown
+                    || room.geometryVersion != CapsulePieceGeometry.VERSION || room.cleanupVersion != CLEANUP_VERSION)
+                throw new IllegalStateException("Saved callback is not a current write-before placement");
+            start = StructureStart.loadStaticStart(serializationContext(), room.plan.copy(), generationSeed());
+            if (start == null || !start.isValid() || start.getStructure() != structure
+                    || !CapsuleGravityFingerprint.hash(room.plan).equals(CapsuleGravityFingerprint.hash(
+                    start.createTag(serializationContext(), start.getChunkPos()))))
+                throw new IllegalStateException("Strict plan reconstruction changed its contents");
+            // Native callbacks and ChunkSerializer must share the same piece graph.
+            // Reading an already loaded registered start is not registration replay.
+            var startChunk = level.getChunkSource().getChunkNow(start.getChunkPos().x, start.getChunkPos().z);
+            var liveStart = startChunk == null ? null : startChunk.getStartForStructure(structure);
+            if (liveStart == null || !liveStart.isValid() || liveStart.getStructure() != structure
+                    || !CapsuleGravityFingerprint.hash(room.plan).equals(CapsuleGravityFingerprint.hash(
+                    liveStart.createTag(serializationContext(), liveStart.getChunkPos()))))
+                throw new IllegalStateException("Registered start unavailable or changed; no re-registration allowed");
+            start = liveStart;
+            bounds = placementEnvelope();
+            if (room.minX != bounds.minX() || room.maxX != bounds.maxX() || room.minY != bounds.minY()
+                    || room.maxY != bounds.maxY() || room.minZ != bounds.minZ() || room.maxZ != bounds.maxZ()
+                    || bounds.getXSpan() <= 0 || bounds.getZSpan() <= 0 || bounds.getYSpan() <= 0
+                    || bounds.getXSpan() > MAX_STRUCTURE_AXIS || bounds.getZSpan() > MAX_STRUCTURE_AXIS
+                    || (long) bounds.getXSpan() * bounds.getZSpan() > MAX_STRUCTURE_XZ_AREA
+                    || (long) bounds.getXSpan() * bounds.getZSpan() * bounds.getYSpan() > MAX_STRUCTURE_VOLUME
+                    || bounds.minY() <= level.getMinBuildHeight() || bounds.maxY() >= level.getMaxBuildHeight()
+                    || !level.getWorldBorder().isWithinBounds(new BlockPos(bounds.minX(), bounds.minY(), bounds.minZ()))
+                    || !level.getWorldBorder().isWithinBounds(new BlockPos(bounds.maxX(), bounds.maxY(), bounds.maxZ()))
+                    || start.getPieces().size() > MAX_STRUCTURE_PIECES)
+                throw new IllegalStateException("Strict placement envelope changed");
+            minChunkX = bounds.minX() >> 4; maxChunkX = bounds.maxX() >> 4;
+            minChunkZ = bounds.minZ() >> 4; maxChunkZ = bounds.maxZ() >> 4;
+            cleanMinChunkX = trimMinChunkX = (bounds.minX() - CapsuleInstances.reservedMargin()) >> 4;
+            cleanMaxChunkX = trimMaxChunkX = (bounds.maxX() + CapsuleInstances.reservedMargin()) >> 4;
+            cleanMinChunkZ = trimMinChunkZ = (bounds.minZ() - CapsuleInstances.reservedMargin()) >> 4;
+            cleanMaxChunkZ = trimMaxChunkZ = (bounds.maxZ() + CapsuleInstances.reservedMargin()) >> 4;
+            chunkCount = ((long) maxChunkX - minChunkX + 1) * ((long) maxChunkZ - minChunkZ + 1);
+            if (chunkCount <= 0 || chunkCount > MAX_STRUCTURE_CHUNKS || room.chunk < 0 || room.chunk >= chunkCount
+                    || room.piece < 0 || room.piece > start.getPieces().size()
+                    || (room.afterPlaced && room.piece != start.getPieces().size())
+                    || room.mapCursor < 0 || room.mapCursor > 4096 || room.previewCursor < 0 || room.previewCursor > 4096)
+                throw new IllegalStateException("Strict callback cursor is invalid");
+            for (int i = 0; i < 4096; i++) {
+                int x = sampleX(i), z = sampleZ(i);
+                mapSamples.computeIfAbsent(ChunkPos.asLong(x >> 4, z >> 4), ignored -> new ArrayList<>()).add(i);
+            }
+            refreshProtection();
+            registered = true; gravityResumed = true;
+        }
+        void observeGravityWitness() {
+            if (gravityChunk != null && "ae2:meteorite".equals(room.structure)) {
+                var observed = CapsuleGravityRecovery.observe(level, gravityChunk);
+                if (observed != null) gravityWitness = observed;
+            }
+        }
+        void confirmGravityResume() {
+            if (gravityResumeGuard != null && gravityResumeValidated) {
+                var liveChunk = level.getChunkSource().getChunkNow(start.getChunkPos().x, start.getChunkPos().z);
+                if (liveChunk == null || liveChunk.getStartForStructure(structure) != start)
+                    throw new CapsuleGravitySupport.IndexBlocked(level, gravityChunk, false, "registered_start_changed_after_callback");
+                liveChunk.setUnsaved(true);
+                CapsuleGravityRecovery.completeClaim(level.getServer(), room.key(), gravityResumeGuard);
+                gravityResumeGuard = null;
             }
         }
         int progress() {
@@ -836,9 +1005,16 @@ public final class NativeCapsules {
             return level.areEntitiesLoaded(center.toLong());
         }
         boolean step() {
+            verifiedGravityPreflight = null;
             if (++ticks > MAX_GENERATION_TICKS) throw new CapsuleLimitException("timeout");
             long deadline = System.nanoTime() + STEP_BUDGET_NANOS;
             if (start == null) return plan();
+            if (gravityResumed && !startTicket) {
+                startTicket = true;
+                level.getChunkSource().addRegionTicket(START_TICKET, start.getChunkPos(), 0, start.getChunkPos());
+            }
+            if (gravityResumed && level.getChunkSource().getChunkNow(start.getChunkPos().x, start.getChunkPos().z) == null)
+                return false;
             if (observedGeometry != data.geometryRevision) { refreshProtection(); clearanceValidated = false; }
             if (!clearanceValidated) {
                 if (!data.hasClearance(room)) throw new CapsuleLimitException("allocation_conflict");
@@ -849,8 +1025,8 @@ public final class NativeCapsules {
             if (room.phase.equals("bedrock")) return bedrock(deadline);
             if (!registered) {
                 if (!startTicket) {
-                    level.getChunkSource().addRegionTicket(START_TICKET, start.getChunkPos(), 0, start.getChunkPos());
                     startTicket = true;
+                    level.getChunkSource().addRegionTicket(START_TICKET, start.getChunkPos(), 0, start.getChunkPos());
                 }
                 if (!ready(start.getChunkPos())) return false;
                 level.getChunk(start.getChunkPos().x, start.getChunkPos().z).setStartForStructure(structure, start);
@@ -860,6 +1036,27 @@ public final class NativeCapsules {
             if ((long) room.chunk < chunkCount) {
                 ChunkPos chunk = chunkAt(room.chunk);
                 if (!ready(chunk)) return false;
+                gravityChunk = chunk;
+                if ("ae2:meteorite".equals(room.structure) && CapsuleGravitySupport.eligible(level)) {
+                    // Must precede biome/reference/POI writes and cursor skipping in this step.
+                    gravityCallback = "chunk_preflight";
+                    try {
+                        CapsuleGravitySupport.preflightCallback(level, chunk);
+                        if (gravityResumeGuard != null) {
+                            var liveChunk = level.getChunkSource().getChunkNow(start.getChunkPos().x, start.getChunkPos().z);
+                            if (liveChunk == null || liveChunk.getStartForStructure(structure) != start
+                                    || !CapsuleGravityFingerprint.hash(room.plan).equals(CapsuleGravityFingerprint.hash(
+                                    start.createTag(serializationContext(), start.getChunkPos()))))
+                                throw new CapsuleGravitySupport.IndexBlocked(level, chunk, true, "registered_start_changed");
+                            CapsuleGravityRecovery.validateClaim(level.getServer(), room, level, chunk, gravityResumeGuard);
+                            gravityResumeValidated = true;
+                        }
+                    }
+                    catch (CapsuleGravitySupport.IndexBlocked failure) {
+                        verifiedGravityPreflight = failure;
+                        throw failure;
+                    }
+                }
                 var access = level.getChunk(chunk.x, chunk.z);
                 if (room.piece == 0 && !room.afterPlaced && room.sourceCoordinates) {
                     // Store the source's 3-D biomes alongside the relocated graph. Runtime
@@ -882,10 +1079,11 @@ public final class NativeCapsules {
                 while (room.piece < pieces.size() && !pieces.get(room.piece).getBoundingBox().intersects(clip)) room.piece++;
                 RandomSource random = RandomSource.create(generationSeed() ^ chunk.toLong() ^ room.piece);
                 if (room.piece < pieces.size()) {
+                    gravityCallback = "piece";
                     var first = pieces.getFirst().getBoundingBox();
                     long began = System.nanoTime();
                     try (var context = new CapsuleGenerationContext(level, sourceLevel, room,
-                            pieces.get(room.piece) instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece)) {
+                            pieces.get(room.piece) instanceof net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece, chunk)) {
                         pieces.get(room.piece).postProcess(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(),
                                 random, clip, chunk, new BlockPos(first.getCenter().getX(), first.minY(), first.getCenter().getZ()));
                     }
@@ -897,8 +1095,9 @@ public final class NativeCapsules {
                     checkpointPiece(room.piece++); return false;
                 }
                 if (!room.afterPlaced) {
+                    gravityCallback = "after_place";
                     long began = System.nanoTime();
-                    try (var context = new CapsuleGenerationContext(level, sourceLevel, room)) {
+                    try (var context = new CapsuleGenerationContext(level, sourceLevel, room, false, chunk)) {
                         structure.afterPlace(level, level.structureManager(), sourceLevel.getChunkSource().getGenerator(), random,
                                 clip, chunk, new PiecesContainer(pieces));
                     }
@@ -1292,6 +1491,59 @@ public final class NativeCapsules {
         }
         int sampleX(int i) { return bounds.minX() + (i % 64) * Math.max(0, bounds.getXSpan() - 1) / 63; }
         int sampleZ(int i) { return bounds.minZ() + (i / 64) * Math.max(0, bounds.getZSpan() - 1) / 63; }
+        CompoundTag gravityCleanupPlan() {
+            CompoundTag receipt = new CompoundTag();
+            receipt.putBoolean("complete", false);
+            receipt.putString("dimension", level.dimension().location().toString());
+            var entries = new net.minecraft.nbt.ListTag();
+            for (ChunkPos ticket : tickets) entries.add(gravityTicket("region", ticket, ticketRadius));
+            if (startTicket) entries.add(gravityTicket("start", start.getChunkPos(), 0));
+            receipt.put("tickets", entries);
+            receipt.putString("planner", planning == null ? "absent" : "present_unconfirmed");
+            return receipt;
+        }
+        private CompoundTag gravityTicket(String type, ChunkPos pos, int radius) {
+            CompoundTag ticket = new CompoundTag();
+            ticket.putString("type", type); ticket.putInt("x", pos.x); ticket.putInt("z", pos.z);
+            ticket.putInt("radius", radius); ticket.putBoolean("released", false);
+            return ticket;
+        }
+        void releaseAfterGravityFailure(Exception original, CompoundTag receipt) {
+            var ledger = receipt.getList("tickets", net.minecraft.nbt.Tag.TAG_COMPOUND);
+            int index = 0;
+            for (ChunkPos ticket : List.copyOf(tickets)) {
+                var item = ledger.getCompound(index++);
+                try {
+                    level.getChunkSource().removeRegionTicket(TICKET, ticket, ticketRadius, ticket);
+                    tickets.remove(ticket);
+                    item.putBoolean("released", true);
+                } catch (RuntimeException releaseFailure) {
+                    item.putString("error", releaseFailure.getClass().getName());
+                    if (releaseFailure != original) original.addSuppressed(releaseFailure);
+                }
+            }
+            if (planning != null) {
+                try { planning.cancel(true); planning = null; receipt.putString("planner", "cancel_requested_unknown"); }
+                catch (RuntimeException releaseFailure) {
+                    receipt.putString("planner", "cancel_failed");
+                    if (releaseFailure != original) original.addSuppressed(releaseFailure);
+                }
+            }
+            if (startTicket) {
+                var item = ledger.getCompound(index);
+                try {
+                    level.getChunkSource().removeRegionTicket(START_TICKET, start.getChunkPos(), 0, start.getChunkPos());
+                    startTicket = false;
+                    item.putBoolean("released", true);
+                } catch (RuntimeException releaseFailure) {
+                    item.putString("error", releaseFailure.getClass().getName());
+                    if (releaseFailure != original) original.addSuppressed(releaseFailure);
+                }
+            }
+            receipt.putBoolean("complete", tickets.isEmpty() && !startTicket && "absent".equals(receipt.getString("planner")));
+            if (!tickets.isEmpty() || startTicket)
+                LogUtils.getLogger().error("Capsule gravity pause could not release all transient tickets; server restart/administrator repair required: {}", room.key());
+        }
         void releaseCurrent() {
             for (ChunkPos ticket : tickets) level.getChunkSource().removeRegionTicket(TICKET, ticket, ticketRadius, ticket);
             tickets.clear();
@@ -1348,6 +1600,7 @@ public final class NativeCapsules {
     }
 
     private static final class PendingEntry {
+        final String roomKey;
         final ServerPlayer player;
         final ServerLevel level;
         final BlockPos entrance;
@@ -1355,6 +1608,7 @@ public final class NativeCapsules {
         final int side;
         int ticks;
         PendingEntry(ServerPlayer player, CapsuleInstances.Instance room, ServerLevel level, int side) {
+            this.roomKey = room.key();
             this.player = player; this.level = level; this.side = side;
         if (!room.boundsKnown || room.minX > room.maxX || room.minY > room.maxY || room.minZ > room.maxZ)
             throw new IllegalStateException("Missing saved capsule bounds");
@@ -1381,6 +1635,10 @@ public final class NativeCapsules {
             for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++)
                 if (level.getChunkSource().getChunkNow(chunk.x + dx, chunk.z + dz) == null) return false;
             if (!level.areEntitiesLoaded(chunk.toLong())) return false;
+            var room = CapsuleInstances.get(player.getServer()).rooms.get(roomKey);
+            if (room == null || !CapsuleGravityRecovery.mayEnterReady(player.getServer(), room)) {
+                release(); return true;
+            }
         for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++) {
             BlockPos p = entrance.offset(dx, -1, dz);
             level.setBlock(p, Blocks.OBSIDIAN.defaultBlockState(), 2);

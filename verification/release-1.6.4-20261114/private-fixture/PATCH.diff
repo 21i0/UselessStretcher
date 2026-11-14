@@ -1,0 +1,46 @@
+--- fixture-b/StaffCompatSmoke.java
++++ fixture-c/StaffCompatSmoke.java
+@@ -294,10 +294,10 @@
+                     client.setScreen(null);
+                     // Reset selected slot locally as part of the next independent fixed-layout case.
+                     client.player.getInventory().selected = 0;
+-                    install(client, STAFF, BASE, "journey-inventory"); stage = 20; age = 0;
++                    install(client, STAFF, BASE, "journey-inventory-0"); stage = 20; age = 0;
+                 }
+                 case 20 -> {
+-                    if (!readyInventory(client, STAFF, BASE, "journey-inventory")) return;
++                    if (!readyInventory(client, STAFF, BASE, "journey-inventory-" + journeys)) return;
+                     var target = journeys == 0 ? Level.NETHER : Level.OVERWORLD;
+                     server(client, "journey-" + journeys, player -> {
+                         var destination = player.getServer().getLevel(target);
+@@ -320,17 +320,26 @@
+                     key(GLFW.GLFW_KEY_X); check(client.screen instanceof StaffScreen, "X reopens after transfer");
+                     ((StaffScreen) client.screen).navigate(StaffScreen.Tab.MAIN);
+                     Method select = client.screen.getClass().getDeclaredMethod("selectSpeed", int.class);
+-                    select.setAccessible(true); select.invoke(client.screen, 16);
++                    final int expectedSpeed = journeys == 0 ? 16 : 64;
++                    select.setAccessible(true); select.invoke(client.screen, expectedSpeed);
+                     server(client, "journey-network-" + journeys, player -> {
+-                        check(player.getMainHandItem().getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), 0) == 16,
++                        check(player.getMainHandItem().getOrDefault(StretcherComponents.WONDROUS_STAFF_SPEED.get(), 0) == expectedSpeed,
+                                 "X packet after transfer reaches server");
+                     }); stage = 23; age = 0;
+                 }
+                 case 23 -> {
+                     if (!ack("journey-network-" + journeys)) return;
+-                    record("DIMENSION_UI_ROUND_" + journeys, "PASS", client.level.dimension().location() + "; native layout ACK and staff speed ACK");
++                    record("DIMENSION_UI_ROUND_" + journeys, "PASS", client.level.dimension().location() + "; native layout ACK and changed staff speed ACK=" + (journeys == 0 ? 16 : 64));
+                     client.setScreen(null); journeys++;
+-                    if (journeys == 1) { stage = 20; return; }
++                    if (journeys == 1) {
++                        // This is a new observation ACK, never the stale initial inventory ACK.
++                        // Do not reinstall or reset items between the two actual dimension trips.
++                        server(client, "journey-inventory-1", player -> {
++                            check(id(player.getMainHandItem()).equals(STAFF), "return journey preserves actual main-hand staff");
++                            check(id(player.getOffhandItem()).equals(BASE), "return journey preserves actual offhand native staff");
++                        });
++                        stage = 20; age = 0; return;
++                    }
+                     stage = 24;
+                 }
+                 case 24 -> {

@@ -5,6 +5,7 @@
   "plugin": "com.sorrowmist.useless.stretcher.mixin.UselessStretcherMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BudgetedRecipeCatalogMixin",
     "CapsuleDimensionBootstrapMixin",
     "CapsuleGenerationHeightMixin",
     "CapsuleScatteredHeightMixin",
@@ -63,9 +64,17 @@
     "SagMillingRecipeAdapterMixin",
     "ApotheosisEnchantingStatsMixin",
     "EnchantmentMenuAccessor",
-    "ApotheosisEnchantingMenuMixin"
+    "ApotheosisEnchantingMenuMixin",
+    "CapsuleGravityPlacementMixin",
+    "CapsuleFallingBlockMixin"
   ],
   "client": [
+    "BudgetedClientCatalogMixin",
+    "CatalogJeiTimingMixin",
+    "CatalogJeiBuildTimingMixin",
+    "CatalogJeiIndexTimingMixin",
+    "CatalogJeiLookupMixin",
+    "CatalogJeiGuiMixin",
     "TwoIDollClientRemovalMixin",
     "StaffPhaseLocalMovementMixin",
     "StaffPhaseVisibilityMixin",

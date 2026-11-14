@@ -1,0 +1,34 @@
+{
+  "status": "ROOT_RELEASE_APPROVED",
+  "productionAcceptance": true,
+  "artifact": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\staging\\useless_stretcher-1.21.1-1.6.4.jar",
+    "size": 15106028,
+    "sha256": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe"
+  },
+  "smokeResult": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\staff-compat-result.json",
+    "size": 5333,
+    "sha256": "4f80aca3ff821d9d6b59bb7f1e9422d379331a53a55c3518266cd3af80d51e94"
+  },
+  "clientResult": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\client-result.json",
+    "size": 1672,
+    "sha256": "7ecb028bbf27ffd56bada5ced39fe88fc6a1adc3b5e5751ba391726cac2248fa"
+  },
+  "runtimeLog": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\logs\\latest.log",
+    "size": 79378,
+    "sha256": "3e8e754b1f3377348b411eea08277b16f2a74367cd0b3ac3bd3ff60fe324e5e4"
+  },
+  "identityObservation": {
+    "status": "OBSERVED_FIXED_HAND_IDENTITY_DRIFT",
+    "decision": "ACCEPTED_FOR_RELEASE",
+    "rationale": "Parent controller explicitly accepted the existing hand-based behavior after the full scoped smoke: artificial server-side replacement of two identical staff items while the settings window stays open targets the current contents of the original hand. Ordinary close/swap/reopen, hotbar switching, nonstaff guards and both dimension trips passed. Document reopening settings after changing hands/items; no zero-tick or remote-multiplayer claim."
+  },
+  "authorization": {
+    "sourceThreadId": "01a18fa2-fb29-7f13-a025-cb15b908048e",
+    "instruction": "明确接受fixed-hand既有限制，已放行29a4 GitHub正式发布，不需等整包，不需重复授权；CF不得绕过URL限制。",
+    "dateShanghai": "2026-11-14"
+  }
+}

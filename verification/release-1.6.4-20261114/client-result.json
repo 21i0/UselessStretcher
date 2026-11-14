@@ -1,0 +1,47 @@
+{
+  "status": "PRIVATE_STAFF_CHECKS_PASSED_WITH_SCOPED_LIMITS",
+  "exit_code": 0,
+  "pid": 25260,
+  "elapsed_seconds": 37.64000000001397,
+  "timed_out": false,
+  "resource_stop": false,
+  "forced_termination": false,
+  "evidence_sha256": "4f80aca3ff821d9d6b59bb7f1e9422d379331a53a55c3518266cd3af80d51e94",
+  "fixture_status": "PASS_WITH_SEPARATE_IDENTITY_OBSERVATION",
+  "post_guard": {
+    "passed": true,
+    "sampled_utc": "2026-11-14T02:05:39.287739+00:00",
+    "policy": {
+      "heap_mib": 4096,
+      "initial_heap_mib": 256,
+      "direct_mib": 128,
+      "code_cache_mib": 128,
+      "active_processors": 4,
+      "required_free_mib": 5120,
+      "required_commit_mib": 5376,
+      "runtime_min_free_mib": 1024,
+      "runtime_min_commit_mib": 1024,
+      "mode": "041-staff-d-lazy-heap-hard-monitor"
+    },
+    "available_physical_bytes": 6702800896,
+    "total_physical_bytes": 17023950848,
+    "other_java": [],
+    "unknown_java_command_line": false,
+    "single_shared_mc_slot_required": true,
+    "reason": "PASS_LAZY_COMMIT_WITH_HARD_MONITOR",
+    "commit_sample": {
+      "sampled_utc": "2026-11-14T02:05:39.287739+00:00",
+      "available_physical_bytes": 6702845952,
+      "available_commit_bytes": 25539215360,
+      "total_physical_bytes": 17023950848,
+      "commit_limit_bytes": 40018190336
+    }
+  },
+  "production_acceptance": false,
+  "fullpack_acceptance": false,
+  "limits": [
+    "NeoForge production input-event dispatch, not native GLFW keyboard callback",
+    "Integrated server; not remote multiplayer",
+    "Fixture reports identity observation separately; inspect before publication"
+  ]
+}

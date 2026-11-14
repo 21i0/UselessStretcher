@@ -1,0 +1,4795 @@
+{
+  "status": "PRODUCTION_CANDIDATE_PACKAGED_AWAITING_ROOT_TESTS",
+  "artifact": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\staging\\useless_stretcher-1.21.1-1.6.4.jar",
+  "sha256": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe",
+  "size": 15106028,
+  "version": "1.21.1-1.6.4",
+  "baseline": {
+    "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\private-packages\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1-capsule-gravity-e1.jar",
+    "size": 15105953,
+    "sha256": "58dad32e8644a8612ef1ed30d6088531f16cf9849df6f844f1e27534865f63c3"
+  },
+  "inputManifest": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\INPUTS-b.json",
+    "size": 9238,
+    "sha256": "936780fb205533fe028919c2ab4cffdcce1f4f0985d394be3f1d472bf9ee5f9f"
+  },
+  "compileLog": {
+    "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\compile-production.log",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "compiledClasses": [
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\classes\\com\\sorrowmist\\useless\\stretcher\\content\\catalog\\CatalogPatchSupport.class",
+      "size": 2521,
+      "sha256": "7ee7cae50401c794c9d181db34bc520667dd5c92fbf7626b00de283eccebba0d"
+    },
+    {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\classes\\com\\sorrowmist\\useless\\stretcher\\mixin\\UselessStretcherMixinPlugin.class",
+      "size": 6149,
+      "sha256": "da071ded3961deb356470f257da29532a1ecec79bfd3dbd00dc9eb8e93afbd45"
+    }
+  ],
+  "entryCount": 789,
+  "changedEntries": 3,
+  "unchangedEntries": 786,
+  "javaStartedByFinalizer": false,
+  "testsRunByFinalizer": false,
+  "fixtureExcluded": true,
+  "metadataDependencyMinimumUnchanged": true,
+  "abiChecks": [
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "externalAbiUnchanged": true,
+      "beforeSha256": "f0d8ca0c19b206228d3e1fa1e57e0973e6fe73a594000a984bdea7302a0880ff",
+      "afterSha256": "7ee7cae50401c794c9d181db34bc520667dd5c92fbf7626b00de283eccebba0d",
+      "beforeBytes": 2442,
+      "afterBytes": 2521
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "externalAbiUnchanged": true,
+      "beforeSha256": "a611a50f57872363bc5810648b52dcadeade745905df88538afd173fe36f7f3d",
+      "afterSha256": "da071ded3961deb356470f257da29532a1ecec79bfd3dbd00dc9eb8e93afbd45",
+      "beforeBytes": 6077,
+      "afterBytes": 6149
+    }
+  ],
+  "entries": [
+    {
+      "entry": "META-INF/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "META-INF/MANIFEST.MF",
+      "changed": false,
+      "size": 25,
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff"
+    },
+    {
+      "entry": "META-INF/coremods.json",
+      "changed": false,
+      "size": 68,
+      "sha256": "811308800c4671b5ccab7f0715259c817537384eef4432c5b7dcd10f0f24cde0"
+    },
+    {
+      "entry": "META-INF/jdte-LICENSE.txt",
+      "changed": false,
+      "size": 1095,
+      "sha256": "936fdc03b0643f9653bffe5c39860b3c5af519f5450a6681ec5eeb805d0c87f6"
+    },
+    {
+      "entry": "META-INF/neoforge.mods.toml",
+      "changed": true,
+      "size": 1005,
+      "sha256": "de02c38211584783bd5a1808bbca327fadc17ca823f63abd94da55179b440448"
+    },
+    {
+      "entry": "TWO_I_TAIL_CREDITS.txt",
+      "changed": false,
+      "size": 1099,
+      "sha256": "4b6e2ce7bd4a80d4652bc423b6d64063555e69e158b4a805ff2347ce3f8ea2cd"
+    },
+    {
+      "entry": "TWO_I_TAIL_LICENSE.txt",
+      "changed": false,
+      "size": 21350,
+      "sha256": "bddaaa7db91b23d4e64485f8a3b0aa5247e2f229ab18b684126e845af54ad6be"
+    },
+    {
+      "entry": "assets/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/ae2/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/capsule.md",
+      "changed": false,
+      "size": 4672,
+      "sha256": "c72b30815c66d859a8973ee0c086dee8ec9ca1c87c85d051d4f9020ef5ac4a23"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/extras.md",
+      "changed": false,
+      "size": 5133,
+      "sha256": "2a7e15a0ba1d03198b8d37d93532394b5534f1f87125faa52343f6fbe3fa99f1"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/index.md",
+      "changed": false,
+      "size": 3082,
+      "sha256": "6a31fcc610dff31bd704f78ce20f957f64d88cc7ea555eacadb22f4b2d8a8bd8"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/myriad.md",
+      "changed": false,
+      "size": 4454,
+      "sha256": "de3b53fb28b9b1d75ca98fc1e6d23e6f45e72f642455e4c2c04125c97a415005"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/range.md",
+      "changed": false,
+      "size": 5067,
+      "sha256": "5064039ea31d4caacc778cbfbe15d01c293b7c0d5b71150a0fee9d72e9b24508"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/recipes.md",
+      "changed": false,
+      "size": 3063,
+      "sha256": "fa23c63d3326194a9a1c303b5590d016f631b15b7f2613d37ee13104c5652ef2"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/staff.md",
+      "changed": false,
+      "size": 12556,
+      "sha256": "4cbfb7c0f7835555e75efa9f520f984bd49b297a31839cf1a5e87064aa0c9c10"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/stretcher.md",
+      "changed": false,
+      "size": 5483,
+      "sha256": "9f451e8441db31afb14844ec88cedc9d79f5aa5e8627398443b823fdd93240e8"
+    },
+    {
+      "entry": "assets/ae2/ae2guide/useless_stretcher/two_i.md",
+      "changed": false,
+      "size": 8392,
+      "sha256": "fa4b202e4b130a9818788a4096949b33cb57d18f10c82035ffd362c8ec548672"
+    },
+    {
+      "entry": "assets/minecraft/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/minecraft/atlases/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/minecraft/atlases/blocks.json",
+      "changed": false,
+      "size": 179,
+      "sha256": "d2230e5bc7c315be5790ae9f909999a73a9ad915a78fd3ef2047d07876cb4317"
+    },
+    {
+      "entry": "assets/useless_stretcher/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/blockstates/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/blockstates/omniversal_myriad.json",
+      "changed": false,
+      "size": 94,
+      "sha256": "f4092b88491caf1a95f590b975b005768bfb7d7491d760d0f59f2cedebbfcf1b"
+    },
+    {
+      "entry": "assets/useless_stretcher/blockstates/two_i_doll_display.json",
+      "changed": false,
+      "size": 105,
+      "sha256": "4cd63302a27d6f75d802979b9c087b4c7129750acf7a951b291ba831b657cb8d"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_0.json",
+      "changed": false,
+      "size": 10253,
+      "sha256": "751d58ade7dd07084a8f396bcbbd9a621b6a80675bdd05fe7d62fa027a7db825"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_1.json",
+      "changed": false,
+      "size": 10553,
+      "sha256": "defaa528487aa700ded2847fbbfafa9fbef8233af5ce972d5a81d63f8f933f21"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_2.json",
+      "changed": false,
+      "size": 10465,
+      "sha256": "34b7ea851b12c173fb070da8db54cfc770723b8c601c5c72ec9f3dabc9d3346c"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_3.json",
+      "changed": false,
+      "size": 10386,
+      "sha256": "36df3cade859195a7aaf75c383c55c59d4a1caf51b76da33229daafb60a0f2a7"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_4.json",
+      "changed": false,
+      "size": 10394,
+      "sha256": "58ae19e54510541f309b63bed23bba0b5df64e40c47f9762b111f2cd87dfba0b"
+    },
+    {
+      "entry": "assets/useless_stretcher/dialogue/long_stories/chapter_5.json",
+      "changed": false,
+      "size": 14494,
+      "sha256": "035194f79443764ce26eae2deeadf4e404da36110a14815cb500dbc2060395bf"
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/en_us.json",
+      "changed": false,
+      "size": 94403,
+      "sha256": "3e8f63926a91ed20b73d709cb81f79fad9e5ab2d68b5d532a158a1c758319ca6"
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/zh_cn.json",
+      "changed": false,
+      "size": 92617,
+      "sha256": "4a058e599e3a5c18f2affee664d43afb0021181e7e6b94f98d42c0a009c00c0c"
+    },
+    {
+      "entry": "assets/useless_stretcher/lang/zh_tw.json",
+      "changed": false,
+      "size": 86606,
+      "sha256": "db991bfb291587fb0163eb56739b10862a230bcea9134b56cd5d3a6645e1ba65"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/block/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/block/omniversal_myriad.json",
+      "changed": false,
+      "size": 125,
+      "sha256": "b1b10853aeab592cfee4442131c92984fb043dcdc043dc26584885d9d5c651dd"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/block/two_i_doll_display.json",
+      "changed": false,
+      "size": 89,
+      "sha256": "e9416ed68a9d5315ab99c8829e7e7a0b17c3a273b750b6a6659fa7a793b595dd"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/entity/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/entity/two_i_tail.json",
+      "changed": false,
+      "size": 13936,
+      "sha256": "201c3f114f2620cf68ab5dc60ba2df7d7b41a6040cafeb36391fc21a8805565b"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/dimension_capsule.json",
+      "changed": false,
+      "size": 107,
+      "sha256": "91154c1129c5fff4ebbd02c958d37f0cd4abd5ce97f5be6995fd9a8da3b5687d"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/omniversal_myriad.json",
+      "changed": false,
+      "size": 63,
+      "sha256": "55f92eeaa63e3be004643babfe268fcabdbc02c80880eb223951e505139a7d4e"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/range_reclaimer.json",
+      "changed": false,
+      "size": 42,
+      "sha256": "d5072715aab2b839b28d75433ec171a708551d2fc470a58795bba18ba8c31146"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/two_i_doll.json",
+      "changed": false,
+      "size": 898,
+      "sha256": "09e5bf97d475368f569ac6bd0425b5e0cb835e7d15ec967ac95d2cf225bff2f6"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/useful_armor_boots.json",
+      "changed": false,
+      "size": 110,
+      "sha256": "cdf3bdf312d7583b7b7104da610bdb78145569771550548daa72849ca72b68f8"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/useful_armor_chestplate.json",
+      "changed": false,
+      "size": 115,
+      "sha256": "e234b3fed2a9045aaa876d11645333cf30520f2ba1580b645e7fa8621e26e8bc"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/useful_armor_helmet.json",
+      "changed": false,
+      "size": 111,
+      "sha256": "e86a44919152ee9e60275a6763756ed3e6227ae3998eac9c7d9f314ec1c63b3d"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/useful_armor_leggings.json",
+      "changed": false,
+      "size": 113,
+      "sha256": "7e291f52dae45a6ac39ea04d95efdc3b87d64ffa4fcfab701093db1464bbfaf7"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/useless_stretcher.json",
+      "changed": false,
+      "size": 126,
+      "sha256": "900f544281e6bc1fb0b1aa96476faba475ad028dc480d4172946db75bdc91f30"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/wondrous_staff.json",
+      "changed": false,
+      "size": 300,
+      "sha256": "15c6beba8fa79548ddd132112499cd90a9591a333e9961c4edc62b29e8af0c8e"
+    },
+    {
+      "entry": "assets/useless_stretcher/models/item/wondrous_staff_silk_touch.json",
+      "changed": false,
+      "size": 131,
+      "sha256": "60056826a5fe3eeba811f8705a039737e4c8ac2996f14f771c6b60342de442a1"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds.json",
+      "changed": false,
+      "size": 524,
+      "sha256": "2bfdc99c5f416e01f94f8b4127b4a947c303ecdb225a8b3d043ebb7ba8aa3a2a"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/player_voice.ogg",
+      "changed": false,
+      "size": 3604,
+      "sha256": "5dac2871a351a1b20ca69cc58d0ac0f844d4dd2c0588e56cfc0bbffc26f10c58"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_pat_1.ogg",
+      "changed": false,
+      "size": 4541,
+      "sha256": "129d5077ad05d3d5ebbfc059748c412c498f56bd7f513ebe4e08bb30815844aa"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_pat_2.ogg",
+      "changed": false,
+      "size": 4723,
+      "sha256": "9a9c35df9930b03a9a618ab7758f6bc84a117529975ab2e547ad4536ad2bbe07"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_pat_3.ogg",
+      "changed": false,
+      "size": 4670,
+      "sha256": "6c9424856af6965470fc91fbd58f88337c8d1b2fc0c5e730669bea6d6e2bfebd"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_voice.ogg",
+      "changed": false,
+      "size": 3671,
+      "sha256": "551ff57412d30f7fdc84e86baef08a97801f98ce1b2552ce5a7f4e29c80f070b"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_voice_bright.ogg",
+      "changed": false,
+      "size": 3664,
+      "sha256": "376d9011cbda02b63c058fafb3a3aebf06c7c3732e8a6f2fd9ffc16c85c918e5"
+    },
+    {
+      "entry": "assets/useless_stretcher/sounds/two_i_voice_soft.ogg",
+      "changed": false,
+      "size": 3620,
+      "sha256": "8968e3e1a3db6081549999e14fd89124c272fa7a75c3aed8f99beb5ffff10d30"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/block/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/block/omniversal_myriad.png",
+      "changed": false,
+      "size": 413,
+      "sha256": "cbf15cad97cc78880262de92efdc19595cd0e5208baa204debcfe5e89a8689ed"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/block/omniversal_myriad.png.mcmeta",
+      "changed": false,
+      "size": 164,
+      "sha256": "dc316f49faa5f245dd765625bfcc2175813365f8d5cbfd25cda3988817c5dd0d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/first_meet.png",
+      "changed": false,
+      "size": 923516,
+      "sha256": "9f47ed16f048df1053b151fb2b06989bcf0af883a24a5583a35ee60963076b88"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/first_meet.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/friends.png",
+      "changed": false,
+      "size": 967086,
+      "sha256": "04bc70a49b3889936f21ef1d4dc4eaf05c1551d2c633e0e64b615f86e0e88682"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/friends.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/starfield_invite.png",
+      "changed": false,
+      "size": 999401,
+      "sha256": "d261236c794e0488330d3621ea0e68862bc9b2b55832934c3388d006b29bdba4"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/cg/starfield_invite.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/calm.png",
+      "changed": false,
+      "size": 654538,
+      "sha256": "9f1afcd4316f07cd53effb2e2c73b78f0381285484fa1fcbc08d02f9f4c0ea7a"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/calm.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/confused.png",
+      "changed": false,
+      "size": 634759,
+      "sha256": "69036927d00c72258f90d3d1e80f982c84c9f35f990d5ceddf6c1011a152b972"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/confused.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/determined.png",
+      "changed": false,
+      "size": 679465,
+      "sha256": "733536bb3ee66c6b74e0eabcfa2d123ca1a3d197482ae654ed48c3065245d090"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/determined.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/guilty.png",
+      "changed": false,
+      "size": 673955,
+      "sha256": "e7f8eb852cb7eb09342dfd759deeb5336d2f5e9f9073aaab56aed1b333a2ff6a"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/guilty.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/happy.png",
+      "changed": false,
+      "size": 695544,
+      "sha256": "1fd329cc735c886923eb6f1cf04a077ec59dadcab3a7f3550c6ab1e64e2f7ee8"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/happy.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/shy.png",
+      "changed": false,
+      "size": 697339,
+      "sha256": "2de4537c5989b4ce280375a77bffdae6768dabc8f963fe82d503ded34be78315"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/shy.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/shy_alt.png",
+      "changed": false,
+      "size": 667426,
+      "sha256": "a2c54674371ec7d6802f700ad3b5d2328a5c05c0e1d5f882d46393a429d88284"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/shy_alt.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/smile.png",
+      "changed": false,
+      "size": 700465,
+      "sha256": "4a380eb7b1fc6261ba915d3b7f73a3c064d78b1b020c9d19b017db1088137039"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/smile.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/surprised.png",
+      "changed": false,
+      "size": 663169,
+      "sha256": "b3cf4ccb776299e267a1b3451e86082b89875e4292dfffde494cf00f55607678"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/surprised.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/tsundere.png",
+      "changed": false,
+      "size": 675301,
+      "sha256": "479e9d136e7f95e189e2dab4528bdf8fb233d7d409fb67b3a622cdf4d722dcff"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/expressions/tsundere.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/portrait/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/portrait/2i_portrait.png",
+      "changed": false,
+      "size": 835239,
+      "sha256": "af426015d9465e7173d0d85ccea42af2b6e58f339bbf10520e34f143cf17aacc"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/bow.png",
+      "changed": false,
+      "size": 318696,
+      "sha256": "611cf27208f2602c4fd1f71fab40fd1291efaabc7c51cbc26fb75cdc66cd5a2d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/bow.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/dialogue_frame.png",
+      "changed": false,
+      "size": 335602,
+      "sha256": "f346bdb945407d31c5166f2c901a17d2ee6274877d54be7f697b7282088db0ac"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/dialogue_frame.png.mcmeta",
+      "changed": false,
+      "size": 40,
+      "sha256": "5ecd14569b77926061dae218b07af27a6d70787d6e92540574294a863796f896"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/dialogue/ui/nameplate.png",
+      "changed": false,
+      "size": 130757,
+      "sha256": "e07ab5223dbe9dc7c4430c14d5cc23edc4cdac96dcfba3e548663c52f58f1a13"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/entity/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/entity/two_i.png",
+      "changed": false,
+      "size": 3119,
+      "sha256": "597dbe84e55288118666187e127167f30686e426d3c0693b398aa63ea6b4e44d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/entity/two_i_accessories.png",
+      "changed": false,
+      "size": 246,
+      "sha256": "9da0d72efae6641a878799bdf25edecbc6c3e6b0305c4099bb283623931bb41b"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/entity/two_i_tail.png",
+      "changed": false,
+      "size": 3146,
+      "sha256": "fd588c2dbc4506aa4027e18ed0570e77fc0ea3ee3545129ce3ad5a838c870684"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/entity/two_i_umbrella.png",
+      "changed": false,
+      "size": 78,
+      "sha256": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/dimension_capsule.png",
+      "changed": false,
+      "size": 213,
+      "sha256": "ae5c1ad8fd72d9222a9a49e210421342b18e9984e596a7ce0cf2e397a06e0bb0"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/endless_beaf_time_item.png",
+      "changed": false,
+      "size": 582,
+      "sha256": "a92105ae1f11af5acbe6c0c05d91a4017990488adc031c1f55c5d48610a13b43"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_boots.png",
+      "changed": false,
+      "size": 479,
+      "sha256": "0f951586867ac0b4d4b08155b3ffa337c9117c1c99a8fdce6f468538005d1850"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_boots.png.mcmeta",
+      "changed": false,
+      "size": 164,
+      "sha256": "dc316f49faa5f245dd765625bfcc2175813365f8d5cbfd25cda3988817c5dd0d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_chestplate.png",
+      "changed": false,
+      "size": 556,
+      "sha256": "22c50ab4ba850034c28c037a6802885d4bd9eaf1881aca55b883fe78e018db9f"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_chestplate.png.mcmeta",
+      "changed": false,
+      "size": 164,
+      "sha256": "dc316f49faa5f245dd765625bfcc2175813365f8d5cbfd25cda3988817c5dd0d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_helmet.png",
+      "changed": false,
+      "size": 464,
+      "sha256": "a5fc4ffb70ddb1bf3698620e29e830814a4871a4438210dc22ab4d2569fe80ce"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_helmet.png.mcmeta",
+      "changed": false,
+      "size": 164,
+      "sha256": "dc316f49faa5f245dd765625bfcc2175813365f8d5cbfd25cda3988817c5dd0d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_leggings.png",
+      "changed": false,
+      "size": 486,
+      "sha256": "ffd0dc99766a408ecbeecef98fa115054a02f4af3834972d9bce03184d515eaf"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useful_armor_leggings.png.mcmeta",
+      "changed": false,
+      "size": 164,
+      "sha256": "dc316f49faa5f245dd765625bfcc2175813365f8d5cbfd25cda3988817c5dd0d"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/useless_stretcher.png",
+      "changed": false,
+      "size": 298,
+      "sha256": "70b2fcdfc816bfc349de03f9feb16313f29eef07a74442a8ac7448880661e72a"
+    },
+    {
+      "entry": "assets/useless_stretcher/textures/item/wondrous_staff.png",
+      "changed": false,
+      "size": 179,
+      "sha256": "e5ed2b37c7fc90f10794c5728ab1cfa57c5fc12b0db08a150f68272a619924a0"
+    },
+    {
+      "entry": "com/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/UselessStretcherClient.class",
+      "changed": false,
+      "size": 1756,
+      "sha256": "2142f3e01c6d865ba0d7f298138ef591708512a15131c0298fa418083895395e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/UselessStretcherMod.class",
+      "changed": false,
+      "size": 5371,
+      "sha256": "f5126c3d9c2b61a925748d1d20368feb88e4cfc0139d0596840775799fd2f2ca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ApotheosisClientState.class",
+      "changed": false,
+      "size": 4019,
+      "sha256": "e32ad96929835e0b3bdec83388d30580117fdb27d43c9d7785cda3ee4be94ed8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CapsuleReadyToast.class",
+      "changed": false,
+      "size": 5014,
+      "sha256": "b5310d7c53190be575e2e33dbeabf41300afe272916068bdc0a4d509428c2a89"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CapsuleVariantsScreen$Layout.class",
+      "changed": false,
+      "size": 3673,
+      "sha256": "7d809c36fe26040a09bb1ddd180d0dcd98c978347a2926bdb312e651423db76f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CapsuleVariantsScreen.class",
+      "changed": false,
+      "size": 20892,
+      "sha256": "eb5672c042d7556e61fadd3e1a204565965e58a82cae9f144a06bd0b3beb56cd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay$Layout.class",
+      "changed": false,
+      "size": 2239,
+      "sha256": "e18084153844fc818cb22240e165aa9ae497ffa25d2d24882a712ea82fd3a45e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiProgressOverlay.class",
+      "changed": false,
+      "size": 4354,
+      "sha256": "cde88cd6e174b8728693d3cf5432ded2c428c796c4959b84c9a9cbba9cd044f4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$1.class",
+      "changed": false,
+      "size": 5894,
+      "sha256": "8025fa26dbc3921c1fb3e2b8acb715e35bf086f5347077b43b8590dad1453064"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeChangedAfterCall.class",
+      "changed": false,
+      "size": 552,
+      "sha256": "0199a838590904b48f21ba2f3e284ba3f3723c67d33a842c8ef723d2141ee2b3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$RuntimeFailure.class",
+      "changed": false,
+      "size": 1975,
+      "sha256": "f250b508ce298085ca9a635403043395467c3c6a1f942c637f42d138c0b383f6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication$StaleRevision.class",
+      "changed": false,
+      "size": 498,
+      "sha256": "74088ac10de888b2f52fd7248467e515f92adc50e8fb9def5184e30a83b46484"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublication.class",
+      "changed": false,
+      "size": 18457,
+      "sha256": "0fe8fc1b4db381d9ac7c227c2eac787d5dc5cf3cb5bb038716db5654eb0c896f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming$Call.class",
+      "changed": false,
+      "size": 4104,
+      "sha256": "cc885994d78eefff2d7759ad87ad6051881c5a7771728169fd26b8ee4933a5ec"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming$Snapshot.class",
+      "changed": false,
+      "size": 3393,
+      "sha256": "e2cd4cd1afb66405b3171abf475c3c13ae1ffd07f4a5b5649b4e7f3474809b62"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiPublicationTiming.class",
+      "changed": false,
+      "size": 8484,
+      "sha256": "c924a417447089d1d3f80c3fefb5db18b408254de685f5fe9ae3370f5b9803e3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/CatalogJeiTiming.class",
+      "changed": false,
+      "size": 1708,
+      "sha256": "a1c7645a6a427095b7c42e37952979626f6b53daf96611091ff7cd7efd987b7a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ClientCatalogLifecycle.class",
+      "changed": false,
+      "size": 8812,
+      "sha256": "c4fe1494ed9753ba6a365011a8aef6c9d8661db634e81f8b113d48cdb1e8df17"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ClientSetup$1.class",
+      "changed": false,
+      "size": 979,
+      "sha256": "b7701faea1940fb8b4daf650f4f376f5d93dbbe5c15d4be560c4a2a36207e7ef"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ClientSetup.class",
+      "changed": false,
+      "size": 8929,
+      "sha256": "468adc5c218a8357d10adbd3720786f1fb2b001af02f5b6e5678e79081be33a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/DimensionCapsuleScreen$Entry.class",
+      "changed": false,
+      "size": 3049,
+      "sha256": "b54811f8b0c39a27643b0a409b7c0963510ee0c8de91b164cf299db5fe55556a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/DimensionCapsuleScreen$Row.class",
+      "changed": false,
+      "size": 1926,
+      "sha256": "42df344902c813b1297a8dabdb13766bc5e1407f2e296adfbd93456542402fdf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/DimensionCapsuleScreen.class",
+      "changed": false,
+      "size": 23478,
+      "sha256": "809262ba09f0908c484cfdfe9037635b9b7849f693800c083ddbf7a86c06c44e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/EntityAccelerationConfigScreen.class",
+      "changed": false,
+      "size": 9872,
+      "sha256": "8bbb005c6a8c995acc881af71e4cfb41bcfc4cd96b52a71e312861a2df6d5b71"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationConfigScreen.class",
+      "changed": false,
+      "size": 14299,
+      "sha256": "07dc4b9d4442d28853f018e0f403ed6df91947ec0feaaadb2210d00bb5820b57"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationHistoryEditScreen.class",
+      "changed": false,
+      "size": 12273,
+      "sha256": "68291830e1349dfd7143c952e7c758a68efaad610ed96963f57d4b00b9791ceb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationHistoryScreen.class",
+      "changed": false,
+      "size": 16937,
+      "sha256": "fb37ee117b4d8c385a5df6173fb1cd01945d545c8d6f95e365e44342e15039eb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationInteraction.class",
+      "changed": false,
+      "size": 3575,
+      "sha256": "0b22c1b67c71ae2fb77a3c72be9e0038fce9e5da1745355979bd4d64b113d8ef"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationPreview$1.class",
+      "changed": false,
+      "size": 978,
+      "sha256": "4bb1518450806b2384c6077437a26319834980ecf88fc0583d7a5d706e86da3d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationPreview$LabelLine.class",
+      "changed": false,
+      "size": 1950,
+      "sha256": "f14b4688cfa49ba0d41997cd2d7122cda1242dcbfc0f0d3aeb04c8c18e6a8fb4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/RangeAccelerationPreview.class",
+      "changed": false,
+      "size": 20281,
+      "sha256": "d1238c5f394e31c8aa57f64a5feb65941a9dea764f17ea593500289933891de2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ReclaimerScreen$Page.class",
+      "changed": false,
+      "size": 1449,
+      "sha256": "c81219164c16a4b3ba14aa01f8eb84bef2af4bfc3eaff8ccaaddbc6f4253b919"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/ReclaimerScreen.class",
+      "changed": false,
+      "size": 17791,
+      "sha256": "e7dfed23e2b24c06ccc60971c7cea8588ccde2729afb88cef1a95778165f3ebf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StaffFluidCollectionScreen.class",
+      "changed": false,
+      "size": 11145,
+      "sha256": "051e96721375e80eae1aaf1f23df2795924df26c23a48f24d718e91a4cbc1337"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StaffPhaseClientEvents.class",
+      "changed": false,
+      "size": 2158,
+      "sha256": "925f3cd74b9c3ee435119bc63f3cd72363a7bbb09364b81a4a5e85cb7c18f107"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StaffScreen$Session.class",
+      "changed": false,
+      "size": 948,
+      "sha256": "a5dc72bc6a70a6009a93d0d34a80f2f8b96dcf8f4589733034c4aed5f42536ea"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StaffScreen$Tab.class",
+      "changed": false,
+      "size": 1663,
+      "sha256": "06bdc3d64640d98e741cb1c31c6455c099231bacec310cf8fab32677c8974fa6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StaffScreen.class",
+      "changed": false,
+      "size": 13207,
+      "sha256": "86f1882a88266b69fdd17d835ff9573df44bec3f082b0ac269bb85fc50d0bf27"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StretcherConfigScreen.class",
+      "changed": false,
+      "size": 7156,
+      "sha256": "cf7890cb1d193720c333502f9e3d9e693839e0273a11d8c5b90cbbe5c5365644"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StretcherHighlight.class",
+      "changed": false,
+      "size": 4335,
+      "sha256": "a7d3f98556fac8933be1574a3964497775abcb50d0605e362fc49954a4548cd1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/StretcherKeyBindings.class",
+      "changed": false,
+      "size": 1378,
+      "sha256": "5284c5540e808e4b9276dad7618ee60721ca0ad3a360f4c1763ae021738e6722"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIClientInteractionLease.class",
+      "changed": false,
+      "size": 2092,
+      "sha256": "58646267d5a850f173ceb5d0de746313d19c5ef4d2614768f00238048e0d5d0a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIDialogueScreen.class",
+      "changed": false,
+      "size": 17937,
+      "sha256": "401b78ccf11b9265f45f698df50244c083f93885588da95e502e98382057a472"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIInteractionScreen.class",
+      "changed": false,
+      "size": 563,
+      "sha256": "1f699b9d6948eeb4fde26ddc5f3327b02c754717138a96ab3bf2cbefac27f185"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIStoryGalleryScreen.class",
+      "changed": false,
+      "size": 8308,
+      "sha256": "a2798785c25c98248cece5a7cc44be725a33fca1f963ea7ce06e2d2671668605"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIStoryLibraryScreen.class",
+      "changed": false,
+      "size": 8033,
+      "sha256": "60b9170f03fbd915f9f0341fa15ba37d87ce04b3e01f4a2583f9e8c5ee99192e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIStoryScreen$NovelButton.class",
+      "changed": false,
+      "size": 2920,
+      "sha256": "67ff480175c34b9f69d00d7c838e3256588c4a093642739a26dfc6f83ebe2a51"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/TwoIStoryScreen.class",
+      "changed": false,
+      "size": 25492,
+      "sha256": "f8c333582013a44cb960300e21b63af2a92d3bdce2a08c8951b51b025858056c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffApotheosisScreen.class",
+      "changed": false,
+      "size": 15149,
+      "sha256": "28850883b40d901f30a1a8733f4677d281b9c77d8f7eabc8442df666c99cafa0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffClient.class",
+      "changed": false,
+      "size": 7244,
+      "sha256": "c32529e74f5ea3a4402377efe523a39898ddb41f41a00f966132e6fd41dcf4ca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffCloudTime.class",
+      "changed": false,
+      "size": 2791,
+      "sha256": "ba0c2f4a912fb43fefc9fad24f91d0ad5d5dc3e19728cce0ff22d6a33c1201bd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffConfigScreen$ChoiceButton.class",
+      "changed": false,
+      "size": 2060,
+      "sha256": "ff954a5ff670299d8bcb5fc77c164aade8b5986a4d4c159ede9822f9a4c0b59b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffConfigScreen.class",
+      "changed": false,
+      "size": 21602,
+      "sha256": "23d8ee3a64aa103b683e1e184af868aac122f22eaad6371e81379c89293140f0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffHighlight.class",
+      "changed": false,
+      "size": 12816,
+      "sha256": "423fd19d42702c61532d3eca2d6151765a3230ca8994822afea740138102e6ce"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffHud$ScreenPos.class",
+      "changed": false,
+      "size": 1759,
+      "sha256": "86c68359acb255c6384596540a33758e48a86911a47ef8762d9038e65b414f6b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffHud.class",
+      "changed": false,
+      "size": 11168,
+      "sha256": "8d47229e2c79c1d7a77a9cd708dbc00c0aebef8b8d965a1ab1bb955f0d0af82f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffSummonScreen$Entry.class",
+      "changed": false,
+      "size": 2666,
+      "sha256": "1138873834cfd91099ceae9e02b141b2e71fd1a522c55dbc8e2a2fd57101b742"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffSummonScreen$Row.class",
+      "changed": false,
+      "size": 2211,
+      "sha256": "2a862ec04579f0714d4d0c1570d230aba2cb1cb700e3ac418b4796c4d0534676"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffSummonScreen$SummonCatalog.class",
+      "changed": false,
+      "size": 4967,
+      "sha256": "98d80781db0a92e265203f73d2f6cc24c2d96cc0a9b25a1d26a3a050b5f67500"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/WondrousStaffSummonScreen.class",
+      "changed": false,
+      "size": 19245,
+      "sha256": "18a474a66d563291a2176276d51cc424d1c16c5ca8562250167829d5d6deb806"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoILongStory$1.class",
+      "changed": false,
+      "size": 1907,
+      "sha256": "bb77924d3806aafe09170d67c5901ff72a55a8a9e1a4fdcad7df9fdf1801df40"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoILongStory$Chapter.class",
+      "changed": false,
+      "size": 3435,
+      "sha256": "fa98666b8808d0b9b393078b603fd26ee7006263704c2be847852af11f2d97a8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoILongStory$Choice.class",
+      "changed": false,
+      "size": 2423,
+      "sha256": "2c8537b732d4920734d67eb72b166fcc545cc216e3e4664ed7a083c50cf406b7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoILongStory$Round.class",
+      "changed": false,
+      "size": 3403,
+      "sha256": "8a0d01b46ef3ef85db99bf0dae4c9b65aa182cfdcea3d8270ff914f06eb8e5a3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoILongStory.class",
+      "changed": false,
+      "size": 10216,
+      "sha256": "c9718cd5dd03ec13c54853599e6363ead37cdbd50d5084a0a95fa4f78d114530"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryDirection$Mood.class",
+      "changed": false,
+      "size": 1883,
+      "sha256": "fa0f4c41261314ccea30f6598682d4952149c0e2aa02f171c71655ee636626e9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryDirection.class",
+      "changed": false,
+      "size": 8171,
+      "sha256": "973c8de81cee435102a4035de6288157a50bfeeafeea2c6f2136b64e40f4eca9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryGallery$Picture.class",
+      "changed": false,
+      "size": 2956,
+      "sha256": "1950eef898409db0e1e8697342e8b246c20e507fc812b2768df5d3d59d166592"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryGallery.class",
+      "changed": false,
+      "size": 2925,
+      "sha256": "d7351f7e8c4d4284e5e60922c7925fb3f7cd2ae53ce2600f39f78cd5737cf191"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryScript$Line.class",
+      "changed": false,
+      "size": 2723,
+      "sha256": "4195a9d7ed282d03a2b6f095217f192a2b72ea6f98357e18d35d39c454744cad"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryScript.class",
+      "changed": false,
+      "size": 8013,
+      "sha256": "3ca23b1150da8da1df86aab710f5508ac4c5e97577380b289b694f70ab7e7a16"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryTimeline$1.class",
+      "changed": false,
+      "size": 1439,
+      "sha256": "01369405f0aa86dbc6987c9694a6273d6c5779b85da89b3ce72bf301c69f26d6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryTimeline$Cue.class",
+      "changed": false,
+      "size": 2941,
+      "sha256": "2f5bec8f711c73bf77bae871a5fe8ddb2c5b751d8edbec3c710cb28407a3d79b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryTimeline$Profile.class",
+      "changed": false,
+      "size": 2689,
+      "sha256": "f56f1b9994f31c2351ccd4401824ce50ca1126661554b3cd32b527a2ade13d7d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryTimeline$Timbre.class",
+      "changed": false,
+      "size": 1589,
+      "sha256": "f09e2487a653b147248f8e073811dcadc60534ebb0b38b619074c042904d7983"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryTimeline.class",
+      "changed": false,
+      "size": 7850,
+      "sha256": "9d3c8978c5e9e517b4a20bbbf3c266c266fe706995a786d6d98234c494697a5f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/dialogue/TwoIStoryVoice.class",
+      "changed": false,
+      "size": 2836,
+      "sha256": "95aeb4f09507be833bb03fe64bcbf297ca1f10c478895ec6668a2c052674cdbe"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/AE2RangeSlider.class",
+      "changed": false,
+      "size": 2917,
+      "sha256": "910c9aa0a35f31e4a0fd4cc1a1961c632a45054ac36a4b8a84f0caeb25838996"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/ButtonHelp.class",
+      "changed": false,
+      "size": 6151,
+      "sha256": "81fe02bc2143c707910633d6f166a920539d51027b22c12206bae8282e29c7c1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/FloatingScreen.class",
+      "changed": false,
+      "size": 9374,
+      "sha256": "875c6c45ac907228e31066441d02503ab94c9331685502ed224151fa2149f8e9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/FloatingWindow$Saved.class",
+      "changed": false,
+      "size": 2463,
+      "sha256": "e9a314766120876bd785c8a210b941f80fbdadfe6084d248430f926dbd6ad68f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/FloatingWindow.class",
+      "changed": false,
+      "size": 16176,
+      "sha256": "22d1b3c0b0168e1041a0600325a95e24cbc941418b5c8d8b7faf3ae99e7b6bfe"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/SelectableAE2Button.class",
+      "changed": false,
+      "size": 3103,
+      "sha256": "a3d787152eea0f1fa4b86fb5779d919bda12a7eae283add82ce3bb54bd12921e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/StretcherConfirmScreen.class",
+      "changed": false,
+      "size": 5479,
+      "sha256": "9e9f2f524b2202db44cbd3e44d6235659810138924f4dc669e70084d94d9262a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/gui/StretcherScreenStyle.class",
+      "changed": false,
+      "size": 1371,
+      "sha256": "f5ee2ea870bfac91ceb914f14c55310cfe3136b5a44acbb4462e7f50a8b5d426"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/StaffLeafRewardRenderer.class",
+      "changed": false,
+      "size": 4698,
+      "sha256": "73ed3d328917241f4d2fb99a12f1c8d6637f05892dff344d9211550469808f09"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TimeFlowRenderer$AlphaVertexConsumer.class",
+      "changed": false,
+      "size": 1145,
+      "sha256": "513bddf3570d73f78e1a086a40c6c9b1f1186616d015aad863e3b8bfea5e27da"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TimeFlowRenderer.class",
+      "changed": false,
+      "size": 6135,
+      "sha256": "a0d43485c2fdd277d9eef86918b8effc60c4eb98014ce2301b9bf3671119c090"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollCarryMotion$Pose.class",
+      "changed": false,
+      "size": 3885,
+      "sha256": "d16c2a92ce3a767a21cafa8c75a5ffafc9ea44c2d1b279f833769383f8bdb2cc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollCarryMotion$Sample.class",
+      "changed": false,
+      "size": 886,
+      "sha256": "57171507c902e57f1cbcf1135f761fd72457d6b4114cff89428bf665a8ddb624"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollCarryMotion$Spring.class",
+      "changed": false,
+      "size": 3076,
+      "sha256": "20dcc68821c4857a3c24ceaf206a679c1cfa9582085aadbae22403d2c06c8c8c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollCarryMotion.class",
+      "changed": false,
+      "size": 4012,
+      "sha256": "f93f9d3493d353f89ad08dcf2600aa2cdd09447d3038910ea8028c0db5407502"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollCurioRenderer.class",
+      "changed": false,
+      "size": 8266,
+      "sha256": "4df2e359a31f0cd88f77a2a63fb3c08256b805aed6ecfaabff425ce9b7a3dc94"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollDisplayRenderer.class",
+      "changed": false,
+      "size": 5303,
+      "sha256": "394ef2871f0f73a89cdbe68fd94713e245d1e133042eb1e42dd9cbb1f9e8dec1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollHandRenderer.class",
+      "changed": false,
+      "size": 9971,
+      "sha256": "6707fd2bba7cf4e3a0e297982863d409a83878550b441018255a75ac5d6f9e74"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollHeadLayer.class",
+      "changed": false,
+      "size": 6944,
+      "sha256": "16da249124aca6574f022d5e30ae61469d18af2e336e6a924fd790febe14738c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollItemRenderer.class",
+      "changed": false,
+      "size": 6351,
+      "sha256": "83847bdf779cf19303f35ac0b484f8bd0a4eaf58b1f204b62e72793bf0b8c7ef"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer$1.class",
+      "changed": false,
+      "size": 2933,
+      "sha256": "2b55c05edd4f360c1b41f44905c2a32980cf7c5b854943f922ffbd96a614fbdc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer$Model.class",
+      "changed": false,
+      "size": 19136,
+      "sha256": "ff52eca26528ab7809addce6b63b67274de74a88c21b9c587160fe0809e3d682"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollRenderer.class",
+      "changed": false,
+      "size": 3849,
+      "sha256": "2a0617d058cfb31721e6bb7e8bad5f006105b2b2d95223647f745980f746eb6d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollSkin$1.class",
+      "changed": false,
+      "size": 4421,
+      "sha256": "283015c1d2e0272a6df686c6f120af3da87051c097617900853c4610a3132c19"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollSkin.class",
+      "changed": false,
+      "size": 5323,
+      "sha256": "b117b8b1f405e2b9fa485fb913d220e5904c2e59c198dbd46ce9d883a357f5c0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollTail$Bone.class",
+      "changed": false,
+      "size": 2610,
+      "sha256": "2b921c09837f484517bd658282dd556633b262574c935e402547a75d48099f20"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollTail$Face.class",
+      "changed": false,
+      "size": 3105,
+      "sha256": "c488d8ba3350e9f5d9a78c46ad9829c6fa4bdd570005a1cba9b70e3c86c42ba3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollTail$Point.class",
+      "changed": false,
+      "size": 2594,
+      "sha256": "178728d440004925758922cfc41127cf58d26da789abae1c88fc6060f565d57a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollTail.class",
+      "changed": false,
+      "size": 25138,
+      "sha256": "d489c31822740132f107d8bbd721d487b7140a5bf20adba0b15a7a72e883f629"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollThirdPerson.class",
+      "changed": false,
+      "size": 5258,
+      "sha256": "6430890d920c69af3a5486c7c04f726813b264b872fcbe906055d37883eb0477"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollWeather$Pose.class",
+      "changed": false,
+      "size": 2020,
+      "sha256": "40b95df312962476eb157088e5b20ae92c35a92f018c02b7e0ce4fe59aec26ac"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollWeather$State.class",
+      "changed": false,
+      "size": 662,
+      "sha256": "8671c38ccbee425a2744ce171729a6bc74075e5213b7bbe712a9a1259d2199f5"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIDollWeather.class",
+      "changed": false,
+      "size": 3198,
+      "sha256": "2f22320102f8180d6bc9799dff2e70e118a3cf7184823967396c192c6bb46d88"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIStarfieldEffects$Ambience.class",
+      "changed": false,
+      "size": 5581,
+      "sha256": "3e9826d5fe10111b1900839db23a719e5fbdc035cfb3bfb167b4d5d597fcd472"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIStarfieldEffects$Registration.class",
+      "changed": false,
+      "size": 1666,
+      "sha256": "6e06dde05927138d0ad633b76a5f581e11aeaa97577bab338ee6222d2d2ff1dd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIStarfieldEffects.class",
+      "changed": false,
+      "size": 2228,
+      "sha256": "9b69f6845eab7a5cae7e41fd119793027bf5a2b5941c2632dcd39fd68930a1a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIUmbrellaCanopy$Point.class",
+      "changed": false,
+      "size": 1914,
+      "sha256": "d7fa074a287d1df5270eb4999db915816f0b760ef255efd03fc3b393d38602ad"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIUmbrellaCanopy$Quad.class",
+      "changed": false,
+      "size": 3051,
+      "sha256": "f56d903e83503b80c32fb32c98de6454b4eea3b8257423b738f8c080b9fe45a2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/TwoIUmbrellaCanopy.class",
+      "changed": false,
+      "size": 7428,
+      "sha256": "1391f1a4a4df692ffac3da4a1ba943661e62c036837bb2790b7b1818d522e436"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/WondrousStaffAccelerationRenderer$1.class",
+      "changed": false,
+      "size": 1019,
+      "sha256": "a34d5073d30021c981d564318bd105e39c19b6f20ccf3fa99e1f66193ddc57a4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/render/WondrousStaffAccelerationRenderer.class",
+      "changed": false,
+      "size": 8638,
+      "sha256": "842442c15bf3680aa74fe20b322ed869513bb200012e7c017757f6792e7f9a0f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/LocalizedSearchIndex$Document.class",
+      "changed": false,
+      "size": 1010,
+      "sha256": "9597a709c62d06d37ea54590b0dc4d43129fd342f152efced4f757062d7566a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/LocalizedSearchIndex$Query.class",
+      "changed": false,
+      "size": 4112,
+      "sha256": "4b4bc9e41b99e881c5187783680d3225cf67d7a7b78cc2b4b8f9d3200ebc5275"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/LocalizedSearchIndex$RomanizedName.class",
+      "changed": false,
+      "size": 609,
+      "sha256": "ed0a150ea8a43ebe021234a41238d5fd27f6c0eb31265b9fe619e2cf57236113"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/LocalizedSearchIndex$TransliteratorHolder.class",
+      "changed": false,
+      "size": 842,
+      "sha256": "68d3360086bf3426967ac07cd3f421a1abb6533f87555eda40a06e8d3b8940a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/LocalizedSearchIndex.class",
+      "changed": false,
+      "size": 7972,
+      "sha256": "40177a8d349c29b2cd443a99f1705c788da5acb7f31d5f2f710272e47b6ba419"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/RegistrySearchCatalog$Entry.class",
+      "changed": false,
+      "size": 2378,
+      "sha256": "d3c1949f49f612ef682ab4348bc60c29cc17fb03af86840090effed43ba26d03"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/RegistrySearchCatalog$Masks.class",
+      "changed": false,
+      "size": 1840,
+      "sha256": "246ca237fab10cf30e2f5d68d64a5b880b6dc3c1c46033a27f9a30ac1b2bed72"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/client/search/RegistrySearchCatalog.class",
+      "changed": false,
+      "size": 5676,
+      "sha256": "e1ea599bad7af8f2a053a1891b67e1d68906d14ef8daf14f6a8297cc66e6d6f2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$1.class",
+      "changed": false,
+      "size": 2138,
+      "sha256": "deea64c38ba3c77bdcb145445dd67c5b8282dca40bd39718d5b33e6a8a522101"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Contract.class",
+      "changed": false,
+      "size": 2108,
+      "sha256": "18abffce76b82aacc45d3d80edc0b314998bb111799066eb0ae2f423bee30ad9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$IdentityReference.class",
+      "changed": false,
+      "size": 1717,
+      "sha256": "ac5ca2f8a1ef754d975400f575222b432bc2b9fb075dd6be0093978b57cfb282"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Pending.class",
+      "changed": false,
+      "size": 2388,
+      "sha256": "f05f3f5de6618c8bbb5b45d48cf2b2cbac018088a53c70634db915e1ef4cc501"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$Queue.class",
+      "changed": false,
+      "size": 1875,
+      "sha256": "cbb874b90cb6cfe9464ababf578e2ef131183ab3138ae2eff030775f5da17188"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat$WeakIdentitySet.class",
+      "changed": false,
+      "size": 1960,
+      "sha256": "8495a62269f57313322f609483f78300e49a3146d92fa889827ecacc65016883"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMachineAccelerationCompat.class",
+      "changed": false,
+      "size": 11691,
+      "sha256": "f13bc315da35599bf3ec65dfcfd277604a2b1171d4f45bce105cf96b5295ce9f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue$IdentityKey.class",
+      "changed": false,
+      "size": 1343,
+      "sha256": "d56a8af48c3556c7739cd08d8526718e2a634891137f2536c77c7912de535b34"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue$Task.class",
+      "changed": false,
+      "size": 1565,
+      "sha256": "ea8e9e2dc274460b6ef68a19e44d58937983f5ca260b3ec73bc80761f722b21b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/CoalescedMainThreadSyncQueue.class",
+      "changed": false,
+      "size": 5093,
+      "sha256": "125de1797b466837eeb37da323b5ea34ddcb21b252015742c30493c6beb9e1e7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/MachineAccelerationCompat.class",
+      "changed": false,
+      "size": 2007,
+      "sha256": "8837e884c04ebec78eab9b3289a03a9c900b3b64c11718c4fdd44defca363760"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat$1.class",
+      "changed": false,
+      "size": 2306,
+      "sha256": "336d1676a23c611b5182771ae99c7a0c667b9828f0b5ea4b95ebb69562d62529"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat$SyncContract.class",
+      "changed": false,
+      "size": 3284,
+      "sha256": "5a6d7cd741407411b57a1ca95589dccf1e09346849c6c8b6739e9c421505b808"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/Mbd2MainThreadSyncCompat.class",
+      "changed": false,
+      "size": 9181,
+      "sha256": "5f61ce04cf2eb0af1b4df34403f98234fe2250a842717b2e91f54bdb901c702a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/MekanismRadiationCompat.class",
+      "changed": false,
+      "size": 1238,
+      "sha256": "6c247443b16b2863721216146eefa18efd254a50ff264de6a404f9cf31140bc4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/OccultismAccelerationCompat.class",
+      "changed": false,
+      "size": 3994,
+      "sha256": "91191f6e6033189bf1ed46bc875284841add32e63046901539cba4d61712575b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/RftoolsBuilderAccelerationCompat.class",
+      "changed": false,
+      "size": 2879,
+      "sha256": "70b52f6b9b53fb3a3ea0d38025d99671d402faf6d81c5397dc183ebff27a3237"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/StaffRadiationProtection.class",
+      "changed": false,
+      "size": 3542,
+      "sha256": "aaa960d9e5f966ee26114150ceebd496df1f2806a134f4b6189ea6204e0aa1bf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/TwoICuriosCompat$1.class",
+      "changed": false,
+      "size": 1420,
+      "sha256": "288a815923a9679ee9fc3834770d854ea779b599939c3fb0725d985f6cbc142a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/compat/TwoICuriosCompat.class",
+      "changed": false,
+      "size": 6438,
+      "sha256": "55bcace31d9a716eb4b64542f6029181f6a507fd12b40e09a0acac9c2b2ba309"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/config/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/config/ServerConfigSync$Payload.class",
+      "changed": false,
+      "size": 4428,
+      "sha256": "324aa465b897d5c98a603c7367f8fa2733081b220442c0add659cc6a4d621169"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/config/ServerConfigSync.class",
+      "changed": false,
+      "size": 6898,
+      "sha256": "4eab805e8321becf7efd042a6f70994258bb683903ae47ff30c048cc01494f38"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/config/StretcherConfig.class",
+      "changed": false,
+      "size": 11873,
+      "sha256": "95665eae744bed5d1bb490efb2f86668ce2061a451f8fadaa4f5555136b97edc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/AccelerationExecutionBudget$ServerState.class",
+      "changed": false,
+      "size": 2126,
+      "sha256": "ffbbe6a922113e435f4598bcbebab284e12093bf953b2f36c904074038116dc9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/AccelerationExecutionBudget.class",
+      "changed": false,
+      "size": 5718,
+      "sha256": "ba1e540b3e41883785bb4a27260f6543661b7ed8c72db0e15a0de1b97e9751d9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/ExtraTickClock.class",
+      "changed": false,
+      "size": 209,
+      "sha256": "4d47cc5719e46f77b8f10be10f0d807a8d5c67fd37951a22cd062c58151888a8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/MachineActivityProbe.class",
+      "changed": false,
+      "size": 6757,
+      "sha256": "f72333159a8b979c6d3346bb2aba2d963fb12f45fe16a361f7483641dfd6153a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/PermanentAccelerationHistory$Entry.class",
+      "changed": false,
+      "size": 2769,
+      "sha256": "7564706315ab708e08a27a418492ce7b19f43b5bd04b8869feffdbc748d163bf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/acceleration/PermanentAccelerationHistory.class",
+      "changed": false,
+      "size": 11877,
+      "sha256": "d3f7a0185b472e4b6a6c30c39492f21e3e2a129378f6677cfbf616d7a85bad5b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/AeBindingStore.class",
+      "changed": false,
+      "size": 5248,
+      "sha256": "d7b800c1f24f1ef9046becd7c1bd062f3a833012fde1f7734ebf3b0fbea2c856"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/AeMaterialContext.class",
+      "changed": false,
+      "size": 7304,
+      "sha256": "0f54161d97f0a0a192290410a57a66e3c54a6df0034c86f20a594b9191cc61a1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/AssemblyStretcherInventory.class",
+      "changed": false,
+      "size": 5757,
+      "sha256": "bd7ce205554707d016bb084fd1350fe1d6a7b766227b5f2ff6418351f3fded8b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/InstalledPatternHost.class",
+      "changed": false,
+      "size": 223,
+      "sha256": "e1ebd190367ca1c68b20dc4ceba6cd495ee778f8ec815249203236e6c5778985"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPatterns.class",
+      "changed": false,
+      "size": 10841,
+      "sha256": "3b1473815a177a593035e0ecf4e7b322d12788429b271aaa9dc29401d496b1ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/InstalledStretcherPlacementGuard.class",
+      "changed": false,
+      "size": 1229,
+      "sha256": "8eb7781ab47b9ed00991f45dbdeb4fcb5243abb5b07d545eb1f0e69b1dc60add"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/JdteAeVirtualTickBridge$Scope.class",
+      "changed": false,
+      "size": 938,
+      "sha256": "da57958ca63d7919c78e4bd9f74e792da47824a775563c75363306bce1d06dad"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/JdteAeVirtualTickBridge.class",
+      "changed": false,
+      "size": 2201,
+      "sha256": "3fbd82f68e6024c3951906ca5e86b8daff0a5c7fdf93a077fc855dd4512e8574"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PassiveStretcherCursor$1.class",
+      "changed": false,
+      "size": 1631,
+      "sha256": "a015eaae72fcd72760b427a15344057487bc77d98561a3a84b4a8ae45befa7b7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PassiveStretcherCursor$PreviewStorage.class",
+      "changed": false,
+      "size": 2872,
+      "sha256": "0ff489da670a69e74138cb5c61ba82810b63dd8b61d68b09953b86f515d6f4a4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PassiveStretcherCursor.class",
+      "changed": false,
+      "size": 7428,
+      "sha256": "d42a74a7d46dbaff67894b38612c99923bed09345257fee502d8585acfe1e23b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyDataBridge.class",
+      "changed": false,
+      "size": 3448,
+      "sha256": "7717b78b11119f1d97ab07a183927278c9f2ec910dfbf399fa835e6c0a5b03a1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyItemMigration.class",
+      "changed": false,
+      "size": 3525,
+      "sha256": "4903c9bb0c5e33c61646e4d7be970ca9ace63b8f85aa87219f550f82455bcfd2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyItemStore$Claim.class",
+      "changed": false,
+      "size": 2069,
+      "sha256": "cc5e3315144f26cb24aa59d9f7902bb9449d0e50e09314e3ec7a4deb4be752c8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyItemStore$StoredEntry.class",
+      "changed": false,
+      "size": 2060,
+      "sha256": "78d5ada710e27b285527016a7cb07d3b6c3bb7d45d217b264f395a2303297bd1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyItemStore.class",
+      "changed": false,
+      "size": 7265,
+      "sha256": "c5b4586148f2b6504bebc40bf33d8f89d3800c84a3d6d8d0d134b222760ef093"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/ae/PatternAssemblyReferenceAccessor.class",
+      "changed": false,
+      "size": 342,
+      "sha256": "4fde2a0143c266cb4cdf72ccf4f5f46e82ae459dd033fe328fbf9c00df04f0a0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/ApotheosisMenuRefresh.class",
+      "changed": false,
+      "size": 221,
+      "sha256": "89091a923dc7c62bf25602707c46257879431ae3f5209fa7a305eb31da09692d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/ApotheosisStaffSettings.class",
+      "changed": false,
+      "size": 12987,
+      "sha256": "ce58b1889ad8db3ebae516258a1397be906b4ef734466de8be987bf5e616af25"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/ApotheosisTableData$Boost.class",
+      "changed": false,
+      "size": 2590,
+      "sha256": "bef58a6f164620e508ef62fc8303a59eef91f338f511f602fb6f29b46220f3eb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/ApotheosisTableData$TableKey.class",
+      "changed": false,
+      "size": 2005,
+      "sha256": "bc7850b8e7868caf2840917796eb91125402bf71504cf1fd0b594499281e0eb5"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/apotheosis/ApotheosisTableData.class",
+      "changed": false,
+      "size": 13653,
+      "sha256": "ab130e87cb4fe8d9026617cf41c3df92085a5dd91e7916704aa31deddc231989"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/block/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/block/OmniversalMyriadBlock.class",
+      "changed": false,
+      "size": 8783,
+      "sha256": "d04e93897d582c974ade1314a680d077a9aa91ad23518741b979c143629500f0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/block/TwoIDollDisplayBlock.class",
+      "changed": false,
+      "size": 11562,
+      "sha256": "c0a6e0b74ce4c2d2bafc76d93b86d9ecee103606a633f7cc89584c824f98a2f3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/blockentity/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/blockentity/OmniversalMyriadBlockEntity.class",
+      "changed": false,
+      "size": 13004,
+      "sha256": "bcb241aec3beb90599ff668777b649c5b42661c788a8f2be62e8567f1691a7ca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/blockentity/TwoIDollDisplayBlockEntity.class",
+      "changed": false,
+      "size": 5546,
+      "sha256": "b8f9a96972775c1f0f19b1120feeaba02a1e8116c65b19a8d7d1438dc4f880cd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleChunkGravityAttachments$1.class",
+      "changed": false,
+      "size": 2160,
+      "sha256": "05ad4f143ede7b08f8731041e28d6bde1c36c46b8f117cc2fa958f3cbc85e826"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleChunkGravityAttachments.class",
+      "changed": false,
+      "size": 3814,
+      "sha256": "0ebc749ff0646786994bafc09291e9f1b1cf689d93f441fbe3869dc0c9173c78"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleChunkGravityData$Section.class",
+      "changed": false,
+      "size": 510,
+      "sha256": "2d1a09b12ef30b68a444b6da13884c62e59c94b017b4d7ce1487a02742a2bba0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleChunkGravityData.class",
+      "changed": false,
+      "size": 7008,
+      "sha256": "1e5c9dc1cbc59c6e9f51686a2ab58de707d3c213c191831a9f9c3812441850a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleDimensions.class",
+      "changed": false,
+      "size": 9419,
+      "sha256": "62d50a55a9979bcd0f38a126ad9f8b24eaca23be66237e547b139d98931e1732"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGenerationContext.class",
+      "changed": false,
+      "size": 6791,
+      "sha256": "3f4114f19627d00b4954bfd942dd3473fc7a7bbebf6d2f18c21ae1e6c0ac2cd2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityFingerprint.class",
+      "changed": false,
+      "size": 16025,
+      "sha256": "d06da7f89e4fd35fae3c042a6b665cb639d08d7a86619dfd19cd14150a099bde"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$ArchivePlan.class",
+      "changed": false,
+      "size": 1687,
+      "sha256": "01e7ffc3d5326d4f07deb8f8b16bd3241b79364495558913fd9acb1352c4ad5a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$Legacy.class",
+      "changed": false,
+      "size": 1719,
+      "sha256": "7d351255cae8d5c5e84ba32a7eae7b33eec6d6c01487aaa861ffe361efc03601"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$LegacyStamp.class",
+      "changed": false,
+      "size": 1772,
+      "sha256": "c1f878d3a5e3b2b1bd66775ffec906ae26aceb2f9095715a1ab5772d13a7abca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$LimitedInput.class",
+      "changed": false,
+      "size": 1249,
+      "sha256": "66e80a9164643af10e7120c7e571ad1723700b466f48907cd569a47899285d06"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$LimitedOutput.class",
+      "changed": false,
+      "size": 1034,
+      "sha256": "6ee8665006163bcb2e6982f1a26acf34ef72e4be7b0bb1b800ddbe214c581d61"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData$RoomRead.class",
+      "changed": false,
+      "size": 2106,
+      "sha256": "c0012334e7cb6b2dd6bc6904a6d78a5c5647bdb7326eb5e048ce722887ade47d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData.class",
+      "changed": false,
+      "size": 28972,
+      "sha256": "276f6964f572ad5e298f6bcbc8b46a4c4ec8122c9c82ce37b368b19c9eb47514"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery$Epoch.class",
+      "changed": false,
+      "size": 898,
+      "sha256": "f35cddd810db5dcf3e9305425f32900002de094762a5139cd355ba925d2d5c76"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery$Proof.class",
+      "changed": false,
+      "size": 1531,
+      "sha256": "bcf898197ef640d2f65238f71f2845efd2ce080155455990bc97cfc5c5a8099e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery$ResumeGuard.class",
+      "changed": false,
+      "size": 901,
+      "sha256": "a34b9788660867c71ff2ff715e82545cead121ea7014667b3292b3d1d7e26ec8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery$Witness.class",
+      "changed": false,
+      "size": 3417,
+      "sha256": "892930492539ed106d4ea8aa236851f01e71a2eb9f1f91cd8d7996f34c092d5c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery.class",
+      "changed": false,
+      "size": 16663,
+      "sha256": "6d182bf890f588eea63169be9f34aeae4270c4d9ec26ce6a97a41ac9c3252018"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecoveryCommands.class",
+      "changed": false,
+      "size": 9484,
+      "sha256": "2c58d5642dd19787db864663ca440db82ef648e29becfef76142fdf1215424d4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravitySupport$IndexBlocked.class",
+      "changed": false,
+      "size": 2454,
+      "sha256": "e1ad7876f1db24577bc0f4c4e24ac8ddca2a54903880be7763b018f72edfba9d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravitySupport.class",
+      "changed": false,
+      "size": 7943,
+      "sha256": "7b9a78d98f9a73a14591743d9d12c00f7620d83c1760ad1856b206b5786cf7c8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleInstances$Box.class",
+      "changed": false,
+      "size": 2354,
+      "sha256": "3ea68a9ce652ba46a1d56b40eca03cc877a9e5239bb17a7a90b3d9508fe03991"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleInstances$Instance.class",
+      "changed": false,
+      "size": 5022,
+      "sha256": "67ed1bb5157c40dfb2a5195b98b84457448fb69b0efe17ead81aa1a67d2eb321"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleInstances.class",
+      "changed": false,
+      "size": 25255,
+      "sha256": "c306e983ba8014c8cda7a46e53ae31fcd421e3d291af40fdfac090a5310d42d9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsulePieceGeometry.class",
+      "changed": false,
+      "size": 3650,
+      "sha256": "5354c18631bbe26ae8d9c0d3671e0c75a7e46a50e2fc1a8636f3d8f2edb47502"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantLayout$Bounds.class",
+      "changed": false,
+      "size": 3299,
+      "sha256": "8d07f69f5e664356947d59ce18008d2c686df3919d98952703e142a43a1d40fa"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantLayout$Layout.class",
+      "changed": false,
+      "size": 2685,
+      "sha256": "904a90f3d6822b2662fe595f5b2637aa1752cdde23672bb11cdaec3904257ead"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantLayout$Piece.class",
+      "changed": false,
+      "size": 2832,
+      "sha256": "8502983e4a480416080ac52c9523d26f31e1a0eab5946af712d917e8a7608bb6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantLayout$View.class",
+      "changed": false,
+      "size": 3148,
+      "sha256": "a8cee881b677921d30dffc75d532d15a7b539d492ccfda7102166e2afcce3e87"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantLayout.class",
+      "changed": false,
+      "size": 22139,
+      "sha256": "dd613fe2093abf0af5dbd127268d60eb8c27f1846c0dec406599f6dc06285244"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariants.class",
+      "changed": false,
+      "size": 23773,
+      "sha256": "5e774c93a5cdf19dd31d3f829d36e26b9c14ef94233737b78144d3f76e50b227"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantsData$1Limited.class",
+      "changed": false,
+      "size": 1086,
+      "sha256": "39c42f2afcb1a40bce0396995169cd41ff726ed2bf077a1b0f0d9b328f0cae56"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantsData$Candidate.class",
+      "changed": false,
+      "size": 1125,
+      "sha256": "bad21f4dfa1bbd02f3703dc93ea9d7a78bf8a864895493fc5dc419e46315101e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantsData$Search.class",
+      "changed": false,
+      "size": 1601,
+      "sha256": "6aedab60d9480e75553dd76b8d1cbab70d245a9505958e5c6182c8d3f1f7b08a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVariantsData.class",
+      "changed": false,
+      "size": 11402,
+      "sha256": "504f131d85461bdfb0fe6dc8d664513d849a209ed265e68adfc60f8878aa5924"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/CapsuleVoidChunkGenerator.class",
+      "changed": false,
+      "size": 12335,
+      "sha256": "23434ec2a2a5bf93105410514e1feb2aa0246c5923db8318e9aeca06ac501099"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsuleCatalog$Entry.class",
+      "changed": false,
+      "size": 2877,
+      "sha256": "274c38c4f23b22f40e6f89909155af370e2dfd4711bc458b5303cb6ec821b93d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsuleCatalog.class",
+      "changed": false,
+      "size": 15588,
+      "sha256": "ca54c6db5f76d5625ab8dd665b437ce333bef434e9ea5eb08e4e7ff7276c419b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsuleData$Room.class",
+      "changed": false,
+      "size": 2171,
+      "sha256": "c70fb258c3d0ca750722c041e2dded283ab3c225f00ccfc176cd1fcc074b89bb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsuleData.class",
+      "changed": false,
+      "size": 6460,
+      "sha256": "5d303d7b55f4740415e5b474c9b48c92f325805a81be5e7632ba3d312f564cc8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsulePlacement$Job.class",
+      "changed": false,
+      "size": 14018,
+      "sha256": "61c9e3b5f44643ed96747434a85c8a95eb9ea8eedbf68107313dfef684ca399b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsulePlacement.class",
+      "changed": false,
+      "size": 7375,
+      "sha256": "a05b1689c036c0780ff9dece8b9bdf2f88cf63840d3caa3caaee9b9712bb49ca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/DimensionCapsuleService.class",
+      "changed": false,
+      "size": 15525,
+      "sha256": "1a9a542b2f2c73c01cc7ec7ee38694cc41c6e709c46d2316032a0a8471c5c6fc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$CapsuleLimitException.class",
+      "changed": false,
+      "size": 496,
+      "sha256": "b42d254f5c8acef85ee1e033c62e179bb2c494b4c61df48ba9e60d7c242147e4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$Job.class",
+      "changed": false,
+      "size": 50389,
+      "sha256": "4419616eccd26bd9afea2a4b24b185235e482c0da8616cf6c5ff4f6fbd83145a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$PendingEntry.class",
+      "changed": false,
+      "size": 5264,
+      "sha256": "b7c822a2546b424cd4c683fe140cba2faa35d0468d75099966b5f83b46e1ac5b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$PlanFuture.class",
+      "changed": false,
+      "size": 1189,
+      "sha256": "c57d0152e0bd51afe48a22a6f93504b306602507ab99d130e6c3fcb4c8ab4f83"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$VariantPlan.class",
+      "changed": false,
+      "size": 2168,
+      "sha256": "2f91c4237c78817351e118c7a85603788b89612e6e9726931cfb5412a40dbde2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules$VariantProbe.class",
+      "changed": false,
+      "size": 7743,
+      "sha256": "022c5b467c0750b897fed5e8b5edea1d0017556c9031dc0ff8d22520750330d8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.class",
+      "changed": false,
+      "size": 31047,
+      "sha256": "f804c4331525d6112a96a80c54e23e934dac8089bbc8224bd06d96fa29935b51"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Adapter.class",
+      "changed": false,
+      "size": 2010,
+      "sha256": "8c0752947c98637443af57bfe0b6ff2743e517c710aa038d9fdf41e8834cb390"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Build.class",
+      "changed": false,
+      "size": 30245,
+      "sha256": "ca03da784b25c00ea621f6217ce08cd10c14f15ce07e6143f116ed1246c6be55"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$ClientOwner.class",
+      "changed": false,
+      "size": 2201,
+      "sha256": "223f3f6d63ebc93e35ea62d4082af1c34581a525457d4276ba861806aa03aaa9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Collected.class",
+      "changed": false,
+      "size": 1831,
+      "sha256": "270190030a24141fb7908b7273c4f864f075f81f8870aa218a87bc2dca5e7be2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$PendingRequest.class",
+      "changed": false,
+      "size": 1629,
+      "sha256": "a4230c11b386e8365de20478f7998f419347ab8b6979632e063cef3ae3ed9507"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Stage.class",
+      "changed": false,
+      "size": 2049,
+      "sha256": "8d41ce20813f0c57e43447b8e435f5a7c087d2217aa845cd4d8af59840416e8a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Status.class",
+      "changed": false,
+      "size": 1968,
+      "sha256": "f064acf050a53bbef5e2f4f44ae3ee675d4208e12f04cc7e94d0b896db0ccb7b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog$Timing.class",
+      "changed": false,
+      "size": 619,
+      "sha256": "213dcc5567dbbd309ed39fa93376f8b16d49f90512602cfae475ca0bf24d0a0f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/BudgetedRecipeCatalog.class",
+      "changed": false,
+      "size": 11979,
+      "sha256": "6246644d338e7f88ebebbd8795a2a950939d908b1955f3b13df556232e2ddb5e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogPatchSupport.class",
+      "changed": true,
+      "size": 2521,
+      "sha256": "7ee7cae50401c794c9d181db34bc520667dd5c92fbf7626b00de283eccebba0d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork$Key.class",
+      "changed": false,
+      "size": 1696,
+      "sha256": "c88c815c945e357fdcee7b7b4b10ad11a45734d4b519a7e6b2da73c0942738c4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSortWork.class",
+      "changed": false,
+      "size": 3210,
+      "sha256": "258a529e253a88fbc009ea1f3c559731b52c85485fd09dad7b3ad32e03ec5416"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogSyncGate.class",
+      "changed": false,
+      "size": 1543,
+      "sha256": "74346fea4acceefbd71f77a915d4d5e8f58976b3a35250efb1b9a1f700244e7f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Accumulator.class",
+      "changed": false,
+      "size": 5179,
+      "sha256": "e47f3a8ae4971b0abbd67ffcc674dd70adb1eee5d360175f8b84fd1601bd090b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Completed.class",
+      "changed": false,
+      "size": 1912,
+      "sha256": "a88174d7188875b3819b660c16377333458bf1c4fd1482662553bbdf56b0ac87"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Digest.class",
+      "changed": false,
+      "size": 1520,
+      "sha256": "9c9c242040c4a650d61dad398adf38a9b28f64d6afc0d6f52a317e76e509adeb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$SourceSummary.class",
+      "changed": false,
+      "size": 1769,
+      "sha256": "8d359a3d364bf60f5dcce9f92c0d4393ec6084c1260ef55c97f18bc242b5ac05"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Summary.class",
+      "changed": false,
+      "size": 3049,
+      "sha256": "e19a30eb8f12750a2a6bbffd15c8b9304d9cfdbc0d8692d091727d632167b402"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence$Tuple.class",
+      "changed": false,
+      "size": 1910,
+      "sha256": "c80b5f7dfd2035bb0695ff570a93462a397834310b5815f0254029758ae1bb56"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/CatalogTupleEvidence.class",
+      "changed": false,
+      "size": 9078,
+      "sha256": "78a3c15f9c825fb3eb1ff911c08a2987aa26cccfef4e8a87f0aaa2c2c2d0cb2c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$1.class",
+      "changed": false,
+      "size": 1757,
+      "sha256": "44a5b08365e66c090a9c57a52fdd26233b1cfab4e681bd7a8a669b4b0349b89b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Cursor.class",
+      "changed": false,
+      "size": 8305,
+      "sha256": "9060d5db166e8674116ed817e7b04ad92b05c191a1f8f50ab5c6721968342a61"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$JdteAbi.class",
+      "changed": false,
+      "size": 5173,
+      "sha256": "f03a766ae106a18db2369f73dffa2312e0f2427e0e0333ca8b15eee1bb505479"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices$Phase.class",
+      "changed": false,
+      "size": 1759,
+      "sha256": "7a039db8fb8b0ef9cb55608662335cb296dba7ad0a50a07582768fe4e5ea55c3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/GeneratedRecipeSlices.class",
+      "changed": false,
+      "size": 6652,
+      "sha256": "636ac69b92eca8a0b3d0d60daf1d219b707a37997d5b70b40e4e791028ee07ae"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards$Native.class",
+      "changed": false,
+      "size": 1295,
+      "sha256": "81985864359492346ac4c0f244bb3d30bb138eb72db3384b61b51441c72204e0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/NativeAdapterGuards.class",
+      "changed": false,
+      "size": 2962,
+      "sha256": "1ddfb4b89dcb8f7780fad642814bad79d6aeaab8b81719b024bce0fb0b3a190d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/NativeCatalogAccess.class",
+      "changed": false,
+      "size": 8422,
+      "sha256": "7b7cc9433a71efbbdb77d78f9c32a91a6378c6b342a58839063800b4d1c074ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$CallStatistics.class",
+      "changed": false,
+      "size": 1965,
+      "sha256": "83bc55e963ce6863ac78eec5982b5390bc4a6d59673c77966d1bd9c3bc2340f7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$MutableCallStatistics.class",
+      "changed": false,
+      "size": 549,
+      "sha256": "188060b7a5935cff34c9b6a8d569af2f4e3cdb4ef9cbc8710332daf87e8794eb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Phase.class",
+      "changed": false,
+      "size": 1726,
+      "sha256": "76a6fc83a5c34b678d4d25f41c5c86f4eb87ca78ad6a15120b3573a8cc317d1a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication$Sink.class",
+      "changed": false,
+      "size": 519,
+      "sha256": "3836169030a0e7bf9e235f4fb6d4b5ebacfe01071f0b0c4fb7b6fd1cda75bd8f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/OwnerRecipePublication.class",
+      "changed": false,
+      "size": 11428,
+      "sha256": "97d259bb8e39c2d4a5b63e3905b9b8a2427efc62a733ff6a5c91aedea2f4ccdf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/PublicationCallBudget$Snapshot.class",
+      "changed": false,
+      "size": 1862,
+      "sha256": "0f39720fdf4f806a0c22cbf27d01865390f25d3b140ff8d962660c2b023b92f9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/PublicationCallBudget$State.class",
+      "changed": false,
+      "size": 519,
+      "sha256": "267b9d50e5778e098f2f7b60c9ee3ebed1d4a62cd69b0225e38745d98f38ba29"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/PublicationCallBudget.class",
+      "changed": false,
+      "size": 3143,
+      "sha256": "14b20b160ec32dcacd1d194fd6073b4915c781b54fc2c174c1a97d451c3e0520"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Cursor.class",
+      "changed": false,
+      "size": 603,
+      "sha256": "0f8f9a488fb86c0a877cc7ff8e12b8d8023dae6af641d0b7470bb2167dace89a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$DistinctStacks.class",
+      "changed": false,
+      "size": 1510,
+      "sha256": "974183e4022201bdda8e72239d87734d9e4bc2caaad9726cbfd53bb0c7c5ac4f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$StackKey.class",
+      "changed": false,
+      "size": 1668,
+      "sha256": "cde250c4676fb6a1d89c057afa9836a40b1f03ee911ebb8e2a3cef459a67d5b4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$Stage.class",
+      "changed": false,
+      "size": 1814,
+      "sha256": "025673abb3a90b8e1f8169049f02e046fe7eecbf70861bfda249f0e3360e20f3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions$VatCursor.class",
+      "changed": false,
+      "size": 8434,
+      "sha256": "abf8947fd5570841578834202fd8e02d18a146812761bd2a5207fe085c3905f7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/catalog/SlicedRecipeConversions.class",
+      "changed": false,
+      "size": 4725,
+      "sha256": "a73ee093624cca244515104022e58a2d4f4e0b03cd4e0e28fc300e09fb4af8c7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/ChangedTickAccessor.class",
+      "changed": false,
+      "size": 219,
+      "sha256": "83f1cf69a702bec0136dc1c55ea3f328c200c8bd2c0ccd1757feef1e0aba0007"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/EntityTimerAcceleration.class",
+      "changed": false,
+      "size": 2748,
+      "sha256": "ab050083c9b5693b0dcc50c2e6d4a1b87a13a7344d93906b11fce0a956e62834"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/PlayerAccelerationManager$Active.class",
+      "changed": false,
+      "size": 2548,
+      "sha256": "b222240f48065e035242578fbd8b415601b791f2adbc839052ddd86e226b2051"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/PlayerAccelerationManager.class",
+      "changed": false,
+      "size": 5704,
+      "sha256": "00fbfe7a978c5fdcb7366a7ae5814073c3eaa0cb2ec9ce24195f7d251577ccf6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/StaffLeafRewardEntity.class",
+      "changed": false,
+      "size": 5708,
+      "sha256": "6338c0c224d6ca5751765db390f49f88003a4df0271138db5179ba7a856412be"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/StaffPhaseManager$CollisionState.class",
+      "changed": false,
+      "size": 1884,
+      "sha256": "376c88a0e1cd455469ead053d438083d6dc2cffac71c9fa29815d8a743bfa6f2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/StaffPhaseManager$FlightState.class",
+      "changed": false,
+      "size": 912,
+      "sha256": "8ac6db10876ad1245707a7a8f951ce2863a6120e26cb2d93b050afbdb1747362"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/StaffPhaseManager$State.class",
+      "changed": false,
+      "size": 1920,
+      "sha256": "66e9e334bca6a1ea99f044de2c5621707913661a135fb1cb3e0b60cb95585522"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/StaffPhaseManager.class",
+      "changed": false,
+      "size": 12248,
+      "sha256": "dc3ee35de9e6de5873397091a82baeb82841ab137fe26ec7c6029935efb774a0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TimeFlowEntity.class",
+      "changed": false,
+      "size": 13135,
+      "sha256": "156009cbaa97b87dfc01579f6049255d2ae623b916387032a72974a478bdeacb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TimeStopManager$State.class",
+      "changed": false,
+      "size": 2277,
+      "sha256": "263dbb6f73f3a773f4c0b1958519fe9c4e8109e42af93b00cf3f9d55b1e60d84"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TimeStopManager.class",
+      "changed": false,
+      "size": 6732,
+      "sha256": "c59254c95c31d6fc7e127018222da9f0f52e4137e137f8fa42a2b0def94e9626"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoICaptureProtection.class",
+      "changed": false,
+      "size": 1202,
+      "sha256": "67f311185fac8010ed0198ff5bbdb9c624c2b8aa41f19dc4ca362809a42c95cf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoICompanionshipData$Progress.class",
+      "changed": false,
+      "size": 4088,
+      "sha256": "fe0743a4e974caa224d7d83d7523fff1e6ca557a4ba6b85c24e74482b6a30393"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoICompanionshipData$Sample.class",
+      "changed": false,
+      "size": 2206,
+      "sha256": "2d476b1f28ff934f4c8be630cfe0189aff7e195d2bda0284bff4409b5b6bfc30"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoICompanionshipData.class",
+      "changed": false,
+      "size": 7793,
+      "sha256": "26ff7ca15f367ce216f3d1c3cfe94fd8acbfab8d33732091bbbf6b89ef355cf6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollAcquisitionData.class",
+      "changed": false,
+      "size": 4122,
+      "sha256": "b233a155f2d58514369f5d4b9aa9754e58331acfc8f3a177be1eb7d5bd513580"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity$1.class",
+      "changed": false,
+      "size": 1769,
+      "sha256": "294a4a034eb50f8ade6a3cfc6cdb6632f5b83afb15545cd4b16c824f51bd019f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity$FollowOwnerGoal.class",
+      "changed": false,
+      "size": 8186,
+      "sha256": "1ca3149008d349afd97537105688c72584b6209f05581746afaa39909cb75a26"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity$ItemStackFactory.class",
+      "changed": false,
+      "size": 1279,
+      "sha256": "0515fc70d316914377f4fe72efeeafa044f9d15682bafd8f46be6227c1017ade"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollEntity.class",
+      "changed": false,
+      "size": 64640,
+      "sha256": "cc0cb5d74eac788d6df2d02306aee69b4e94bf3a4a4a6e50f012e3b01f4f1509"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollEnvironment.class",
+      "changed": false,
+      "size": 2106,
+      "sha256": "3759920b39a1aab206bfcaf8a296d764332f9c97a8e00180fc8aeb0a0a007032"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollMemory$Cooldowns.class",
+      "changed": false,
+      "size": 5929,
+      "sha256": "761a5bec9bf8c27da7fbbbad8aed7107469c5af485dc74149fb0c2d7eba1b4ea"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollMemory$Interaction.class",
+      "changed": false,
+      "size": 7407,
+      "sha256": "03423807caa5a1e1fc2bb611b6ff398efb41922ce00070c4c5d220de5bfd5c01"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollMemory.class",
+      "changed": false,
+      "size": 5999,
+      "sha256": "91dff17045f5b99e76959a83b3b0ad47ee2d723c2e195cc6c823081fe8a6cf0b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIDollService.class",
+      "changed": false,
+      "size": 23284,
+      "sha256": "a02d0b962329fd91d994349523fa94b274e56d05e6b8f49b276267a533ec5da3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoILifecycleGuard.class",
+      "changed": false,
+      "size": 1890,
+      "sha256": "99f71ca3f0e37b32abcad62885d96770a714ff5035ddc54f6a719a468dd8639b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIStarfieldData$ReturnPoint.class",
+      "changed": false,
+      "size": 2475,
+      "sha256": "efb89713889151b11c881ac61d1f2bd9a7c602737f9148a5a08a5c86792e47a1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIStarfieldData.class",
+      "changed": false,
+      "size": 12104,
+      "sha256": "ae0b46774b70c2951bfcad80076570152eadbffd2d0a52984345757052736d62"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIStoryData$Progress.class",
+      "changed": false,
+      "size": 1824,
+      "sha256": "148dbe50a755422f160ffab9d7f820b3a7a682c01a7a0391c7be0dd2795f9d85"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIStoryData.class",
+      "changed": false,
+      "size": 5975,
+      "sha256": "069213cd4fa919505fba3421cc5aebcc6ae43fe8fdc1b79cd19bbf3029ea5bbb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/TwoIStorySession.class",
+      "changed": false,
+      "size": 3395,
+      "sha256": "c3468aee4199996c88eaca3abaca0b42903c320167bb2b9b47b70fe30aa8d800"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAcceleration$AeEndpoint.class",
+      "changed": false,
+      "size": 2140,
+      "sha256": "4fc10ef8d91eb2581bb997a3de4a29c40352a46eb05203827e401c16b6fb86f9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAcceleration.class",
+      "changed": false,
+      "size": 33282,
+      "sha256": "a3426d53b666f5ba3db66e35df517ed5d77a1ddd4352bddf8388606741f4ba35"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffAccelerationEntity.class",
+      "changed": false,
+      "size": 21230,
+      "sha256": "e598210c1fa4ca92a9316b2d5f5884b1595443ab454dd1f41a600a2dece863d9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/entity/WondrousStaffSummoning.class",
+      "changed": false,
+      "size": 10057,
+      "sha256": "64e7b23d6afe94ce7ff7a5a956b09289f08da06a656332328b05552f799fcfb8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/DimensionCapsuleItem.class",
+      "changed": false,
+      "size": 4439,
+      "sha256": "a7ce02e9e1b541ec90a7ba20e8467202c59bf4d5b62f8953d4cccbc6c0dfe704"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/RangeReclaimerInteractionHandler.class",
+      "changed": false,
+      "size": 2736,
+      "sha256": "7f65d5bcad94f44f9d409d280188a218c2b627bbfd9ab51890e554328ebe73f9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/RangeReclaimerItem.class",
+      "changed": false,
+      "size": 4662,
+      "sha256": "07254b8eef37d4694e275e1c601435b160e44ccf5157216f739bc1f5176a4aa5"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffBrushContext.class",
+      "changed": false,
+      "size": 1863,
+      "sha256": "24aa82542b5ffa39443b28cd8b6d45b2acb0ede875dac4041ada559f7fa63442"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffBrushHelper.class",
+      "changed": false,
+      "size": 4297,
+      "sha256": "562c368f612dc72cf2b844dc7d02b79ad839ce48b36055db8a70f1668a3ff42a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$DrainPermissionCheck.class",
+      "changed": false,
+      "size": 1244,
+      "sha256": "776ffe2879851709400e900772ca895533801d58b2eb5b8c6f4bdb5e96d17ad3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$PendingFluid.class",
+      "changed": false,
+      "size": 6244,
+      "sha256": "034bb934a04f275d7ce632c104f816511138adcbb04bbd3a337719c3ec13114b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector$Scan.class",
+      "changed": false,
+      "size": 772,
+      "sha256": "e6f53a7d9a533db3a672dcfe489f54afaa10cac503832d983fe162bf14c01e3d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffFluidCollector.class",
+      "changed": false,
+      "size": 14740,
+      "sha256": "8f5940f9f75bdf5c9b760f11c5b791c5cf4c0a807c8527665ff453738eacf2fb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffMiningContext.class",
+      "changed": false,
+      "size": 3604,
+      "sha256": "eb67cb77123a2537731b0ac2c3258c2c9860f82f1c4a4e1721424c9e78588916"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/StaffTutorialData.class",
+      "changed": false,
+      "size": 5675,
+      "sha256": "dde4bb180e9d8e83da9256983533cce85532aa6a49865b664b85fc0ac7b24c60"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/TwoIDollAcquisition.class",
+      "changed": false,
+      "size": 3915,
+      "sha256": "654608d75ee9d499dc67562d2c6e14c18946ae4a47ea6f8194c5af5f968ac546"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/TwoIDollItem.class",
+      "changed": false,
+      "size": 11241,
+      "sha256": "b99033ccdaf09b183118af536d8e7a7bea880e83b7d490197d6455f0447237a0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/UsefulArmorItem.class",
+      "changed": false,
+      "size": 1030,
+      "sha256": "5ca00c12da997f0e714367a063782b0c0711e4492a59945c2fe338aaf574735a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/UselessStretcherItem.class",
+      "changed": false,
+      "size": 11934,
+      "sha256": "0100bd3372999c596b07382d216f5b2e0232120caa1241ba47e5cfa81204462f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/WondrousStaffItem.class",
+      "changed": false,
+      "size": 12257,
+      "sha256": "167793dfda62217b6ddb9a8d65b46c247779f49ae43577a5661c1f26d26b224b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/WondrousStaffLootRefresh$RefreshResult.class",
+      "changed": false,
+      "size": 1646,
+      "sha256": "3342496367c36c304052eb95aa7d5c61204b8b12cb6626b277e855ffca3544ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/WondrousStaffLootRefresh.class",
+      "changed": false,
+      "size": 11155,
+      "sha256": "bda0f3ddba122bc3bc76b2c373998d8a6188b5f9f92b14f68700793de22f6e32"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/item/WondrousStaffRightClickHandler.class",
+      "changed": false,
+      "size": 6587,
+      "sha256": "bb1ea3b1466a8d28810bfa8e4ad6e7c0e55532a6c21eeccaa30a6bd12d852626"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/leaf/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/leaf/StaffLeafDropData.class",
+      "changed": false,
+      "size": 7397,
+      "sha256": "41b2faa28decdf98ec96033ae9c9e94185c1a1f676f8726144ae6cd263fa5050"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalog$Builder.class",
+      "changed": false,
+      "size": 8459,
+      "sha256": "2cbab9ff96e3bd28e449724c49df7ea1c7ed285d6585483deed0bb93ca39edfb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalog$MoldEntry.class",
+      "changed": false,
+      "size": 2436,
+      "sha256": "a1b7e37821c82d11b7b386663ef4f3c42ee18380a81dec2ccdcd8967e1f6d9ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalog.class",
+      "changed": false,
+      "size": 4536,
+      "sha256": "d21e8b0c4cf0f1a8fd0cc1a33dabb20d139791433af0554d5f7f51cb3e210369"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalogSavedData.class",
+      "changed": false,
+      "size": 7749,
+      "sha256": "ad8af636c5dfcdd1e051f5673d1c95dd3dc8229394c45f9e5d9a329be6eede81"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalogService$Request.class",
+      "changed": false,
+      "size": 656,
+      "sha256": "dc70c013fc0c7496907fe3dbd3ca17da0c82a854fec65b2ce03fd14a7ca0a203"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalogService$ServerState.class",
+      "changed": false,
+      "size": 7034,
+      "sha256": "5e08d1233dfe19fc08bad464e3a38841ca388d171dfccccfff824098de06104f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldCatalogService.class",
+      "changed": false,
+      "size": 6252,
+      "sha256": "fee431e3f4c61f5a960299c8c25c5b8b471972956e6dbc9c51762df235c56c0e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldMatch.class",
+      "changed": false,
+      "size": 3222,
+      "sha256": "5d75c0128fe98d591aab3b871ae1dcf503cd88186f0254b56ae4233c8138f08a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex$Cursor.class",
+      "changed": false,
+      "size": 1169,
+      "sha256": "f4e669781af766fa5068a93429a3f72bb6b0a4d3aa6d142e8e9033dd861a89e1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex$Match.class",
+      "changed": false,
+      "size": 2691,
+      "sha256": "3131a8e8e462422020d57a7207e3ee0efe6ed0bf4defe23696ba82c2b217fe4d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex$Posting.class",
+      "changed": false,
+      "size": 793,
+      "sha256": "d280aff5caadee5fa09107a1e2ea1cd80046b24ad7cdca884eee64d8d186b2a1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex$Query.class",
+      "changed": false,
+      "size": 6312,
+      "sha256": "ef3910c73fbb84ff6a4567c1f083d677f12b10501019df6bf00f9c90d1853d8c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex$Resolution.class",
+      "changed": false,
+      "size": 2164,
+      "sha256": "f0b97094d6897b8bfb49c38d1841846bd41254ea8c7f7c67c6adfad605f5e07d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MoldRecipeIndex.class",
+      "changed": false,
+      "size": 10115,
+      "sha256": "8164f38a317a24bd8060aa9114ef86f9e482caa457c1a6e9565856e1aaec046a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadMoldData.class",
+      "changed": false,
+      "size": 9044,
+      "sha256": "b8b9626455006a76bdee139586128212affc84c02e09a0ea1ea4fde8931152d8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadMoldMatcher.class",
+      "changed": false,
+      "size": 5370,
+      "sha256": "57ff75510e52451b0334a1aa3e68958c059a67774b58c4e75c073020ff5541d8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadMoldStore.class",
+      "changed": false,
+      "size": 6562,
+      "sha256": "504b47bb0006971cdaec967e253b93968bcce05225f6ca339ca83d6e7f13a08c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Library.class",
+      "changed": false,
+      "size": 5888,
+      "sha256": "2008c43481ac759ec54929f8b708896571be003cc9c59decc43c998a5f56c072"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore$Rewrite.class",
+      "changed": false,
+      "size": 5855,
+      "sha256": "e8db1e6d2666a516b1cf39de8149d7eed0b5c594dfc30c0ae7a05d7051579bce"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/MyriadPatternStore.class",
+      "changed": false,
+      "size": 22882,
+      "sha256": "38a3204ab8ccf71f028098f5edff7912249ac07425e119d4cbedd0bb35208637"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternFetcher.class",
+      "changed": false,
+      "size": 8389,
+      "sha256": "3c97d435c38e32cfb3ff89e36b35868c893dd48c8f9f723fe0d430d1e748ff64"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternOutputs.class",
+      "changed": false,
+      "size": 5716,
+      "sha256": "f5a5d36d54329a0303ddecbf5d25d676cff45a52dcc425e857ab543aae3e9070"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch$Job.class",
+      "changed": false,
+      "size": 5721,
+      "sha256": "a9f9baa40fabf187e754eda2fbf72e67cc96c8aecacac1fd779075db9bfbd814"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternRepositorySearch.class",
+      "changed": false,
+      "size": 14285,
+      "sha256": "825638e8e0eccb2c7175e3ec535041ecb11c9abefb92441ae6b47752bde93b22"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$1.class",
+      "changed": false,
+      "size": 1709,
+      "sha256": "9eed87eec6cbac65f4c353c7ee2f9e3fad8e1b6b5a1eeb213f107163ec6e6c53"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$DuplicatePage.class",
+      "changed": false,
+      "size": 2249,
+      "sha256": "39c053ee697f5609b14bf24bd70003bd5328caa0f276c83f46feb14a41ce8e22"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Filter.class",
+      "changed": false,
+      "size": 4700,
+      "sha256": "946019854762860fcd67cd88e9063ae167cde9d48265744518afdd9cb5feddbc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Keep.class",
+      "changed": false,
+      "size": 1462,
+      "sha256": "ee18cec13351dc5f27f2fc1bab2629b34844c9c92b58e1a9646b4abca0e735d5"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Metadata.class",
+      "changed": false,
+      "size": 3789,
+      "sha256": "2edea939bd9edb34f8a495b4412d5450b71026b3aa454d4bdd831bbe83ed6585"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Mode.class",
+      "changed": false,
+      "size": 1749,
+      "sha256": "584c79beff0c47c851d96d0a71ad17311f207a96b2b3c2da1caadcfccd11eb65"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Search.class",
+      "changed": false,
+      "size": 2919,
+      "sha256": "5acd9b92b7a0ba5522b9bb1a104f064949261fd35a021e10c69a3eafdb91e933"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$SearchTerms.class",
+      "changed": false,
+      "size": 3393,
+      "sha256": "74a02abffe0f747fbcc24df7958d9a98ffc53c658b4ae222e29ba897842aac75"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Terms.class",
+      "changed": false,
+      "size": 4583,
+      "sha256": "55f272e57d36144c5d756a586fe6d07d959a7d02865510cf41e0d5b4d722abbe"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex$Winners.class",
+      "changed": false,
+      "size": 906,
+      "sha256": "d720cd0f9aa56e14b24303d2cd78aa541e243df4716e018dd9366aa538663d1c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/PatternSearchIndex.class",
+      "changed": false,
+      "size": 13094,
+      "sha256": "1c428d739c94e7638baece98d1292065571943dd0de8e05af01e325f99c5999a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/RecipeCatalogAccess$Reader.class",
+      "changed": false,
+      "size": 3172,
+      "sha256": "bbc2943415c8456b460fc16b8346ed5efec2c4f21a161d027e8eb70026b6e4a4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/RecipeCatalogAccess$Snapshot.class",
+      "changed": false,
+      "size": 2420,
+      "sha256": "a81c1677e2ee3d27e5dfd537770add8ec73dfdf06761afcab4284dad6a003f4d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/mold/RecipeCatalogAccess.class",
+      "changed": false,
+      "size": 3000,
+      "sha256": "575771f759c7618bc3931f8fc63c73e74f89bb3ba115e501fc6f55a14faff390"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$Field.class",
+      "changed": false,
+      "size": 18189,
+      "sha256": "730a9e24839ba9209f8004f9bbe75eeaa116bd7ee212f1e5b2a3c7aa864a3b03"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$FieldRuntime.class",
+      "changed": false,
+      "size": 1402,
+      "sha256": "1b9fc50bf915451e413d5fd74e8b6853071a060f7fbbbd254fa8514ce3f7f95d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$MarkResult.class",
+      "changed": false,
+      "size": 3021,
+      "sha256": "2df165e71ad2976f8df45b5bbf0b2407302fee31ab1498d20eb6b79c1956481c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$MarkStatus.class",
+      "changed": false,
+      "size": 1701,
+      "sha256": "383dfdf0e6bb2b2c67f7c5134d773f765400ad6921e368db96aad8f13bea52a2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$PlacementResult.class",
+      "changed": false,
+      "size": 2371,
+      "sha256": "92160a726a4993554320839fa94721043c23dc09651a12dc4c1d676ece6d397b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$PlacementStatus.class",
+      "changed": false,
+      "size": 1738,
+      "sha256": "0ee4a72137c86d916a98b4845e2bdf245d56549327ba51a11a98a2bc2ac297d9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$Summary.class",
+      "changed": false,
+      "size": 4349,
+      "sha256": "cf860cb69201b4dad4ef82b8e18e0364aeec168c758940dc6ae7f346d31864e4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData$TargetWork.class",
+      "changed": false,
+      "size": 1837,
+      "sha256": "eb86b641e6a43d098706823a85d1e8882b5244ce5447db2294ea82300323620c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSavedData.class",
+      "changed": false,
+      "size": 32768,
+      "sha256": "860ec74f1f6aa654149efcc8b4533950c15afe13ecfa7ce9bf833221f21e9bba"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/range/RangeAccelerationSettings.class",
+      "changed": false,
+      "size": 5375,
+      "sha256": "5b47a3bad9bdbadb2bcfbf2bd17d5d4ad79274edf036fc89ca2ab6d1620f4f35"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/travel/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/travel/StandaloneBlink.class",
+      "changed": false,
+      "size": 10588,
+      "sha256": "5e0ccc091e87dc523db7ae9d9cf72759e47f67b5bb97c19e4804bc0da01312f3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/content/travel/StandaloneTeleport.class",
+      "changed": false,
+      "size": 5316,
+      "sha256": "b4321450e11418a99ab8303e3ba974af38ac5ae203514fe0798b9c8bfaf6343d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/dimension/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/dimension/world/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/dimension/world/TwoIStarfieldChunkGenerator.class",
+      "changed": false,
+      "size": 13365,
+      "sha256": "e2126d2a408ab584d489cfbf8dba0ef0ddf99ec9738a2c45fc50d554e01ec489"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/dimension/world/TwoIStarfieldCourtyard.class",
+      "changed": false,
+      "size": 3135,
+      "sha256": "3cae3b524fc750f3446209e32a002fc2f829d85ca25af0fa990f34d3387ef45f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/dimension/world/TwoIStarfieldDimensions.class",
+      "changed": false,
+      "size": 2904,
+      "sha256": "38db8a913b4a88840aa10c8054a7bc0f0fc38d65a1317dd2203482bb4ca2c6b8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/ApotheosisTableCleanup.class",
+      "changed": false,
+      "size": 2827,
+      "sha256": "7f425e43522a6ed01d298ea7816916d5b6568e9ad04ab1b38deb8e8dd35755aa"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/BudgetedCatalogEvents.class",
+      "changed": false,
+      "size": 1673,
+      "sha256": "5a880701d2e2f0b3a2cdab3e9c4b5a87ae34fe7d8bbc57a204dbb6b3512d3f68"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/MyriadItemMigration.class",
+      "changed": false,
+      "size": 2812,
+      "sha256": "6c22c07fbf7bfed3b95505d911fae6eff5f791f4458301554dc4e97cacd81e99"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/MyriadWorkQueue.class",
+      "changed": false,
+      "size": 7468,
+      "sha256": "0459d9a9986d01ae6661e7d262583889d5245177f8443c6b7cbc2b4b78565613"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/RangeAccelerationTicker.class",
+      "changed": false,
+      "size": 2154,
+      "sha256": "b837468353544e571b7484ae670954bbfcad602599d6736d1763c0790bd62e50"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/StaffPhaseInteractionEvents.class",
+      "changed": false,
+      "size": 2909,
+      "sha256": "7fe5b0d0c805d556c2246b27c113cc77de358b3a7b55e03e9b4e35b46db51cd5"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/StaffServerTickHandler.class",
+      "changed": false,
+      "size": 1806,
+      "sha256": "93249a1bad6691458e2fc0d3ef71d57aa716a32594fcd64fbd7dbe15fc71a7a0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/TimeStopInteractionEvents.class",
+      "changed": false,
+      "size": 3397,
+      "sha256": "30d7b977c01c88e1e172427575b1c9b22ee48ae09637e59d5ac75e7417ff3372"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/TwoICarriedCompanionship.class",
+      "changed": false,
+      "size": 5359,
+      "sha256": "8ee92c623fe5a526c71f7c48c86c0bd276d47d65965987090396154923b818d4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/TwoIDollAcquisitionEvents.class",
+      "changed": false,
+      "size": 3753,
+      "sha256": "4607a26f0aa0c4bad64ae7bdd8dbde34b784067cbcf38687f9a15c7306c1f9d7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/TwoIDollProtection.class",
+      "changed": false,
+      "size": 2707,
+      "sha256": "9d5498321ef4ca037ce92624d52f47406e5c5dd3032dab6e6a9ed9a730ea9252"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/UsefulArmorController.class",
+      "changed": false,
+      "size": 5498,
+      "sha256": "00428c4af1b4369fd94a074daa02da2c196307ca157843ea2fc70e8c1342a74b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/UsefulArmorRecipes.class",
+      "changed": false,
+      "size": 7685,
+      "sha256": "9b286519f0d58fc100ecbfb268a95085d2b93dc569fafc6c8027e0238e3ae44a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/WondrousStaffFeatureEvents.class",
+      "changed": false,
+      "size": 2900,
+      "sha256": "1f85db57629fe5660a1c98360ebca63a838ed0e2e48a870f90c76d1ee945ce67"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/event/WondrousStaffLeafDropHandler.class",
+      "changed": false,
+      "size": 17926,
+      "sha256": "41489541d481a3e1531b24c7a4ec78e88cb6c1b687237169051762291fd0f011"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModBlockEntities.class",
+      "changed": false,
+      "size": 4193,
+      "sha256": "9d14eec1d09d9c2f098d976094982d7ba6a5f065b4f5db84ec24e126c4278eec"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModBlocks.class",
+      "changed": false,
+      "size": 2657,
+      "sha256": "4c121853a964bf6e3fe0cc7b2c1bd31303201d04587d1a315128bad3abb0a663"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModCreativeTabs.class",
+      "changed": false,
+      "size": 4471,
+      "sha256": "645104804796c84b52bfd1c16ba0d76ab3c7de275c436ed11db0888dea20d225"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModEntities.class",
+      "changed": false,
+      "size": 6123,
+      "sha256": "b330f1c27bcabe0831c31a312996a3ffa9a4330b89f6ceb0dcfb3b61eb0073c0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModItemDefaults.class",
+      "changed": false,
+      "size": 2879,
+      "sha256": "b7db9e339bdc01a384e7e9d2250e71ad6ba34ed3ba4915aa46a592b5f465a6e1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModItems.class",
+      "changed": false,
+      "size": 5761,
+      "sha256": "cbcbf7c2005aef2ba403ab655ad54accff2ba91902c4343f36d2997aa36092cf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModMenuTypes.class",
+      "changed": false,
+      "size": 2729,
+      "sha256": "ffabbb38d285bb0999a8e09a11d5eda8ddbf4acdecc7dee4d603f8dd138f8853"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/ModSounds.class",
+      "changed": false,
+      "size": 2029,
+      "sha256": "6aa3ab9553327f3bb3fd37b7792a16237e76b3482dc6862a4bfaa3217e4d87bb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/init/StretcherComponents.class",
+      "changed": false,
+      "size": 17910,
+      "sha256": "5f197845cb5f55c697ea6a188c80bf31594eeea3f437c905a8f7404ed8950972"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/menu/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/menu/OmniversalMyriadMenu.class",
+      "changed": false,
+      "size": 4280,
+      "sha256": "5b2c580da697df3f1aadd7e594729037ea5f663ef95f8177b1cfb347c49724fd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/AdapterUtilsItemRepresentativeMixin.class",
+      "changed": false,
+      "size": 2359,
+      "sha256": "bb668470d002f6845861e6773d69b1949a39442a4f214d8fbb52f8aefbd83cdc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/AdapterUtilsMoldMixin.class",
+      "changed": false,
+      "size": 2711,
+      "sha256": "81c4a77355dddba72da8244705d04ff782527c7269feac38007153d5244ec599"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/ApotheosisEnchantingMenuMixin.class",
+      "changed": false,
+      "size": 1075,
+      "sha256": "65c5c1c68991cf72f440fbab49205361179285168de477f3b51ac6401c0f251e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/ApotheosisEnchantingStatsMixin.class",
+      "changed": false,
+      "size": 4204,
+      "sha256": "a5479d63419b768812d383402afb713ac00125588173a27e571816bd6ac76630"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BeeTimerAccessor.class",
+      "changed": false,
+      "size": 441,
+      "sha256": "aee9bc2b899359ddc0af979c274d50d2ad8d3e5c00373e730ba74d1085d7437e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BeefTimeAccelerationMixin.class",
+      "changed": false,
+      "size": 3695,
+      "sha256": "253c6359859e53f82926dc10deccc19a0bbe8da5da947e41aa5ac7f57c4bd459"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BeefToolVariantsMixin.class",
+      "changed": false,
+      "size": 4940,
+      "sha256": "65543fbaf3782a291e075656e6774e0ded87637491282ac6f725e89734943012"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BlockEntityChangedMixin.class",
+      "changed": false,
+      "size": 1558,
+      "sha256": "690dda59d657a508a9be9028a56d6fd423ec811887e0a82a5dcc0c21a40ed95c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BrushableBlockEntityMixin.class",
+      "changed": false,
+      "size": 1974,
+      "sha256": "b753ecb91716ad411b247b57f7eb16ff672819b594e51c300d7d3b31f3d09534"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BudgetedClientCatalogMixin.class",
+      "changed": false,
+      "size": 1258,
+      "sha256": "079825767f5a47254b11330515b9bbba3d3115e0379856c4070fc240c37d822e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/BudgetedRecipeCatalogMixin.class",
+      "changed": false,
+      "size": 2090,
+      "sha256": "c290956ab5f02275fb62e10aa4dec6a7bb4d71ab9148460d6c4d2f14c4b68d1b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CapsuleDimensionBootstrapMixin.class",
+      "changed": false,
+      "size": 1931,
+      "sha256": "1a0bbd798a757f21fe46eafb95d9d925287e0879046ddfb79fa297313dd19c1a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CapsuleFallingBlockMixin.class",
+      "changed": false,
+      "size": 1427,
+      "sha256": "3beaed83455ce58b186b8cc488c048191e11c6023530952070ae3114a2bf1403"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CapsuleGenerationHeightMixin.class",
+      "changed": false,
+      "size": 2096,
+      "sha256": "0586a83577540a827cbe6ed8acb55e6ca4f4d821fb1cb6ddcd11d3545e2b6af8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CapsuleGravityPlacementMixin.class",
+      "changed": false,
+      "size": 1964,
+      "sha256": "07cc475ec1d861cb817bee417b797eaca7d97d9fd0fd485b7647be3fa5bc3d55"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CapsuleScatteredHeightMixin.class",
+      "changed": false,
+      "size": 3912,
+      "sha256": "303889f19dc6b24b86ff6e9d80b6248f1dfe7ac0f3fc40e719d5e6eca875b216"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiBuildTimingMixin.class",
+      "changed": false,
+      "size": 1754,
+      "sha256": "9f085d0c8fecd48c195f0583b13752b85843e4fb81c99038bd6c9f39cb7991d8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiGuiMixin.class",
+      "changed": false,
+      "size": 1098,
+      "sha256": "cc359528d756c2c7f8644ed3e83826f7cd15012a9cf365d83c778452a78a3886"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiIndexTimingMixin.class",
+      "changed": false,
+      "size": 1349,
+      "sha256": "4503033d2d11a6401503c19a48c28a1dbad169d36ae8c076e322de71e033ef15"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiLookupMixin.class",
+      "changed": false,
+      "size": 1566,
+      "sha256": "50d7e833fa409e81fcaaeba8a6233ca35018bb704f0fe3c218a0d4598fc240b7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/CatalogJeiTimingMixin.class",
+      "changed": false,
+      "size": 2254,
+      "sha256": "ae2f0bd6d9bf752575ef777cdc25e1b5d6bd7a03291083e699719b1c487c1612"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/DesertPyramidCheckpointMixin.class",
+      "changed": false,
+      "size": 3047,
+      "sha256": "6362c25366ae150c15408518658feaafa2938faf7d8fa8f3d7ce9aa30fa3d6c7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/EmptyMyriadMoldMixin.class",
+      "changed": false,
+      "size": 3124,
+      "sha256": "1f197ae65b23509a26f0fe3cf0a8b792567ba479ca02f3a53191190b9b38da92"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/EnchantmentMenuAccessor.class",
+      "changed": false,
+      "size": 496,
+      "sha256": "75a2ae11b0ab33cffaa7e3dde1371c2332b09edac07edcaf300b4dce709b7e02"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/EntityNoPhysicsAccessor.class",
+      "changed": false,
+      "size": 512,
+      "sha256": "0fa13d48303f6d3f37489ce1e75f7e63f011d20579c21b2c21c22aee4e775a1a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherAssemblyMixin.class",
+      "changed": false,
+      "size": 3022,
+      "sha256": "ddb386dead1c341dfa9b69babbe6b64eac214768ba9e99ab70da8a0dcb541036"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherFurnaceMixin.class",
+      "changed": false,
+      "size": 2497,
+      "sha256": "bdf36d54beccd9966332e40e34d9401311e0f08fe92dadd6028cf80c8f2ac87d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherMenuMixin.class",
+      "changed": false,
+      "size": 1261,
+      "sha256": "bea16ab726196263708cae6acb37c92ff68de19f7f675c1769f579207ffcf874"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherPassiveMixin.class",
+      "changed": false,
+      "size": 7192,
+      "sha256": "61b3636df0e927b9312b87ad45192f0a770cd4054f79e28aeca680951bdd310b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherSlotMixin.class",
+      "changed": false,
+      "size": 1426,
+      "sha256": "6d7cd60b1653ab47729d448695432b4daf3cd12a9bfbb478d00b67a51d2f6a35"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/InstalledStretcherTerminalMixin.class",
+      "changed": false,
+      "size": 1837,
+      "sha256": "f726c07ee375aae7375c24955d2138f1880d13ad177d16e78815466c8f024750"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/ItemStackToolTagsMixin.class",
+      "changed": false,
+      "size": 2606,
+      "sha256": "78d0d11fa9d60dc0548e46158c78acbdd24d83b9d311d9ec57d38c357aaa741f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/LevelRendererCloudMixin.class",
+      "changed": false,
+      "size": 2013,
+      "sha256": "42dfeaa231ae2acfd32f47ce9fde978370d1e3fcd61815686a53626065a738e7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/LivingHealthDataAccessor.class",
+      "changed": false,
+      "size": 759,
+      "sha256": "6bcc05796a30824a65049fdaa9d2d5e1d8b176372f728e054f290377b7e4a6b7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/Mbd2AsyncSyncMixin.class",
+      "changed": false,
+      "size": 2942,
+      "sha256": "e4fca08552a3ece73d5a25461eec9021c6f9be298c2471e567564f76b97567e1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MePatternAssemblyBlockEntityMixin.class",
+      "changed": false,
+      "size": 2905,
+      "sha256": "1f31f01f3df8cb0d2805bbe53cb5b62d7f5f304454b1f415f86297b6b95b4906"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MePatternAssemblyBlockMixin.class",
+      "changed": false,
+      "size": 6343,
+      "sha256": "872898bd6ca55d56a7f220e065506f056e002dbb232e1e70080c86559b9405ad"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MinecartContainerLootMemoryMixin.class",
+      "changed": false,
+      "size": 2230,
+      "sha256": "8ce8b07cd25646d1f71dfcea2c516c3a642d8185380ec2dcb028744a1090cba3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MoldHubMultiMoldMixin.class",
+      "changed": false,
+      "size": 2335,
+      "sha256": "f7bb842f39a56896dfb47820cd886b8cb138bb538325353961a8af36420d4714"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MoldMatcherPreparedMoldsMixin.class",
+      "changed": false,
+      "size": 2864,
+      "sha256": "2861e2b1be625e38b5b0ce37bf77ca3fff70d342eaa6d14d5243dae63db85b47"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/MyriadContainerMigrationMixin.class",
+      "changed": false,
+      "size": 2815,
+      "sha256": "fadeafdee9d204ac60f28debc071794909af0cbf0c78e20241f35ed10504812e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/OccultismRitualClockMixin.class",
+      "changed": false,
+      "size": 1412,
+      "sha256": "99c20771a20f98e240fa730fba30fd69ac7ce242369e771adece67991a248d76"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/RandomizableContainerLootMemoryMixin.class",
+      "changed": false,
+      "size": 1747,
+      "sha256": "fe6338f1bf1df6e47dafa962aae4f0b92d5981f2a480c185852a1b9641ba7d96"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/SagMillingRecipeAdapterMixin.class",
+      "changed": false,
+      "size": 3384,
+      "sha256": "62151ddae8f2649c61c5bf955f393a7a71ef967e9bfc9a3a04dc9781eb28c37f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/ServerGamePacketListenerTimeStopMixin.class",
+      "changed": false,
+      "size": 1113,
+      "sha256": "3b4d7ff4d775eb4b8f263e9d5e1387572fd2c08b30f03a7812d84da3d119efdf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/ServerLevelTimeStopMixin.class",
+      "changed": false,
+      "size": 3334,
+      "sha256": "f644f1363acd29a581dc8f674d7a3280c748e3067387e676636de198dfa38579"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffMiningDispatcherMixin.class",
+      "changed": false,
+      "size": 4895,
+      "sha256": "3e291335f253b0daa940cab38d863217785e9bb37b22d781e5932b1665078df0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffMiningDropsMixin.class",
+      "changed": false,
+      "size": 1831,
+      "sha256": "8d2e6f2b5f3b0ef4434aae8e6ce941b4c1926101caaf43ac2f81b80b8ab807b1"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffPhaseLocalMovementMixin.class",
+      "changed": false,
+      "size": 1621,
+      "sha256": "23f5c97af3644dec876cc868a8df0f74e8216003d26247789cbe563fef757714"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffPhaseMovementMixin.class",
+      "changed": false,
+      "size": 1727,
+      "sha256": "4b166cb0911eea3ac3593586aa1605056d3bd5ab622a382560ba713f20f13675"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffPhasePacketMovementMixin.class",
+      "changed": false,
+      "size": 1825,
+      "sha256": "34ba2a0af4af97affd0177c28e62060c156a332d084529620e5068385594026f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffPhaseVisibilityMixin.class",
+      "changed": false,
+      "size": 1557,
+      "sha256": "8a331733caa4c039088fa8825755d38cfb43880975c06226b0d66a6de2cf2ede"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffRadiationEntityMixin.class",
+      "changed": false,
+      "size": 2039,
+      "sha256": "860fb6cae986cb7e516b6da37d03393aaad96a6d6034c454d2ddc40528227585"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/StaffRadiationShieldingMixin.class",
+      "changed": false,
+      "size": 1962,
+      "sha256": "5d3a5fba35ce275c9b650daeb8f1f1a93f6e8f893db8d4e173951a5b6044b19e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TurtleTimerAccessor.class",
+      "changed": false,
+      "size": 523,
+      "sha256": "1bc148d20260ac570c8288a7d8b8f085965bc3951c68146052f04228895df4ae"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIAmberMixin.class",
+      "changed": false,
+      "size": 2425,
+      "sha256": "111a07ecfa661a88b9a81a7f5e2d201383d7888cd3e964175618d03c3449c6ad"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIArsJarMixin.class",
+      "changed": false,
+      "size": 3067,
+      "sha256": "dd609ba438f7698d9b930ddd27dd97db687fa5998a557a20748a97aa7688263d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIArsRitualMixin.class",
+      "changed": false,
+      "size": 1740,
+      "sha256": "e5eff64c9b4a4d9f4fd96c247b4965da31f73919c8e60e522db8432cf4cb83c4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIBeeEncaseMixin.class",
+      "changed": false,
+      "size": 1459,
+      "sha256": "804dca07892a19f3ea0a06d64ee9bbf0d14ee012a01f564f620692216e1a6e02"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollBrainTargetMixin.class",
+      "changed": false,
+      "size": 2198,
+      "sha256": "83225de369514b91e6ba9b25d6282f7572fcf16bb19524ece828b7b0c9fb97eb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollClientRemovalMixin.class",
+      "changed": false,
+      "size": 2528,
+      "sha256": "ae5b11bca2e9fa5c15d8aa6cfa400ee1d9f505c0a48ac6adf71c0dd02fc1586d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollLevelCallbackGuardMixin.class",
+      "changed": false,
+      "size": 1423,
+      "sha256": "88e22fd4cb3d5f0ceedaa8d9e221dd5339b7a09f5a72f9e00cb6375556fab54f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollLookupGuardMixin.class",
+      "changed": false,
+      "size": 1308,
+      "sha256": "e116c949ba0bda715f55b8121794e6a8182369fae5368d4931ff6f8aa543fa02"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollManagerLifecycleMixin.class",
+      "changed": false,
+      "size": 2245,
+      "sha256": "7391cd1294194c8eae99e1d15482498eb9c9ffe7190d0c3fe30d7829b7f8a3d8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollRemovalGuardMixin.class",
+      "changed": false,
+      "size": 1984,
+      "sha256": "654187112cac85acf49bcf3becad91bc3c67c2e0a36123007c21c502088bdcef"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollSectionGuardMixin.class",
+      "changed": false,
+      "size": 1750,
+      "sha256": "f961f85e409ddbe2a656a81529ad9961d22df9dddb830c9a30cd4804d07d1d14"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollSectionLifecycleMixin.class",
+      "changed": false,
+      "size": 3090,
+      "sha256": "e058b730fb614cf37986115fcc9ccf0d86a2d5d89f64c062f8a295db0eff78df"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollSpawnEggMixin.class",
+      "changed": false,
+      "size": 1491,
+      "sha256": "30f49321940c1befbb4811b06607a39c5fb383065e43e4633569c5eefd7f3e49"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollTickListGuardMixin.class",
+      "changed": false,
+      "size": 1292,
+      "sha256": "94d4f5a0148dca8479b8bf333bdcbdc975d4a9fa7678dace1c5331a412632475"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIDollUselessKillGuardMixin.class",
+      "changed": false,
+      "size": 4123,
+      "sha256": "9169534a4c1b6d27ced7bcfbf78dcd0183b884fed91aff7965e9bac32f56fe91"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIHeldDollMixin.class",
+      "changed": false,
+      "size": 5069,
+      "sha256": "c680d190b2d0d0bcc724274913336a12aacf32f557f7223b1add6f94cd329d6f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoIPlayerArmMixin.class",
+      "changed": false,
+      "size": 2238,
+      "sha256": "f61ef79c34604d6b4f8dba90d9372f1aa5402d4d7d1bee7ce9c421b613ce18cd"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/TwoISummonCommandMixin.class",
+      "changed": false,
+      "size": 2862,
+      "sha256": "49fae00931b4f873ab3c2a4138ac1e36719565a39620b50b2f605c5f8426b420"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/UsefulArmorGameModeMixin.class",
+      "changed": false,
+      "size": 2013,
+      "sha256": "34f7d4f8d85404b0b0802f1151d27b76536e825b7d70242aed3ea7dd1fd64582"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/UsefulArmorLayerMixin.class",
+      "changed": false,
+      "size": 3170,
+      "sha256": "5a109166ad4ac945c1da18b62317f1c19141ee4a6fc95d31a2e152d1c41b24bc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/UselessModLightningRodMixin.class",
+      "changed": false,
+      "size": 3774,
+      "sha256": "acb96f5c1b84ac6417829052c344bce4fc43661e8780a2bbcb64587f52fe3970"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/mixin/UselessStretcherMixinPlugin.class",
+      "changed": true,
+      "size": 6149,
+      "sha256": "da071ded3961deb356470f257da29532a1ecec79bfd3dbd00dc9eb8e93afbd45"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/ApotheosisNetwork$MarkersPayload.class",
+      "changed": false,
+      "size": 5966,
+      "sha256": "60745013a74f7a0dadb98262adbbdd2a40cc0c552d9ec8b6b21ac4de374ff488"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/ApotheosisNetwork$RequestPayload.class",
+      "changed": false,
+      "size": 4322,
+      "sha256": "38bf96b79bae65efb9d5297f2cf005673bae9dd57eacfd5f479a0f8bc60ecb5d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/ApotheosisNetwork$SettingsPayload.class",
+      "changed": false,
+      "size": 5692,
+      "sha256": "e7a278adcc4344b56e0893f3e6439abec0684d8355274442961d42e9da0bd833"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/ApotheosisNetwork.class",
+      "changed": false,
+      "size": 8652,
+      "sha256": "d1702f006c045bf8404242d418cfea2458af0127036a61498d83d93efc6dfd32"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleNetwork$Complete.class",
+      "changed": false,
+      "size": 4863,
+      "sha256": "ffef395e92eb83724548a99f4eb54935ddb8a273e972c43ad1fdacb7aa4d8d9f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleNetwork$Request.class",
+      "changed": false,
+      "size": 5552,
+      "sha256": "10acd5819dc9b70550421b8a41f199f2ad7bf9c8f04a102fd1650d402962439a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleNetwork$State.class",
+      "changed": false,
+      "size": 6923,
+      "sha256": "2e066e6cbe494b03fbd0b4c4778ab5cc47b3a06e39bb4ca5df4a2fbd46a8b591"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleNetwork.class",
+      "changed": false,
+      "size": 8890,
+      "sha256": "814cc1ebaeddc0d75d1edade21653a55519fa0435c03727f083f000d3436c393"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleVariantNetwork$Entry.class",
+      "changed": false,
+      "size": 2497,
+      "sha256": "fc59c012d66bf869dc11d1bb0fb729167c8afdc95ed64be75549ccdb06e1266b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleVariantNetwork$Request.class",
+      "changed": false,
+      "size": 5662,
+      "sha256": "ea02c6a2d4e7c8ca423061b063bac9c345b887768fa0143c0c0783a7ac932e02"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleVariantNetwork$State.class",
+      "changed": false,
+      "size": 8880,
+      "sha256": "770483ce34c95fa533d3c4583c05713b3e528fee015560a78fcfe342dc6a4aed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/CapsuleVariantNetwork.class",
+      "changed": false,
+      "size": 8084,
+      "sha256": "1e7a678fe19fb6a7871e942d01fc37ecc32835b9e66f1c049ce1eaef77e2aab9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/ClientStateReceiver.class",
+      "changed": false,
+      "size": 14989,
+      "sha256": "0ab0c85ee2ddb94c7f78259abf7c4155dfc838837cff5d7a7952c15570b62e49"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/MyriadSelectionBatches.class",
+      "changed": false,
+      "size": 1685,
+      "sha256": "cffd040f14384114bc98dfa9b32551caf32ab9b7c847d06400a87bf27b500fa8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ApotheosisOptionsPayload.class",
+      "changed": false,
+      "size": 5602,
+      "sha256": "b14dd418fd93fe76741f97b4623b874a0ca74ea4d7691c692810219dacdd7ae6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ApotheosisTablePayload.class",
+      "changed": false,
+      "size": 4587,
+      "sha256": "92a3a50501d29b4c1577e4b1ffaebe2946be3df52a59fe6a9a2de0119f04bff8"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ApotheosisTierPayload.class",
+      "changed": false,
+      "size": 3897,
+      "sha256": "61d95b29f80d6610b3868c6d1863dea8fb190fd16bd7718c28297d5a0b1913ff"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$DimensionCapsuleCatalogPayload.class",
+      "changed": false,
+      "size": 6663,
+      "sha256": "30ecc1e6d66b97f9e9d9be287b0f4e00652f36f8bb6c8ad378a5aba75f0343b3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$DimensionCapsuleRequestPayload.class",
+      "changed": false,
+      "size": 5121,
+      "sha256": "13050272dd0d296452234402eefd3909d65247c3d56411a6a6ccb8bcf6eb29cb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$EntityTimerSettingsPayload.class",
+      "changed": false,
+      "size": 4797,
+      "sha256": "16ca31c2853acfe32f0ad6c23b2c063bc29ebec5ebc95248b2a678180a3aa699"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$FullSlotsPayload.class",
+      "changed": false,
+      "size": 3896,
+      "sha256": "46773f3fe49a280cc06d0d3d8ef15783087de6d54eaca1947fc0003d3c11d19a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$MoldCatalogPayload.class",
+      "changed": false,
+      "size": 7074,
+      "sha256": "c9a73831ed2c8b3cd33549e377cd80d02bce206bb558cfe5d7f092d0470a9df7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$MyriadActionPayload.class",
+      "changed": false,
+      "size": 5875,
+      "sha256": "ec6b12ab35bc276016ea10dbb075571bbe6765bc0cd9cd5e66b2fe084ad0631b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$MyriadStatePayload.class",
+      "changed": false,
+      "size": 7304,
+      "sha256": "56233ffff7b72f0f08061330ec7ee0964012268f495420978adc90faed2bb67b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$PatternDeduplicatePayload.class",
+      "changed": false,
+      "size": 5740,
+      "sha256": "1f7e0e6a5d6e9ea7cb98371c4233f50671fb9b01bc2afd61bdd5d32a0f23a941"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$PatternDeletePayload.class",
+      "changed": false,
+      "size": 6733,
+      "sha256": "34e2595ae8ef7ec40a2850bcd0a6fede512a2205b529d39a3ba5047825e26eee"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$PatternPagePayload.class",
+      "changed": false,
+      "size": 10099,
+      "sha256": "f1a9b0e7fe121764bcfe4fae07f56b103d6fe80dd316ba789f30b273872391b7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$PatternPageRequestPayload.class",
+      "changed": false,
+      "size": 8093,
+      "sha256": "44850eda309e296ff794153be361b42af9f0692e89b47feef6d635ff304d81bc"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$PatternTrimPayload.class",
+      "changed": false,
+      "size": 4324,
+      "sha256": "8d544aded525c60e267d69baf276d2ab57a43303c5018d89258f0cd1708a057d"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ReclaimerActionPayload.class",
+      "changed": false,
+      "size": 4938,
+      "sha256": "ea237a66bb2e05085992e8d02300b102da9ad40807bd9f22542afb5f18d91166"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ReclaimerEntry.class",
+      "changed": false,
+      "size": 6063,
+      "sha256": "23ed98d664c2b4db5f7cedefbec0650aec1481b7b961f9018e9bbbddfb575f3b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ReclaimerRequestPayload.class",
+      "changed": false,
+      "size": 4486,
+      "sha256": "329766b31f0ee58b31b5a639f23e8a300d757b8005ef060ad36a9e543f7b4084"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$ReclaimerStatePayload.class",
+      "changed": false,
+      "size": 5802,
+      "sha256": "f2384e685ea9e04c93ba7210735e6c193f399a50e2838391b2a8c277ee005bb4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StaffFluidSettingsPayload.class",
+      "changed": false,
+      "size": 5057,
+      "sha256": "e4827e269301161f92e0ff502968acfecc0d6ddabd79a50bb2185aecab6c7111"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StaffPhaseStatePayload.class",
+      "changed": false,
+      "size": 4376,
+      "sha256": "9ed13bb770d68128d30328e44d4df413a459b841ccf7a5264fbd28ef6e502a3e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StaffTimeStopPayload.class",
+      "changed": false,
+      "size": 4453,
+      "sha256": "a83679ae39fc94c1017196bc2f0bd82731f5e790ce7ca28415c1d81fceea15d4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StaffTutorialOpenedPayload.class",
+      "changed": false,
+      "size": 4186,
+      "sha256": "ecec454b66629fe2b9d2f3629d57eaad5e1f7038b22389fb04e4b7f1f63b36f7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StaffTutorialPayload.class",
+      "changed": false,
+      "size": 4119,
+      "sha256": "bb4f9ba5ba83f9852a46b41da4fb003ad76ddb6bb226233123055217b1f16bdb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$StandaloneTeleportPayload.class",
+      "changed": false,
+      "size": 4174,
+      "sha256": "4fb5dfc07a6b4ff913067ab07649885e51f2188c1f202379c75d21cc4ff29f82"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TimeAccelerationStatePayload.class",
+      "changed": false,
+      "size": 4471,
+      "sha256": "f81b5e991ddb32706b79cbe6baf81bf3c033463a62827f86ea79b12f78a971ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TimeStopStatePayload.class",
+      "changed": false,
+      "size": 3951,
+      "sha256": "e7a15619b970615e97f2049d7353341c200192a55ad3f38a2d1bd2c2bd34fb94"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDialoguePayload.class",
+      "changed": false,
+      "size": 5001,
+      "sha256": "930b9c76e35171fac4e172e41f005ba3a07fc02660b3872abafe1fc4775e53d3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollDeployPayload.class",
+      "changed": false,
+      "size": 3959,
+      "sha256": "85cff4bda911cdaecdff38713bd7b04afd90e6b1454e46219e04c0679c23eb5e"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollGiftPayload.class",
+      "changed": false,
+      "size": 3935,
+      "sha256": "e9c7b91439d5ed2d8a49ed44680fbf286cc5f27f304bd29d17a15197a5561db4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollInvitePayload.class",
+      "changed": false,
+      "size": 3957,
+      "sha256": "7fea329e25bc69b5b61f836270fb007a369e26d20204192347ce4deca8a6edb3"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollPatPayload.class",
+      "changed": false,
+      "size": 3924,
+      "sha256": "736236e0f205f856ff9093cfc97e25cf9ef3d6a759770523ffd781044abdeae0"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollReclaimPayload.class",
+      "changed": false,
+      "size": 3968,
+      "sha256": "10e9e40d3f943a987a2e9501c5053edc4a17f47364cc21e020e40eae3a216eec"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollRemoteReclaimPayload.class",
+      "changed": false,
+      "size": 4205,
+      "sha256": "978a1b5284c1aa44ff91b1a0d809d63118eef617ed0c675aa18ce25bee0ad6c2"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollStoryPayload.class",
+      "changed": false,
+      "size": 4737,
+      "sha256": "c31fb8ba22eb9a7fb5ad6b7dad36c511647194ae2f2d735ea87050d86d89810b"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollStoryStartPayload.class",
+      "changed": false,
+      "size": 4002,
+      "sha256": "459927a68485191df48cf8b61a3f17b96bce984d39e29675bff2bfa9c21155ed"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIDollTalkPayload.class",
+      "changed": false,
+      "size": 3935,
+      "sha256": "7b851cde4d6d55ccffbf880267a70f7bc1b2922ed6aebdc23fed846fa4ff09fb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIInteractionPayload.class",
+      "changed": false,
+      "size": 4468,
+      "sha256": "fa4183f71ef3fc71f12240a3211912dde86afb82a27a2793afcb86e5997fd4bb"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIItemDialoguePayload.class",
+      "changed": false,
+      "size": 4776,
+      "sha256": "20c23e4253e000103aa5d03370c6c0bd864ca97797fa458973302662ee5b10ff"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIStoryLibraryRequestPayload.class",
+      "changed": false,
+      "size": 4063,
+      "sha256": "99a27d052bcd68971d60a1cbdc9cdd586945b3fe9bd88a991c61a99bc40718c6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIStoryLibraryStatePayload.class",
+      "changed": false,
+      "size": 4425,
+      "sha256": "c0ab1cc33f984ff0f35a37f00298dbc1fc27d6f35857c57ed524c00538d04cc7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$TwoIStoryStatePayload.class",
+      "changed": false,
+      "size": 5559,
+      "sha256": "8af003af9ae237b90c6efaceec010dc90d2cc01d5b7b3bbd1e82429b4cab3ab9"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffFeaturesPayload.class",
+      "changed": false,
+      "size": 4717,
+      "sha256": "30a8bdee8f1130e3d5cbda472dcbb24cabfdf7614a1bb1b2b1e0178b329ba222"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffPhasePayload.class",
+      "changed": false,
+      "size": 4696,
+      "sha256": "17ba1d9293168ea3a14d062877743427a43709244b1d0f5a2dc440a3f39635ab"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffRadiationPayload.class",
+      "changed": false,
+      "size": 4421,
+      "sha256": "f85380bf797ce7b75cf6f99f7916972daded931f6d702734a3a1c512c68a11fa"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffRecallPayload.class",
+      "changed": false,
+      "size": 4519,
+      "sha256": "3a25dcd8bce00af446191b2bb208065951bf7e63f4f413cec6327de3e513808a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffSpeedPayload.class",
+      "changed": false,
+      "size": 5079,
+      "sha256": "ed6cc3a31bfa624848d7f34755f5d04755bb83ca9d0c4a618fe9b301fa98304a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network$WondrousStaffSummonPayload.class",
+      "changed": false,
+      "size": 6084,
+      "sha256": "ee011f03d43265c8f1990c63246a6e5f44d4f7ba5c78eb80e2532b8990ad211c"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/Network.class",
+      "changed": false,
+      "size": 93047,
+      "sha256": "1d8670b9a7d2c586c64fe1a1f576d303b117159790ecb2321517782d433077d4"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$FilterTogglePayload.class",
+      "changed": false,
+      "size": 4804,
+      "sha256": "50e1336815f9722ed51c3bfd47ff2dbfc072a066611bb0b0292a41c60ee966ea"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryEditPayload.class",
+      "changed": false,
+      "size": 5884,
+      "sha256": "fadf381b03b2a912f57d65d2104fb2015e9d23b48d8a6008d2bc9ea957226082"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryReclaimPayload.class",
+      "changed": false,
+      "size": 4345,
+      "sha256": "0a3920b8a2233024ce96a5c1f87dcadd1b4cda40e5fa95905503674024c76cda"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryRenamePayload.class",
+      "changed": false,
+      "size": 4645,
+      "sha256": "87f1b22d479a996d3bb3d12462626653ac90e173a1e59e8e4a7df1cf01f6e1a7"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryRequestPayload.class",
+      "changed": false,
+      "size": 3981,
+      "sha256": "0efd735ece63d8abda0a259da361ee66ac2b82d6ff12e3954907d5b2203d1cca"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryStatePayload.class",
+      "changed": false,
+      "size": 7168,
+      "sha256": "c1bc02f03b8dcad1a5f7a8e7f548686d78155da49667ff703c47f22694c0de82"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$HistoryTogglePayload.class",
+      "changed": false,
+      "size": 4593,
+      "sha256": "39efb01ec91ee919d204cdd301c0cd77c8e07066e70f320bb91327965068fcd6"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$PlacePayload.class",
+      "changed": false,
+      "size": 4997,
+      "sha256": "8e162c0b0921ba248ae481adbaeaff79e8d46f3eda64de0d25882fdc4ff44e37"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork$SettingsPayload.class",
+      "changed": false,
+      "size": 6060,
+      "sha256": "5c97a6d5d4428b9b1f5eee06a9997ffee98b22ff656507f0a6f457afbd5e3607"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/RangeNetwork.class",
+      "changed": false,
+      "size": 26346,
+      "sha256": "cbdb7ada3e57e304b7e9c1b7f43919eaca62b4a8774ec57790d127b08163e200"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/TwoIStarfieldShowNetwork$Show$1.class",
+      "changed": false,
+      "size": 2147,
+      "sha256": "47627dd29285401da638fcfb595a51e2004c774df541183846f91a0ccf652a9a"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/TwoIStarfieldShowNetwork$Show.class",
+      "changed": false,
+      "size": 3380,
+      "sha256": "8ba1727e508cf6959b94ff9bab273decfedbbb20cfca7f219e123eb993ee9352"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/network/TwoIStarfieldShowNetwork.class",
+      "changed": false,
+      "size": 4281,
+      "sha256": "a8225704532fa1f0253b85173da2bb8d64b5909bc52991a39a17e743a948b896"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/MyriadPatternRepositoryScreen.class",
+      "changed": false,
+      "size": 28166,
+      "sha256": "bdda326d8051cb3aec5e572a850b71acd6d5d71314d0f5fb822c5139fb345194"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/OmniversalMyriadScreen$HeaderRow.class",
+      "changed": false,
+      "size": 2540,
+      "sha256": "be38a006238b5ce20c802c434c4c130a2e99ce5b2c0cd65e40c6572dbd9e8676"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/OmniversalMyriadScreen$MoldRow.class",
+      "changed": false,
+      "size": 2126,
+      "sha256": "1a323dc68a425501d8552b5f3a6166f847d98f626b8b48aca1ec616e5aea412f"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/OmniversalMyriadScreen$Row.class",
+      "changed": false,
+      "size": 519,
+      "sha256": "981094c63de9f2ca3b3bee4d6be0a0aec3b7a6cfb7405957b2cc690c3415c2cf"
+    },
+    {
+      "entry": "com/sorrowmist/useless/stretcher/screen/OmniversalMyriadScreen.class",
+      "changed": false,
+      "size": 35443,
+      "sha256": "bd18ce3aec7f2f570cfee29fcb0c1e45a95ece7050bcbf1d00089b662601f531"
+    },
+    {
+      "entry": "coremods/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "coremods/two_i_manaita_compat.js",
+      "changed": false,
+      "size": 5232,
+      "sha256": "8968de4ebe1c351d0aa73e016cd81186cff84fc29ac9afacf57f1ea59699f05d"
+    },
+    {
+      "entry": "data/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/apotheosis/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/apotheosis/data_maps/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/apotheosis/data_maps/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/apotheosis/data_maps/item/loot_category_overrides.json",
+      "changed": false,
+      "size": 88,
+      "sha256": "132f72feb75149cc37b3e8613a7d802ac7447e2f3d84939d3d46dbf78c3bb36a"
+    },
+    {
+      "entry": "data/ars_nouveau/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/entity_type/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/entity_type/animal_summon_blacklist.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/entity_type/interact_jar_blacklist.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/entity_type/jar_blacklist.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/ars_nouveau/tags/entity_type/jar_release_blacklist.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/c/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/c/tags/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/c/tags/entity_type/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/c/tags/entity_type/capturing_not_supported.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/c/tags/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/c/tags/item/hidden_from_recipe_viewers.json",
+      "changed": false,
+      "size": 235,
+      "sha256": "ced4657e145d432bd57053c1a17d5aa380d00ca168941346338ecb2dc7cc9cfa"
+    },
+    {
+      "entry": "data/c/tags/item/tools/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/c/tags/item/tools/wrench.json",
+      "changed": false,
+      "size": 87,
+      "sha256": "8625d7955ce3059659f1d4fbb47784859b00caec664745496331d99812568422"
+    },
+    {
+      "entry": "data/curios/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/curios/tags/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/curios/tags/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/curios/tags/item/curio.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/productivebees/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/productivebees/tags/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/productivebees/tags/entity_type/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/productivebees/tags/entity_type/bee_encase_blacklist.json",
+      "changed": false,
+      "size": 73,
+      "sha256": "3a27c228a5121090a4cd40542290d7706e0d6a3d0811738536c8eb4d5c3569c7"
+    },
+    {
+      "entry": "data/useless_mod/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_mod/tags/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_mod/tags/item/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_mod/tags/item/molds.json",
+      "changed": false,
+      "size": 90,
+      "sha256": "21c7bf42cde9754f9601c320e5a0dd54af27501d5d2ca9e98632d128b84286d8"
+    },
+    {
+      "entry": "data/useless_stretcher/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_stretcher/advancement/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_stretcher/advancement/staff_leaf_drop.json",
+      "changed": false,
+      "size": 618,
+      "sha256": "58a816ec896971b7d17fd1663b336e9ae915f64c3ac713a9c5bd8dc1aa820ffb"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension/capsule_end.json",
+      "changed": false,
+      "size": 257,
+      "sha256": "4f5fd7b2cd8ba210c97adddd011a572696fd681e5e39126ab45d2b504e684ddc"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension/capsule_nether.json",
+      "changed": false,
+      "size": 260,
+      "sha256": "7a4d4d11a12aaaead67fdc44904e0aeaf75c3049ff236a24038208762530d8cf"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension/capsule_overworld.json",
+      "changed": false,
+      "size": 256,
+      "sha256": "ea2e6d43df814dff6472ed30352c84973bdc1962a173f818cfc25f36e5bd8f5e"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension/two_i_starfield.json",
+      "changed": false,
+      "size": 232,
+      "sha256": "c49f2ec191914437dac7018193f27834f0086e54fc7b768e05cb7cbb7d244b3d"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension_type/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension_type/capsule_end.json",
+      "changed": false,
+      "size": 529,
+      "sha256": "043c1ceacecd71f934c19c36d4e014d3f8b3dfc0a2cfdbb8849aa2a051609fbb"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension_type/capsule_nether.json",
+      "changed": false,
+      "size": 528,
+      "sha256": "7892c258d10c7c8e3f304e83269256a661d8246afe82bacbeba39f52ed9062f8"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension_type/capsule_overworld.json",
+      "changed": false,
+      "size": 504,
+      "sha256": "96f7918cc478482a9f330e0a6a8bfcee6699eb743a4afa511517e101354e781d"
+    },
+    {
+      "entry": "data/useless_stretcher/dimension_type/two_i_starfield.json",
+      "changed": false,
+      "size": 547,
+      "sha256": "8570bcc13b09fb197ff11321037a5d6d114eff90887fd8d6aee4c33c934d8981"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/",
+      "changed": false,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/conduit.json",
+      "changed": false,
+      "size": 220,
+      "sha256": "cc454c7a3382d8163695d99d5a6588071e9be3752d3256a3b9b9aa680eb6e862"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/dragon_breath.json",
+      "changed": false,
+      "size": 233,
+      "sha256": "4f63a75fffc71422171fa59a5bea34ab0fa08dcb71973a6ce04c7f57b81a87fb"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/dragon_head.json",
+      "changed": false,
+      "size": 238,
+      "sha256": "29d04450c31ccb822bb94bbfef44807a72fc2461163bae94216d7aae8e4a0a63"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/elytra.json",
+      "changed": false,
+      "size": 230,
+      "sha256": "a3a68db892b3635686fd4d900dbf140893c11e16dcb04f8a3f74a7638e32ff5b"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/enchanted_golden_apple.json",
+      "changed": false,
+      "size": 290,
+      "sha256": "d574603f074dd6d9bee2b71306982566c89b1323b39c41ba81eef2ed4dffb101"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/goat_horn.json",
+      "changed": false,
+      "size": 370,
+      "sha256": "377ee3b2564849241558fc8064e5b052b96188fb36f49cd917f2e94118000c03"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/omniversal_myriad.json",
+      "changed": false,
+      "size": 259,
+      "sha256": "b9a1c1fda12c3132d6ad3cc5f9d28907b5c9d675b2910dd69599f108b2656a86"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/phantom_membrane.json",
+      "changed": false,
+      "size": 229,
+      "sha256": "2698fc681c86123219b84a5a98da8988bfa02582356ecdf3d934d43fc07b83be"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/rabbit_foot.json",
+      "changed": false,
+      "size": 224,
+      "sha256": "6da56fec1e4d7f10ba50a16d37d1b5ba52236c7203f17e533cd62cc7c6d2fc45"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/shulker_shell.json",
+      "changed": false,
+      "size": 233,
+      "sha256": "4499f2025b63abbdf2de43ebfe62b68b970d43593a553913ee45d0723b3e49b2"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/totem_of_undying.json",
+      "changed": false,
+      "size": 229,
+      "sha256": "e165f53eab3e6bb31f0a105194e18fd7c898923e433f7d92ae7a70c8d4cc5f45"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/turtle_scute.json",
+      "changed": false,
+      "size": 238,
+      "sha256": "097fa565b54fcb474e336485e4a4f8c960b8a98203bbf77aed590923d10772ad"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/useless_stretcher.json",
+      "changed": false,
+      "size": 254,
+      "sha256": "fa1509158720277031b8f88bf86b6122b2cc18c6b405ffd45790c774fe98566c"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/wither_rose.json",
+      "changed": false,
+      "size": 391,
+      "sha256": "4e1e0564251a106f4c735c7959d92d32fcb85b762497f406832d398ae2ba28db"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/wither_skeleton_skull.json",
+      "changed": false,
+      "size": 234,
+      "sha256": "d640c93cf1a2d91f830bf3d721b1c72f1f24a97d83df898e20b0debffa040633"
+    },
+    {
+      "entry": "data/useless_stretcher/recipe/wondrous_staff.json",
+      "changed": false,
+      "size": 246,
+      "sha256": "cd6aee50cc81f7cac19bd83555d3c51092bdf8016cbec5cb0ebaa802e9a75a9c"
+    },
+    {
+      "entry": "pack.mcmeta",
+      "changed": false,
+      "size": 88,
+      "sha256": "08a87e1ceb4f75f02620a6da5cf96fb4592a94893d2c5449cd1cdf2b8e65aba3"
+    },
+    {
+      "entry": "useless_stretcher.mixins.json",
+      "changed": false,
+      "size": 2833,
+      "sha256": "d190f4c05d0a184d951ced73c4b39973d39a6e65a60b2a615bd97aa8057398fd"
+    }
+  ]
+}

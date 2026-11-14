@@ -1,0 +1,83 @@
+{
+  "status": "INDEPENDENT_READ_ONLY_REVIEW_COMPLETE_ROOT_ACCEPTED_SCOPED_RELEASE",
+  "production_sha256": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe",
+  "delivery_path": "D:\\AI\\useless_stretcher-1.21.1-1.6.4.jar",
+  "mods_match_exact_set": true,
+  "mods_sha256": {
+    "appliedenergistics2-19.2.19.jar": "7db959595ca8734acccac51c963567460e7db9f31b145b23dea72778b692777b",
+    "guideme-21.1.22.jar": "108337ff98c706b18ed2fbec077b3337ba72c08f8b46a273534886280e89ef0d",
+    "jei-1.21.1-neoforge-19.70.0.469.jar": "9ab82d9bdbc8d9a08b80bc2023e1d886f6335b92f937d3afac878c9ea995dc33",
+    "mezz_config-1.21.1-neoforge-0.7.1-standalone.jar": "c42510938584eda0aae134003e367d745fd32ceac1836221cecac4cbc7bfa3a1",
+    "resource-stop-watchdog-PRIVATE.jar": "3bf08c04f0aee9318418fc25a036f31048c6f37cdb3618c23a4d468948698150",
+    "stretcher-staff-smoke-private.jar": "2f5e774d65bbd8538d1252890b1ae4d222c95a1f0c6d317ce4e765a03dfe78a8",
+    "useless_mod-1.21.1-2.4.6.6.jar": "fbadd572c3cafb27c4bee7397b57eaa2edb2278b2bca9335b91e74197f1e0d65",
+    "useless_stretcher-1.21.1-1.6.4.jar": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe"
+  },
+  "checks_status_counts": {
+    "PASS": 18,
+    "OBSERVED_FIXED_HAND_IDENTITY_DRIFT": 1
+  },
+  "prior_runs_retained": {
+    "a": {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-a\\launch-evidence\\client-result.json",
+      "sha256": "2e550ea77c88e9fba75957758638dd663e6d6f3cd2a5284a381cef6fa57739f7",
+      "status": "DEFERRED_NO_JAVA",
+      "fixture_status": null
+    },
+    "b": {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-b\\launch-evidence\\client-result.json",
+      "sha256": "b5b3f98231ac95fbf0bbddc2497cbaefb36a22ced64bf186f6c87e8c00b01de5",
+      "status": "ROOT_REVIEW_REQUIRED",
+      "fixture_status": "FAIL"
+    },
+    "c": {
+      "path": "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-c\\launch-evidence\\client-result.json",
+      "sha256": "8e7cf4191c7d165c8e1d4ead3c07c9463a0602e8af05817689ba9d45e1e8c6a5",
+      "status": "ROOT_REVIEW_REQUIRED",
+      "fixture_status": "FAIL"
+    }
+  },
+  "files": {
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\production\\staging\\useless_stretcher-1.21.1-1.6.4.jar": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe",
+    "D:\\AI\\useless_stretcher-1.21.1-1.6.4.jar": "29a4ece1dea89e19778370e87c7af35e1a789d29f0e88ee213ae4bc2a9402fbe",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\staff-compat-result.json": "4f80aca3ff821d9d6b59bb7f1e9422d379331a53a55c3518266cd3af80d51e94",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\client-result.json": "7ecb028bbf27ffd56bada5ced39fe88fc6a1adc3b5e5751ba391726cac2248fa",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\fixture-binding.json": "adc18bfc34218aca67ff76a5f87248055a5f8d30473cf01052837097c2d49157",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\launch-evidence\\watchdog-binding.json": "a473b03e145a362991998ff0b6d7417e650a47a0125aa516b07bb9cc4e6ee31b",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\runtime-client-d\\logs\\latest.log": "3e8e754b1f3377348b411eea08277b16f2a74367cd0b3ac3bd3ff60fe324e5e4",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\fixture-c\\src\\main\\java\\com\\twoi\\stretcher\\verification\\StaffCompatSmoke.java": "bec2bbf17bd3a70a102c5ce28530ff51037e967a6790af03d9614f25bbdc8cbc",
+    "D:\\AI\\verification\\stretcher-release-1.6.4-20261114\\fixture-c\\attempt-b\\stretcher-staff-smoke-private.jar": "2f5e774d65bbd8538d1252890b1ae4d222c95a1f0c6d317ce4e765a03dfe78a8",
+    "D:\\AI\\sources\\DollChronicle\\verification\\update-041-20261114\\runtime-agent\\watchdog\\build-a\\resource-stop-watchdog-PRIVATE.jar": "3bf08c04f0aee9318418fc25a036f31048c6f37cdb3618c23a4d468948698150"
+  },
+  "post_guard": {
+    "passed": true,
+    "sampled_utc": "2026-11-14T02:05:39.287739+00:00",
+    "policy": {
+      "heap_mib": 4096,
+      "initial_heap_mib": 256,
+      "direct_mib": 128,
+      "code_cache_mib": 128,
+      "active_processors": 4,
+      "required_free_mib": 5120,
+      "required_commit_mib": 5376,
+      "runtime_min_free_mib": 1024,
+      "runtime_min_commit_mib": 1024,
+      "mode": "041-staff-d-lazy-heap-hard-monitor"
+    },
+    "available_physical_bytes": 6702800896,
+    "total_physical_bytes": 17023950848,
+    "other_java": [],
+    "unknown_java_command_line": false,
+    "single_shared_mc_slot_required": true,
+    "reason": "PASS_LAZY_COMMIT_WITH_HARD_MONITOR",
+    "commit_sample": {
+      "sampled_utc": "2026-11-14T02:05:39.287739+00:00",
+      "available_physical_bytes": 6702845952,
+      "available_commit_bytes": 25539215360,
+      "total_physical_bytes": 17023950848,
+      "commit_limit_bytes": 40018190336
+    }
+  },
+  "production_acceptance_flag_unchanged": false,
+  "fullpack_acceptance_flag_unchanged": false
+}

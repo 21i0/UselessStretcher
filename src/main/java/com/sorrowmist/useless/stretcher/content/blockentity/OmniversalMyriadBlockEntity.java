@@ -118,12 +118,15 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     public void replacePatternKeys(ResourceLocation moldId, Set<AEItemKey> patterns) {
         MyriadPatternStore store = store();
         if (store == null) return;
+        if (!store.isResolved(patternRef)) { setFetchFailed(); return; }
         if (patternRef == null) patternRef = UUID.randomUUID();
         store.replace(patternRef, moldId, patterns);
         setChanged();
     }
 
     public void requestPatterns(Collection<ResourceLocation> ids) {
+        MyriadPatternStore store = store();
+        if (store != null && !store.isResolved(patternRef)) { setFetchFailed(); return; }
         selectionVersion++;
         fetchResult = "";
         for (ResourceLocation id : ids) {
@@ -133,6 +136,8 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
     }
 
     public void removePatterns(Collection<ResourceLocation> ids) {
+        MyriadPatternStore store = store();
+        if (store != null && !store.isResolved(patternRef)) { setFetchFailed(); return; }
         selectionVersion++;
         for (ResourceLocation id : ids) {
             pendingFetch.remove(id);
@@ -186,6 +191,7 @@ public final class OmniversalMyriadBlockEntity extends BlockEntity implements Me
         cancelFetch();
         fetchResult = "";
         MyriadPatternStore store = store();
+        if (store != null && !store.isResolved(patternRef)) { setFetchFailed(); return; }
         if (store != null) store.clear(patternRef);
         setChanged();
     }

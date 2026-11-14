@@ -1,0 +1,41 @@
+--- D:\AI\candidates\useless-stretcher-upstream-2465-20261107-a\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessStretcherMixinPlugin.java
++++ D:\AI\verification\stretcher-release-1.6.4-20261114\production\src\main\java\com\sorrowmist\useless\stretcher\mixin\UselessStretcherMixinPlugin.java
+@@ -20,16 +20,17 @@
+                 || mixinClassName.endsWith(".CatalogJeiIndexTimingMixin")) {
+             String base = modVersionEarly("useless_mod");
+             return ("1.21.1-2.4.6".equals(base) || "1.21.1-2.4.6.2".equals(base)
+-                    || "1.21.1-2.4.6.5".equals(base))
++                    || "1.21.1-2.4.6.5".equals(base) || "1.21.1-2.4.6.6".equals(base))
+                     && ("19.57.0.451".equals(modVersionEarly("jei"))
+-                        || "19.70.0.460".equals(modVersionEarly("jei")));
++                        || "19.70.0.460".equals(modVersionEarly("jei"))
++                        || "19.70.0.469".equals(modVersionEarly("jei")));
+         }
+         if (mixinClassName.endsWith(".BudgetedRecipeCatalogMixin")
+                 || mixinClassName.endsWith(".BudgetedClientCatalogMixin")
+                 || mixinClassName.endsWith(".CatalogJeiTimingMixin")) {
+             String version = modVersionEarly("useless_mod");
+             boolean verified = "1.21.1-2.4.6".equals(version) || "1.21.1-2.4.6.2".equals(version)
+-                    || "1.21.1-2.4.6.5".equals(version);
++                    || "1.21.1-2.4.6.5".equals(version) || "1.21.1-2.4.6.6".equals(version);
+             if (!verified) com.mojang.logging.LogUtils.getLogger().warn(
+                     "Catalog budget candidate does not patch unverified Useless Mod {}", version);
+             return verified && (!mixinClassName.endsWith(".CatalogJeiTimingMixin") || isModLoadedEarly("jei"));
+--- D:\AI\candidates\useless-stretcher-upstream-2465-20261107-a\src\main\java\com\sorrowmist\useless\stretcher\content\catalog\CatalogPatchSupport.java
++++ D:\AI\verification\stretcher-release-1.6.4-20261114\production\src\main\java\com\sorrowmist\useless\stretcher\content\catalog\CatalogPatchSupport.java
+@@ -11,12 +11,13 @@
+     }
+     public static boolean verifiedVersion(String version) {
+         return "1.21.1-2.4.6".equals(version) || "1.21.1-2.4.6.2".equals(version)
+-                || "1.21.1-2.4.6.5".equals(version);
++                || "1.21.1-2.4.6.5".equals(version) || "1.21.1-2.4.6.6".equals(version);
+     }
+     public static boolean jeiPublicationEnabled() {
+         var list = ModList.get();
+         return enabled() && list.getModContainerById("jei")
+                 .map(c -> "19.57.0.451".equals(c.getModInfo().getVersion().toString())
+-                        || "19.70.0.460".equals(c.getModInfo().getVersion().toString())).orElse(false);
++                        || "19.70.0.460".equals(c.getModInfo().getVersion().toString())
++                        || "19.70.0.469".equals(c.getModInfo().getVersion().toString())).orElse(false);
+     }
+ }

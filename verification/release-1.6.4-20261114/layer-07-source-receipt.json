@@ -1,0 +1,169 @@
+{
+  "status": "E_SOURCE_FROZEN_NOT_COMPILED_NOT_ACCEPTED",
+  "parentCSourceFreezeSha256": "836a5484397cf5fbf1839d0e200030522069042719367fc93426252a5889e234",
+  "baseline": "D:\\AI\\candidates\\useless-stretcher-jei-sponge-fix-20261108-a\\delivery\\useless_stretcher-1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1.jar",
+  "baselineSha256": "3aeb59b7aad8a2bf50d203bb220192ff45d90d0c50f80f6d8878514249f2f6ef",
+  "version": "1.21.1-1.6.4-catalog-P4-assembly-lock-zh-hud-base2465-jei1970-sponge1-capsule-gravity-e1",
+  "sources": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleChunkGravityAttachments.java",
+      "sha256": "73e52d56fb1fdbe09d6f5bd5f204dfe437ed2c9bb9a8464297b4a8db96290556",
+      "size": 2680
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleChunkGravityData.java",
+      "sha256": "1191741e59d3737e2e602b0a956c1fb51ea1dd8a2217a0be3ee748e7930d736b",
+      "size": 10009
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGenerationContext.java",
+      "sha256": "362b0787dd2562abc7008a756450f0c45b188b7242c6e0c120faac6406f8ee05",
+      "size": 4434
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityFingerprint.java",
+      "sha256": "2bf5bbb3e0d04925ceac2d42fa1871f91970223c810b199c1886cb88444da6fa",
+      "size": 13679
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityPauseData.java",
+      "sha256": "c3e55d3803a82e778c16007f9e849226fbfd2eb5fc1848f2e34c8fc1a02f5183",
+      "size": 36442
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityRecovery.java",
+      "sha256": "ea5a960ee6e1573fd0adf46a0da48093b6a9ca09558cbe030ebbb5b9476a77b2",
+      "size": 18974
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityRecoveryCommands.java",
+      "sha256": "7aa88ec5c233597db6abce4a6879c384c4d3ab4ff3a87ea1fdc683712da12da2",
+      "size": 6888
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravitySupport.java",
+      "sha256": "5add045290c2a527003d7354c95fca3f0f8f5d5a19212689adcd296b6cab5bfe",
+      "size": 9045
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\NativeCapsules.java",
+      "sha256": "4dd44b462dbc792ae0a18c2e99e30edd9d304300565287a49dbf124fba41d259",
+      "size": 102475
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\CapsuleFallingBlockMixin.java",
+      "sha256": "ae1aed5b88addfa32b8a123e1429631a9333215aeb566ab1982b6a132504f50c",
+      "size": 1164
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\java\\com\\sorrowmist\\useless\\stretcher\\mixin\\CapsuleGravityPlacementMixin.java",
+      "sha256": "ee55e172d86f36a7b9023ff756843c531a66667ab2551f9e0e54c2d4e84309a9",
+      "size": 1668
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\resources\\assets\\useless_stretcher\\lang\\en_us.json",
+      "sha256": "3e8f63926a91ed20b73d709cb81f79fad9e5ab2d68b5d532a158a1c758319ca6",
+      "size": 94403
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\resources\\assets\\useless_stretcher\\lang\\zh_cn.json",
+      "sha256": "4a058e599e3a5c18f2affee664d43afb0021181e7e6b94f98d42c0a009c00c0c",
+      "size": 92617
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\resources\\assets\\useless_stretcher\\lang\\zh_tw.json",
+      "sha256": "db991bfb291587fb0163eb56739b10862a230bcea9134b56cd5d3a6645e1ba65",
+      "size": 86606
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\resources\\META-INF\\neoforge.mods.toml",
+      "sha256": "0d377af68958ab225613e663d72c584af02095bacfc92dfe159a51d2569649b7",
+      "size": 1081
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\main\\resources\\useless_stretcher.mixins.json",
+      "sha256": "d190f4c05d0a184d951ced73c4b39973d39a6e65a60b2a615bd97aa8057398fd",
+      "size": 2833
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\regression\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityEntryIsolationChecks.java",
+      "sha256": "94ad3457974aa8b4cfb99c902f7a6000c3baa77b77a6ec465ab8483c3e83aabb",
+      "size": 4158
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\regression\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityPauseShardChecks.java",
+      "sha256": "85619be4b6c478863fcc6ba449a48d22328944b342d7d096661bf7b3f0ee5bd3",
+      "size": 26565
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\src\\regression\\java\\com\\sorrowmist\\useless\\stretcher\\content\\capsule\\CapsuleGravityRecoveryDataChecks.java",
+      "sha256": "97c3cb10aacb49bf0e6dff2ed354e3b52bbd15f6e07a5caed4db886d6f0ae189",
+      "size": 13712
+    }
+  ],
+  "support": [
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\compile_e.py",
+      "sha256": "088c0806639bc566f7d3a8b77187d3f43e7f994238ed6432a67ec5656b1916ff",
+      "size": 15295
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\EDataLauncher.java",
+      "sha256": "2aa7c994a777b3260854192e5cbaa15f7f9d4545a39bce4c542419192a7deb28",
+      "size": 3677
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\freeze_e.py",
+      "sha256": "981ee0afa837d204482906033c4fdad338d5908e5e847a748bfcdad26234f936",
+      "size": 3798
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\package_e.py",
+      "sha256": "58507a4bfc7f74400ddf955cd938cc47c6634ccf6410112b0f5873deefeb8140",
+      "size": 7517
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-recovery-20261110-c\\verification\\native-n1\\package_main.py",
+      "sha256": "e9c10e9580272d347a838a34975dc71a261e5c07e6b5dcb8d3eb96c734b8509f",
+      "size": 9899
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-recovery-20261110-c\\verification\\continuation-20261111\\audit_private_main.py",
+      "sha256": "fd361cd897b7500dd742b7f1323550d5bd4e093d2adf44197f31e8d74ac67f09",
+      "size": 6241
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-recovery-20261110-c\\verification\\jvm_guard.py",
+      "sha256": "3e5769b2f41839810761596e767a422db1b48cf380803166cda094dd70310e52",
+      "size": 4086
+    },
+    {
+      "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-recovery-20261110-c\\verification\\runner_windows_job.py",
+      "sha256": "85972ab1d86561e60cd3655e319710537c10394bb85a147f58c3f61db5174c7f",
+      "size": 13811
+    }
+  ],
+  "patch": {
+    "path": "D:\\AI\\candidates\\useless-stretcher-capsule-gravity-pause-shards-20261111-e\\verification\\E-vs-C-SOURCE-ONLY.patch",
+    "sha256": "1bc3ad9736e7098b3ccfaae7a25dff9ab8c9f7837baf214732bf973878121b96",
+    "size": 85149
+  },
+  "mainSourceCount": 11,
+  "regressionSourceCount": 3,
+  "resourceCount": 5,
+  "changedFromC": [
+    "src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseData.java",
+    "src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecovery.java",
+    "src/main/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityRecoveryCommands.java",
+    "src/main/java/com/sorrowmist/useless/stretcher/content/capsule/NativeCapsules.java"
+  ],
+  "addedFromC": [
+    "src/main/resources/META-INF/neoforge.mods.toml",
+    "src/regression/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityEntryIsolationChecks.java",
+    "src/regression/java/com/sorrowmist/useless/stretcher/content/capsule/CapsuleGravityPauseShardChecks.java"
+  ],
+  "javaStarted": false,
+  "classesReused": false,
+  "gameTested": false,
+  "publicDeliveryChanged": false
+}
